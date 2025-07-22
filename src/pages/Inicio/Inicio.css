@@ -1,0 +1,266 @@
+html {
+    zoom: 65%;
+}
+
+#contenedor {
+    display: grid;
+    grid-template-areas:
+        "Buscador Buscador Buscador"
+        "Indicados     Feed     Propaganda";
+    grid-template-columns: minmax(150px, 25%) 1fr minmax(150px, 25%);
+    grid-template-rows: auto 1fr auto;
+    gap: 1rem;
+    margin: auto;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.Indicados button {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(to right, #043ff4, #3e73ff);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.5px;
+}
+
+.Indicados button:hover {
+    background: linear-gradient(to right, #315bff, #547dff);
+    transform: translateY(-2px);
+}
+
+.Indicados button:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.Propaganda button {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(to right, #043ff4, #3e73ff);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.5px;
+}
+
+.Propaganda button:hover {
+    background: linear-gradient(to right, #315bff, #547dff);
+    transform: translateY(-2px);
+}
+
+.Propaganda button:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Áreas nomeadas */
+.Buscador {
+    grid-area: Buscador;
+    margin-left: -10px;
+}
+
+.Feed {
+    grid-area: Feed;
+    width: 100%;
+    height: 400px;
+    position: relative;
+}
+
+
+
+.Log img {
+    max-width: 100%;
+    height: auto;
+    max-height: 100px;
+    object-fit: contain;
+    position: static;
+}
+
+
+
+
+.Propaganda {
+    grid-area: Propaganda;
+    text-align: right;
+    margin-right: 10px;
+    position: static;
+}
+
+.Indicados button {
+    display: flex;
+    margin: auto auto;
+}
+
+.Propaganda button {
+    display: flex;
+    margin: auto auto;
+}
+
+
+
+body {
+    zoom: 100%;
+}
+
+.propaganda-scroll-vertical {
+    max-height: 90vh;
+    /* ajustável */
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    scroll-behavior: smooth;
+    background-color: #f5f7fb;
+    border-radius: 12px;
+}
+
+.propaganda-item {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.propaganda-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.propaganda-item h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.coursera h3 {
+    color: #0056d2;
+}
+
+.udemy h3 {
+    color: #ec5252;
+}
+
+@media (max-width: 100px) {
+    .flutuante-topo {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .flutuante-topo button {
+        font-size: 0.65rem;
+        padding: 0.4rem 0.8rem;
+        border-radius: 8px;
+    }
+
+    /* Oculta o conteúdo normal */
+    #contenedor {
+        display: none;
+    }
+}
+
+@media (max-width :480px) {
+    #contenedor {
+        display: grid;
+        grid-template-areas:
+            "Buscador Buscador"
+            "Indicados Propaganda"
+            "Feed Feed";
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto 1fr;
+    }
+
+    .Buscador {
+        grid-area: Buscador;
+    }
+
+    .Feed {
+        grid-area: Feed;
+    }
+
+    .Propaganda {
+        grid-area: Propaganda;
+    }
+
+    .Propaganda button,
+    .Indicados button {
+        width: 50%;
+        height: 60px;
+    }
+
+
+    .Indicados {
+        grid-area: Indicados;
+    }
+
+
+
+}
+
+@media (max-width: 480px) {
+    .fullscreen-propaganda {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+        background-color: rgba(14, 34, 137, 0.63);
+        padding: 1rem;
+        overflow-y: auto;
+    }
+
+    .fullscreen-propaganda .voltar {
+        display: block;
+        margin-bottom: 1rem;
+        padding: 0.5rem 1rem;
+        font-weight: bold;
+        background-color: #ef4444;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+
+    .fullscreen-indicados {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 95%;
+        height: 100%;
+        z-index: 1000;
+        background-color: rgba(14, 34, 137, 0.63);
+        padding: 1rem;
+        overflow-y: auto;
+    }
+
+    .fullscreen-indicados .voltar {
+        display: block;
+        margin-bottom: 1rem;
+        padding: 0.5rem 1rem;
+        font-weight: bold;
+        background-color: #ef4444;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+}

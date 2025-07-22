@@ -1,0 +1,63 @@
+.config-wrapper {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0f4f, #1c1e80, #292855);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    border-radius: 40px;
+}
+
+.configuracoes-page {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    padding: 40px 30px;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 80%;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.configuracoes-page h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    color: #ffcc00;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.botoes-config {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.botao-config {
+    background: linear-gradient(145deg, #ffffff20, #ffffff10);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 18px;
+    font-size: 20px !important;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.botao-config:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+}
+
+.botao-config:active {
+    transform: scale(0.98);
+    background: rgba(255, 255, 255, 0.35);
+}

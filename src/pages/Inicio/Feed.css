@@ -1,0 +1,224 @@
+/* ===== WRAPPER ===== */
+.FeedWrapper {
+    width: 95%;
+    max-width: 95vw;
+    height: 130vh;
+    margin: 2vh auto;
+    border-radius: 2vw;
+    overflow: hidden;
+    box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.1);
+    background-color: #395cf9;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== Feed Interno Scroll ===== */
+.FeedSectionScroll {
+    flex: 1;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    padding: 2rem;
+    background-color: #f0f2f5;
+    font-family: 'Segoe UI', 'Inter', sans-serif;
+    border-radius: 1.2rem;
+    box-shadow: 0 1.2rem 4rem rgba(0, 0, 0, 0.06);
+}
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* ===== Cabeçalhos ===== */
+.FeedSectionScroll h2,
+.FeedSectionScroll h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #1e1e2f;
+    font-weight: 600;
+}
+
+/* ===== Nova Postagem ===== */
+.comentario-boxx textarea {
+    width: 90%;
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+    border: 0.1rem solid #d0d4da;
+    border-radius: 1.2rem;
+    resize: none;
+    outline: none;
+    background-color: #ffffff;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.04);
+}
+
+.comentario-boxx textarea:focus {
+    border-color: #4a6ee0;
+    box-shadow: 0 0 0 0.3rem rgba(74, 110, 224, 0.2);
+}
+
+/* ===== Botão de Postagem ===== */
+.btn-comentar {
+    margin-top: 1rem;
+    background: linear-gradient(to right, #4a6ee0, #3a5ed0);
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.06);
+    width: 90%;
+}
+
+.btn-comentar:hover {
+    background: linear-gradient(to right, #3a5ed0, #2e4cb8);
+    transform: translateY(-0.1rem);
+}
+
+/* ===== Card do Post ===== */
+.card-post {
+    background-color: #ffffff;
+    border-radius: 1.6rem;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    position: relative;
+
+}
+
+.card-post:hover {
+    transform: translateY(-0.4rem);
+    box-shadow: 0 1.4rem 3.2rem rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Autor ===== */
+.autor-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.autor-info img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 0.2rem solid #4a6ee0;
+}
+
+/* ===== Título ===== */
+.card-post h4 {
+    font-size: 1.25rem;
+    color: #2c2c3e;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+/* ===== Ver Mais ===== */
+.btn-vermais-link {
+    color: #4a6ee0;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-block;
+    margin-top: 0.4rem;
+    font-size: 1rem;
+}
+
+.btn-vermais-link:hover {
+    color: #2e4cb8;
+    text-decoration: underline;
+}
+
+/* ===== Ações ===== */
+.comentario-acoes {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1.2rem;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 1rem;
+    color: #4a6ee0;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.btn-link:hover {
+    color: #2e4cb8;
+    text-decoration: underline;
+}
+
+/* ===== Campo de Comentário ===== */
+.input-comentario {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border: 0.1rem solid #ccc;
+    border-radius: 1rem;
+    margin-top: 0.5rem;
+    outline: none;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.input-comentario:focus {
+    border-color: #4a6ee0;
+}
+
+/* ===== Lista de Comentários ===== */
+.lista-comentarios {
+    list-style: none;
+    padding-left: 1rem;
+    margin-top: 1rem;
+    color: #444;
+    font-size: 0.95rem;
+}
+
+/* ===== Botão Voltar ao Topo ===== */
+.btn-voltar-topo {
+    display: block;
+    margin: 3rem auto 2rem;
+    background: #4a6ee0;
+    color: white;
+    border: none;
+    border-radius: 1.2rem;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.btn-voltar-topo:hover {
+    background-color: #2e4cb8;
+    transform: translateY(-0.2rem);
+}
+
+@media (max-width :480px) {
+
+    .FeedWrapper textarea,
+    .FeedWrapper button {
+        width: 90%;
+    }

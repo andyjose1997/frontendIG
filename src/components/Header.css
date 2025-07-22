@@ -1,0 +1,86 @@
+/* Logo */
+#logo {
+    width: 280px;
+    border-radius: 5%;
+    margin: 0 0 -83px 10px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalho */
+#Cabecalho ul {
+    background-color: #1e5686;
+    border-radius: 20px;
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    padding: 15px;
+    margin: 20px;
+    justify-content: flex-end;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#Cabecalho li {
+    padding: 0 3%;
+}
+
+#Cabecalho a {
+    color: #f6f6f9;
+    text-decoration: none;
+    font-size: 25px;
+    transition: color 0.3s, transform 0.2s;
+}
+
+#Cabecalho a:hover {
+    color: #cce6ff;
+    transform: translateY(-2px);
+}
+
+#Cabecalho a.menu-link {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+#Cabecalho a.menu-link:hover {
+    color: lightblue;
+}
+
+/* Responsivo básico */
+@media (max-width: 768px) {
+    #logo {
+        width: 200px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    #Cabecalho ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        padding: 12px;
+    }
+
+    #Cabecalho a {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    #logo {
+        width: 180px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    #Cabecalho ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    #Cabecalho a {
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,145 @@
+#Perfil {
+    display: grid;
+    grid-template-areas:
+        "Up Up Up Up"
+        "Botoes BotaoUm BotaoDois BotaoTres";
+    grid-template-columns: 18% 1fr 1fr 1fr;
+    grid-template-rows: 28% 1fr;
+    gap: 1rem;
+}
+
+#Up {
+    grid-area: Up;
+
+}
+
+#Botoes {
+    grid-area: Botoes;
+    display: flex;
+    margin-top: 30px;
+}
+
+#BotaoUm {
+    grid-area: BotaoUm;
+}
+
+#BotaoDois {
+    grid-area: BotaoDois;
+}
+
+.foto-perfil {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#BotaoTres {
+    grid-area: BotaoTres;
+}
+
+@media (max-width: 1000px) {
+    #Perfil {
+        display: grid;
+        grid-template-areas:
+            "Up Up"
+            "Botoes  BotaoUm"
+            "BotaoDois BotaoTres";
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 28% 10% 1fr;
+
+    }
+
+    #Up {
+        grid-area: Up;
+    }
+
+    .abrir-botoes {
+        grid-area: Botoes;
+        width: 150px;
+        height: 70px;
+        margin: auto auto;
+        margin-bottom: 90px;
+        background-color: blue;
+        color: white;
+        font-weight: bold;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 20px;
+    }
+
+    .abrir-botaoUm {
+        grid-area: BotaoUm;
+        width: 160px;
+        height: 70px;
+        margin: auto auto;
+        margin-bottom: 90px;
+        background-color: blue;
+        color: white;
+        font-weight: bold;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 20px;
+    }
+
+    #BotaoDois {
+        grid-area: BotaoDois;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    #BotaoTres {
+        grid-area: BotaoTres;
+        width: 90%;
+        margin: 0 auto;
+
+    }
+
+
+
+
+    .fullscreen-botoes {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 95%;
+        height: 100%;
+        background-color: rgba(33, 20, 156, 0.446);
+        z-index: 1000;
+        padding: 1rem;
+        overflow-y: auto;
+    }
+
+    .fullscreen-botoes .voltar {
+        background-color: #ef4444;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-weight: bold;
+        border: none;
+        margin-bottom: 1rem;
+        cursor: pointer;
+    }
+
+    .fullscreen-botaoUm {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 95%;
+        height: 100%;
+        background-color: rgba(33, 20, 156, 0.446);
+        z-index: 1000;
+        padding: 1rem;
+        overflow-y: auto;
+    }
+
+    .fullscreen-botaoUm .voltar {
+        background-color: #ef4444;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-weight: bold;
+        border: none;
+        margin-bottom: 1rem;
+        cursor: pointer;
+    }
+}

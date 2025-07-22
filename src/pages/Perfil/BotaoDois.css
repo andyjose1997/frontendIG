@@ -1,0 +1,185 @@
+.experiencias-section {
+    background-color: #1a1b4b;
+    padding: 20px;
+    color: white;
+    max-height: 350px;
+    overflow-y: auto;
+    border-radius: 15px;
+    margin: 20px auto;
+    width: 90%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    min-height: 95vh;
+}
+
+.titulo-exp {
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.container-exp {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.botoes-exp {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    padding: 10px;
+}
+
+.botoes-exp button {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.botoes-exp button:first-child {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.botoes-exp button:last-child {
+    background-color: #3498db;
+    color: white;
+}
+
+.botoes-exp button:hover {
+    opacity: 0.85;
+}
+
+.form-edit-exp {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+}
+
+.form-edit-exp input {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 90% !important;
+    margin: auto auto;
+}
+
+.form-edit-exp button {
+    background-color: #2ecc71;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.botao-remover-exp {
+    background-color: #ff1744;
+    color: white;
+    font-weight: bold;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.botao-remover-exp:hover {
+    background-color: #d50000;
+}
+
+.item-exp-click {
+    cursor: pointer;
+}
+
+
+.box-exp {
+    background-color: #3e73ff;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    user-select: none;
+    cursor: default;
+    transition: transform 0.2s;
+}
+
+.box-exp:hover {
+    transform: scale(1.02);
+}
+
+.box-exp small {
+    font-weight: normal;
+    font-size: 0.85rem;
+    color: #e0e0e0;
+}
+
+/* NOVOS ESTILOS PARA FORMULÁRIO */
+
+.form-exp {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #2d2f6c;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-exp input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f0f0f0;
+    color: #333;
+    width: 90% !important;
+}
+
+.form-exp input::placeholder {
+    color: #888;
+}
+
+.form-exp button {
+    background-color: #00c853;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.form-exp button:hover {
+    background-color: #00b248;
+}
+
+.botao-adicionar-exp {
+    margin-top: 20px;
+    background-color: #2979ff;
+    color: white;
+    font-weight: bold;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.botao-adicionar-exp:hover {
+    background-color: #1565c0;
+}

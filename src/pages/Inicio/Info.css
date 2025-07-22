@@ -1,0 +1,65 @@
+.InfoEmpresa {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.InfoEmpresa h2 {
+    font-size: 1.8rem;
+    color: #1e3a8a;
+    /* Azul escuro moderno */
+    margin-bottom: 0.3rem;
+}
+
+.InfoEmpresa p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.Info {
+    background-color: #f0f4ff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    max-width: 500px;
+    margin: auto;
+}
+
+.InfoLinks a,
+.InfoRedes a {
+    text-decoration: none;
+    color: #4f46e5;
+    /* Indigo */
+    transition: color 0.2s ease;
+}
+
+.InfoLinks a:hover,
+.InfoRedes a:hover {
+    color: #1e40af;
+    text-decoration: underline;
+}
+
+.InfoLinks {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.InfoRedes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.InfoRedes li {
+    font-weight: 500;
+}
+
+.InfoCopy {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #777;
+    margin-top: 1.5rem;
+}

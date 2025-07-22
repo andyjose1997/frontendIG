@@ -1,0 +1,23 @@
+#GeralConfig {
+    display: grid;
+    grid-template-areas:
+        "Up Up"
+        "Botoes Config";
+    grid-template-columns: 35% 65%;
+    gap: 12px;
+    box-sizing: border-box;
+}
+
+#Up {
+    grid-area: Up;
+}
+
+#Botoes {
+    grid-area: Botoes;
+
+}
+
+#Config {
+    grid-area: Config;
+    margin-top: 9px;
+}

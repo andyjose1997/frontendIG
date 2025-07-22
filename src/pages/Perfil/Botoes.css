@@ -1,0 +1,152 @@
+.botoa-container {
+    width: 50%;
+    padding: 1rem;
+    background-color: #041582;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #ddd;
+    max-height: 100vh;
+    margin: 6px;
+    border-radius: 15px;
+}
+
+.botoa-container a {
+    background: linear-gradient(to right, #ffffff, #f0f0f0);
+    color: #222;
+    padding: 0.9rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+    transition: all 0.25s ease;
+}
+
+.botoa-container a:hover {
+    background: linear-gradient(to right, #e0eaff, #d6e0ff);
+    color: #003366;
+    transform: translateX(4px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+
+.botoa-container a:hover {
+    background-color: #e6e6e6;
+}
+
+.botoa-container img {
+    width: 70px;
+    display: flex;
+    margin: 80% auto;
+}
+
+@media (max-width: 660px) {
+    .link-text {
+        display: none;
+    }
+
+    .botoa-container a {
+        margin: auto auto;
+    }
+
+    .botoa-container {
+        width: 20%;
+    }
+
+}
+
+@media (max-width: 510px) {
+    .botoa-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 0.5rem;
+        width: 100%;
+        padding: 1rem;
+        border-radius: 0;
+        max-height: none;
+        margin: 0;
+    }
+
+    .botoa-container img {
+        display: none;
+    }
+
+    .botoa-container a {
+        width: 15px;
+        height: 15px;
+        gap: -1rem;
+    }
+
+    .botoa-container {
+        gap: 0rem;
+        height: 70px;
+        margin: 2px auto;
+
+    }
+}
+
+@media (max-width: 361px) {
+    .botoa-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 0.5rem;
+        width: 100%;
+        padding: 1rem;
+        border-radius: 0;
+        max-height: none;
+        margin: 0;
+    }
+
+    .botoa-container img {
+        display: none;
+    }
+
+    .botoa-container a {
+        width: 10px;
+        height: 10px;
+        gap: -1rem;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto auto;
+    }
+
+    .botoa-container {
+        gap: 0rem;
+        height: 70px;
+        margin: auto auto;
+        width: 80%;
+        border-radius: 20px;
+
+    }
+}
+
+@media (max-width: 430px) {
+    .botoa-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: 10px;
+        height: 100px;
+    }
+
+    .botoa-container a {
+        justify-content: center;
+        /* centraliza emoji/texto */
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    .botoa-container img {
+        display: none;
+        /* oculta a logo pra economizar espaço */
+    }
+}
