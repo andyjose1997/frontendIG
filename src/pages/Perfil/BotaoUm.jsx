@@ -137,16 +137,14 @@ export default function BotaoUm() {
                         value={numero}
                         onChange={(e) => setNumero(e.target.value)}
                     />
-                    <button
-                        style={{
-                            backgroundColor: 'green',
-                            color: 'white',
-                            fontWeight: 'bold',
-                        }}
+                    <a
+                        className="botao-salvar-forcado"
                         onClick={salvarWhatsapp}
                     >
                         💾 Salvar
-                    </button>
+                    </a>
+
+
                 </div>
             )}
 

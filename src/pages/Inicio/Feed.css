@@ -216,9 +216,143 @@
     transform: translateY(-0.2rem);
 }
 
-@media (max-width :480px) {
+/* ===== Nova Postagem (Input e Botão) ===== */
+.nova-postagem-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    gap: 1rem;
+}
 
-    .FeedWrapper textarea,
-    .FeedWrapper button {
-        width: 90%;
-    }
+.nova-postagem-input {
+    width: 70%;
+    padding: 0.75rem 1.2rem;
+    font-size: 1rem;
+    border: 0.1rem solid #ccc;
+    border-radius: 1rem;
+    background-color: #fff;
+    transition: border 0.3s ease;
+}
+
+.nova-postagem-input:focus {
+    border-color: #4a6ee0;
+    outline: none;
+}
+
+.nova-postagem-botao {
+    padding: 0.75rem 1.5rem;
+    background-color: #4a6ee0;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.nova-postagem-botao:hover {
+    background-color: #2e4cb8;
+    transform: translateY(-0.1rem);
+}
+
+/* Reações: imagens circulares */
+.reacao-botao {
+    background: transparent;
+    border: none;
+    margin: 0 5px;
+    padding: 0;
+    position: relative;
+}
+
+.reacao-botao img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    /* ✅ Torna circular */
+    border: 2px solid #ddd;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.reacao-botao img:hover {
+    transform: scale(1.2);
+    border-color: #0d6efd;
+    /* muda a cor da borda ao passar o mouse */
+}
+
+/* Container que aparece ao passar o mouse sobre a reação principal */
+.reacoes-container {
+    position: relative;
+    display: inline-block;
+}
+
+.reacoes-opcoes {
+    display: none;
+    position: absolute;
+    top: -50px;
+    /* aparece acima */
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 5px 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+}
+
+.reacoes-container:hover .reacoes-opcoes {
+    display: flex;
+    gap: 8px;
+}
+
+
+/* ===== Reações ===== */
+.reacoes-box {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.reacoes-box button {
+    background: none;
+    border: none;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.reacoes-box button:hover {
+    transform: scale(1.2);
+}
+
+const menuBotaoEstilo= {
+    display: "block",
+        padding: "10px",
+        background: "none",
+        border: "none",
+        width: "100%",
+        textAlign: "left",
+        cursor: "pointer"
+}
+
+;
+
+.reacoes-box img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+/* ===== Contagem de Reações ===== */
+.contagem-reacoes {
+    margin-left: 1rem;
+    font-size: 0.9rem;
+    color: #333;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+}

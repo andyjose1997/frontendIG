@@ -1,0 +1,66 @@
+.mudar-senha {
+    background-color: #1a1b4b;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    margin: 2rem auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.mudar-senha h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.mudar-senha input {
+    width: 96%;
+    padding: 15px;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+}
+
+.mudar-senha input:focus {
+    outline: none;
+    background-color: #f0f0f0;
+    color: black;
+}
+
+.mensagem {
+    text-align: center;
+    font-weight: bold;
+    margin: 1rem 0;
+    color: #ffcc00;
+}
+
+.botoes {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+
+
+.botoes .botao-config,
+.botoes .botao-voltar {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.botoes .botao-config:hover {
+    background-color: #4caf50;
+    color: white;
+}
+
+.botoes .botao-voltar:hover {
+    background-color: #555;
+    color: white;
+}

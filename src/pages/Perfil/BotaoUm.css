@@ -115,6 +115,31 @@
     transition: background-color 0.3s;
 }
 
+.botao-salvar-forcado {
+    display: inline-block;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
+    cursor: pointer;
+    user-select: none;
+}
+
+.botao-salvar-forcado:hover {
+    background-color: #006400;
+    /* verde mais escuro no hover */
+    transform: scale(1.05);
+}
+
+.botao-salvar-forcado:active {
+    transform: scale(0.98);
+}
+
 .formulario-whatsapp button:hover {
     background-color: #043ff4;
 }

@@ -3,7 +3,7 @@
     grid-template-areas:
         "Up Up"
         "Botoes Bandeja";
-    grid-template-columns: 35% 65%;
+    grid-template-columns: 18% 1fr;
     gap: 12px;
     box-sizing: border-box;
 }

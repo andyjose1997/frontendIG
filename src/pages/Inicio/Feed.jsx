@@ -1,191 +1,526 @@
 import './Feed.css';
-import { useState, useRef } from 'react';
-import Info from './Info';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Feed() {
     const sectionRef = useRef(null);
-
-    const [posts, setPosts] = useState([
-        { id: 1, autor: "Maria Souza", imagem: "https://i.pravatar.cc/40?img=1", data: "25 de junho de 2025", titulo: "Como aprendi programação em 3 meses" },
-        { id: 2, autor: "João Silva", imagem: "https://i.pravatar.cc/40?img=2", data: "24 de junho de 2025", titulo: "Dicas para ser mais produtivo estudando online" },
-        { id: 3, autor: "Ana Lima", imagem: "https://i.pravatar.cc/40?img=3", data: "22 de junho de 2025", titulo: "Meu primeiro projeto usando React" },
-        { id: 4, autor: "Carlos Mendes", imagem: "https://i.pravatar.cc/40?img=4", data: "21 de junho de 2025", titulo: "Vale a pena estudar JavaScript em 2025?" },
-        { id: 5, autor: "Fernanda Costa", imagem: "https://i.pravatar.cc/40?img=5", data: "20 de junho de 2025", titulo: "Consegui meu primeiro cliente como freelancer!" },
-        { id: 6, autor: "Bruno Rocha", imagem: "https://i.pravatar.cc/40?img=6", data: "19 de junho de 2025", titulo: "Como estudar 1h por dia com foco total" },
-        { id: 7, autor: "Patrícia Oliveira", imagem: "https://i.pravatar.cc/40?img=7", data: "18 de junho de 2025", titulo: "Erros que cometi no meu primeiro projeto" },
-        { id: 8, autor: "Lucas Santos", imagem: "https://i.pravatar.cc/40?img=8", data: "17 de junho de 2025", titulo: "React ou Vue: o que escolhi para meu app?" },
-        { id: 9, autor: "Juliana Ribeiro", imagem: "https://i.pravatar.cc/40?img=9", data: "16 de junho de 2025", titulo: "Estudando com vídeos gratuitos no YouTube" },
-        { id: 10, autor: "Ricardo Almeida", imagem: "https://i.pravatar.cc/40?img=10", data: "15 de junho de 2025", titulo: "Montei meu portfólio com HTML e CSS" },
-    ]);
-
-    const [novaPostagem, setNovaPostagem] = useState("");
+    const [posts, setPosts] = useState([]);
     const [comentariosPorPost, setComentariosPorPost] = useState({});
-    const [mostrarComentarios, setMostrarComentarios] = useState({});
-    const [mostrarCampoComentario, setMostrarCampoComentario] = useState({});
-    const [novosComentarios, setNovosComentarios] = useState({});
-    const [refreshCount, setRefreshCount] = useState(0);
-    const [loading, setLoading] = useState(false);
+    const [novaPostagem, setNovaPostagem] = useState("");
+    const [reacoesPorPost, setReacoesPorPost] = useState({});
+    const [menuAberto, setMenuAberto] = useState({});
+    const [modoEdicao, setModoEdicao] = useState({});
+    const [novoTitulo, setNovoTitulo] = useState({});
+    const [mostrarInputComentario, setMostrarInputComentario] = useState({});
+    const [comentariosDigitados, setComentariosDigitados] = useState({});
+    const [comentariosEmEdicao, setComentariosEmEdicao] = useState({});
 
-    const usuario = {
-        nome: "Seu Nome",
-        imagem: "/perfil.png"
-    };
+    const userId = localStorage.getItem('user_id');
 
-    const handlePostar = () => {
-        if (novaPostagem.trim() === "") return;
-
-        const novoPost = {
-            id: Date.now(),
-            autor: usuario.nome,
-            imagem: usuario.imagem,
-            data: new Date().toLocaleString("pt-BR", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-            }),
-            titulo: novaPostagem,
-        };
-
-        setPosts([novoPost, ...posts]);
-        setNovaPostagem("");
-    };
-
-    const toggleMostrarComentarios = (postId) => {
-        setMostrarComentarios((prev) => ({
-            ...prev,
-            [postId]: !prev[postId]
-        }));
-    };
-
-    const toggleCampoComentario = (postId) => {
-        setMostrarCampoComentario((prev) => ({
-            ...prev,
-            [postId]: !prev[postId]
-        }));
-    };
-
-    const adicionarComentario = (postId) => {
-        const texto = (novosComentarios[postId] || "").trim();
-        if (texto === "") return;
-
+    const buscarComentarios = async (postId) => {
+        const resposta = await fetch(`http://localhost:8899/comentarios/${postId}`);
+        const dados = await resposta.json();
         setComentariosPorPost((prev) => ({
             ...prev,
-            [postId]: [...(prev[postId] || []), texto]
+            [postId]: dados
+        }));
+    };
+
+    const editarComentario = async (idComentario, novoTexto, idPostagem) => {
+        if (!novoTexto.trim()) {
+            alert("O comentário não pode estar vazio.");
+            return;
+        }
+
+        await fetch(`http://localhost:8899/comentarios/${idComentario}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ texto: novoTexto })
+        });
+
+        // Limpa o estado de edição
+        setComentariosEmEdicao((prev) => ({
+            ...prev,
+            [idComentario]: undefined
         }));
 
-        setNovosComentarios((prev) => ({
+        await buscarComentarios(idPostagem);
+    };
+
+    const tiposDeReacao = [
+        { tipo: "blz", imagem: "/reacoes/blz.png" },
+        { tipo: "risada", imagem: "/reacoes/risada.png" },
+        { tipo: "seila", imagem: "/reacoes/seila.jpg" },
+        { tipo: "surpreso", imagem: "/reacoes/surpreso.jpg" },
+        { tipo: "amei", imagem: "/reacoes/amei.png" },
+    ];
+
+    const enviarComentario = async (postId) => {
+        const comentario = comentariosDigitados[postId]?.trim();
+        if (!comentario) return;
+
+        await fetch(`http://localhost:8899/postagens/${postId}/comentar`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ texto: comentario })
+        });
+
+        setComentariosDigitados((prev) => ({
             ...prev,
             [postId]: ""
         }));
 
-        setMostrarCampoComentario((prev) => ({
+        setMostrarInputComentario((prev) => ({
             ...prev,
             [postId]: false
         }));
 
-        setMostrarComentarios((prev) => ({
-            ...prev,
-            [postId]: true
-        }));
+        await buscarComentarios(postId);
     };
 
+    const buscarPostagens = async () => {
+        const resposta = await fetch('http://localhost:8899/postagens');
+        const dados = await resposta.json();
+        setPosts(dados);
+        dados.forEach(post => {
+            buscarReacoes(post.id);
+            buscarComentarios(post.id); // ✅ buscar comentários junto com posts
+        });
+    };
+
+    const buscarReacoes = async (postId) => {
+        const resposta = await fetch(`http://localhost:8899/reacoes/${postId}`);
+        const dados = await resposta.json();
+        setReacoesPorPost(prev => ({
+            ...prev,
+            [postId]: dados
+        }));
+    };
+    const menuBotaoEstilo = {
+        display: "block",
+        padding: "10px",
+        background: "none",
+        border: "none",
+        width: "100%",
+        textAlign: "left",
+        cursor: "pointer"
+    };
+    const apagarComentario = async (idComentario, idPostagem) => {
+        const confirmar = window.confirm("Deseja apagar este comentário?");
+        if (!confirmar) return;
+
+        await fetch(`http://localhost:8899/comentarios/deletar/${idComentario}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+
+        await buscarComentarios(idPostagem);
+    };
+
+    const enviarReacao = async (postId, tipoReacao) => {
+        await fetch(`http://localhost:8899/reacoes/${postId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ tipo_reacao: tipoReacao })
+        });
+        buscarReacoes(postId);
+    };
+
+    const criarPostagem = async () => {
+        if (novaPostagem.trim() === "") return;
+
+        await fetch('http://localhost:8899/postagens', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ titulo: novaPostagem })
+        });
+
+        setNovaPostagem("");
+        buscarPostagens();
+    };
+
+    const removerPostagem = async (postId) => {
+        await fetch(`http://localhost:8899/postagens/${postId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        buscarPostagens();
+    };
+
+    const atualizarPostagem = async (postId) => {
+        await fetch(`http://localhost:8899/postagens/${postId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ titulo: novoTitulo[postId] })
+        });
+
+        setModoEdicao((prev) => ({ ...prev, [postId]: false }));
+        buscarPostagens();
+    };
+
+    useEffect(() => {
+        buscarPostagens();
+    }, []);
+
     return (
-        <div className="FeedWrapper" key={refreshCount}>
+        <div className="FeedWrapper">
             <section ref={sectionRef} className="FeedSectionScroll">
+                <h3>Últimas Notícias</h3>
 
-                <h3>Últimas Noticias</h3>
-                {posts.map((post) => (
+                <div className="nova-postagem-box">
+                    <input
+                        type="text"
+                        className="nova-postagem-input"
+                        placeholder="Escreva uma nova postagem..."
+                        value={novaPostagem}
+                        onChange={(e) => setNovaPostagem(e.target.value)}
+                    />
+                    <button className="nova-postagem-botao" onClick={criarPostagem}>Postar</button>
+                </div>
+
+                {posts.map(post => (
                     <div key={post.id} className="card-post">
-                        <div className="autor-info">
-                            <img src={post.imagem} alt="Perfil" />
-                            <div>
-                                <strong>{post.autor}</strong><br />
-                                <small>{post.data}</small>
+                        <div className="autor-info" style={{ justifyContent: "space-between" }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                                <img
+                                    src={post.foto ? `http://localhost:8899/fotos/${post.foto}` : "/perfil.png"}
+                                    alt="Perfil"
+                                />
+                                <div>
+                                    <strong>{post.nome} {post.sobrenome}</strong><br />
+                                    <small>{post.data_postagem}</small>
+                                </div>
                             </div>
+
+                            {String(post.id_usuario) === String(userId) && (
+                                <div style={{ position: "relative" }}>
+                                    <button
+                                        onClick={() => setMenuAberto((prev) => ({
+                                            ...prev,
+                                            [post.id]: !prev[post.id]
+                                        }))}
+                                        style={{
+                                            background: "transparent",
+                                            border: "none",
+                                            fontSize: "1.5rem",
+                                            cursor: "pointer"
+                                        }}
+                                    >
+                                        ⋮
+                                    </button>
+
+                                    {menuAberto[post.id] && (
+                                        <div style={{
+                                            position: "absolute",
+                                            right: 0,
+                                            top: "100%",
+                                            backgroundColor: "#fff",
+                                            border: "1px solid #ccc",
+                                            borderRadius: "8px",
+                                            boxShadow: "0 0 8px rgba(0,0,0,0.1)",
+                                            zIndex: 1
+                                        }}>
+                                            <button
+                                                onClick={() => {
+                                                    setModoEdicao((prev) => ({ ...prev, [post.id]: true }));
+                                                    setNovoTitulo((prev) => ({ ...prev, [post.id]: post.titulo }));
+                                                    setMenuAberto((prev) => ({ ...prev, [post.id]: false }));
+                                                }}
+                                                style={{
+                                                    display: "block",
+                                                    padding: "10px",
+                                                    background: "none",
+                                                    border: "none",
+                                                    width: "100%",
+                                                    textAlign: "left",
+                                                    cursor: "pointer"
+                                                }}
+                                            >
+                                                Editar
+                                            </button>
+                                            <button
+                                                onClick={() => removerPostagem(post.id)}
+                                                style={{
+                                                    display: "block",
+                                                    padding: "10px",
+                                                    background: "none",
+                                                    border: "none",
+                                                    width: "100%",
+                                                    textAlign: "left",
+                                                    cursor: "pointer",
+                                                    color: "red"
+                                                }}
+                                            >
+                                                Remover
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                         </div>
 
-                        <h4>{post.titulo}</h4>
-                        <a href="#" className="btn-vermais-link">Ver mais</a>
-
-                        <div className="comentario-acoes">
-                            <button className="btn-link" onClick={() => toggleCampoComentario(post.id)}>
-                                Comentar
-                            </button>
-                            <button className="btn-link" onClick={() => toggleMostrarComentarios(post.id)}>
-                                Comentários ({(comentariosPorPost[post.id] || []).length})
-                            </button>
-                        </div>
-
-                        {mostrarCampoComentario[post.id] && (
-                            <div className="comentario-box">
+                        {modoEdicao[post.id] ? (
+                            <div style={{ marginTop: "1rem" }}>
                                 <input
                                     type="text"
-                                    placeholder="Escreva um comentário..."
-                                    className="input-comentario"
-                                    value={novosComentarios[post.id] || ""}
-                                    onChange={(e) =>
-                                        setNovosComentarios((prev) => ({
-                                            ...prev,
-                                            [post.id]: e.target.value
-                                        }))
-                                    }
+                                    value={novoTitulo[post.id]}
+                                    onChange={(e) => setNovoTitulo((prev) => ({
+                                        ...prev,
+                                        [post.id]: e.target.value
+                                    }))}
+                                    style={{
+                                        width: "100%",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                        border: "1px solid #ccc"
+                                    }}
                                 />
-                                <button className="btn-comentar" onClick={() => adicionarComentario(post.id)}>
-                                    Comentar
+                                <button
+                                    onClick={() => atualizarPostagem(post.id)}
+                                    style={{
+                                        marginTop: "10px",
+                                        padding: "10px 20px",
+                                        backgroundColor: "#0d6efd",
+                                        color: "white",
+                                        fontWeight: "bold",
+                                        border: "none",
+                                        borderRadius: "10px"
+                                    }}
+                                >
+                                    Salvar
                                 </button>
                             </div>
+                        ) : (
+                            <h4>{post.titulo}</h4>
                         )}
 
-                        {mostrarComentarios[post.id] && (
-                            <ul className="lista-comentarios">
-                                {(comentariosPorPost[post.id] || []).map((comentario, i) => (
-                                    <li key={i}>{comentario}</li>
+                        <div className="reacoes-box">
+                            <div className="reacoes-container">
+                                <button
+                                    className="reacao-botao"
+                                    onClick={() => enviarReacao(post.id, "blz")}
+                                >
+                                    <img src="/reacoes/blz.png" alt="blz" />
+                                </button>
+
+                                <div className="reacoes-opcoes">
+                                    {tiposDeReacao.map(reacao => (
+                                        <button
+                                            key={reacao.tipo}
+                                            className="reacao-botao"
+                                            onClick={() => enviarReacao(post.id, reacao.tipo)}
+                                        >
+                                            <img src={reacao.imagem} alt={reacao.tipo} />
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="contagem-reacoes">
+                                {(reacoesPorPost[post.id] || []).map(item => (
+                                    <span key={item.tipo_reacao} style={{ marginRight: "10px", fontSize: "14px" }}>
+                                        <img
+                                            src={tiposDeReacao.find(r => r.tipo === item.tipo_reacao)?.imagem}
+                                            alt={item.tipo_reacao}
+                                            style={{
+                                                width: "20px",
+                                                height: "20px",
+                                                borderRadius: "50%",
+                                                marginRight: "5px",
+                                                verticalAlign: "middle"
+                                            }}
+                                        />
+                                        {item.total}
+                                    </span>
                                 ))}
-                            </ul>
-                        )}
+                            </div>
+                        </div>
+
+                        <div className="comentario-box">
+                            <button
+                                className="botao-comentar"
+                                onClick={() =>
+                                    setMostrarInputComentario((prev) => ({
+                                        ...prev,
+                                        [post.id]: !prev[post.id]
+                                    }))
+                                }
+                            >
+                                💬 Comentar
+                            </button>
+
+                            {mostrarInputComentario[post.id] && (
+                                <div style={{ marginTop: "1rem" }}>
+                                    <input
+                                        type="text"
+                                        placeholder="Escreva seu comentário..."
+                                        value={comentariosDigitados[post.id] || ""}
+                                        onChange={(e) =>
+                                            setComentariosDigitados((prev) => ({
+                                                ...prev,
+                                                [post.id]: e.target.value
+                                            }))
+                                        }
+                                        style={{
+                                            width: "100%",
+                                            padding: "10px",
+                                            borderRadius: "10px",
+                                            border: "1px solid #ccc"
+                                        }}
+                                    />
+                                    <button
+                                        style={{
+                                            marginTop: "10px",
+                                            padding: "10px 20px",
+                                            backgroundColor: "#28a745",
+                                            color: "white",
+                                            fontWeight: "bold",
+                                            border: "none",
+                                            borderRadius: "10px"
+                                        }}
+                                        onClick={() => enviarComentario(post.id)}
+                                    >
+                                        Enviar Comentário
+                                    </button>
+                                </div>
+                            )}
+
+                            {/* 🔽 Lista de Comentários */}
+                            {/* 🔽 Lista de Comentários */}
+                            {(comentariosPorPost[post.id] || []).map(comentario => (
+                                <div key={comentario.id} className="comentario-item" style={{ marginTop: "10px", borderTop: "1px solid #ccc", paddingTop: "10px", position: "relative" }}>
+                                    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                                        <img
+                                            src={comentario.foto ? `http://localhost:8899/fotos/${comentario.foto}` : "/perfil.png"}
+                                            alt="Perfil"
+                                            style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+                                        />
+                                        <strong>{comentario.nome} {comentario.sobrenome}</strong>
+                                        <small style={{ marginLeft: "auto", fontSize: "0.8rem" }}>{comentario.data_comentario}</small>
+
+                                        {/* ⋮ Botão de opções */}
+                                        {(String(comentario.id_usuario) === String(userId) || String(post.id_usuario) === String(userId)) && (
+                                            <div style={{ position: "relative" }}>
+                                                <button
+                                                    onClick={() => setMenuAberto(prev => ({
+                                                        ...prev,
+                                                        [`comentario-${comentario.id}`]: !prev[`comentario-${comentario.id}`]
+                                                    }))}
+                                                    style={{
+                                                        background: "transparent",
+                                                        border: "none",
+                                                        fontSize: "1.5rem",
+                                                        cursor: "pointer",
+                                                        marginLeft: "8px"
+                                                    }}
+                                                >
+                                                    ⋮
+                                                </button>
+
+                                                {menuAberto[`comentario-${comentario.id}`] && (
+                                                    <div style={{
+                                                        position: "absolute",
+                                                        right: 0,
+                                                        top: "100%",
+                                                        backgroundColor: "#fff",
+                                                        border: "1px solid #ccc",
+                                                        borderRadius: "8px",
+                                                        boxShadow: "0 0 8px rgba(0,0,0,0.1)",
+                                                        zIndex: 1
+                                                    }}>
+                                                        {/* Se for o autor do comentário */}
+                                                        {String(comentario.id_usuario) === String(userId) && (
+                                                            <>
+                                                                <button
+                                                                    onClick={() => {
+                                                                        setComentariosEmEdicao((prev) => ({
+                                                                            ...prev,
+                                                                            [comentario.id]: comentario.texto
+                                                                        }));
+                                                                        setMenuAberto((prev) => ({
+                                                                            ...prev,
+                                                                            [`comentario-${comentario.id}`]: false
+                                                                        }));
+                                                                    }}
+                                                                    style={menuBotaoEstilo}
+                                                                >
+                                                                    Editar
+                                                                </button>
+                                                                <button
+                                                                    onClick={() => apagarComentario(comentario.id, post.id)}
+                                                                    style={{ ...menuBotaoEstilo, color: "red" }}
+                                                                >
+                                                                    Apagar
+                                                                </button>
+                                                            </>
+                                                        )}
+
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {comentariosEmEdicao[comentario.id] !== undefined ? (
+                                        <div style={{ marginLeft: "35px", marginTop: "10px" }}>
+                                            <input
+                                                type="text"
+                                                value={comentariosEmEdicao[comentario.id]}
+                                                onChange={(e) =>
+                                                    setComentariosEmEdicao((prev) => ({
+                                                        ...prev,
+                                                        [comentario.id]: e.target.value
+                                                    }))
+                                                }
+                                                style={{
+                                                    width: "100%",
+                                                    padding: "8px",
+                                                    border: "1px solid #ccc",
+                                                    borderRadius: "8px"
+                                                }}
+                                            />
+                                            <button
+                                                onClick={() => editarComentario(comentario.id, comentariosEmEdicao[comentario.id], post.id)}
+                                                style={{
+                                                    marginTop: "5px",
+                                                    padding: "6px 12px",
+                                                    backgroundColor: "#28a745",
+                                                    color: "white",
+                                                    border: "none",
+                                                    borderRadius: "6px"
+                                                }}
+                                            >
+                                                Salvar
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <p style={{ marginLeft: "35px", fontSize: "0.95rem" }}>{comentario.texto}</p>
+                                    )}
+                                </div>
+                            ))}
+
+                        </div>
                     </div>
                 ))}
-                <button
-                    className="btn-voltar-topo"
-                    onClick={() => {
-                        setLoading(true);  // Mostra a bolinha de carregamento
-
-                        setTimeout(() => {
-                            if (sectionRef.current) {
-                                sectionRef.current.scrollTo({
-                                    top: 0,
-                                    behavior: 'smooth'
-                                });
-                            }
-                            setRefreshCount((prev) => prev + 1);  // Força re-renderização
-
-                            setLoading(false);  // Esconde o carregamento
-                        }, 1000);  // Tempo do "carregando"
-                    }}
-                >
-                    {loading ? (
-                        <span className="spinner"></span>  // Mostra a bolinha enquanto está carregando
-                    ) : (
-                        "Voltar ao topo do Feed"
-                    )}
-                </button>
-
-
-
-                <br /><br /><br />
-                <div style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    border: "1px solid black",
-                    borderRadius: "50px"
-                }}>
-                    <Info />
-                </div>
-                <br /><br /><br /><br />
             </section>
         </div>
-
     );
 }

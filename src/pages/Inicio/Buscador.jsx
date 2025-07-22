@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Buscador.css';
-import Perfil from '../Perfil/Perfil';
-
-
 
 export default function Buscador() {
     const [showModal, setShowModal] = useState(false);
     const [countdown, setCountdown] = useState(15);
 
+    const [sugestoes, setSugestoes] = useState([]);
+    const [textoBusca, setTextoBusca] = useState("");
+    const [detalhe, setDetalhe] = useState(null);
+
     function handleLogoutClick(e) {
-        e.preventDefault(); // evita navegação imediata
+        e.preventDefault();
         setShowModal(true);
         setCountdown(15);
     }
@@ -24,6 +25,35 @@ export default function Buscador() {
         window.location.href = '/';
     }
 
+    async function buscarUsuarios(texto) {
+        if (texto.trim() === "") {
+            setSugestoes([]);
+            return;
+        }
+        try {
+            const resposta = await fetch(`http://localhost:8899/usuarios_publicos?nome=${encodeURIComponent(texto)}`, {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                }
+            });
+            const dados = await resposta.json();
+            setSugestoes(dados);
+        } catch (error) {
+            console.error("Erro ao buscar usuários:", error);
+            setSugestoes([]);
+        }
+    }
+
+    function selecionarUsuario(usuario) {
+        setSugestoes([]);
+        setTextoBusca("");
+        setDetalhe(usuario);
+    }
+
+    function fecharDetalhe() {
+        setDetalhe(null);
+    }
+
     useEffect(() => {
         let timer;
         if (showModal && countdown > 0) {
@@ -33,30 +63,43 @@ export default function Buscador() {
         } else if (showModal && countdown === 0) {
             handleConfirmLogout();
         }
-
         return () => clearTimeout(timer);
     }, [showModal, countdown]);
 
     return (
         <>
             <div id="BuscadorFundo">
-                <div className="esquerda" > {/* vazio por enquanto */}
-
-                    <img style={{
-                        width: "55px"
-                    }} src="/Logo/I_round.png" alt="" />
-                    <h3 style={{
-                        color: "white"
-                    }}>IronSources</h3></div>
+                <div className="esquerda">
+                    <img style={{ width: "55px" }} src="/Logo/I_round.png" alt="" />
+                    <h3 style={{ color: "white" }}>IronSources</h3>
+                </div>
                 <div className="centro">
-                    <input id='Buscador' type="text" placeholder='Procurar por alguém' />
-                    <button id='buscar'>Buscar</button>
+                    <input
+                        id='Buscador'
+                        type="text"
+                        placeholder='Procurar Usuários públicos'
+                        value={textoBusca}
+                        onChange={(e) => {
+                            const valor = e.target.value;
+                            setTextoBusca(valor);
+                            buscarUsuarios(valor);
+                        }}
+                    />
+
+                    {sugestoes.length > 0 && (
+                        <ul className="sugestoes-dropdown">
+                            {sugestoes.map(usuario => (
+                                <li key={usuario.id} onClick={() => selecionarUsuario(usuario)}>
+                                    {usuario.nome} {usuario.sobrenome}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
                 <div className="direita">
                     <Link className='topo' to="/perfil">Perfil</Link>
                     <a className='topo' href="/Mensagens">Mensagens</a>
-                    <Link className='topo' to="/TelaConfig"> Configurações</Link>
-
+                    <Link className='topo' to="/TelaConfig">Configurações</Link>
                     <a className='Logout' href="/" onClick={handleLogoutClick}>Logout</a>
                 </div>
             </div>
@@ -70,6 +113,33 @@ export default function Buscador() {
                             <button onClick={handleConfirmLogout}>Sair agora</button>
                             <button onClick={handleCancel}>Cancelar</button>
                         </div>
+                    </div>
+                </div>
+            )}
+
+            {detalhe && (
+                <div className="modalFundo">
+                    <div className="modalDetalhe">
+                        <button className="fecharModal" onClick={fecharDetalhe}>✖</button>
+                        <img
+                            src={`http://localhost:8899/fotos/${detalhe.foto || "padrao.png"}`}
+                            alt="Foto"
+                        />
+                        <h2>{detalhe.nome} {detalhe.sobrenome}</h2>
+                        <a
+                            href={`https://wa.me/${detalhe.whatsapp}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="botaoZap"
+                        >
+                            📱 Abrir WhatsApp
+                        </a>
+                        <p className="comentarioPerfil">
+                            <strong>Próxima Meta:</strong><br />
+                            {detalhe.comentario_perfil && detalhe.comentario_perfil.trim() !== ""
+                                ? detalhe.comentario_perfil
+                                : "Nenhuma meta definida."}
+                        </p>
                     </div>
                 </div>
             )}

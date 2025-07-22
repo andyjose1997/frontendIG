@@ -9,6 +9,33 @@
     box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.15);
 }
 
+/* ===== Dropdown de Sugestões ===== */
+.sugestoes-dropdown {
+    position: fixed;
+    top: 3rem;
+    width: 18rem;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    max-height: 250px;
+    padding: 0;
+    margin-top: 30px;
+    list-style: none;
+}
+
+.sugestoes-dropdown li {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.2s ease;
+}
+
+.sugestoes-dropdown li:hover {
+    background-color: #f4f4f4;
+}
+
 /* ===== Alinhamentos nas colunas ===== */
 .centro {
     display: flex;
@@ -16,6 +43,8 @@
     align-items: center;
     gap: 0.75rem;
 }
+
+
 
 .dropdown-lista {
     position: absolute;
@@ -55,7 +84,7 @@
 
 /* ===== Campo de busca ===== */
 #Buscador {
-    width: 18rem;
+    width: 23rem;
     height: 2.6rem;
     padding: 0 1rem;
     border-radius: 2rem;
@@ -70,19 +99,6 @@
     box-shadow: 0 0 0 0.25rem rgba(4, 64, 244, 0.3);
 }
 
-/* ===== Botão Buscar ===== */
-#buscar {
-    height: 2.6rem;
-    padding: 0 1.5rem;
-    border-radius: 2rem;
-    border: none;
-    background-color: #ffffff;
-    color: #043ff4;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
 
 #buscar:hover {
     background-color: #dde5ff;

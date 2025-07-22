@@ -21,20 +21,30 @@
 }
 
 #Cabecalho li {
-    padding: 0 3%;
+    background: none !important;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin-right: 5%;
 }
+
 
 #Cabecalho a {
     color: #f6f6f9;
     text-decoration: none;
     font-size: 25px;
     transition: color 0.3s, transform 0.2s;
+    display: inline-block;
+    /* <- Aqui está a solução */
 }
 
 #Cabecalho a:hover {
     color: #cce6ff;
     transform: translateY(-2px);
+    background-color: transparent;
 }
+
+
 
 #Cabecalho a.menu-link {
     color: white;
