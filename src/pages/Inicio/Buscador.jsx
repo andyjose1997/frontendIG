@@ -9,6 +9,7 @@ export default function Buscador() {
     const [sugestoes, setSugestoes] = useState([]);
     const [textoBusca, setTextoBusca] = useState("");
     const [detalhe, setDetalhe] = useState(null);
+    const [carregando, setCarregando] = useState(false);
 
     function handleLogoutClick(e) {
         e.preventDefault();
@@ -30,6 +31,8 @@ export default function Buscador() {
             setSugestoes([]);
             return;
         }
+
+        setCarregando(true); // 👈 Início do carregamento
         try {
             const resposta = await fetch(`http://localhost:8899/usuarios_publicos?nome=${encodeURIComponent(texto)}`, {
                 headers: {
@@ -41,6 +44,8 @@ export default function Buscador() {
         } catch (error) {
             console.error("Erro ao buscar usuários:", error);
             setSugestoes([]);
+        } finally {
+            setCarregando(false); // 👈 Fim do carregamento
         }
     }
 
@@ -65,6 +70,14 @@ export default function Buscador() {
         }
         return () => clearTimeout(timer);
     }, [showModal, countdown]);
+    useEffect(() => {
+        const delay = setTimeout(() => {
+            buscarUsuarios(textoBusca);
+        }, 500); // 500ms de espera
+
+        return () => clearTimeout(delay);
+    }, [textoBusca]);
+
 
     return (
         <>
@@ -79,12 +92,16 @@ export default function Buscador() {
                         type="text"
                         placeholder='Procurar Usuários públicos'
                         value={textoBusca}
+                        autoComplete="off"
+
                         onChange={(e) => {
-                            const valor = e.target.value;
-                            setTextoBusca(valor);
-                            buscarUsuarios(valor);
+                            setTextoBusca(e.target.value);
                         }}
+
                     />
+                    {carregando && (
+                        <div className="spinner"></div>
+                    )}
 
                     {sugestoes.length > 0 && (
                         <ul className="sugestoes-dropdown">

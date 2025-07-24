@@ -81,10 +81,10 @@ export default function Login() {
 
             localStorage.setItem('token', data.token);
             localStorage.setItem('usuario', JSON.stringify(data.usuario));
-            console.log("⚠️ Usuario recebido:", data.usuario);   // <-- para inspecionar
-            localStorage.setItem('user_id', data.usuario.id);    // <-- ou id_usuario, dependendo do que for recebido
+            console.log("⚠️ Usuario recebido:", data.usuario);
+            localStorage.setItem('user_id', data.usuario.id);
 
-            localStorage.setItem('user_id', data.usuario.id);  // ✅ adicione esta linha
+            localStorage.setItem('user_id', data.usuario.id);
 
             login(data.usuario, data.token);
 

@@ -132,13 +132,20 @@ export default function Up() {
                     </div>
 
                     <div className="info">
-                        <h1>{user.nome} {user.sobrenome}</h1>
+                        <h1>
+                            {user.nome.charAt(0).toUpperCase() + user.nome.slice(1).toLowerCase()}{" "}
+                            {user.sobrenome.charAt(0).toUpperCase() + user.sobrenome.slice(1).toLowerCase()}
+                        </h1>
                         <h2>ID: {user.id}</h2>
 
                         <div className="comentario-perfil">
                             {user.comentario_perfil && !editando ? (
                                 <>
-                                    <h3>{user.comentario_perfil}</h3>
+                                    <h3>
+                                        {user.comentario_perfil
+                                            ? user.comentario_perfil.charAt(0).toUpperCase() + user.comentario_perfil.slice(1).toLowerCase()
+                                            : ""}
+                                    </h3>
                                     <button className="btn-postar editar" onClick={() => setEditando(true)}>✏️ </button>
                                 </>
                             ) : (

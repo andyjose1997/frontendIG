@@ -12,6 +12,46 @@
     flex-direction: column;
 }
 
+
+
+/* ===== Botão Comentar ===== */
+.botao-comentar {
+    background-color: #4a6ee0;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.contagem-reacoes {
+    background-color: #f9f9f9;
+    /* fundo claro */
+    border-radius: 12px;
+    /* cantos arredondados */
+    padding: 8px 12px;
+    /* espaço interno */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* sombra suave */
+    font-size: 0.95rem;
+    color: #333;
+}
+
+
+.botao-comentar:hover {
+    background-color: #2e4cb8;
+    transform: translateY(-0.1rem);
+}
+
 /* ===== Feed Interno Scroll ===== */
 .FeedSectionScroll {
     flex: 1;
@@ -43,7 +83,7 @@
 
 /* ===== Cabeçalhos ===== */
 .FeedSectionScroll h2,
-.FeedSectionScroll h3 {
+.FeedSectionScroll h1 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
     text-align: center;
@@ -264,6 +304,7 @@
     margin: 0 5px;
     padding: 0;
     position: relative;
+    width: 60px;
 }
 
 .reacao-botao img {
@@ -273,6 +314,7 @@
     /* ✅ Torna circular */
     border: 2px solid #ddd;
     transition: transform 0.2s ease, border-color 0.2s ease;
+    margin-left: 20px;
 }
 
 .reacao-botao img:hover {
@@ -328,17 +370,7 @@
     transform: scale(1.2);
 }
 
-const menuBotaoEstilo= {
-    display: "block",
-        padding: "10px",
-        background: "none",
-        border: "none",
-        width: "100%",
-        textAlign: "left",
-        cursor: "pointer"
-}
 
-;
 
 .reacoes-box img {
     width: 32px;
@@ -355,4 +387,324 @@ const menuBotaoEstilo= {
     flex-wrap: wrap;
     gap: 0.8rem;
     margin-top: 0.5rem;
+}
+
+/* === TIPOGRAFIA GLOBAL === */
+.FeedSectionScroll {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 1.3rem;
+    /* Aumentado 30% */
+    color: #1e1e2f;
+    font-weight: 400;
+}
+
+/* Títulos */
+.FeedSectionScroll h2,
+.FeedSectionScroll h1,
+.card-post h4 {
+    font-size: 2.4rem;
+    /* Antes era 2rem */
+    font-weight: 600;
+    color: #1e1e2f;
+}
+
+/* Botões principais */
+.nova-postagem-botao,
+.botao-comentar,
+button {
+    font-size: 1.3rem;
+    /* Antes 1rem */
+    font-weight: 600;
+}
+
+/* Texto de comentários */
+.comentario-item p {
+    font-size: 1.1rem;
+    /* Antes 0.95rem */
+    color: #2e2e3e;
+}
+
+/* Inputs e caixas de texto */
+input,
+textarea {
+    font-size: 1.2rem;
+    /* Aumentado */
+}
+
+
+/* BOTÕES DENTRO DO MENU DE OPÇÕES */
+.menu-opcoes button {
+    display: block;
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #1e293b;
+    /* padrão */
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-bottom: 1px solid #e2e8f0;
+    border-radius: 0;
+}
+
+.menu-opcoes button:last-child {
+    border-bottom: none;
+}
+
+/* HOVER GERAL (para ambos) */
+.menu-opcoes button:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+}
+
+/* BOTÃO REMOVER */
+.menu-opcoes button.remover {
+    color: #ef4444;
+    font-weight: bold;
+}
+
+.menu-opcoes button.remover:hover {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+
+
+/* POSTS */
+.card-post {
+    background-color: #f9fafb;
+    /* Tom muito claro */
+    border: 1px solid #e2e8f0;
+    /* Borda leve */
+}
+
+/* TÍTULOS */
+.FeedSectionScroll h2,
+.FeedSectionScroll h1,
+.card-post h4 {
+    color: #1e2a3a;
+}
+
+/* BOTÕES PRINCIPAIS */
+.nova-postagem-botao,
+.botao-comentar,
+button {
+    background-color: #1e40af;
+    /* Azul escuro */
+    color: #ffffff;
+    border: none;
+}
+
+.nova-postagem-botao:hover,
+.botao-comentar:hover,
+button:hover {
+    background-color: #1e3a8a;
+    /* Azul ainda mais escuro no hover */
+    transform: scale(1.05);
+}
+
+/* BOTÕES CONFIRMAR e CANCELAR do MODAL */
+button[style*="background-color: #28a745"] {
+    background-color: #22c55e !important;
+    /* Verde mais forte */
+}
+
+button[style*="background-color: #dc3545"] {
+    background-color: #ef4444 !important;
+    /* Vermelho claro e vibrante */
+}
+
+/* BOTÕES GERAIS */
+.nova-postagem-botao,
+.botao-comentar,
+button {
+    font-size: 1.3rem;
+    font-weight: 600;
+    background-color: #1e40af;
+    color: #000000;
+    border: none;
+    border-radius: 1.5rem;
+    /* Mais arredondado */
+    padding: 0.8rem 1.6rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Sombra */
+    transition: all 0.25s ease;
+}
+
+.nova-postagem-botao:hover,
+.botao-comentar:hover,
+button:hover {
+    background-color: #1e3a8a;
+    transform: scale(1.07);
+    /* Efeito de "crescimento" no hover */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    /* Sombra mais forte */
+}
+
+/* BOTÕES ESPECIAIS (CONFIRMAR e CANCELAR no MODAL) */
+button[style*="background-color: #28a745"] {
+    background-color: #22c55e !important;
+    border-radius: 1.5rem !important;
+}
+
+button[style*="background-color: #dc3545"] {
+    background-color: #ef4444 !important;
+    border-radius: 1.5rem !important;
+}
+
+/* COMENTÁRIOS EM BALÃO */
+.comentario-item {
+    background-color: #f1f5f9;
+    /* Cinza claro */
+    padding: 1rem;
+    border-radius: 1.2rem;
+    margin-top: 1rem;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    transition: background-color 0.3s ease;
+}
+
+/* SETINHA DO BALÃO */
+.comentario-item::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #f1f5f9;
+}
+
+/* AO PASSAR O MOUSE NO COMENTÁRIO */
+.comentario-item:hover {
+    background-color: #e2e8f0;
+    /* Fica um pouco mais escuro ao passar o mouse */
+}
+
+/* MENU ⋮ DE OPÇÕES */
+.menu-opcoes {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e2e8f0;
+    min-width: 160px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 10;
+}
+
+/* QUANDO VISÍVEL */
+.menu-opcoes.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* BOTÕES DENTRO DO MENU */
+.menu-opcoes button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #1e293b;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.menu-opcoes button:hover {
+    background-color: #f1f5f9;
+}
+
+/* IMAGEM DO PERFIL COM BORDA COLORIDA */
+.autor-info img,
+.comentario-item img {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #3b82f6;
+    /* Azul destaque */
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+/* EFEITO AO PASSAR O MOUSE */
+.autor-info img:hover,
+.comentario-item img:hover {
+    border-color: #1e3a8a;
+    /* Azul mais escuro no hover */
+    transform: scale(1.1);
+    /* Aumenta levemente no hover */
+}
+
+/* ANIMAÇÃO FADE-IN */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* APLICAÇÃO NOS POSTS */
+.card-post {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* APLICAÇÃO NOS COMENTÁRIOS */
+.comentario-item {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.menu-opcoes button {
+    display: block;
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #1e293b;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.menu-opcoes button:last-child {
+    border-bottom: none;
+}
+
+/* HOVER */
+.menu-opcoes button:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+}
+
+/* BOTÃO REMOVER (COR VERMELHA DE DESTAQUE) */
+.menu-opcoes button.remover {
+    color: #ef4444;
+}
+
+.menu-opcoes button.remover:hover {
+    background-color: #fee2e2;
+    color: #b91c1c;
 }

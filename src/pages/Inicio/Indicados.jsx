@@ -9,24 +9,24 @@ export default function Indicados() {
     const [buscaInput, setBuscaInput] = useState("");
     const [resultadoBusca, setResultadoBusca] = useState(null);
     const [filtroTipo, setFiltroTipo] = useState("nome");
-    const [detalhe, setDetalhe] = useState(null);  // ✅ Controle do modal
+    const [detalhe, setDetalhe] = useState(null);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        buscarIndicadosDoUsuario();  // ✅ Agora sem ID
+        buscarIndicadosDoUsuario();
     }, []);
 
     const buscarIndicadosDoUsuario = async () => {
         const token = localStorage.getItem("token");
 
-        const res = await fetch(`${URL}/indicados`, {  // ✅ Sem enviar ID manual
+        const res = await fetch(`${URL}/indicados`, {
             headers: { Authorization: `Bearer ${token}` },
         });
 
         const data = await res.json();
-        console.log("🔍 Dados recebidos do backend:", data);  // 👈 Coloque isso aqui
+        console.log("🔍 Dados recebidos do backend:", data);
 
         setIndicados(data);
     };
@@ -64,6 +64,13 @@ export default function Indicados() {
 
     const abrirDetalhe = (pessoa) => setDetalhe(pessoa);
     const fecharDetalhe = () => setDetalhe(null);
+    const formatarNome = (nomeCompleto) => {
+        return nomeCompleto
+            .toLowerCase()
+            .split(" ")
+            .map(p => p.charAt(0).toUpperCase() + p.slice(1))
+            .join(" ");
+    };
 
     return (
         <div className="indicadosContainer">
@@ -86,23 +93,45 @@ export default function Indicados() {
 
                     {buscaInput.trim() !== "" && (
                         <ul className="sugestoesLista">
-                            {indicados
-                                .filter(pessoa =>
-                                    pessoa.nome.toLowerCase().includes(buscaInput.toLowerCase())
-                                )
-                                .map(pessoa => (
-                                    <li
-                                        key={pessoa.id}
-                                        onClick={() => {
-                                            setDetalhe(pessoa);   // Mostra detalhes da pessoa
-                                            setBuscaInput("");    // Limpa o campo de busca
-                                        }}
-                                    >
-                                        {pessoa.nome} {pessoa.sobrenome}
-                                    </li>
-                                ))}
+                            {(() => {
+                                const normalizar = texto => texto
+                                    .normalize("NFD")
+                                    .replace(/[\u0300-\u036f]/g, "")
+                                    .toLowerCase();
+
+                                const filtrados = indicados.filter(pessoa =>
+                                    normalizar(`${pessoa.nome} ${pessoa.sobrenome}`).includes(normalizar(buscaInput))
+                                );
+
+                                return filtrados.length > 0 ? (
+                                    filtrados.map(pessoa => (
+                                        <li
+                                            key={pessoa.id}
+                                            onClick={() => {
+                                                setDetalhe(pessoa);
+                                                setBuscaInput("");
+                                            }}
+                                        >
+                                            <img
+                                                src={
+                                                    pessoa?.foto
+                                                        ? `http://localhost:8899/fotos/${pessoa.foto}`
+                                                        : "/Logo/perfilPadrao/M.png"
+                                                }
+                                                alt="foto"
+                                                className="miniFotoSugestao"
+                                            />
+                                            <span>{formatarNome(`${pessoa.nome} ${pessoa.sobrenome}`)}</span>
+                                        </li>
+                                    ))
+                                ) : (
+                                    <li className="nenhumResultado">🔍 Nenhum resultado encontrado</li>
+                                );
+                            })()}
                         </ul>
                     )}
+
+
 
                 </div>
             )}
@@ -122,7 +151,7 @@ export default function Indicados() {
                     <ul>
                         {indicados.map((indicado, index) => (
                             <li key={index} onClick={() => abrirDetalhe(indicado)}>
-                                {indicado.nome} {indicado.sobrenome}
+                                {formatarNome(`${indicado.nome} ${indicado.sobrenome}`)}
                             </li>
                         ))}
                     </ul>
@@ -143,7 +172,7 @@ export default function Indicados() {
                         />
 
 
-                        <h2>{detalhe.nome} {detalhe.sobrenome}</h2>
+                        <h2>{formatarNome(`${detalhe.nome} ${detalhe.sobrenome}`)}</h2>
                         <a
                             href={`https://wa.me/${detalhe.whatsapp}`}
                             target="_blank"

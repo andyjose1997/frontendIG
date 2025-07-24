@@ -1,10 +1,12 @@
 import { useState } from "react";
 import './Cadastrarse.css';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 
 export default function Cadastrarse() {
     const [mostrarPainel, setMostrarPainel] = useState("faq");
+    const [mostrarExplicacaoHost, setMostrarExplicacaoHost] = useState(false);
 
-    // Estados para campos e erros
     const [nome, setNome] = useState('');
     const [sobrenome, setSobrenome] = useState('');
     const [dataNascimento, setDataNascimento] = useState('');
@@ -14,6 +16,12 @@ export default function Cadastrarse() {
     const [confirmarSenha, setConfirmarSenha] = useState('');
     const [aceitouTermos, setAceitouTermos] = useState(false);
 
+    const [mensagemCadastro, setMensagemCadastro] = useState("");
+    const [tipoMensagem, setTipoMensagem] = useState("");
+
+    const { login } = useAuth();
+    const navigate = useNavigate();
+
     const [errors, setErrors] = useState({
         idAnfitiao: '',
         email: '',
@@ -21,50 +29,28 @@ export default function Cadastrarse() {
         confirmarSenha: ''
     });
 
-    // Validação dinâmica
-    const handleNomeChange = (e) => {
-        setNome(e.target.value);
-    };
-
-    const handleSobrenomeChange = (e) => {
-        setSobrenome(e.target.value);
-    };
-
-    const handleDataNascimentoChange = (e) => {
-        setDataNascimento(e.target.value);
-    };
+    const handleNomeChange = (e) => setNome(e.target.value);
+    const handleSobrenomeChange = (e) => setSobrenome(e.target.value);
+    const handleDataNascimentoChange = (e) => setDataNascimento(e.target.value);
 
     const handleIdChange = (e) => {
         const value = e.target.value;
         setIdAnfitiao(value);
-        setErrors(prev => ({
-            ...prev,
-            idAnfitiao: !value ? 'erro' : ''
-        }));
+        setErrors(prev => ({ ...prev, idAnfitiao: !value ? 'erro' : '' }));
     };
 
     const handleEmailChange = (e) => {
         const value = e.target.value;
         setEmail(value);
-        setErrors(prev => ({
-            ...prev,
-            email: !value.includes('@') ? 'erro' : ''
-        }));
+        setErrors(prev => ({ ...prev, email: !value.includes('@') ? 'erro' : '' }));
     };
 
     const validarSenha = (value) => {
         const regexMaiuscula = /[A-Z]/;
         const regexSimbolo = /[.,\-!?@#$%&*]/;
-
-        if (value.length < 8) {
-            return 'A senha deve ter pelo menos 8 caracteres.';
-        }
-        if (!regexMaiuscula.test(value)) {
-            return 'A senha deve ter ao menos uma letra maiúscula.';
-        }
-        if (!regexSimbolo.test(value)) {
-            return 'A senha deve conter ao menos um símbolo (. , - ! ? @ # $ % & *).';
-        }
+        if (value.length < 8) return 'A senha deve ter pelo menos 8 caracteres.';
+        if (!regexMaiuscula.test(value)) return 'A senha deve ter ao menos uma letra maiúscula.';
+        if (!regexSimbolo.test(value)) return 'A senha deve conter ao menos um símbolo (. , - ! ? @ # $ % & *).';
         return '';
     };
 
@@ -90,9 +76,58 @@ export default function Cadastrarse() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        const nomeFormatado = nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase();
+        const sobrenomeFormatado = sobrenome.charAt(0).toUpperCase() + sobrenome.slice(1).toLowerCase();
+        const errosValidacao = [];
+
+        // ID do Host
+        if (!idAnfitiao.trim()) {
+            errosValidacao.push("ID do Host é obrigatório.");
+        }
+
+        // Data de nascimento
+        const dataNasc = new Date(dataNascimento);
+        const hoje = new Date();
+        let idade = hoje.getFullYear() - dataNasc.getFullYear(); // ← corrigido aqui
+        const mes = hoje.getMonth() - dataNasc.getMonth();
+        if (mes < 0 || (mes === 0 && hoje.getDate() < dataNasc.getDate())) {
+            idade--;
+        }
+
+        if (isNaN(dataNasc.getTime()) || idade < 18) {
+            errosValidacao.push("Você deve ter ao menos 18 anos para ser membro.");
+        }
+
+        // Email
+        if (!email.includes("@")) {
+            errosValidacao.push("Email inválido.");
+        }
+
+        // Senha
+        const erroSenha = validarSenha(senha);
+        if (erroSenha) {
+            errosValidacao.push(erroSenha);
+        }
+
+        // Confirmar Senha
+        if (senha !== confirmarSenha) {
+            errosValidacao.push("As senhas não coincidem.");
+        }
+        // Aceite dos Termos
+        if (!aceitouTermos) {
+            errosValidacao.push("Você deve aceitar os Termos de Uso.");
+        }
+
+
+        if (errosValidacao.length > 0) {
+            setMensagemCadastro(errosValidacao.join("\n"));
+            setTipoMensagem("erro");
+            return;
+        }
+
         const formData = new FormData();
-        formData.append("nome", nome);
-        formData.append("sobrenome", sobrenome);
+        formData.append("nome", nomeFormatado);
+        formData.append("sobrenome", sobrenomeFormatado);
         formData.append("data_nascimento", dataNascimento);
         formData.append("id_host", idAnfitiao);
         formData.append("email", email);
@@ -105,315 +140,242 @@ export default function Cadastrarse() {
                 body: formData,
             });
 
-            const data = await response.json();
+            let data;
+            let textoErro = "";
 
-            if (response.ok) {
-                alert("Usuário cadastrado com sucesso!");
-            } else {
-                if (data.erro === "Este email já está cadastrado.") {
-                    setErrors(prev => ({
-                        ...prev,
-                        email: data.erro
-                    }));
-                } else {
-                    alert(data.erro || "Erro desconhecido ao tentar cadastrar.");
-                }
+            try {
+                data = await response.json();
+            } catch (e) {
+                textoErro = await response.text();
             }
 
+            if (response.ok) {
+                setMensagemCadastro("✅ Cadastro realizado com sucesso!");
+                setTipoMensagem("sucesso");
+
+                setTimeout(async () => {
+                    const loginForm = new FormData();
+                    loginForm.append("email", email);
+                    loginForm.append("senha", senha);
+
+                    const loginResponse = await fetch("http://localhost:8899/login", {
+                        method: "POST",
+                        body: loginForm,
+                    });
+
+                    const loginData = await loginResponse.json();
+
+                    if (loginResponse.ok && loginData.token && loginData.usuario) {
+                        localStorage.setItem("token", loginData.token);
+                        localStorage.setItem("usuario", JSON.stringify(loginData.usuario));
+                        localStorage.setItem("user_id", loginData.usuario.id);
+                        login(loginData.usuario, loginData.token);
+                        navigate("/inicio");
+                    } else {
+                        setMensagemCadastro(loginData?.erro || "⚠️ Erro ao logar automaticamente.");
+                        setTipoMensagem("erro");
+                    }
+                }, 3000);
+                return;
+            }
+
+            // Se não for OK (erro do backend)
+            const erroMsg = data?.erro || textoErro || "Erro ao tentar cadastrar.";
+            if (erroMsg.includes("email já está cadastrado")) {
+                setMensagemCadastro("Email já cadastrado. Tente outro ou recupere sua senha.");
+            } else {
+                setMensagemCadastro(erroMsg);
+            }
+            setTipoMensagem("erro");
+
         } catch (error) {
-            alert("Erro na conexão com o servidor.");
+            setMensagemCadastro("Erro na conexão com o servidor.");
+            setTipoMensagem("erro");
         }
+
     };
 
-
-
-
-
-
-
-
     return (
-        <div
-            className="PainelCadastro"
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-            }}
-        >
-            {/* Formulário */}
-            <div className="Cadastro-login">
-                <h2>Faça seu cadastro</h2>
-                <form className="FormularioLogin" onSubmit={handleSubmit}>
-                    <label htmlFor="Nome">Nome</label><br />
-                    <input
-                        id="Nome"
-                        type="text"
-                        placeholder="Digite seu nome"
-                        value={nome}
-                        onChange={handleNomeChange}
-                        className="inputPadrao"
-                        required
-                    /><br /><br />
-
-                    <label htmlFor="Sobrenome">Sobrenome</label><br />
-                    <input
-                        id="Sobrenome"
-                        type="text"
-                        placeholder="Digite seu sobrenome"
-                        value={sobrenome}
-                        onChange={handleSobrenomeChange}
-                        className="inputPadrao"
-                        required
-                    /><br /><br />
-
-                    <label htmlFor="DataNascimento">Data de Nascimento</label><br />
-                    <input
-                        id="DataNascimento"
-                        type="date"
-                        value={dataNascimento}
-                        onChange={handleDataNascimentoChange}
-                        className="inputPadrao"
-                        required
-                    /><br /><br />
-
-                    <label htmlFor="ID">ID do Host</label><br />
-                    <input
-                        id="ID"
-                        type="text"
-                        placeholder="Digite o ID do Host"
-                        value={idAnfitiao}
-                        onChange={handleIdChange}
-                        className={`inputPadrao ${errors.idAnfitiao ? 'bordaVermelha' : ''}`}
-                        required
-                    /><br /><br />
-
-                    <label htmlFor="Email">Email</label><br />
-                    <input
-                        id="Email"
-                        type="email"
-                        placeholder="Digite seu email"
-                        value={email}
-                        onChange={handleEmailChange}
-                        className={`inputPadrao ${errors.email ? 'bordaVermelha' : ''}`}
-                        required
-                    /><br />
-                    {errors.email && (
-                        <div style={{ color: "red", fontSize: "0.9rem" }}>{errors.email}</div>
-                    )}
-                    <br /><br />
-
-
-                    <label htmlFor="Senha">Senha</label><br />
-                    <input
-                        id="Senha"
-                        type="password"
-                        placeholder="Digite sua senha"
-                        value={senha}
-                        onChange={handleSenhaChange}
-                        className={`inputPadrao ${errors.senha ? 'bordaVermelha' : ''}`}
-                        required
-                    />
-                    {errors.senha && (
-                        <div style={{ color: "red", fontSize: "0.9rem" }}>{errors.senha}</div>
-                    )}
-                    <br /><br />
-
-                    <label htmlFor="ConfirmarSenha">Confirmar Senha</label><br />
-                    <input
-                        id="ConfirmarSenha"
-                        type="password"
-                        placeholder="Confirme sua senha"
-                        value={confirmarSenha}
-                        onChange={handleConfirmarSenhaChange}
-                        className={`inputPadrao ${errors.confirmarSenha ? 'bordaVermelha' : ''}`}
-                        required
-                    />
-                    {errors.confirmarSenha && (
-                        <div style={{ color: "red", fontSize: "0.9rem" }}>{errors.confirmarSenha}</div>
-                    )}
-                    <br /><br />
-
-                    <input
-                        type="radio"
-                        name="Termos"
-                        id="Termos"
-                        checked={aceitouTermos}
-                        readOnly
-                        onClick={() => {
-                            if (!aceitouTermos) {
-                                alert(
-                                    "Você deve ler e aceitar os Termos de Uso clicando em Termos de abaixo dos Termos."
-                                );
-                            }
-                        }}
-                    /><br />
-
-                    <label htmlFor="Termos">
-                        Eu li e aceito os{" "}
-                        <span
-                            onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                setMostrarPainel("termos");
-                                setTimeout(() => {
-                                    document
-                                        .getElementById("painelTermos")
-                                        ?.scrollIntoView({ behavior: "smooth" });
-                                }, 50);
-                            }}
-                            style={{
-                                color: "blue",
-                                textDecoration: "underline",
-                                cursor: "pointer",
-                            }}
-                        >
-                            Termos de Uso
-                        </span>
-                    </label>
-
-                    <br /><br />
-                    <input type="submit" id="botaoCad" value="Enviar" />
-                </form>
-            </div>
-
-            {/* FAQ */}
+        <div className="PainelCadastro" style={{ display: "flex", alignItems: "center" }}>
             {mostrarPainel === "faq" && (
                 <section className="FAQmini">
                     <h2>Perguntas Frequentes</h2>
-
                     <h4>Preciso pagar algo?</h4>
-                    <p>
-                        Não, o cadastro é gratuito. Você só paga pelos pacotes ou serviços
-                        extras que desejar usar.
-                    </p>
-
+                    <p>Não, o cadastro é gratuito...</p>
                     <h4>Posso trocar de Host?</h4>
-                    <p>
-                        Sim, é possível solicitar a troca mediante análise da plataforma.
-                    </p>
-
+                    <p>Sim, é possível solicitar a troca...</p>
                     <h4>O que ganho usando a plataforma?</h4>
-                    <p>
-                        Você conquista certificados, currículo gerado, participa de rankings e
-                        pode oferecer ou contratar serviços.
-                    </p>
-
+                    <p>Você conquista certificados...</p>
                     <h4>Como recebo suporte?</h4>
-                    <p>
-                        Seu Host é seu primeiro ponto de apoio. Além disso, nosso time
-                        está disponível via WhatsApp e email.
-                    </p>
-
+                    <p>Seu Host é seu primeiro ponto de apoio...</p>
                     <h4>Posso vender meus serviços aqui?</h4>
-                    <p>
-                        Sim! Usuários qualificados podem oferecer serviços ou cursos seguindo
-                        as diretrizes da plataforma.
-                    </p>
-
+                    <p>Sim! Usuários qualificados podem oferecer serviços...</p>
                     <h4>É possível cancelar minha conta?</h4>
-                    <p>
-                        Sim. Você pode solicitar o cancelamento a qualquer momento através do
-                        suporte.
-                    </p>
+                    <p>Sim. Você pode solicitar o cancelamento a qualquer momento.</p>
                 </section>
             )}
 
-            {/* Termos */}
             {mostrarPainel === "termos" && (
-                <main
-                    id="painelTermos"
-                    style={{
-                        fontFamily: "Arial, sans-serif",
-                        lineHeight: "1.6",
-                        maxWidth: "800px",
-                    }}
-                >
-                    <h1>Termos de Uso - IronGoals</h1>
-
-                    <p>
-                        Este documento apresenta um resumo dos principais pontos dos Termos de
-                        Uso. Para mais informações,{" "}
-                        <a href="/Manual" target="_blank" rel="noopener noreferrer">
-                            consulte as cláusulas completas no Manual de Políticas e Termos de
-                            Uso.
-                        </a>
-                    </p>
-
-                    <h2>1. Direitos Autorais</h2>
-                    <p>
-                        Todo o conteúdo disponibilizado na plataforma é protegido por direitos
-                        autorais. É proibido copiar, distribuir ou reproduzir o material sem
-                        autorização escrita e assinada por um representante da IronGoals.
-                    </p>
-
-                    <h2>2. Categorias de Usuários</h2>
-                    <p>
-                        Existem três categorias: Explorer, Member e Mentor, cada uma com
-                        permissões específicas.
-                    </p>
-
-                    <h2>3. Sistema de Indicação e Comissão</h2>
-                    <p>
-                        Usuários podem promover a plataforma com links exclusivos e recebem
-                        comissão conforme as regras internas.
-                    </p>
-
-                    <h2>4. Aulas Individuais e Coletivas</h2>
-                    <p>
-                        Mentores são responsáveis pelas aulas. O registro de presença é
-                        obrigatório para acessar o link da videoconferência.
-                    </p>
-
-                    <h2>5. Cancelamentos e Reembolsos</h2>
-                    <p>
-                        Cancelamentos seguem a política de reembolso, variando conforme a data
-                        de solicitação e progresso das aulas.
-                    </p>
-
-                    <h2>6. Penalidades</h2>
-                    <p>
-                        Fraudes ou descumprimento das regras podem resultar em bloqueio de
-                        conta e medidas legais.
-                    </p>
-
-                    <h2>Cláusula X — Responsabilidade pela Leitura dos Termos</h2>
-                    <p>
-                        Ao acessar e utilizar a plataforma IronGoals, o usuário declara
-                        estar ciente de que é sua inteira responsabilidade ler, compreender e
-                        cumprir todas as disposições destes Termos de Uso e eventuais
-                        documentos complementares. <br />
-                        A IronGoals não se responsabiliza por danos, prejuízos ou
-                        inconvenientes decorrentes do uso indevido da plataforma por usuários
-                        que não tenham lido ou não tenham buscado esclarecimentos sobre o
-                        conteúdo destes Termos.
-                    </p>
-
-                    <p style={{ marginTop: "20px", fontWeight: "bold" }}>
-                        Para mais informações detalhadas,{" "}
-                        <a href="/Manual"> leia o documento completo das cláusulas.</a>
-                    </p>
-                    <br />
-
-                    <button
-                        id="liEAceito"
-                        onClick={() => {
+                <div className="modal-overlay">
+                    <div style={{ textAlign: "center" }} className="modal-termos">
+                        <h1>Termos de Uso - IronGoals</h1>
+                        <p>Este documento apresenta um resumo...</p>
+                        <h2>1. Direitos Autorais</h2>
+                        <p>Todo o conteúdo é protegido por direitos autorais...</p>
+                        <h2>2. Categorias de Usuários</h2>
+                        <p>Explorer, Member e Mentor...</p>
+                        <h2>3. Sistema de Indicação e Comissão</h2>
+                        <p>Usuários recebem comissão...</p>
+                        <h2>4. Aulas Individuais e Coletivas</h2>
+                        <p>Mentores são responsáveis pelas aulas...</p>
+                        <h2>5. Cancelamentos e Reembolsos</h2>
+                        <p>Cancelamentos seguem política...</p>
+                        <h2>6. Penalidades</h2>
+                        <p>Fraudes podem resultar em bloqueio...</p>
+                        <h2>Cláusula X</h2>
+                        <p>É responsabilidade do usuário ler os Termos...</p>
+                        <button className="btn-aceito" onClick={() => {
                             setAceitouTermos(true);
                             setMostrarPainel("faq");
-                            setTimeout(() => {
-                                document
-                                    .querySelector(".Cadastro-login")
-                                    ?.scrollIntoView({
-                                        behavior: "smooth",
-                                        block: "start",
-                                    });
-                            }, 50);
-                        }}
-                    >
-                        LI E ACEITO OS TERMOS DE USO
-                    </button>
-                </main>
+                        }}>LI E ACEITO OS TERMOS DE USO</button>
+                        <button className="btn-fechar-modal" onClick={() => setMostrarPainel("faq")} aria-label="Fechar">&times;</button>
+                    </div>
+                </div>
             )}
+            {mensagemCadastro && (
+                <div className="modal-feedback">
+                    <div className="caixa-feedback">
+
+                        {tipoMensagem === "erro" && (
+                            <div style={{ marginTop: '0px' }}>
+                                <button
+                                    className="btn-fechar-modal-xx"
+                                    onClick={() => {
+                                        setMensagemCadastro("");
+                                        setTipoMensagem("");
+                                        setMostrarExplicacaoHost(false);
+                                    }}
+                                    aria-label="Fechar"
+                                >
+                                    fechar                                </button>
+                                <p style={{ whiteSpace: 'pre-line' }}>{mensagemCadastro}</p>
+
+
+                                {mensagemCadastro.includes("ID do host informado não existe") && (
+                                    <>
+                                        <button
+                                            className="btn-explicacao-host"
+                                            onClick={() => setMostrarExplicacaoHost(true)}
+                                        >
+                                            O que é um Host?
+                                        </button>
+
+                                        <button
+                                            className="btn-facebook"
+                                            onClick={() => window.open("https://www.facebook.com/IronGoalsOficial", "_blank")}
+                                        >
+                                            Ir para o Facebook
+                                        </button>
+                                    </>
+                                )}
+                            </div>
+                        )}
+
+                    </div>
+                </div>
+            )}
+            {mostrarExplicacaoHost && (
+                <div className="modal-feedback">
+                    <div className="caixa-feedback">
+                        <h3>O que é um Host?</h3>
+                        <p>
+                            Um Host é um usuário da plataforma que pode indicar novos membros,
+                            responder dúvidas e acompanhar os indicados.
+                            <br />
+                            Ao se cadastrar com o ID de um Host, você recebe suporte personalizado
+                            e o Host recebe comissão pelas suas conquistas.
+                            <br /><br />
+                            Se você ainda não tem um Host, pode conhecer mais clicando abaixo.
+                        </p>
+
+                        <div style={{ marginTop: '20px' }}>
+
+
+                            <button
+                                className="btn-facebook"
+                                onClick={() => window.open("https://www.facebook.com", "_blank")}
+                            >
+                                Ir para o Facebook
+                            </button>
+                            <button
+                                className="btn-fechar-modal"
+                                onClick={() => setMostrarExplicacaoHost(false)}
+                            >
+                                Voltar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+
+
+            <div className="Cadastro-login">
+                <h2>Faça seu cadastro</h2>
+
+                {mensagemCadastro && (
+                    <div className={`mensagem ${tipoMensagem}`}>
+                        {mensagemCadastro}
+                    </div>
+                )}
+
+                <form className="FormularioLogin" onSubmit={handleSubmit}>
+                    <label htmlFor="Nome">Nome</label><br />
+                    <input id="Nome" type="text" placeholder="Digite seu nome" value={nome} onChange={handleNomeChange} className="inputPadrao" required /><br /><br />
+
+                    <label htmlFor="Sobrenome">Sobrenome</label><br />
+                    <input id="Sobrenome" type="text" placeholder="Digite seu sobrenome" value={sobrenome} onChange={handleSobrenomeChange} className="inputPadrao" required /><br /><br />
+
+                    <label htmlFor="DataNascimento">Data de Nascimento</label><br />
+                    <input id="DataNascimento" type="date" value={dataNascimento} onChange={handleDataNascimentoChange} className="inputPadrao" required /><br /><br />
+
+                    <label htmlFor="ID">ID do Host</label><br />
+                    <input id="ID" type="text" placeholder="Digite o ID do Host" autoComplete="off" value={idAnfitiao} onChange={handleIdChange} className={`inputPadrao ${errors.idAnfitiao ? 'bordaVermelha' : ''}`} required /><br /><br />
+
+                    <label htmlFor="Email">Email</label><br />
+                    <input id="Email" type="email" placeholder="Digite seu email" value={email} onChange={handleEmailChange} className={`inputPadrao ${errors.email ? 'bordaVermelha' : ''}`} required />
+                    {errors.email && <div style={{ color: "red", fontSize: "0.9rem" }}>{errors.email}</div>}<br /><br />
+
+                    <label htmlFor="Senha">Senha</label><br />
+                    <input id="Senha" type="password" placeholder="Digite sua senha" value={senha} onChange={handleSenhaChange} className={`inputPadrao ${errors.senha ? 'bordaVermelha' : ''}`} required />
+                    {errors.senha && <div style={{ color: "red", fontSize: "0.9rem" }}>{errors.senha}</div>}<br /><br />
+
+                    <label htmlFor="ConfirmarSenha">Confirmar Senha</label><br />
+                    <input id="ConfirmarSenha" type="password" placeholder="Confirme sua senha" value={confirmarSenha} onChange={handleConfirmarSenhaChange} className={`inputPadrao ${errors.confirmarSenha ? 'bordaVermelha' : ''}`} required />
+                    {errors.confirmarSenha && <div style={{ color: "red", fontSize: "0.9rem" }}>{errors.confirmarSenha}</div>}<br /><br />
+
+                    <input type="radio" name="Termos" id="Termos" checked={aceitouTermos} readOnly onClick={() => {
+                        if (!aceitouTermos) {
+                            alert("Você deve ler e aceitar os Termos de Uso clicando em Termos de abaixo dos Termos.");
+                        }
+                    }} /><br />
+
+                    <label htmlFor="Termos">
+                        Eu li e aceito os{" "}
+                        <span onClick={(e) => {
+                            e.preventDefault();
+                            setMostrarPainel("termos");
+                            setTimeout(() => {
+                                document.getElementById("painelTermos")?.scrollIntoView({ behavior: "smooth" });
+                            }, 50);
+                        }} style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }}>
+                            Termos de Uso
+                        </span>
+                    </label><br /><br />
+
+                    <input type="submit" id="botaoCad" value="Enviar" />
+                </form>
+            </div>
         </div>
     );
 }

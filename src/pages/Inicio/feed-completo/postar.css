@@ -1,0 +1,39 @@
+.nova-postagem-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    gap: 1rem;
+}
+
+.nova-postagem-input {
+    width: 70%;
+    padding: 0.75rem 1.2rem;
+    font-size: 1rem;
+    border: 0.1rem solid #ccc;
+    border-radius: 1rem;
+    background-color: #fff;
+    transition: border 0.3s ease;
+}
+
+.nova-postagem-input:focus {
+    border-color: #4a6ee0;
+    outline: none;
+}
+
+.nova-postagem-botao {
+    padding: 0.75rem 1.5rem;
+    background-color: #4a6ee0;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.nova-postagem-botao:hover {
+    background-color: #2e4cb8;
+    transform: translateY(-0.1rem);
+}

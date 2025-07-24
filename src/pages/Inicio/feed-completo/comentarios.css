@@ -1,0 +1,231 @@
+.comentario-box {
+    margin-top: 1rem;
+}
+
+.comentario-box input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.comentario-box button.enviar {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+}
+
+.botao-ver {
+    margin-top: 10px;
+    padding: 8px 16px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+.botao-ver.todos {
+    background-color: #2e4cb8;
+    margin-left: 10px;
+}
+
+
+
+.menu-opcoes-comentario button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.menu-opcoes-comentario button.editar:hover {
+    background-color: #e0e7ff;
+    color: #1e40af;
+}
+
+.menu-opcoes-comentario button.apagar:hover {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+.editar-comentario-box {
+    margin-left: 35px;
+    margin-top: 10px;
+}
+
+.editar-comentario-box input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.editar-comentario-box button {
+    margin-top: 5px;
+    padding: 6px 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+
+
+.botao-comentar {
+    background-color: #4a6ee0;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.botao-comentar:hover {
+    background-color: #2e4cb8;
+    transform: translateY(-0.1rem);
+}
+
+
+
+.botao-ver.mais {
+    background-color: #4a6ee0;
+}
+
+
+
+.novo-comentario-box {
+    margin-top: 1rem;
+}
+
+.input-novo-comentario {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.botao-enviar {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+}
+
+.comentario-item {
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    position: relative;
+}
+
+.comentario-topo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.comentario-foto {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.comentario-data {
+    margin-left: auto;
+    font-size: 0.8rem;
+}
+
+.menu-wrapper {
+    position: relative;
+}
+
+.menu-botao {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.menu-opcoes-comentario {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.menu-item {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.menu-item.editar {
+    color: #1e3a8a;
+}
+
+.menu-item.editar:hover {
+    background-color: #e0e7ff;
+    color: #1e40af;
+}
+
+.menu-item.apagar {
+    color: #dc2626;
+}
+
+.menu-item.apagar:hover {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+.editar-comentario-box {
+    margin-left: 35px;
+    margin-top: 10px;
+}
+
+.editar-comentario-box input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.editar-comentario-box button {
+    margin-top: 5px;
+    padding: 6px 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+
+.comentario-texto {
+    margin-left: 35px;
+    font-size: 0.95rem;
+}

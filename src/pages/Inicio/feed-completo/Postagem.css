@@ -1,0 +1,40 @@
+/* Cabeçalho da postagem */
+.post-cabecalho {
+    justify-content: space-between;
+}
+
+.card-post h4 {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+
+/* Detalhes autor + imagem */
+.post-autor-detalhes {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Campo de edição da postagem */
+.post-edicao {
+    margin-top: 1rem;
+}
+
+.post-edicao input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.post-edicao button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #0d6efd;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}

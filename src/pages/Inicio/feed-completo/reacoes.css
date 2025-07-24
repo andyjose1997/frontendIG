@@ -1,0 +1,101 @@
+.reacoes-box {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.reacoes-box button {
+    background: none;
+    border: none;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.reacoes-box button:hover {
+    transform: scale(1.2);
+}
+
+.reacoes-box img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+/* Reação única (blz) + opções */
+.reacoes-container {
+    position: relative;
+    display: inline-block;
+}
+
+.reacao-botao {
+    background: transparent;
+    border: none;
+    margin: 0 5px;
+    padding: 0;
+    position: relative;
+    width: 60px;
+}
+
+.reacao-botao img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    margin-left: 20px;
+}
+
+.reacao-botao img:hover {
+    transform: scale(1.2);
+    border-color: #0d6efd;
+}
+
+.reacoes-opcoes {
+    display: none;
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 5px 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+}
+
+.reacoes-container:hover .reacoes-opcoes {
+    display: flex;
+    gap: 8px;
+}
+
+/* Contagem de reações */
+.contagem-reacoes {
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 8px 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.reacao-contagem-item {
+    margin-right: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.reacao-contagem-img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+}
