@@ -2,6 +2,7 @@ import './BotaoUm.css';
 import { useState, useEffect, useRef } from 'react';
 import { URL } from '../../config';
 import HostModal from './hostModal';
+import { useFerramentas } from '../../ferramentasContext';
 
 export default function BotaoUm() {
     const [mostrarNivel, setMostrarNivel] = useState(false);
@@ -110,6 +111,31 @@ export default function BotaoUm() {
         };
     }, [mostrarFormularioZap]);
 
+    const [mostrarFerramentas, setMostrarFerramentas] = useState(false);
+    const [funcao, setFuncao] = useState("");
+    const [chaveCorreta, setChaveCorreta] = useState("");
+    const [palavraDigitada, setPalavraDigitada] = useState("");
+    const [erroChave, setErroChave] = useState(false);
+    const { setAcessoLiberado } = useFerramentas();
+
+    // Buscar função e chave da pessoa logada
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        fetch(`${URL}/perfil`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("🔍 Função recebida:", data.funcao);
+                console.log("🔑 Palavra-chave recebida:", data.palavra_chave);
+
+                setFuncao(data.funcao || "");
+                setChaveCorreta(data.palavra_chave || "");
+            });
+
+    }, []);
+
+
     return (
         <div className="lista-vertical">
             {!mostrarFormularioZap ? (
@@ -152,6 +178,50 @@ export default function BotaoUm() {
             <button onClick={() => setMostrarPosicao(true)}>📍 Última Posição</button>
             <button onClick={() => window.location.href = "/pacotes"}>📦 Pacotes</button>
             <button onClick={() => setMostrarModal(true)}>🧭 Host</button>
+            {["admin", "coordinador", "auditor"].includes(funcao.toLowerCase()) && (
+                <button onClick={() => setMostrarFerramentas(true)}>🛠 Painel de controle</button>
+            )}
+
+            {mostrarFerramentas && (
+                <div className="modal-ferramentas-overlay">
+                    <div className={`modal-ferramentas ${erroChave ? "erro" : ""}`}>
+                        <h2>Bem-vindo ao painel de controle geral</h2>
+                        <p>Sua função na plataforma é: <strong>{funcao}</strong></p>
+                        <input
+                            type="password"
+                            placeholder="Digite a palavra-chave para ingressar"
+                            value={palavraDigitada}
+                            onChange={(e) => setPalavraDigitada(e.target.value)}
+                        />
+                        <div className="botoes-ferramentas">
+                            <button
+                                className="btn-entrar"
+                                onClick={() => {
+                                    if (palavraDigitada.trim().toLowerCase() === chaveCorreta.trim().toLowerCase()) {
+                                        setAcessoLiberado(true);
+                                        localStorage.setItem("acessoFerramentas", "true"); // ← ESSENCIAL
+                                        window.open(`${window.location.origin}/ferramentas/painelcontrole`, "_blank");
+                                    }
+
+                                    else {
+                                        setErroChave(true);
+                                        setTimeout(() => setErroChave(false), 3000);
+                                    }
+                                }}
+                            >
+                                Entrar
+                            </button>
+                            <button
+                                className="btn-voltar"
+                                onClick={() => setMostrarFerramentas(false)}
+                            >
+                                Voltar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
 
             {mostrarModal && idHost && (   // ✅ só renderiza se idHost estiver carregado
                 <HostModal idHost={idHost} onClose={() => setMostrarModal(false)} />

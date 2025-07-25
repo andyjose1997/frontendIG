@@ -18,6 +18,8 @@ import TelaConfig from "./pages/Perfil/TelaConfig.jsx";
 
 import { AuthProvider } from "./AuthContext";
 import PrivateRoute from "./PrivateRoute";
+import PainelControle from './pages/ferramentas/painelcontrole';
+import AdminRoute from "./AdminRoute";
 
 import { Link } from "react-router-dom";
 import { URL } from "./config.jsx";
@@ -151,18 +153,32 @@ function AppRoutes() {
         <Route path="/mensagens" element={<PrivateRoute><Mensagens /></PrivateRoute>} />
         <Route path="/TelaConfig" element={<PrivateRoute><TelaConfig /></PrivateRoute>} />
         <Route path="/Manual" element={<Manual />} />
+        <Route
+          path="/ferramentas/painelcontrole"
+          element={
+            <AdminRoute>
+              <PainelControle />
+            </AdminRoute>
+          }
+        />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
 }
 
+import { FerramentasProvider } from "./ferramentasContext.jsx";
+
 export default function App() {
   return (
     <Router>
       <AuthProvider>
-        <AppRoutes />
+        <FerramentasProvider>
+          <AppRoutes />
+        </FerramentasProvider>
       </AuthProvider>
     </Router>
   );
 }
+

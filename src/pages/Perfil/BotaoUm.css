@@ -10,6 +10,110 @@
     border-radius: 15px;
 }
 
+.modal-ferramentas-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-ferramentas {
+    background: linear-gradient(to bottom right, #ffffff, #f3f7fa);
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+    transition: background-color 0.3s;
+}
+
+.modal-ferramentas.erro {
+    background: linear-gradient(to bottom right, #ffe5e5, #ffcccc);
+    border: 2px solid #ff4d4d;
+}
+
+.modal-ferramentas h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+    color: #222;
+}
+
+.modal-ferramentas p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.modal-ferramentas input {
+    width: 85%;
+    padding: 0.9rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 1.8px solid #ccc;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.modal-ferramentas input:focus {
+    border-color: #007bff;
+}
+
+.botoes-ferramentas {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-entrar {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-entrar:hover {
+    background-color: #0056b3;
+}
+
+.btn-voltar {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 0.7rem 1.4rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-voltar:hover {
+    background-color: #ddd;
+}
+
+@keyframes fadeIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
 .fundo-escurecido {
     position: fixed;
     top: 0;
