@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Buscador.css';
-
+import { URL } from '../../config';
 export default function Buscador() {
     const [showModal, setShowModal] = useState(false);
     const [countdown, setCountdown] = useState(15);
+    const [naoLidas, setNaoLidas] = useState(0);
 
     const [sugestoes, setSugestoes] = useState([]);
     const [textoBusca, setTextoBusca] = useState("");
@@ -34,7 +35,7 @@ export default function Buscador() {
 
         setCarregando(true); // 👈 Início do carregamento
         try {
-            const resposta = await fetch(`http://localhost:8899/usuarios_publicos?nome=${encodeURIComponent(texto)}`, {
+            const resposta = await fetch(`${URL}/usuarios_publicos?nome=${encodeURIComponent(texto)}`, {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
                 }
@@ -58,6 +59,26 @@ export default function Buscador() {
     function fecharDetalhe() {
         setDetalhe(null);
     }
+    useEffect(() => {
+        const carregarNaoLidas = async () => {
+            try {
+                const userId = localStorage.getItem("id"); // pega o id do usuário logado
+                const resposta = await fetch(`${URL}/mensagens/nao_lidas/${userId}`, {
+                    headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+                });
+                const data = await resposta.json();
+                setNaoLidas(data.total || 0); // backend deve retornar { total: X }
+            } catch (err) {
+                console.error("Erro ao buscar mensagens não lidas:", err);
+            }
+        };
+
+        carregarNaoLidas();
+
+        // atualizar a cada 30s
+        const intervalo = setInterval(carregarNaoLidas, 30000);
+        return () => clearInterval(intervalo);
+    }, []);
 
     useEffect(() => {
         let timer;
@@ -115,7 +136,14 @@ export default function Buscador() {
                 </div>
                 <div className="direita">
                     <Link className='topo' to="/perfil">Perfil</Link>
-                    <a className='topo' href="/Mensagens">Mensagens</a>
+                    <div className="mensagenss-wrapper">
+                        <Link className='topo' to="/Mensagens">
+                            Mensagens
+                        </Link>
+                        {naoLidas > 0 && (
+                            <span className="badge-naoo-lidas">{naoLidas}</span>
+                        )}
+                    </div>
                     <Link className='topo' to="/TelaConfig">Configurações</Link>
                     <a className='Logout' href="/" onClick={handleLogoutClick}>Logout</a>
                 </div>
@@ -139,7 +167,7 @@ export default function Buscador() {
                     <div className="modalDetalhe">
                         <button className="fecharModal" onClick={fecharDetalhe}>✖</button>
                         <img
-                            src={`http://localhost:8899/fotos/${detalhe.foto || "padrao.png"}`}
+                            src={`${URL}/fotos/${detalhe.foto || "padrao.png"}`}
                             alt="Foto"
                         />
                         <h2>{detalhe.nome} {detalhe.sobrenome}</h2>

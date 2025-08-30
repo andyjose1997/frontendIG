@@ -4,7 +4,6 @@ import { URL } from '../../../config';
 
 export default function DadosConta({ onVoltar }) {
     const [dados, setDados] = useState(null);
-
     const [editandoCampo, setEditandoCampo] = useState(null);
 
     const [nome, setNome] = useState("");
@@ -12,6 +11,14 @@ export default function DadosConta({ onVoltar }) {
     const [email, setEmail] = useState("");
     const [frase, setFrase] = useState("");
     const [notificacoesAtivas, setNotificacoesAtivas] = useState(false);
+
+    const [alerta, setAlerta] = useState(""); // 🔹 novo estado para o alerta
+
+    // 🔹 Função para deixar a primeira letra maiúscula
+    const capitalize = (str) => {
+        if (!str) return "";
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    };
 
     useEffect(() => {
         buscarDadosConta();
@@ -35,29 +42,41 @@ export default function DadosConta({ onVoltar }) {
             setNotificacoesAtivas(data.notificacoes || false);
 
         } catch {
-            alert("Erro ao carregar dados da conta.");
+            setAlerta("❌ Erro ao carregar dados da conta.");
+            setTimeout(() => setAlerta(""), 2000);
         }
     };
 
     const salvarAlteracoes = async () => {
         const token = localStorage.getItem('token');
 
-        await fetch(`${URL}/perfil/atualizar_perfil`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                nome: nome.trim(),
-                sobrenome: sobrenome.trim(),
-                email: email.trim(),
-                comentario_perfil: frase,
-                notificacoes: notificacoesAtivas
-            })
-        });
+        try {
+            await fetch(`${URL}/perfil/atualizar_perfil`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    nome: nome.trim(),
+                    sobrenome: sobrenome.trim(),
+                    email: email.trim(),
+                    comentario_perfil: frase,
+                    notificacoes: notificacoesAtivas
+                })
+            });
 
-        alert("Dados atualizados!");
+            // 🔹 Exibe alerta e volta depois de 2s
+            setAlerta("✅ Dados atualizados com sucesso!");
+            setTimeout(() => {
+                setAlerta("");
+                onVoltar(); // 🔙 volta automaticamente
+            }, 2000);
+
+        } catch {
+            setAlerta("❌ Erro ao salvar alterações.");
+            setTimeout(() => setAlerta(""), 2000);
+        }
     };
 
     const atualizarNotificacoes = async (novoStatus) => {
@@ -110,12 +129,17 @@ export default function DadosConta({ onVoltar }) {
         <section className="privacidade-config">
             <h2>👤 Dados da Conta</h2>
             <h4>clique em cada area para editar</h4>
-            <p><strong>Nome:</strong> {renderCampo("nome", nome, setNome)}</p>
-            <p><strong>Sobrenome:</strong> {renderCampo("sobrenome", sobrenome, setSobrenome)}</p>
+            <p><strong>Nome: </strong>
+                {renderCampo("nome", nome, (val) => setNome(capitalize(val)))}
+            </p>
+
+            <p><strong>Sobrenome: </strong>
+                {renderCampo("sobrenome", sobrenome, (val) => setSobrenome(capitalize(val)))}
+            </p>
+
             <p><strong>Email:</strong> {renderCampo("email", email, setEmail)}</p>
 
             <p><strong>Próxima Meta:</strong> {renderCampo("frase", frase, setFrase)}</p>
-
 
             <div style={{ marginTop: '20px' }}>
                 <label>
@@ -137,6 +161,13 @@ export default function DadosConta({ onVoltar }) {
                     ← Voltar
                 </button>
             </div>
+
+            {/* 🔹 Toast personalizado */}
+            {alerta && (
+                <div className="toasta-alerta">
+                    {alerta}
+                </div>
+            )}
         </section>
     );
 }

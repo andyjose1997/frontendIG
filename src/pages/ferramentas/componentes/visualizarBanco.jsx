@@ -206,11 +206,12 @@ export default function VisualizarBanco() {
                             <thead>
                                 <tr>
                                     {colunas.map(col => (
-                                        (["funcao", "palavra_chave"].includes(col) && funcaoUsuario !== "admin") ? null : (
-                                            <th key={col} className={col === "senha" ? "ocultar" : ""}>
-                                                {col}
-                                            </th>
-                                        )
+                                        (["funcao", "palavra_chave"].includes(col) && funcaoUsuario !== "admin") ||
+                                            ["senha", "cargo", "responsabilidade"].includes(col)
+                                            ? null
+                                            : (
+                                                <th key={col}>{col}</th>
+                                            )
                                     ))}
                                     {funcaoUsuario === "admin" && <th>Ações</th>}
                                 </tr>
@@ -218,22 +219,25 @@ export default function VisualizarBanco() {
 
                                 <tr>
                                     {colunas.map(col => (
-                                        (["funcao", "palavra_chave"].includes(col) && funcaoUsuario !== "admin") ? null : (
-                                            <th key={col} className={col === "senha" ? "ocultar" : ""}>
-                                                <input
-                                                    type="text"
-                                                    placeholder={` ${col}`}
-                                                    value={filtrosPorColuna[col] || ""}
-                                                    onChange={(e) =>
-                                                        setFiltrosPorColuna(prev => ({
-                                                            ...prev,
-                                                            [col]: e.target.value
-                                                        }))
-                                                    }
-                                                    style={{ width: "100%", padding: "4px", fontSize: "0.8rem" }}
-                                                />
-                                            </th>
-                                        )
+                                        (["funcao", "palavra_chave"].includes(col) && funcaoUsuario !== "admin") ||
+                                            ["senha", "cargo", "responsabilidade"].includes(col)
+                                            ? null
+                                            : (
+                                                <th key={col}>
+                                                    <input
+                                                        type="text"
+                                                        placeholder={` ${col}`}
+                                                        value={filtrosPorColuna[col] || ""}
+                                                        onChange={(e) =>
+                                                            setFiltrosPorColuna(prev => ({
+                                                                ...prev,
+                                                                [col]: e.target.value
+                                                            }))
+                                                        }
+                                                        style={{ width: "100%", padding: "4px", fontSize: "0.8rem" }}
+                                                    />
+                                                </th>
+                                            )
                                     ))}
                                 </tr>
 
@@ -251,14 +255,14 @@ export default function VisualizarBanco() {
                                         }}
                                     >
                                         {colunas.map(col => (
-                                            (["funcao", "palavra_chave"].includes(col) && funcaoUsuario !== "admin") ? null : (
-                                                <td
-                                                    key={col}
-                                                    className={col === "senha" ? "ocultar" : ""}
-                                                >
-                                                    {String(linha[col])}
-                                                </td>
-                                            )
+                                            (["funcao", "palavra_chave"].includes(col) && funcaoUsuario !== "admin") ||
+                                                ["senha", "cargo", "responsabilidade"].includes(col)
+                                                ? null
+                                                : (
+                                                    <td key={col}>
+                                                        {String(linha[col])}
+                                                    </td>
+                                                )
                                         ))}
 
                                         <td>
@@ -326,59 +330,63 @@ export default function VisualizarBanco() {
                             }}
                         >
                             {Object.entries(dadosEditados).map(([campo, valor]) => (
-                                (campo === "senha" || (["funcao", "palavra_chave"].includes(campo) && funcaoUsuario !== "admin")) ? null : (
-                                    <div key={campo} className="campo-edicao">
-                                        <label htmlFor={`input-${campo}`}>{campo}</label>
+                                (campo === "senha" ||
+                                    ["cargo", "responsabilidade"].includes(campo) ||
+                                    (["funcao", "palavra_chave"].includes(campo) && funcaoUsuario !== "admin"))
+                                    ? null
+                                    : (
+                                        <div key={campo} className="campo-edicao">
+                                            <label htmlFor={`input-${campo}`}>{campo}</label>
 
-                                        {campo === "funcao" ? (
-                                            <select
-                                                id={`input-${campo}`}
-                                                value={valor || ""}
-                                                onChange={(e) =>
-                                                    setDadosEditados((prev) => ({
-                                                        ...prev,
-                                                        [campo]: e.target.value
-                                                    }))
-                                                }
-                                            >
-                                                <option value=""></option>
-                                                <option value="admin">admin</option>
-                                                <option value="auditor">auditor</option>
-                                                <option value="coordenador">coordenador</option>
-                                            </select>
-                                        ) : campo === "categoria" ? (
-                                            <select
-                                                id={`input-${campo}`}
-                                                value={valor || ""}
-                                                onChange={(e) =>
-                                                    setDadosEditados((prev) => ({
-                                                        ...prev,
-                                                        [campo]: e.target.value
-                                                    }))
-                                                }
-                                            >
-                                                <option value=""></option>
-                                                <option value="mentor">mentor</option>
-                                                <option value="member">member</option>
-                                                <option value="explorer">explorer</option>
-                                            </select>
-                                        ) : campo === "id" ? (
-                                            <p id={`input-${campo}`} style={{ fontWeight: "bold", color: "#555" }}>{valor}</p>
-                                        ) : (
-                                            <input
-                                                id={`input-${campo}`}
-                                                type="text"
-                                                value={valor || ""}
-                                                onChange={(e) =>
-                                                    setDadosEditados((prev) => ({
-                                                        ...prev,
-                                                        [campo]: e.target.value
-                                                    }))
-                                                }
-                                            />
-                                        )}
-                                    </div>
-                                )
+                                            {campo === "funcao" ? (
+                                                <select
+                                                    id={`input-${campo}`}
+                                                    value={valor || ""}
+                                                    onChange={(e) =>
+                                                        setDadosEditados((prev) => ({
+                                                            ...prev,
+                                                            [campo]: e.target.value
+                                                        }))
+                                                    }
+                                                >
+                                                    <option value=""></option>
+                                                    <option value="admin">admin</option>
+                                                    <option value="auditor">auditor</option>
+                                                    <option value="coordenador">coordenador</option>
+                                                </select>
+                                            ) : campo === "categoria" ? (
+                                                <select
+                                                    id={`input-${campo}`}
+                                                    value={valor || ""}
+                                                    onChange={(e) =>
+                                                        setDadosEditados((prev) => ({
+                                                            ...prev,
+                                                            [campo]: e.target.value
+                                                        }))
+                                                    }
+                                                >
+                                                    <option value=""></option>
+                                                    <option value="mentor">mentor</option>
+                                                    <option value="member">member</option>
+                                                    <option value="explorer">explorer</option>
+                                                </select>
+                                            ) : campo === "id" ? (
+                                                <p id={`input-${campo}`} style={{ fontWeight: "bold", color: "#555" }}>{valor}</p>
+                                            ) : (
+                                                <input
+                                                    id={`input-${campo}`}
+                                                    type="text"
+                                                    value={valor || ""}
+                                                    onChange={(e) =>
+                                                        setDadosEditados((prev) => ({
+                                                            ...prev,
+                                                            [campo]: e.target.value
+                                                        }))
+                                                    }
+                                                />
+                                            )}
+                                        </div>
+                                    )
                             ))}
 
 

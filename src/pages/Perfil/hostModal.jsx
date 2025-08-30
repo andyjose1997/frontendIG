@@ -6,7 +6,7 @@ export default function HostModal({ idHost, onClose }) {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        fetch(`http://localhost:8899/host/${idHost}`, {
+        fetch(`${URL}/host/${idHost}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(async res => {

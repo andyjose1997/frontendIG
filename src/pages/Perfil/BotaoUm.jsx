@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 import { URL } from '../../config';
 import HostModal from './hostModal';
 import { useFerramentas } from '../../ferramentasContext';
+import ModalQrCode from './config/ModalQrCode';
+import AlertaWhatsApp from "./AlertaWhatsApp";
 
 export default function BotaoUm() {
     const [mostrarNivel, setMostrarNivel] = useState(false);
@@ -12,6 +14,7 @@ export default function BotaoUm() {
     const [codigo, setCodigo] = useState("+55");
     const [numero, setNumero] = useState("");
     const [mostrarModal, setMostrarModal] = useState(false);
+    const [alerta, setAlerta] = useState({ mostrar: false, tipo: "", mensagem: "" });
 
     const [idHost, setIdHost] = useState("");   // ✅ ID do host da pessoa logada
     useEffect(() => {
@@ -59,14 +62,14 @@ export default function BotaoUm() {
             const data = await response.json();
 
             if (response.ok) {
-                alert("WhatsApp atualizado com sucesso!");
+                setAlerta({ mostrar: true, tipo: "sucesso", mensagem: "WhatsApp atualizado com sucesso!" });
                 setEditarZap(false);
             } else {
-                alert("Erro ao atualizar WhatsApp: " + data.erro);
+                setAlerta({ mostrar: true, tipo: "erro", mensagem: "Erro ao atualizar WhatsApp: " + data.erro });
             }
         } catch (error) {
             console.error("Erro na requisição:", error);
-            alert("Erro ao se comunicar com o servidor.");
+            setAlerta({ mostrar: true, tipo: "erro", mensagem: "Erro ao se comunicar com o servidor." });
         }
     };
 
@@ -75,7 +78,7 @@ export default function BotaoUm() {
             const token = localStorage.getItem("token");
 
             try {
-                const response = await fetch(`${URL}/perfil/obter_whatsapp`, {
+                const response = await fetch(`${URL}/perfil`, {
                     method: "GET",
                     headers: { "Authorization": `Bearer ${token}` }
                 });
@@ -83,11 +86,14 @@ export default function BotaoUm() {
                 const data = await response.json();
 
                 if (response.ok && data.whatsapp) {
-                    const codigoExtraido = data.whatsapp.slice(0, 3);
-                    const numeroExtraido = data.whatsapp.slice(3);
+                    // separa código e número
+                    const regex = /^(\+\d{1,4})(\d+)$/;
+                    const match = data.whatsapp.match(regex);
 
-                    setCodigo(codigoExtraido);
-                    setNumero(numeroExtraido);
+                    if (match) {
+                        setCodigo(match[1]);   // exemplo: +55 ou +351
+                        setNumero(match[2]);   // exemplo: 11999999999
+                    }
                 }
             } catch (error) {
                 console.error("Erro ao buscar WhatsApp:", error);
@@ -96,6 +102,7 @@ export default function BotaoUm() {
 
         buscarWhatsapp();
     }, []);
+
 
     useEffect(() => {
         const handleDoubleClickOutside = (e) => {
@@ -174,7 +181,14 @@ export default function BotaoUm() {
                 </div>
             )}
 
-            <button onClick={() => setMostrarNivel(true)}>🎯 Nível</button>
+            <button onClick={() => setMostrarNivel(true)}>🔗 Meu link de indicação</button>
+
+            {mostrarNivel && (
+                <ModalQrCode
+                    onClose={() => setMostrarNivel(false)}
+                    linkIndicacao={`${window.location.origin}/cadastro/${idHost}`}
+                />
+            )}
             <button onClick={() => setMostrarPosicao(true)}>📍 Última Posição</button>
             <button onClick={() => window.location.href = "/pacotes"}>📦 Pacotes</button>
             <button onClick={() => setMostrarModal(true)}>🧭 Host</button>
@@ -226,6 +240,14 @@ export default function BotaoUm() {
             {mostrarModal && idHost && (   // ✅ só renderiza se idHost estiver carregado
                 <HostModal idHost={idHost} onClose={() => setMostrarModal(false)} />
             )}
+            {alerta.mostrar && (
+                <AlertaWhatsApp
+                    tipo={alerta.tipo}
+                    mensagem={alerta.mensagem}
+                    onClose={() => setAlerta({ mostrar: false, tipo: "", mensagem: "" })}
+                />
+            )}
+
         </div>
     );
 }

@@ -1,0 +1,218 @@
+/* 📂 src/pages/cadastroGeral/FAQ.css */
+
+.modalFAQ-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modalFAQ {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    /* 🔹 adicionado */
+    flex-direction: column;
+    /* 🔹 adicionado */
+    position: relative;
+    /* 🔹 para alinhamento do sticky */
+}
+
+.modalFAQ h2 {
+    margin-top: 0;
+}
+
+.modalFAQ li {
+    margin-bottom: 15px;
+}
+
+.faq-highlight {
+    background-color: #dceeff;
+    /* 🔹 azul clarinho */
+    border-radius: 8px;
+    padding: 5px;
+    transition: background-color 0.8s ease;
+}
+
+.faq-busca {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    padding-bottom: 10px;
+    z-index: 10;
+    margin-bottom: 15px;
+}
+
+.faq-busca input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.sugestoes {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.sugestoes li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.sugestoes li:hover {
+    background: #f2f2f2;
+}
+
+.faq-lista {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.modalFAQ li:hover {
+    margin-bottom: 15px;
+}
+
+.btn-fechar {
+    margin-top: 15px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.FaqAzul {
+    background-color: #fff;
+    text-align: center;
+}
+
+.FaqAzul:hover {
+    background-color: #000000;
+    text-align: center;
+    color: #fff;
+}
+
+.faq-lista a {
+    color: inherit;
+    /* herda a cor normal do texto */
+    text-decoration: none;
+    /* remove o sublinhado */
+}
+
+.faq-lista a:hover {
+    text-decoration: underline;
+    /* opcional: aparece só no hover */
+}
+
+/* Container da seção FAQ */
+.faqSection {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.faqSection-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 1100px;
+    max-height: 500px;
+    overflow-y: auto;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+
+.faqSection-box h2 {
+    margin: 0 0 15px 0;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Buscador fixo */
+.faq-busca {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    padding-bottom: 10px;
+    z-index: 10;
+}
+
+.faq-busca input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.sugestoes {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 20;
+}
+
+.sugestoes li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.sugestoes li:hover {
+    background: #f2f2f2;
+}
+
+/* Lista FAQ */
+.faq-lista {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.faq-lista li {
+    margin-bottom: 15px;
+}
+
+.faq-highlight {
+    background: #dceeff;
+    /* azul claro */
+    border-radius: 8px;
+    padding: 5px;
+    transition: background-color 0.8s ease;
+}

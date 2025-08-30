@@ -1,0 +1,264 @@
+.faqBanco-admin {
+    padding: 20px;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    color: #333;
+    font-size: 21px;
+    /* 🔹 fonte geral aumentada em 50% */
+}
+
+.faqBanco-admin h2 {
+    font-size: 30px;
+    /* 🔹 título maior */
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* ===== Botão Adicionar ===== */
+.faqBanco-btn-adicionar {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: #fff;
+    border: none;
+    padding: 15px 22px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.faqBanco-btn-adicionar:hover {
+    background: linear-gradient(135deg, #20c997, #28a745);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Tabela ===== */
+.faqBanco-tabela {
+    width: 95%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    table-layout: fixed;
+    /* 🔹 garante que o texto respeite a largura */
+}
+
+.faqBanco-tabela th,
+.faqBanco-tabela td {
+    padding: 16px 18px;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 21px;
+    word-wrap: break-word;
+    white-space: normal;
+    vertical-align: top;
+    text-align: left;
+}
+
+/* Hover só funciona quando NÃO está em highlight */
+.faqBanco-tabela tr:hover:not(.faqBanco-highlight) {
+    background: #00076b;
+    color: #ddd;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+/* ===== Modal Overlay ===== */
+.faqBanco-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* ===== Modal ===== */
+.faqBanco-modal-form {
+    background: #fff;
+    padding: 25px;
+    border-radius: 14px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease;
+    font-size: 20px;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.faqBanco-modal-form h3 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* ===== Inputs & Textarea ===== */
+.faqBanco-modal-form input,
+.faqBanco-modal-form textarea {
+    width: 90%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 18px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: none;
+}
+
+.faqBanco-modal-form input:focus,
+.faqBanco-modal-form textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.2);
+}
+
+/* ===== Botões ===== */
+.faqBanco-btn-apagar {
+    background: linear-gradient(135deg, #dc3545, #e74c3c);
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.faqBanco-btn-apagar:hover {
+    background: linear-gradient(135deg, #e74c3c, #dc3545);
+    transform: translateY(-2px);
+}
+
+.faqBanco-btn-salvar {
+    background: linear-gradient(135deg, #007bff, #339af0);
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 97%;
+}
+
+.faqBanco-btn-salvar:hover {
+    background: linear-gradient(135deg, #339af0, #007bff);
+    transform: translateY(-2px);
+}
+
+/* ===== Topo alinhado lado a lado ===== */
+.faqBanco-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 15px;
+}
+
+.faqBanco-busca-container {
+    position: relative;
+    width: 70%;
+    flex-shrink: 0;
+    margin-right: 10%;
+}
+
+.faqBanco-busca {
+    padding: 10px 14px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.faqBanco-sugestoes {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.faqBanco-sugestoes li {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.faqBanco-sugestoes li:hover {
+    background: #f2f2f2;
+    font-weight: bold;
+    margin-left: 3%;
+
+}
+
+/* ===== Destaque ===== */
+.faqBanco-highlight {
+    background: #007bff !important;
+    color: #fff;
+    pointer-events: none;
+    /* 🔹 desativa hover/click temporário */
+    transition: background-color 1s ease;
+}
+
+/* Área do título, botão e busca fica fixa */
+.faqBanco-topo-fixado {
+    position: sticky;
+    top: 0;
+    background: #f8f9fa;
+    padding: 15px 20px;
+    z-index: 100;
+    border-bottom: 2px solid #e0e0e0;
+
+    /* 🔹 Efeitos visuais */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(6px);
+    /* leve efeito glass */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Quando o usuário começa a rolar, dá um destaque */
+.faqBanco-topo-fixado.scrolled {
+    background: #ffffff;
+    /* muda levemente a cor */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    border-bottom: 2px solid #d0d0d0;
+}

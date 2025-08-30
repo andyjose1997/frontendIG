@@ -8,13 +8,14 @@ import Login from './pages/Login.jsx';
 import Cursos from "./pages/Cursos.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import './App.css';
-import Cadastrarse from "./pages/Cadastrarse.jsx";
-import Organizacao from "./pages/Organização.jsx";
+import Cadastrarse from "./pages/cadastroGeral/Cadastrarse.jsx";
+import Organizacao from "./pages/Organizacao.jsx";
 import Inicio from "./pages/Inicio/Inicio.jsx";
 import Perfil from "./pages/Perfil/Perfil.jsx";
 import Manual from './pages/Manual.jsx';
-import Mensagens from './pages/Perfil/Mensagens.jsx';
+import Mensagens from './pages/mensagens/Mensagens.jsx';
 import TelaConfig from "./pages/Perfil/TelaConfig.jsx";
+import Aprendizagem from "./pages/aprendizagem/Aprendizagem.jsx";
 
 import { AuthProvider } from "./AuthContext";
 import PrivateRoute from "./PrivateRoute";
@@ -23,6 +24,7 @@ import AdminRoute from "./AdminRoute";
 
 import { Link } from "react-router-dom";
 import { URL } from "./config.jsx";
+import FAQSection from "./pages/FAQSection.jsx";
 
 function Home() {
   return (
@@ -63,26 +65,8 @@ function Home() {
         </a>
       </section>
 
-      <section className="FAQminii">
-        <h2>Perguntas Frequentes</h2>
-        <h4> Preciso pagar algo?</h4>
-        <p>Não, o cadastro é gratuito. Você só paga pelos pacotes ou serviços extras que desejar usar.</p>
+      <FAQSection />
 
-        <h4> Posso trocar de anfitrião?</h4>
-        <p>Sim, é possível solicitar a troca mediante análise da plataforma.</p>
-
-        <h4> O que ganho usando a plataforma?</h4>
-        <p>Você conquista certificados, currículo gerado, participa de rankings e pode oferecer ou contratar serviços.</p>
-
-        <h4> Como recebo suporte?</h4>
-        <p>Seu anfitrião é seu primeiro ponto de apoio. Além disso, nosso time está disponível via WhatsApp e email.</p>
-
-        <h4> Posso vender meus serviços aqui?</h4>
-        <p>Sim! Usuários qualificados podem oferecer serviços ou cursos seguindo as diretrizes da plataforma.</p>
-
-        <h4> É possível cancelar minha conta?</h4>
-        <p>Sim. Você pode solicitar o cancelamento a qualquer momento através do suporte.</p>
-      </section>
 
       <section className="CTAfinal">
         <h2>Pronto para evoluir?</h2>
@@ -145,11 +129,14 @@ function AppRoutes() {
           <Route path="/" element={<Home />} />
           <Route path="/cursos" element={<Cursos />} />
           <Route path="/cadastrarse" element={<Cadastrarse />} />
+          <Route path="/criar-conta/:idHost/:nomeCompleto" element={<Cadastrarse />} />
           <Route path="/organizacao" element={<Organizacao />} />
           <Route path="/login" element={<Login />} />
         </Route>
         <Route path="/inicio" element={<PrivateRoute><Inicio /></PrivateRoute>} />
         <Route path="/perfil" element={<PrivateRoute><Perfil /></PrivateRoute>} />
+        <Route path="/aprendizagem" element={<PrivateRoute><Aprendizagem /></PrivateRoute>} />
+
         <Route path="/mensagens" element={<PrivateRoute><Mensagens /></PrivateRoute>} />
         <Route path="/TelaConfig" element={<PrivateRoute><TelaConfig /></PrivateRoute>} />
         <Route path="/Manual" element={<Manual />} />

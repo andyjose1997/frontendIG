@@ -13,6 +13,59 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+.alerta-temporario {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: linear-gradient(135deg, #4caf50, #66bb6a);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.3s ease, fadeOut 0.5s ease 1.5s forwards;
+    z-index: 2000;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+}
+
 .privacidade-config h2 {
     text-align: center;
     font-size: 2.4rem;
@@ -191,4 +244,42 @@ ul li:hover {
     align-items: center;
     justify-content: center;
     z-index: 999;
+}
+
+.qrcode-container {
+    display: inline-block;
+    padding: 6px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #ffffff, #f4f7ff);
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+/* Efeito hover */
+.qrcode-container:hover {
+    transform: rotate(-2deg) scale(1.07);
+    filter: drop-shadow(0 0 12px rgba(0, 136, 255, 0.6));
+}
+
+/* Cursor de clique */
+.qrcode-container {
+    cursor: pointer;
+}
+
+.qrcode-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #4a90e2, #9013fe);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+    margin: 10px auto;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Hover chamativo */
+.qrcode-container:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 22px rgba(0, 136, 255, 0.6);
 }

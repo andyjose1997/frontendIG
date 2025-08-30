@@ -1,0 +1,80 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-termos {
+    background: #024ef1;
+    width: 65%;
+    max-width: 800px;
+    max-height: 75%;
+    overflow-y: auto;
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.4s ease-in-out;
+    font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.modal-termos h2 {
+    margin-top: 0;
+    font-size: 65px;
+    color: #1a1a1a;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+
+
+.modal-termos ol {
+    padding-left: 20px;
+    margin: 1rem 0 1.5rem 0;
+    color: #000000;
+    font-size: 15px;
+    line-height: 1.6;
+    font-size: 25px;
+
+}
+
+.acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 1.5rem;
+}
+
+.btnTermos-verde,
+.btnTermos-vermelho {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.btnTermos-verde {
+    background: linear-gradient(135deg, #28a745, #34d058);
+    color: #fff;
+}
+
+.btnTermos-verde:hover {
+    background: #000000;
+}
+
+.btnTermos-vermelho {
+    background: linear-gradient(135deg, #dc3545, #f25c6b);
+    color: #fff;
+}

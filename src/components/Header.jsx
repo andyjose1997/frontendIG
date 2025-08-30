@@ -17,7 +17,7 @@ export default function Header() {
                     {atual !== "/cursos" && (
                         <li><Link to="/cursos">Cursos</Link></li>
                     )}
-                    {atual !== "/cadastrarse" && (
+                    {!atual.startsWith("/cadastrarse") && (   // 👈 corrigido
                         <li><Link to="/cadastrarse">Cadastre-se</Link></li>
                     )}
                     {atual !== "/organizacao" && (

@@ -37,3 +37,127 @@
     background-color: #2e4cb8;
     transform: translateY(-0.1rem);
 }
+
+/* === Overlay escurecido com blur === */
+.modalPost-postagem-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+/* === Container do modalPost === */
+.modalPost-postagem-conteudo {
+    background: rgba(7, 0, 48, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 18px;
+    padding: 28px;
+    width: 95%;
+    max-width: 1040px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    animation: modalPostFadeIn 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+    height: 80%;
+    max-height: 900px;
+}
+
+/* === Título === */
+.modalPost-postagem-conteudo h2 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    padding-bottom: 10px;
+    letter-spacing: -0.3px;
+}
+
+/* === Textarea === */
+.modalPost-postagem-textarea {
+    width: 100%;
+    min-height: 150px;
+    resize: none;
+    padding: 14px 16px;
+    font-size: 1.7rem;
+    line-height: 1.6;
+    border: 1px solid #d1d5db;
+    border-radius: 14px;
+    background: #f9fafb;
+    transition: all 0.25s ease;
+    width: 96%;
+
+}
+
+.modalPost-postagem-textarea:focus {
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+    outline: none;
+}
+
+/* === Área dos botões === */
+.modalPost-postagem-botoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+/* Botões base */
+.modalPost-postagem-cancelar,
+.modalPost-postagem-confirmar {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease, transform 0.15s ease;
+    width: 190px;
+    height: 2.3rem;
+}
+
+/* Botão Cancelar */
+.modalPost-postagem-cancelar {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.modalPost-postagem-cancelar:hover {
+    background: #e5e7eb;
+    transform: translateY(-1px);
+}
+
+/* Botão Confirmar */
+.modalPost-postagem-confirmar {
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+
+.modalPost-postagem-confirmar:hover {
+    background: linear-gradient(90deg, #1d4ed8, #1e3a8a);
+    transform: translateY(-1px);
+}
+
+/* === Animação de entrada === */
+@keyframes modalPostFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

@@ -1,7 +1,7 @@
 // feed-completo/Comentarios.jsx
 import React from 'react';
 import Reacoes from './reacoes';
-
+import { URL } from '../../../config';
 export default function Comentarios({
     post,
     comentariosPorPost,
@@ -132,7 +132,7 @@ export default function Comentarios({
                     <div key={comentario.id} className="comentario-item" style={{ marginTop: "10px", borderTop: "1px solid #ccc", paddingTop: "10px", position: "relative" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                             <img
-                                src={comentario.foto ? `http://localhost:8899/fotos/${comentario.foto}` : "/perfil.png"}
+                                src={comentario.foto ? `${URL}/fotos/${comentario.foto}` : "/perfil.png"}
                                 alt="Perfil"
                                 style={{ width: "30px", height: "30px", borderRadius: "50%" }}
                             />

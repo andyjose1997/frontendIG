@@ -1,100 +1,268 @@
 .organizacao {
-    background-color: #e6f0ff;
-    margin: 30px auto;
-    padding: 30px;
-    border-radius: 8px;
-    max-width: 800px;
-    text-align: center;
-    font-size: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 4rem 2rem;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(180deg, #f9fbfd 0%, #eef2f7 100%);
 }
 
+/* ======= Título principal ======= */
 .organizacao h2 {
-    color: #003366;
-    margin-bottom: 15px;
+    text-align: center;
+    font-size: 2.4rem;
+    margin-bottom: 1.5rem;
+    color: #1c2a39;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    animation: fadeInDown 0.6s ease;
 }
 
 .organizacao p {
-    color: #333;
-    font-size: 1.1em;
-    line-height: 1.6;
-}
-
-.responsaveis {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.responsavel {
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border-radius: 8px;
-    padding: 20px;
-    max-width: 300px;
     text-align: center;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 0 auto 3rem auto;
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    animation: fadeIn 1s ease;
 }
 
-.responsavel h2 {
-    color: #003366;
-    margin-bottom: 10px;
+/* ======= Títulos de seções ======= */
+.secao {
+    margin: 3rem 0 2rem 0;
+    font-size: 1.7rem;
+    font-weight: 700;
+    text-align: center;
+    color: #1c2a39;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.responsavel p {
-    color: #333;
-    font-size: 1em;
-    line-height: 1.4;
-    width: 300px;
+.secao::after {
+    content: "";
+    width: 0;
+    height: 4px;
+    display: block;
+    margin: 0.7rem auto 0 auto;
+    border-radius: 2px;
+    background: #007bff;
+    transition: width 0.5s ease;
 }
 
-#GerenteUm {
-    width: 150px;
+.secao:hover::after {
+    width: 80px;
+}
+
+/* ======= Cards Container ======= */
+.responsaveis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 0 auto;
+    justify-content: center;
+    max-width: 1100px;
+    animation: fadeInUp 0.8s ease;
+}
+
+/* ======= Card ======= */
+.responsavel {
+    background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+    padding: 2rem 1.5rem;
+    border-radius: 18px;
+    text-align: center;
+    max-width: 320px;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08),
+        0 2px 4px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.responsavel:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.15),
+        0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Borda colorida animada em hover */
+.responsavel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: #007bff;
+    transition: width 0.3s ease;
+}
+
+.responsavel:hover::before {
+    width: 100%;
+}
+
+/* Foto com borda colorida */
+.responsavel.admin .foto-perfil {
+    border: 3px solid #0056b3;
+}
+
+.responsavel.coordenador .foto-perfil {
+    border: 3px solid #198754;
+}
+
+.responsavel.auditor .foto-perfil {
+    border: 3px solid #6f42c1;
+}
+
+.foto-perfil {
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    border: solid rgb(3, 3, 114) 1px;
+    object-fit: cover;
+    margin: 0 auto 1rem auto;
+    display: block;
+    transition: transform 0.3s ease;
 }
 
-#TagUm {
-    background-color: #0a2161;
-    border-radius: 10px;
-    color: #fffbfb;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 21px;
+.responsavel:hover .foto-perfil {
+    transform: scale(1.05);
 }
 
-#TagDois {
-    background-color: #0a2161;
-    border-radius: 10px;
-    color: #fffbfb;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 21px;
+/* Nome e cargo */
+.responsavel h2 {
+    font-size: 1.35rem;
+    margin: 0.6rem 0 0.3rem 0;
+    color: #222;
+    font-weight: 700;
+    text-align: center;
 }
 
-/* Responsividade para celular */
-@media (max-width: 768px) {
-    .responsaveis {
-        flex-direction: column;
-        gap: 15px;
+.cargo {
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Cargo colorido conforme função */
+.responsavel.admin .cargo {
+    color: #0056b3;
+}
+
+.responsavel.coordenador .cargo {
+    color: #198754;
+}
+
+.responsavel.auditor .cargo {
+    color: #6f42c1;
+}
+
+/* Descrição */
+.responsavel p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    margin-top: 0.8rem;
+    /* removemos o limite */
+}
+
+.descricao.fechada {
+    max-height: 6.4em;
+    /* ~4 linhas */
+    overflow: hidden;
+}
+
+.descricao.aberta {
+    max-height: none;
+}
+
+.descricao.fechada {
+    max-height: 6.4em;
+    /* ~4 linhas */
+    overflow: hidden;
+}
+
+.descricao.aberta {
+    max-height: none;
+}
+
+/* Texto da responsabilidade */
+.responsavel p {
+    font-size: 1.3rem;
+    /* antes 1rem → +30% */
+    color: #555;
+    line-height: 1.6;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    margin-top: 0.8rem;
+}
+
+/* Botão Ver mais / Ver menos */
+.btn-vermais {
+    margin-top: 0.8rem;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    /* aumentei proporcional */
+    color: #007bff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-vermais:hover {
+    color: #0056b3;
+}
+
+.btn-vermais {
+    margin-top: 0.5rem;
+    background: none;
+    border: none;
+    color: #007bff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-vermais:hover {
+    color: #0056b3;
+}
+
+/* ======= Animações ======= */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
     }
 
-    .responsavel {
-        max-width: 90%;
-        padding: 15px;
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
     }
 
-    .responsavel p {
-        width: 100%;
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
     }
 
-    #GerenteUm {
-        width: 120px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

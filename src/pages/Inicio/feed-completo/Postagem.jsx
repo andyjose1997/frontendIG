@@ -2,7 +2,7 @@ import React from 'react';
 import Reacoes from './reacoes';
 import Comentarios from './comentarios';
 import MenuOpcoesPostagem from './MenuOpcoesPostagem';
-
+import { URL } from '../../../config';
 export default function Postagem({
     post,
     userId,
@@ -39,15 +39,32 @@ export default function Postagem({
             <div className="autor-info post-cabecalho">
                 <div className="post-autor-detalhes">
                     <img
-                        src={post.foto ? `http://localhost:8899/fotos/${post.foto}` : "/perfil.png"}
+                        src={post.foto ? `${URL}/fotos/${post.foto}` : "/perfil.png"}
                         alt="Perfil"
                     />
+
                     <div>
                         <strong>
                             {post.nome.charAt(0).toUpperCase() + post.nome.slice(1).toLowerCase()}{" "}
                             {post.sobrenome.charAt(0).toUpperCase() + post.sobrenome.slice(1).toLowerCase()}
                         </strong><br />
                         <small>{post.data_postagem}</small>
+                        {post.sistema === 1 && (
+                            <span style={{
+                                marginLeft: "10px",
+                                backgroundColor: "#e63946",
+                                color: "white",
+                                fontWeight: "bold",
+                                padding: "2px 8px",
+                                borderRadius: "12px",
+                                fontSize: "0.85rem",
+                                display: "inline-flex",
+                                alignItems: "center",
+                                gap: "4px"
+                            }}>
+                                ⭐ OFICIAL
+                            </span>
+                        )}
                     </div>
                 </div>
 

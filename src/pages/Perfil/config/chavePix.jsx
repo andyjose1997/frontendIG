@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
-import { URL } from '../../../config';
+import { FRONT_URL, URL } from '../../../config';
 import './chavePix.css';
+import { QRCodeCanvas } from "qrcode.react";
+import ModalQrCode from './ModalQrCode';
 
 export default function ChavePix({ onVoltar }) {
     const [chavePix, setChavePix] = useState('');
     const [email, setEmail] = useState('');
     const [whatsapp, setWhatsapp] = useState('');
+    const [idUsuario, setIdUsuario] = useState('');
+    const [linkIndicacao, setLinkIndicacao] = useState('link pendente');
     const [mostrarMensagens, setMostrarMensagens] = useState(false);
     const [mostrarSugestoes, setMostrarSugestoes] = useState(false);
-    const linkIndicacao = "link pendente";
+    const [alerta, setAlerta] = useState("");
+    const [mostrarQrModal, setMostrarQrModal] = useState(false);
 
     useEffect(() => {
         buscarChavePix();
@@ -33,22 +38,42 @@ export default function ChavePix({ onVoltar }) {
         setEmail(data.email || '');
         setWhatsapp(data.whatsapp || '');
         if (!chavePix) {
-            setChavePix(data.email || '');  // ✅ Email como padrão só se não houver chave salva
+            setChavePix(data.email || '');
         }
+        if (data.id) {
+            setIdUsuario(data.id);
+
+            // junta nome e sobrenome e remove espaços
+            const nomeFormatado = (data.nome + data.sobrenome).replace(/\s+/g, '').toLowerCase();
+
+            setLinkIndicacao(`${FRONT_URL}/criar-conta/${data.id}/${nomeFormatado}`);
+        }
+
     };
 
     const salvarChavePix = async () => {
         const token = localStorage.getItem('token');
-        await fetch(`${URL}/perfil/atualizar_chave_pix`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify({ chave_pix: chavePix.trim() })
-        });
-        alert('Chave Pix atualizada com sucesso!');
+        try {
+            const resposta = await fetch(`${URL}/perfil/atualizar_chave_pix`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({ chave_pix: chavePix.trim() })
+            });
+
+            if (resposta.ok) {
+                mostrarAlerta("✅ Chave Pix atualizada com sucesso!");
+            } else {
+                const erro = await resposta.json();
+                mostrarAlerta(`❌ Erro: ${erro.detail || "Não foi possível salvar."}`);
+            }
+        } catch (e) {
+            mostrarAlerta("⚠️ Erro de conexão com o servidor.");
+        }
     };
+
 
     const handleInputChange = (e) => {
         setChavePix(e.target.value);
@@ -57,12 +82,22 @@ export default function ChavePix({ onVoltar }) {
 
     const inserirSugestao = (valor) => {
         setChavePix(valor);
-        setMostrarSugestoes(true);  // Sugestões continuam visíveis para seguir clicando
+        setMostrarSugestoes(true);
     };
 
     const copiarLink = () => {
         navigator.clipboard.writeText(linkIndicacao);
-        alert("Link copiado!");
+        mostrarAlerta("🔗 Link copiado!");
+    };
+
+    const copiarMensagem = (mensagem) => {
+        navigator.clipboard.writeText(mensagem);
+        mostrarAlerta("📋 Mensagem copiada!");
+    };
+
+    const mostrarAlerta = (texto) => {
+        setAlerta(texto);
+        setTimeout(() => setAlerta(""), 2000);
     };
 
     return (
@@ -97,49 +132,77 @@ export default function ChavePix({ onVoltar }) {
             </section>
 
             <div className="area-link">
+                <h2>🔗 Seu link exclusivo de indicação como Host</h2>
                 <h3 className="link-indicacao">{linkIndicacao}</h3>
+
+                {/* 🔹 Gerar QRCode (clicável) */}
+                <div
+                    className="qrcode-container"
+                    onClick={() => setMostrarQrModal(true)}
+                    style={{ cursor: "pointer" }}
+                >
+                    <QRCodeCanvas value={linkIndicacao} size={150} bgColor="#ffffff" fgColor="#000000" />
+                </div>
+                <br />
                 <div>
                     <button className="botao-config" onClick={copiarLink}>
                         Copiar Link
                     </button>
                     <button className="botao-config" onClick={() => setMostrarMensagens(true)}>
                         Mensagens para Postar
-                    </button> </div>
+                    </button>
+                </div>
             </div>
 
             {mostrarMensagens && (
                 <div className="modal-overlay">
                     <div className="modal-mensagens">
                         <h2>Mensagens para Postar</h2>
-
                         <p>Mensagem 1 exemplo.</p>
-                        <button onClick={() => {
-                            navigator.clipboard.writeText("Mensagem 1 exemplo.");
-                            alert("Mensagem copiada!");
-                        }}>Copiar</button>
-
+                        <button onClick={() => copiarMensagem("Mensagem 1 exemplo.")}>Copiar</button>
                         <hr />
-
                         <p>Mensagem 2 exemplo.</p>
-                        <button onClick={() => {
-                            navigator.clipboard.writeText("Mensagem 2 exemplo.");
-                            alert("Mensagem copiada!");
-                        }}>Copiar</button>
-
+                        <button onClick={() => copiarMensagem("Mensagem 2 exemplo.")}>Copiar</button>
                         <hr />
-
                         <p>Mensagem 3 exemplo.</p>
-                        <button onClick={() => {
-                            navigator.clipboard.writeText("Mensagem 3 exemplo.");
-                            alert("Mensagem copiada!");
-                        }}>Copiar</button><br /><br />
-
-                        <button className="botao-voltar" onClick={() => setMostrarMensagens(false)}>
-                            Voltar
-                        </button>
+                        <button onClick={() => copiarMensagem("Mensagem 3 exemplo.")}>Copiar</button>
+                        <br /><br />
+                        <button className="botao-voltar" onClick={() => setMostrarMensagens(false)}>Voltar</button>
                     </div>
                 </div>
             )}
+
+            {mostrarQrModal && (
+                <ModalQrCode
+                    onClose={() => setMostrarQrModal(false)}
+                    linkIndicacao={linkIndicacao}
+                />
+            )}
+
+            {alerta && (
+                <div
+                    style={{
+                        position: "fixed",
+                        top: "20px",
+                        right: "20px",
+                        background: alerta.includes("✅") ? "#4CAF50" : alerta.includes("❌") ? "#f44336" : "#ff9800",
+                        color: "white",
+                        padding: "14px 24px",
+                        borderRadius: "10px",
+                        boxShadow: "0px 6px 12px rgba(0,0,0,0.25)",
+                        zIndex: 9999,
+                        fontSize: "15px",
+                        fontWeight: "500",
+                        opacity: "1",
+                        transform: "translateX(0)",
+                        animation: "slideIn 0.4s ease, fadeOut 0.5s ease 1.8s forwards"
+                    }}
+                >
+                    {alerta}
+                </div>
+            )}
+
+
         </>
     );
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import './Login.css';
-
+import { URL } from '../config';
 export default function Login() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -41,7 +41,7 @@ export default function Login() {
             formData.append("email", email);
             formData.append("senha", senha);
 
-            const response = await fetch("http://localhost:8899/login", {
+            const response = await fetch(`${URL}/login`, {
                 method: "POST",
                 body: formData,
             });
@@ -81,15 +81,14 @@ export default function Login() {
 
             localStorage.setItem('token', data.token);
             localStorage.setItem('usuario', JSON.stringify(data.usuario));
-            console.log("⚠️ Usuario recebido:", data.usuario);
-            localStorage.setItem('user_id', data.usuario.id);
-
-            localStorage.setItem('user_id', data.usuario.id);
+            localStorage.setItem('id', data.usuario.id);   // 👈 adicionado
+            localStorage.setItem('user_id', data.usuario.id); // pode manter se já usa em outros lugares
 
             login(data.usuario, data.token);
 
             console.log("✅ Login realizado, redirecionando...");
             navigate("/inicio");
+
         } catch (error) {
             console.error("Erro ao logar:", error);
             setMensagem("Erro de conexão com o servidor.");

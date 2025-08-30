@@ -11,6 +11,30 @@
     z-index: 1000;
 }
 
+.mensagenss-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.badge-naoo-lidas {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 3px 7px;
+    border-radius: 50%;
+    min-width: 20px;
+    text-align: center;
+    line-height: 1.2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 5;
+    /* 👈 garante que fica na frente */
+}
+
+
 .sugestoes-dropdown {
     position: absolute;
     top: 3.5rem;

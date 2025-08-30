@@ -12,6 +12,41 @@
     flex-direction: column;
 }
 
+/* 🔹 Estilo para os botões de filtro */
+.btnPostGeral {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 22px;
+    margin: 0 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    outline: none;
+}
+
+/* Hover */
+.btnPostGeral:hover {
+    background: linear-gradient(135deg, #2a5298, #1e3c72);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Foco (acessibilidade) */
+.btnPostGeral:focus {
+    outline: 2px solid #4a90e2;
+    outline-offset: 3px;
+}
+
+/* Clique */
+.btnPostGeral:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
 
 
 /* ===== Botão Comentar ===== */

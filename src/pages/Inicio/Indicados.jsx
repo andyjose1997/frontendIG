@@ -115,7 +115,7 @@ export default function Indicados() {
                                             <img
                                                 src={
                                                     pessoa?.foto
-                                                        ? `http://localhost:8899/fotos/${pessoa.foto}`
+                                                        ? `${URL}/fotos/${pessoa.foto}`
                                                         : "/Logo/perfilPadrao/M.png"
                                                 }
                                                 alt="foto"
@@ -167,7 +167,7 @@ export default function Indicados() {
                     <div className="modalDetalhe">
                         <button className="fecharModal" onClick={fecharDetalhe}>✖</button>
                         <img
-                            src={`http://localhost:8899/fotos/${detalhe.foto || "padrao.png"}`}
+                            src={`${URL}/fotos/${detalhe.foto || "padrao.png"}`}
                             alt="Foto"
                         />
 

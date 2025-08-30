@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import { URL } from '../../../config';
 const tiposDeReacao = [
     { tipo: "blz", imagem: "/reacoes/blz.png" },
     { tipo: "risada", imagem: "/reacoes/risada.png" },
@@ -22,21 +22,30 @@ export default function useFeedHandlers() {
     const [alerta, setAlerta] = useState({ visivel: false, mensagem: '', aoConfirmar: null });
     const [minhaReacaoPorPost, setMinhaReacaoPorPost] = useState({});
     const [quantidadeComentariosVisiveis, setQuantidadeComentariosVisiveis] = useState({});
+    const [funcaoUsuario, setFuncaoUsuario] = useState("");
 
     const userId = localStorage.getItem('user_id');
 
     const buscarComentarios = async (postId) => {
-        const resposta = await fetch(`http://localhost:8899/comentarios/${postId}`);
+        const resposta = await fetch(`${URL}/comentarios/${postId}`);
         const dados = await resposta.json();
         setComentariosPorPost((prev) => ({ ...prev, [postId]: dados }));
     };
 
     const buscarMinhaReacao = async (postId) => {
-        const resposta = await fetch(`http://localhost:8899/reacoes/minha/${postId}`, {
+        const resposta = await fetch(`${URL}/reacoes/minha/${postId}`, {
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         const dados = await resposta.json();
         setMinhaReacaoPorPost(prev => ({ ...prev, [postId]: dados.tipo_reacao }));
+    };
+    const buscarFuncaoUsuario = async () => {
+        const token = localStorage.getItem("token");
+        const resposta = await fetch(`${URL}/perfil`, {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        const dados = await resposta.json();
+        setFuncaoUsuario(dados.funcao); // 🔹 funcao vem da tabela usuarios
     };
 
     const editarComentario = async (idComentario, novoTexto, idPostagem) => {
@@ -45,7 +54,7 @@ export default function useFeedHandlers() {
             return;
         }
 
-        await fetch(`http://localhost:8899/comentarios/${idComentario}`, {
+        await fetch(`${URL}/comentarios/${idComentario}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -62,7 +71,7 @@ export default function useFeedHandlers() {
         const comentario = comentariosDigitados[postId]?.trim();
         if (!comentario) return;
 
-        await fetch(`http://localhost:8899/comentarios/${postId}`, {
+        await fetch(`${URL}/comentarios/${postId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -73,11 +82,14 @@ export default function useFeedHandlers() {
 
         setComentariosDigitados((prev) => ({ ...prev, [postId]: "" }));
         setMostrarInputComentario((prev) => ({ ...prev, [postId]: false }));
+
+        // 🔹 garante atualização logo após enviar
         await buscarComentarios(postId);
     };
 
+
     const buscarPostagens = async () => {
-        const resposta = await fetch('http://localhost:8899/postagens');
+        const resposta = await fetch(`${URL}/postagens`);
         const dados = await resposta.json();
         setPosts(dados);
         dados.forEach(post => {
@@ -92,7 +104,7 @@ export default function useFeedHandlers() {
     };
 
     const buscarReacoes = async (postId) => {
-        const resposta = await fetch(`http://localhost:8899/reacoes/totais/${postId}`);
+        const resposta = await fetch(`${URL}/reacoes/totais/${postId}`);
         const dados = await resposta.json();
         setReacoesPorPost(prev => ({ ...prev, [postId]: dados }));
     };
@@ -102,7 +114,7 @@ export default function useFeedHandlers() {
             visivel: true,
             mensagem: 'Deseja apagar este comentário?',
             aoConfirmar: async () => {
-                await fetch(`http://localhost:8899/comentarios/deletar/${idComentario}`, {
+                await fetch(`${URL}/comentarios/deletar/${idComentario}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
                 });
@@ -116,7 +128,7 @@ export default function useFeedHandlers() {
             visivel: true,
             mensagem: 'Deseja apagar esta postagem?',
             aoConfirmar: async () => {
-                await fetch(`http://localhost:8899/postagens/${postId}`, {
+                await fetch(`${URL}/postagens/${postId}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
                 });
@@ -129,12 +141,12 @@ export default function useFeedHandlers() {
         const reacaoAtual = minhaReacaoPorPost[postId];
 
         if (reacaoAtual === tipoReacao) {
-            await fetch(`http://localhost:8899/reacoes/remover/${postId}`, {
+            await fetch(`${URL}/reacoes/remover/${postId}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
             });
         } else {
-            await fetch(`http://localhost:8899/reacoes/${postId}`, {
+            await fetch(`${URL}/reacoes/${postId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -151,7 +163,22 @@ export default function useFeedHandlers() {
     const criarPostagem = async () => {
         if (novaPostagem.trim() === "") return;
 
-        await fetch('http://localhost:8899/postagens', {
+        await fetch(`${URL}/postagens`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ titulo: novaPostagem })
+        });
+
+        setNovaPostagem("");
+        buscarPostagens();
+    };
+    const criarPostagemSistema = async () => {
+        if (novaPostagem.trim() === "") return;
+
+        await fetch(`${URL}/postagens/sistema`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -165,7 +192,7 @@ export default function useFeedHandlers() {
     };
 
     const atualizarPostagem = async (postId) => {
-        await fetch(`http://localhost:8899/postagens/${postId}`, {
+        await fetch(`${URL}/postagens/${postId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -193,6 +220,10 @@ export default function useFeedHandlers() {
             [postId]: comentariosPorPost[postId]?.length || 0
         }));
     };
+    useEffect(() => {
+        buscarPostagens();
+        buscarFuncaoUsuario();
+    }, []);
 
     useEffect(() => {
         buscarPostagens();
@@ -227,10 +258,14 @@ export default function useFeedHandlers() {
         removerPostagem,
         enviarReacao,
         criarPostagem,
+        criarPostagemSistema,
         atualizarPostagem,
         verMaisComentarios,
         verTodosComentarios,
         apagarComentario,
         tiposDeReacao,
+        funcaoUsuario,
     };
+
+
 }
