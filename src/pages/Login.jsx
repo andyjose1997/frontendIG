@@ -1,38 +1,24 @@
+// 📂 src/componentes/Login.jsx
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import './Login.css';
 import { URL } from '../config';
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+
 export default function Login() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [showSenha, setShowSenha] = useState(false);
-    const [errors, setErrors] = useState({ email: '', senha: '' });
     const [mensagem, setMensagem] = useState('');
-    const [tipoMensagem, setTipoMensagem] = useState(''); // ex: 'erro', 'sucesso'
+    const [tipoMensagem, setTipoMensagem] = useState('');
 
     const { login } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
-    const handleEmailChange = (e) => {
-        const value = e.target.value;
-        setEmail(value);
-        setErrors(prev => ({
-            ...prev,
-            email: !value.includes('@') ? 'Email inválido' : ''
-        }));
-    };
-
-    const handleSenhaChange = (e) => {
-        const value = e.target.value;
-        setSenha(value);
-        setErrors(prev => ({
-            ...prev,
-            senha: ''
-        }));
-    };
-
+    // --- Email + senha ---
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -41,60 +27,70 @@ export default function Login() {
             formData.append("email", email);
             formData.append("senha", senha);
 
-            const response = await fetch(`${URL}/login`, {
+            const res = await fetch(`${URL}/login`, {
                 method: "POST",
-                body: formData,
+                body: formData
             });
 
-            let data;
-            try {
-                data = await response.json();
-            } catch (e) {
-                const texto = await response.text();
-                console.error("❌ Erro ao converter JSON:", e);
-                console.error("📄 Resposta crua do backend:", texto);
-                setMensagem("Resposta inesperada do servidor.");
+            const data = await res.json();
+
+            if (!res.ok) {
+                setMensagem(data?.erro || "Erro ao fazer login.");
                 setTipoMensagem("erro");
                 return;
             }
 
-            console.log("🔁 Dados recebidos do backend:", data);
-
-            if (!response.ok) {
-                if (data?.erro === "Email não encontrado") {
-                    setMensagem("Email não encontrado.");
-                } else if (data?.erro === "Senha incorreta") {
-                    setMensagem("Senha incorreta.");
-                } else {
-                    setMensagem(data?.erro || "Erro ao fazer login.");
-                }
-                setTipoMensagem("erro");
-                return;
-            }
-
-            if (!data || !data.token || !data.usuario) {
-                console.error("❌ Resposta inesperada:", data);
-                setMensagem("Resposta inesperada do servidor.");
-                setTipoMensagem("erro");
-                return;
-            }
-
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('usuario', JSON.stringify(data.usuario));
-            localStorage.setItem('id', data.usuario.id);   // 👈 adicionado
-            localStorage.setItem('user_id', data.usuario.id); // pode manter se já usa em outros lugares
+            // Salva token e usuário
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("usuario", JSON.stringify(data.usuario));
+            localStorage.setItem("usuario_id", data.usuario.id); // 🔹 corrigido
 
             login(data.usuario, data.token);
-
-            console.log("✅ Login realizado, redirecionando...");
             navigate("/inicio");
 
         } catch (error) {
-            console.error("Erro ao logar:", error);
             setMensagem("Erro de conexão com o servidor.");
             setTipoMensagem("erro");
         }
     };
+
+
+    // --- Login com Google ---
+    const handleGoogleLogin = async (credentialResponse) => {
+        try {
+            const userInfo = jwtDecode(credentialResponse.credential);
+
+            const formData = new FormData();
+            formData.append("email", userInfo.email);
+            formData.append("nome", userInfo.given_name || "");
+
+            const res = await fetch(`${URL}/login-google`, {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                setMensagem(data?.erro || "Erro no login com Google.");
+                setTipoMensagem("erro");
+                return;
+            }
+
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("usuario", JSON.stringify(data.usuario));
+            localStorage.setItem("usuario_id", data.usuario.id); // 🔹 corrigido
+
+            login(data.usuario, data.token);
+            navigate("/inicio");
+
+        } catch (err) {
+            console.error("Erro no login com Google:", err);
+            setMensagem("Erro ao autenticar com Google.");
+            setTipoMensagem("erro");
+        }
+    };
+
 
     return (
         <div className="login-container">
@@ -107,10 +103,6 @@ export default function Login() {
                     <li>✅ Falar com seu Host</li>
                     <li>✅ Participar do ranking de alunos</li>
                 </ul>
-                <p className="depoimento">
-                    “A IronGoals me ajudou a crescer profissionalmente em pouco tempo!”
-                </p>
-                <p className="autor">- Depoimento de um usuário satisfeito</p>
             </div>
 
             <div className="form-section">
@@ -122,12 +114,13 @@ export default function Login() {
                     </div>
                 )}
 
+                {/* Login tradicional */}
                 <form onSubmit={handleSubmit} className="FormularioLogin">
                     <label>Email:</label><br />
                     <input
                         type="email"
                         value={email}
-                        onChange={handleEmailChange}
+                        onChange={(e) => setEmail(e.target.value)}
                         placeholder="Digite seu email"
                     /><br /><br />
 
@@ -136,18 +129,28 @@ export default function Login() {
                         <input
                             type={showSenha ? "text" : "password"}
                             value={senha}
-                            onChange={handleSenhaChange}
+                            onChange={(e) => setSenha(e.target.value)}
                             placeholder="Digite sua senha"
                         />
                     </div>
 
-                    <br /><br />
+                    <br />
                     <a id="EsqueciMinhaSenha" href="#">Esqueci minha senha</a><br /><br />
 
                     <button id="botaoInicio" type="submit">
                         Entrar
                     </button><br />
                 </form>
+
+                <div className="separador">ou</div>
+
+                {/* Login com Google */}
+                <div className="google-login-wrapper">
+                    <GoogleLogin
+                        onSuccess={handleGoogleLogin}
+                        onError={() => setMensagem("Erro no login com Google")}
+                    />
+                </div>
             </div>
         </div>
     );

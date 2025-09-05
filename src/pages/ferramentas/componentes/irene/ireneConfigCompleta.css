@@ -1,0 +1,22 @@
+.irene-completa {
+    padding: 20px;
+}
+
+.botoes-irene {
+    margin-bottom: 15px;
+}
+
+.botoes-irene button {
+    margin-right: 10px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    background: #444;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.botoes-irene button.ativo {
+    background: #0162d1;
+}

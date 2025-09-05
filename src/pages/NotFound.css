@@ -1,0 +1,184 @@
+.notfound-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+
+    /* 🎨 Fundo elegante */
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+
+    /* 🖋️ Tipografia consistente */
+    font-family: "Segoe UI", Roboto, sans-serif;
+    text-align: center;
+    color: #fff;
+
+    /* ✨ Animação suave na entrada */
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* 🔄 Animação de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Logo ===== */
+.notfound-logo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+
+    /* 🔲 Destaque */
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+
+    /* ✨ Suavidade */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* 🔹 Interação */
+.notfound-logo:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 🔹 Toque mais sofisticado em telas pequenas */
+@media (max-width: 480px) {
+    .notfound-logo {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* ===== Título principal (404) ===== */
+.notfound-title {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    margin-bottom: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    /* 🎨 Destaque visual */
+    background: linear-gradient(to right, #aad4ff, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* ✨ Profundidade */
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.35);
+
+    /* 🎬 Entrada animada */
+    animation: bounceIn 1s ease;
+}
+
+/* 🔹 Animação suave para o título */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ===== Subtítulo ===== */
+.notfound-subtitle {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #aad4ff;
+    margin-bottom: 1.5rem;
+
+    /* ✨ Suavidade e leitura */
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.35);
+
+    /* 🎬 Transição para hover */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* 🔹 Interação */
+.notfound-subtitle:hover {
+    color: #d0e8ff;
+    /* tom mais claro no hover */
+    transform: translateY(-2px);
+    /* leve destaque */
+}
+
+/* ===== Texto ===== */
+.notfound-text {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+    color: #dbe9f4;
+
+    /* ✨ leitura fluida */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.3px;
+
+    /* 📱 responsividade */
+    padding: 0 0.5rem;
+}
+
+/* 🔹 Ajuste em telas menores */
+@media (max-width: 480px) {
+    .notfound-text {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+}
+
+/* ===== Botão ===== */
+.notfound-button {
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #3e73ff, #2b58d4);
+    /* 🔹 leve gradiente */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+
+    /* ✨ estilo moderno */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+}
+
+/* 🔹 Interação ao passar o mouse */
+.notfound-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    background: linear-gradient(135deg, #4b7fff, #3e73ff);
+}
+
+/* 🔹 Clique ativo */
+.notfound-button:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25) inset;
+}
+
+/* 🔹 Acessibilidade: foco no teclado */
+.notfound-button:focus {
+    outline: 2px solid #aad4ff;
+    outline-offset: 4px;
+}

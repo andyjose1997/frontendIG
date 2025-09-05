@@ -16,11 +16,12 @@ import Manual from './pages/Manual.jsx';
 import Mensagens from './pages/mensagens/Mensagens.jsx';
 import TelaConfig from "./pages/Perfil/TelaConfig.jsx";
 import Aprendizagem from "./pages/aprendizagem/Aprendizagem.jsx";
-
+import IreneChat from "./components/IreneChat.jsx";
 import { AuthProvider } from "./AuthContext";
 import PrivateRoute from "./PrivateRoute";
 import PainelControle from './pages/ferramentas/painelcontrole';
 import AdminRoute from "./AdminRoute";
+import IronQuiz from "./pages/ironQuiz/IronQuiz.jsx";
 
 import { Link } from "react-router-dom";
 import { URL } from "./config.jsx";
@@ -64,8 +65,8 @@ function Home() {
           📞 Falar no WhatsApp
         </a>
       </section>
-
-      <FAQSection />
+      <div style={{ display: "none" }} >      <FAQSection />
+      </div>
 
 
       <section className="CTAfinal">
@@ -124,21 +125,66 @@ function AppRoutes() {
   return (
     <>
       {isLoading && <Loader />}
+
       <Routes>
+        {/* Rotas que usam Layout */}
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/cursos" element={<Cursos />} />
           <Route path="/cadastrarse" element={<Cadastrarse />} />
-          <Route path="/criar-conta/:idHost/:nomeCompleto" element={<Cadastrarse />} />
+          <Route
+            path="/criar-conta/:idHost/:nomeCompleto"
+            element={<Cadastrarse />}
+          />
           <Route path="/organizacao" element={<Organizacao />} />
           <Route path="/login" element={<Login />} />
         </Route>
-        <Route path="/inicio" element={<PrivateRoute><Inicio /></PrivateRoute>} />
-        <Route path="/perfil" element={<PrivateRoute><Perfil /></PrivateRoute>} />
-        <Route path="/aprendizagem" element={<PrivateRoute><Aprendizagem /></PrivateRoute>} />
 
-        <Route path="/mensagens" element={<PrivateRoute><Mensagens /></PrivateRoute>} />
-        <Route path="/TelaConfig" element={<PrivateRoute><TelaConfig /></PrivateRoute>} />
+        {/* 🔹 Rotas independentes */}
+        <Route
+          path="/iron_quiz"
+          element={<IronQuiz />}   // 👈 agora é independente
+        />
+        <Route
+          path="/inicio"
+          element={
+            <PrivateRoute>
+              <Inicio />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/perfil"
+          element={
+            <PrivateRoute>
+              <Perfil />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/aprendizagem"
+          element={
+            <PrivateRoute>
+              <Aprendizagem />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/mensagens"
+          element={
+            <PrivateRoute>
+              <Mensagens />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/TelaConfig"
+          element={
+            <PrivateRoute>
+              <TelaConfig />
+            </PrivateRoute>
+          }
+        />
         <Route path="/Manual" element={<Manual />} />
         <Route
           path="/ferramentas/painelcontrole"
@@ -148,10 +194,16 @@ function AppRoutes() {
             </AdminRoute>
           }
         />
-
         <Route path="*" element={<NotFound />} />
       </Routes>
+
+      {/* 👇 Irene aparece em todas as rotas, menos no painel de controle */}
+      {!location.pathname.startsWith("/ferramentas/painelcontrole") && (
+        <IreneChat />
+      )}
     </>
+
+
   );
 }
 

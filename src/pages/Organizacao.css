@@ -2,6 +2,16 @@
     padding: 4rem 2rem;
     font-family: "Segoe UI", Roboto, sans-serif;
     background: linear-gradient(180deg, #f9fbfd 0%, #eef2f7 100%);
+
+    /* 🔹 estética */
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    max-width: 1200px;
+    margin: 0 auto;
+
+    /* 🔹 experiência de leitura */
+    line-height: 1.7;
+    color: #333;
 }
 
 /* ======= Título principal ======= */
@@ -12,7 +22,25 @@
     color: #1c2a39;
     font-weight: 700;
     letter-spacing: 0.5px;
-    animation: fadeInDown 0.6s ease;
+
+    /* 🔹 estética */
+    text-transform: capitalize;
+    line-height: 1.3;
+    position: relative;
+
+    /* 🔹 animação mais fluida */
+    animation: fadeInDown 0.8s ease forwards;
+}
+
+/* detalhe moderno abaixo do título */
+.organizacao h2::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    margin: 0.6rem auto 0;
+    background: #1c2a39;
+    border-radius: 2px;
 }
 
 .organizacao p {
@@ -22,9 +50,19 @@
     color: #555;
     font-size: 1.1rem;
     line-height: 1.7;
-    animation: fadeIn 1s ease;
+
+    /* 🔹 estética */
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    padding: 0 1rem;
+    opacity: 0.95;
+
+    /* 🔹 animação mais sutil */
+    animation: fadeIn 1s ease forwards;
 }
 
+
+/* ======= Títulos de seções ======= */
 /* ======= Títulos de seções ======= */
 .secao {
     margin: 3rem 0 2rem 0;
@@ -35,18 +73,25 @@
     position: relative;
     text-transform: uppercase;
     letter-spacing: 1px;
+
+    /* 🔹 impacto visual */
+    line-height: 1.4;
+    opacity: 0.95;
+    animation: fadeInUp 0.8s ease forwards;
 }
 
+/* detalhe elegante abaixo */
 .secao::after {
     content: "";
-    width: 0;
-    height: 4px;
     display: block;
-    margin: 0.7rem auto 0 auto;
+    width: 50px;
+    height: 3px;
+    margin: 0.6rem auto 0;
+    background: #1c2a39;
     border-radius: 2px;
-    background: #007bff;
-    transition: width 0.5s ease;
+    opacity: 0.8;
 }
+
 
 .secao:hover::after {
     width: 80px;
@@ -60,31 +105,42 @@
     margin: 0 auto;
     justify-content: center;
     max-width: 1100px;
-    animation: fadeInUp 0.8s ease;
+
+    /* 🔹 estética */
+    padding: 0.5rem;
+    align-items: stretch;
+    animation: fadeInUp 0.8s ease forwards;
 }
 
 /* ======= Card ======= */
 .responsavel {
     background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
     padding: 2rem 1.5rem;
-    border-radius: 18px;
+    border-radius: 20px;
     text-align: center;
     max-width: 320px;
     width: 100%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08),
-        0 2px 4px rgba(0, 0, 0, 0.04);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* 🔹 sombra mais realista e suave */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08),
+        0 3px 8px rgba(0, 0, 0, 0.05);
+
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
     position: relative;
     overflow: hidden;
+
+    /* 🔹 deixa o card mais “clean” */
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(4px);
 }
 
 .responsavel:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.15),
-        0 4px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18),
+        0 6px 14px rgba(0, 0, 0, 0.1);
 }
 
-/* Borda colorida animada em hover */
+/* 🔹 Borda superior animada */
 .responsavel::before {
     content: "";
     position: absolute;
@@ -92,27 +148,52 @@
     left: 0;
     width: 0%;
     height: 4px;
-    background: #007bff;
-    transition: width 0.3s ease;
+    background: linear-gradient(90deg, #0162d1, #014581);
+    transition: width 0.35s ease;
+    border-radius: 0 0 4px 0;
 }
 
 .responsavel:hover::before {
     width: 100%;
 }
 
-/* Foto com borda colorida */
+/* ======= Foto de Perfil com destaque por função ======= */
+.responsavel .foto-perfil {
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+
+    /* 🔹 estética */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* 🔹 Efeito de hover suave */
+.responsavel:hover .foto-perfil {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* 🔹 Bordas coloridas por função */
 .responsavel.admin .foto-perfil {
     border: 3px solid #0056b3;
+    box-shadow: 0 0 12px rgba(0, 86, 179, 0.35);
 }
 
 .responsavel.coordenador .foto-perfil {
     border: 3px solid #198754;
+    box-shadow: 0 0 12px rgba(25, 135, 84, 0.35);
 }
 
 .responsavel.auditor .foto-perfil {
     border: 3px solid #6f42c1;
+    box-shadow: 0 0 12px rgba(111, 66, 193, 0.35);
 }
 
+
+/* ======= Foto de Perfil ======= */
 .foto-perfil {
     width: 130px;
     height: 130px;
@@ -120,85 +201,158 @@
     object-fit: cover;
     margin: 0 auto 1rem auto;
     display: block;
-    transition: transform 0.3s ease;
+
+    /* 🔹 estética premium */
+    border: 3px solid transparent;
+    /* preparado p/ bordas dinâmicas */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12),
+        0 3px 6px rgba(0, 0, 0, 0.06);
+
+    /* 🔹 transições mais suaves */
+    transition: transform 0.4s ease,
+        box-shadow 0.4s ease,
+        border-color 0.4s ease,
+        filter 0.4s ease;
+}
+
+/* 🔹 Destaque quando hover no card */
+.responsavel:hover .foto-perfil {
+    transform: scale(1.07);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18),
+        0 6px 12px rgba(0, 0, 0, 0.08);
+    filter: brightness(1.05);
+    /* leve realce */
+}
+
+
+/* 🔹 Efeito de destaque no hover do card */
+.responsavel:hover .foto-perfil {
+    transform: scale(1.06);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
 }
 
 .responsavel:hover .foto-perfil {
     transform: scale(1.05);
 }
 
-/* Nome e cargo */
+/* Nome */
 .responsavel h2 {
     font-size: 1.35rem;
     margin: 0.6rem 0 0.3rem 0;
     color: #222;
     font-weight: 700;
     text-align: center;
+
+    /* 🔹 estética premium */
+    letter-spacing: 0.4px;
+    line-height: 1.4;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
+/* 🔹 leve destaque no hover */
+.responsavel:hover h2 {
+    color: #000;
+    transform: translateY(-2px);
+}
+
+/* Cargo */
 .cargo {
     font-size: 1.05rem;
     margin-bottom: 1rem;
     font-weight: 500;
     font-style: italic;
     text-align: center;
+
+    /* 🔹 refinamento */
+    color: #444;
+    letter-spacing: 0.3px;
+    line-height: 1.4;
+    opacity: 0.9;
+    transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+/* 🔹 leve destaque ao passar o mouse no card */
+.responsavel:hover .cargo {
+    color: #222;
+    opacity: 1;
 }
 
 /* Cargo colorido conforme função */
 .responsavel.admin .cargo {
     color: #0056b3;
+    text-shadow: 0 1px 2px rgba(0, 86, 179, 0.15);
 }
 
 .responsavel.coordenador .cargo {
     color: #198754;
+    text-shadow: 0 1px 2px rgba(25, 135, 84, 0.15);
 }
 
 .responsavel.auditor .cargo {
     color: #6f42c1;
+    text-shadow: 0 1px 2px rgba(111, 66, 193, 0.15);
 }
 
-/* Descrição */
-.responsavel p {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
-    text-align: center;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    margin-top: 0.8rem;
-    /* removemos o limite */
+
+/* 🔹 destaque no hover do card */
+.responsavel:hover p {
+    color: #333;
+    opacity: 1;
 }
 
+
+/* 🔹 Estado fechado (limite de 4 linhas) */
 .descricao.fechada {
     max-height: 6.4em;
     /* ~4 linhas */
     overflow: hidden;
+    position: relative;
+    transition: max-height 0.45s ease;
 }
 
+/* 🔹 Efeito de gradiente no texto cortado */
+.descricao.fechada::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2.5em;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fafbfc 90%);
+}
+
+/* 🔹 Estado aberto */
 .descricao.aberta {
     max-height: none;
+    transition: max-height 0.45s ease;
 }
 
-.descricao.fechada {
-    max-height: 6.4em;
-    /* ~4 linhas */
-    overflow: hidden;
-}
-
-.descricao.aberta {
-    max-height: none;
-}
 
 /* Texto da responsabilidade */
 .responsavel p {
     font-size: 1.3rem;
-    /* antes 1rem → +30% */
+    /* destaque maior */
     color: #555;
-    line-height: 1.6;
+    line-height: 1.7;
     text-align: center;
     word-wrap: break-word;
     overflow-wrap: break-word;
     margin-top: 0.8rem;
+
+    /* 🔹 refinamento */
+    max-width: 92%;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
+    letter-spacing: 0.4px;
+    opacity: 0.95;
+    transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+/* 🔹 leve destaque no hover */
+.responsavel:hover p {
+    color: #333;
+    opacity: 1;
 }
 
 /* Botão Ver mais / Ver menos */
@@ -207,46 +361,51 @@
     background: none;
     border: none;
     font-size: 1.1rem;
-    /* aumentei proporcional */
     color: #007bff;
     font-weight: 500;
     cursor: pointer;
-    transition: color 0.2s;
+
+    /* 🔹 refinamento */
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    transition: color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
 }
 
+/* Hover elegante */
 .btn-vermais:hover {
     color: #0056b3;
+    background-color: rgba(0, 123, 255, 0.08);
+    transform: translateY(-2px);
 }
 
-.btn-vermais {
-    margin-top: 0.5rem;
-    background: none;
-    border: none;
-    color: #007bff;
-    font-weight: 500;
-    cursor: pointer;
-    transition: color 0.2s;
+/* Clique (efeito de pressão) */
+.btn-vermais:active {
+    transform: translateY(0);
+    background-color: rgba(0, 123, 255, 0.15);
 }
 
-.btn-vermais:hover {
-    color: #0056b3;
-}
-
-/* ======= Animações ======= */
+/* ======= Animações refinadas ======= */
 @keyframes fadeIn {
     from {
         opacity: 0;
+        transform: scale(0.98);
     }
 
     to {
         opacity: 1;
+        transform: scale(1);
     }
 }
 
 @keyframes fadeInDown {
     from {
         opacity: 0;
-        transform: translateY(-15px);
+        transform: translateY(-20px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(4px);
     }
 
     to {
@@ -258,7 +417,12 @@
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(15px);
+        transform: translateY(20px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(-4px);
     }
 
     to {

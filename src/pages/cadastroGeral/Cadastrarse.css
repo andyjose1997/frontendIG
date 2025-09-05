@@ -1,17 +1,3 @@
-/* ===========================
-   ESTILOS GERAIS
-=========================== */
-
-body {
-    font-family: "Segoe UI", Roboto, sans-serif;
-    background: #f4f6f9;
-    margin: 0;
-    padding: 0;
-    color: #333;
-    font-size: 150%;
-}
-
-
 /* Container principal */
 .PainelCadastro {
     max-width: 480px;
@@ -19,8 +5,24 @@ body {
     padding: 2rem;
     background: #fff;
     border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.5s ease-in-out;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+
+    /* 🔹 animação mais suave */
+    animation: fadeIn 0.6s ease forwards;
+
+    /* 🔹 garante boa renderização */
+    -webkit-font-smoothing: antialiased;
+
+    /* 🔹 previne elementos colados nas bordas */
+    box-sizing: border-box;
+
+    /* 🔹 leve efeito de destaque ao passar o mouse */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.PainelCadastro:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
 }
 
 /* Inputs */
@@ -30,150 +32,191 @@ body {
     margin: 8px 0 16px 0;
     border: 1px solid #ddd;
     border-radius: 10px;
-    outline: none;
     font-size: 15px;
-    transition: all 0.2s ease;
+    outline: none;
+
+    /* 🔹 tipografia e UX */
+    font-family: "Segoe UI", Roboto, sans-serif;
+    color: #333;
+    background-color: #fff;
+
+    /* 🔹 transição mais natural */
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.3s ease;
+}
+
+.inputPadrao::placeholder {
+    color: #888;
+    font-size: 14px;
+    opacity: 0.9;
 }
 
 .inputPadrao:focus {
     border-color: #0077ff;
-    box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.2);
+    background-color: #f9fcff;
+    box-shadow: 0 0 0 4px rgba(0, 119, 255, 0.15);
 }
 
-/* Labels */
-label {
+/* ===========================
+   NOVAS CLASSES PARA TAGS QUE NÃO TINHAM
+=========================== */
+
+/* Host */
+.host-texto-intro {
+    font-size: 15px;
+    color: #444;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.host-nome {
+    font-size: 16px;
+    font-weight: 700;
+    color: #222;
+    margin-top: 4px;
+}
+
+.host-label {
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.btn-verificar-host {
+    background: #0077ff;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-verificar-host:hover {
+    background: #005fcc;
+    transform: translateY(-2px);
+}
+
+.host-erro {
+    color: red;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+/* Modal Host */
+.modal-titulo {
+    font-size: 20px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 12px;
+}
+
+.modal-host-nome {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Login Google */
+.login-google-titulo {
+    font-size: 18px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 1rem;
+}
+
+/* Formulário */
+.form-titulo {
+    margin-top: 20px;
+    color: #0077ff;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 2px solid #0077ff20;
+    padding-bottom: 6px;
+}
+
+.form-email-info {
+    font-size: 14px;
+    color: #555;
+    margin: 10px 0;
+}
+
+.form-label {
     font-weight: 600;
     color: #444;
     margin-bottom: 6px;
     display: block;
 }
 
-/* Botões */
-button {
-    padding: 12px 18px;
-    border: none;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
+/* Botão próxima etapa */
+.btn-proxima-etapa {
+    margin-top: 12px;
 }
 
-button:hover {
-    transform: translateY(-2px);
+/* Botão encontrar host (FAQ azul) */
+.btn-encontrar-host {
+    margin-top: 20px;
 }
 
 /* Botões principais */
 .btn-verde {
     background: #28a745;
-    color: white;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+
+    /* 🔹 transições suaves */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .btn-verde:hover {
     background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .btn-vermelho {
     background: #dc3545;
-    color: white;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-.btn-vermelho:hover {
-    background: #c82333;
-}
-
-/* ===========================
-   HOST
-=========================== */
-.host-verificacao {
-    text-align: center;
-}
-
-.host-box {
-    display: flex;
-    flex-direction: column;
-    /* 🔹 coloca "seu host será" em cima */
-    align-items: center;
-    /* 🔹 centraliza tudo */
-    gap: 8px;
-    padding: 12px;
-    background: #eef5ff;
-    border: 1px solid #cce0ff;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    animation: slideDown 0.4s ease;
-    text-align: center;
-    /* 🔹 centraliza texto */
-    word-wrap: break-word;
-    /* 🔹 quebra palavras grandes */
-    overflow-wrap: break-word;
-    /* 🔹 garante quebra em navegadores modernos */
-    max-width: 100%;
-    /* 🔹 impede de sair do container */
-}
-
-.host-box p {
-    margin: 0;
-    line-height: 1.4;
-}
-
-
-.host-verificacao input {
-    padding: 20px;
-    margin-top: 0px;
-    width: 80%;
-}
-
-.host-box img {
-    width: 150px;
-    height: 150px;
-}
-
-.host-foto {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #0077ff;
-}
-
-/* ===========================
-   MODAIS
-=========================== */
+/* ===== Overlay do modal de Host ===== */
 .modalCadastro-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.55);
+
+    /* 🔹 fundo escurecido + blur */
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
-    animation: fadeIn 0.3s ease-in-out;
+
+    z-index: 5000;
+    animation: fadeIn 0.4s ease forwards;
 }
 
-.btnn-info {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 18px;
-    background: linear-gradient(135deg, #0077ff, #00b4ff);
-    color: #fff;
-    font-weight: 600;
-    font-size: 15px;
-    text-decoration: none;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-}
-
-.btnn-info:hover {
-    background: linear-gradient(135deg, #005fcc, #0099cc);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
-}
-
+/* ===== Caixa principal do modal ===== */
 .modalCadastro-host {
     background: #fff;
     border-radius: 16px;
@@ -181,8 +224,335 @@ button:hover {
     width: 90%;
     max-width: 420px;
     text-align: center;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-    animation: scaleIn 0.3s ease-in-out;
+
+    /* 🔹 profundidade */
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+
+    /* 🔹 animação de entrada */
+    animation: scaleIn 0.35s ease-out;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    -webkit-font-smoothing: antialiased;
+    backface-visibility: hidden;
+}
+
+.modalCadastro-host:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+}
+
+/* ===== Título do modal ===== */
+.modal-titulo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+}
+
+/* ===== Nome do host ===== */
+.modal-host-nome {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0.8rem 0;
+    letter-spacing: 0.4px;
+}
+
+/* ===== Foto do host ===== */
+.modalCadastro-host .host-foto {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+
+    border: 3px solid #0077ff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    margin-bottom: 1rem;
+
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.modalCadastro-host .host-foto:hover {
+    transform: scale(1.05);
+    border-color: #0056b3;
+}
+
+/* ===== Área dos botões ===== */
+.botoes-modal {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 1.5rem;
+}
+
+/* ===== Botões de ação ===== */
+.botoes-modal .btn-verde,
+.botoes-modal .btn-vermelho {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+/* ===== Hover nos botões ===== */
+.botoes-modal .btn-verde:hover,
+.botoes-modal .btn-vermelho:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Animações suaves ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+.btn-vermelho:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ===========================
+   HOST
+=========================== */
+/* Container da verificação do Host */
+.host-verificacao {
+    text-align: center;
+
+    /* 🔹 layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    /* 🔹 espaçamento */
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+
+    /* 🔹 estética */
+    background: #f9fbff;
+    border: 1px solid #d6e4ff;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+
+    /* 🔹 animação suave */
+    animation: fadeIn 0.4s ease-in-out;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.host-verificacao:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Card do Host */
+.host-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    /* 🔹 espaçamento interno */
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+
+    /* 🔹 visual do card */
+    background: linear-gradient(180deg, #eef5ff 0%, #f8fbff 100%);
+    border: 1px solid #cce0ff;
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+
+    /* 🔹 tipografia */
+    text-align: center;
+    color: #333;
+
+    /* 🔹 responsividade e segurança */
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+    /* 🔹 entrada animada */
+    animation: slideDown 0.4s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.host-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Texto dentro do card do Host */
+.host-box p {
+    margin: 0;
+    line-height: 1.5;
+
+    /* 🔹 tipografia */
+    font-family: "Segoe UI", Roboto, sans-serif;
+    font-size: 15px;
+    color: #444;
+
+    /* 🔹 suavidade */
+    letter-spacing: 0.3px;
+    transition: color 0.2s ease;
+}
+
+.host-box p b {
+    color: #1e5686;
+    /* 🔹 destaca nome do host */
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+/* Input do ID do Host */
+.host-verificacao input {
+    width: 80%;
+    padding: 14px 16px;
+    margin-top: 8px;
+
+    /* 🔹 visual */
+    border: 1px solid #cce0ff;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 15px;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    color: #333;
+
+    /* 🔹 UX */
+    outline: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.host-verificacao input:focus {
+    border-color: #0077ff;
+    box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.15);
+}
+
+/* Foto do Host */
+.host-foto {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+
+    /* 🔹 garante proporção correta */
+    object-fit: cover;
+
+    /* 🔹 estilo */
+    border: 2px solid #0077ff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+    /* 🔹 transições para interatividade */
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.host-foto:hover {
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: #005fcc;
+    /* tom mais escuro ao hover */
+}
+
+/* ===========================
+   MODAIS
+=========================== */
+/* Overlay do Modal de Cadastro */
+
+
+.modalCadastro-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    /* 🔹 evita clique quando escondido */
+}
+
+/* Botão informativo */
+.btnn-info {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+
+    /* 🔹 gradiente refinado */
+    background: linear-gradient(135deg, #0077ff, #00b4ff);
+    color: #fff;
+
+    /* 🔹 tipografia */
+    font-weight: 600;
+    font-size: 15px;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    text-align: center;
+    text-decoration: none;
+
+    /* 🔹 estética */
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    /* 🔹 experiência do usuário */
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+}
+
+.btnn-info:hover {
+    background: linear-gradient(135deg, #005fcc, #0099cc);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.btnn-info:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Caixa central do modal de cadastro */
+.modalCadastro-host {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+
+    /* 🔹 profundidade */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+
+    /* 🔹 animação suave */
+    animation: scaleIn 0.35s ease-out;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    /* 🔹 acabamento */
+    -webkit-font-smoothing: antialiased;
+    backface-visibility: hidden;
+}
+
+.modalCadastro-host:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
 }
 
 .modalCadastro-host img {
@@ -206,61 +576,93 @@ button:hover {
 /* ===========================
    FORMULÁRIOS
 =========================== */
+/* Títulos dentro do formulário */
 .FormularioLogin h3 {
     margin-top: 20px;
-    color: #0077ff;
-    border-bottom: 2px solid #0077ff20;
-    padding-bottom: 6px;
+    margin-bottom: 12px;
     font-size: 18px;
+    font-weight: 600;
+    color: #0077ff;
+
+    /* 🔹 destaque visual */
+    border-bottom: 2px solid rgba(0, 119, 255, 0.15);
+    padding-bottom: 6px;
+
+    /* 🔹 acabamento tipográfico */
+    font-family: "Segoe UI", Roboto, sans-serif;
+    letter-spacing: 0.4px;
+
+    /* 🔹 animação de entrada */
+    animation: fadeIn 0.4s ease;
 }
 
+
+/* Container dos termos de uso */
 .termos {
     display: flex;
     align-items: center;
-    margin: 12px 0;
+    gap: 8px;
+    /* substitui margin-right do input */
+    margin: 14px 0;
     font-size: 14px;
+    line-height: 1.5;
+
+    /* 🔹 estilo */
+    color: #444;
+    font-family: "Segoe UI", Roboto, sans-serif;
+
+    /* 🔹 interação */
+    cursor: pointer;
+    user-select: none;
+    /* evita seleção de texto acidental */
+    transition: color 0.3s ease;
 }
 
+.termos:hover {
+    color: #0077ff;
+    /* leve destaque no hover */
+}
+
+/* Input de checkbox */
 .termos input {
-    margin-right: 8px;
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    accent-color: #0077ff;
+    /* cor do checkbox nos navegadores modernos */
+    cursor: pointer;
 }
 
 /* ===========================
-   VERIFICAR EMAIL
+   ANIMAÇÕES REFINADAS
 =========================== */
-.verificar-email {
-    margin-top: 2rem;
-    text-align: center;
-}
 
-.verificar-email p.sucesso {
-    color: green;
-    font-weight: 600;
-    margin-top: 10px;
-}
-
-.verificar-email p.erro {
-    color: red;
-    font-weight: 600;
-    margin-top: 10px;
-}
-
-/* ===========================
-   ANIMAÇÕES
-=========================== */
+/* Fade-in suave */
 @keyframes fadeIn {
     from {
-        opacity: 0
+        opacity: 0;
     }
 
     to {
-        opacity: 1
+        opacity: 1;
     }
 }
 
+/* Fade-out (útil para esconder elementos) */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/* Slide de cima para baixo */
 @keyframes slideDown {
     from {
-        transform: translateY(-15px);
+        transform: translateY(-20px);
         opacity: 0;
     }
 
@@ -270,6 +672,20 @@ button:hover {
     }
 }
 
+/* Slide de baixo para cima */
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Zoom-in (perfeito para modais) */
 @keyframes scaleIn {
     from {
         transform: scale(0.9);
@@ -282,63 +698,460 @@ button:hover {
     }
 }
 
+/* Zoom-out (quando fecha modal) */
+@keyframes scaleOut {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    to {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+}
+
+/* Overlay do modal de escolha */
 .modalEscolher-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+
+    /* 🔹 fundo escurecido com leve desfoque */
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+
+    /* 🔹 centralização */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999;
+
+    /* 🔹 garante prioridade */
+    z-index: 5000;
+
+    /* 🔹 animação suave de entrada */
+    animation: fadeIn 0.4s ease forwards;
+    transition: opacity 0.3s ease;
 }
 
+/* Estado oculto com transição */
+.modalEscolher-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    /* não bloqueia o clique quando escondido */
+}
+
+/* Conteúdo do modal de escolha */
 .modalEscolher {
-    background: white;
+    background: #fff;
     padding: 2rem;
-    border-radius: 12px;
+    border-radius: 16px;
     max-width: 600px;
     width: 90%;
     text-align: center;
-    animation: fadeIn 0.3s ease;
+
+    /* 🔹 profundidade */
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+
+    /* 🔹 animação de entrada */
+    animation: scaleIn 0.35s ease-out;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    /* 🔹 acabamento */
+    -webkit-font-smoothing: antialiased;
+    backface-visibility: hidden;
 }
 
+.modalEscolher:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+/* Lista de opções de avatar */
 .avatar-lista {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     justify-content: center;
     flex-wrap: wrap;
-    margin: 1rem 0;
+    margin: 1.2rem 0;
+
+    /* 🔹 alinhamento visual */
+    padding: 0.5rem;
+    border-radius: 12px;
 }
 
+/* Avatares individuais */
 .avatar-opcao {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     cursor: pointer;
-    transition: transform 0.2s;
+    object-fit: cover;
+
+    /* 🔹 sombra leve para destacar */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+
+    /* 🔹 transições suaves */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+/* Hover: efeito de zoom e brilho */
 .avatar-opcao:hover {
     transform: scale(1.1);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
 }
 
+/* Estado selecionado */
+.avatar-opcao.selecionado {
+    outline: 3px solid #0077ff;
+    outline-offset: 3px;
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 119, 255, 0.25);
+}
+
+/* Mensagem de confirmação da foto escolhida */
 .foto-ok {
     color: green;
-    font-weight: bold;
+    font-weight: 600;
     margin-top: 1rem;
+    font-size: 0.95rem;
+
+    /* 🔹 destaque visual */
+    text-align: center;
+    letter-spacing: 0.3px;
+
+    /* 🔹 animação suave */
+    animation: fadeIn 0.5s ease, pulseSuccess 1.5s ease infinite;
 }
 
+/* Efeito de "pulsar" suave para chamar atenção */
+@keyframes pulseSuccess {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ===========================
+   ALERTAS
+=========================== */
+.alerta-erro {
+    background: #ffe5e5;
+    color: #b30000;
+    padding: 12px 16px;
+    border: 1px solid #ffcccc;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+
+    /* 🔹 destaque visual */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+
+    /* 🔹 animação de entrada */
+    animation: fadeIn 0.4s ease, shakeError 0.4s ease;
+
+    /* 🔹 acessibilidade */
+}
+
+/* Pequena animação de erro (tremer horizontalmente) */
+@keyframes shakeError {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    50% {
+        transform: translateX(4px);
+    }
+
+    75% {
+        transform: translateX(-4px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+/* ===========================
+   LOGIN GOOGLE
+=========================== */
+.login-google {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem 0;
+
+    /* 🔹 consistência visual */
+    font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.login-google h3 {
+    color: #444;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.login-google>div {
+    display: inline-block;
+
+    /* 🔹 sombra e destaque */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+
+    /* 🔹 leve transição no hover */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.login-google>div:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+/* ===========================
+   FAQ MODAL - Botão Azul
+=========================== */
+.FaqAzul {
+    display: block;
+    margin: 1.5rem auto;
+    padding: 12px 20px;
+    border-radius: 12px;
+
+    /* 🔹 estilo visual */
+    background: linear-gradient(135deg, #0077ff, #00c6ff);
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+
+    /* 🔹 interação */
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.25s ease, box-shadow 0.25s ease;
+
+    /* 🔹 profundidade */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.FaqAzul:hover {
+    background: linear-gradient(135deg, #005fcc, #0099cc);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.FaqAzul:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* ===========================
+   Modal FAQ - Overlay
+=========================== */
+.modalFAQ-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* 🔹 fundo escuro com mais realismo */
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(3px);
+
+    /* 🔹 centralização */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* 🔹 sobreposição */
+    z-index: 3000;
+
+    /* 🔹 efeito de entrada */
+    animation: fadeIn 0.4s ease;
+}
+
+
+.modalFAQ-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    animation: scaleIn 0.3s ease-in-out;
+}
+
+/* ===========================
+   MODAL FUNDADORES - Conteúdo
+=========================== */
+.modalFundadores-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 480px;
+    text-align: center;
+
+    /* 🔹 destaque visual */
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+
+    /* 🔹 tipografia */
+    font-family: "Segoe UI", Roboto, sans-serif;
+    color: #333;
+    line-height: 1.6;
+
+    /* 🔹 animação mais fluida */
+    animation: scaleIn 0.35s ease;
+}
+
+/* Títulos dentro do modal */
+.modalFundadores-content h2,
+.modalFundadores-content h3 {
+    color: #0077ff;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: 0.4px;
+}
+
+/* Mensagem principal */
+.modalFundadores-content p {
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 1.5rem;
+}
+
+/* Área dos botões */
+.modalFundadores-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 1.5rem;
+}
+
+/* Botões do modal */
+.modalFundadores-btn {
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+
+    background: #0077ff;
+    color: #fff;
+
+    transition: background 0.3s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.modalFundadores-btn:hover {
+    background: #005fcc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.modalFundadores-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* ===========================
+   RESPONSIVIDADE
+=========================== */
+@media (max-width: 600px) {
+
+    /* Painel principal */
+    .PainelCadastro {
+        margin: 1.5rem 1rem;
+        padding: 1.25rem;
+        border-radius: 12px;
+    }
+
+    /* Foto do host */
+    .host-box img {
+        width: 110px;
+        height: 110px;
+    }
+
+    /* Foto dentro do modal de host */
+    .modalCadastro-host img {
+        width: 140px;
+        height: 140px;
+    }
+
+    /* Títulos do formulário */
+    .FormularioLogin h3 {
+        font-size: 15px;
+    }
+
+    /* Botões principais */
+    .btn-verde,
+    .btn-vermelho,
+    .FaqAzul {
+        font-size: 13px;
+        padding: 9px 12px;
+        border-radius: 8px;
+    }
+
+    /* Ajusta espaçamento interno do modal */
+    .modalCadastro-host {
+        padding: 1.5rem;
+    }
+
+    /* Texto dos inputs menor */
+    .inputPadrao {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+/* ===========================
+   Botão Fechar
+=========================== */
 .btn-fechar {
     margin-top: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     background: #0077ff;
-    color: white;
+    color: #fff;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
+
+    /* 🔹 efeitos de transição */
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+/* Hover com destaque */
+.btn-fechar:hover {
+    background: #005fcc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+/* Estado ativo (clicado) */
+.btn-fechar:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
 /* Esconde o input padrão */
@@ -370,4 +1183,157 @@ button:hover {
     font-size: 0.95rem;
     color: #444;
     font-style: italic;
+}
+
+/* Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Caixa do modal */
+.modal-termos {
+    background: #fff;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 600px;
+    padding: 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    animation: scaleIn 0.3s ease;
+    text-align: center;
+}
+
+/* Título */
+.modal-termos h2 {
+    color: #0077ff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid rgba(0, 119, 255, 0.15);
+    padding-bottom: 0.5rem;
+}
+
+/* Conteúdo com rolagem */
+.modal-termos .conteudo-termos {
+    max-height: 300px;
+    overflow-y: auto;
+    text-align: left;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 1.5rem;
+    padding-right: 8px;
+}
+
+/* Botões alinhados */
+.modal-termos .botoes {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* Botão genérico */
+.btn {
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Botão verde */
+.btn-aceitar {
+    background: #28a745;
+    color: #fff;
+}
+
+.btn-aceitar:hover {
+    background: #218838;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Botão vermelho */
+.btn-fechar {
+    background: #dc3545;
+    color: #fff;
+}
+
+.btn-fechar:hover {
+    background: #c82333;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Overlay global para qualquer modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    /* fundo */
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(3px);
+
+    /* centralização */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* sobreposição */
+    z-index: 9999;
+
+    /* animação */
+    animation: fadeIn 0.4s ease forwards;
+}
+
+/* Conteúdo genérico dos modais */
+.modal-content {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 600px;
+
+    text-align: center;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+
+    animation: scaleIn 0.35s ease-out;
 }

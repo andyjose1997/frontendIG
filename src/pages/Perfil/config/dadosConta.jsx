@@ -137,7 +137,7 @@ export default function DadosConta({ onVoltar }) {
                 {renderCampo("sobrenome", sobrenome, (val) => setSobrenome(capitalize(val)))}
             </p>
 
-            <p><strong>Email:</strong> {renderCampo("email", email, setEmail)}</p>
+            <p style={{ display: "none" }} ><strong>Email:</strong> {renderCampo("email", email, setEmail)}</p>
 
             <p><strong>Próxima Meta:</strong> {renderCampo("frase", frase, setFrase)}</p>
 

@@ -1,0 +1,220 @@
+.irene-config {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: #f5f7fa;
+    /* fundo mais suave */
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    /* sombra leve */
+}
+
+
+.irene-config h2 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #2c3e50;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 🔹 Botão de Nova Resposta */
+.irene-config>button {
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.irene-config>button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.irene-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.irene-tabs button {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    background: #010e81;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.irene-tabs button.ativo {
+    background: linear-gradient(135deg, #40a345, #17240f);
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.irene-tabs button:hover {
+    transform: scale(1.05);
+}
+
+
+/* 🔹 Lista */
+.irene-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.irene-conteudo ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 97%;
+    /* ocupa 97% da largura */
+}
+
+.irene-conteudo li {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* permite quebra natural */
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.irene-conteudo li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔹 Área de texto */
+.irene-conteudo li .texto {
+    flex: 1;
+    margin-right: 12px;
+    font-size: 1.4rem;
+    /* tamanho mais legível sem exagerar */
+    line-height: 1.6;
+    color: #2c3e50;
+    font-family: 'Inter', 'Segoe UI', 'Roboto', 'Open Sans', sans-serif;
+    font-weight: 500;
+    /* médio, nem muito fino nem muito grosso */
+    letter-spacing: 0.2px;
+    /* deixa mais elegante */
+}
+
+
+
+/* 🔹 Agrupamento de botões */
+.irene-conteudo li .acoes {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* 🔹 Botões */
+.irene-conteudo li button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+/* Editar / Adicionar */
+.irene-conteudo li button.editar {
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    color: white;
+    box-shadow: 0 3px 6px rgba(230, 126, 34, 0.3);
+}
+
+.irene-conteudo li button.editar:hover {
+    background: linear-gradient(135deg, #d35400, #e67e22);
+    transform: scale(1.05);
+}
+
+/* Apagar */
+.irene-conteudo li button.apagar {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    box-shadow: 0 3px 6px rgba(231, 76, 60, 0.3);
+}
+
+.irene-conteudo li button.apagar:hover {
+    background: linear-gradient(135deg, #c0392b, #e74c3c);
+    transform: scale(1.05);
+}
+
+
+/* 🔹 Texto sempre à esquerda */
+.irene-conteudo li .texto {
+    flex: 1;
+    margin-right: 10px;
+    white-space: normal;
+    /* permite quebra de linha */
+    word-wrap: break-word;
+    /* quebra palavras longas */
+    overflow-wrap: break-word;
+}
+
+
+/* 🔹 Botões agrupados à direita */
+.irene-conteudo li .acoes {
+    display: flex;
+    gap: 8px;
+}
+
+/* Botões */
+.irene-conteudo li button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+/* Botão editar */
+.irene-conteudo li button.editar {
+    background: #e67e22;
+    color: white;
+}
+
+.irene-conteudo li button.editar:hover {
+    background: #ca6a15;
+}
+
+/* Botão apagar */
+.irene-conteudo li button.apagar {
+    background: #e74c3c;
+    color: white;
+}
+
+.irene-conteudo li button.apagar:hover {
+    background: #c0392b;
+}

@@ -55,12 +55,12 @@ export default function Botoes() {
             ) : (
                 <Link to="/TelaConfig">🔧 <span className="link-text">Configurações</span></Link>
             )}
-
-            <Link to="/ajuda">📞 <span className="link-text">Ajuda</span></Link>
-            <Link to="/comentarios">🏷️ <span className="link-text">Comentários</span></Link>
             <Link to="/manual">🧾 <span className="link-text">Manual</span></Link>
-            <Link to="/aprendizagem">📘 <span className="link-text">Aprendizagem</span></Link>
+
+            <Link to="/iron_quiz">🏆 <span className="link-text">IronQuiz</span></Link> {/* ✅ corrigido */}
+            <Link to="/aprendizagem">📘 <span className="link-text">Autossuficiência</span></Link>
             <a href="/" onClick={handleLogout}>🔒 <span className="link-text">Logout</span></a>
         </aside>
     );
+
 }

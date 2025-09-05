@@ -1,0 +1,25 @@
+.conversa-lista .mensagem {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    padding: 8px;
+    border-radius: 6px;
+    background: #f7f7f7;
+    border-left: 3px solid #0077ff;
+}
+
+.conversa-lista .numero {
+    font-weight: bold;
+    color: #0077ff;
+}
+
+.conversa-lista .texto {
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+.conversa-lista .texto.vazio {
+    color: #aaa;
+    font-style: italic;
+}

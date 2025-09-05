@@ -135,13 +135,23 @@ export default function Up() {
                         <h1>
                             {user.nome.charAt(0).toUpperCase() + user.nome.slice(1).toLowerCase()}{" "}
                             {user.sobrenome.charAt(0).toUpperCase() + user.sobrenome.slice(1).toLowerCase()}
+                            {" "}
+                            <span style={{ fontSize: "0.8em", color: "#ccc", marginLeft: "10px" }}>
+                                ({user.categoria && user.categoria.trim() !== ""
+                                    ? user.categoria.charAt(0).toUpperCase() + user.categoria.slice(1).toLowerCase()
+                                    : "Explorer"})
+                            </span>
                         </h1>
                         <h2>ID: {user.id}</h2>
 
-                        <div className="comentario-perfil">
+
+
+                        <div className="comentario-perfilUp">
                             {user.comentario_perfil && !editando ? (
                                 <>
-                                    <h3>
+                                    <h3 style={{
+                                        color: "white"
+                                    }} >
                                         {user.comentario_perfil
                                             ? user.comentario_perfil.charAt(0).toUpperCase() + user.comentario_perfil.slice(1).toLowerCase()
                                             : ""}

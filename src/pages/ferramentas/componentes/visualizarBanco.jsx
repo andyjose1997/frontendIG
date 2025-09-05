@@ -199,7 +199,68 @@ export default function VisualizarBanco() {
                                 Usuários cadastrados nesse intervalo: <strong>{totalFiltradoPorData}</strong>
                             </p>
                         )}
+
+                        {/* 🔹 NOVOS BOTÕES PARA FILTRAR POR CATEGORIA */}
+                        <div className="filtro-categoria-botoes">
+                            <h3>🎯 Filtrar por categoria</h3>
+                            <div className="botoes-categorias">
+                                <button
+                                    className="btn-explorer"
+                                    onClick={() => setFiltrosPorColuna(prev => ({ ...prev, categoria: "explorer" }))}
+                                >
+                                    Explorer
+                                </button>
+                                <button
+                                    className="btn-member"
+                                    onClick={() => setFiltrosPorColuna(prev => ({ ...prev, categoria: "member" }))}
+                                >
+                                    Member
+                                </button>
+                                <button
+                                    className="btn-mentor"
+                                    onClick={() => setFiltrosPorColuna(prev => ({ ...prev, categoria: "mentor" }))}
+                                >
+                                    Mentor
+                                </button>
+                                <button
+                                    className="btn-founder"
+                                    onClick={() => setFiltrosPorColuna(prev => ({ ...prev, categoria: "founder" }))}
+                                >
+                                    Founder
+                                </button>
+                                <button
+                                    className="btn-todos"
+                                    onClick={() => setFiltrosPorColuna(prev => ({ ...prev, categoria: "" }))}
+                                >
+                                    Todos
+                                </button>
+                            </div>
+                        </div>
+                        {/* 🔹 NOVO INPUT COM DATALIST PARA FILTRAR PELO id_host */}
+                        <div className="filtro-idhost">
+                            <h3>🔑 Filtrar por Host</h3>
+                            <input
+                                list="lista-idhosts"
+                                placeholder="Selecione um Host..."
+                                onChange={(e) =>
+                                    setFiltrosPorColuna(prev => ({
+                                        ...prev,
+                                        id_host: e.target.value
+                                    }))
+                                }
+                            />
+                            <datalist id="lista-idhosts">
+                                {dados
+                                    .map(linha => linha.id_host) // pega valores da coluna
+                                    .filter((valor, index, self) => valor && self.indexOf(valor) === index) // remove duplicados e valores vazios
+                                    .map((valor, i) => (
+                                        <option key={i} value={valor} />
+                                    ))}
+                            </datalist>
+                        </div>
+
                     </div>
+                    <br /><br /><br /><br />
 
                     <div className="area-tabela">
                         <table>
@@ -369,6 +430,8 @@ export default function VisualizarBanco() {
                                                     <option value="mentor">mentor</option>
                                                     <option value="member">member</option>
                                                     <option value="explorer">explorer</option>
+                                                    <option value="founder">founder</option>
+
                                                 </select>
                                             ) : campo === "id" ? (
                                                 <p id={`input-${campo}`} style={{ fontWeight: "bold", color: "#555" }}>{valor}</p>

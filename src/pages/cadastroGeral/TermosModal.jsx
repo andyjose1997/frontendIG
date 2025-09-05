@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 import "./TermosModal.css";
 import { URL } from "../../config";
-export default function TermosModal({ onClose, onAceitar }) {
+
+export default function TermosModal({ onClose, onAceitar, onFinalizar }) {
     const [termos, setTermos] = useState([]);
     const [carregando, setCarregando] = useState(true);
     const [erro, setErro] = useState("");
@@ -34,20 +35,20 @@ export default function TermosModal({ onClose, onAceitar }) {
                 {!carregando && !erro && (
                     <ol>
                         {termos
-                            .filter((t) => t.cadastro && t.cadastro.trim() !== "") // 🔹 só retorna se tiver texto
+                            .filter((t) => t.cadastro && t.cadastro.trim() !== "")
                             .map((t) => (
                                 <li key={t.id}>{t.cadastro}</li>
                             ))}
                     </ol>
-
                 )}
 
                 <div className="acoes">
                     <button
                         className="btnTermos-verde"
                         onClick={() => {
-                            onAceitar();
-                            onClose();
+                            onAceitar();   // marca termos aceitos
+                            onClose();     // fecha modal termos
+                            if (onFinalizar) onFinalizar(); // 🔹 abre modal de foto
                         }}
                     >
                         ✅ Li e aceito os Termos de Uso

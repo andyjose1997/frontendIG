@@ -3,30 +3,111 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    flex-wrap: wrap;
+
     gap: 3rem;
     padding: 4rem;
+
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f1f5f9;
+
     min-height: 100vh;
     box-sizing: border-box;
-    flex-wrap: wrap;
+
+    /* 🔹 leve profundidade */
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+
+/* ===========================
+   SEPARADOR "OU"
+=========================== */
+.separador {
+    text-align: center;
+    margin: 1.8rem 0;
+    /* 🔹 leve ajuste para respiro */
+    font-weight: 600;
+    color: #64748b;
+    position: relative;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    /* 🔹 melhora leitura */
+}
+
+.separador::before,
+.separador::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 38%;
+    /* 🔹 equilíbrio melhor no layout */
+    height: 1px;
+    background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+    /* 🔹 linha mais elegante */
+    transform: translateY(-50%);
+    border-radius: 2px;
+    /* 🔹 bordas suaves */
+}
+
+.separador::before {
+    left: 0;
+}
+
+.separador::after {
+    right: 0;
+}
+
+/* ===========================
+   LOGIN COM GOOGLE
+=========================== */
+.google-login-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.2rem;
+    padding: 0.3rem;
+    /* 🔹 dá respiro ao redor */
+    border-radius: 10px;
+    background: linear-gradient(145deg, #ffffff, #f1f5f9);
+    /* 🔹 efeito sutil */
+}
+
+.google-login-wrapper iframe {
+    border-radius: 8px !important;
+    /* 🔹 bordas mais suaves */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    will-change: transform, box-shadow;
+    /* 🔹 performance suave */
+}
+
+.google-login-wrapper iframe:hover {
+    transform: translateY(-2px) scale(1.03);
+    /* 🔹 micro movimento */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
 }
 
 /* Seção do formulário */
 .form-section {
     background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 1rem;
+    padding: 2.2rem;
+    /* 🔹 um pouco mais de respiro interno */
+    border-radius: 1.2rem;
+    /* 🔹 cantos mais suaves */
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
     width: 90%;
     max-width: 420px;
-    transition: transform 0.3s ease;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform, box-shadow;
+    /* 🔹 otimiza animação */
 }
 
-
-
+/* 🔹 Efeito interativo */
 .form-section:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    /* 🔹 sensação de “flutuar” */
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+    /* 🔹 sombra mais realista */
 }
 
 .form-section h2 {
@@ -34,6 +115,24 @@
     color: #0f172a;
     font-size: 1.8rem;
     font-weight: 700;
+    letter-spacing: 0.3px;
+    /* 🔹 leitura mais refinada */
+    line-height: 1.3;
+    /* 🔹 equilíbrio vertical */
+    text-align: center;
+    /* 🔹 centraliza para mais impacto */
+    position: relative;
+}
+
+/* 🔹 detalhe elegante abaixo do título */
+.form-section h2::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    margin: 0.6rem auto 0;
+    background: linear-gradient(90deg, #0f172a 0%, #334155 100%);
+    border-radius: 2px;
 }
 
 .FormularioLogin {
@@ -48,26 +147,61 @@
     color: #334155;
     margin-bottom: 0.5rem;
     display: block;
+
+    font-size: 0.95rem;
+    /* 🔹 leve ajuste para leitura */
+    letter-spacing: 0.3px;
+    /* 🔹 deixa o texto mais refinado */
+    transition: color 0.2s ease;
+    /* 🔹 interação suave */
+}
+
+.FormularioLogin label:hover {
+    color: #1e293b;
+    /* 🔹 leve destaque no hover */
+    cursor: default;
 }
 
 .FormularioLogin input[type="email"],
 .FormularioLogin input[type="password"],
 .FormularioLogin input[type="text"] {
     width: 90% !important;
-    margin: auto auto !important;
+    margin: 0.25rem auto 0 !important;
     padding: 0.75rem 1rem;
-    margin-top: 0.25rem;
+
     border: 1px solid #d1d5db;
-    border-radius: 0.5rem;
+    border-radius: 0.6rem;
+    /* 🔹 cantos mais suaves */
     font-size: 1rem;
     background-color: #f9fafb;
-    transition: border-color 0.3s, box-shadow 0.3s;
+
+    color: #1e293b;
+    /* 🔹 texto mais legível */
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    box-sizing: border-box;
 }
+
+/* 🔹 Efeito no foco */
+.FormularioLogin input[type="email"]:focus,
+.FormularioLogin input[type="password"]:focus,
+.FormularioLogin input[type="text"]:focus {
+    border-color: #3b82f6;
+    /* azul elegante */
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    /* glow sutil */
+    outline: none;
+}
+
 
 .FormularioLogin input:focus {
     border-color: #3b82f6;
+    background-color: #ffffff;
+    /* 🔹 realce sutil ao focar */
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
     outline: none;
+
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
 .senha-wrapper {
@@ -85,13 +219,33 @@
     top: 50%;
     right: 0.75rem;
     transform: translateY(-50%);
+
     background: none;
     border: none;
+    padding: 0;
+
     font-size: 1.2rem;
+    line-height: 1;
     cursor: pointer;
     color: #64748b;
-    padding: 0;
-    line-height: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: color 0.25s ease, transform 0.2s ease;
+}
+
+.toggle-senha:hover {
+    color: #0f172a;
+    /* 🔹 leve destaque */
+    transform: translateY(-50%) scale(1.1);
+    /* 🔹 micro zoom elegante */
+}
+
+.toggle-senha:active {
+    transform: translateY(-50%) scale(0.95);
+    /* 🔹 feedback de clique */
 }
 
 #EsqueciMinhaSenha {
@@ -100,78 +254,203 @@
     font-size: 0.9rem;
     display: inline-block;
     margin-top: 0.75rem;
+    font-weight: 500;
+    /* 🔹 dá mais presença */
+    letter-spacing: 0.3px;
+    /* 🔹 leitura mais refinada */
+    transition: color 0.2s ease, text-decoration 0.2s ease;
 }
 
 #EsqueciMinhaSenha:hover {
     text-decoration: underline;
+    color: #2563eb;
+    /* 🔹 azul mais forte no hover */
 }
 
 #botaoInicio {
-    background-color: #1d4ed8;
+    background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    /* 🔹 degrade sutil */
     color: #ffffff;
     border: none;
     padding: 0.75rem 2rem;
     font-size: 1rem;
-    border-radius: 0.5rem;
+    border-radius: 0.6rem;
+    /* 🔹 cantos mais suaves */
     cursor: pointer;
     font-weight: 600;
-    transition: background-color 0.3s, transform 0.2s;
+
     width: 100%;
     margin-top: 1.5rem;
+
+    transition:
+        background 0.3s ease,
+        transform 0.2s ease,
+        box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(29, 78, 216, 0.25);
+    /* 🔹 sombra elegante */
 }
 
 #botaoInicio:hover {
-    background-color: #1e40af;
-    transform: scale(1.02);
+    background: linear-gradient(135deg, #1e40af, #1d4ed8);
+    /* 🔹 inversão leve */
+    transform: translateY(-2px) scale(1.02);
+    /* 🔹 micro flutuação */
+    box-shadow: 0 6px 16px rgba(29, 78, 216, 0.35);
+    /* 🔹 sombra mais profunda */
+}
+
+#botaoInicio:active {
+    transform: translateY(0) scale(0.98);
+    /* 🔹 feedback de clique */
+    box-shadow: 0 3px 8px rgba(29, 78, 216, 0.2);
 }
 
 .mensagem {
-    padding: 1rem;
-    border-radius: 0.5rem;
+    padding: 1rem 1.2rem;
+    border-radius: 0.6rem;
+    /* 🔹 cantos mais suaves */
     margin-bottom: 1.5rem;
+
     font-weight: 500;
     font-size: 0.95rem;
+    line-height: 1.5;
+    /* 🔹 melhora leitura em erros longos */
+
+    border-left: 4px solid transparent;
+    /* 🔹 barra de destaque */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    /* 🔹 profundidade sutil */
+    animation: fadeIn 0.3s ease;
+    /* 🔹 entrada suave */
+}
+
+
+.mensagem.sucesso {
+    background-color: #dcfce7;
+    color: #166534;
+    border-left-color: #22c55e;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .mensagem.sucesso {
     background-color: #dcfce7;
     color: #166534;
     border: 1px solid #22c55e;
+    border-left: 4px solid #22c55e;
+    /* 🔹 destaque lateral */
+
+    padding: 1rem 1.2rem;
+    border-radius: 0.6rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    line-height: 1.5;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    /* 🔹 profundidade sutil */
+    animation: fadeIn 0.3s ease;
+    /* 🔹 entrada suave */
 }
 
 .mensagem.erro {
-    background-color: #fee2e2;
-    color: #991b1b;
+    background-color: #e47070;
+    color: #000000 !important;
     border: 1px solid #ef4444;
+    border-left: 4px solid #ef4444;
+    /* 🔹 destaque lateral */
+
+    padding: 1rem 1.2rem;
+    border-radius: 0.6rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    line-height: 1.5;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    /* 🔹 profundidade sutil */
+    animation: shake 0.3s ease;
+    /* 🔹 animação de erro */
+}
+
+/* 🔹 animação de feedback para erro */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20%,
+    60% {
+        transform: translateX(-4px);
+    }
+
+    40%,
+    80% {
+        transform: translateX(4px);
+    }
 }
 
 .info-section {
     background-color: #ffffff;
     padding: 2rem;
-    border-radius: 1rem;
+    border-radius: 1.2rem;
+    /* 🔹 cantos mais suaves */
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+
     line-height: 1.6;
     max-width: 350px;
     flex: 1;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* 🔹 efeito interativo */
+.info-section:hover {
+    transform: translateY(-3px);
+    /* 🔹 micro flutuação elegante */
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+/* 🔹 títulos dentro da seção */
 .info-section h2 {
-    text-align: center;
+    color: #0f172a;
+    font-size: 1.5rem;
+    font-weight: 700;
     margin-bottom: 1rem;
-    font-size: 1.6rem;
-    color: #1f2937;
+    text-align: center;
+    position: relative;
 }
 
+.info-section h2::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    margin: 0.6rem auto 0;
+    background: linear-gradient(90deg, #1d4ed8 0%, #1e40af 100%);
+    border-radius: 2px;
+}
+
+/* 🔹 lista de benefícios */
 .info-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    margin-top: 1rem;
+    padding-left: 1.2rem;
+    color: #334155;
+    font-size: 0.95rem;
 }
 
 .info-section li {
     margin-bottom: 0.75rem;
-    font-size: 1rem;
-    color: #0f172a;
 }
 
 .depoimento {
@@ -179,6 +458,22 @@
     font-style: italic;
     color: #475569;
     font-size: 0.95rem;
+    line-height: 1.6;
+
+    position: relative;
+    padding-left: 1.2rem;
+    /* 🔹 espaço para o detalhe */
+}
+
+/* 🔹 aspas decorativas sutis */
+.depoimento::before {
+    content: "“";
+    font-size: 2rem;
+    color: #cbd5e1;
+    position: absolute;
+    left: 0;
+    top: -0.4rem;
+    font-style: normal;
 }
 
 .autor {
@@ -186,7 +481,24 @@
     margin-top: 0.5rem;
     color: #334155;
     font-size: 0.9rem;
+    letter-spacing: 0.3px;
+    /* 🔹 leitura mais refinada */
+    display: block;
+    text-align: right;
+    /* 🔹 alinhado como assinatura */
+    font-style: normal;
+    opacity: 0.9;
+    /* 🔹 suavidade */
 }
+
+/* 🔹 detalhe elegante abaixo do nome */
+.autor::before {
+    content: "— ";
+    /* 🔹 traço típico de citação */
+    color: #64748b;
+    font-weight: 400;
+}
+
 
 /* === TELAS PEQUENAS: celulares grandes (até 768px) === */
 @media (max-width: 768px) {

@@ -1,0 +1,190 @@
+.irene-formulario-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(20, 20, 20, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* 🔹 Caixa do formulário */
+.irene-formulario {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 60%;
+    max-height: 100vh;
+    /* nunca passa da altura da tela */
+    overflow-y: auto;
+    /* ativa scroll vertical se precisar */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 🔹 Deixar o scroll mais bonito */
+.irene-formulario::-webkit-scrollbar {
+    width: 8px;
+}
+
+.irene-formulario::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.irene-formulario::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+/* 🔹 Título */
+.irene-formulario h3 {
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: center;
+}
+
+/* 🔹 Labels */
+.irene-formulario label {
+    display: block;
+    margin: 12px 0 6px;
+    font-weight: 600;
+    color: #34495e;
+    font-size: 0.95rem;
+}
+
+/* 🔹 Inputs e Textarea */
+.irene-formulario input,
+.irene-formulario textarea {
+    width: 97%;
+    padding: 12px 14px;
+    border: 1px solid #d0d7e2;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.25s ease;
+    margin-bottom: 12px;
+    background: #fdfdfd;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.irene-formulario input:focus,
+.irene-formulario textarea:focus {
+    border-color: #5dade2;
+    background: #fff;
+    box-shadow: 0 0 8px rgba(93, 173, 226, 0.4);
+}
+
+
+/* 🔹 Textarea */
+.irene-formulario textarea {
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* 🔹 Botões de adicionar campos */
+.irene-formulario button[type="button"] {
+    display: inline-block;
+    margin: 6px 0 16px;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: transform 0.15s, background 0.2s;
+}
+
+.irene-formulario button[type="button"]:hover {
+    background: linear-gradient(135deg, #27ae60, #1e8449);
+    transform: translateY(-2px);
+}
+
+
+/* 🔹 Área de botões principais */
+.form-botoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+
+/* 🔹 Botão salvar */
+.form-botoes button[type="submit"] {
+    background: linear-gradient(135deg, #3498db, #2e86c1);
+    color: #fff;
+    padding: 11px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.2s;
+    font-size: 1rem;
+}
+
+.form-botoes button[type="submit"]:hover {
+    background: linear-gradient(135deg, #2e86c1, #21618c);
+    transform: translateY(-2px);
+}
+
+
+.form-botoes button[type="button"] {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: #fff;
+    padding: 11px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.2s;
+    font-size: 1rem;
+}
+
+.form-botoes button[type="button"]:hover {
+    background: linear-gradient(135deg, #c0392b, #922b21);
+    transform: translateY(-2px);
+}
+
+
+/* 🔹 Animação */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🔹 Container principal do formulário */
+.irene-formulario {
+    background: #ffffff;
+    padding: 28px 32px;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    width: 600px;
+    max-width: 95%;
+    animation: fadeIn 0.35s ease-in-out;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    position: relative;
+
+    /* 🔹 Borda gradiente sem warnings */
+    border: 3px solid transparent;
+    border-image: linear-gradient(135deg, #3498db, #9b59b6, #2ecc71) 1;
+}
+
+
+/* 🔹 Bordas suaves estilo “card premium” */

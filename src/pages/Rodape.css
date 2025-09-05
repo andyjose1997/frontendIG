@@ -4,18 +4,25 @@
     padding: 5px 0;
     text-align: center;
     position: relative;
+    z-index: auto;
+    /* 🔹 não cria prioridade de camada */
 }
 
-.RodapeContent {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%;
-    /* deixa 10% de cada lado */
-    margin: 0 auto 20px auto;
-    /* centraliza e deixa gap embaixo */
-    flex-wrap: wrap;
+/* Irene acima do rodapé */
+.irene-container {
+    z-index: 2000;
 }
+
+.modalCadastro-overlay,
+.modalFAQ-overlay,
+.modalFundadores-overlay,
+.modalEscolher-overlay {
+    position: fixed;
+    z-index: 3000 !important;
+}
+
+
+
 
 .RodapeContent {
     display: flex;
@@ -25,8 +32,16 @@
     /* centraliza com 10% de margem em cada lado */
     margin: 0 auto 20px auto;
     flex-wrap: wrap;
-}
 
+    /* 🔹 refinamentos profissionais */
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    line-height: 1.5;
+    /* melhor leitura do conteúdo */
+    letter-spacing: 0.3px;
+    /* texto mais clean */
+    gap: 12px;
+    /* respiro entre elementos sem afetar posição */
+}
 
 .RodapeEmpresa {
     border: none;
@@ -34,6 +49,19 @@
     background-color: #ffffff;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    /* 🔹 refinamentos profissionais */
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    text-align: center;
+    /* centraliza conteúdo interno */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* efeito suave */
+}
+
+.RodapeEmpresa:hover {
+    transform: translateY(-4px);
+    /* leve destaque ao passar o mouse */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .RodapeLinks,
@@ -47,6 +75,33 @@
     background-color: #ffffff;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    /* 🔹 refinamentos profissionais */
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    border-radius: 12px;
+    /* combina com o estilo da empresa */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.RodapeLinks:hover,
+.RodapeRedes:hover {
+    transform: translateY(-3px);
+    /* efeito flutuante leve */
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.RodapeLinks a,
+.RodapeRedes a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.RodapeLinks a:hover,
+.RodapeRedes a:hover {
+    color: #0162d1;
+    transform: translateY(-2px);
 }
 
 .RodapeLinks a,
@@ -54,50 +109,78 @@
     color: #555;
     position: relative;
     overflow: hidden;
+
+    /* 🔹 refinamentos profissionais */
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 4px 6px;
+    /* dá um respiro sem mudar tamanho real */
+    transition: color 0.3s ease;
 }
 
+/* 🔹 efeito de linha animada */
 .RodapeLinks a::after,
 .RodapeRedes a::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -2px;
+    bottom: 0;
     width: 100%;
     height: 2px;
-    background: currentColor;
-    transform: scaleX(0);
-    transform-origin: right;
+    background-color: #0162d1;
+    transform: translateX(-100%);
     transition: transform 0.3s ease;
-}
-
-.RodapeLinks a:hover::after,
-.RodapeRedes a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
 }
 
 .RodapeLinks a:hover,
 .RodapeRedes a:hover {
-    color: #007BFF;
+    color: #0162d1;
+}
+
+.RodapeLinks a:hover::after,
+.RodapeRedes a:hover::after {
+    transform: translateX(0);
 }
 
 .RodapeCopy {
     font-size: 0.9em;
     color: #666;
     margin-top: 20px;
+
+    /* 🔹 refinamentos profissionais */
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    letter-spacing: 0.4px;
+    /* deixa a leitura mais clean */
+    line-height: 1.6;
+    /* melhora o espaçamento vertical */
+    text-align: center;
+    /* garante alinhamento perfeito */
+    user-select: none;
+    /* evita seleção acidental */
 }
+
 
 /* Logo da empresa dentro do RodapeEmpresa */
 .RodapeEmpresa img {
     width: 40px;
     border-radius: 50%;
     filter: drop-shadow(4px 4px 6px rgba(0, 0, 0, 0.4));
-    transition: transform 0.3s ease;
     box-shadow: 0 0 0 2px #021533;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* 🔹 refinamento */
+    cursor: pointer;
+    /* sugere interatividade */
+    background-color: #fff;
+    /* destaca em fundos claros/escuros */
 }
 
 .RodapeEmpresa img:hover {
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(2deg);
+    /* sutil rotação junto ao zoom */
+    box-shadow: 0 0 0 3px #0162d1;
+    /* realce na borda ao hover */
 }
 
 /* Responsividade para telas menores */
@@ -105,12 +188,57 @@
     .RodapeContent {
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 24px;
+        /* respiro maior entre blocos */
+        text-align: center;
+        padding: 10px 0;
+        animation: fadeInUp 0.5s ease;
+        /* entrada suave */
     }
 
     .RodapeLinks,
     .RodapeRedes {
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
+        padding: 12px 18px;
+        border-radius: 12px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+        animation: fadeIn 0.6s ease;
+    }
+
+    .RodapeLinks a,
+    .RodapeRedes a {
+        display: inline-block;
+        font-size: 1.05em;
+        transition: transform 0.2s ease, color 0.3s ease;
+    }
+
+    .RodapeLinks a:hover,
+    .RodapeRedes a:hover {
+        transform: translateY(-2px) scale(1.05);
+        color: #0162d1;
+    }
+}
+
+/* 🔹 Animações suaves */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }

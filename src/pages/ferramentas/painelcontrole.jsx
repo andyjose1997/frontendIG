@@ -5,6 +5,11 @@ import RankingGeral from './componentes/rakingGeral';
 import ListaUsuariosSimples from './componentes/ListaUsuariosSimples';
 import PerguntasUsuarios from './componentes/perguntasUsuarios';
 import TermosUso from './componentes/TermosUso'; // 🔹 novo componente
+import PermitirFundadores from './componentes/PermitirFundadores';
+import LinksRedes from './componentes/LinksRedes';
+import Propaganda from './componentes/Propaganda';
+import IreneConfig from './componentes/irene/ireneConfig';
+import IreneConfigCompleta from './componentes/irene/ireneConfigCompleta';
 import './painelcontrole.css';
 
 export default function PainelControle() {
@@ -40,34 +45,67 @@ export default function PainelControle() {
                 >
                     Lista de Funcionarios
                 </button>
+                <button
+                    className={painelAtivo === "irene" ? "ativo" : ""}
+                    onClick={() => setPainelAtivo("irene")}
+                >
+                    Irene
+                </button>
 
                 <button
                     className={painelAtivo === "infoCadastro" ? "ativo" : ""}
                     onClick={() => {
                         setPainelAtivo("infoCadastro");
-                        setSubPainelCadastro(null); // 🔹 reseta escolha
+                        setSubPainelCadastro(null); // reseta escolha
                     }}
                 >
                     Info de cadastro
                 </button>
 
+
+                <button style={{ display: "block" }}  // mudar para none quando nao precise mais
+                    className={painelAtivo === "permitirFundadores" ? "ativo" : ""}
+                    onClick={() => setPainelAtivo("permitirFundadores")}
+                >
+                    Permitir Fundadores
+                </button>
+                <button
+                    className={painelAtivo === "linksRedes" ? "ativo" : ""}
+                    onClick={() => setPainelAtivo("linksRedes")}
+                >
+                    Redes sociais
+                </button>
+                <button
+                    className={painelAtivo === "propaganda" ? "ativo" : ""}
+                    onClick={() => setPainelAtivo("propaganda")}
+                >
+                    Propaganda
+                </button>
+
+
+
                 <button
                     className={painelAtivo === "rankingGeral" ? "ativo" : ""}
                     onClick={() => setPainelAtivo("rankingGeral")}
                 >
-                    Ranking Geral
+                    Rankings gerais
                 </button>
             </div>
 
             {painelAtivo === "visualizarBanco" && <VisualizarBanco />}
             {painelAtivo === "rankingGeral" && <RankingGeral />}
+            {painelAtivo === "linksRedes" && <LinksRedes />}
+            {painelAtivo === "propaganda" && <Propaganda />}
+            {painelAtivo === "irene" && <IreneConfigCompleta />}
+
+            {painelAtivo === "permitirFundadores" && <PermitirFundadores />}
             {painelAtivo === "listaUsuarios" && <ListaUsuariosSimples />}
 
             {/* 🔹 Novo fluxo Info de Cadastro */}
             {painelAtivo === "infoCadastro" && (
                 <div className="subpainel-cadastro">
                     <div className="botoes-subpainel">
-                        <button
+                        <button style={{ display: "none" }}
                             className={subPainelCadastro === "faq" ? "ativo" : ""}
                             onClick={() => setSubPainelCadastro("faq")}
                         >

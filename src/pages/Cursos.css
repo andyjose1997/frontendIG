@@ -1,4 +1,3 @@
-/* Seção de informações */
 .pacotes-info {
     background: #f9fbff;
     border-radius: 12px;
@@ -6,101 +5,253 @@
     margin: 30px auto;
     max-width: 900px;
     text-align: center;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s;
+
+    /* 🔹 Estética mais clean */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.05);
+
+    /* 🔹 Tipografia e leitura */
+    font-family: "Segoe UI", Roboto, sans-serif;
+    line-height: 1.7;
+    color: #333;
+
+    /* 🔹 Micro interação */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .pacotes-info:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12),
+        0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .pacotes-info h2 {
     color: #1e5686;
     margin-bottom: 15px;
+
+    /* 🔹 Tipografia refinada */
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-family: "Segoe UI", Roboto, sans-serif;
+
+    /* 🔹 Estética */
+    text-transform: capitalize;
+    position: relative;
+
+    /* 🔹 Animação suave */
+    animation: fadeInDown 0.7s ease both;
+}
+
+/* 🔹 Detalhe sutil abaixo do título */
+.pacotes-info h2::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    margin: 8px auto 0;
+    background-color: #1e5686;
+    border-radius: 2px;
 }
 
 .pacotes-info p {
     color: #444;
     font-size: 1.1em;
     line-height: 1.6;
+
+    /* 🔹 Melhorias de leitura */
+    font-family: "Segoe UI", Roboto, sans-serif;
+    max-width: 750px;
+    margin: 0 auto 1.2rem auto;
+    text-align: justify;
+
+    /* 🔹 Estética */
+    letter-spacing: 0.3px;
+    word-spacing: 1px;
+
+    /* 🔹 Animação suave */
+    animation: fadeIn 1s ease both;
 }
 
 /* Pacote geral */
 .pacote-geral {
     background: #f0f8ff;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 30px;
     max-width: 900px;
     margin: 30px auto;
     text-align: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    /* 🔹 Estética refinada */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08),
+        0 2px 6px rgba(0, 0, 0, 0.05);
+
+    /* 🔹 Tipografia */
+    font-family: "Segoe UI", Roboto, sans-serif;
+    line-height: 1.7;
+
+    /* 🔹 Micro interação */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pacote-geral:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12),
+        0 4px 10px rgba(0, 0, 0, 0.06);
 }
 
 .Pacote {
     font-size: 50px;
     font-family: Georgia, 'Times New Roman', Times, serif;
+
+    /* 🔹 Aparência elegante */
+    font-weight: 700;
+    color: #1e5686;
+
+    /* 🔹 Estética */
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    /* 🔹 Efeito de destaque */
+    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15);
+
+    /* 🔹 Animação suave */
+    animation: fadeInUp 0.8s ease both;
 }
 
 /* Lista de cursos */
 .lista-cursos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    gap: 24px;
     margin-top: 30px;
     text-align: left;
+
+    /* 🔹 Aparência refinada */
+    padding: 10px;
+    border-radius: 12px;
+
+    /* 🔹 Micro detalhes */
+    font-family: "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    animation: fadeIn 1s ease both;
 }
+
 
 .curso {
     background: #ffffff;
     border: 1px solid #cccccc;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    transition: transform 0.3s, box-shadow 0.3s;
+
+    /* 🔹 Suavidade e movimento */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
 }
 
+/* 🔹 Efeito hover elegante */
 .curso:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    border-color: #bbb;
+    /* leve destaque sem mudar cor principal */
 }
 
 .curso h3 {
     color: #1e5686;
     margin-bottom: 10px;
+
+    /* 🔹 Tipografia */
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-family: "Segoe UI", Roboto, sans-serif;
+
+    /* 🔹 Estética */
+    letter-spacing: 0.5px;
+
+    /* 🔹 Detalhe sutil */
+    position: relative;
+}
+
+.curso h3::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background-color: #1e5686;
+    margin-top: 6px;
+    border-radius: 2px;
 }
 
 .curso p {
     color: #333;
     font-size: 1em;
-    line-height: 1.5;
+    line-height: 1.6;
+
+    /* 🔹 Tipografia moderna */
+    font-family: "Segoe UI", Roboto, sans-serif;
+    font-weight: 400;
+
+    /* 🔹 Estética */
+    margin-top: 6px;
+    letter-spacing: 0.3px;
+    word-spacing: 1px;
+
+    /* 🔹 Microinteração sutil */
+    transition: color 0.3s ease;
 }
+
+.curso:hover p {
+    color: #222;
+    /* leve escurecida no hover */
+}
+
 
 /* Botão de compra */
 #PacoteBotao {
-    width: 250px;
+    width: 280px;
     height: 50px;
     font-size: 18px;
     border: none;
-    border-radius: 5px;
+    border-radius: 12px;
     background-color: #1e5686;
     color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+
+    /* 🔹 Aparência */
+    box-shadow: 0 6px 16px rgba(30, 86, 134, 0.35);
+    transition: background-color 0.3s ease,
+        transform 0.25s ease,
+        box-shadow 0.3s ease;
 }
 
+/* 🔹 Interação elegante */
 #PacoteBotao:hover {
-    background-color: #003366;
+    background-color: #174568;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(30, 86, 134, 0.45);
 }
 
+/* 🔹 Toque extra no clique */
 #PacoteBotao:active {
-    transform: scale(0.97);
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 6px 14px rgba(30, 86, 134, 0.3);
 }
 
 /* Div para centralizar o botão */
 #divBotao {
-    width: 250px;
-    height: 50px;
-    margin: auto auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    margin: 40px auto 20px auto;
+
+    /* 🔹 Estética */
+    padding: 10px 0;
 }

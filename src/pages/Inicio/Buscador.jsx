@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Buscador.css';
 import { URL } from '../../config';
+
 export default function Buscador() {
     const [showModal, setShowModal] = useState(false);
     const [countdown, setCountdown] = useState(15);
@@ -33,7 +34,7 @@ export default function Buscador() {
             return;
         }
 
-        setCarregando(true); // 👈 Início do carregamento
+        setCarregando(true);
         try {
             const resposta = await fetch(`${URL}/usuarios_publicos?nome=${encodeURIComponent(texto)}`, {
                 headers: {
@@ -46,7 +47,7 @@ export default function Buscador() {
             console.error("Erro ao buscar usuários:", error);
             setSugestoes([]);
         } finally {
-            setCarregando(false); // 👈 Fim do carregamento
+            setCarregando(false);
         }
     }
 
@@ -59,23 +60,22 @@ export default function Buscador() {
     function fecharDetalhe() {
         setDetalhe(null);
     }
+
     useEffect(() => {
         const carregarNaoLidas = async () => {
             try {
-                const userId = localStorage.getItem("id"); // pega o id do usuário logado
+                const userId = localStorage.getItem("id");
                 const resposta = await fetch(`${URL}/mensagens/nao_lidas/${userId}`, {
                     headers: { Authorization: "Bearer " + localStorage.getItem("token") }
                 });
                 const data = await resposta.json();
-                setNaoLidas(data.total || 0); // backend deve retornar { total: X }
+                setNaoLidas(data.total || 0);
             } catch (err) {
                 console.error("Erro ao buscar mensagens não lidas:", err);
             }
         };
 
         carregarNaoLidas();
-
-        // atualizar a cada 30s
         const intervalo = setInterval(carregarNaoLidas, 30000);
         return () => clearInterval(intervalo);
     }, []);
@@ -91,95 +91,95 @@ export default function Buscador() {
         }
         return () => clearTimeout(timer);
     }, [showModal, countdown]);
+
     useEffect(() => {
         const delay = setTimeout(() => {
             buscarUsuarios(textoBusca);
-        }, 500); // 500ms de espera
-
+        }, 500);
         return () => clearTimeout(delay);
     }, [textoBusca]);
 
-
     return (
         <>
-            <div id="BuscadorFundo">
-                <div className="esquerda">
-                    <img style={{ width: "55px" }} src="/Logo/I_round.png" alt="" />
-                    <h3 style={{ color: "white" }}>IronSources</h3>
+            <div className="buscador-fundo">
+                <div className="buscador-esquerda">
+                    <img className="buscador-logo" src="/Logo/I_round.png" alt="Logo IronGoals" />
+                    <h3 className="buscador-titulo">IronGoals</h3>
                 </div>
-                <div className="centro">
+
+                <div className="buscador-centro">
                     <input
-                        id='Buscador'
+                        className="buscador-input"
                         type="text"
-                        placeholder='Procurar Usuários públicos'
+                        placeholder="Procurar Usuários públicos"
                         value={textoBusca}
                         autoComplete="off"
-
-                        onChange={(e) => {
-                            setTextoBusca(e.target.value);
-                        }}
-
+                        onChange={(e) => setTextoBusca(e.target.value)}
                     />
-                    {carregando && (
-                        <div className="spinner"></div>
-                    )}
+                    {carregando && <div className="buscador-spinner"></div>}
 
                     {sugestoes.length > 0 && (
-                        <ul className="sugestoes-dropdown">
+                        <ul className="buscador-sugestoes">
                             {sugestoes.map(usuario => (
-                                <li key={usuario.id} onClick={() => selecionarUsuario(usuario)}>
+                                <li
+                                    key={usuario.id}
+                                    className="buscador-sugestao-item"
+                                    onClick={() => selecionarUsuario(usuario)}
+                                >
                                     {usuario.nome} {usuario.sobrenome}
                                 </li>
                             ))}
                         </ul>
                     )}
                 </div>
-                <div className="direita">
-                    <Link className='topo' to="/perfil">Perfil</Link>
-                    <div className="mensagenss-wrapper">
-                        <Link className='topo' to="/Mensagens">
-                            Mensagens
-                        </Link>
+
+                <div className="buscador-direita">
+                    <Link className="buscador-link" to="/perfil">Perfil</Link>
+                    <div className="buscador-mensagens-wrapper">
+                        <Link className="buscador-link" to="/Mensagens">Mensagens</Link>
                         {naoLidas > 0 && (
-                            <span className="badge-naoo-lidas">{naoLidas}</span>
+                            <span className="buscador-badge">{naoLidas}</span>
                         )}
                     </div>
-                    <Link className='topo' to="/TelaConfig">Configurações</Link>
-                    <a className='Logout' href="/" onClick={handleLogoutClick}>Logout</a>
+                    <Link className="buscador-link" to="/TelaConfig">Configurações</Link>
+                    <a className="buscador-logout" href="/" onClick={handleLogoutClick}>Logout</a>
                 </div>
             </div>
 
             {showModal && (
                 <div className="modal-overlay">
                     <div className="modal-box">
-                        <h3>Tem certeza que deseja sair?</h3>
-                        <p>Saindo automaticamente em <strong>{countdown}</strong> segundos...</p>
-                        <div className="botoes">
-                            <button onClick={handleConfirmLogout}>Sair agora</button>
-                            <button onClick={handleCancel}>Cancelar</button>
+                        <h3 className="modal-titulo">Tem certeza que deseja sair?</h3>
+                        <p className="modal-texto">
+                            Saindo automaticamente em <strong>{countdown}</strong> segundos...
+                        </p>
+                        <div className="modal-botoes">
+                            <button className="modal-btn sair" onClick={handleConfirmLogout}>Sair agora</button>
+                            <button className="modal-btn cancelar" onClick={handleCancel}>Cancelar</button>
                         </div>
                     </div>
                 </div>
             )}
 
             {detalhe && (
-                <div className="modalFundo">
-                    <div className="modalDetalhe">
-                        <button className="fecharModal" onClick={fecharDetalhe}>✖</button>
+                <div className="detalhe-overlay">
+                    <div className="detalhe-box">
+                        <button className="detalhe-fechar" onClick={fecharDetalhe}>✖</button>
                         <img
+                            className="detalhe-foto"
                             src={`${URL}/fotos/${detalhe.foto || "padrao.png"}`}
                             alt="Foto"
                         />
-                        <h2>{detalhe.nome} {detalhe.sobrenome}</h2>
+                        <h2 className="detalhe-nome">{detalhe.nome} {detalhe.sobrenome}</h2>
                         <a
                             href={`https://wa.me/${detalhe.whatsapp}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="botaoZap"
+                            className="detalhe-whatsapp"
                         >
                             📱 Abrir WhatsApp
                         </a>
-                        <p className="comentarioPerfil">
+                        <p className="detalhe-meta">
                             <strong>Próxima Meta:</strong><br />
                             {detalhe.comentario_perfil && detalhe.comentario_perfil.trim() !== ""
                                 ? detalhe.comentario_perfil

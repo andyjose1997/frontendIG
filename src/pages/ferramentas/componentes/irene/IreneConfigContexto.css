@@ -1,0 +1,18 @@
+.exemplo-conversa {
+    background: #f8f9fa;
+    border-left: 4px solid #0162d1;
+    padding: 10px 15px;
+    margin: 15px 0;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.exemplo-conversa p {
+    margin: 5px 0;
+}
+
+.exemplo-conversa em {
+    color: #0162d1;
+    font-style: normal;
+    font-weight: bold;
+}

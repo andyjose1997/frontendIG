@@ -1,407 +1,598 @@
-#BuscadorFundo {
-    width: 100%;
-    background: linear-gradient(to right, #003366, #0052cc);
+/* ===== Fundo principal do buscador ===== */
+.buscador-fundo {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.8rem 1.5rem;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
 
-.mensagenss-wrapper {
+    /* 🔹 Mantém o gradiente original */
+    background: linear-gradient(135deg, #014581, #0162d1);
+    color: #fff;
+
+    /* 🔹 Tipografia mais suave */
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+
+    /* 🔹 Profundidade e elegância */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+
+    /* 🔹 Suavidade */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* 🔹 Organização */
     position: relative;
-    display: inline-block;
+    z-index: 100;
+
+    /* 🔹 Transição sutil ao interagir */
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
-.badge-naoo-lidas {
-    position: absolute;
-    top: -8px;
-    right: -12px;
-    background: red;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 3px 7px;
-    border-radius: 50%;
-    min-width: 20px;
-    text-align: center;
-    line-height: 1.2;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    z-index: 5;
-    /* 👈 garante que fica na frente */
+.buscador-fundo:hover {
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
 }
 
 
-.sugestoes-dropdown {
-    position: absolute;
-    top: 3.5rem;
-    width: 24rem;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ccc;
-    border-radius: 1rem;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    z-index: 999;
-    max-height: 250px;
-    overflow-y: auto;
-    list-style: none;
-    animation: fadeIn 0.25s ease-out forwards;
-    padding: 0;
-    margin-top: 0.5rem;
+/* ===== Esquerda ===== */
+.buscador-esquerda {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* 🔹 um pouco mais de respiro */
+
+    /* 🔹 Estabilidade no alinhamento */
+    flex-shrink: 0;
+
+    /* 🔹 Melhor suavidade visual */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* 🔹 Transição sutil em elementos filhos (logo/título) */
+    transition: transform 0.25s ease;
 }
 
-.sugestoes-dropdown li {
-    padding: 0.75rem 1.2rem;
-    cursor: pointer;
-    font-size: 0.95rem;
-    transition: background 0.2s ease;
-    border-bottom: 1px solid #eee;
+.buscador-esquerda:hover {
+    transform: translateY(-1px);
 }
 
-.sugestoes-dropdown li:hover {
-    background-color: #f0f4ff;
-    color: #003366;
+.buscador-logo {
+    width: 55px;
+    border-radius: 12px;
+
+    /* 🔹 Profundidade mais elegante */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+
+    /* 🔹 Garante proporção */
+    object-fit: cover;
+    flex-shrink: 0;
+
+    /* 🔹 Transição para hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.sugestoes-dropdown li:focus {
-    background-color: #e0eaff;
+.buscador-logo:hover {
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+
+.buscador-titulo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+
+    /* 🔹 Estilo mais profissional */
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #ffffff;
+
+    /* 🔹 Suavidade na renderização */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* 🔹 Aparência premium */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+
+    /* 🔹 Transição sutil em interações */
+    transition: color 0.3s ease, transform 0.25s ease;
+}
+
+.buscador-titulo:hover {
+    color: #e0e0e0;
+    /* 🔹 leve contraste no hover */
+    transform: translateY(-1px);
+}
+
+/* ===== Centro ===== */
+.buscador-centro {
+    flex: 1;
+    max-width: 420px;
+    position: relative;
+
+    /* 🔹 Organização e consistência */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    /* 🔹 Respiro visual */
+    margin: 0 1rem;
+
+    /* 🔹 Transição suave para ajustes dinâmicos */
+    transition: max-width 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .buscador-centro {
+        max-width: 100%;
+        /* 🔹 em telas menores ocupa tudo */
+        margin: 0.5rem 0;
+    }
+}
+
+/* ===== Input de Busca ===== */
+.buscador-input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: none;
     outline: none;
+    font-size: 1rem;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    /* 🔹 Sombra mais elegante e uniforme */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+
+    /* 🔹 Suavidade ao interagir */
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+
+    /* 🔹 Melhor contraste interno */
+    background-color: #ffffff;
+    color: #1c2a39;
 }
 
-.spinner {
-    border: 4px solid #e0e0e0;
-    border-top: 4px solid #0052cc;
+.buscador-input:focus {
+    /* 🔹 Destaque no foco */
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(1, 98, 209, 0.35);
+    transform: translateY(-1px);
+}
+
+.buscador-input::placeholder {
+    color: #022d66;
+    font-weight: 500;
+}
+
+/* Loading spinner */
+.buscador-spinner {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    border-top-color: #fff;
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    animation: spin 0.8s linear infinite;
-    margin: 0.5rem auto;
-    z-index: 1000;
+    animation: spin 1s linear infinite;
+    transform: translateY(-50%);
 }
 
 @keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-
     to {
-        transform: rotate(360deg);
+        transform: translateY(-50%) rotate(360deg);
     }
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
+/* Sugestões dropdown */
+/* ===== Sugestões Dropdown ===== */
+.buscador-sugestoes {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    /* 🔹 ligeiramente mais arredondado */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+    /* 🔹 sombra mais suave e elegante */
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 200;
 
+    /* 🔹 animação mais profissional */
+    opacity: 0;
+    transform: translateY(-5px);
+    animation: dropdownFadeIn 0.25s forwards ease-out;
+}
+
+/* 🔹 Scroll personalizado */
+.buscador-sugestoes::-webkit-scrollbar {
+    width: 6px;
+}
+
+.buscador-sugestoes::-webkit-scrollbar-thumb {
+    background-color: rgba(1, 98, 209, 0.5);
+    border-radius: 3px;
+}
+
+.buscador-sugestoes::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 3px;
+}
+
+/* 🔹 Itens da lista */
+.buscador-sugestoes li {
+    padding: 10px 14px;
+    cursor: pointer;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 0.95rem;
+    color: #1c2a39;
+    transition: background 0.2s ease, color 0.2s ease;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.buscador-sugestoes li:last-child {
+    border-bottom: none;
+}
+
+.buscador-sugestoes li:hover {
+    background-color: #f0f5ff;
+    /* 🔹 leve destaque azul */
+    color: #014581;
+    /* 🔹 cor primária de destaque */
+}
+
+/* 🔹 Animação do dropdown */
+@keyframes dropdownFadeIn {
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-
-/* ===== Alinhamentos nas colunas ===== */
-.centro {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-
-
-.dropdown-lista {
-    position: absolute;
-    background: white;
-    border: 1px solid #ccc;
-    max-height: 200px;
-    overflow-y: auto;
-    width: 250px;
-    z-index: 1000;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.dropdown-item {
-    padding: 10px;
-    cursor: pointer;
-}
-
-.dropdown-item:hover {
-    background-color: #f0f0f0;
-}
-
-.direita {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    padding-right: 2rem;
-}
-
-.esquerda {
+/* ===== Direita ===== */
+.buscador-direita {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding-left: 1rem;
+    gap: 18px;
+    /* 🔹 ligeiramente mais compacto */
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-
-
-.esquerda img:hover {
-    transform: scale(1.05);
-}
-
-.esquerda h3 {
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: opacity 0.3s ease;
-}
-
-
-#Buscador {
-    width: 24rem;
-    height: 2.7rem;
-    padding: 0 1.2rem;
-    border-radius: 2rem;
-    border: none;
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff;
-    font-size: 1rem;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: box-shadow 0.3s ease, background 0.3s ease;
-    outline: none;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-#Buscador::placeholder {
-    color: #f0f0f0;
-}
-
-#Buscador:focus {
-    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.2);
-}
-
-
-#Buscador:focus {
-    box-shadow: 0 0 0 0.25rem rgba(4, 64, 244, 0.3);
-}
-
-
-#buscar:hover {
-    background-color: #dde5ff;
-    transform: translateY(-0.15rem);
-}
-
-#buscar:active {
-    transform: scale(0.97);
-}
-
-.topo,
-.Logout {
-    padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 2rem;
+/* 🔹 Links padrão */
+.buscador-link {
     color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
     text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    transition: all 0.25s ease;
 }
 
-.topo:hover,
-.Logout:hover {
-    background-color: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
+.buscador-link:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+    /* 🔹 micro movimento elegante */
+}
+
+/* 🔹 Wrapper das mensagens (badge) */
+.buscador-mensagens-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* 🔹 Badge de mensagens não lidas */
+.buscador-badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background-color: #ff4d4f;
+    /* 🔹 vermelho alert */
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease;
+}
+
+.buscador-badge:hover {
+    transform: scale(1.1);
+    /* 🔹 micro efeito ao passar o mouse */
+}
+
+/* ===== Badge de mensagens ===== */
+.buscador-badge {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background: #ff3b30;
+    /* 🔹 vermelho alerta */
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 7px;
+    border-radius: 50%;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buscador-badge:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Botão Logout ===== */
+.buscador-logout {
+    background: #e53935;
+    /* 🔹 vermelho forte */
+    color: #ffffff;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.25s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.Logout:hover {
-    color: #ffdcdc;
+.buscador-logout:hover {
+    background: #c62828;
+    /* 🔹 vermelho hover */
+    transform: translateY(-2px) scale(1.02);
+    /* 🔹 micro efeito de destaque */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
-
+/* ===== Modal de Logout ===== */
 .modal-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    inset: 0;
+    /* top:0; left:0; right:0; bottom:0 */
+    background: rgba(0, 0, 0, 0.65);
+    /* 🔹 leve escurecimento mais elegante */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 500;
+    animation: fadeIn 0.3s ease forwards;
 }
 
+/* 🔹 Box do modal */
 .modal-box {
-    background: linear-gradient(to bottom right, #ffffff, #f0f4ff);
-    padding: 2rem;
-    border-radius: 1rem;
-    text-align: center;
+    background: #ffffff;
+    padding: 2rem 1.8rem;
+    border-radius: 16px;
+    /* 🔹 cantos mais suaves */
+    max-width: 400px;
     width: 90%;
-    max-width: 24rem;
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4);
-    animation: scaleIn 0.3s ease-out forwards;
+    text-align: center;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+    /* 🔹 sombra mais profunda */
+    animation: zoomIn 0.35s ease forwards;
+    position: relative;
 }
 
-@keyframes scaleIn {
+/* Título */
+.modal-titulo {
+    font-size: 1.5rem;
+    margin-bottom: 0.6rem;
+    color: #1c2a39;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Texto explicativo */
+.modal-texto {
+    color: #555;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Container dos botões */
+.modal-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+/* Botões */
+.modal-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Hover efeito */
+.modal-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    opacity: 0.95;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+}
+
+/* Botão sair */
+.modal-btn.sair {
+    background: #e53935;
+    color: #fff;
+    font-weight: 700;
+}
+
+/* Botão cancelar */
+.modal-btn.cancelar {
+    background: #f1f5f9;
+    color: #3b0000;
+    font-weight: 600;
+}
+
+.modal-btn.cancelar:hover {
+    background: #740707;
+    color: #f0f0f0;
+}
+
+/* ===== Animações ===== */
+@keyframes fadeIn {
     from {
-        transform: scale(0.95);
         opacity: 0;
     }
 
     to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+
+    100% {
         transform: scale(1);
         opacity: 1;
     }
 }
 
-.modalDetalhe img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #007bff;
-    margin-bottom: 1rem;
+/* ===== Modal de Detalhe ===== */
+.detalhe-overlay {
+    position: fixed;
+    inset: 0;
+    /* top:0; left:0; right:0; bottom:0 */
+    background: rgba(0, 0, 0, 0.65);
+    /* 🔹 leve escurecimento */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 600;
+    animation: fadeIn 0.3s ease forwards;
 }
 
-.modalDetalhe h2 {
-    margin-bottom: 0.5rem;
-    color: #002244;
-    font-size: 1.4rem;
+/* Box do modal */
+.detalhe-box {
+    background: #ffffff;
+    padding: 2rem 1.8rem;
+    border-radius: 16px;
+    /* 🔹 cantos suaves */
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+    /* 🔹 sombra moderna */
+    animation: zoomIn 0.35s ease forwards;
+    position: relative;
 }
 
-.botaoZap {
-    display: inline-block;
-    background-color: #25d366;
-    color: white;
-    padding: 0.5rem 1.2rem;
-    border-radius: 2rem;
-    text-decoration: none;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    transition: background 0.2s ease;
-}
-
-.botaoZap:hover {
-    background-color: #1ebc5e;
-}
-
-.comentarioPerfil {
-    font-size: 0.95rem;
-    color: #333;
-    background: #eef4ff;
-    padding: 1rem;
-    border-radius: 0.75rem;
-    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
-    text-align: left;
-}
-
-.fecharModal {
+/* Botão de fechar */
+.detalhe-fechar {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 14px;
+    right: 14px;
     background: none;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     cursor: pointer;
     color: #888;
-    transition: color 0.2s ease;
+    transition: color 0.25s ease, transform 0.2s ease;
 }
 
-.fecharModal:hover {
+.detalhe-fechar:hover {
     color: #000;
+    transform: scale(1.1);
 }
 
-.modal-box h3 {
-    margin-bottom: 0.75rem;
-    font-size: 1.3rem;
-    color: #002244;
+/* Foto do usuário */
+.detalhe-foto {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
 }
 
-.modal-box p {
-    font-size: 0.95rem;
-    color: #333;
+/* Nome do usuário */
+.detalhe-nome {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+    color: #1c2a39;
+    letter-spacing: 0.5px;
 }
 
-.botoes {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: space-around;
-    gap: 1rem;
+/* Botão WhatsApp */
+.detalhe-whatsapp {
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 10px 18px;
+    background: #25d366;
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.botoes button {
-    flex: 1;
-    padding: 0.65rem 1.2rem;
-    border: none;
-    border-radius: 0.6rem;
-    cursor: pointer;
-    font-size: 0.95rem;
-    font-weight: 600;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.detalhe-whatsapp:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: #20ba57;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
 }
 
-/* Botão vermelho (Sair) */
-.botoes button:first-child {
-    background-color: #d9534f;
-    color: white;
+/* Meta informação do usuário */
+.detalhe-meta {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-top: 1rem;
 }
 
-.botoes button:first-child:hover {
-    background-color: #c9302c;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(217, 83, 79, 0.5);
-}
-
-/* Botão azul (Cancelar) */
-.botoes button:last-child {
-    background-color: #5bc0de;
-    color: white;
-}
-
-.botoes button:last-child:hover {
-    background-color: #31b0d5;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(91, 192, 222, 0.5);
-}
-
-
-@media (max-width: 697px) {
-    #BuscadorFundo h3 {
-        display: none;
+/* ===== Animações ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
     }
 
-    #BuscadorFundo {
-        display: block;
+    to {
+        opacity: 1;
+    }
+}
 
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.85);
+        opacity: 0;
     }
 
-    #BuscadorFundo button {
-        width: 110px;
-        font-size: 20px;
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 768px) {
+    .buscador-fundo {
+        flex-direction: column;
+        gap: 12px;
+        padding: 1rem;
     }
 
-    #BuscadorFundo img,
-    #BuscadorFundo a {
-        margin: auto auto;
-        font-size: 30px;
-
+    .buscador-direita {
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
-    #BuscadorFundo a {
-        margin-top: 20px;
+    .buscador-centro {
+        width: 100%;
     }
-
 }

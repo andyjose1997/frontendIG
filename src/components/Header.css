@@ -1,24 +1,77 @@
 /* Logo */
 #logo {
     width: 280px;
-    border-radius: 5%;
     margin: 0 0 -83px 10px;
+    border-radius: 10px;
+    /* cantos suaves */
     border: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    /* sombra difusa e leve */
+    background: #050363;
+    /* fundo branco para destacar em qualquer layout */
+    padding: 6px;
+    /* cria respiro ao redor da imagem */
+    transition: all 0.35s ease-in-out;
+    cursor: pointer;
 }
+
+#logo:hover {
+    transform: scale(1.04);
+    /* efeito de destaque sutil */
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+    /* sombra mais marcante */
+    filter: brightness(1.05);
+    /* leve realce nas cores */
+}
+
+
+
+
+
+
 
 /* Cabeçalho */
 #Cabecalho ul {
     background-color: #1e5686;
-    border-radius: 20px;
+    border-radius: 28px;
     list-style: none;
     display: flex;
-    gap: 1rem;
-    padding: 15px;
+    gap: 1.8rem;
+    /* espaçamento maior para dar mais respiro */
+    padding: 16px 36px;
     margin: 20px;
     justify-content: flex-end;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
+#Cabecalho ul:hover {
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+}
+
+/* 🔹 Links */
+#Cabecalho ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    /* um pouco maior */
+    padding: 6px 10px;
+    /* só pra hover ter área de clique */
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+#Cabecalho ul li a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    /* fundo só no hover */
+    backdrop-filter: blur(4px);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
 
 #Cabecalho li {
     background: none !important;
@@ -26,71 +79,112 @@
     border-radius: 0 !important;
     padding: 0 !important;
     margin-right: 5%;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
+
+/* 🔹 Efeito underline elegante no hover */
+#Cabecalho li a {
+    position: relative;
+}
+
+#Cabecalho li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+#Cabecalho li a:hover::after {
+    width: 100%;
+    /* animação underline no hover */
+}
+
 
 
 #Cabecalho a {
     color: #f6f6f9;
     text-decoration: none;
-    font-size: 25px;
-    transition: color 0.3s, transform 0.2s;
+    font-size: 20px;
+    /* mais equilibrado que 25px */
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.2s ease;
     display: inline-block;
-    /* <- Aqui está a solução */
+    padding: 6px 10px;
+    /* área clicável maior */
+    border-radius: 8px;
 }
 
 #Cabecalho a:hover {
     color: #cce6ff;
     transform: translateY(-2px);
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.1);
+    /* hover mais elegante */
 }
 
-
-
+/* 🔹 Links com classe especial */
 #Cabecalho a.menu-link {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
 }
 
 #Cabecalho a.menu-link:hover {
-    color: lightblue;
+    color: #cce6ff;
+    background-color: rgba(255, 255, 255, 0.12);
 }
 
-/* Responsivo básico */
+
+/* 📱 Responsivo - Tablets */
 @media (max-width: 768px) {
     #logo {
         width: 200px;
-        margin: 0 auto;
+        margin: 0 auto 15px auto;
+        /* centraliza e dá respiro */
         display: block;
     }
 
     #Cabecalho ul {
         flex-wrap: wrap;
         justify-content: center;
-        gap: 15px;
-        padding: 12px;
+        gap: 18px;
+        padding: 12px 20px;
+        border-radius: 20px;
     }
 
     #Cabecalho a {
-        font-size: 22px;
+        font-size: 20px;
+        padding: 8px 12px;
+        /* área de clique confortável */
     }
 }
 
+/* 📱 Responsivo - Celulares */
 @media (max-width: 480px) {
     #logo {
-        width: 180px;
-        margin: 0 auto;
+        width: 160px;
+        margin: 0 auto 20px auto;
         display: block;
     }
 
     #Cabecalho ul {
         flex-direction: column;
         align-items: center;
-        gap: 10px;
-        padding: 10px;
+        gap: 12px;
+        padding: 14px;
+        border-radius: 16px;
     }
 
     #Cabecalho a {
-        font-size: 20px;
+        font-size: 18px;
+        padding: 6px 10px;
     }
 }

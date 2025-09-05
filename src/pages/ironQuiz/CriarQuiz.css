@@ -1,0 +1,232 @@
+/* Container geral */
+.criarQuiz-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* Título */
+.criarQuiz-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #014581;
+    text-align: center;
+}
+
+/* Layout principal: formulário + lista */
+.criarQuiz-main {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* Área do formulário */
+.criarQuiz-formulario {
+    flex: 2;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    width: 2000px;
+}
+
+/* Campos do topo (tipo/nome) */
+.criarQuiz-info {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.criarQuiz-info input {
+    flex: 1;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+/* Lista de perguntas */
+.criarQuiz-perguntas {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Card de pergunta */
+.criarQuiz-perguntaCard {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.criarQuiz-perguntaCard input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* Linha de opção */
+.criarQuiz-opcaoLinha {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.criarQuiz-opcaoLinha input[type="text"] {
+    flex: 1;
+}
+
+.criarQuiz-opcaoLinha label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Botão remover pergunta */
+.criarQuiz-btnRemover {
+    margin-top: 10px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.criarQuiz-btnRemover:hover {
+    background: #c0392b;
+}
+
+/* Botões finais */
+.criarQuiz-botoes {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.criarQuiz-botoes button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.criarQuiz-botoes button:first-child {
+    background: #28a745;
+}
+
+.criarQuiz-botoes button:last-child {
+    background: #0162d1;
+}
+
+.criarQuiz-botoes button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* Lista lateral de quizzes */
+.criarQuiz-lista {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.criarQuiz-lista h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #333;
+}
+
+.criarQuiz-lista ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Item da lista */
+.criarQuiz-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+.criarQuiz-item span {
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Ações dos quizzes */
+.criarQuiz-acoes {
+    display: flex;
+    gap: 10px;
+}
+
+.criarQuiz-btnApagar,
+.criarQuiz-btnEditar {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+/* Botão apagar */
+.criarQuiz-btnApagar {
+    background: #e74c3c;
+    color: white;
+}
+
+.criarQuiz-btnApagar.confirmar {
+    background: #c0392b;
+    animation: piscar 0.8s infinite alternate;
+}
+
+.criarQuiz-btnApagar:hover {
+    transform: scale(1.05);
+}
+
+/* Botão editar */
+.criarQuiz-btnEditar {
+    background: #f39c12;
+    color: white;
+}
+
+.criarQuiz-btnEditar:hover {
+    background: #e67e22;
+    transform: scale(1.05);
+}
+
+/* Animação para confirmar apagar */
+@keyframes piscar {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0.6;
+    }
+}
