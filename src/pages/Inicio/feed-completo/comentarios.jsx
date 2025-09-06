@@ -34,12 +34,10 @@ export default function Comentarios({
         textAlign: "left",
         cursor: "pointer"
     };
-
     return (
-        <div className="comentario-box">
+        <div className="comentarios-box">
             <button
-                style={{ color: "white" }}
-                className="botao-comentar"
+                className="comentarios-botao-comentar"
                 onClick={() =>
                     setMostrarInputComentario((prev) => ({
                         ...prev,
@@ -53,16 +51,7 @@ export default function Comentarios({
             {comentariosPorPost[post.id]?.length > 3 && (
                 <button
                     onClick={() => verMaisComentarios(post.id)}
-                    style={{
-                        marginTop: "10px",
-                        padding: "8px 16px",
-                        backgroundColor: "#4a6ee0",
-                        color: "white",
-                        border: "none",
-                        borderRadius: "8px",
-                        cursor: "pointer",
-                        fontWeight: "bold"
-                    }}
+                    className="comentarios-botao-vermais"
                 >
                     {(quantidadeComentariosVisiveis[post.id] || 3) >= (comentariosPorPost[post.id]?.length || 0)
                         ? 'Ver Menos'
@@ -74,24 +63,14 @@ export default function Comentarios({
                 quantidadeComentariosVisiveis[post.id] !== comentariosPorPost[post.id].length) && (
                     <button
                         onClick={() => verTodosComentarios(post.id)}
-                        style={{
-                            marginTop: "10px",
-                            marginLeft: "10px",
-                            padding: "8px 16px",
-                            backgroundColor: "#2e4cb8",
-                            color: "white",
-                            border: "none",
-                            borderRadius: "8px",
-                            cursor: "pointer",
-                            fontWeight: "bold"
-                        }}
+                        className="comentarios-botao-vertodos"
                     >
                         Ver Todos
                     </button>
                 )}
 
             {mostrarInputComentario[post.id] && (
-                <div style={{ marginTop: "1rem" }}>
+                <div className="comentarios-area-input">
                     <input
                         type="text"
                         placeholder="Escreva seu comentário..."
@@ -102,23 +81,10 @@ export default function Comentarios({
                                 [post.id]: e.target.value
                             }))
                         }
-                        style={{
-                            width: "100%",
-                            padding: "10px",
-                            borderRadius: "10px",
-                            border: "1px solid #ccc"
-                        }}
+                        className="comentarios-input"
                     />
                     <button
-                        style={{
-                            marginTop: "10px",
-                            padding: "10px 20px",
-                            backgroundColor: "#28a745",
-                            color: "white",
-                            fontWeight: "bold",
-                            border: "none",
-                            borderRadius: "10px"
-                        }}
+                        className="comentarios-botao-enviar"
                         onClick={() => enviarComentario(post.id)}
                     >
                         Enviar Comentário
@@ -129,48 +95,33 @@ export default function Comentarios({
             {(comentariosPorPost[post.id] || [])
                 .slice(0, quantidadeComentariosVisiveis[post.id] || 3)
                 .map(comentario => (
-                    <div key={comentario.id} className="comentario-item" style={{ marginTop: "10px", borderTop: "1px solid #ccc", paddingTop: "10px", position: "relative" }}>
-                        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                    <div key={comentario.id} className="comentarios-item">
+                        <div className="comentarios-header">
                             <img
                                 src={comentario.foto ? `${URL}/fotos/${comentario.foto}` : "/perfil.png"}
                                 alt="Perfil"
-                                style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+                                className="comentarios-foto"
                             />
-                            <strong>
+                            <strong className="comentarios-nome">
                                 {comentario.nome.charAt(0).toUpperCase() + comentario.nome.slice(1).toLowerCase()}{" "}
                                 {comentario.sobrenome.charAt(0).toUpperCase() + comentario.sobrenome.slice(1).toLowerCase()}
                             </strong>
-                            <small style={{ marginLeft: "auto", fontSize: "0.8rem" }}>{comentario.data_comentario}</small>
+                            <small className="comentarios-data">{comentario.data_comentario}</small>
 
                             {(String(comentario.id_usuario) === String(userId) || String(post.id_usuario) === String(userId)) && (
-                                <div style={{ position: "relative" }}>
+                                <div className="comentarios-menu">
                                     <button
                                         onClick={() => setMenuAberto(prev => ({
                                             ...prev,
                                             [`comentario-${comentario.id}`]: !prev[`comentario-${comentario.id}`]
                                         }))}
-                                        style={{
-                                            background: "transparent",
-                                            border: "none",
-                                            fontSize: "1.5rem",
-                                            cursor: "pointer",
-                                            marginLeft: "8px"
-                                        }}
+                                        className="comentarios-menu-toggle"
                                     >
                                         ⋮
                                     </button>
 
                                     {menuAberto[`comentario-${comentario.id}`] && (
-                                        <div style={{
-                                            position: "absolute",
-                                            right: 0,
-                                            top: "100%",
-                                            backgroundColor: "#fff",
-                                            border: "1px solid #ccc",
-                                            borderRadius: "8px",
-                                            boxShadow: "0 0 8px rgba(0,0,0,0.1)",
-                                            zIndex: 1
-                                        }}>
+                                        <div className="comentarios-menu-opcoes">
                                             {String(comentario.id_usuario) === String(userId) ? (
                                                 <>
                                                     <button
@@ -184,38 +135,14 @@ export default function Comentarios({
                                                                 [`comentario-${comentario.id}`]: false
                                                             }));
                                                         }}
-                                                        style={{
-                                                            ...menuBotaoEstilo,
-                                                            color: "#1e3a8a",
-                                                            fontWeight: "600"
-                                                        }}
-                                                        onMouseOver={(e) => {
-                                                            e.target.style.backgroundColor = "#e0e7ff";
-                                                            e.target.style.color = "#1e40af";
-                                                        }}
-                                                        onMouseOut={(e) => {
-                                                            e.target.style.backgroundColor = "transparent";
-                                                            e.target.style.color = "#1e3a8a";
-                                                        }}
+                                                        className="comentarios-menu-editar"
                                                     >
                                                         Editar
                                                     </button>
 
                                                     <button
                                                         onClick={() => apagarComentario(comentario.id, post.id)}
-                                                        style={{
-                                                            ...menuBotaoEstilo,
-                                                            color: "#dc2626",
-                                                            fontWeight: "600"
-                                                        }}
-                                                        onMouseOver={(e) => {
-                                                            e.target.style.backgroundColor = "#fee2e2";
-                                                            e.target.style.color = "#b91c1c";
-                                                        }}
-                                                        onMouseOut={(e) => {
-                                                            e.target.style.backgroundColor = "transparent";
-                                                            e.target.style.color = "#dc2626";
-                                                        }}
+                                                        className="comentarios-menu-apagar"
                                                     >
                                                         Apagar
                                                     </button>
@@ -223,7 +150,7 @@ export default function Comentarios({
                                             ) : (
                                                 <button
                                                     onClick={() => apagarComentario(comentario.id, post.id)}
-                                                    style={{ ...menuBotaoEstilo, color: "red" }}
+                                                    className="comentarios-menu-apagar"
                                                 >
                                                     Apagar
                                                 </button>
@@ -235,7 +162,7 @@ export default function Comentarios({
                         </div>
 
                         {comentariosEmEdicao[comentario.id] !== undefined ? (
-                            <div style={{ marginLeft: "35px", marginTop: "10px" }}>
+                            <div className="comentarios-editar-area">
                                 <input
                                     type="text"
                                     value={comentariosEmEdicao[comentario.id]}
@@ -245,42 +172,23 @@ export default function Comentarios({
                                             [comentario.id]: e.target.value
                                         }))
                                     }
-                                    style={{
-                                        width: "100%",
-                                        padding: "8px",
-                                        border: "1px solid #ccc",
-                                        borderRadius: "8px"
-                                    }}
+                                    className="comentarios-editar-input"
                                 />
                                 <button
                                     onClick={() => editarComentario(comentario.id, comentariosEmEdicao[comentario.id], post.id)}
-                                    style={{
-                                        marginTop: "5px",
-                                        padding: "6px 12px",
-                                        backgroundColor: "#28a745",
-                                        color: "white",
-                                        border: "none",
-                                        borderRadius: "6px"
-                                    }}
+                                    className="comentarios-editar-salvar"
                                 >
                                     Salvar
                                 </button>
                             </div>
                         ) : (
-                            <p style={{
-                                marginLeft: "35px",
-                                fontSize: "1.55rem",
-                                wordBreak: "break-word",
-                                overflowWrap: "break-word"
-                            }}>
+                            <p className="comentarios-texto">
                                 {comentario.texto}
                             </p>
                         )}
-
-
-
                     </div>
                 ))}
         </div>
     );
+
 }

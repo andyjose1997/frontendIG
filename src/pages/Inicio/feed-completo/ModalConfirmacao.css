@@ -11,7 +11,8 @@
     z-index: 9999;
 }
 
-.modal-container {
+/* Caixa do modal */
+.modal-box {
     background-color: #1a1b4b;
     color: white;
     padding: 30px;
@@ -21,11 +22,13 @@
     max-width: 400px;
 }
 
+/* Mensagem dentro do modal */
 .modal-mensagem {
     font-size: 1.2rem;
     margin-bottom: 20px;
 }
 
+/* Botões gerais */
 .modal-botao {
     padding: 10px 20px;
     border: none;
@@ -36,12 +39,14 @@
     margin-right: 10px;
 }
 
-.modal-botao.confirmar {
+/* Botão confirmar */
+.modal-confirmar {
     background-color: #28a745;
     color: white;
 }
 
-.modal-botao.cancelar {
+/* Botão cancelar */
+.modal-cancelar {
     background-color: #dc3545;
     color: white;
     margin-right: 0;

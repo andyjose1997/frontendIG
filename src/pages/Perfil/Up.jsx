@@ -110,16 +110,27 @@ export default function Up() {
     }
 
     if (!user) return <p>Carregando...</p>;
+    function getDiaSemana(cpp) {
+        switch (cpp) {
+            case "2": return "Segunda-feira";
+            case "3": return "Terça-feira";
+            case "4": return "Quarta-feira";
+            case "5": return "Quinta-feira";
+            case "6": return "Sexta-feira";
+            default: return null;
+        }
+    }
 
     return (
         <main>
-            <div id="fundo">
-                <div className="perfil">
-                    <div className="foto-container">
+            <div id="blocoPerfil">
+                <div className="perfilBox">
+                    {/* FOTO */}
+                    <div className="fotoWrapper">
                         <img
                             src={fotoURL}
                             alt={`Foto de ${user.nome}`}
-                            className="foto-perfil"
+                            className="fotoUsuario"
                             onClick={handleFotoClick}
                         />
                         <input
@@ -131,58 +142,80 @@ export default function Up() {
                         />
                     </div>
 
-                    <div className="info">
+                    {/* INFORMAÇÕES */}
+                    <div className="infoBox">
                         <h1>
                             {user.nome.charAt(0).toUpperCase() + user.nome.slice(1).toLowerCase()}{" "}
-                            {user.sobrenome.charAt(0).toUpperCase() + user.sobrenome.slice(1).toLowerCase()}
-                            {" "}
-                            <span style={{ fontSize: "0.8em", color: "#ccc", marginLeft: "10px" }}>
+                            {user.sobrenome.charAt(0).toUpperCase() + user.sobrenome.slice(1).toLowerCase()}{" "}
+                            <span className="categoriaTexto">
                                 ({user.categoria && user.categoria.trim() !== ""
                                     ? user.categoria.charAt(0).toUpperCase() + user.categoria.slice(1).toLowerCase()
                                     : "Explorer"})
                             </span>
                         </h1>
-                        <h2>ID: {user.id}</h2>
+                        <h2>
+                            <span className="id-wrapper">
+                                ID: {user.id}
+                                <span className="id-msg">
+                                    Esse é o seu ID de indicação. <br />
+                                    Compartilhe este ID ou o link de indicação com seus amigos para que eles se cadastrem <br /> como seus indicados e vôce receba compensações pelas compras deles.
+                                </span>
+                            </span>
+
+                            {user.cpp && (
+                                <span className="cpp-wrapper">
+                                    | CPP: {user.cpp}
+                                    <span className="cpp-msg">
+                                        Você recebe suas compensações das compras dos seus indicados nas {getDiaSemana(user.cpp)}s
+                                    </span>
+                                </span>
+                            )}
+
+                            {user.funcao && (
+                                <span className="funcao-wrapper">
+                                    | Função: {user.funcao}
+                                    <span className="funcao-msg">
+                                        🎉 Parabéns, você é um funcionário da empresa IronGoals
+                                    </span>
+                                </span>
+                            )}
+                            {user.funcao && user.cargo ? ` | Cargo: ${user.cargo}` : ""}
+                        </h2>
 
 
-
-                        <div className="comentario-perfilUp">
+                        <div className="comentarioBox">
                             {user.comentario_perfil && !editando ? (
                                 <>
-                                    <h3 style={{
-                                        color: "white"
-                                    }} >
+                                    <h3 className="comentarioTexto">
                                         {user.comentario_perfil
                                             ? user.comentario_perfil.charAt(0).toUpperCase() + user.comentario_perfil.slice(1).toLowerCase()
                                             : ""}
                                     </h3>
-                                    <button className="btn-postar editar" onClick={() => setEditando(true)}>✏️ </button>
+                                    <button className="botaoEditar" onClick={() => setEditando(true)}>✏️</button>
                                 </>
                             ) : (
                                 <>
                                     <input
-                                        className="input-comentario"
+                                        className="inputComentario"
                                         type="text"
                                         value={comentario}
                                         onChange={(e) => setComentario(e.target.value)}
                                         placeholder="Qual é a sua próxima meta?"
                                     />
-                                    <button className="btn-postar salvar" onClick={handleSalvarComentario}>Salvar</button>
+                                    <button className="botaoSalvar" onClick={handleSalvarComentario}>Salvar</button>
                                 </>
                             )}
                         </div>
-
-
                     </div>
                 </div>
             </div>
 
-            {/* Modal da imagem */}
+            {/* Modal */}
             {mostrarModal && (
-                <div className="modal-overlay">
-                    <div className="modal-conteudo">
-                        <img src={fotoURL} alt="Foto Ampliada" className="modal-imagem" />
-                        <div className="modal-botoes">
+                <div className="overlayModal">
+                    <div className="conteudoModal">
+                        <img src={fotoURL} alt="Foto Ampliada" className="imagemModal" />
+                        <div className="botoesModal">
                             <button onClick={handleFecharModal}>← Voltar</button>
                             <button onClick={handleEditarImagem}>Editar</button>
                         </div>
@@ -191,4 +224,5 @@ export default function Up() {
             )}
         </main>
     );
+
 }

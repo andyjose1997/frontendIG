@@ -1,58 +1,90 @@
+/* ===== Nova Postagem ===== */
 .nova-postagem-box {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 2rem 0;
     gap: 1rem;
+    margin: 2.5rem auto;
+
+    /* 🔹 aparência clean */
+    padding: 1.2rem 1.5rem;
+    background: #ffffff;
+    border-radius: 14px;
+
+    /* 🔹 sombra moderna */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+
+    /* 🔹 suavidade */
+    transition: transform 0.25s ease, box-shadow 0.3s ease;
+    max-width: 900px;
 }
 
 .nova-postagem-input {
     width: 70%;
-    padding: 0.75rem 1.2rem;
+    padding: 0.85rem 1.2rem;
     font-size: 1rem;
-    border: 0.1rem solid #ccc;
-    border-radius: 1rem;
-    background-color: #fff;
-    transition: border 0.3s ease;
+    color: #1e293b;
+    background-color: #ffffff;
+
+    border: 1px solid #d1d5db;
+    /* cinza suave */
+    border-radius: 12px;
+
+    /* 🔹 estética moderna */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
 }
+
+.nova-postagem-input:focus {
+    border-color: #2563eb;
+    /* azul moderno */
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+    outline: none;
+    transform: translateY(-1px);
+}
+
+.nova-postagem-input::placeholder {
+    color: #9ca3af;
+    /* cinza placeholder */
+    font-style: italic;
+}
+
 
 .nova-postagem-input:focus {
     border-color: #4a6ee0;
     outline: none;
 }
 
-.nova-postagem-botao {
-    padding: 0.75rem 1.5rem;
-    background-color: #4a6ee0;
-    color: white;
-    border: none;
-    border-radius: 1rem;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s;
-}
-
-.nova-postagem-botao:hover {
-    background-color: #2e4cb8;
-    transform: translateY(-0.1rem);
-}
-
-/* === Overlay escurecido com blur === */
-.modalPost-postagem-overlay {
+/* ===== Overlay escurecido com blur ===== */
+.modalPost-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    background: rgba(0, 0, 0, 0.65);
+    /* leve mais escuro */
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2000;
+
+    /* 🔹 animação de entrada */
+    animation: modalOverlayFade 0.9s ease forwards;
 }
 
-/* === Container do modalPost === */
-.modalPost-postagem-conteudo {
+@keyframes modalOverlayFade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* ===== Container do modal ===== */
+.modalPost-conteudo {
     background: rgba(7, 0, 48, 0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -61,60 +93,128 @@
     width: 95%;
     max-width: 1040px;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
-    animation: modalPostFadeIn 0.35s ease;
     display: flex;
     flex-direction: column;
     gap: 18px;
     font-family: "Inter", "Segoe UI", Roboto, sans-serif;
     height: 80%;
     max-height: 900px;
+
+    /* 🔹 animação suave de crescimento */
+    opacity: 0;
+    transform: scale(0.9);
+    animation: modalGrow 0.9s ease forwards;
 }
 
-/* === Título === */
-.modalPost-postagem-conteudo h2 {
+@keyframes modalGrow {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* ===== Título ===== */
+.modalPost-titulo {
     margin: 0;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #ffffff;
+    font-size: 2.4rem;
+    font-weight: 800;
+    font-family: "Poppins", "Segoe UI", Roboto, sans-serif;
+    color: #f8fafc !important;
     text-align: center;
-    padding-bottom: 10px;
-    letter-spacing: -0.3px;
+    padding-bottom: 14px;
+    letter-spacing: -0.5px;
+
+    /* 🔹 estética */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.45);
+
+    /* 🔹 animação de entrada */
+    opacity: 0;
+    transform: translateY(-12px) scale(0.96);
+    animation: tituloFadeIn 0.45s ease forwards;
+    animation-delay: 0.1s;
+
+    transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.25s ease;
 }
 
-/* === Textarea === */
-.modalPost-postagem-textarea {
-    width: 100%;
-    min-height: 150px;
+.modalPost-titulo:hover {
+    color: #60a5fa;
+    /* azul suave */
+    text-shadow: 0 4px 12px rgba(96, 165, 250, 0.6);
+    transform: scale(1.03);
+}
+
+/* 🔹 animação inicial */
+@keyframes tituloFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-12px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* ===== Textarea ===== */
+.modalPost-textarea {
+    width: 96%;
+    height: 100%;
     resize: none;
-    padding: 14px 16px;
-    font-size: 1.7rem;
-    line-height: 1.6;
+    padding: 16px 18px;
+
+    font-size: 1.1rem;
+    font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+    line-height: 1.7;
+    color: #1e293b;
+
     border: 1px solid #d1d5db;
     border-radius: 14px;
     background: #f9fafb;
-    transition: all 0.25s ease;
-    width: 96%;
 
+    /* 🔹 conforto visual */
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04);
+    transition: border-color 0.25s ease, box-shadow 0.3s ease, background 0.3s ease, transform 0.2s ease;
 }
 
-.modalPost-postagem-textarea:focus {
+.modalPost-textarea:focus {
     border-color: #2563eb;
     background: #ffffff;
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15),
+        inset 0 2px 8px rgba(0, 0, 0, 0.06);
     outline: none;
+    transform: translateY(-2px);
 }
 
-/* === Área dos botões === */
-.modalPost-postagem-botoes {
+.modalPost-textarea:hover {
+    background: #ffffff;
+    border-color: #93c5fd;
+}
+
+/* ===== Área dos botões ===== */
+.modalPost-botoes {
     display: flex;
     justify-content: flex-end;
-    gap: 12px;
-    margin-top: 8px;
+    gap: 14px;
+    margin-top: 16px;
+
+    /* 🔹 garante que nunca cole na borda em telas pequenas */
+    flex-wrap: wrap;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+
 /* Botões base */
-.modalPost-postagem-cancelar,
-.modalPost-postagem-confirmar {
+.modalPost-cancelar,
+.modalPost-confirmar {
     padding: 10px 22px;
     border: none;
     border-radius: 10px;
@@ -127,37 +227,76 @@
 }
 
 /* Botão Cancelar */
-.modalPost-postagem-cancelar {
+.modalPost-cancelar {
     background: #f3f4f6;
     color: #374151;
 }
 
-.modalPost-postagem-cancelar:hover {
+.modalPost-cancelar:hover {
     background: #e5e7eb;
     transform: translateY(-1px);
 }
 
 /* Botão Confirmar */
-.modalPost-postagem-confirmar {
+.modalPost-confirmar {
     background: linear-gradient(90deg, #2563eb, #1d4ed8);
     color: #fff;
     box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
 }
 
-.modalPost-postagem-confirmar:hover {
+.modalPost-confirmar:hover {
     background: linear-gradient(90deg, #1d4ed8, #1e3a8a);
     transform: translateY(-1px);
 }
 
-/* === Animação de entrada === */
-@keyframes modalPostFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px) scale(0.96);
-    }
+/* ===== Botões base ===== */
+.modalPost-cancelar,
+.modalPost-confirmar {
+    padding: 12px 26px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 180px;
+    height: 2.6rem;
 
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+    /* 🔹 suavidade */
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+/* ===== Botão Cancelar ===== */
+.modalPost-cancelar {
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    color: #374151;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.modalPost-cancelar:hover {
+    background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.modalPost-cancelar:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Botão Confirmar ===== */
+.modalPost-confirmar {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+.modalPost-confirmar:hover {
+    background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
+}
+
+.modalPost-confirmar:active {
+    transform: scale(0.96);
+    box-shadow: 0 3px 8px rgba(29, 78, 216, 0.4);
 }

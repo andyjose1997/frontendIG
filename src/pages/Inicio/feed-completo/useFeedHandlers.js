@@ -89,9 +89,21 @@ export default function useFeedHandlers() {
 
 
     const buscarPostagens = async () => {
-        const resposta = await fetch(`${URL}/postagens`);
+        const resposta = await fetch(`${URL}/postagens`, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!resposta.ok) {
+            console.error("Erro ao buscar postagens:", resposta.status);
+            return;
+        }
+
         const dados = await resposta.json();
         setPosts(dados);
+
         dados.forEach(post => {
             if (!post.id) {
                 console.warn("Post inválido:", post);
@@ -102,6 +114,7 @@ export default function useFeedHandlers() {
             buscarMinhaReacao(post.id);
         });
     };
+
 
     const buscarReacoes = async (postId) => {
         const resposta = await fetch(`${URL}/reacoes/totais/${postId}`);

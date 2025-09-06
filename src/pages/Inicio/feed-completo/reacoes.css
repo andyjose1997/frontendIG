@@ -1,101 +1,196 @@
+/* ===== Box principal ===== */
 .reacoes-box {
     display: flex;
     align-items: center;
-    margin-top: 1rem;
     flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.2rem;
+
+    /* 🔹 estética */
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+
+    /* 🔹 sombra elegante */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+
+    /* 🔹 suavidade */
+    transition: transform 0.25s ease, box-shadow 0.3s ease;
 }
 
-.reacoes-box button {
-    background: none;
-    border: none;
-    margin: 0 5px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+.reacoes-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
-.reacoes-box button:hover {
-    transform: scale(1.2);
-}
-
-.reacoes-box img {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-}
-
-/* Reação única (blz) + opções */
-.reacoes-container {
-    position: relative;
-    display: inline-block;
-}
-
-.reacao-botao {
+/* ===== Botões ===== */
+.reacoes-botao {
     background: transparent;
     border: none;
-    margin: 0 5px;
-    padding: 0;
+    margin: 0 6px;
+    padding: 4px;
+    cursor: pointer;
     position: relative;
-    width: 60px;
+
+    /* 🔹 efeito suave */
+    border-radius: 50%;
+    transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.reacao-botao img {
+.reacoes-botao:hover {
+    background-color: rgba(13, 110, 253, 0.08);
+    transform: scale(1.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.reacoes-botao:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* ===== Ícones de reação ===== */
+.reacoes-icone {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border: 2px solid #ddd;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-    margin-left: 20px;
+    border: 2px solid #e2e8f0;
+    /* cinza claro moderno */
+    object-fit: cover;
+
+    /* 🔹 suavidade */
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    background-color: #fff;
 }
 
-.reacao-botao img:hover {
-    transform: scale(1.2);
+.reacoes-icone:hover {
+    transform: scale(1.2) rotate(5deg);
     border-color: #0d6efd;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
+}
+
+/* ===== Container e opções ===== */
+.reacoes-container {
+    position: relative;
+    display: inline-block;
+
+    /* 🔹 garante clique confortável */
+    padding: 4px;
+    border-radius: 50%;
+    transition: background-color 0.25s ease;
+}
+
+.reacoes-container:hover {
+    background-color: rgba(0, 0, 0, 0.03);
 }
 
 .reacoes-opcoes {
-    display: none;
+    display: flex;
+    /* fica preparado mas invisível */
+    gap: 8px;
     position: absolute;
-    top: -50px;
+    top: -60px;
     left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    padding: 5px 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    z-index: 10;
+    transform: translateX(-50%) translateY(10px);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 6px 12px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    z-index: 20;
+
+    /* 🔹 animação de entrada */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .reacoes-container:hover .reacoes-opcoes {
-    display: flex;
-    gap: 8px;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
 }
 
-/* Contagem de reações */
-.contagem-reacoes {
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    padding: 8px 12px;
+/* ===== Contagem de reações ===== */
+.reacoes-contagem {
+    background: #f8fafc;
+    /* cinza bem claro */
+    border-radius: 14px;
+    padding: 8px 14px;
+
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8rem;
-    margin-top: 0.5rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    font-size: 0.95rem;
-    color: #333;
+    align-items: center;
+    gap: 1rem;
+
+    margin-top: 0.75rem;
+
+    /* 🔹 estética */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    font-size: 0.9rem;
+    color: #1e293b;
+
+    /* 🔹 suavidade */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.reacao-contagem-item {
-    margin-right: 10px;
-    font-size: 16px;
+.reacoes-contagem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.reacoes-item {
+    font-size: 0.95rem;
     display: flex;
     align-items: center;
+    gap: 6px;
+
+    background: #ffffff;
+    padding: 4px 8px;
+    border-radius: 8px;
+
+    /* 🔹 estética */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.reacao-contagem-img {
+.reacoes-item:hover {
+    background-color: #f1f5f9;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Ícone na contagem */
+.reacoes-icone-contagem {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    margin-right: 5px;
     vertical-align: middle;
+    object-fit: cover;
+
+    /* 🔹 acabamento */
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+
+    /* 🔹 interação suave */
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.reacoes-icone-contagem:hover {
+    transform: scale(1.15);
+    border-color: #0d6efd;
+    box-shadow: 0 3px 8px rgba(13, 110, 253, 0.3);
+}
+
+.reacoes-label {
+    font-size: 0.85rem;
+    color: #475569;
+    font-weight: 500;
+}
+
+.reacoes-vazia {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    font-style: italic;
+    margin-top: 0.5rem;
 }

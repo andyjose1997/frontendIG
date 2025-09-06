@@ -35,33 +35,24 @@ export default function Postagem({
 
 }) {
     return (
-        <div className="card-post">
-            <div className="autor-info post-cabecalho">
-                <div className="post-autor-detalhes">
+        <div className="post-card">
+            <div className="post-cabecalho">
+                <div className="post-autor">
                     <img
                         src={post.foto ? `${URL}/fotos/${post.foto}` : "/perfil.png"}
                         alt="Perfil"
+                        className="post-autor-foto"
                     />
 
-                    <div>
-                        <strong>
+                    <div className="post-autor-info">
+                        <strong className="post-autor-nome">
                             {post.nome.charAt(0).toUpperCase() + post.nome.slice(1).toLowerCase()}{" "}
                             {post.sobrenome.charAt(0).toUpperCase() + post.sobrenome.slice(1).toLowerCase()}
                         </strong><br />
-                        <small>{post.data_postagem}</small>
+                        <small className="post-data">{post.data_postagem}</small>
+
                         {post.sistema === 1 && (
-                            <span style={{
-                                marginLeft: "10px",
-                                backgroundColor: "#e63946",
-                                color: "white",
-                                fontWeight: "bold",
-                                padding: "2px 8px",
-                                borderRadius: "12px",
-                                fontSize: "0.85rem",
-                                display: "inline-flex",
-                                alignItems: "center",
-                                gap: "4px"
-                            }}>
+                            <span className="post-oficial">
                                 ⭐ OFICIAL
                             </span>
                         )}
@@ -90,11 +81,17 @@ export default function Postagem({
                                 [post.id]: e.target.value
                             }))
                         }
+                        className="post-edicao-input"
                     />
-                    <button onClick={() => atualizarPostagem(post.id)}>Salvar</button>
+                    <button
+                        onClick={() => atualizarPostagem(post.id)}
+                        className="post-edicao-salvar"
+                    >
+                        Salvar
+                    </button>
                 </div>
             ) : (
-                <h4>{post.titulo}</h4>
+                <h4 className="post-titulo">{post.titulo}</h4>
             )}
 
             <Reacoes
@@ -103,6 +100,7 @@ export default function Postagem({
                 enviarReacao={enviarReacao}
                 reacoesPorPost={reacoesPorPost}
             />
+
             <Comentarios
                 post={post}
                 comentariosPorPost={comentariosPorPost}
@@ -127,4 +125,5 @@ export default function Postagem({
             />
         </div>
     );
+
 }

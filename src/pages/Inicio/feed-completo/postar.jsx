@@ -15,35 +15,37 @@ export default function Postar({ novaPostagem, setNovaPostagem, criarPostagem })
                 placeholder="Escreva uma nova postagem..."
                 value={novaPostagem}
                 onFocus={handleAbrirModal} // 🔹 abre modal ao clicar
-                readOnly // 🔹 só abre o modal, não escreve direto aqui
+                readOnly
             />
 
             {abrirModal && (
-                <div className="modalPost-postagem-overlay">
-                    <div className="modalPost-postagem-conteudo">
-                        <h2 className="modalPost-postagemm-titulo">Criar nova postagem</h2>
+                <div className="modalPost-overlay">
+                    <div className="modalPost-conteudo">
+                        <h2 className="modalPost-titulo">Criar nova postagem</h2>
                         <textarea
-                            className="modalPost-postagem-textarea"
+                            className="modalPost-textarea"
                             placeholder="Escreva sua mensagem..."
                             value={novaPostagem}
                             onChange={(e) => setNovaPostagem(e.target.value)}
                             rows={14}
                             onKeyDown={(e) => {
                                 if (e.key === "Enter" && !e.shiftKey) {
-                                    e.preventDefault(); // bloqueia só a quebra normal
+                                    e.preventDefault();
                                     criarPostagem();
                                     handleFecharModal();
                                 }
-                                // Shift+Enter vai deixar o navegador inserir \n normalmente ✅
                             }}
                         />
 
-                        <div className="modalPost-postagem-botoes">
-                            <button className="modalPost-postagem-cancelar" onClick={handleFecharModal}>
+                        <div className="modalPost-botoes">
+                            <button
+                                className="modalPost-cancelar"
+                                onClick={handleFecharModal}
+                            >
                                 Cancelar
                             </button>
                             <button
-                                className="modalPost-postagem-confirmar"
+                                className="modalPost-confirmar"
                                 onClick={() => {
                                     criarPostagem();
                                     handleFecharModal();
@@ -57,4 +59,5 @@ export default function Postar({ novaPostagem, setNovaPostagem, criarPostagem })
             )}
         </div>
     );
+
 }

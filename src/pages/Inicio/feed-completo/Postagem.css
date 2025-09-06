@@ -1,40 +1,241 @@
-/* Cabeçalho da postagem */
-.post-cabecalho {
-    justify-content: space-between;
+/* ===== Card da postagem ===== */
+.post-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+
+    /* 🔹 sombra mais moderna */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+
+    /* 🔹 suavidade */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.card-post h4 {
+.post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Cabeçalho da postagem ===== */
+.post-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    /* 🔹 separação visual */
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.75rem;
+}
+
+.post-cabecalho:hover {
+    border-bottom-color: #cbd5e1;
+    /* realce sutil no hover */
+}
+
+.post-card h4,
+.post-titulo {
     word-break: break-word;
     overflow-wrap: break-word;
+
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-top: 0.75rem;
+    color: #1e293b;
+    /* azul-acinzentado moderno */
+
+    /* 🔹 suavidade */
+    transition: color 0.3s ease;
 }
 
+.post-card h4:hover,
+.post-titulo:hover {
+    color: #0f172a;
+    /* tom mais escuro no hover */
+}
 
-/* Detalhes autor + imagem */
-.post-autor-detalhes {
+/* ===== Autor + Imagem ===== */
+.post-autor {
     display: flex;
     align-items: center;
     gap: 1rem;
+    /* 🔹 equilíbrio visual */
+    padding: 0.25rem 0;
 }
 
-/* Campo de edição da postagem */
+.post-autor:hover {
+    background-color: #f8fafc;
+    /* leve destaque ao passar o mouse */
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.post-autor-foto {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+
+    /* 🔹 estilo extra */
+    border: 2px solid #f1f5f9;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+    /* 🔹 interação */
+    transition: transform 0.25s ease, box-shadow 0.3s ease;
+}
+
+.post-autor-foto:hover {
+    transform: scale(1.08);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.post-autor-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.4;
+
+    /* 🔹 garante alinhamento consistente */
+    gap: 2px;
+}
+
+.post-autor-nome {
+    font-weight: 600;
+    font-size: 1.7rem;
+    color: #1e293b;
+    /* azul-acinzentado elegante */
+    letter-spacing: 0.3px;
+
+    /* 🔹 transição suave */
+    transition: color 0.3s ease;
+}
+
+.post-autor-nome:hover {
+    color: #0f172a;
+    /* destaque sutil no hover */
+}
+
+.post-data {
+    font-size: 1rem;
+    color: #64748b;
+    /* cinza moderno */
+    font-style: italic;
+    opacity: 0.85;
+    white-space: nowrap;
+    margin-top: -19px;
+    /* 🔹 transição sutil */
+    transition: opacity 0.3s ease;
+}
+
+.post-data:hover {
+    opacity: 1;
+}
+
+.post-oficial {
+    margin-left: 10px;
+    background: linear-gradient(135deg, #e63946, #b91c1c);
+    color: #fff;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 14px;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.4px;
+
+    /* 🔹 destaque */
+    box-shadow: 0 2px 6px rgba(230, 57, 70, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.post-oficial:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(185, 28, 28, 0.5);
+}
+
+/* ===== Edição de postagem ===== */
 .post-edicao {
     margin-top: 1rem;
-}
-
-.post-edicao input {
-    width: 100%;
-    padding: 10px;
+    padding: 1rem;
+    border: 1px dashed #94a3b8;
+    /* borda sutil para indicar edição */
     border-radius: 10px;
-    border: 1px solid #ccc;
+    background-color: #f8fafc;
+    animation: fadeIn 0.3s ease;
 }
 
-.post-edicao button {
+/* 🔹 pequena animação de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.post-edicao-input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    /* cinza suave */
+    font-size: 0.95rem;
+    color: #1e293b;
+    background-color: #ffffff;
+
+    /* 🔹 transições suaves */
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.post-edicao-input:focus {
+    outline: none;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+}
+
+.post-edicao-input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    /* cinza suave */
+    font-size: 0.95rem;
+    color: #1e293b;
+    background-color: #ffffff;
+
+    /* 🔹 transições suaves */
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.post-edicao-salvar {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #0d6efd;
-    color: white;
-    font-weight: bold;
+    background: linear-gradient(135deg, #0d6efd, #084298);
+    color: #ffffff;
+    font-weight: 600;
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    font-size: 0.95rem;
+
+    /* 🔹 interação */
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
+}
+
+.post-edicao-salvar:hover {
+    background: linear-gradient(135deg, #084298, #052c65);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(13, 110, 253, 0.35);
+}
+
+.post-edicao-salvar:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 6px rgba(13, 110, 253, 0.3);
 }

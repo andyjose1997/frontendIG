@@ -39,7 +39,6 @@ export default function Login() {
                 setTipoMensagem("erro");
                 return;
             }
-
             // Salva token e usuário
             localStorage.setItem("token", data.token);
             localStorage.setItem("usuario", JSON.stringify(data.usuario));
@@ -47,7 +46,6 @@ export default function Login() {
 
             login(data.usuario, data.token);
             navigate("/inicio");
-
         } catch (error) {
             setMensagem("Erro de conexão com o servidor.");
             setTipoMensagem("erro");
@@ -98,11 +96,12 @@ export default function Login() {
                 <h2>Bem-vindo(a)!</h2>
                 <p>Ao fazer login, você pode:</p>
                 <ul>
-                    <li>✅ Acompanhar seus cursos</li>
-                    <li>✅ Gerar certificados</li>
-                    <li>✅ Falar com seu Host</li>
-                    <li>✅ Participar do ranking de alunos</li>
+                    <li>📚 Acessar cursos organizados e sempre disponíveis</li>
+                    <li>🎓 Conquistar certificados reconhecidos na plataforma</li>
+                    <li>🤝 Receber suporte direto do seu anfitrião</li>
+                    <li>🏆 Evoluir no ranking e desbloquear novas oportunidades</li>
                 </ul>
+
             </div>
 
             <div className="form-section">

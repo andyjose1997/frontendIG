@@ -147,6 +147,7 @@ export default function Indicados() {
 
             {indicados.length > 0 ? (
                 <div className="listaIndicados">
+                    <br />
                     <h3>Lista de Indicados:</h3>
                     <ul>
                         {indicados.map((indicado, index) => (
@@ -165,7 +166,7 @@ export default function Indicados() {
             {detalhe && (
                 <div className="modalFundo">
                     <div className="modalDetalhe">
-                        <button className="fecharModal" onClick={fecharDetalhe}>✖</button>
+                        <button className="fecharModalIndicado" onClick={fecharDetalhe}>✖</button>
                         <img
                             src={`${URL}/fotos/${detalhe.foto || "padrao.png"}`}
                             alt="Foto"

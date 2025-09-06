@@ -9,13 +9,20 @@
     padding: 4rem;
 
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f1f5f9;
 
+    /* 🔹 Fundo mais profissional */
+    background: linear-gradient(rgba(0, 20, 50, 0.75),
+            rgba(0, 20, 50, 0.85)),
+        url("/Logo/fundoLogin.png") no-repeat center center fixed;
+
+    background-size: cover;
+    border-radius: 40px;
     min-height: 100vh;
     box-sizing: border-box;
+    width: 100%;
 
     /* 🔹 leve profundidade */
-    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    backdrop-filter: blur(2px);
 }
 
 
@@ -408,9 +415,8 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 
     line-height: 1.6;
-    max-width: 350px;
+    max-width: 580px;
     flex: 1;
-
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 

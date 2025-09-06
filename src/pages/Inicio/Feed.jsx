@@ -52,7 +52,7 @@ export default function Feed() {
 
 
 
-    const userId = localStorage.getItem('user_id');
+    const userId = localStorage.getItem('usuario_id');
 
     return (
         <div className="FeedWrapper">

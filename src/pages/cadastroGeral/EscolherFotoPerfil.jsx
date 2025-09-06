@@ -2,23 +2,70 @@ import { useState } from "react";
 import "./cadastrarse.css";
 import { FRONT_URL } from "../../config";
 import { URL } from "../../config";
+
 export default function EscolherFotoPerfil() {
     const [fotoCarregada, setFotoCarregada] = useState(false);
     const token = localStorage.getItem("token");
 
+    // 🔹 Função para redimensionar imagem antes do upload
+    const resizeImage = (file, maxSize = 800) => {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement("canvas");
+                    let width = img.width;
+                    let height = img.height;
+
+                    // Mantém proporção
+                    if (width > height) {
+                        if (width > maxSize) {
+                            height *= maxSize / width;
+                            width = maxSize;
+                        }
+                    } else {
+                        if (height > maxSize) {
+                            width *= maxSize / height;
+                            height = maxSize;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    canvas.toBlob((blob) => {
+                        resolve(
+                            new File([blob], file.name, {
+                                type: "image/jpeg",
+                                lastModified: Date.now(),
+                            })
+                        );
+                    }, "image/jpeg", 0.9); // qualidade 90%
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    };
+
+    // 🔹 Upload da foto do usuário
     const handleUpload = async (event) => {
         const file = event.target.files[0];
         if (!file) return;
 
+        // Redimensiona antes de enviar
+        const resizedFile = await resizeImage(file);
+
         const formData = new FormData();
-        formData.append("foto", file);
+        formData.append("foto", resizedFile);
 
         try {
             const res = await fetch(`${URL}/upload_foto`, {
                 method: "POST",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+                headers: { Authorization: `Bearer ${token}` },
                 body: formData,
             });
 
@@ -32,17 +79,21 @@ export default function EscolherFotoPerfil() {
         }
     };
 
+    // 🔹 Escolher um avatar pronto
     const handleEscolherAvatar = async (nomeArquivo) => {
         try {
             const blob = await fetch(`/fotos/${nomeArquivo}`).then((r) => r.blob());
+            const file = new File([blob], nomeArquivo, { type: blob.type });
+
+            // Redimensiona avatar também
+            const resizedFile = await resizeImage(file);
+
             const formData = new FormData();
-            formData.append("foto", new File([blob], nomeArquivo));
+            formData.append("foto", resizedFile);
 
             const res = await fetch(`${URL}/upload_foto`, {
                 method: "POST",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+                headers: { Authorization: `Bearer ${token}` },
                 body: formData,
             });
 
@@ -90,7 +141,6 @@ export default function EscolherFotoPerfil() {
                 <label htmlFor="upload" className="upload-label">📂 Escolher Arquivo</label>
                 <input id="upload" type="file" accept="image/*" onChange={handleUpload} />
                 <p id="file-name"></p>
-
 
                 {fotoCarregada && <p className="foto-ok">✅ Foto carregada!</p>}
 

@@ -22,38 +22,32 @@ export default function Reacoes({
         <div className="reacoes-box">
             <div className="reacoes-container">
                 <button
-                    className="reacao-botao"
+                    className="reacoes-botao"
                     onClick={() => handleReacao("blz")}
                 >
-                    <img src="/reacoes/blz.png" alt="blz" />
+                    <img src="/reacoes/blz.png" alt="blz" className="reacoes-icone" />
                 </button>
 
                 <div className="reacoes-opcoes">
                     {tiposDeReacao.map(reacao => (
                         <button
                             key={reacao.tipo}
-                            className="reacao-botao"
+                            className="reacoes-botao"
                             onClick={() => handleReacao(reacao.tipo)}
                         >
-                            <img src={reacao.imagem} alt={reacao.tipo} />
+                            <img src={reacao.imagem} alt={reacao.tipo} className="reacoes-icone" />
                         </button>
                     ))}
                 </div>
             </div>
 
-            <div className="contagem-reacoes">
+            <div className="reacoes-contagem">
                 {(reacoesPorPost?.[post.id] || []).map(item => (
-                    <span key={item.tipo_reacao} style={{ marginRight: "10px", fontSize: "16px" }}>
+                    <span key={item.tipo_reacao} className="reacoes-item">
                         <img
                             src={tiposDeReacao.find(r => r.tipo === item.tipo_reacao)?.imagem}
                             alt={item.tipo_reacao}
-                            style={{
-                                width: "20px",
-                                height: "20px",
-                                borderRadius: "50%",
-                                marginRight: "5px",
-                                verticalAlign: "middle"
-                            }}
+                            className="reacoes-icone-contagem"
                         />
                         {item.total}
                     </span>
@@ -61,5 +55,6 @@ export default function Reacoes({
             </div>
         </div>
     );
+
 }
 

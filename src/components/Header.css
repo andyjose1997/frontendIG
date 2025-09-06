@@ -1,13 +1,12 @@
 /* Logo */
 #logo {
     width: 280px;
-    margin: 0 0 -83px 10px;
-    border-radius: 10px;
+    margin: 0 0 -113px 10px;
+    border-radius: 50px;
     /* cantos suaves */
     border: none;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
     /* sombra difusa e leve */
-    background: #050363;
     /* fundo branco para destacar em qualquer layout */
     padding: 6px;
     /* cria respiro ao redor da imagem */
