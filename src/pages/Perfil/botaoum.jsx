@@ -4,7 +4,7 @@ import { URL } from '../../config';
 import HostModal from './hostmodal';
 import { useFerramentas } from '../../ferramentascontext';
 import ModalQrCode from './config/modalqrcode';
-import AlertaWhatsApp from "./alertawhatsApp";
+import AlertaWhatsApp from "./alertawhatsapp";
 
 export default function BotaoUm() {
     const [mostrarNivel, setMostrarNivel] = useState(false);
