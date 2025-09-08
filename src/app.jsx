@@ -10,7 +10,7 @@ import NotFound from "./pages/notfound.jsx";
 import './app.css';
 import Cadastrarse from "./pages/cadastrogeral/cadastrarse.jsx";
 import Organizacao from "./pages/organizacao.jsx";
-import Inicio from "./pages/inicio/inicio.jsx";
+import Inicio from "./pages/Inicio/inicio.jsx";
 import Perfil from "./pages/perfil/perfil.jsx";
 import Manual from './pages/manual.jsx';
 import Mensagens from './pages/mensagens/mensagens.jsx';
