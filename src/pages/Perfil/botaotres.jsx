@@ -1,4 +1,4 @@
-import './BotaoTres.css'
+import './Botaotres.css'
 
 export default function BotaoTres() {
     const participantes = [

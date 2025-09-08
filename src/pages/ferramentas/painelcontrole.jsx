@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import VisualizarBanco from './componentes/visualizarBanco';
-import RankingGeral from './componentes/rakingGeral';
-import ListaUsuariosSimples from './componentes/ListaUsuariosSimples';
+import RankingGeral from './componentes/rakinggeral';
+import ListaUsuariosSimples from './componentes/listausuariossimples';
 import PerguntasUsuarios from './componentes/perguntasUsuarios';
 import TermosUso from './componentes/TermosUso'; // 🔹 novo componente
 import PermitirFundadores from './componentes/PermitirFundadores';
 import LinksRedes from './componentes/LinksRedes';
 import Propaganda from './componentes/Propaganda';
-import IreneConfig from './componentes/irene/ireneConfig';
-import IreneConfigCompleta from './componentes/irene/ireneConfigCompleta';
+import IreneConfig from './componentes/irene/ireneconfig';
+import IreneConfigCompleta from './componentes/irene/ireneconfigcompleta';
 import './painelcontrole.css';
 
 export default function PainelControle() {

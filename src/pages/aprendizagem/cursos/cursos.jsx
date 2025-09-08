@@ -1,7 +1,7 @@
 // src/components/Cursos.jsx
 
 import React, { useEffect, useState } from "react";
-import PacoteDeCursosUm from "./pacotes/PacoteDeCursosUm";
+import PacoteDeCursosUm from "./pacotes/pacotedecursosum";
 import { URL } from "../../../config";
 
 export const Cursos = () => {

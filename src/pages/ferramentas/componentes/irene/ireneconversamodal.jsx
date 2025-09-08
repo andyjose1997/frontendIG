@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./ireneConversaModal.css";
+import "./ireneconversamodal.css";
 
 // imports dos modais
 import IreneFormulario from "./ireneformulario";

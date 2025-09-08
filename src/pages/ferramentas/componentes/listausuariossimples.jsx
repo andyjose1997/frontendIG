@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { URL } from "../../../config";
-import "./listaUsuariosSimples.css";
+import "./listausuariosSsimples.css";
 
 export default function ListaUsuariosSimples() {
     const [usuarios, setUsuarios] = useState([]);

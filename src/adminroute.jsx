@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { useFerramentas } from './ferramentasContext';
+import { useFerramentas } from './ferramentascontext';
 import { useAuth } from './authcontext';
 
 export default function AdminRoute({ children }) {

@@ -1,4 +1,4 @@
-import './telaConfig.css';
+import './telaconfig.css';
 import Acima from "./up.jsx";
 import Botoes from "./botoes.jsx";
 

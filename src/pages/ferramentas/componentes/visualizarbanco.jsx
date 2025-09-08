@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { URL } from '../../../config';
-import './visualizarBanco.css';
+import './visualizarbanco.css';
 
 export default function VisualizarBanco() {
     const [tabelas, setTabelas] = useState([]);

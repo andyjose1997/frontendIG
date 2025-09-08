@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../authcontext';
-import './Login.css';
+import './login.css';
 import { URL } from '../config';
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";

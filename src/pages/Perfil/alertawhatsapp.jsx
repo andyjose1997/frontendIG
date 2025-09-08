@@ -1,5 +1,5 @@
 // AlertaWhatsApp.jsx
-import "./alertawhatsApp.css";
+import "./alertawhatsapp.css";
 
 export default function AlertaWhatsApp({ tipo, mensagem, onClose }) {
     return (

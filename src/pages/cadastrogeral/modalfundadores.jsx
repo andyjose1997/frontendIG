@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./modalFundadores.css";
+import "./modalfundadores.css";
 import { URL } from "../../config";
 
 // 🔹 Ícones

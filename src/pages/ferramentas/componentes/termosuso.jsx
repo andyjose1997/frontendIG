@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { URL } from "../../../config";
-import "./termosUso.css";
+import "./termosuso.css";
 
 export default function TermosUso() {
     const [termos, setTermos] = useState([]);

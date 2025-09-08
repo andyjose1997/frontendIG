@@ -1,7 +1,7 @@
 import { useState } from "react";
 import IreneConfig from "./ireneconfig";
-import IreneConfigContexto from "./Ireneconfigcontexto";
-import "./ireneConfigCompleta.css"; // opcional para estilizar
+import IreneConfigContexto from "./ireneconfigcontexto";
+import "./ireneconfigcompleta.css"; // opcional para estilizar
 
 export default function IreneConfigCompleta() {
     const [painelAtivo, setPainelAtivo] = useState("config");

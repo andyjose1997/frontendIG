@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { URL } from "../../../../config";
-import "./ireneFormulario.css";
+import "./ireneformulario.css";
 
 export default function IreneFormulario({ modo, dados, onClose, onSaved }) {
     // 🔹 Estados do formulário
