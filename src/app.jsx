@@ -18,7 +18,7 @@ import TelaConfig from "./pages/Perfil/telaconfig.jsx"; // 🚨 "Perfil" com P m
 import Aprendizagem from "./pages/aprendizagem/aprendizagem.jsx";
 import IreneChat from "./components/irenechat.jsx";
 import { AuthProvider } from "./authcontext.jsx";  // 🚨 "ironQuiz" com Q maiúsculo
-
+import FAQSection from "./pages/FAQSection.jsx";
 import PrivateRoute from "./privateroute.jsx";
 import PainelControle from './pages/ferramentas/painelcontrole.jsx';
 import AdminRoute from "./adminroute.jsx";
