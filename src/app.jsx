@@ -17,7 +17,7 @@ import Mensagens from './pages/mensagens/mensagens.jsx';
 import TelaConfig from "./pages/Perfil/telaconfig.jsx"; // 🚨 "Perfil" com P maiúsculo
 import Aprendizagem from "./pages/aprendizagem/aprendizagem.jsx";
 import IreneChat from "./components/irenechat.jsx";
-import { AuthProvider } from "./authContext.jsx";  // 🚨 "ironQuiz" com Q maiúsculo
+import { AuthProvider } from "./authcontext.jsx";  // 🚨 "ironQuiz" com Q maiúsculo
 
 import PrivateRoute from "./privateroute.jsx";
 import PainelControle from './pages/ferramentas/painelcontrole.jsx';

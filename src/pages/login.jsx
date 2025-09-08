@@ -1,7 +1,7 @@
 // 📂 src/componentes/Login.jsx
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../authContext';
+import { useAuth } from '../authcontext';
 import './Login.css';
 import { URL } from '../config';
 import { GoogleLogin } from "@react-oauth/google";

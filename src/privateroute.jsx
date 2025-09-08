@@ -1,5 +1,5 @@
 // src/PrivateRoute.jsx
-import { useAuth } from "./authContext.jsx";
+import { useAuth } from "./authcontext.jsx";
 import { Navigate, useLocation } from "react-router-dom";
 import Loader from "./components/loader.jsx"; // ✅ ajuste se estiver em outro caminho
 
