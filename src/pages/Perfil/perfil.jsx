@@ -1,9 +1,9 @@
 import './Perfil.css'
 import Up from './Up';
-import BotaoUm from './BotaoUm';
-import BotaoDois from './BotaoDois';
-import BotaoTres from './BotaoTres';
-import Botoes from './Botoes';
+import BotaoUm from './botaoUm';
+import BotaoDois from './botaoDois';
+import BotaoTres from './botaoTres';
+import Botoes from './botoes';
 import { useEffect, useState } from "react";
 
 
