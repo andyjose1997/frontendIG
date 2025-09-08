@@ -5,7 +5,7 @@ import BotaoDois from './botaoDois';
 import BotaoTres from './botaoTres';
 import Botoes from './botoes';
 import { useEffect, useState } from "react";
-
+/*fgbfgf */
 
 export default function Perfil() {
     const [modoMobileBotoes, setModoMobileBotoes] = useState(false);
