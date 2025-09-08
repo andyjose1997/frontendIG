@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import "./perguntasUsuarios.css";
+import "./perguntasusuarios.css";
 import { URL } from "../../../config";
 export default function PerguntasUsuarios() {
     const [faqs, setFaqs] = useState([]);
