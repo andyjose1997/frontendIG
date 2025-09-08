@@ -1,7 +1,7 @@
-import './TelaConfig.css'
-import Up from './up'
-import Botoes from './Botoes'
-import Config from './Config'
+import './telaConfig.css';
+import Up from '../up';
+import Botoes from './botoes';
+import Config from './Config';
 
 export default function TelaConfig() {
     return (
