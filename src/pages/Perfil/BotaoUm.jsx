@@ -146,7 +146,14 @@ export default function BotaoUm() {
     return (
         <div className="lista-vertical">
             {!mostrarFormularioZap ? (
-                <button onClick={() => setMostrarFormularioZap(true)}>📱 WhatsApp</button>
+                <div className="whatsapp-tooltip-wrapper">
+                    <button onClick={() => setMostrarFormularioZap(true)} className="whatsapp-button">
+                        📱 WhatsApp
+                    </button>
+                    <span className="whatsapp-tooltip">
+                        Aqui pode colocar seu WhatsApp para se comunicar com seus indicados e o seu host
+                    </span>
+                </div>
             ) : (
                 <div className="botoes-zap" ref={botoesZapRef}>
                     <button onClick={() => window.open(`https://web.whatsapp.com/send?phone=${codigo}${numero}`, "_blank")}>🔗 Ir ao WhatsApp</button>
@@ -181,7 +188,15 @@ export default function BotaoUm() {
                 </div>
             )}
 
-            <button onClick={() => setMostrarNivel(true)}>🔗 Meu link de indicação</button>
+            <div className="indicacao-tooltip-wrapper">
+                <button onClick={() => setMostrarNivel(true)}>
+                    🔗 Meu link de indicação
+                </button>
+                <span className="indicacao-tooltip">
+                    Com o seu link de indicação, outras pessoas podem se cadastrar como seus indicados
+                    e você receberá compensações pelas compras delas.
+                </span>
+            </div>
 
             {mostrarNivel && (
                 <ModalQrCode
@@ -197,8 +212,8 @@ export default function BotaoUm() {
             )}
 
             {mostrarFerramentas && (
-                <div className="modal-ferramentas-overlay">
-                    <div className={`modal-ferramentas ${erroChave ? "erro" : ""}`}>
+                <div className="painel-modal-overlay">
+                    <div className={`painel-modal ${erroChave ? "painel-erro" : ""}`}>
                         <h2>Bem-vindo ao painel de controle geral</h2>
                         <p>Sua função na plataforma é: <strong>{funcao}</strong></p>
                         <input
@@ -207,17 +222,21 @@ export default function BotaoUm() {
                             value={palavraDigitada}
                             onChange={(e) => setPalavraDigitada(e.target.value)}
                         />
-                        <div className="botoes-ferramentas">
+                        <div className="painel-botoes">
                             <button
-                                className="btn-entrar"
+                                className="painel-btn-entrar"
                                 onClick={() => {
-                                    if (palavraDigitada.trim().toLowerCase() === chaveCorreta.trim().toLowerCase()) {
+                                    if (
+                                        palavraDigitada.trim().toLowerCase() ===
+                                        chaveCorreta.trim().toLowerCase()
+                                    ) {
                                         setAcessoLiberado(true);
                                         localStorage.setItem("acessoFerramentas", "true"); // ← ESSENCIAL
-                                        window.open(`${window.location.origin}/ferramentas/painelcontrole`, "_blank");
-                                    }
-
-                                    else {
+                                        window.open(
+                                            `${window.location.origin}/ferramentas/painelcontrole`,
+                                            "_blank"
+                                        );
+                                    } else {
                                         setErroChave(true);
                                         setTimeout(() => setErroChave(false), 3000);
                                     }
@@ -226,7 +245,7 @@ export default function BotaoUm() {
                                 Entrar
                             </button>
                             <button
-                                className="btn-voltar"
+                                className="painel-btn-voltar"
                                 onClick={() => setMostrarFerramentas(false)}
                             >
                                 Voltar
@@ -235,6 +254,7 @@ export default function BotaoUm() {
                     </div>
                 </div>
             )}
+
 
 
             {mostrarModal && idHost && (   // ✅ só renderiza se idHost estiver carregado

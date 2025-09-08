@@ -1,18 +1,216 @@
-.exemplo-conversa {
-    background: #f8f9fa;
-    border-left: 4px solid #0162d1;
-    padding: 10px 15px;
-    margin: 15px 0;
+/* ===== Container principal ===== */
+.contexto-config {
+    font-family: "Segoe UI", sans-serif;
+    width: 100%;
+    margin: 20px auto;
+    padding: 2rem;
+    background: #fafbfc;
+    /* fundo dark */
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    color: #f3f4f6;
+}
+
+/* ===== Título ===== */
+.contexto-titulo {
+    text-align: center;
+    font-size: 1.6em;
+    font-weight: 600;
+    margin: 1.5rem 0;
+    color: #011930;
+    letter-spacing: 0.5px;
+}
+
+/* ===== Botões principais ===== */
+.contexto-novo,
+.contexto-ajuda {
+    background: #1e3a8a;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    margin: 10px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.contexto-novo:hover,
+.contexto-ajuda:hover {
+    background: #3b82f6;
+    transform: translateY(-2px);
+}
+
+/* ===== Lista de contextos ===== */
+.contexto-lista {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contexto-item {
+    background: #f9f9f9;
+    color: #111827;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.25s ease;
+}
+
+.contexto-item:hover {
+    background: #eef3ff;
+    border-color: #000d3f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Texto dentro da lista */
+.contexto-texto strong {
+    font-weight: 700;
+    color: #1e3a8a;
+}
+
+/* ===== Ações dentro da lista ===== */
+.contexto-acoes {
+    display: flex;
+    gap: 10px;
+}
+
+.contexto-editar,
+.contexto-apagar {
+    border: none;
+    padding: 8px 14px;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: all 0.25s ease;
 }
 
-.exemplo-conversa p {
-    margin: 5px 0;
+.contexto-editar {
+    background: #2563eb;
+    color: #090263;
 }
 
-.exemplo-conversa em {
-    color: #0162d1;
-    font-style: normal;
-    font-weight: bold;
+.contexto-editar:hover {
+    background: #1d4ed8;
+}
+
+.contexto-apagar {
+    background: #f87171;
+    color: #fff;
+}
+
+.contexto-apagar:hover {
+    background: #dc2626;
+}
+
+/* ===== Overlay do modal ===== */
+.contexto-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* ===== Modal ===== */
+.contexto-modal {
+    background: #fff;
+    padding: 28px;
+    border-radius: 14px;
+    width: 550px;
+    max-width: 95%;
+    max-height: 85%;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+    overflow-y: auto;
+    color: #111827;
+    line-height: 1.6;
+    animation: zoomIn 0.35s ease forwards;
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Títulos dentro do modal */
+.contexto-modal-titulo {
+    margin-bottom: 18px;
+    font-size: 1.4em;
+    font-weight: 600;
+    text-align: center;
+    color: #1e3a8a;
+}
+
+.contexto-exemplo-titulo {
+    margin-top: 18px;
+    font-weight: 600;
+    font-size: 1.2em;
+    color: #1e40af;
+}
+
+/* Exemplos de conversa */
+.contexto-exemplo {
+    background: #f3f4f6;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-top: 10px;
+    font-size: 0.95em;
+    color: #374151;
+}
+
+/* Ações no modal */
+.contexto-modal-acoes {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.contexto-modal-fechar {
+    background: #10b981;
+    color: #001055;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background 0.25s ease;
+}
+
+.contexto-modal-fechar:hover {
+    background: #059669;
 }

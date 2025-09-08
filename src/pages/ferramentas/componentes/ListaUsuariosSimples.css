@@ -1,61 +1,120 @@
 .lista-usuarios-simples {
     font-family: "Segoe UI", sans-serif;
-    margin-top: 20px;
-    font-size: 1.0em;
-    /* 70% maior */
+    margin: 20px auto;
+    font-size: 1em;
+
+    /* 🔹 Layout */
+    width: 90%;
+    padding: 2rem;
+    background: #010f3d;
+    border-radius: 16px;
+
+    /* 🔹 Sombra elegante */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+
+    /* 🔹 Transição suave em interações */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-/* Centralizar a lista */
+
+
+.lista-usuarios-simples h2 {
+    text-align: center;
+    font-size: 1.6em;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #f3f1f1;
+    letter-spacing: 0.5px;
+}
+
+/* 🔹 Lista centralizada e organizada */
 .lista-usuarios-simples ul {
     list-style: none;
-    padding: 0px 20%;
+    padding: 0 20%;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* espaço entre os itens */
+}
+
+/* 🔹 Estilo dos itens */
+.lista-usuarios-simples ul li {
+    background: #f9f9f9;
+    padding: 12px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* borda + sombra leve */
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+    transition: all 0.25s ease;
+}
+
+/* 🔹 Efeito hover */
+.lista-usuarios-simples ul li:hover {
+    background: #eef3ff;
+    border-color: #c7d2fe;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔹 Nome e função bem definidos */
+.lista-usuarios-simples ul li strong {
+    color: #111827;
+    font-weight: 600;
+}
+
+.lista-usuarios-simples ul li span {
+    color: #374151;
+    font-size: 0.95em;
+    font-style: italic;
 }
 
 .modalFuncionarios-edicao select {
     width: 80%;
-    margin: 0 10% 12px 10%;
-    padding: 8px 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 24px;
-    transition: border-color 0.2s;
-    background: #fff;
-}
-
-.modalFuncionarios-edicao select:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-/* Cada linha como card */
-.lista-usuarios-simples li {
-    background: #fff;
-    padding: 22px 26px;
-    /* aumentado */
-    margin-bottom: 16px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    margin: 0 10% 16px 10%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    /* cinza leve */
     font-size: 1.2em;
-    /* maior */
-    font-weight: 600;
-    color: #333;
+    /* mantém proporcional ao input */
+    background: #fff;
+    color: #111827;
+    outline: none;
+    height: 100%;
+    /* 🔹 Transições suaves */
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-/* Hover elegante */
-.lista-usuarios-simples li:hover {
-    background: #f9f9f9;
-    border-color: #bbb;
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+/* 🔹 Efeito ao focar */
+.modalFuncionarios-edicao select:focus {
+    border-color: #3b82f6;
+    /* azul clean */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
 }
 
-/* modalFuncionarios */
+/* 🔹 Opcional: estilo dos options */
+.modalFuncionarios-edicao select option {
+    padding: 10px;
+    font-size: 1em;
+}
+
+
+
+
+
+
+
+/* 🔹 Fundo escuro com leve transição */
 .modalFuncionarios-overlay {
     position: fixed;
     top: 0;
@@ -67,21 +126,74 @@
     align-items: center;
     justify-content: center;
     z-index: 999;
+
+    /* 🔹 efeito de fade-in */
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* 🔹 animação suave */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .modalFuncionarios-edicao {
     background: #fff;
-    padding: 35px 25px;
+    padding: 25px 22px;
+    /* 🔹 menos padding */
     border-radius: 14px;
-    width: 600px;
-    max-width: 95%;
-    height: 90%;
-    /* ocupa 90% da tela */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    width: 420px;
+    /* 🔹 menor largura */
+    max-width: 90%;
+    max-height: 80%;
+    /* 🔹 reduz altura máxima */
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
     overflow-y: auto;
-    /* se estourar, scroll vertical */
-    font-size: 1.7em;
-    /* aumenta tudo dentro */
+    font-size: 1.2em;
+    /* 🔹 reduz tamanho da fonte */
+
+    /* animação */
+    animation: zoomIn 0.35s ease forwards;
+
+    line-height: 1.5;
+    color: #1f2937;
+}
+
+/* 🔹 barra de rolagem discreta */
+.modalFuncionarios-edicao::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modalFuncionarios-edicao::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 8px;
+}
+
+.modalFuncionarios-edicao::-webkit-scrollbar-thumb {
+    background: #9ca3af;
+    border-radius: 8px;
+}
+
+.modalFuncionarios-edicao::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* 🔹 animação de zoom-in */
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .modalFuncionarios-edicao h3 {

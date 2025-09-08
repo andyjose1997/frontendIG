@@ -1,37 +1,253 @@
-#painelc h1 {
-    background-color: #121212;
+/* ===== Container Principal ===== */
+#controle-painel {
+    font-family: "Segoe UI", Roboto, sans-serif;
+    color: #222;
+    min-height: 100vh;
+    box-sizing: border-box;
 
+    /* 🔹 Fundo sutil para destacar o painel */
+
+    /* 🔹 Canto levemente arredondado */
+    border-radius: 12px;
+
+    /* 🔹 Sombra suave para dar profundidade */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+
+    /* 🔹 Tipografia mais clean */
+    line-height: 1.6;
+
+    /* 🔹 Efeito suave de entrada */
+    animation: fadeIn 0.6s ease forwards;
+
+    /* 🔹 Para que elementos nunca grudem nas bordas */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ===== Título ===== */
+#controle-painel h1 {
     text-align: center;
     font-size: 2.4rem;
-    color: #ffffff;
-    background: linear-gradient(to right, #222, #333);
-    padding: 1.5rem;
-    border-bottom: 2px solid #444;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    margin: 0;
+    font-weight: 800;
+    margin-bottom: 2.5rem;
+    color: #fdfdfd;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    /* 🔹 efeito de destaque */
+
+
+    /* 🔹 leve sombra para contraste */
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+
+    /* 🔹 animação de entrada */
+    animation: fadeSlideDown 0.7s ease;
 }
 
-.botoes-paineis {
+@keyframes fadeSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.controle-botoes-paineis {
     display: flex;
-    gap: 12px;
-    margin: 16px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    /* 🔹 leve destaque visual */
+    padding: 1rem 1.5rem;
+    background: #ffffff;
+    border-radius: 12px;
+
+    /* 🔹 sombra suave para profundidade */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+
+    /* 🔹 transição suave ao carregar */
+    animation: fadeIn 0.6s ease forwards;
 }
 
-.botoes-paineis button {
-    padding: 10px 16px;
-    border-radius: 8px;
-    background: #f0f0f0;
-    font-weight: bold;
+/* Animação */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.controle-botoes-paineis button {
+    padding: 12px 20px;
     border: none;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #00143d, #0360ff);
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: 0.2s;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+    /* 🔹 efeito 3D sutil */
+    transform: translateY(0);
 }
 
-.botoes-paineis button:hover {
-    background: #e0e0e0;
+/* Hover elegante */
+.controle-botoes-paineis button:hover {
+    background: linear-gradient(145deg, #e2e6ed, #f1f3f7);
+    color: #111;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
 }
 
-.botoes-paineis button.ativo {
-    background: #007bff;
-    color: white;
+/* Clique */
+.controle-botoes-paineis button:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.controle-botoes-paineis .controle-ativo {
+    background: #3e73ff;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(62, 115, 255, 0.35);
+}
+
+/* ===== Subpainel (FAQ/Termos) ===== */
+.controle-subpainel-cadastro {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 14px;
+
+    /* 🔹 borda discreta */
+    border: 1px solid #e5e9f2;
+
+    /* 🔹 sombra elegante */
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+
+    /* 🔹 transição suave ao abrir */
+    animation: fadeInUp 0.5s ease;
+
+    /* 🔹 melhor leitura */
+    line-height: 1.7;
+    color: #2c3e50;
+}
+
+/* Animação refinada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Botões do Subpainel (Container) ===== */
+.controle-botoes-subpainel {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.8rem;
+    flex-wrap: wrap;
+
+    /* 🔹 destaque sutil */
+    padding: 0.75rem 1rem;
+    background: #fdfdfd;
+    border-radius: 10px;
+    border: 1px solid #e5e9f2;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+
+/* ===== Botões do Subpainel (Individuais) ===== */
+.controle-botoes-subpainel button {
+    padding: 10px 18px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #f7f8fa, #eceff3);
+    color: #2c3e50;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+
+    /* 🔹 mantém consistência visual */
+    transform: translateY(0);
+}
+
+/* Hover */
+.controle-botoes-subpainel button:hover {
+    background: linear-gradient(145deg, #eceff3, #f7f8fa);
+    color: #111;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+/* Active (clique) */
+.controle-botoes-subpainel button:active {
+    transform: scale(0.97);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Aba ativa */
+.controle-botoes-subpainel .controle-ativo {
+    background: linear-gradient(145deg, #3e73ff, #1d4ed8);
+    color: #fff;
+    border: 1px solid #2a54d4;
+    box-shadow: 0 4px 12px rgba(62, 115, 255, 0.35);
+}
+
+
+
+/* Conteúdo dentro do subpainel */
+.controle-conteudo-subpainel {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* ===== Animações ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

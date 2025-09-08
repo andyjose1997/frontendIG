@@ -119,18 +119,18 @@ export default function Propaganda() {
 
     return (
         <div className="propaganda-container">
-            <h2>Gerenciar Propagandas</h2>
+            <h2 className="propaganda-titulo">Gerenciar Propagandas</h2>
 
             {/* Botão de adicionar */}
-            <button className="btn-adicionar" onClick={() => setMostrarModal(true)}>
+            <button className="propaganda-btn adicionar" onClick={() => setMostrarModal(true)}>
                 + Adicionar
             </button>
 
             {loading ? (
-                <p>Carregando...</p>
+                <p className="propaganda-loading">Carregando...</p>
             ) : (
-                <table className="tabela-propagandas">
-                    <thead>
+                <table className="propaganda-tabela">
+                    <thead className="propaganda-tabela-head">
                         <tr>
                             <th>Site</th>
                             <th>Link</th>
@@ -139,20 +139,30 @@ export default function Propaganda() {
                             <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="propaganda-tabela-body">
                         {propagandas.map((item) => (
-                            <tr key={item.id}>
-                                <td>{item.site}</td>
-                                <td>
+                            <tr key={item.id} className="propaganda-item">
+                                <td className="propaganda-site">{item.site}</td>
+                                <td className="propaganda-link">
                                     <a href={item.link} target="_blank" rel="noreferrer">
                                         {item.link}
                                     </a>
                                 </td>
-                                <td>{item.comentario}</td>
-                                <td>{item.ordem}</td>
-                                <td>
-                                    <button className="btn-editar" onClick={() => abrirEditar(item)}>Editar</button>
-                                    <button className="btn-apagar" onClick={() => apagarPropaganda(item.id)}>Apagar</button>
+                                <td className="propaganda-comentario">{item.comentario}</td>
+                                <td className="propaganda-ordem">{item.ordem}</td>
+                                <td className="propaganda-acoes">
+                                    <button
+                                        className="propaganda-btn editar"
+                                        onClick={() => abrirEditar(item)}
+                                    >
+                                        Editar
+                                    </button>
+                                    <button
+                                        className="propaganda-btn apagar"
+                                        onClick={() => apagarPropaganda(item.id)}
+                                    >
+                                        Apagar
+                                    </button>
                                 </td>
                             </tr>
                         ))}
@@ -162,25 +172,48 @@ export default function Propaganda() {
 
             {/* 🔹 Modal de Adicionar */}
             {mostrarModal && (
-                <div className="modal-overlay">
-                    <div className="modal-conteudo">
-                        <h3>Adicionar Propaganda</h3>
-                        <form onSubmit={adicionarPropaganda}>
-                            <label>Site</label>
-                            <input value={site} onChange={(e) => setSite(e.target.value)} required />
+                <div className="propaganda-modal-overlay">
+                    <div className="propaganda-modal-conteudo">
+                        <h3 className="propaganda-modal-titulo">Adicionar Propaganda</h3>
+                        <form className="propaganda-form" onSubmit={adicionarPropaganda}>
+                            <label className="propaganda-label">Site</label>
+                            <input
+                                className="propaganda-input"
+                                value={site}
+                                onChange={(e) => setSite(e.target.value)}
+                                required
+                            />
 
-                            <label>Link</label>
-                            <input value={link} onChange={(e) => setLink(e.target.value)} required />
+                            <label className="propaganda-label">Link</label>
+                            <input
+                                className="propaganda-input"
+                                value={link}
+                                onChange={(e) => setLink(e.target.value)}
+                                required
+                            />
 
-                            <label>Comentário</label>
-                            <input value={comentario} onChange={(e) => setComentario(e.target.value)} />
+                            <label className="propaganda-label">Comentário</label>
+                            <input
+                                className="propaganda-input"
+                                value={comentario}
+                                onChange={(e) => setComentario(e.target.value)}
+                            />
 
-                            <label>Ordem</label>
-                            <input value={ordem} onChange={(e) => setOrdem(e.target.value)} required />
+                            <label className="propaganda-label">Ordem</label>
+                            <input
+                                className="propaganda-input"
+                                value={ordem}
+                                onChange={(e) => setOrdem(e.target.value)}
+                                required
+                            />
 
-                            <div className="modal-botoes">
-                                <button type="submit" className="btn-salvar">Salvar</button>
-                                <button type="button" className="btn-cancelar" onClick={fecharModal}>
+                            <div className="propaganda-modal-botoes">
+                                <button type="submit" className="propaganda-btn salvar">Salvar</button>
+                                <button
+                                    type="button"
+                                    className="propaganda-btn cancelar"
+                                    onClick={fecharModal}
+                                >
                                     Cancelar
                                 </button>
                             </div>
@@ -191,25 +224,48 @@ export default function Propaganda() {
 
             {/* 🔹 Modal de Editar */}
             {mostrarEditar && (
-                <div className="modal-overlay">
-                    <div className="modal-conteudo">
-                        <h3>Editar Propaganda</h3>
-                        <form onSubmit={editarPropaganda}>
-                            <label>Site</label>
-                            <input value={site} onChange={(e) => setSite(e.target.value)} required />
+                <div className="propaganda-modal-overlay">
+                    <div className="propaganda-modal-conteudo">
+                        <h3 className="propaganda-modal-titulo">Editar Propaganda</h3>
+                        <form className="propaganda-form" onSubmit={editarPropaganda}>
+                            <label className="propaganda-label">Site</label>
+                            <input
+                                className="propaganda-input"
+                                value={site}
+                                onChange={(e) => setSite(e.target.value)}
+                                required
+                            />
 
-                            <label>Link</label>
-                            <input value={link} onChange={(e) => setLink(e.target.value)} required />
+                            <label className="propaganda-label">Link</label>
+                            <input
+                                className="propaganda-input"
+                                value={link}
+                                onChange={(e) => setLink(e.target.value)}
+                                required
+                            />
 
-                            <label>Comentário</label>
-                            <input value={comentario} onChange={(e) => setComentario(e.target.value)} />
+                            <label className="propaganda-label">Comentário</label>
+                            <input
+                                className="propaganda-input"
+                                value={comentario}
+                                onChange={(e) => setComentario(e.target.value)}
+                            />
 
-                            <label>Ordem</label>
-                            <input value={ordem} onChange={(e) => setOrdem(e.target.value)} required />
+                            <label className="propaganda-label">Ordem</label>
+                            <input
+                                className="propaganda-input"
+                                value={ordem}
+                                onChange={(e) => setOrdem(e.target.value)}
+                                required
+                            />
 
-                            <div className="modal-botoes">
-                                <button type="submit" className="btn-salvar">Salvar</button>
-                                <button type="button" className="btn-cancelar" onClick={fecharModal}>
+                            <div className="propaganda-modal-botoes">
+                                <button type="submit" className="propaganda-btn salvar">Salvar</button>
+                                <button
+                                    type="button"
+                                    className="propaganda-btn cancelar"
+                                    onClick={fecharModal}
+                                >
                                     Cancelar
                                 </button>
                             </div>
@@ -218,5 +274,6 @@ export default function Propaganda() {
                 </div>
             )}
         </div>
+
     );
 }

@@ -155,7 +155,7 @@ export default function VisualizarBanco() {
 
             {tabelaSelecionada && (
                 <>
-                    <h2>🗂️ Tabela: <span style={{ fontWeight: "600" }}>{tabelaSelecionada}</span></h2>
+                    <h2>🗂️ Tabela <span style={{ fontWeight: "600" }}>{tabelaSelecionada}</span></h2>
 
                     <div className="resumo-tabela">
                         <p style={{ fontSize: "30px" }}>Total de registros: <strong>{dadosFiltrados.length}</strong></p>
@@ -380,7 +380,7 @@ export default function VisualizarBanco() {
                 </>
             )}
             {linhaEditando && (
-                <div className="modal-overlay">
+                <div className="bancomodal-overlay">
                     <div className="modal-edicao">
                         <h3>Editar Usuário</h3>
                         <form
@@ -454,7 +454,7 @@ export default function VisualizarBanco() {
 
 
                             <div className="botoes-edicao">
-                                <button type="submit" className="btn-salvar">💾 Salvar</button>
+                                <button type="submit" className="bancobtn-salvar">💾 Salvar</button>
                                 <button
                                     type="button"
                                     className="btn-cancelar"

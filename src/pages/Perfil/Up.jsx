@@ -179,7 +179,17 @@ export default function Up() {
                                     </span>
                                 </span>
                             )}
-                            {user.funcao && user.cargo ? ` | Cargo: ${user.cargo}` : ""}
+                            {user.funcao && user.cargo ? (
+                                <span className="funcao-wrapper">
+                                    | Cargo: {user.cargo}
+                                    <span className="funcao-msg">
+                                        {user.responsabilidade && user.responsabilidade.trim() !== ""
+                                            ? user.responsabilidade
+                                            : "Nenhuma responsabilidade cadastrada"}
+                                    </span>
+                                </span>
+                            ) : ""}
+
                         </h2>
 
 

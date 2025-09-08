@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './Botoes.css';
 import { URL } from '../../config';
@@ -8,7 +8,6 @@ export default function Botoes() {
     const navigate = useNavigate();
     const [naoLidas, setNaoLidas] = useState(0);
 
-    // 🔹 Controle do modal de logout
     const [showModal, setShowModal] = useState(false);
     const [countdown, setCountdown] = useState(15);
 
@@ -24,24 +23,20 @@ export default function Botoes() {
     }
 
     function handleConfirmLogout() {
-        localStorage.clear(); // ✅ limpa sessão
-        navigate('/');        // ✅ volta pra home
+        localStorage.clear();
+        navigate('/');
     }
 
-    // 🔹 Contagem regressiva
     useEffect(() => {
         let timer;
         if (showModal && countdown > 0) {
-            timer = setTimeout(() => {
-                setCountdown(prev => prev - 1);
-            }, 1000);
+            timer = setTimeout(() => setCountdown(prev => prev - 1), 1000);
         } else if (showModal && countdown === 0) {
             handleConfirmLogout();
         }
         return () => clearTimeout(timer);
     }, [showModal, countdown]);
 
-    // 🔹 Buscar mensagens não lidas
     useEffect(() => {
         const carregarNaoLidas = async () => {
             try {
@@ -64,32 +59,49 @@ export default function Botoes() {
     return (
         <>
             <aside className="botoa-container">
-                <Link to="/inicio">🏛️ <span className="link-text">Início</span></Link>
+                <div className="tooltip-wrapper">
+                    <button onClick={() => navigate('/inicio')}>🏛️ <span className="link-text">Início</span></button>
+                </div>
 
-                {location.pathname === "/mensagens" ? (
-                    <Link to="/perfil">🙋‍♂️ <span className="link-text">Perfil</span></Link>
-                ) : (
-                    <div className="mensagenss-wrapper">
-                        <Link to="/mensagens">🗨️ <span className="link-text">Mensagens</span></Link>
-                        {naoLidas > 0 && (
-                            <span className="badge-naoo-lidas">{naoLidas}</span>
-                        )}
-                    </div>
-                )}
+                <div className="tooltip-wrapper">
+                    <button onClick={() => navigate('/mensagens')}>
+                        🗨️ <span className="link-text">Mensagens</span>
+                        {naoLidas > 0 && <span className="badge-naoo-lidas">{naoLidas}</span>}
+                    </button>
+                </div>
 
-                {location.pathname === "/TelaConfig" ? (
-                    <Link to="/perfil">👤 <span className="link-text">Perfil</span></Link>
-                ) : (
-                    <Link to="/TelaConfig">🔧 <span className="link-text">Configurações</span></Link>
-                )}
-                <Link to="/manual">🧾 <span className="link-text">Manual</span></Link>
+                <div className="tooltip-wrapper">
+                    <button onClick={() => navigate('/TelaConfig')}>🔧 <span className="link-text">Configurações</span></button>
+                </div>
 
-                <Link to="/iron_quiz">🏆 <span className="link-text">IronQuiz</span></Link>
-                <Link to="/aprendizagem">📘 <span className="link-text">Autossuficiência</span></Link>
-                <a href="/" onClick={handleLogout}>🔒 <span className="link-text">Logout</span></a>
+                <div className="tooltip-wrapper">
+                    <button onClick={() => navigate('/manual')}>🧾 <span className="link-text">Manual</span></button>
+                </div>
+
+                <div className="tooltip-wrapper">
+                    <button onClick={() => navigate('/iron_quiz')}>
+                        🏆 <span className="link-text">IronQuiz</span>
+                    </button>
+                    <span className="tooltip-text">
+                        Participe dos quizzes do sistema e ganhe compensações se vencer os torneios.
+                    </span>
+                </div>
+
+                <div className="tooltip-wrapper">
+                    <button onClick={() => navigate('/aprendizagem')}>
+                        📘 <span className="link-text">Autossuficiência</span>
+                    </button>
+                    <span className="tooltip-text">
+                        Aqui você encontra cursos de autossuficiência organizados pela plataforma,
+                        com aulas, materiais e recursos para desenvolver suas habilidades.
+                    </span>
+                </div>
+
+                <div className="tooltip-wrapper">
+                    <button onClick={handleLogout}>🔒 <span className="link-text">Logout</span></button>
+                </div>
             </aside>
 
-            {/* 🔹 Modal de Logout */}
             {showModal && (
                 <div className="modal-overlay">
                     <div className="modal-box">

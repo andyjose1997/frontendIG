@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { URL } from "../../../../config";
-import "./IreneConfig.css";
+import "./IreneContextoFormulario.css";
 
 export default function IreneContextoFormulario({ dados, onClose, onSaved }) {
     const [palavraChave, setPalavraChave] = useState(dados?.chave || "");
@@ -59,23 +59,27 @@ export default function IreneContextoFormulario({ dados, onClose, onSaved }) {
     };
 
     return (
-        <div className="irene-formulario-overlay">
-            <div className="irene-formulario">
-                <h3>{dados ? "✏️ Editar Contexto" : "➕ Novo Contexto"}</h3>
+        <div className="contexto-overlay">
+            <div className="contexto-formulario">
+                <h3 className="contexto-formulario-titulo">
+                    {dados ? "✏️ Editar Contexto" : "➕ Novo Contexto"}
+                </h3>
 
-                <form onSubmit={handleSubmit}>
-                    <label>Palavra-chave</label>
+                <form className="contexto-form" onSubmit={handleSubmit}>
+                    <label className="contexto-label">Palavra-chave</label>
                     <input
+                        className="contexto-input"
                         type="text"
                         value={palavraChave}
                         onChange={(e) => setPalavraChave(e.target.value)}
                         required
                     />
 
-                    <h4>⚡ Gatilhos</h4>
+                    <h4 className="contexto-subtitulo">⚡ Gatilhos</h4>
                     {gatilhos.map((g, gi) => (
-                        <div key={gi} className="bloco-gatilho">
+                        <div key={gi} className="contexto-bloco-gatilho">
                             <input
+                                className="contexto-input"
                                 type="text"
                                 placeholder="Digite o gatilho"
                                 value={g.texto}
@@ -83,10 +87,11 @@ export default function IreneContextoFormulario({ dados, onClose, onSaved }) {
                                 required
                             />
 
-                            <h5>💬 Respostas</h5>
+                            <h5 className="contexto-subsubtitulo">💬 Respostas</h5>
                             {g.respostas.map((r, ri) => (
                                 <input
                                     key={ri}
+                                    className="contexto-input"
                                     type="text"
                                     placeholder="Digite a resposta"
                                     value={r}
@@ -95,27 +100,42 @@ export default function IreneContextoFormulario({ dados, onClose, onSaved }) {
                                 />
                             ))}
 
-                            <button type="button" onClick={() => adicionarResposta(gi)}>
+                            <button
+                                type="button"
+                                className="contexto-btn adicionar-resposta"
+                                onClick={() => adicionarResposta(gi)}
+                            >
                                 ➕ Adicionar Resposta
                             </button>
                         </div>
                     ))}
 
                     {/* 🔹 Botão de adicionar gatilho logo abaixo da lista */}
-                    <div className="bloco-adicionar-gatilho">
-                        <button type="button" onClick={adicionarGatilho}>
+                    <div className="contexto-bloco-adicionar-gatilho">
+                        <button
+                            type="button"
+                            className="contexto-btn adicionar-gatilho"
+                            onClick={adicionarGatilho}
+                        >
                             ➕ Adicionar Gatilho
                         </button>
                     </div>
 
-                    <div className="acoes-form">
-                        <button type="submit">💾 Salvar</button>
-                        <button type="button" onClick={onClose}>
+                    <div className="contexto-acoes-form">
+                        <button type="submit" className="contexto-btn salvar">
+                            💾 Salvar
+                        </button>
+                        <button
+                            type="button"
+                            className="contexto-btn cancelar"
+                            onClick={onClose}
+                        >
                             ❌ Cancelar
                         </button>
                     </div>
                 </form>
             </div>
         </div>
+
     );
 }

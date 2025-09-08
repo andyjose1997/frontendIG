@@ -6,9 +6,8 @@ import { URL } from "../../config";
 export default function EscolherFotoPerfil() {
     const [fotoCarregada, setFotoCarregada] = useState(false);
     const token = localStorage.getItem("token");
-
-    // 🔹 Função para redimensionar imagem antes do upload
-    const resizeImage = (file, maxSize = 800) => {
+    // 🔹 Função para redimensionar imagem mantendo formato original e qualidade máxima
+    const resizeImage = (file, maxSize = 1200) => {
         return new Promise((resolve) => {
             const reader = new FileReader();
             reader.onload = (event) => {
@@ -34,22 +33,27 @@ export default function EscolherFotoPerfil() {
                     canvas.width = width;
                     canvas.height = height;
                     const ctx = canvas.getContext("2d");
+                    ctx.imageSmoothingQuality = "high"; // 🔹 suavização máxima
                     ctx.drawImage(img, 0, 0, width, height);
+
+                    // Mantém formato original (PNG ou JPEG)
+                    const fileType = file.type.includes("png") ? "image/png" : "image/jpeg";
 
                     canvas.toBlob((blob) => {
                         resolve(
                             new File([blob], file.name, {
-                                type: "image/jpeg",
+                                type: fileType,
                                 lastModified: Date.now(),
                             })
                         );
-                    }, "image/jpeg", 0.9); // qualidade 90%
+                    }, fileType, 1.0); // 🔹 qualidade 100%
                 };
                 img.src = event.target.result;
             };
             reader.readAsDataURL(file);
         });
     };
+
 
     // 🔹 Upload da foto do usuário
     const handleUpload = async (event) => {
@@ -108,16 +112,21 @@ export default function EscolherFotoPerfil() {
     };
 
     const avatares = [
-        "5bcdb605-6f8d-4618-accf-f312dfa3e416.png",
-        "6ab18ad7-97d5-4bfb-bd17-d7a9d7b49eee.png",
-        "48c09ef1-c89f-4010-a34f-6da7ac5e6cf6.png",
-        "84d89e0b-b962-48e1-a7c0-5650018831d6.png",
-        "86b06058-b445-421e-8abc-d89e7d03e1fa.png",
-        "d74de034-0a5e-4709-941a-9269b75b884f.png",
-        "padrafemAZUL.png",
-        "padrao.png",
-        "padraoFemenino.png"
+        "umF.png",
+        "umE.png",
+        "umD.png",
+        "umC.png",
+        "umB.png",
+        "umA.png",
+        "um.png",
+        "umG.png",
+        "umH.png",
+        "umI.png",
+        "umM.png",
+        "umAA.png",
+        "umBB.png",
     ];
+
 
     return (
         <div className="modalEscolher-overlay">
@@ -127,7 +136,7 @@ export default function EscolherFotoPerfil() {
                 <h3>📂 Avatares Disponíveis</h3>
                 <div className="avatar-lista">
                     {avatares.map((img) => (
-                        <img
+                        <img style={{ width: "100px", height: "100px" }}
                             key={img}
                             src={`/fotos/${img}`}
                             alt={img}

@@ -26,34 +26,34 @@ export default function PainelControle() {
             navigate("/");
         }
     }, [navigate]);
-
     return (
-        <div id='painelc'>
+        <div id='controle-painel'>
             <h1>Painel de Controle</h1>
 
-            <div className="botoes-paineis">
+            <div className="controle-botoes-paineis">
                 <button
-                    className={painelAtivo === "visualizarBanco" ? "ativo" : ""}
+                    className={painelAtivo === "visualizarBanco" ? "controle-ativo" : ""}
                     onClick={() => setPainelAtivo("visualizarBanco")}
                 >
                     Banco de Dados
                 </button>
 
                 <button
-                    className={painelAtivo === "listaUsuarios" ? "ativo" : ""}
+                    className={painelAtivo === "listaUsuarios" ? "controle-ativo" : ""}
                     onClick={() => setPainelAtivo("listaUsuarios")}
                 >
                     Lista de Funcionarios
                 </button>
+
                 <button
-                    className={painelAtivo === "irene" ? "ativo" : ""}
+                    className={painelAtivo === "irene" ? "controle-ativo" : ""}
                     onClick={() => setPainelAtivo("irene")}
                 >
                     Irene
                 </button>
 
                 <button
-                    className={painelAtivo === "infoCadastro" ? "ativo" : ""}
+                    className={painelAtivo === "infoCadastro" ? "controle-ativo" : ""}
                     onClick={() => {
                         setPainelAtivo("infoCadastro");
                         setSubPainelCadastro(null); // reseta escolha
@@ -62,30 +62,29 @@ export default function PainelControle() {
                     Info de cadastro
                 </button>
 
-
                 <button style={{ display: "block" }}  // mudar para none quando nao precise mais
-                    className={painelAtivo === "permitirFundadores" ? "ativo" : ""}
+                    className={painelAtivo === "permitirFundadores" ? "controle-ativo" : ""}
                     onClick={() => setPainelAtivo("permitirFundadores")}
                 >
                     Permitir Fundadores
                 </button>
+
                 <button
-                    className={painelAtivo === "linksRedes" ? "ativo" : ""}
+                    className={painelAtivo === "linksRedes" ? "controle-ativo" : ""}
                     onClick={() => setPainelAtivo("linksRedes")}
                 >
                     Redes sociais
                 </button>
+
                 <button
-                    className={painelAtivo === "propaganda" ? "ativo" : ""}
+                    className={painelAtivo === "propaganda" ? "controle-ativo" : ""}
                     onClick={() => setPainelAtivo("propaganda")}
                 >
                     Propaganda
                 </button>
 
-
-
                 <button
-                    className={painelAtivo === "rankingGeral" ? "ativo" : ""}
+                    className={painelAtivo === "rankingGeral" ? "controle-ativo" : ""}
                     onClick={() => setPainelAtivo("rankingGeral")}
                 >
                     Rankings gerais
@@ -97,29 +96,28 @@ export default function PainelControle() {
             {painelAtivo === "linksRedes" && <LinksRedes />}
             {painelAtivo === "propaganda" && <Propaganda />}
             {painelAtivo === "irene" && <IreneConfigCompleta />}
-
             {painelAtivo === "permitirFundadores" && <PermitirFundadores />}
             {painelAtivo === "listaUsuarios" && <ListaUsuariosSimples />}
 
             {/* 🔹 Novo fluxo Info de Cadastro */}
             {painelAtivo === "infoCadastro" && (
-                <div className="subpainel-cadastro">
-                    <div className="botoes-subpainel">
+                <div className="controle-subpainel-cadastro">
+                    <div className="controle-botoes-subpainel">
                         <button style={{ display: "none" }}
-                            className={subPainelCadastro === "faq" ? "ativo" : ""}
+                            className={subPainelCadastro === "faq" ? "controle-ativo" : ""}
                             onClick={() => setSubPainelCadastro("faq")}
                         >
                             Perguntas Frequentes
                         </button>
                         <button
-                            className={subPainelCadastro === "termos" ? "ativo" : ""}
+                            className={subPainelCadastro === "termos" ? "controle-ativo" : ""}
                             onClick={() => setSubPainelCadastro("termos")}
                         >
                             Termos de Uso
                         </button>
                     </div>
 
-                    <div className="conteudo-subpainel">
+                    <div className="controle-conteudo-subpainel">
                         {subPainelCadastro === "faq" && <PerguntasUsuarios />}
                         {subPainelCadastro === "termos" && <TermosUso />}
                     </div>

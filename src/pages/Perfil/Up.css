@@ -520,13 +520,22 @@
     padding: 6px 10px;
     border-radius: 6px;
     margin-top: 6px;
-    white-space: nowrap;
+
+    /* 🔹 Quebra de linha */
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
     position: absolute;
     left: 0;
     top: 120%;
+
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    z-index: 10;
+
+    /* 🔹 Sempre acima de tudo */
+    z-index: 9999;
 }
+
 
 .funcao-wrapper:hover .funcao-msg {
     display: block;

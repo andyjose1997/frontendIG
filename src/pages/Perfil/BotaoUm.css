@@ -288,6 +288,14 @@
     margin-top: 10px;
 }
 
+.lista-vertical .indicacao-tooltip-wrapper button {
+    width: 100%;
+}
+
+.lista-vertical .whatsapp-tooltip-wrapper button {
+    width: 100%;
+}
+
 .lista-vertical button:hover {
     transform: scale(1.05);
     font-weight: bold;
@@ -380,4 +388,278 @@
 
 .formulario-whatsapp button {
     background-color: #0be763;
+}
+
+/* Wrapper para alinhar */
+.whatsapp-tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip escondido por padrão */
+.whatsapp-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    width: 240px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    /* sobe acima do botão */
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.3s;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+/* Setinha do tooltip */
+/* Tooltip escondido por padrão */
+.whatsapp-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    width: 260px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px 14px;
+    position: absolute;
+    z-index: 1;
+    bottom: 130%;
+    /* sobe mais acima do botão */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    transition: all 0.3s ease;
+    font-size: 1.7rem;
+    line-height: 1.4;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    pointer-events: none;
+    /* não atrapalha o mouse */
+}
+
+/* Setinha do tooltip */
+.whatsapp-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    /* parte de baixo do tooltip */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
+}
+
+/* Mostrar tooltip ao passar o mouse */
+.whatsapp-tooltip-wrapper:hover .whatsapp-tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    /* efeito de subida */
+}
+
+.indicacao-tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.indicacao-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    width: 280px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px 14px;
+    position: absolute;
+    z-index: 1;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    transition: all 0.3s ease;
+    font-size: 1.7rem;
+    line-height: 1.4;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    pointer-events: none;
+}
+
+.indicacao-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
+}
+
+.indicacao-tooltip-wrapper:hover .indicacao-tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ===== Overlay do Painel ===== */
+.painel-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+
+    animation: fadeIn 0.35s ease;
+}
+
+/* ===== Container Principal ===== */
+.painel-modal {
+    background: #fff;
+    padding: 2.2rem 2.5rem;
+    border-radius: 14px;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+    text-align: center;
+
+    animation: zoomIn 0.35s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.painel-modal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Estado de Erro ===== */
+.painel-erro {
+    border: 2px solid #e63946;
+    animation: shake 0.3s ease;
+}
+
+/* ===== Títulos e textos ===== */
+.painel-modal h2 {
+    font-size: 1.5rem;
+    color: #222;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.painel-modal p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: #444;
+    line-height: 1.5;
+}
+
+/* ===== Input ===== */
+.painel-modal input {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1.8px solid #ccc;
+    outline: none;
+    transition: all 0.25s ease;
+    margin-bottom: 1.5rem;
+}
+
+.painel-modal input:focus {
+    border-color: #3e73ff;
+    box-shadow: 0 0 0 3px rgba(62, 115, 255, 0.25);
+}
+
+/* ===== Botões ===== */
+.painel-botoes {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.painel-btn-entrar,
+.painel-btn-voltar {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+/* Botão entrar */
+.painel-btn-entrar {
+    background: #3e73ff;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(62, 115, 255, 0.3);
+}
+
+.painel-btn-entrar:hover {
+    background: #2856d8;
+    transform: translateY(-2px);
+}
+
+/* Botão voltar */
+.painel-btn-voltar {
+    background: #f1f1f1;
+    color: #444;
+}
+
+.painel-btn-voltar:hover {
+    background: #e2e2e2;
+    transform: translateY(-2px);
+}
+
+/* ===== Animações ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-6px);
+    }
+
+    50% {
+        transform: translateX(6px);
+    }
+
+    75% {
+        transform: translateX(-6px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }

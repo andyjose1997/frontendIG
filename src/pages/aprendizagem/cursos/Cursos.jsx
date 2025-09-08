@@ -23,7 +23,7 @@ export const Cursos = () => {
         })
             .then(res => res.json())
             .then(data => {
-                setCategoria(data.categoria); // 🔹 precisa que o backend /me retorne categoria
+                setCategoria(data.categoria);
                 setLoading(false);
             })
             .catch(err => {
@@ -32,49 +32,60 @@ export const Cursos = () => {
             });
     }, []);
 
-    // Enquanto carrega a categoria, pode mostrar algo temporário
+    // Enquanto carrega a categoria
     if (loading) {
         return <p>Carregando...</p>;
     }
 
-    // Se for member ou mentor → já mostra PacoteDeCursosUm
+    // Se já é membro → mostra Pacote
     if (categoria === "member" || categoria === "mentor" || categoria === "founder") {
         return <PacoteDeCursosUm />;
     }
 
-    // Se não for → mostra botão temporário
+    // Se não é membro → mostra botão de compra
     return (
         <div>
             <button
                 onClick={async () => {
                     try {
                         const token = localStorage.getItem("token");
-                        const response = await fetch("http://localhost:8899/ativar-member", {
+                        const response = await fetch("http://localhost:8899/criar-preferencia", {
                             method: "POST",
                             headers: {
-                                "Content-Type": "application/json",
-                                "Authorization": `Bearer ${token}`
+                                "Authorization": `Bearer ${token}`,
+                                "Content-Type": "application/json"
                             }
                         });
 
                         const data = await response.json();
-                        alert(data.mensagem || "Usuário atualizado para MEMBER!");
-                        setCategoria("member"); // 🔹 muda direto para member → recarrega PacoteDeCursosUm
+
+                        if (data.init_point) {
+                            // 🔹 Redireciona para o checkout MercadoPago
+                            window.location.href = data.init_point;
+                        } else {
+                            alert("Erro ao iniciar pagamento.");
+                        }
                     } catch (error) {
-                        console.error("Erro ao atualizar:", error);
-                        alert("Erro ao se tornar membro.");
+                        console.error("Erro:", error);
+                        alert("Erro ao conectar com pagamento.");
                     }
                 }}
                 style={{
                     marginTop: "20px",
-                    padding: "10px",
-                    backgroundColor: "#007bff",
+                    padding: "12px 20px",
+                    backgroundColor: "#28a745",
                     color: "#fff",
                     border: "none",
-                    borderRadius: "5px"
+                    borderRadius: "8px",
+                    fontSize: "16px",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                    transition: "background-color 0.3s"
                 }}
+                onMouseOver={(e) => (e.target.style.backgroundColor = "#218838")}
+                onMouseOut={(e) => (e.target.style.backgroundColor = "#28a745")}
             >
-                Ativar Membro (TEMPORÁRIO)
+                💳 Comprar Pacote de Cursos (R$60)
             </button>
         </div>
     );

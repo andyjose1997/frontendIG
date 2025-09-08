@@ -7,6 +7,7 @@ export default function IreneChat() {
     const [mensagens, setMensagens] = useState([]);
     const [input, setInput] = useState("");
     const [carregando, setCarregando] = useState(false);
+    const [perguntas, setPerguntas] = useState([]); // sugestões vindas do backend
 
     const mensagensFimRef = useRef(null);
     const usuarioId = localStorage.getItem("usuario_id");
@@ -43,6 +44,22 @@ export default function IreneChat() {
         return () => controller.abort();
     }, [aberto, usuarioId]);
 
+    // 🔹 Buscar perguntas no backend conforme digita
+    const buscarPerguntas = async (texto) => {
+        if (!texto) {
+            setPerguntas([]);
+            return;
+        }
+
+        try {
+            const res = await fetch(`${URL}/irene/faq/perguntas?q=${encodeURIComponent(texto)}`);
+            const data = await res.json();
+            setPerguntas(data.perguntas || []);
+        } catch (err) {
+            console.error("Erro ao buscar perguntas:", err);
+        }
+    };
+
     // 🔹 Função para digitar letra por letra
     const digitarResposta = (texto) => {
         let i = 0;
@@ -58,7 +75,7 @@ export default function IreneChat() {
 
             if (i >= texto.length) {
                 clearInterval(interval);
-                setCarregando(false); // ✅ só libera quando terminou de digitar
+                setCarregando(false);
             }
         }, 40);
     };
@@ -125,21 +142,38 @@ export default function IreneChat() {
                         <div ref={mensagensFimRef} />
                     </div>
 
+                    {/* 🔹 Input + sugestões */}
                     <div className="irene-input">
                         <input
+                            list="perguntas"
                             type="text"
                             value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                            placeholder="Digite sua pergunta..."
+                            onChange={(e) => {
+                                setInput(e.target.value);
+                                buscarPerguntas(e.target.value); // 🔹 chama backend enquanto digita
+                            }}
+                            placeholder="Digite ou escolha uma pergunta..."
                             onKeyDown={(e) =>
                                 e.key === "Enter" && !carregando && enviarPergunta()
                             }
-                            disabled={carregando} // ✅ bloqueia enquanto carrega
+                            disabled={carregando}
                         />
+
+                        {/* 🔹 Datalist com sugestões do backend */}
+                        <datalist id="perguntas">
+                            {[...new Set(perguntas)] // 🔹 remove duplicadas
+                                .slice(0, 5)          // 🔹 limita a 5 sugestões
+                                .map((p, i) => (
+                                    <option key={i} value={p} />
+                                ))}
+                        </datalist>
+
+
                         <button onClick={enviarPergunta} disabled={carregando}>
                             {carregando ? "Aguarde..." : "Enviar"}
                         </button>
                     </div>
+
                 </div>
             )}
         </div>
