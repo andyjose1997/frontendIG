@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../authContext";
 
-import "./Manual.css";
+import "./manual.css";
 
 
 export default function Manual() {

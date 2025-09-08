@@ -1,6 +1,6 @@
 // 📂 src/componentes/TermosModal.jsx
 import { useEffect, useState } from "react";
-import "./TermosModal.css";
+import "./termosModal.css";
 import { URL } from "../../config";
 
 export default function TermosModal({ onClose, onAceitar, onFinalizar }) {

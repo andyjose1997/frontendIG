@@ -1,31 +1,31 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import Layout from "./components/Layout.jsx";
-import Loader from "./components/Loader.jsx";
+import Layout from "./components/layout.jsx";
+import Loader from "./components/loader.jsx";
 
-import Login from './pages/Login.jsx';
-import Cursos from "./pages/Cursos.jsx";
-import NotFound from "./pages/NotFound.jsx";
+import Login from './pages/login.jsx';
+import Cursos from "./pages/cursos.jsx";
+import NotFound from "./pages/notFound.jsx";
 import './App.css';
 import Cadastrarse from "./pages/cadastroGeral/Cadastrarse.jsx";
-import Organizacao from "./pages/Organizacao.jsx";
-import Inicio from "./pages/Inicio/Inicio.jsx";
-import Perfil from "./pages/Perfil/Perfil.jsx";
-import Manual from './pages/Manual.jsx';
-import Mensagens from './pages/mensagens/Mensagens.jsx';
-import TelaConfig from "./pages/Perfil/TelaConfig.jsx";
-import Aprendizagem from "./pages/aprendizagem/Aprendizagem.jsx";
-import IreneChat from "./components/IreneChat.jsx";
-import { AuthProvider } from "./AuthContext";
-import PrivateRoute from "./PrivateRoute";
-import PainelControle from './pages/ferramentas/painelcontrole';
-import AdminRoute from "./AdminRoute";
-import IronQuiz from "./pages/ironQuiz/IronQuiz.jsx";
+import Organizacao from "./pages/organizacao.jsx";
+import Inicio from "./pages/inicio/Inicio.jsx";
+import Perfil from "./pages/perfil/Perfil.jsx";
+import Manual from './pages/manual.jsx';
+import Mensagens from './pages/mensagens/mensagens.jsx';
+import TelaConfig from "./pages/Perfil/telaConfig.jsx";
+import Aprendizagem from "./pages/aprendizagem/aprendizagem.jsx";
+import IreneChat from "./components/ireneChat.jsx";
+import { AuthProvider } from "./authContext.jsx";
+import PrivateRoute from "./privateRoute.jsx";
+import PainelControle from './pages/ferramentas/painelcontrole.jsx';
+import AdminRoute from "./adminRoute.jsx";
+import IronQuiz from "./pages/ironQuiz/ironQuiz.jsx";
 
 import { Link } from "react-router-dom";
 import { URL } from "./config.jsx";
-import FAQSection from "./pages/FAQSection.jsx";
+import FAQSection from "./pages/fAQSection.jsx";
 
 function Home() {
   return (

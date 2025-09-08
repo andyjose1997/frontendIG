@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./Organizacao.css";
+import "./organizacao.css";
 import { URL } from "../config";
 export default function Organizacao() {
     const [admins, setAdmins] = useState([]);

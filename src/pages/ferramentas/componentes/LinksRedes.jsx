@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { URL } from "../../../config";
-import "./LinksRedes.css";
+import "./linksRedes.css";
 
 export default function LinksRedes() {
     const [links, setLinks] = useState([]);

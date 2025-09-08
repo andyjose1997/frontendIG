@@ -4,7 +4,7 @@ import Reacoes from './feed-completo/reacoes';
 import Comentarios from './feed-completo/comentarios';
 import Postar from './feed-completo/postar';
 import ModalConfirmacao from './feed-completo/ModalConfirmacao';
-import MenuOpcoesPostagem from './feed-completo/MenuOpcoesPostagem';
+import MenuOpcoesPostagem from './feed-completo/menuOpcoesPostagem';
 import Postagem from './feed-completo/Postagem';
 import PostagemSistema from './feed-completo/PostagemSistema'; // ✅ novo
 import useFeedHandlers from './feed-completo/useFeedHandlers';

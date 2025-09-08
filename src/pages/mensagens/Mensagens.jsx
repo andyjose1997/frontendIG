@@ -1,6 +1,6 @@
-import Bandeja from './Bandeja';
-import Up from '../Perfil/Up';
-import Botoes from '../Perfil/Botoes';
+import Bandeja from './bandeja';
+import Up from '../Perfil/up';
+import Botoes from '../Perfil/botoes';
 import './Mensagens.css'
 
 export default function LayoutMensagens() {

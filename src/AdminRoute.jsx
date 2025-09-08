@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { useFerramentas } from './ferramentasContext';
-import { useAuth } from './AuthContext';
+import { useAuth } from './authContext';
 
 export default function AdminRoute({ children }) {
     const { acessoLiberado } = useFerramentas();

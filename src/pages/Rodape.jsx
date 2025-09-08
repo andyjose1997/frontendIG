@@ -1,4 +1,4 @@
-import './Rodape.css';
+import './rodape.css';
 const Facebook = "https://www.facebook.com/";
 const YouTube = "https://www.youtube.com/";
 const LinkedIn = "https://www.linkedin.com/";

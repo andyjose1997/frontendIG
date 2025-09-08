@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import './Cursos.css';
+import './cursos.css';
 
 
 export default function Cursos() {

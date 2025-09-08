@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import "./AlertaTermos.css";
+import "./alertaTermos.css";
 
 export default function AlertaTermos({ mensagem, onClose }) {
     useEffect(() => {

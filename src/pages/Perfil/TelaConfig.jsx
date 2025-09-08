@@ -1,5 +1,5 @@
 import './TelaConfig.css'
-import Up from './Up'
+import Up from './up'
 import Botoes from './Botoes'
 import Config from './Config'
 

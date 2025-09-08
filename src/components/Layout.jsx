@@ -1,5 +1,5 @@
 import Header from './Header';
-import Rodape from '../pages/Rodape'; // 👈 Correto!
+import Rodape from '../pages/rodape'; // 👈 Correto!
 import { Outlet } from 'react-router-dom';
 
 export default function Layout() {

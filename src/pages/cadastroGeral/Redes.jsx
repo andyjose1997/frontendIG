@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { URL } from "../../config";
-import "./Redes.css";
+import "./redes.css";
 
 // 🔹 Ícones do lucide-react
 import { Facebook, Instagram, Linkedin, Twitter, Youtube, Globe, MessageCircle } from "lucide-react";

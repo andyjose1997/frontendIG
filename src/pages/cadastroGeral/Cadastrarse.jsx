@@ -1,15 +1,15 @@
 // 📂 src/componentes/Cadastrarse.jsx
 import { useState, useEffect } from "react";
-import './Cadastrarse.css';
-import EscolherFotoPerfil from "./EscolherFotoPerfil";
-import TermosModal from "./TermosModal";
-import AlertaTermos from "./AlertaTermos";
+import './cadastrarse.css';
+import EscolherFotoPerfil from "./escolherFotoPerfil";
+import TermosModal from "./termosModal";
+import AlertaTermos from "./alertaTermos";
 import { useParams } from "react-router-dom";
 import { URL } from "../../config";
-import ModalFundadores from "./ModalFundadores";
+import ModalFundadores from "./modalFundadores";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-import Redes from "./Redes";
+import Redes from "./redes";
 
 export default function Cadastrarse() {
     const { idHost } = useParams();

@@ -1,6 +1,6 @@
 // src/pages/Aprendizagem.jsx
-import "./Aprendizagem.css";
-import Rodape from "../Rodape";
+import "./aprendizagem.css";
+import Rodape from "../rodape";
 import { useState } from "react";
 import FormularioCurriculo from "./curriculo/curriculo";
 
