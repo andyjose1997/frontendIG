@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { URL } from '../../config';
 import './bandeja.css';
-import ModalUsuario from './modalusuario';
+import ModalUsuarioMensagem from './modalusuariomensagem';
 
 export default function Bandeja() {
     const [usuarios, setUsuarios] = useState([]);
@@ -320,8 +320,9 @@ export default function Bandeja() {
                 </>
             )}
             {mostrarModalUsuario && (
-                <ModalUsuario usuario={dadosUsuario} onClose={() => setMostrarModalUsuario(false)} />
+                <ModalUsuarioMensagem usuario={dadosUsuario} onClose={() => setMostrarModalUsuario(false)} />
             )}
+
             {confirmarApagar && (
                 <div className="modal-overlay">
                     <div className="modal-confirmacao">

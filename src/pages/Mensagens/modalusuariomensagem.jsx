@@ -1,10 +1,8 @@
-// 📂 src/pages/Perfil/ModalUsuario.jsx
+// 📂 src/pages/Perfil/modalusuariomensagem.jsx
 import './modalusuario.css';
 import { URL } from '../../config';
 
-
-
-export default function ModalUsuario({ usuario, onClose }) {
+export default function ModalUsuarioMensagem({ usuario, onClose }) {
     if (!usuario) return null;
 
     const linkWhatsapp = usuario.whatsapp
@@ -27,11 +25,18 @@ export default function ModalUsuario({ usuario, onClose }) {
                 <h2>{usuario.nome} {usuario.sobrenome}</h2>
 
                 {linkWhatsapp ? (
-                    <a href={linkWhatsapp} target="_blank" rel="noopener noreferrer" className="btn-whatsapp">
+                    <a
+                        href={linkWhatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-whatsapp"
+                    >
                         📲 Abrir WhatsApp
                     </a>
                 ) : (
-                    <button className="btn-whatsapp desabilitado" disabled>Sem WhatsApp</button>
+                    <button className="btn-whatsapp desabilitado" disabled>
+                        Sem WhatsApp
+                    </button>
                 )}
 
                 <div className="meta-box">

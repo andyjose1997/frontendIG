@@ -65,7 +65,7 @@ export default function Buscador() {
         const carregarNaoLidas = async () => {
             try {
                 const userId = localStorage.getItem("id");
-                const resposta = await fetch(`${URL}/mensagens/nao_lidas/${userId}`, {
+                const resposta = await fetch(`${URL}/Mensagens/nao_lidas/${userId}`, {
                     headers: { Authorization: "Bearer " + localStorage.getItem("token") }
                 });
                 const data = await resposta.json();

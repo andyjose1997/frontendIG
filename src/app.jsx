@@ -25,7 +25,6 @@ import AdminRoute from "./adminroute.jsx";
 import IronQuiz from "./pages/ironQuiz/ironquiz.jsx";
 import { Link } from "react-router-dom";
 import { URL } from "./config.jsx";
-import FAQSection from "./pages/faqsection.jsx";
 
 
 function Home() {
