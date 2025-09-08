@@ -9,7 +9,7 @@ import Postagem from './feed-completo/postagem';
 import PostagemSistema from './feed-completo/postagemsistema'; // ✅ novo
 import useFeedHandlers from './feed-completo/useFeedHandlers';
 import './feed-completo/comentarios.css';
-import './feed-completo/modalConfirmacao.css';
+import './feed-completo/modalconfirmacao.css';
 import './feed-completo/postagem.css';
 import './feed-completo/postar.css';
 import './feed-completo/reacoes.css';
