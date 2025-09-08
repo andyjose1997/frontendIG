@@ -1,4 +1,4 @@
-import './Botaoum.css';
+import './botaoum.css';
 import { useState, useEffect, useRef } from 'react';
 import { URL } from '../../config';
 import HostModal from './hostmodal';
