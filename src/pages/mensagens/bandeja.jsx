@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { URL } from '../../config';
 import './bandeja.css';
-import ModalUsuario from './modalUsuario';
+import ModalUsuario from './modalusuario';
 
 export default function Bandeja() {
     const [usuarios, setUsuarios] = useState([]);

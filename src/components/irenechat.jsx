@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
-import "./ireneChat.css";
+import "./irenechat.css";
 import { URL } from "../config";
 
 export default function IreneChat() {

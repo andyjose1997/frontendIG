@@ -1,6 +1,6 @@
 // 📂 src/componentes/FAQSection.jsx
 import { useEffect, useState, useRef } from "react";
-import "./cadastroGeral/faq.css";
+import "./cadastrogeral/faq.css";
 import { URL } from "../config";
 export default function FAQSection() {
     const [faqs, setFaqs] = useState([]);
