@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './dadosConta.css';
+import './dadosconta.css';
 import { URL } from '../../../config';
 
 export default function DadosConta({ onVoltar }) {

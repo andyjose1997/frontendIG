@@ -3,10 +3,10 @@ import { useRef, useState } from 'react';
 import Reacoes from './feed-completo/reacoes';
 import Comentarios from './feed-completo/comentarios';
 import Postar from './feed-completo/postar';
-import ModalConfirmacao from './feed-completo/ModalConfirmacao';
-import MenuOpcoesPostagem from './feed-completo/menuOpcoesPostagem';
-import Postagem from './feed-completo/Postagem';
-import PostagemSistema from './feed-completo/PostagemSistema'; // ✅ novo
+import ModalConfirmacao from './feed-completo/modalconfirmacao';
+import MenuOpcoesPostagem from './feed-completo/menuopcoespostagem';
+import Postagem from './feed-completo/postagem';
+import PostagemSistema from './feed-completo/postagemsistema'; // ✅ novo
 import useFeedHandlers from './feed-completo/useFeedHandlers';
 import './feed-completo/comentarios.css';
 import './feed-completo/ModalConfirmacao.css';

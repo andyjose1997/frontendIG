@@ -1,8 +1,8 @@
-import './Perfil.css'
-import Up from './Up';
-import BotaoUm from './botaoUm';
-import BotaoDois from './botaoDois';
-import BotaoTres from './botaoTres';
+import './perfil.css'
+import Up from './up';
+import BotaoUm from './botaoum';
+import BotaoDois from './botaodois';
+import BotaoTres from './botaotres';
 import Botoes from './botoes';
 import { useEffect, useState } from "react";
 /*fgbfgf */

@@ -2,8 +2,8 @@ import { useState } from "react";
 import "./ireneConversaModal.css";
 
 // imports dos modais
-import IreneFormulario from "./IreneFormulario";
-import IreneContextoFormulario from "./IreneContextoFormulario";
+import IreneFormulario from "./ireneformulario";
+import IreneContextoFormulario from "./irenecontextoformulario";
 
 export default function IreneConversaModal({ dados, onClose, onResponder }) {
     const [mostrarFormulario, setMostrarFormulario] = useState(false);

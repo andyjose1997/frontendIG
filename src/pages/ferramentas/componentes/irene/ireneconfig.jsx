@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { URL } from "../../../../config";
 import "./ireneConfig.css";
-import IreneFormulario from "./IreneFormulario";
-import IreneConversaModal from "./IreneConversaModal";
+import IreneFormulario from "./ireneformulario";
+import IreneConversaModal from "./ireneconversamodal";
 
 export default function IreneConfig() {
     const [respostas, setRespostas] = useState([]);

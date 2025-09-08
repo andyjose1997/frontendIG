@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import './Up.css';
+import './up.css';
 import { URL } from "../../config";
 
 export default function Up() {

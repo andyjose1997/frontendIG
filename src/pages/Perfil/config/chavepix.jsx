@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { FRONT_URL, URL } from '../../../config';
-import './chavePix.css';
+import './chavepix.css';
 import { QRCodeCanvas } from "qrcode.react";
-import ModalQrCode from './ModalQrCode';
+import ModalQrCode from './modalqrcode';
 
 export default function ChavePix({ onVoltar }) {
     const [chavePix, setChavePix] = useState('');

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { URL } from "../../config";
-import CriarQuiz from "./CriarQuiz";
-import JogarQuiz from "./jogarQuiz";
+import CriarQuiz from "./criarquiz";
+import JogarQuiz from "./jogarquiz";
 
 export default function IronQuiz() {
     const [modo, setModo] = useState(null);

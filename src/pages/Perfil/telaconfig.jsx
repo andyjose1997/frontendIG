@@ -1,14 +1,16 @@
 import './telaConfig.css';
-import Up from '../up';
-import Botoes from './botoes';
-import Config from './Config';
+import Acima from "./up.jsx";
+import Botoes from "./botoes.jsx";
+
+
+
 
 export default function TelaConfig() {
     return (
         <div>
             <div id="GeralConfig">
                 <div id="Up">
-                    <Up />
+                    <Acima />
                 </div>
 
                 <div id="Botoes">

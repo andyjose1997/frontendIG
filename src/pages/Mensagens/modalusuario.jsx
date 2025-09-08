@@ -1,6 +1,9 @@
 // 📂 src/pages/Perfil/ModalUsuario.jsx
-import './ModalUsuario.css';
+import './modalusuario.css';
 import { URL } from '../../config';
+
+
+
 export default function ModalUsuario({ usuario, onClose }) {
     if (!usuario) return null;
 

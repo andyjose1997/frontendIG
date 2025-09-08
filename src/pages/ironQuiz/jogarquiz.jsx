@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { URL } from "../../config";
-import "./JogarQuiz.css";
+import "./Jogarquiz.css";
 
 export default function JogarQuiz() {
     const [quizzes, setQuizzes] = useState([]);

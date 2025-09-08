@@ -1,6 +1,6 @@
 import { useState } from "react";
-import IreneConfig from "./ireneConfig";
-import IreneConfigContexto from "./IreneConfigContexto";
+import IreneConfig from "./ireneconfig";
+import IreneConfigContexto from "./Ireneconfigcontexto";
 import "./ireneConfigCompleta.css"; // opcional para estilizar
 
 export default function IreneConfigCompleta() {

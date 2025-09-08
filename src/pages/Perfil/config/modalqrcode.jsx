@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 import { URL } from "../../../config";
-import "./ModalQrCode.css";
+import "./modalqrcode.css";
 import { FRONT_URL } from "../../../config";
 
 export default function ModalQrCode({ onClose }) {

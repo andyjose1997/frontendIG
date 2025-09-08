@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import './Botoes.css';
+import './botoes.css';
 import { URL } from '../../config';
 
 export default function Botoes() {

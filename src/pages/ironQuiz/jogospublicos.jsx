@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { URL } from "../../config";
-import "./JogarQuiz.css";
-import "./JogosPublicos.css";
+import "./Jogarquiz.css";
+import "./Jogospublicos.css";
 
 export default function JogosPublicos({ id_jogador, abrirQuiz }) {
     const [jogosPublicos, setJogosPublicos] = useState([]);

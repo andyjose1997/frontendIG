@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { URL } from '../../../config';
-import './mudarSenha.css';
+import './mudarsenha.css';
 
 export default function MudarSenha({ onVoltar }) {
     const [senhaAtual, setSenhaAtual] = useState("");

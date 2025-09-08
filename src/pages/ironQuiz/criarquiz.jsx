@@ -1,7 +1,7 @@
 // 📂 src/pages/ironQuiz/CriarQuiz.jsx
 import { useState, useEffect } from "react";
 import { URL } from "../../config";
-import "./CriarQuiz.css";
+import "./criarquiz.css";
 
 export default function CriarQuiz() {
     const [tipo, setTipo] = useState("");

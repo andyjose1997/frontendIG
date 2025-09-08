@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import './Config.css';
-import ModoPP from './config/ModoPP';
-import DadosConta from './config/dadosConta';
-import ChavePix from './config/ChavePix';  // ✅ Importado
-import MudarSenha from './config/MudarSenha';  // ✅ Importado
+import './config.css';
+import ModoPP from './config/modopp';
+import DadosConta from './config/dadosconta';
+import ChavePix from './config/chavepix';  // ✅ Importado
+import MudarSenha from './config/mudarsenha';  // ✅ Importado
 
 export default function Config() {
     const [mostrarPrivacidade, setMostrarPrivacidade] = useState(false);

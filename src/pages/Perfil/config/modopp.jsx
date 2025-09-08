@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './ModoPP.css';
+import './Modopp.css';
 import { URL } from '../../../config';
-import HostModal from '../hostModal';
+import HostModal from './hostModal';
 
 export default function ModoPP({ onVoltar }) {
     const [status, setStatus] = useState(null);

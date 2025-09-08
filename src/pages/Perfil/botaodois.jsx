@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import './BotaoDois.css';
+import './Botaodois.css';
 import { URL } from '../../config';
 
 export default function BotaoDois() {

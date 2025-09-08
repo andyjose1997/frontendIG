@@ -1,10 +1,10 @@
-import './BotaoUm.css';
+import './Botaoum.css';
 import { useState, useEffect, useRef } from 'react';
 import { URL } from '../../config';
-import HostModal from './hostModal';
+import HostModal from './hostmodal';
 import { useFerramentas } from '../../ferramentasContext';
-import ModalQrCode from './config/modalQrCode';
-import AlertaWhatsApp from "./alertaWhatsApp";
+import ModalQrCode from './config/modalqrcode';
+import AlertaWhatsApp from "./alertawhatsApp";
 
 export default function BotaoUm() {
     const [mostrarNivel, setMostrarNivel] = useState(false);
