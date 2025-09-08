@@ -1,12 +1,12 @@
 // 📂 src/componentes/Cadastrarse.jsx
 import { useState, useEffect } from "react";
 import './cadastrarse.css';
-import EscolherFotoPerfil from "./escolherFotoPerfil";
-import TermosModal from "./termosModal";
-import AlertaTermos from "./alertaTermos";
+import EscolherFotoPerfil from "./escolherfotoperfil";
+import TermosModal from "./termosmodal";
+import AlertaTermos from "./alertatermos";
 import { useParams } from "react-router-dom";
 import { URL } from "../../config";
-import ModalFundadores from "./modalFundadores";
+import ModalFundadores from "./modalfundadores";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import Redes from "./redes";
