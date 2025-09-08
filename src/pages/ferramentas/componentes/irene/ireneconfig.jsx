@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { URL } from "../../../../config";
-import "./ireneConfig.css";
+import "./ireneconfig.css";
 import IreneFormulario from "./ireneformulario";
 import IreneConversaModal from "./ireneconversamodal";
 
