@@ -207,7 +207,7 @@ function AppRoutes() {
   );
 }
 
-import { FerramentasProvider } from "./context/FerramentasContext.jsx";
+import { FerramentasProvider } from "./ferramentasContext.jsx";
 
 export default function App() {
   return (
