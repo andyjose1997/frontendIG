@@ -6,7 +6,7 @@ import FormularioCurriculo from "./curriculo/curriculo";
 
 // Importando os componentes Cursos e CursosYouTube
 import { Cursos } from "./cursos/cursos";
-import { CursosYouTube } from "./cursosYoutube/Cursosyoutube";
+import { CursosYouTube } from "./cursosYoutube/cursosyoutube";
 
 // Importando a imagem para o botão
 import youtubeImage from "./imagens/youtube.png";
