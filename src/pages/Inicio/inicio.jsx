@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Feed from "./feed";
-import Buscador from "./Buscador";
-import Propaganda from "./Propaganda";
-import Indicados from "./Indicados";
+import Buscador from "./buscador";
+import Propaganda from "./propaganda";
+import Indicados from "./indicados";
 import './inicio.css';
 import { URL } from "../../config";
 
