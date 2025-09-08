@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { URL } from "../../../config";
-import "./Propaganda.css";
+import "./propaganda.css";
 
 export default function Propaganda() {
     const [propagandas, setPropagandas] = useState([]);

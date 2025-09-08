@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-import './Indicados.css';
+import './indicados.css';
 import { URL } from "../../config";
 
 export default function Indicados() {

@@ -1,4 +1,4 @@
-import './Info.css'
+import './info.css'
 
 const Facebook = "https://www.facebook.com/";
 const YouTube = "https://www.youtube.com/";

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Feed from "./Feed";
+import Feed from "./feed";
 import Buscador from "./Buscador";
 import Propaganda from "./Propaganda";
 import Indicados from "./Indicados";
-import './Inicio.css';
+import './inicio.css';
 import { URL } from "../../config";
 
 function Inicio() {

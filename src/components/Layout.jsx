@@ -1,4 +1,4 @@
-import Header from './Header';
+import Header from './header';
 import Rodape from '../pages/rodape'; // 👈 Correto!
 import { Outlet } from 'react-router-dom';
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { URL } from "../../../../config";
-import "./IreneConfigContexto.css";
+import "./ireneConfigContexto.css";
 import IreneContextoFormulario from "./IreneContextoFormulario";
 
 export default function IreneConfigContexto() {

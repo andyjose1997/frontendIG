@@ -1,6 +1,6 @@
 // 📂 src/componentes/Propaganda.jsx
 import { useEffect, useState } from "react";
-import "./Propaganda.css";
+import "./propaganda.css";
 import { URL } from "../../config";
 
 export default function Propaganda() {

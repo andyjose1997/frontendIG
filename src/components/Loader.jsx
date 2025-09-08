@@ -1,5 +1,5 @@
 // src/components/Loader.jsx
-import './Loader.css';
+import './loader.css';
 
 export default function Loader() {
     return (

@@ -1,4 +1,4 @@
-import './Feed.css';
+import './feed.css';
 import { useRef, useState } from 'react';
 import Reacoes from './feed-completo/reacoes';
 import Comentarios from './feed-completo/comentarios';

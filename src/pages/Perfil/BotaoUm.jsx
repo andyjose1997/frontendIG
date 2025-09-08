@@ -3,8 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 import { URL } from '../../config';
 import HostModal from './hostModal';
 import { useFerramentas } from '../../ferramentasContext';
-import ModalQrCode from './config/ModalQrCode';
-import AlertaWhatsApp from "./AlertaWhatsApp";
+import ModalQrCode from './config/modalQrCode';
+import AlertaWhatsApp from "./alertaWhatsApp";
 
 export default function BotaoUm() {
     const [mostrarNivel, setMostrarNivel] = useState(false);

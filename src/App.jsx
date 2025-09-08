@@ -6,26 +6,26 @@ import Loader from "./components/loader.jsx";
 
 import Login from './pages/login.jsx';
 import Cursos from "./pages/cursos.jsx";
-import NotFound from "./pages/notFound.jsx";
-import './App.css';
-import Cadastrarse from "./pages/cadastroGeral/Cadastrarse.jsx";
+import NotFound from "./pages/notfound.jsx";
+import './app.css';
+import Cadastrarse from "./pages/cadastrogeral/cadastrarse.jsx";
 import Organizacao from "./pages/organizacao.jsx";
-import Inicio from "./pages/inicio/Inicio.jsx";
-import Perfil from "./pages/perfil/Perfil.jsx";
+import Inicio from "./pages/inicio/inicio.jsx";
+import Perfil from "./pages/perfil/perfil.jsx";
 import Manual from './pages/manual.jsx';
 import Mensagens from './pages/mensagens/mensagens.jsx';
-import TelaConfig from "./pages/Perfil/telaConfig.jsx";
+import TelaConfig from "./pages/perfil/telaconfig.jsx";
 import Aprendizagem from "./pages/aprendizagem/aprendizagem.jsx";
-import IreneChat from "./components/ireneChat.jsx";
+import IreneChat from "./components/irenechat.jsx";
 import { AuthProvider } from "./authContext.jsx";
-import PrivateRoute from "./privateRoute.jsx";
+import PrivateRoute from "./privateroute.jsx";
 import PainelControle from './pages/ferramentas/painelcontrole.jsx';
-import AdminRoute from "./adminRoute.jsx";
+import AdminRoute from "./adminroute.jsx";
 import IronQuiz from "./pages/ironQuiz/ironQuiz.jsx";
 
 import { Link } from "react-router-dom";
 import { URL } from "./config.jsx";
-import FAQSection from "./pages/fAQSection.jsx";
+import FAQSection from "./pages/faqsection.jsx";
 
 function Home() {
   return (

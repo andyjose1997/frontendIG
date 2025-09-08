@@ -1,4 +1,4 @@
-import './Header.css';
+import './header.css';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function Header() {

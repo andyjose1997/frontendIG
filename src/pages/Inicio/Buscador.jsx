@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './Buscador.css';
+import './buscador.css';
 import { URL } from '../../config';
 
 export default function Buscador() {

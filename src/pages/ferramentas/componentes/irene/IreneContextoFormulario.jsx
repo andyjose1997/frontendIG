@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { URL } from "../../../../config";
-import "./IreneContextoFormulario.css";
+import "./ireneContextoFormulario.css";
 
 export default function IreneContextoFormulario({ dados, onClose, onSaved }) {
     const [palavraChave, setPalavraChave] = useState(dados?.chave || "");
