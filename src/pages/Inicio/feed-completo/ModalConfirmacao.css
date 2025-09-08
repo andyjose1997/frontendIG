@@ -14,17 +14,18 @@
 /* Caixa do modal */
 .modal-box {
     background-color: #1a1b4b;
-    color: white;
+    color: rgb(12, 0, 0) !;
     padding: 30px;
     border-radius: 20px;
     text-align: center;
     width: 90%;
     max-width: 400px;
+    font-size: 2.5rem;
 }
 
 /* Mensagem dentro do modal */
 .modal-mensagem {
-    font-size: 1.2rem;
+    font-size: 2.2rem;
     margin-bottom: 20px;
 }
 

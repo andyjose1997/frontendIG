@@ -145,8 +145,8 @@ export default function Up() {
                     {/* INFORMAÇÕES */}
                     <div className="infoBox">
                         <h1>
-                            {user.nome.charAt(0).toUpperCase() + user.nome.slice(1).toLowerCase()}{" "}
-                            {user.sobrenome.charAt(0).toUpperCase() + user.sobrenome.slice(1).toLowerCase()}{" "}
+                            {user.nome} {user.sobrenome}
+
                             <span className="categoriaTexto">
                                 ({user.categoria && user.categoria.trim() !== ""
                                     ? user.categoria.charAt(0).toUpperCase() + user.categoria.slice(1).toLowerCase()

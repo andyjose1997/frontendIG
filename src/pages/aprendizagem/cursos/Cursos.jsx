@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import PacoteDeCursosUm from "./pacotes/PacoteDeCursosUm";
+import { URL } from "../../../config";
 
 export const Cursos = () => {
     const [categoria, setCategoria] = useState(null);
@@ -15,7 +16,7 @@ export const Cursos = () => {
             return;
         }
 
-        fetch("http://localhost:8899/me", {
+        fetch(`${URL}/me`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -49,7 +50,7 @@ export const Cursos = () => {
                 onClick={async () => {
                     try {
                         const token = localStorage.getItem("token");
-                        const response = await fetch("http://localhost:8899/criar-preferencia", {
+                        const response = await fetch(`${URL}/criar-preferencia`, {
                             method: "POST",
                             headers: {
                                 "Authorization": `Bearer ${token}`,
