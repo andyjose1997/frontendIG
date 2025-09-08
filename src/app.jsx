@@ -11,7 +11,7 @@ import './app.css';
 import Cadastrarse from "./pages/cadastrogeral/cadastrarse.jsx";
 import Organizacao from "./pages/organizacao.jsx";
 import Inicio from "./pages/Inicio/inicio.jsx";
-import Perfil from "./pages/perfil/perfil.jsx";
+import Perfil from "./pages/Perfil/perfil.jsx";
 import Manual from './pages/manual.jsx';
 import Mensagens from './pages/mensagens/mensagens.jsx';
 import TelaConfig from "./pages/perfil/telaconfig.jsx";
@@ -21,7 +21,7 @@ import { AuthProvider } from "./authContext.jsx";
 import PrivateRoute from "./privateroute.jsx";
 import PainelControle from './pages/ferramentas/painelcontrole.jsx';
 import AdminRoute from "./adminroute.jsx";
-import IronQuiz from "./pages/ironQuiz/ironQuiz.jsx";
+import IronQuiz from "./pages/ironQuiz/ironQuiz.jsx"; /* aqui */
 
 import { Link } from "react-router-dom";
 import { URL } from "./config.jsx";
