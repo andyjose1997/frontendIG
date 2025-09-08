@@ -17,12 +17,12 @@ import Mensagens from './pages/mensagens/mensagens.jsx';
 import TelaConfig from "./pages/Perfil/telaconfig.jsx"; // 🚨 "Perfil" com P maiúsculo
 import Aprendizagem from "./pages/aprendizagem/aprendizagem.jsx";
 import IreneChat from "./components/irenechat.jsx";
-import { AuthProvider } from "./authContext.jsx";
+import { AuthProvider } from "./authContext.jsx";  // 🚨 "ironQuiz" com Q maiúsculo
+
 import PrivateRoute from "./privateroute.jsx";
 import PainelControle from './pages/ferramentas/painelcontrole.jsx';
 import AdminRoute from "./adminroute.jsx";
-import IronQuiz from "./pages/ironQuiz/ironquiz.jsx";   // 🚨 "ironQuiz" com Q maiúsculo
-
+import IronQuiz from "./pages/ironQuiz/ironquiz.jsx";
 import { Link } from "react-router-dom";
 import { URL } from "./config.jsx";
 import FAQSection from "./pages/faqsection.jsx";
