@@ -1,6 +1,6 @@
 // src/config.js
 
-const ambiente = "prod";  // "local" ou "prod"
+const ambiente = "proOOOOOOOOd";  // "local" ou "prod"
 
 // Backend
 export const URL =
