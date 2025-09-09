@@ -1,13 +1,13 @@
 import { useState } from "react";
 import "./cadastrarse.css";
-import { URL } from "../../config";
+import { URL as BACKEND_URL } from "../../config"; // renomeado para não conflitar
 
 export default function EscolherFotoPerfil() {
     const [fotoCarregada, setFotoCarregada] = useState(false);
     const [preview, setPreview] = useState(null);
     const token = localStorage.getItem("token");
 
-    // 🔹 Função para redimensionar imagem mantendo formato original e qualidade máxima
+    // 🔹 Redimensiona imagem mantendo qualidade
     const resizeImage = (file, maxSize = 1200) => {
         return new Promise((resolve) => {
             const reader = new FileReader();
@@ -53,23 +53,22 @@ export default function EscolherFotoPerfil() {
         });
     };
 
-    // 🔹 Upload da foto do usuário
+    // 🔹 Upload de arquivo
     const handleUpload = async (event) => {
         const file = event.target.files[0];
         if (!file) return;
 
-        setPreview(URL.createObjectURL(file));
+        setPreview(window.URL.createObjectURL(file)); // ✅ usa window.URL
 
         const resizedFile = await resizeImage(file);
 
         const usuarioId = localStorage.getItem("usuario_id");
         const formData = new FormData();
         formData.append("foto", resizedFile);
-        formData.append("usuario_id", usuarioId); // 🔹 garante ID junto com a foto
-
+        formData.append("usuario_id", usuarioId);
 
         try {
-            const res = await fetch(`${URL}/upload_foto`, {
+            const res = await fetch(`${BACKEND_URL}/upload_foto`, {
                 method: "POST",
                 headers: { Authorization: `Bearer ${token}` },
                 body: formData,
@@ -84,28 +83,27 @@ export default function EscolherFotoPerfil() {
             } else {
                 alert("❌ Erro ao enviar a foto");
             }
-        } catch (err) {
+        } catch {
             alert("⚠️ Erro de conexão");
         }
     };
 
-    // 🔹 Escolher um avatar pronto
-    // 🔹 Escolher um avatar pronto
+    // 🔹 Escolher avatar pronto
     const handleEscolherAvatar = async (nomeArquivo) => {
         try {
             const blob = await fetch(`/fotos/${nomeArquivo}`).then((r) => r.blob());
             const file = new File([blob], nomeArquivo, { type: blob.type });
 
-            setPreview(URL.createObjectURL(file));
+            setPreview(window.URL.createObjectURL(file)); // ✅ usa window.URL
 
             const resizedFile = await resizeImage(file);
 
-            const usuarioId = localStorage.getItem("usuario_id"); // 🔹 pega id do localStorage
+            const usuarioId = localStorage.getItem("usuario_id");
             const formData = new FormData();
             formData.append("foto", resizedFile);
-            formData.append("usuario_id", usuarioId); // 🔹 garante ID junto com o avatar
+            formData.append("usuario_id", usuarioId);
 
-            const res = await fetch(`${URL}/upload_foto`, {
+            const res = await fetch(`${BACKEND_URL}/upload_foto`, {
                 method: "POST",
                 headers: { Authorization: `Bearer ${token}` },
                 body: formData,
@@ -120,11 +118,10 @@ export default function EscolherFotoPerfil() {
             } else {
                 alert("❌ Erro ao salvar avatar");
             }
-        } catch (err) {
+        } catch {
             alert("⚠️ Erro de conexão");
         }
     };
-
 
     const avatares = [
         "umF.png", "umE.png", "umD.png", "umC.png", "umB.png", "umA.png",
@@ -139,7 +136,8 @@ export default function EscolherFotoPerfil() {
                 <h3>📂 Avatares Disponíveis</h3>
                 <div className="avatar-lista">
                     {avatares.map((img) => (
-                        <img style={{ width: "100px", height: "100px" }}
+                        <img
+                            style={{ width: "100px", height: "100px" }}
                             key={img}
                             src={`/fotos/${img}`}
                             alt={img}
@@ -152,18 +150,12 @@ export default function EscolherFotoPerfil() {
                 <h3>📤 Ou carregue uma foto</h3>
                 <label htmlFor="upload" className="upload-label">📂 Escolher Arquivo</label>
                 <input id="upload" type="file" accept="image/*" onChange={handleUpload} />
-                <p id="file-name"></p>
 
-                {/* Preview da imagem */}
                 {preview && <img src={preview} alt="Preview" className="foto-preview" />}
-
                 {fotoCarregada && <p className="foto-ok">✅ Foto carregada!</p>}
 
                 <div className="botoes">
-                    <button
-                        className="btn-fechar"
-                        onClick={() => window.location.href = "/inicio"}
-                    >
+                    <button className="btn-fechar" onClick={() => window.location.href = "/inicio"}>
                         Finalizar Cadastro
                     </button>
                 </div>
