@@ -16,6 +16,7 @@ export default function VisualizarBanco() {
     const [filtrosPorColuna, setFiltrosPorColuna] = useState({});
     const [linhaEditando, setLinhaEditando] = useState(null);
     const [dadosEditados, setDadosEditados] = useState({});
+    const [alerta, setAlerta] = useState({ mensagem: "", tipo: "" });
 
     useEffect(() => {
         if (linhaEditando) {
@@ -74,6 +75,16 @@ export default function VisualizarBanco() {
         (paginaAtual + 1) * registrosPorPagina
     );
     const [funcaoUsuario, setFuncaoUsuario] = useState("");
+    // 🔹 Fecha o alerta automaticamente após 10 segundos
+    useEffect(() => {
+        if (alerta.mensagem) {
+            const timer = setTimeout(() => {
+                setAlerta({ mensagem: "", tipo: "" });
+            }, 5000); // 10 segundos
+
+            return () => clearTimeout(timer); // limpa se mudar antes
+        }
+    }, [alerta]);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -97,13 +108,14 @@ export default function VisualizarBanco() {
             });
 
             if (resposta.ok) {
-                alert("Usuário e dados relacionados apagados com sucesso.");
+                setAlerta({ mensagem: "Usuário e dados relacionados apagados com sucesso.", tipo: "sucesso" });
                 carregarTabela(tabelaSelecionada);
             } else {
-                alert("Erro ao apagar o usuário.");
+                setAlerta({ mensagem: "Erro ao apagar o usuário.", tipo: "erro" });
             }
+
         } catch (erro) {
-            alert("Erro na requisição.");
+            setAlerta({ mensagem: "Erro na requisição.", tipo: "erro" });
         }
     };
     const salvarAlteracoes = async () => {
@@ -120,14 +132,15 @@ export default function VisualizarBanco() {
             });
 
             if (resposta.ok) {
-                alert("Alterações salvas com sucesso!");
+                setAlerta({ mensagem: "Alterações salvas com sucesso!", tipo: "sucesso" });
                 setLinhaEditando(null);
                 carregarTabela(tabelaSelecionada);
             } else {
-                alert("Erro ao salvar.");
+                setAlerta({ mensagem: "Erro ao salvar.", tipo: "erro" });
             }
+
         } catch (erro) {
-            alert("Erro ao conectar com servidor.");
+            setAlerta({ mensagem: "Erro ao conectar com servidor.", tipo: "erro" });
         }
     };
 
@@ -361,7 +374,9 @@ export default function VisualizarBanco() {
                     </div>
 
                     <div className="paginacao-tabela">
-                        <button
+                        <button style={{
+                            marginLeft: "200px"
+                        }}
                             onClick={() => setPaginaAtual(p => Math.max(p - 1, 0))}
                             disabled={paginaAtual === 0}
                         >
@@ -370,7 +385,9 @@ export default function VisualizarBanco() {
                         <span>
                             Página {paginaAtual + 1} de {Math.ceil(dados.length / registrosPorPagina)}
                         </span>
-                        <button
+                        <button style={{
+                            marginRight: "200px"
+                        }}
                             onClick={() => setPaginaAtual(p => p + 1)}
                             disabled={(paginaAtual + 1) * registrosPorPagina >= dados.length}
                         >
@@ -381,7 +398,7 @@ export default function VisualizarBanco() {
             )}
             {linhaEditando && (
                 <div className="bancomodal-overlay">
-                    <div className="modal-edicao">
+                    <div className="modal-edicaobanco">
                         <h3>Editar Usuário</h3>
                         <form
                             className="formulario-edicao"
@@ -469,6 +486,11 @@ export default function VisualizarBanco() {
                 </div>
             )}
 
+            {alerta.mensagem && (
+                <div className={`alerta-custom alerta-${alerta.tipo}`}>
+                    <p>{alerta.mensagem}</p>
+                </div>
+            )}
 
         </div>
     );

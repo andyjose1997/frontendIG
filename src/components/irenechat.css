@@ -1,23 +1,32 @@
 .irene-container {
     position: fixed;
     bottom: 20px;
-    right: 20px;
     z-index: 2000;
     font-family: "Segoe UI", Tahoma, sans-serif;
-
     display: flex;
-    /* ✅ organiza melhor */
     flex-direction: column;
-    /* ✅ facilita adicionar elementos no futuro */
-    align-items: flex-end;
-    /* ✅ garante alinhamento no canto */
     gap: 12px;
-    /* ✅ dá respiro entre botão/chat */
+    margin-bottom: 7px;
 }
+
+/* Padrão → direita */
+.irene-container.direita {
+    right: 20px;
+    left: auto;
+    align-items: flex-end;
+}
+
+/* Página Mensagens → esquerda */
+.irene-container.esquerda {
+    left: 20px;
+    right: auto;
+    align-items: flex-start;
+}
+
+/* Quando estiver na tela de mensagens → Irene no canto esquerdo */
 
 
 .irene-botao {
-    background: linear-gradient(135deg, #0162d1, #014581);
     color: #fff;
     border: none;
     border-radius: 40px;
@@ -30,14 +39,13 @@
 
     /* ✅ estética */
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
-    transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 /* Hover mais elegante */
 .irene-botao:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(135deg, #014581, #0162d1);
+    background: linear-gradient(135deg, #0162d1, #014581);
     /* inverte gradiente */
 }
 

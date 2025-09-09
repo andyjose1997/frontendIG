@@ -1,10 +1,19 @@
+// 📂 src/componentes/Bandeja.jsx
 import { useState, useEffect, useRef } from 'react';
 import { URL } from '../../config';
 import './bandeja.css';
 import ModalUsuarioMensagem from './modalusuariomensagem';
 
 export default function Bandeja() {
-    const [usuarios, setUsuarios] = useState([]);
+    const userId = localStorage.getItem("usuario_id");
+
+    const [usuarios, setUsuarios] = useState({
+        host: [],
+        historico: [],
+        indicados: []
+    });
+    console.log("🧩 Usuario ID logado:", userId);
+
     const [selecionado, setSelecionado] = useState(null);
     const [mensagens, setMensagens] = useState([]);
     const [mensagemNova, setMensagemNova] = useState("");
@@ -13,45 +22,35 @@ export default function Bandeja() {
     const [menuAberto, setMenuAberto] = useState(null);
     const [confirmarApagar, setConfirmarApagar] = useState(null);
     const [busca, setBusca] = useState("");
-    const [sugestoes, setSugestoes] = useState([]);
-    const [indicados, setIndicados] = useState([]);
-    const [quantidadeNaoLidas, setQuantidadeNaoLidas] = useState(0); // 🔹 novo
+    const [quantidadeNaoLidas, setQuantidadeNaoLidas] = useState(0);
 
-    const userId = localStorage.getItem("id");
+
     const [mostrarModalUsuario, setMostrarModalUsuario] = useState(false);
     const [dadosUsuario, setDadosUsuario] = useState(null);
 
-    const buscarUsuarios = async (valor) => {
-        setBusca(valor);
-
-        if (valor.trim() === "") {
-            setSugestoes([]);
-            return;
-        }
-
+    // 🔹 Buscar contatos (host, histórico e indicados)
+    const carregarUsuarios = async (filtro = "") => {
         try {
-            const res = await fetch(`${URL}/mensagens/indicados/${userId}?q=${encodeURIComponent(valor)}`);
+            const res = await fetch(`${URL}/mensagens/contatos/${userId}?q=${encodeURIComponent(filtro)}`);
             const data = await res.json();
-            setSugestoes(data);
+
+            setUsuarios({
+                host: data.host || [],
+                historico: data.historico || [],
+                indicados: data.indicados || []
+            });
         } catch (err) {
-            console.error("Erro ao buscar indicados:", err);
+            console.error("Erro ao carregar contatos:", err);
+            setUsuarios({ host: [], historico: [], indicados: [] });
         }
     };
 
-    useEffect(() => {
-        const carregarIndicados = async () => {
-            try {
-                const res = await fetch(`${URL}/mensagens/indicados/${userId}`);
-                const data = await res.json();
-                setIndicados(Array.isArray(data) ? data : []);
-            } catch (err) {
-                console.error("Erro ao carregar indicados:", err);
-            }
-        };
-        if (userId) carregarIndicados();
-    }, [userId]);
 
-    // abrir modal e buscar info do usuário
+    useEffect(() => {
+        if (userId) carregarUsuarios(busca);
+    }, [userId, busca]);
+
+    // 🔹 Abrir modal de perfil
     const abrirModalUsuario = async () => {
         try {
             const res = await fetch(`${URL}/perfil/${selecionado.id}`);
@@ -65,24 +64,20 @@ export default function Bandeja() {
 
     const menuRef = useRef(null);
 
-    // fechar ao clicar fora
+    // 🔹 Fechar menu ao clicar fora
     useEffect(() => {
         const handleClickFora = (e) => {
             if (menuRef.current && !menuRef.current.contains(e.target)) {
-                setMenuAberto(null); // fecha
+                setMenuAberto(null);
             }
         };
-
         if (menuAberto !== null) {
             document.addEventListener("mousedown", handleClickFora);
-        } else {
-            document.removeEventListener("mousedown", handleClickFora);
         }
-
         return () => document.removeEventListener("mousedown", handleClickFora);
     }, [menuAberto]);
 
-    // 🔹 ref para rolar até a última mensagem
+    // 🔹 Scroll automático até última mensagem
     const fimRef = useRef(null);
     useEffect(() => {
         if (fimRef.current) {
@@ -90,41 +85,21 @@ export default function Bandeja() {
         }
     }, [mensagens]);
 
-    // 🔹 Carregar contatos
-    useEffect(() => {
-        const carregarUsuarios = async () => {
-            try {
-                const res = await fetch(`${URL}/mensagens/meus_contatos/${userId}`);
-                const data = await res.json();
-                setUsuarios(Array.isArray(data) ? data : []);
-            } catch (err) {
-                console.error("Erro ao carregar contatos:", err);
-            }
-        };
-        if (userId) carregarUsuarios();
-    }, [userId]);
-
     // 🔹 Carregar conversa
     const carregarMensagens = async (destinatario) => {
         setSelecionado(destinatario);
         try {
-            // 🔹 carrega conversa
             const res = await fetch(`${URL}/mensagens/${userId}/${destinatario.id}`);
             const data = await res.json();
             setMensagens(data.dados || data);
 
-            // 🔹 guarda qtd não lidas antes de marcar
             setQuantidadeNaoLidas(destinatario.nao_lidas || 0);
 
-            // 🔹 marca todas como lidas
             await fetch(`${URL}/mensagens/marcar_lidas/${destinatario.id}/${userId}`, {
                 method: "PUT"
             });
 
-            // 🔹 recarregar contatos para atualizar os badges
-            const contatosRes = await fetch(`${URL}/mensagens/meus_contatos/${userId}`);
-            const contatosData = await contatosRes.json();
-            setUsuarios(Array.isArray(contatosData) ? contatosData : []);
+            carregarUsuarios(busca);
         } catch (err) {
             console.error("Erro ao carregar mensagens:", err);
         }
@@ -135,7 +110,6 @@ export default function Bandeja() {
         if (!mensagemNova.trim() || !selecionado) return;
 
         if (editando) {
-            // editar
             await fetch(`${URL}/mensagens/${editando}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
@@ -146,7 +120,6 @@ export default function Bandeja() {
             );
             setEditando(null);
         } else {
-            // enviar
             const res = await fetch(`${URL}/mensagens/`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -171,6 +144,38 @@ export default function Bandeja() {
         setMensagens(prev => prev.filter(m => m.id !== id));
     };
 
+    // 🔹 Renderizar lista de contatos por grupo
+    const renderLista = (titulo, lista = []) => (
+        <>
+            {lista.length > 0 && <h3 className="grupo-titulo">{titulo}</h3>}
+            <ul className="lista-mensagens">
+                {lista.length === 0 ? (
+                    <p>⚠️ Nenhum contato encontrado</p>
+                ) : (
+                    lista.map((u) => (
+                        <li key={u.id} className="mensagem-item" onClick={() => carregarMensagens(u)}>
+                            <div className="mensagem-avatar">
+                                <img
+                                    src={u.foto || "/Logo/perfilPadrao/M.png"}
+                                    alt={`Foto de ${u.nome}`}
+                                    className="avatar-foto"
+                                />
+                            </div>
+                            <div className="mensagem-detalhes">
+                                <strong>
+                                    {u.nome} {u.sobrenome}
+                                </strong>
+                                <p>{u.email}</p>
+                            </div>
+
+                            {u.nao_lidas > 0 && <span className="badge-nao-lidas">{u.nao_lidas}</span>}
+                        </li>
+                    ))
+                )}
+            </ul>
+        </>
+    );
+
     return (
         <main className="mensagens-container">
             {!selecionado ? (
@@ -179,59 +184,17 @@ export default function Bandeja() {
                     <div className="busca-container">
                         <input
                             type="text"
-                            placeholder="🔍 Buscar indicado..."
+                            placeholder="🔍 Buscar contato..."
                             value={busca}
-                            onChange={(e) => buscarUsuarios(e.target.value)}
+                            onChange={(e) => setBusca(e.target.value)}
                         />
 
-                        {sugestoes.length > 0 && (
-                            <ul className="sugestoes-lista">
-                                {sugestoes.map(u => (
-                                    <li key={u.id} onClick={() => {
-                                        carregarMensagens(u);
-                                        setBusca("");
-                                        setSugestoes([]);
-                                    }}>
-                                        <div className="sugestao-avatar">{u.nome?.charAt(0)}</div>
-                                        <div className="sugestao-info">
-                                            <strong>{u.nome}</strong>
-                                            <span>{u.email}</span>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
                     </div>
+                    <h2>Seu host</h2>
 
-                    <ul className="lista-mensagens">
-                        {usuarios.length === 0 ? (
-                            <p>⚠️ Nenhum contato encontrado</p>
-                        ) : (
-                            usuarios.map((u) => (
-                                <li key={u.id} className="mensagem-item" onClick={() => carregarMensagens(u)}>
-                                    <div className="mensagem-avatar">
-                                        {u.foto ? (
-                                            <img
-                                                src={`${URL}/fotos/${u.foto}`}
-                                                alt={u.nome}
-                                                className="avatar-foto"
-                                            />
-                                        ) : (
-                                            <span>{u.nome?.charAt(0)}</span> // fallback se não tiver foto
-                                        )}
-                                    </div>
-                                    <div className="mensagem-detalhes">
-                                        <strong>{u.nome}</strong>
-                                        <p>{u.email}</p>
-                                    </div>
-
-                                    {u.nao_lidas > 0 && (
-                                        <span className="badge-nao-lidas">{u.nao_lidas}</span>
-                                    )}
-                                </li>
-                            ))
-                        )}
-                    </ul>
+                    {renderLista("⭐ Seu Host", usuarios.host)}
+                    {renderLista("💬 Conversas", usuarios.historico)}
+                    {renderLista("👥 Indicados", usuarios.indicados)}
 
                 </>
             ) : (
@@ -245,8 +208,6 @@ export default function Bandeja() {
                         {mensagens.map((msg, i) => {
                             const anterior = mensagens[i - 1];
                             const mudouAutor = !anterior || anterior.remetente_id !== msg.remetente_id;
-
-                            // 🔹 mostra linha "não lida(s)" no ponto certo
                             const mostrarSeparador =
                                 quantidadeNaoLidas > 0 && i === mensagens.length - quantidadeNaoLidas;
 
@@ -259,7 +220,6 @@ export default function Bandeja() {
                                     <div
                                         className={`mensagem-bolha ${msg.remetente_id === userId ? "enviada" : "recebida"} ${mudouAutor ? "mensagem-grupo" : ""}`}
                                     >
-                                        {/* Texto da resposta */}
                                         {msg.resposta_conteudo && (
                                             <div className="resposta">{msg.resposta_conteudo}</div>
                                         )}
@@ -269,7 +229,6 @@ export default function Bandeja() {
                                             {msg.editado ? <span className="editada"> (editada)</span> : ""}
                                         </p>
 
-                                        {/* Três pontos */}
                                         <div className="mensagem-menu" onClick={() => setMenuAberto(menuAberto === msg.id ? null : msg.id)}>
                                             ⋮
                                         </div>
@@ -290,7 +249,6 @@ export default function Bandeja() {
                             );
                         })}
 
-                        {/* 🔹 ref para scroll automático */}
                         <div ref={fimRef}></div>
                     </div>
 
@@ -309,16 +267,16 @@ export default function Bandeja() {
                             onChange={(e) => setMensagemNova(e.target.value)}
                             onKeyDown={(e) => {
                                 if (e.key === "Enter") {
-                                    e.preventDefault(); // evita quebra de linha
+                                    e.preventDefault();
                                     enviarMensagem();
                                 }
                             }}
                         />
-
                         <button onClick={enviarMensagem}>{editando ? "Salvar" : "Enviar"}</button>
                     </div>
                 </>
             )}
+
             {mostrarModalUsuario && (
                 <ModalUsuarioMensagem usuario={dadosUsuario} onClose={() => setMostrarModalUsuario(false)} />
             )}
@@ -328,11 +286,11 @@ export default function Bandeja() {
                     <div className="modal-confirmacao">
                         <h3>⚠️ Tem certeza que deseja apagar esta mensagem?</h3>
                         <div className="botoes">
-                            <button className="btn-nao" onClick={() => setConfirmarApagar(null)}>Não tenho</button>
+                            <button className="btn-nao" onClick={() => setConfirmarApagar(null)}>Não</button>
                             <button className="btn-sim" onClick={() => {
                                 apagarMensagem(confirmarApagar);
                                 setConfirmarApagar(null);
-                            }}>Tenho</button>
+                            }}>Sim</button>
                         </div>
                     </div>
                 </div>

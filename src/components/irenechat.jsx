@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import "./irenechat.css";
 import { URL } from "../config";
+import { useLocation } from "react-router-dom";
 
 export default function IreneChat() {
     const [aberto, setAberto] = useState(false);
@@ -8,6 +9,8 @@ export default function IreneChat() {
     const [input, setInput] = useState("");
     const [carregando, setCarregando] = useState(false);
     const [perguntas, setPerguntas] = useState([]); // sugestões vindas do backend
+    const location = useLocation();
+    const isMensagens = location.pathname.toLowerCase().includes("mensagens");
 
     const mensagensFimRef = useRef(null);
     const usuarioId = localStorage.getItem("usuario_id");
@@ -107,7 +110,7 @@ export default function IreneChat() {
     };
 
     return (
-        <div className="irene-container">
+        <div className={`irene-container ${isMensagens ? "esquerda" : "direita"}`}>
             {!aberto && (
                 <button className="irene-botao" onClick={() => setAberto(true)}>
                     Assistente Virtual Irene

@@ -16,6 +16,55 @@
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    min-width: 250px;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #fff;
+    animation: fadeIn 0.5s, fadeOut 0.5s 4.5s;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.toast.sucesso {
+    background: #28a745;
+    /* verde */
+}
+
+.toast.erro {
+    background: #dc3545;
+    /* vermelho */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
 
 
 .lista-usuarios-simples h2 {

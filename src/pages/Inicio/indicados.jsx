@@ -30,8 +30,13 @@ export default function Indicados() {
 
         setIndicados(data);
     };
+    const supabaseBase =
+        "https://sbeotetrpndvnvjgddyv.supabase.co/storage/v1/object/public/fotosdeperfis/";
 
-
+    const getFotoUrl = (foto) => {
+        if (!foto) return "/Logo/perfilPadrao/M.png";
+        return foto.startsWith("http") ? foto : supabaseBase + foto;
+    };
     const buscarPessoa = async () => {
         const token = localStorage.getItem("token");
 
@@ -113,14 +118,12 @@ export default function Indicados() {
                                             }}
                                         >
                                             <img
-                                                src={
-                                                    pessoa?.foto
-                                                        ? `${URL}/fotos/${pessoa.foto}`
-                                                        : "/Logo/perfilPadrao/M.png"
-                                                }
+                                                src={getFotoUrl(pessoa.foto)}
                                                 alt="foto"
                                                 className="miniFotoSugestao"
                                             />
+
+
                                             <span>{formatarNome(`${pessoa.nome} ${pessoa.sobrenome}`)}</span>
                                         </li>
                                     ))
@@ -130,15 +133,18 @@ export default function Indicados() {
                             })()}
                         </ul>
                     )}
-
-
-
                 </div>
             )}
 
             {resultadoBusca && resultadoBusca.id && (
                 <div className="resultadoPessoa">
-                    <img src={resultadoBusca.fotoURL || "/Logo/perfilPadrao/M.png"} alt="Foto de perfil" className="fotoPerfilMini" />
+                    <img
+                        src={getFotoUrl(resultadoBusca.foto)}
+                        alt="Foto de perfil"
+                        className="fotoPerfilMini"
+                    />
+
+
                     <h3>{resultadoBusca.nome}</h3>
                     <p>ID: {resultadoBusca.id}</p>
                     <button onClick={voltar}>🔙 Voltar</button>
@@ -161,14 +167,12 @@ export default function Indicados() {
                 <p>Nenhum indicado encontrado.</p>
             )}
 
-
-
             {detalhe && (
                 <div className="modalFundo">
                     <div className="modalDetalhe">
                         <button className="fecharModalIndicado" onClick={fecharDetalhe}>✖</button>
                         <img
-                            src={`${URL}/fotos/${detalhe.foto || "padrao.png"}`}
+                            src={getFotoUrl(detalhe.foto)}
                             alt="Foto"
                         />
 
@@ -191,10 +195,6 @@ export default function Indicados() {
                     </div>
                 </div>
             )}
-
-
-
-
         </div>
     );
 }

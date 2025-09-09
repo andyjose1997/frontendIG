@@ -1,3 +1,4 @@
+// 📂 src/pages/Perfil/modalqrcode.jsx
 import { useEffect, useState, useRef } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 import { URL } from "../../../config";
@@ -19,12 +20,13 @@ export default function ModalQrCode({ onClose }) {
             const data = await res.json();
             setDados(data);
 
-            // 🔹 Monta o link correto com ID do usuário
-
             if (data.id) {
-                const nomeFormatado = (data.nome + data.sobrenome).replace(/\s+/g, '').toLowerCase();
-                setLinkIndicacao(`${window.location.origin}/criar-conta/${data.id}/${nomeFormatado}`);
-
+                const nomeFormatado = (data.nome + data.sobrenome)
+                    .replace(/\s+/g, "")
+                    .toLowerCase();
+                setLinkIndicacao(
+                    `${window.location.origin}/criar-conta/${data.id}/${nomeFormatado}`
+                );
             }
         };
         carregar();
@@ -47,12 +49,14 @@ export default function ModalQrCode({ onClose }) {
 
                 <div className="qrcode-card" ref={cardRef}>
                     <img
-                        src={dados.foto ? `${URL}/fotos/${dados.foto}` : "/perfilPadrao.png"}
+                        src={dados.foto || "/perfilPadrao.png"}
                         alt="Foto de perfil"
                         className="foto-perfil"
                     />
                     <h2>{dados.nome} {dados.sobrenome}</h2>
-                    <p className="comentario">{dados.comentario_perfil || "Qual é a sua próxima meta?"}</p>
+                    <p className="comentario">
+                        {dados.comentario_perfil || "Qual é a sua próxima meta?"}
+                    </p>
 
                     {linkIndicacao && (
                         <>

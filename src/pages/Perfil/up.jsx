@@ -34,9 +34,14 @@ export default function Up() {
                 }
                 setUser(data);
                 if (data.comentario_perfil) setComentario(data.comentario_perfil);
-                if (data.foto) {
-                    const nomeArquivo = data.foto.split("/").pop();
-                    setFotoURL(`${URL}/fotos/${nomeArquivo}`);
+
+                if (res.ok && data.foto) {
+                    // Se for URL completa (http), usa direto
+                    setFotoURL(data.foto.startsWith("http") ? data.foto : `${URL}${data.foto}`);
+                }
+
+                else {
+                    setFotoURL("/Logo/perfilPadrao/M.png");
                 }
             })
             .catch(err => {
@@ -77,9 +82,9 @@ export default function Up() {
                 .then(async res => {
                     const data = await res.json();
                     if (res.ok && data.foto) {
-                        const nomeArquivo = data.foto.split("/").pop();
-                        setFotoURL(`${URL}/fotos/${nomeArquivo}`);
+                        setFotoURL(data.foto); // já vem URL completa do Supabase
                     }
+
                 })
                 .catch(err => console.error("❌ Erro ao enviar imagem:", err));
         }
@@ -110,6 +115,7 @@ export default function Up() {
     }
 
     if (!user) return <p>Carregando...</p>;
+
     function getDiaSemana(cpp) {
         switch (cpp) {
             case "2": return "Segunda-feira";
@@ -192,7 +198,6 @@ export default function Up() {
 
                         </h2>
 
-
                         <div className="comentarioBox">
                             {user.comentario_perfil && !editando ? (
                                 <>
@@ -234,5 +239,4 @@ export default function Up() {
             )}
         </main>
     );
-
 }

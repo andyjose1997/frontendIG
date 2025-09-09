@@ -115,7 +115,8 @@ export default function Cadastrarse() {
                 if (loginRes.ok) {
                     const dados = await loginRes.json();
                     localStorage.setItem("token", dados.token);
-                    localStorage.setItem("id", dados.id);
+                    localStorage.setItem("usuario", JSON.stringify(dados.usuario));
+                    localStorage.setItem("usuario_id", dados.usuario.id);
 
                     setMostrarEscolherFoto(true);
                 }
@@ -146,7 +147,7 @@ export default function Cadastrarse() {
                 {hostData && !mostrarModalHost && (
                     <div className="host-box">
                         <p className="host-texto-intro">Seu Host será...</p>
-                        <img src={`${URL}/fotos/${hostData.foto}`} alt="Foto do Host" className="host-foto" />
+                        <img src={hostData.foto} alt="Foto do Host" className="host-foto" />
                         <p className="host-nome"><b>{hostData.nome} {hostData.sobrenome}!!</b></p>
                     </div>
                 )}
@@ -229,7 +230,7 @@ export default function Cadastrarse() {
                 <div className="modalCadastro-overlay">
                     <div className="modalCadastro-host">
                         <h2 className="modal-titulo">Este é o usuário que te recomendou?</h2>
-                        <img src={`${URL}/fotos/${hostData.foto}`} alt="Foto do Host" className="host-foto" />
+                        <img src={hostData.foto} alt="Foto do Host" className="host-foto" />
                         <h3 className="modal-host-nome">{hostData.nome} {hostData.sobrenome}</h3>
                         <div className="botoes-modal">
                             <button className="btn-vermelho" onClick={() => { setMostrarModalHost(false); setHostData(null); setIdAnfitiao(""); }}>

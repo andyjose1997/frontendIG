@@ -39,9 +39,12 @@ export default function PostagemSistema({
             <div className="autor-info post-cabecalho">
                 <div className="post-autor-detalhes">
                     <img
-                        src={post.foto ? `${URL}/fotos/${post.foto}` : "/perfil.png"}
-                        alt="Perfil"
+                        src={post.foto}
+                        alt={`Foto de ${post.nome}`}
+                        className="host-foto"
                     />
+
+
                     <div>
                         <strong>
                             {post.nome.charAt(0).toUpperCase() + post.nome.slice(1).toLowerCase()}{" "}

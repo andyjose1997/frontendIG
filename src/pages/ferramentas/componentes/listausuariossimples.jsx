@@ -6,7 +6,8 @@ export default function ListaUsuariosSimples() {
     const [usuarios, setUsuarios] = useState([]);
     const [usuarioSelecionado, setUsuarioSelecionado] = useState(null);
     const [dadosEditados, setDadosEditados] = useState({});
-    const [busca, setBusca] = useState(""); // 🔍 novo estado para o filtro
+    const [busca, setBusca] = useState(""); // 🔍 filtro
+    const [alerta, setAlerta] = useState(null); // 🔔 alerta personalizado
 
     // Carrega apenas usuarios
     useEffect(() => {
@@ -33,6 +34,14 @@ export default function ListaUsuariosSimples() {
         }
     }, [usuarioSelecionado]);
 
+    // Faz alerta sumir em 5s
+    useEffect(() => {
+        if (alerta) {
+            const timer = setTimeout(() => setAlerta(null), 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [alerta]);
+
     const atualizarUsuario = async () => {
         const token = localStorage.getItem("token");
         try {
@@ -46,7 +55,7 @@ export default function ListaUsuariosSimples() {
             });
 
             if (resposta.ok) {
-                alert("Funcionario atualizado com sucesso!");
+                setAlerta({ tipo: "sucesso", mensagem: "Funcionario atualizado com sucesso!" });
                 setUsuarioSelecionado(null);
                 // recarregar lista
                 const res = await fetch(`${URL}/ferramentas/tabela/usuarios`, {
@@ -55,10 +64,10 @@ export default function ListaUsuariosSimples() {
                 const data = await res.json();
                 setUsuarios(data.dados || []);
             } else {
-                alert("Erro ao atualizar Funcionario.");
+                setAlerta({ tipo: "erro", mensagem: "Erro ao atualizar Funcionario." });
             }
         } catch (erro) {
-            alert("Erro de conexão.");
+            setAlerta({ tipo: "erro", mensagem: "Erro de conexão." });
         }
     };
 
@@ -73,12 +82,12 @@ export default function ListaUsuariosSimples() {
                 value={busca}
                 onChange={(e) => setBusca(e.target.value)}
                 style={{
-                    width: "60%",
+                    width: "50%",
                     padding: "10px",
                     margin: "10px 20%",
                     borderRadius: "8px",
                     border: "1px solid #ccc",
-                    fontSize: "1em"
+                    fontSize: "1em",
                 }}
             />
 
@@ -115,7 +124,6 @@ export default function ListaUsuariosSimples() {
                                 <option value="coordenador">coordenador</option>
                             </select>
 
-
                             <label>Cargo</label>
                             <input
                                 type="text"
@@ -142,6 +150,13 @@ export default function ListaUsuariosSimples() {
                             </div>
                         </form>
                     </div>
+                </div>
+            )}
+
+            {/* 🔔 Toast personalizado */}
+            {alerta && (
+                <div className={`toast ${alerta.tipo}`}>
+                    {alerta.mensagem}
                 </div>
             )}
         </div>

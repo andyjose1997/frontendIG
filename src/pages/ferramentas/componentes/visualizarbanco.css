@@ -374,51 +374,45 @@
     color: white;
 }
 
-/* Evita que linhas azuis fiquem sobrecarregadas se clicadas várias vezes */
-/* ===== Overlay ===== */
 .bancomodal-overlay {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 500vh;
+
     display: flex;
     align-items: center;
+    /* centraliza na vertical */
     justify-content: center;
-    padding: 1rem;
-    z-index: 2000;
+    /* centraliza na horizontal */
 
     background: rgba(0, 0, 0, 0.65);
     backdrop-filter: blur(6px);
+    z-index: 2000;
 
     animation: fadeIn 0.4s ease;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-/* ===== Caixa do Modal ===== */
-.modal-edicao {
+.modal-edicaobanco {
     background: rgba(10, 37, 64, 0.95);
     padding: 2rem 2.5rem;
     border-radius: 16px;
     width: 100%;
     max-width: 650px;
-    max-height: 90vh;
-    overflow-y: auto;
+    max-height: 200vh;
 
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
 
     font-family: "Segoe UI", Roboto, sans-serif;
     color: #ffffff;
     font-size: 1.7rem;
-    /* 🔹 tamanho base maior */
 
     animation: zoomIn 0.35s ease;
+}
+
+select option {
+    color: #000000;
 }
 
 @keyframes zoomIn {
@@ -434,7 +428,7 @@
 }
 
 /* ===== Título ===== */
-.modal-edicao h3 {
+.modal-edicaobanco h3 {
     margin-bottom: 1.5rem;
     padding: 0.8rem 1.2rem;
     font-size: 2.2rem;
@@ -453,8 +447,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    max-height: 70vh;
-    overflow-y: auto;
+    max-height: 170vh;
 }
 
 /* Campo individual */
@@ -767,4 +760,37 @@
 .btn-editar,
 .btn-apagar {
     margin: 0 6px;
+}
+
+.alerta-custom {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    min-width: 280px;
+    max-width: 400px;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    color: #fff;
+    animation: slideIn 0.4s ease, fadeOut 0.5s ease 10s forwards;
+    /* agora some só depois de 10s */
+}
+
+.alerta-sucesso {
+    background: linear-gradient(135deg, #28a745, #218838);
+}
+
+.alerta-erro {
+    background: linear-gradient(135deg, #dc3545, #a71d2a);
+}
+
+.alerta-info {
+    background: linear-gradient(135deg, #007bff, #0056b3);
 }

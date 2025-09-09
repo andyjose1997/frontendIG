@@ -8,22 +8,25 @@ export default function ModalUsuarioMensagem({ usuario, onClose }) {
     const linkWhatsapp = usuario.whatsapp
         ? `https://wa.me/55${usuario.whatsapp.replace(/\D/g, '')}`
         : null;
-
+    const supabaseBase =
+        "https://sbeotetrpndvnvjgddyv.supabase.co/storage/v1/object/public/fotosdeperfis/";
     return (
         <div className="modal-overlay">
             <div className="modal-card">
                 <button className="fechar" onClick={onClose}>✖</button>
 
+                {/* Foto do usuário */}
                 <img
-                    src={usuario.foto
-                        ? `${URL}/fotos/${usuario.foto}`
-                        : "/perfilPadrao.png"}
-                    alt="Foto do usuário"
-                    className="modal-fotoUsu"
+                    src={usuario.foto || "/perfilPadrao.png"}
+                    alt="Foto de perfil"
+                    className="foto-perfil"
                 />
 
+
+                {/* Nome */}
                 <h2>{usuario.nome} {usuario.sobrenome}</h2>
 
+                {/* WhatsApp */}
                 {linkWhatsapp ? (
                     <a
                         href={linkWhatsapp}
@@ -39,6 +42,7 @@ export default function ModalUsuarioMensagem({ usuario, onClose }) {
                     </button>
                 )}
 
+                {/* Meta */}
                 <div className="meta-box">
                     <p><b>Próxima Meta:</b></p>
                     <p>{usuario.comentario_perfil || "Nenhuma meta definida."}</p>

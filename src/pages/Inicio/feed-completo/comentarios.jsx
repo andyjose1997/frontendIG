@@ -98,10 +98,11 @@ export default function Comentarios({
                     <div key={comentario.id} className="comentarios-item">
                         <div className="comentarios-header">
                             <img
-                                src={comentario.foto ? `${URL}/fotos/${comentario.foto}` : "/perfil.png"}
+                                src={comentario.foto || "/perfil.png"}
                                 alt="Perfil"
                                 className="comentarios-foto"
                             />
+
                             <strong className="comentarios-nome">
                                 {comentario.nome.charAt(0).toUpperCase() + comentario.nome.slice(1).toLowerCase()}{" "}
                                 {comentario.sobrenome.charAt(0).toUpperCase() + comentario.sobrenome.slice(1).toLowerCase()}

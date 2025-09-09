@@ -39,10 +39,11 @@ export default function Postagem({
             <div className="post-cabecalho">
                 <div className="post-autor">
                     <img
-                        src={post.foto ? `${URL}/fotos/${post.foto}` : "/perfil.png"}
+                        src={post.foto || "/perfil.png"}
                         alt="Perfil"
                         className="post-autor-foto"
                     />
+
 
                     <div className="post-autor-info">
                         <strong className="post-autor-nome">

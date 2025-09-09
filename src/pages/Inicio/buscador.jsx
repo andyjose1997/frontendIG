@@ -167,9 +167,11 @@ export default function Buscador() {
                         <button className="detalhe-fechar" onClick={fecharDetalhe}>✖</button>
                         <img
                             className="detalhe-foto"
-                            src={`${URL}/fotos/${detalhe.foto || "padrao.png"}`}
+                            src={detalhe.foto || "/Logo/perfilPadrao/M.png"}
                             alt="Foto"
                         />
+
+
                         <h2 className="detalhe-nome">{detalhe.nome} {detalhe.sobrenome}</h2>
                         <a
                             href={`https://wa.me/${detalhe.whatsapp}`}
