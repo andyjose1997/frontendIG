@@ -1,7 +1,6 @@
 // src/config.js
 
-// 🔹 Troque apenas uma letra aqui para alternar entre local e produção
-const ambiente = "local";  // use "local" ou "prod"
+const ambiente = "prod";  // "local" ou "prod"
 
 // Backend
 export const URL =
@@ -13,4 +12,4 @@ export const URL =
 export const FRONT_URL =
     ambiente === "local"
         ? "http://localhost:5173"
-        : "https://irongoals.vercel.app";  // coloque aqui o link real do seu frontend no Vercel
+        : "https://irongoals.vercel.app";

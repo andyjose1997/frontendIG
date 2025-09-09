@@ -156,7 +156,7 @@ export default function EscolherFotoPerfil() {
                 <div className="botoes">
                     <button
                         className="btn-fechar"
-                        onClick={() => window.location.href = `${FRONT_URL}/inicio`}
+                        onClick={() => window.location.href = "/inicio"}
                     >
                         Finalizar Cadastro
                     </button>
