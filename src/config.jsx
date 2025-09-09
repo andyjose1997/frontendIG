@@ -5,7 +5,7 @@ const ambiente = "local";  // use "local" ou "prod"
 
 // Backend
 export const URL =
-    ambiente === "local"
+    ambiente === "lcal"
         ? "http://localhost:8899"
         : "https://backendig-2.onrender.com";
 
