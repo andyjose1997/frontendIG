@@ -1,3 +1,4 @@
+// 📂 src/pages/cadastrogeral/EscolherFotoPerfil.jsx
 import { useState } from "react";
 import "./cadastrarse.css";
 import { URL as BACKEND_URL } from "../../config"; // renomeado para não conflitar
@@ -58,7 +59,7 @@ export default function EscolherFotoPerfil() {
         const file = event.target.files[0];
         if (!file) return;
 
-        setPreview(window.URL.createObjectURL(file)); // ✅ usa window.URL
+        setPreview(URL.createObjectURL(file)); // ✅ corrigido
 
         const resizedFile = await resizeImage(file);
 
@@ -68,7 +69,7 @@ export default function EscolherFotoPerfil() {
         formData.append("usuario_id", usuarioId);
 
         try {
-            const res = await fetch(`${BACKEND_URL}/upload_foto`, {
+            const res = await fetch(`${BACKEND_URL}/upload_foto`, { // ✅ endpoint correto
                 method: "POST",
                 headers: { Authorization: `Bearer ${token}` },
                 body: formData,
@@ -94,7 +95,7 @@ export default function EscolherFotoPerfil() {
             const blob = await fetch(`/fotos/${nomeArquivo}`).then((r) => r.blob());
             const file = new File([blob], nomeArquivo, { type: blob.type });
 
-            setPreview(window.URL.createObjectURL(file)); // ✅ usa window.URL
+            setPreview(URL.createObjectURL(file)); // ✅ corrigido
 
             const resizedFile = await resizeImage(file);
 
@@ -103,7 +104,7 @@ export default function EscolherFotoPerfil() {
             formData.append("foto", resizedFile);
             formData.append("usuario_id", usuarioId);
 
-            const res = await fetch(`${BACKEND_URL}/upload_foto`, {
+            const res = await fetch(`${BACKEND_URL}/upload_foto`, { // ✅ endpoint correto
                 method: "POST",
                 headers: { Authorization: `Bearer ${token}` },
                 body: formData,
