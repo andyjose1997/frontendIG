@@ -62,8 +62,11 @@ export default function EscolherFotoPerfil() {
 
         const resizedFile = await resizeImage(file);
 
+        const usuarioId = localStorage.getItem("usuario_id");
         const formData = new FormData();
         formData.append("foto", resizedFile);
+        formData.append("usuario_id", usuarioId); // 🔹 garante ID junto com a foto
+
 
         try {
             const res = await fetch(`${URL}/upload_foto`, {
@@ -87,6 +90,7 @@ export default function EscolherFotoPerfil() {
     };
 
     // 🔹 Escolher um avatar pronto
+    // 🔹 Escolher um avatar pronto
     const handleEscolherAvatar = async (nomeArquivo) => {
         try {
             const blob = await fetch(`/fotos/${nomeArquivo}`).then((r) => r.blob());
@@ -96,8 +100,10 @@ export default function EscolherFotoPerfil() {
 
             const resizedFile = await resizeImage(file);
 
+            const usuarioId = localStorage.getItem("usuario_id"); // 🔹 pega id do localStorage
             const formData = new FormData();
             formData.append("foto", resizedFile);
+            formData.append("usuario_id", usuarioId); // 🔹 garante ID junto com o avatar
 
             const res = await fetch(`${URL}/upload_foto`, {
                 method: "POST",
@@ -118,6 +124,7 @@ export default function EscolherFotoPerfil() {
             alert("⚠️ Erro de conexão");
         }
     };
+
 
     const avatares = [
         "umF.png", "umE.png", "umD.png", "umC.png", "umB.png", "umA.png",

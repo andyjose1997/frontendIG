@@ -118,7 +118,11 @@ export default function Cadastrarse() {
                     localStorage.setItem("usuario", JSON.stringify(dados.usuario));
                     localStorage.setItem("usuario_id", dados.usuario.id);
 
+                    // 🔹 garante que o storage foi salvo antes de abrir o modal
+                    await new Promise(res => setTimeout(res, 200));
+
                     setMostrarEscolherFoto(true);
+
                 }
             } else {
                 const erro = await res.json();
