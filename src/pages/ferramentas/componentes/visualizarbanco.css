@@ -714,3 +714,57 @@
     color: #ffffff !important;
     font-weight: 700;
 }
+
+/* 🔹 Botão Editar */
+.btn-editar {
+    background: linear-gradient(135deg, #4cafef, #2196f3);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    box-shadow: 0 4px 10px rgba(33, 150, 243, 0.25);
+}
+
+.btn-editar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(33, 150, 243, 0.35);
+    opacity: 0.9;
+}
+
+.btn-editar:active {
+    transform: scale(0.96);
+}
+
+/* 🔹 Botão Apagar */
+.btn-apagar {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    box-shadow: 0 4px 10px rgba(244, 67, 54, 0.25);
+}
+
+.btn-apagar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(244, 67, 54, 0.35);
+    opacity: 0.9;
+}
+
+.btn-apagar:active {
+    transform: scale(0.96);
+}
+
+/* 🔹 Espaçamento quando usados juntos */
+.btn-editar,
+.btn-apagar {
+    margin: 0 6px;
+}
