@@ -181,13 +181,6 @@ h2:hover,
     color: #ffffff;
 }
 
-.mensagens-container~.irene-container {
-    left: 20px;
-    right: auto;
-    align-items: flex-start;
-    /* botão alinhado à esquerda */
-}
-
 .mensagem-detalhes p {
     font-size: 1.45rem;
     color: #b3b8d1;
