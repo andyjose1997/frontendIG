@@ -1,11 +1,12 @@
 import { useState } from "react";
 import "./cadastrarse.css";
-import { FRONT_URL } from "../../config";
 import { URL } from "../../config";
 
 export default function EscolherFotoPerfil() {
     const [fotoCarregada, setFotoCarregada] = useState(false);
+    const [preview, setPreview] = useState(null);
     const token = localStorage.getItem("token");
+
     // 🔹 Função para redimensionar imagem mantendo formato original e qualidade máxima
     const resizeImage = (file, maxSize = 1200) => {
         return new Promise((resolve) => {
@@ -17,7 +18,6 @@ export default function EscolherFotoPerfil() {
                     let width = img.width;
                     let height = img.height;
 
-                    // Mantém proporção
                     if (width > height) {
                         if (width > maxSize) {
                             height *= maxSize / width;
@@ -33,10 +33,9 @@ export default function EscolherFotoPerfil() {
                     canvas.width = width;
                     canvas.height = height;
                     const ctx = canvas.getContext("2d");
-                    ctx.imageSmoothingQuality = "high"; // 🔹 suavização máxima
+                    ctx.imageSmoothingQuality = "high";
                     ctx.drawImage(img, 0, 0, width, height);
 
-                    // Mantém formato original (PNG ou JPEG)
                     const fileType = file.type.includes("png") ? "image/png" : "image/jpeg";
 
                     canvas.toBlob((blob) => {
@@ -46,7 +45,7 @@ export default function EscolherFotoPerfil() {
                                 lastModified: Date.now(),
                             })
                         );
-                    }, fileType, 1.0); // 🔹 qualidade 100%
+                    }, fileType, 1.0);
                 };
                 img.src = event.target.result;
             };
@@ -54,13 +53,13 @@ export default function EscolherFotoPerfil() {
         });
     };
 
-
     // 🔹 Upload da foto do usuário
     const handleUpload = async (event) => {
         const file = event.target.files[0];
         if (!file) return;
 
-        // Redimensiona antes de enviar
+        setPreview(URL.createObjectURL(file));
+
         const resizedFile = await resizeImage(file);
 
         const formData = new FormData();
@@ -74,6 +73,10 @@ export default function EscolherFotoPerfil() {
             });
 
             if (res.ok) {
+                const dados = await res.json();
+                const usuario = JSON.parse(localStorage.getItem("usuario"));
+                usuario.foto = dados.url;
+                localStorage.setItem("usuario", JSON.stringify(usuario));
                 setFotoCarregada(true);
             } else {
                 alert("❌ Erro ao enviar a foto");
@@ -89,7 +92,8 @@ export default function EscolherFotoPerfil() {
             const blob = await fetch(`/fotos/${nomeArquivo}`).then((r) => r.blob());
             const file = new File([blob], nomeArquivo, { type: blob.type });
 
-            // Redimensiona avatar também
+            setPreview(URL.createObjectURL(file));
+
             const resizedFile = await resizeImage(file);
 
             const formData = new FormData();
@@ -102,6 +106,10 @@ export default function EscolherFotoPerfil() {
             });
 
             if (res.ok) {
+                const dados = await res.json();
+                const usuario = JSON.parse(localStorage.getItem("usuario"));
+                usuario.foto = dados.url;
+                localStorage.setItem("usuario", JSON.stringify(usuario));
                 setFotoCarregada(true);
             } else {
                 alert("❌ Erro ao salvar avatar");
@@ -112,21 +120,9 @@ export default function EscolherFotoPerfil() {
     };
 
     const avatares = [
-        "umF.png",
-        "umE.png",
-        "umD.png",
-        "umC.png",
-        "umB.png",
-        "umA.png",
-        "um.png",
-        "umG.png",
-        "umH.png",
-        "umI.png",
-        "umM.png",
-        "umAA.png",
-        "umBB.png",
+        "umF.png", "umE.png", "umD.png", "umC.png", "umB.png", "umA.png",
+        "um.png", "umG.png", "umH.png", "umI.png", "umM.png", "umAA.png", "umBB.png",
     ];
-
 
     return (
         <div className="modalEscolher-overlay">
@@ -150,6 +146,9 @@ export default function EscolherFotoPerfil() {
                 <label htmlFor="upload" className="upload-label">📂 Escolher Arquivo</label>
                 <input id="upload" type="file" accept="image/*" onChange={handleUpload} />
                 <p id="file-name"></p>
+
+                {/* Preview da imagem */}
+                {preview && <img src={preview} alt="Preview" className="foto-preview" />}
 
                 {fotoCarregada && <p className="foto-ok">✅ Foto carregada!</p>}
 
