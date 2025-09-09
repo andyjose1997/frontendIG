@@ -35,7 +35,11 @@ export default function Reacoes({
                             className="reacoes-botao"
                             onClick={() => handleReacao(reacao.tipo)}
                         >
-                            <img src={reacao.imagem} alt={reacao.tipo} className="reacoes-icone" />
+                            <img
+                                src={`/reacoes/${reacao.imagem}`}
+                                alt={reacao.tipo}
+                                className="reacoes-icone"
+                            />
                         </button>
                     ))}
                 </div>
