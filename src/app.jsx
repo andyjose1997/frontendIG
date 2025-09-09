@@ -93,7 +93,7 @@ function AppRoutes() {
   useEffect(() => {
     const verificarBackend = async () => {
       try {
-        const resposta = await fetch({ URL } + "/ping");
+        const resposta = await fetch(`${URL}/ping`);
         setBackendOnline(resposta.ok);
       } catch (erro) {
         setBackendOnline(false);
