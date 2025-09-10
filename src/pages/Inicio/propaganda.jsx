@@ -8,21 +8,36 @@ export default function Propaganda() {
 
     useEffect(() => {
         fetch(`${URL}/propagandas`)
-            .then((res) => res.json())
-            .then((data) => setPropagandas(data))
+            .then((res) => {
+                if (!res.ok) throw new Error("Erro na resposta do servidor");
+                return res.json();
+            })
+            .then((data) => {
+                // 🔹 Garante que só entra array no estado
+                if (Array.isArray(data)) {
+                    setPropagandas(data);
+                } else {
+                    console.error("Resposta inesperada:", data);
+                    setPropagandas([]);
+                }
+            })
             .catch((err) => console.error("Erro ao carregar propagandas:", err));
     }, []);
 
     return (
         <section className="propaganda-scroll-vertical">
-            {propagandas.map((item) => (
-                <div key={item.id} className={`propaganda-item ${item.site.toLowerCase()}`}>
-                    <a href={item.link} target="_blank" rel="noopener noreferrer">
-                        <h3>{item.site}</h3>
-                    </a>
-                    <p>{item.comentario}</p>
-                </div>
-            ))}
+            {Array.isArray(propagandas) &&
+                propagandas.map((item) => (
+                    <div
+                        key={item.id}
+                        className={`propaganda-item ${item.site?.toLowerCase() || ""}`}
+                    >
+                        <a href={item.link} target="_blank" rel="noopener noreferrer">
+                            <h3>{item.site}</h3>
+                        </a>
+                        <p>{item.comentario}</p>
+                    </div>
+                ))}
         </section>
     );
 }
