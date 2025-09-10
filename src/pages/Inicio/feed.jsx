@@ -16,7 +16,8 @@ import './feed-completo/reacoes.css';
 
 export default function Feed() {
     const sectionRef = useRef(null);
-    const [filtro, setFiltro] = useState("gerais"); // ✅ novo estado
+    const [filtro, setFiltro] = useState("gerais");
+    const [limite, setLimite] = useState(10); // 🔹 Máximo inicial (edite aqui → 2)
 
     const {
         posts, setPosts,
@@ -49,10 +50,12 @@ export default function Feed() {
         funcaoUsuario
     } = useFeedHandlers();
 
-
-
-
     const userId = localStorage.getItem('usuario_id');
+
+    // 🔹 Função para carregar mais posts
+    const carregarMais = () => {
+        setLimite(prev => prev + 10); // aumenta 10 a cada clique
+    };
 
     return (
         <div className="FeedWrapper">
@@ -71,8 +74,7 @@ export default function Feed() {
                     )}
                 </div>
 
-
-                <h1 style={{ fontSize: "3rem" }}>
+                <h1 style={{ fontSize: "3rem", color: "white" }}>
                     {filtro === "gerais" && "Últimas Notícias"}
                     {filtro === "postagens" && "Postagens dos Usuários"}
                     {filtro === "sistema" && "Notícias Oficiais do Sistema"}
@@ -87,9 +89,7 @@ export default function Feed() {
                     />
                 )}
 
-
-
-                {/* 🔹 Renderizar posts filtrados */}
+                {/* 🔹 Renderizar posts com limite */}
                 {posts
                     .filter(post => {
                         if (filtro === "gerais") return true;
@@ -98,6 +98,7 @@ export default function Feed() {
                         if (filtro === "muro") return post.muro === 1;
                         return true;
                     })
+                    .slice(0, limite) // 👈 Aplica limite
                     .map(post => (
                         filtro === "sistema" ? (
                             <PostagemSistema
@@ -165,6 +166,17 @@ export default function Feed() {
                             />
                         )
                     ))}
+
+                {/* 🔹 Botão Carregar mais */}
+                {limite < posts.length && (
+                    <button
+                        className="btnPostGeral"
+                        style={{ marginTop: "2rem", display: "block", marginLeft: "auto", marginRight: "auto" }}
+                        onClick={carregarMais}
+                    >
+                        Carregar mais
+                    </button>
+                )}
             </section>
         </div>
     );
