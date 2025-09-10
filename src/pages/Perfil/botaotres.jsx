@@ -40,7 +40,7 @@ export default function BotaoTres() {
 
     return (
         <section className="experiencias-section">
-            <h2 className="titulo-exp">🏆 Ranking — Divisão 1</h2>
+            <h2 className="titulo-exp">🏆 Ranking — Divisão 1 ATUALMENTE SENDO DESENVOLVIDO</h2>
             <div className="container-exp">
                 {rankingOrdenado.map((pessoa, index) => (
                     <div className="box-exp" key={index}>
