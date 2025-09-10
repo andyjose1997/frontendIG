@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Modopp.css';
+import './modopp.css';
 import { URL } from '../../../config';
 
 export default function ModoPP({ onVoltar }) {
