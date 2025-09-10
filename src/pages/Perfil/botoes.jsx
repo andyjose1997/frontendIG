@@ -103,19 +103,24 @@ export default function Botoes() {
             </aside>
 
             {showModal && (
-                <div className="modal-overlay">
-                    <div className="modal-box">
-                        <h3 className="modal-titulo">Tem certeza que deseja sair?</h3>
-                        <p className="modal-texto">
+                <div className="sair-overlay">
+                    <div className="sair-box">
+                        <h3 className="sair-titulo">Tem certeza que deseja sair?</h3>
+                        <p className="sair-texto">
                             Saindo automaticamente em <strong>{countdown}</strong> segundos...
                         </p>
-                        <div className="modal-botoes">
-                            <button className="modal-btn sair" onClick={handleConfirmLogout}>Sair agora</button>
-                            <button className="modal-btn cancelar" onClick={handleCancel}>Cancelar</button>
+                        <div className="sair-botoes">
+                            <button className="sair-btn sair-agora" onClick={handleConfirmLogout}>
+                                Sair agora
+                            </button>
+                            <button className="sair-btn sair-cancelar" onClick={handleCancel}>
+                                Cancelar
+                            </button>
                         </div>
                     </div>
                 </div>
             )}
+
         </>
     );
 }

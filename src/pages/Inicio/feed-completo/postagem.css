@@ -1,241 +1,126 @@
-/* ===== Card da postagem ===== */
+/* ====== CARD DA POSTAGEM ====== */
 .post-card {
-    background: #ffffff;
-    border-radius: 14px;
+    background: linear-gradient(145deg, #01162c, #22427e);
+    color: #e0e6ed;
+    border-radius: 16px;
     padding: 1.5rem;
-    margin-bottom: 1.5rem;
-
-    /* 🔹 sombra mais moderna */
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-
-    /* 🔹 suavidade */
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    margin-bottom: 1.8rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .post-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
 }
 
-/* ===== Cabeçalho da postagem ===== */
+/* ====== CABEÇALHO ====== */
 .post-cabecalho {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 1rem;
-
-    /* 🔹 separação visual */
-    border-bottom: 1px solid #e5e7eb;
-    padding-bottom: 0.75rem;
 }
 
-.post-cabecalho:hover {
-    border-bottom-color: #cbd5e1;
-    /* realce sutil no hover */
-}
-
-.post-card h4,
-.post-titulo {
-    word-break: break-word;
-    overflow-wrap: break-word;
-
-    font-size: 1.75rem;
-    font-weight: 600;
-    line-height: 1.4;
-    margin-top: 0.75rem;
-    color: #1e293b;
-    /* azul-acinzentado moderno */
-
-    /* 🔹 suavidade */
-    transition: color 0.3s ease;
-}
-
-.post-card h4:hover,
-.post-titulo:hover {
-    color: #0f172a;
-    /* tom mais escuro no hover */
-}
-
-/* ===== Autor + Imagem ===== */
+/* ====== AUTOR ====== */
 .post-autor {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    /* 🔹 equilíbrio visual */
-    padding: 0.25rem 0;
-}
-
-.post-autor:hover {
-    background-color: #f8fafc;
-    /* leve destaque ao passar o mouse */
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
+    gap: 12px;
 }
 
 .post-autor-foto {
-    width: 90px;
-    height: 90px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
+    border: 2px solid #3a86ff;
     object-fit: cover;
-
-    /* 🔹 estilo extra */
-    border: 2px solid #f1f5f9;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-
-    /* 🔹 interação */
-    transition: transform 0.25s ease, box-shadow 0.3s ease;
-}
-
-.post-autor-foto:hover {
-    transform: scale(1.08);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .post-autor-info {
     display: flex;
     flex-direction: column;
-    line-height: 1.4;
-
-    /* 🔹 garante alinhamento consistente */
-    gap: 2px;
 }
 
 .post-autor-nome {
+    font-size: 1.9rem;
+    color: #f1f6ff;
     font-weight: 600;
-    font-size: 1.7rem;
-    color: #1e293b;
-    /* azul-acinzentado elegante */
-    letter-spacing: 0.3px;
-
-    /* 🔹 transição suave */
-    transition: color 0.3s ease;
-}
-
-.post-autor-nome:hover {
-    color: #0f172a;
-    /* destaque sutil no hover */
 }
 
 .post-data {
-    font-size: 1rem;
-    color: #64748b;
-    /* cinza moderno */
-    font-style: italic;
-    opacity: 0.85;
-    white-space: nowrap;
-    margin-top: -19px;
-    /* 🔹 transição sutil */
-    transition: opacity 0.3s ease;
+    color: #9baec8;
+    font-size: 1.25rem;
 }
 
-.post-data:hover {
-    opacity: 1;
-}
-
+/* ====== TAG OFICIAL ====== */
 .post-oficial {
-    margin-left: 10px;
-    background: linear-gradient(135deg, #e63946, #b91c1c);
-    color: #fff;
-    font-weight: 600;
+    background: #e63946;
     padding: 3px 10px;
+    font-size: 0.85rem;
     border-radius: 14px;
-    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    color: #fff;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    letter-spacing: 0.4px;
-
-    /* 🔹 destaque */
-    box-shadow: 0 2px 6px rgba(230, 57, 70, 0.4);
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 6px rgba(230, 57, 70, 0.5);
+    margin-top: 4px;
 }
 
-.post-oficial:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(185, 28, 28, 0.5);
+/* ====== TÍTULO ====== */
+.post-titulo {
+    font-size: 2rem;
+    line-height: 1.6;
+    color: #d8e3f0;
+    margin: 1rem 0;
+    white-space: pre-line;
 }
 
-/* ===== Edição de postagem ===== */
+/* ====== MODO EDIÇÃO ====== */
 .post-edicao {
-    margin-top: 1rem;
-    padding: 1rem;
-    border: 1px dashed #94a3b8;
-    /* borda sutil para indicar edição */
-    border-radius: 10px;
-    background-color: #f8fafc;
-    animation: fadeIn 0.3s ease;
-}
-
-/* 🔹 pequena animação de entrada */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .post-edicao-input {
-    width: 100%;
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid #cbd5e1;
-    /* cinza suave */
-    font-size: 0.95rem;
-    color: #1e293b;
-    background-color: #ffffff;
-
-    /* 🔹 transições suaves */
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #3a506b;
+    background: #1b263b;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
 }
 
 .post-edicao-input:focus {
-    outline: none;
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
-}
-
-.post-edicao-input {
-    width: 100%;
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid #cbd5e1;
-    /* cinza suave */
-    font-size: 0.95rem;
-    color: #1e293b;
-    background-color: #ffffff;
-
-    /* 🔹 transições suaves */
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    border-color: #3a86ff;
+    box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.3);
 }
 
 .post-edicao-salvar {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #0d6efd, #084298);
-    color: #ffffff;
-    font-weight: 600;
+    align-self: flex-start;
+    padding: 0.5rem 1.2rem;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
+    background: #3a86ff;
+    color: #fff;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 0.95rem;
-
-    /* 🔹 interação */
-    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
+    transition: background 0.2s ease;
 }
 
 .post-edicao-salvar:hover {
-    background: linear-gradient(135deg, #084298, #052c65);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(13, 110, 253, 0.35);
+    background: #2a6edb;
 }
 
-.post-edicao-salvar:active {
-    transform: scale(0.96);
-    box-shadow: 0 2px 6px rgba(13, 110, 253, 0.3);
+/* ====== REAÇÕES E COMENTÁRIOS ====== */
+.reacoes-box,
+.comentarios-box {
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }

@@ -9,18 +9,12 @@ import './inicio.css';
 import { URL } from "../../config";
 
 function Inicio() {
-    const [mostrarIndicados, setMostrarIndicados] = useState(false);
-    const [mostrarPropaganda, setMostrarPropaganda] = useState(false);
-    const [modoMobilePropaganda, setModoMobilePropaganda] = useState(false);
-    const [modoMobileIndicados, setModoMobileIndicados] = useState(false);
-    const [mensagem, setMensagem] = useState("Carregando do backend...");
-    const [mensagemUsuario, setMensagemUsuario] = useState("");
-    const [nome, setNome] = useState("");
-    const [respostaBackend, setRespostaBackend] = useState("");
+    const [abaAtiva, setAbaAtiva] = useState("feed"); // 🔹 Feed aberto por padrão
+    const [largura, setLargura] = useState(window.innerWidth);
 
     const navigate = useNavigate();
 
-    // 🔐 Proteção da rota: verifica se há token
+    // 🔐 Proteção da rota
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -28,22 +22,14 @@ function Inicio() {
         }
     }, [navigate]);
 
+    // 🔹 Monitorar resize
+    useEffect(() => {
+        const handleResize = () => setLargura(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
-
-
-
-    const enviarNome = () => {
-        fetch(`${URL}/enviar-nome`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ nome: nome })
-        })
-            .then((res) => res.json())
-            .then((data) => setRespostaBackend(data.message))
-            .catch(() => setRespostaBackend("Erro ao enviar nome"));
-    };
+    const isMobile = largura <= 700;
 
     return (
         <section id="contenedor">
@@ -51,57 +37,52 @@ function Inicio() {
                 <Buscador />
             </div>
 
-            <div className="Feed">
-                <Feed />
-            </div>
-
-            <div className="Propaganda">
-                <button
-                    onClick={() => {
-                        if (window.innerWidth <= 480) {
-                            setModoMobilePropaganda(true);
-                        } else {
-                            setMostrarPropaganda(!mostrarPropaganda);
-                        }
-                    }}
-                >
-                    {mostrarPropaganda ? "Ocultar Sites recomendados" : "Mostrar Sites recomendados"}
-                </button>
-
-                {modoMobilePropaganda && window.innerWidth <= 480 && (
-                    <div className="fullscreen-propaganda">
-                        <button className="voltar" onClick={() => setModoMobilePropaganda(false)}>🔙 Voltar</button>
-                        <Propaganda />
+            {/* 🔹 Mobile: botões + conteúdo central */}
+            {isMobile && (
+                <>
+                    <div className="acoes-topo">
+                        <button
+                            className={abaAtiva === "indicados" ? "ativo" : ""}
+                            onClick={() => setAbaAtiva("indicados")}
+                        >
+                            Indicados
+                        </button>
+                        <button
+                            className={abaAtiva === "feed" ? "ativo" : ""}
+                            onClick={() => setAbaAtiva("feed")}
+                        >
+                            Feed
+                        </button>
+                        <button
+                            className={abaAtiva === "propaganda" ? "ativo" : ""}
+                            onClick={() => setAbaAtiva("propaganda")}
+                        >
+                            Propaganda
+                        </button>
                     </div>
-                )}
 
-                <br /><br />
-                {mostrarPropaganda && <Propaganda />}
-            </div>
+                    <div className="conteudo-central">
+                        {abaAtiva === "indicados" && <Indicados />}
+                        {abaAtiva === "feed" && <Feed />}
+                        {abaAtiva === "propaganda" && <Propaganda />}
+                    </div>
+                </>
+            )}
 
-            <div className="Indicados">
-                <button
-                    onClick={() => {
-                        if (window.innerWidth <= 480) {
-                            setModoMobileIndicados(true);
-                        } else {
-                            setMostrarIndicados(!mostrarIndicados);
-                        }
-                    }}
-                >
-                    {mostrarIndicados ? "Ocultar Indicados" : "Mostrar Indicados"}
-                </button>
-
-                {modoMobileIndicados && window.innerWidth <= 480 && (
-                    <div className="fullscreen-indicados">
-                        <button className="voltar" onClick={() => setModoMobileIndicados(false)}>🔙 Voltar</button>
+            {/* 🔹 Desktop: layout em grid */}
+            {!isMobile && (
+                <>
+                    <div className="Indicados">
                         <Indicados />
                     </div>
-                )}
-
-                <br />
-                {mostrarIndicados && <Indicados />}
-            </div>
+                    <div className="Feed">
+                        <Feed />
+                    </div>
+                    <div className="Propaganda">
+                        <Propaganda />
+                    </div>
+                </>
+            )}
         </section>
     );
 }

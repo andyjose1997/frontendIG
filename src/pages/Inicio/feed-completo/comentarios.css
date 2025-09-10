@@ -1,367 +1,216 @@
-/* ===== Caixa principal ===== */
+/* ====== Caixa principal ====== */
 .comentarios-box {
     margin-top: 1rem;
-
-    /* 🔹 layout e estética */
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 1.2rem;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-
-    /* 🔹 suavidade na transição */
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    padding: 1rem;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #0d1b2a, #1b263b);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    color: #e0e6ed;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .comentarios-box:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
 }
 
-
-/* ===== Botão comentar ===== */
-.comentarios-botao-comentar {
-    color: #fff;
-    background: linear-gradient(135deg, #0162d1, #014581);
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    padding: 10px 18px;
-    border-radius: 8px;
-
-    /* 🔹 animação */
-    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-.comentarios-botao-comentar:hover {
-    background: linear-gradient(135deg, #014581, #01325c);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
-}
-
-.comentarios-botao-comentar:active {
-    transform: scale(0.96);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* ===== Botões Ver Mais / Ver Todos ===== */
+/* ====== Botões principais ====== */
+.comentarios-botao-comentar,
 .comentarios-botao-vermais,
-.comentarios-botao-vertodos {
-    margin-top: 10px;
-    padding: 10px 18px;
-    color: #fff;
+.comentarios-botao-vertodos,
+.comentarios-botao-enviar {
+    background: #22427e;
+    color: #f1f6ff;
     border: none;
     border-radius: 10px;
+    padding: 6px 12px;
+    margin: 6px 8px 6px 0;
+    font-size: 1.35rem;
     cursor: pointer;
-    font-weight: 600;
-    font-size: 0.95rem;
-
-    /* 🔹 aparência moderna */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    font-weight: 500;
+    transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Ver Mais */
-.comentarios-botao-vermais {
-    background: linear-gradient(135deg, #4a6ee0, #2e4cb8);
-}
-
-.comentarios-botao-vermais:hover {
-    background: linear-gradient(135deg, #2e4cb8, #1e3a99);
+.comentarios-botao-comentar:hover,
+.comentarios-botao-vermais:hover,
+.comentarios-botao-vertodos:hover,
+.comentarios-botao-enviar:hover {
+    background: #3a86ff;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 12px rgba(58, 134, 255, 0.3);
 }
 
-.comentarios-botao-vermais:active {
-    transform: scale(0.96);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+.comentarios-botao-comentar:active,
+.comentarios-botao-vermais:active,
+.comentarios-botao-vertodos:active,
+.comentarios-botao-enviar:active {
+    transform: scale(0.95);
 }
 
-/* Ver Todos */
-.comentarios-botao-vertodos {
-    background: linear-gradient(135deg, #2e4cb8, #1e3a99);
-    margin-left: 10px;
-}
-
-.comentarios-botao-vertodos:hover {
-    background: linear-gradient(135deg, #1e3a99, #142d77);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-}
-
-.comentarios-botao-vertodos:active {
-    transform: scale(0.96);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-}
-
-
-
-/* ===== Área de input de comentário ===== */
+/* ====== Área de input ====== */
 .comentarios-area-input {
-    margin-top: 1rem;
+    display: flex;
+    gap: 10px;
+    margin-top: 0.8rem;
 }
 
 .comentarios-input {
-    width: 100%;
-    padding: 10px;
+    flex: 1;
+    padding: 0.6rem 1rem;
     border-radius: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #3a506b;
+    background: #1b263b;
+    color: #f1f6ff;
+    font-size: 1.45rem;
+    outline: none;
+    transition: border 0.25s ease, box-shadow 0.25s ease;
 }
 
-.comentarios-botao-enviar {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+.comentarios-input:focus {
+    border-color: #3a86ff;
+    box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.25);
 }
 
-/* ===== Item do comentário ===== */
+/* ====== Cada comentário ====== */
 .comentarios-item {
-    margin-top: 12px;
-    padding: 14px 16px;
-    border-radius: 10px;
-    background: #fff;
-
-    /* 🔹 separação e leveza */
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-
-    /* 🔹 transições suaves */
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-    position: relative;
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    background: #112544;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 
 .comentarios-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    background: #18335a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 }
 
-/* ===== Cabeçalho do comentário ===== */
+/* ====== Header ====== */
 .comentarios-header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-
-    /* 🔹 espaço e equilíbrio */
-    padding-bottom: 6px;
-    border-bottom: 1px dashed #e5e7eb;
-    margin-bottom: 8px;
+    gap: 10px;
+    margin-bottom: 0.5rem;
 }
-
-/* Quando o usuário passa o mouse no cabeçalho */
-.comentarios-header:hover {
-    border-bottom-color: #cbd5e1;
-}
-
 
 .comentarios-foto {
-    width: 50px;
-    height: 50px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-
-    /* 🔹 estética moderna */
+    border: 2px solid #3a86ff;
     object-fit: cover;
-    border: 2px solid #f1f5f9;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-
-    /* 🔹 animação */
-    transition: transform 0.25s ease, box-shadow 0.3s ease;
-}
-
-.comentarios-foto:hover {
-    transform: scale(1.08);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 .comentarios-nome {
+    font-size: 1.6rem;
     font-weight: 600;
-    font-size: 0.95rem;
-    color: #1e293b;
-    /* azul-acinzentado elegante */
-    letter-spacing: 0.3px;
-
-    /* 🔹 suavidade */
-    transition: color 0.3s ease;
-}
-
-.comentarios-nome:hover {
-    color: #0f172a;
-    /* tom mais escuro no hover */
+    color: #f1f6ff;
 }
 
 .comentarios-data {
+    font-size: 1.25rem;
+    color: #9baec8;
     margin-left: auto;
-    font-size: 0.75rem;
-    color: #64748b;
-    /* cinza moderno */
-    font-style: italic;
-    white-space: nowrap;
-
-    /* 🔹 detalhe sutil */
-    opacity: 0.85;
-    transition: opacity 0.3s ease;
 }
 
-.comentarios-data:hover {
-    opacity: 1;
+/* ====== Texto do comentário ====== */
+.comentarios-texto {
+    font-size: 1.95rem;
+    line-height: 1.5;
+    color: #d8e3f0;
+    margin: 0.2rem 0 0;
 }
 
-/* ===== Menu de ações ===== */
+/* ====== Menu de opções ====== */
 .comentarios-menu {
     position: relative;
-    display: flex;
-    align-items: center;
-
-    /* 🔹 evita clique fora de lugar */
-    padding-left: 4px;
-}
-
-/* Quando o menu está aberto, dá um leve destaque */
-.comentarios-menu.open {
-    background-color: #f8fafc;
-    border-radius: 6px;
+    margin-left: 10px;
 }
 
 .comentarios-menu-toggle {
     background: transparent;
     border: none;
-    font-size: 1.4rem;
+    color: #cbd5e1;
+    font-size: 1.8rem;
     cursor: pointer;
-    margin-left: 8px;
-    color: #475569;
-    /* cinza azulado moderno */
-
-    /* 🔹 feedback visual */
     padding: 4px;
-    border-radius: 6px;
-    transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+    border-radius: 50%;
+    transition: background 0.25s ease;
 }
 
 .comentarios-menu-toggle:hover {
-    background-color: #f1f5f9;
-    color: #1e293b;
-    transform: scale(1.1);
-}
-
-.comentarios-menu-toggle:active {
-    transform: scale(0.95);
-    background-color: #e2e8f0;
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .comentarios-menu-opcoes {
     position: absolute;
+    top: 30px;
     right: 0;
-    top: 110%;
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
+    background: #0d1b2a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-    z-index: 10;
-    overflow: hidden;
-    min-width: 140px;
-
-    /* 🔹 animação de entrada */
-    opacity: 0;
-    transform: translateY(-6px);
-    pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 50;
 }
 
-.comentarios-menu-opcoes.show {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-/* Botões dentro do menu */
-.comentarios-menu-editar,
-.comentarios-menu-apagar {
-    display: block;
-    width: 100%;
-    padding: 10px 14px;
-    background: none;
+.comentarios-menu-opcoes button {
+    background: transparent;
     border: none;
+    padding: 6px 10px;
     text-align: left;
-    cursor: pointer;
-    font-weight: 600;
+    color: #f1f6ff;
     font-size: 0.9rem;
-
-    /* 🔹 transições suaves */
-    transition: background-color 0.25s ease, color 0.25s ease;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.25s ease;
 }
 
-/* Editar */
-.comentarios-menu-editar {
-    color: #1e40af;
+.comentarios-menu-opcoes button:hover {
+    background: #22427e;
 }
 
-.comentarios-menu-editar:hover {
-    background-color: #e0e7ff;
-    color: #1e3a8a;
-}
-
-/* Apagar */
-.comentarios-menu-apagar {
-    color: #dc2626;
-}
-
-.comentarios-menu-apagar:hover {
-    background-color: #fee2e2;
-    color: #b91c1c;
-}
-
-/* Estados normais */
-.comentarios-menu-editar {
-    color: #1e3a8a;
-}
-
-.comentarios-menu-apagar {
-    color: #dc2626;
-}
-
-/* Hover */
-.comentarios-menu-editar:hover {
-    background-color: #e0e7ff;
-    color: #1e40af;
-}
-
-.comentarios-menu-apagar:hover {
-    background-color: #fee2e2;
-    color: #b91c1c;
-}
-
-/* ===== Área de edição ===== */
+/* ====== Edição de comentário ====== */
 .comentarios-editar-area {
-    margin-left: 35px;
-    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    margin-top: 0.5rem;
 }
 
 .comentarios-editar-input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
+    flex: 1;
+    padding: 0.5rem 0.8rem;
     border-radius: 8px;
+    border: 1px solid #3a506b;
+    background: #1b263b;
+    color: #fff;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.comentarios-editar-input:focus {
+    border-color: #3a86ff;
+    box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.25);
 }
 
 .comentarios-editar-salvar {
-    margin-top: 5px;
-    padding: 6px 12px;
-    background-color: #28a745;
-    color: white;
+    background: #3a86ff;
     border: none;
-    border-radius: 6px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
     cursor: pointer;
+    transition: background 0.25s ease, transform 0.2s ease;
 }
 
-/* ===== Texto do comentário ===== */
-.comentarios-texto {
-    margin-left: 35px;
-    font-size: 1.55rem;
-    word-break: break-word;
-    overflow-wrap: break-word;
+.comentarios-editar-salvar:hover {
+    background: #2a6edb;
+    transform: translateY(-1px);
 }

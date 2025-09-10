@@ -4,6 +4,7 @@ import Reacoes from './reacoes';
 import Comentarios from './comentarios';
 import MenuOpcoesPostagem from './menuopcoespostagem';
 import { URL } from '../../../config';
+import './postagemsistema.css';
 export default function PostagemSistema({
     post,
     userId,
@@ -44,7 +45,6 @@ export default function PostagemSistema({
                         className="host-foto"
                     />
 
-
                     <div>
                         <strong>
                             {post.nome.charAt(0).toUpperCase() + post.nome.slice(1).toLowerCase()}{" "}
@@ -52,24 +52,8 @@ export default function PostagemSistema({
                         </strong><br />
                         <small>{post.data_postagem}</small>
                         {post.sistema === 1 && (
-                            <span
-                                style={{
-                                    marginLeft: "10px",
-                                    backgroundColor: "#e63946",
-                                    color: "white",
-                                    fontWeight: "bold",
-                                    padding: "2px 8px",
-                                    borderRadius: "12px",
-                                    fontSize: "0.85rem",
-                                    display: "inline-flex",
-                                    alignItems: "center",
-                                    gap: "4px"
-                                }}
-                            >
-                                ⭐ OFICIAL
-                            </span>
+                            <span className="tag-oficial">⭐ OFICIAL</span>
                         )}
-
                     </div>
                 </div>
 
@@ -109,7 +93,6 @@ export default function PostagemSistema({
                 </>
             )}
 
-
             <Reacoes
                 post={post}
                 tiposDeReacao={tiposDeReacao}
@@ -140,4 +123,5 @@ export default function PostagemSistema({
             />
         </div>
     );
+
 }

@@ -183,6 +183,17 @@
     /* realce na borda ao hover */
 }
 
+.RodapeEmpresa a h2,
+.RodapeEmpresa p {
+    color: black;
+    font-size: 1.4rem;
+}
+
+.RodapeEmpresa p {
+    color: black;
+    font-size: 1.2rem;
+}
+
 /* Responsividade para telas menores */
 @media (max-width: 768px) {
     .RodapeContent {

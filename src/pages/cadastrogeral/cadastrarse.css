@@ -1095,55 +1095,7 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
-/* ===========================
-   RESPONSIVIDADE
-=========================== */
-@media (max-width: 600px) {
 
-    /* Painel principal */
-    .PainelCadastro {
-        margin: 1.5rem 1rem;
-        padding: 1.25rem;
-        border-radius: 12px;
-    }
-
-    /* Foto do host */
-    .host-box img {
-        width: 110px;
-        height: 110px;
-    }
-
-    /* Foto dentro do modal de host */
-    .modalCadastro-host img {
-        width: 140px;
-        height: 140px;
-    }
-
-    /* Títulos do formulário */
-    .FormularioLogin h3 {
-        font-size: 15px;
-    }
-
-    /* Botões principais */
-    .btn-verde,
-    .btn-vermelho,
-    .FaqAzul {
-        font-size: 13px;
-        padding: 9px 12px;
-        border-radius: 8px;
-    }
-
-    /* Ajusta espaçamento interno do modal */
-    .modalCadastro-host {
-        padding: 1.5rem;
-    }
-
-    /* Texto dos inputs menor */
-    .inputPadrao {
-        font-size: 14px;
-        padding: 10px;
-    }
-}
 
 /* ===========================
    Botão Fechar

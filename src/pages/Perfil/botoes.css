@@ -55,112 +55,6 @@
 }
 
 
-@media (max-width: 660px) {
-    .link-text {
-        display: none;
-    }
-
-    .botoa-container a {
-        margin: auto auto;
-    }
-
-    .botoa-container {
-        width: 20%;
-    }
-
-}
-
-@media (max-width: 510px) {
-    .botoa-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 0.5rem;
-        width: 100%;
-        padding: 1rem;
-        border-radius: 0;
-        max-height: none;
-        margin: 0;
-    }
-
-    .botoa-container img {
-        display: none;
-    }
-
-    .botoa-container a {
-        width: 15px;
-        height: 15px;
-        gap: -1rem;
-    }
-
-    .botoa-container {
-        gap: 0rem;
-        height: 70px;
-        margin: 2px auto;
-
-    }
-}
-
-@media (max-width: 361px) {
-    .botoa-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 0.5rem;
-        width: 100%;
-        padding: 1rem;
-        border-radius: 0;
-        max-height: none;
-        margin: 0;
-    }
-
-    .botoa-container img {
-        display: none;
-    }
-
-    .botoa-container a {
-        width: 10px;
-        height: 10px;
-        gap: -1rem;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: auto auto;
-    }
-
-    .botoa-container {
-        gap: 0rem;
-        height: 70px;
-        margin: auto auto;
-        width: 80%;
-        border-radius: 20px;
-
-    }
-}
-
-@media (max-width: 430px) {
-    .botoa-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.5rem;
-        width: 100%;
-        padding: 0.5rem;
-        border-radius: 10px;
-        height: 100px;
-    }
-
-    .botoa-container a {
-        justify-content: center;
-        /* centraliza emoji/texto */
-        padding: 0.8rem;
-        font-size: 1rem;
-    }
-
-    .botoa-container img {
-        display: none;
-        /* oculta a logo pra economizar espaço */
-    }
-}
-
 .tooltip-wrapper {
     position: relative;
     width: 100%;
@@ -254,4 +148,101 @@
 .botoa-container button:active {
     transform: scale(0.98);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* 🔹 Overlay */
+.sair-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 20, 60, 0.75);
+    /* azul escuro translúcido */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* 🔹 Caixa principal */
+.sair-box {
+    width: 40%;
+    /* ~20% maior */
+    max-width: 600px;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    /* degrade azul */
+    color: #fff;
+    padding: 2.5rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    animation: sair-fadeInScale 0.3s ease;
+}
+
+/* 🔹 Título */
+.sair-titulo {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* 🔹 Texto */
+.sair-texto {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* 🔹 Botões container */
+.sair-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+/* 🔹 Botões */
+.sair-btn {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Botão sair agora */
+.sair-btn.sair-agora {
+    background: #ff4b5c;
+    color: #fff;
+}
+
+.sair-btn.sair-agora:hover {
+    background: #e84150;
+    transform: scale(1.05);
+}
+
+/* Botão cancelar */
+.sair-btn.sair-cancelar {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.sair-btn.sair-cancelar:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}
+
+/* 🔹 Animação */
+@keyframes sair-fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

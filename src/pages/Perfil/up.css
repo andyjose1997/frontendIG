@@ -540,3 +540,51 @@
 .funcao-wrapper:hover .funcao-msg {
     display: block;
 }
+
+/* ===== Responsividade para telas pequenas ===== */
+@media (max-width: 580px) {
+    .perfilBox {
+        flex-direction: column;
+        /* foto em cima, info embaixo */
+        align-items: center;
+        /* centraliza no eixo horizontal */
+        text-align: center;
+        /* centraliza textos */
+        gap: 1.5rem;
+    }
+
+    .fotoWrapper {
+        padding: 0;
+        /* menos espaçamento */
+        box-shadow: none;
+        /* opcional: remove sombra extra */
+    }
+
+    .fotoUsuario {
+        margin-top: 20px;
+        width: 160px;
+        /* reduz um pouco a foto no mobile */
+        height: 160px;
+    }
+
+    .infoBox h1 {
+        font-size: 2rem;
+        /* ajusta título */
+        text-align: center;
+    }
+
+    .infoBox h2 {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .comentarioBox {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .inputComentario {
+        max-width: 100%;
+    }
+}

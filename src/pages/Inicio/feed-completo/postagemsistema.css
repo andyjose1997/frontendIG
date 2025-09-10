@@ -1,0 +1,120 @@
+/* ====== CARD DA POSTAGEM ====== */
+.card-post {
+    background: linear-gradient(145deg, #01162c, #22427e);
+    color: #e0e6ed;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.8rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-post:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+}
+
+/* ====== CABEÇALHO ====== */
+.post-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.post-autor-detalhes {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.host-foto {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid #3a86ff;
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+
+
+.post-autor-detalhes strong {
+    font-size: 1.9rem;
+    color: #f1f6ff;
+}
+
+.post-autor-detalhes small {
+    color: #9baec8;
+    font-size: 1.25rem;
+}
+
+/* ====== CONTEÚDO ====== */
+.post-conteudo {
+    font-size: 2rem;
+    line-height: 1.6;
+    color: #d8e3f0;
+    margin: 1rem 0;
+    white-space: pre-line;
+}
+
+/* ====== MODO EDIÇÃO ====== */
+.post-edicao {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.post-edicao input {
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #3a506b;
+    background: #1b263b;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+}
+
+.post-edicao input:focus {
+    border-color: #3a86ff;
+    box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.3);
+}
+
+.post-edicao button {
+    align-self: flex-start;
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    background: #3a86ff;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.post-edicao button:hover {
+    background: #2a6edb;
+}
+
+/* ====== TAG OFICIAL ====== */
+.post-autor-detalhes span {
+    background: #e63946 !important;
+    padding: 3px 10px;
+    font-size: 0.85rem;
+    border-radius: 14px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 6px rgba(230, 57, 70, 0.5);
+}
+
+/* ====== REAÇÕES E COMENTÁRIOS ====== */
+.reacoes-box,
+.comentarios-box {
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}

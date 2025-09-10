@@ -2,6 +2,8 @@
 import React from 'react';
 import Reacoes from './reacoes';
 import { URL } from '../../../config';
+import './comentarios.css';
+
 export default function Comentarios({
     post,
     comentariosPorPost,

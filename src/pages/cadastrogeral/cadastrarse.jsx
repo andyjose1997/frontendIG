@@ -11,6 +11,8 @@ import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import Redes from "./redes";
 
+
+
 export default function Cadastrarse() {
     const { idHost } = useParams();
     const [idAnfitiao, setIdAnfitiao] = useState(idHost || "");

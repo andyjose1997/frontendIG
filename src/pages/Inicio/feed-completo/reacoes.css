@@ -6,21 +6,18 @@
     gap: 1rem;
     margin-top: 1.2rem;
 
-    /* 🔹 estética */
-    background: #ffffff;
+    background: linear-gradient(145deg, #0d1b2a, #1b263b);
+    /* dark azul */
     border-radius: 12px;
     padding: 0.75rem 1rem;
 
-    /* 🔹 sombra elegante */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-
-    /* 🔹 suavidade */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
     transition: transform 0.25s ease, box-shadow 0.3s ease;
 }
 
 .reacoes-box:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
 }
 
 /* ===== Botões ===== */
@@ -32,75 +29,70 @@
     cursor: pointer;
     position: relative;
 
-    /* 🔹 efeito suave */
     border-radius: 50%;
     transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .reacoes-botao:hover {
-    background-color: rgba(13, 110, 253, 0.08);
+    background-color: rgba(58, 134, 255, 0.12);
+    /* azul suave */
     transform: scale(1.15);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 10px rgba(58, 134, 255, 0.25);
 }
 
 .reacoes-botao:active {
     transform: scale(0.95);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
-
-
 
 /* ===== Ícones de reação ===== */
 .reacoes-icone {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border: 2px solid #e2e8f0;
-    /* cinza claro moderno */
+    border: 3px solid #3a86ff;
+    /* azul vibrante */
     object-fit: cover;
 
-    /* 🔹 suavidade */
     transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-    background-color: #fff;
 }
 
 .reacoes-icone:hover {
     transform: scale(1.2) rotate(5deg);
-    border-color: #0d6efd;
-    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
+    border-color: #2a6edb;
+    /* azul mais escuro */
+    box-shadow: 0 4px 12px rgba(42, 110, 219, 0.35);
 }
 
 /* ===== Container e opções ===== */
 .reacoes-container {
     position: relative;
     display: inline-block;
-
-    /* 🔹 garante clique confortável */
     padding: 4px;
     border-radius: 50%;
     transition: background-color 0.25s ease;
 }
 
 .reacoes-container:hover {
-    background-color: rgba(0, 0, 0, 0.03);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .reacoes-opcoes {
     display: flex;
-    /* fica preparado mas invisível */
     gap: 8px;
     position: absolute;
     top: -60px;
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+
+    background: #0d1b2a;
+    /* dark azul consistente */
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 14px;
     padding: 6px 12px;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
     z-index: 20;
 
-    /* 🔹 animação de entrada */
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.25s ease, transform 0.25s ease;
@@ -114,8 +106,8 @@
 
 /* ===== Contagem de reações ===== */
 .reacoes-contagem {
-    background: #f8fafc;
-    /* cinza bem claro */
+    background: #1b263b;
+    /* dark azul médio */
     border-radius: 14px;
     padding: 8px 14px;
 
@@ -126,18 +118,16 @@
 
     margin-top: 0.75rem;
 
-    /* 🔹 estética */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
     font-size: 0.9rem;
-    color: #1e293b;
+    color: #d8e3f0;
 
-    /* 🔹 suavidade */
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .reacoes-contagem:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
 }
 
 .reacoes-item {
@@ -146,21 +136,22 @@
     align-items: center;
     gap: 6px;
 
-    background: #ffffff;
+    background: #22427e;
+    /* azul mais claro que o fundo */
     padding: 4px 8px;
     border-radius: 8px;
 
-    /* 🔹 estética */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
     transition: background-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .reacoes-item:hover {
-    background-color: #f1f5f9;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    background-color: #2a6edb;
+    /* destaque azul ao hover */
+    box-shadow: 0 4px 10px rgba(42, 110, 219, 0.4);
 }
 
-/* Ícone na contagem */
+/* ===== Ícone na contagem ===== */
 .reacoes-icone-contagem {
     width: 20px;
     height: 20px;
@@ -168,23 +159,23 @@
     vertical-align: middle;
     object-fit: cover;
 
-    /* 🔹 acabamento */
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
 
-    /* 🔹 interação suave */
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .reacoes-icone-contagem:hover {
     transform: scale(1.15);
-    border-color: #0d6efd;
-    box-shadow: 0 3px 8px rgba(13, 110, 253, 0.3);
+    border-color: #3a86ff;
+    box-shadow: 0 3px 8px rgba(58, 134, 255, 0.35);
 }
 
+/* ===== Labels ===== */
 .reacoes-label {
     font-size: 0.85rem;
-    color: #475569;
+    color: #cbd5e1;
+    /* cinza claro */
     font-weight: 500;
 }
 

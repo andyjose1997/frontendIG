@@ -273,6 +273,34 @@ export default function VisualizarBanco() {
                         </div>
 
                     </div>
+                    {/* 🔹 BOTÃO PARA COPIAR EMAILS FILTRADOS */}
+                    <div className="filtro-emails">
+                        <h3>📧 Ações rápidas</h3>
+                        <button
+                            className="btn-copiar-emails"
+                            onClick={() => {
+                                const emails = dadosFiltrados
+                                    .map(linha => linha.email) // pega os emails já filtrados
+                                    .filter(email => !!email); // remove nulos/vazios
+
+                                if (emails.length === 0) {
+                                    setAlerta({ mensagem: "Nenhum email encontrado nos resultados filtrados.", tipo: "erro" });
+                                    return;
+                                }
+
+                                navigator.clipboard.writeText(emails.join(", "))
+                                    .then(() => {
+                                        setAlerta({ mensagem: `${emails.length} emails copiados!`, tipo: "sucesso" });
+                                    })
+                                    .catch(() => {
+                                        setAlerta({ mensagem: "Erro ao copiar emails.", tipo: "erro" });
+                                    });
+                            }}
+                        >
+                            Copiar emails filtrados
+                        </button>
+                    </div>
+
                     <br /><br /><br /><br />
 
                     <div className="area-tabela">
@@ -294,7 +322,7 @@ export default function VisualizarBanco() {
                                 <tr>
                                     {colunas.map(col => (
                                         (["funcao", "palavra_chave"].includes(col) && funcaoUsuario !== "admin") ||
-                                            ["senha", "cargo", "responsabilidade"].includes(col)
+                                            ["foto", "senha", "cargo", "responsabilidade"].includes(col)
                                             ? null
                                             : (
                                                 <th key={col}>

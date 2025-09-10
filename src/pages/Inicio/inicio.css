@@ -152,115 +152,55 @@ body {
     color: #ec5252;
 }
 
-@media (max-width: 100px) {
-    .flutuante-topo {
-        position: fixed;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 999;
+/* 🔹 Botões lado a lado (mobile) */
+.acoes-topo {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.acoes-topo button {
+    padding: 0.6rem 1.2rem;
+    background: linear-gradient(to right, #043ff4, #3e73ff);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.acoes-topo button:hover {
+    background: linear-gradient(to right, #315bff, #547dff);
+    transform: translateY(-2px);
+}
+
+.acoes-topo button:active {
+    transform: scale(0.96);
+}
+
+.acoes-topo button.ativo {
+    background: linear-gradient(to right, #0d2cff, #3e73ff);
+    box-shadow: 0 0 12px rgba(62, 115, 255, 0.6);
+}
+
+/* 🔹 Conteúdo central no mobile */
+.conteudo-central {
+    margin-top: 1rem;
+}
+
+/* ===== Mobile (até 700px) ===== */
+@media (max-width: 700px) {
+    #contenedor {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        align-items: center;
     }
 
-    .flutuante-topo button {
-        font-size: 0.65rem;
-        padding: 0.4rem 0.8rem;
-        border-radius: 8px;
-    }
-
-    /* Oculta o conteúdo normal */
-    #contenedor {
-        display: none;
-    }
-}
-
-@media (max-width :480px) {
-    #contenedor {
-        display: grid;
-        grid-template-areas:
-            "Buscador Buscador"
-            "Indicados Propaganda"
-            "Feed Feed";
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto 1fr;
-    }
-
-    .Buscador {
-        grid-area: Buscador;
-    }
-
-    .Feed {
-        grid-area: Feed;
-    }
-
-    .Propaganda {
-        grid-area: Propaganda;
-    }
-
-    .Propaganda button,
-    .Indicados button {
-        width: 50%;
-        height: 60px;
-    }
-
-
-    .Indicados {
-        grid-area: Indicados;
-    }
-
-
-
-}
-
-@media (max-width: 480px) {
-    .fullscreen-propaganda {
-        position: fixed;
-        top: 0;
-        left: 0;
+    .conteudo-central {
         width: 100%;
-        height: 100%;
-        z-index: 1000;
-        background-color: rgba(14, 34, 137, 0.63);
-        padding: 1rem;
-        overflow-y: auto;
-    }
-
-    .fullscreen-propaganda .voltar {
-        display: block;
-        margin-bottom: 1rem;
-        padding: 0.5rem 1rem;
-        font-weight: bold;
-        background-color: #ef4444;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-    }
-
-
-    .fullscreen-indicados {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 95%;
-        height: 100%;
-        z-index: 1000;
-        background-color: rgba(14, 34, 137, 0.63);
-        padding: 1rem;
-        overflow-y: auto;
-    }
-
-    .fullscreen-indicados .voltar {
-        display: block;
-        margin-bottom: 1rem;
-        padding: 0.5rem 1rem;
-        font-weight: bold;
-        background-color: #ef4444;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
+        max-width: 600px;
     }
 }

@@ -108,14 +108,22 @@ export default function IreneChat() {
             digitarResposta("⚠️ Não consegui conectar com a Irene. Tente novamente.");
         }
     };
+    const [largura, setLargura] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => setLargura(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     return (
         <div className={`irene-container ${isMensagens ? "esquerda" : "direita"}`}>
             {!aberto && (
                 <button className="irene-botao" onClick={() => setAberto(true)}>
-                    Assistente Virtual Irene
+                    {largura <= 850 ? "💭" : "Assistente Virtual Irene"}
                 </button>
             )}
+
 
             {aberto && (
                 <div className="irene-chat">
