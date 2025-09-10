@@ -32,7 +32,7 @@ export default function Perfil() {
                     {/* Botão Menu */}
                     {!modoMobileBotoes && (
                         <button className="abrir-botoes" onClick={() => setModoMobileBotoes(true)}>
-                            📋 Menu
+                            Menu
                         </button>
                     )}
                     {modoMobileBotoes && (
@@ -49,7 +49,7 @@ export default function Perfil() {
                     {/* Botão Informações */}
                     {!modoMobileBotaoUm && (
                         <button className="abrir-botaoUm" onClick={() => setModoMobileBotaoUm(true)}>
-                            ℹ️ Informações
+                            Informações
                         </button>
                     )}
                     {modoMobileBotaoUm && (
@@ -66,7 +66,7 @@ export default function Perfil() {
                     {/* Botão Dois */}
                     {!modoMobileBotaoDois && (
                         <button className="abrir-botaoDois" onClick={() => setModoMobileBotaoDois(true)}>
-                            📑 Botão Dois
+                            Experiências
                         </button>
                     )}
                     {modoMobileBotaoDois && (
@@ -83,8 +83,7 @@ export default function Perfil() {
                     {/* Botão Três */}
                     {!modoMobileBotaoTres && (
                         <button className="abrir-botaoTres" onClick={() => setModoMobileBotaoTres(true)}>
-                            ⚙️ Botão Três
-                        </button>
+                            Ranking                        </button>
                     )}
                     {modoMobileBotaoTres && (
                         <div className="perfil-modal-overlay">
