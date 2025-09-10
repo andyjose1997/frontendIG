@@ -11,11 +11,18 @@ export default function Redes({ onClose }) {
     useEffect(() => {
         const carregarLinks = async () => {
             try {
-                const res = await fetch(`${URL}/links`);
+                const res = await fetch(`${URL}/fundadores/links`);
                 const data = await res.json();
-                setLinks(data);
+
+                if (Array.isArray(data)) {
+                    setLinks(data);
+                } else {
+                    console.error("Resposta inesperada:", data);
+                    setLinks([]);
+                }
             } catch (err) {
                 console.error("Erro ao carregar links:", err);
+                setLinks([]);
             }
         };
         carregarLinks();
@@ -36,23 +43,27 @@ export default function Redes({ onClose }) {
     return (
         <div className="redes-overlay">
             <div className="redes-modal">
-                <h2>🌐 Nossas Redes</h2>
+                <h2>Nossas Redes</h2>
 
                 <div className="redes-grid">
-                    {links.map((item, index) => (
-                        <button
-                            key={index}
-                            className="rede-btn"
-                            onClick={() => window.open(item.link, "_blank", "noopener,noreferrer")}
-                        >
-                            <span className="icon">{getIcon(item.rede)}</span>
-                            <span>{item.rede}</span>
-                        </button>
-                    ))}
+                    {Array.isArray(links) && links.length > 0 ? (
+                        links.map((item, index) => (
+                            <button
+                                key={index}
+                                className="rede-btn"
+                                onClick={() => window.open(item.link, "_blank", "noopener,noreferrer")}
+                            >
+                                <span className="icon">{getIcon(item.rede)}</span>
+                                <span>{item.rede}</span>
+                            </button>
+                        ))
+                    ) : (
+                        <p>Nenhuma rede cadastrada.</p>
+                    )}
                 </div>
 
                 <button className="fechar-btn" onClick={onClose}>
-                    ❌ Fechar
+                    Fechar
                 </button>
             </div>
         </div>
