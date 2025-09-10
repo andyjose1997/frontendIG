@@ -35,11 +35,20 @@ export default function Rodape() {
                     </div>
 
                     <div className="RodapeRedes">
-                        <a href={Facebook} target="_blank" rel="https://www.facebook.com/profile.php?id=61580492555279">Facebook</a>
-                        <a href={Instagram} target="_blank" rel="instagram.com/irongoals3/">Instagram</a>
-                        <a href={LinkedIn} target="_blank" rel="https://www.tiktok.com/@irongoals3">TikTok</a>
-                        <a href={YouTube} target="_blank" rel="https://www.youtube.com/@Andy-y7b6z/featured">YouTube</a>
+                        <a href="https://www.facebook.com/profile.php?id=61580492555279" target="_blank" rel="noopener noreferrer">
+                            Facebook
+                        </a>
+                        <a href="https://www.instagram.com/irongoals3/" target="_blank" rel="noopener noreferrer">
+                            Instagram
+                        </a>
+                        <a href="https://www.tiktok.com/@irongoals3" target="_blank" rel="noopener noreferrer">
+                            TikTok
+                        </a>
+                        <a href="https://www.youtube.com/@Andy-y7b6z/featured" target="_blank" rel="noopener noreferrer">
+                            YouTube
+                        </a>
                     </div>
+
                 </div>
                 <p className="RodapeCopy">© 2025 IronGoals. Todos os direitos reservados.</p>
             </footer>
