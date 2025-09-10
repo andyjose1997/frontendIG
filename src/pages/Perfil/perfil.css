@@ -110,17 +110,14 @@ body {
 
 /* ===== Conteúdo do Modal ===== */
 .perfil-modal-conteudo {
-    background: linear-gradient(145deg, #0d1b2a, #1b263b);
     border-radius: 20px;
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6);
-    width: 90vw;
-    max-width: 700px;
+    width: 100%;
+    max-width: 1300px;
     height: auto;
     max-height: 90vh;
     padding: 2rem;
     position: relative;
-    overflow-y: auto;
-    overflow-x: hidden;
     /* 🔹 remove barra horizontal */
     animation: scaleIn 0.3s ease;
     color: #f1f6ff;

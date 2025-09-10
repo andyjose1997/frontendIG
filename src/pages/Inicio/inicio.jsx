@@ -57,8 +57,7 @@ function Inicio() {
                             className={abaAtiva === "propaganda" ? "ativo" : ""}
                             onClick={() => setAbaAtiva("propaganda")}
                         >
-                            Propaganda
-                        </button>
+                            Recomendados                        </button>
                     </div>
 
                     <div className="conteudo-central">
