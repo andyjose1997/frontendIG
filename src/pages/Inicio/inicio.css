@@ -91,7 +91,7 @@ html {
 .Feed {
     grid-area: Feed;
     position: relative;
-    min-height: 400px;
+    min-height: 900px;
     /* mantém altura mínima */
 }
 
@@ -200,6 +200,6 @@ html {
 
     .conteudo-central {
         width: 100%;
-        max-width: 600px;
+        max-width: 690px;
     }
 }
