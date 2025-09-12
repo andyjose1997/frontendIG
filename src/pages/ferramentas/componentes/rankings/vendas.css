@@ -1,0 +1,63 @@
+.vendas-container {
+    margin: 2rem auto;
+    padding: 1rem;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    color: #333;
+}
+
+.vendas-container h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 8rem;
+    /* antes 4rem */
+    color: #1e5686;
+}
+
+.venda-data {
+    font-size: 3.8rem !important;
+    /* antes 1.9rem */
+    color: #666;
+    margin-bottom: 0.6rem;
+}
+
+.venda-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 2rem 3rem;
+    /* aumentei um pouco para não ficar apertado */
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.venda-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.venda-card h2 {
+    margin: 0 0 1.6rem 0;
+    /* dobrado */
+    font-size: 2.8rem;
+    /* antes 1.4rem */
+    color: #0571d6;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 0.8rem;
+    /* dobrado */
+}
+
+.venda-card p {
+    margin: 0.8rem 0;
+    /* dobrado */
+    font-size: 2rem;
+    /* antes 1rem */
+    line-height: 2.8rem;
+    /* antes 1.4 */
+}
+
+.venda-card strong {
+    color: #222;
+    font-size: 2.2rem;
+    /* destaque maior */
+}

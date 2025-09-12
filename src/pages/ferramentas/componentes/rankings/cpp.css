@@ -1,0 +1,84 @@
+/* ====== Container principal ====== */
+.cpp-container {
+    padding: 20px;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    color: #222;
+}
+
+.cpp-container h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2.8rem;
+    color: #1e5686;
+}
+
+/* ====== Mensagem ====== */
+.cpp-mensagem {
+    color: green;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.cpp-vazio {
+    color: #777;
+    font-style: italic;
+}
+
+/* ====== Tabela ====== */
+.cpp-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cpp-tabela th,
+.cpp-tabela td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.cpp-tabela thead {
+    background: #056901;
+    color: #fff;
+}
+
+.cpp-tabela tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.cpp-tabela tr:hover {
+    background: #012141;
+    transition: background 0.2s ease-in-out;
+    color: #eeeaea;
+}
+
+/* ====== Botão ====== */
+.cpp-botao {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    background: #0571d6;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.1s ease;
+}
+
+.cpp-botao:hover {
+    background: #045bb0;
+    transform: scale(1.05);
+}
+
+.cpp-botao:active {
+    transform: scale(0.95);
+}
+
+.linha-sem-pix {
+    background-color: #5c0101;
+    /* vermelho claro */
+    font-weight: bold;
+    color: white;
+}
