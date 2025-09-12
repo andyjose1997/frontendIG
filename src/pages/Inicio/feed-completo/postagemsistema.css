@@ -96,6 +96,11 @@
     background: #2a6edb;
 }
 
+.post-autor-detalhes img {
+    width: 82px;
+    height: 82px;
+}
+
 /* ====== TAG OFICIAL ====== */
 .post-autor-detalhes span {
     background: #e63946 !important;

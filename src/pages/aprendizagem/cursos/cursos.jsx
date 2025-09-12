@@ -61,11 +61,12 @@ export const Cursos = () => {
                         const data = await response.json();
 
                         if (data.init_point) {
-                            // 🔹 Redireciona para o checkout MercadoPago
-                            window.location.href = data.init_point;
+                            // 🔹 Abre o checkout do MercadoPago em nova aba
+                            window.open(data.init_point, "_blank");
                         } else {
                             alert("Erro ao iniciar pagamento.");
                         }
+
                     } catch (error) {
                         console.error("Erro:", error);
                         alert("Erro ao conectar com pagamento.");
@@ -83,6 +84,7 @@ export const Cursos = () => {
                     cursor: "pointer",
                     transition: "background-color 0.3s"
                 }}
+
                 onMouseOver={(e) => (e.target.style.backgroundColor = "#218838")}
                 onMouseOut={(e) => (e.target.style.backgroundColor = "#28a745")}
             >

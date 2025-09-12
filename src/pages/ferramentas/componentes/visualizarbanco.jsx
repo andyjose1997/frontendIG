@@ -309,7 +309,7 @@ export default function VisualizarBanco() {
                                 <tr>
                                     {colunas.map(col => (
                                         (["funcao", "palavra_chave"].includes(col) && funcaoUsuario !== "admin") ||
-                                            ["senha", "cargo", "responsabilidade"].includes(col)
+                                            ["foto", "senha", "cargo", "responsabilidade"].includes(col)
                                             ? null
                                             : (
                                                 <th key={col}>{col}</th>
@@ -358,7 +358,7 @@ export default function VisualizarBanco() {
                                     >
                                         {colunas.map(col => (
                                             (["funcao", "palavra_chave"].includes(col) && funcaoUsuario !== "admin") ||
-                                                ["senha", "cargo", "responsabilidade"].includes(col)
+                                                ["foto", "senha", "cargo", "responsabilidade"].includes(col)
                                                 ? null
                                                 : (
                                                     <td key={col}>

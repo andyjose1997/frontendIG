@@ -131,6 +131,40 @@
     list-style: none;
     padding: 0;
     margin: 0.8rem 0 0;
+
+}
+
+/* ====== Lista de Indicados ====== */
+.listaIndicados {
+    max-height: 900px;
+    /* 🔹 Altura máxima */
+    overflow-y: auto;
+    /* 🔹 Rolagem vertical */
+    padding-right: 6px;
+    /* 🔹 Espaço para a barra */
+}
+
+/* Personalização da barra de rolagem */
+.listaIndicados::-webkit-scrollbar {
+    width: 10px;
+    /* Largura da barra */
+}
+
+.listaIndicados::-webkit-scrollbar-track {
+    background: #0d1b2a;
+    /* Cor do fundo */
+    border-radius: 10px;
+}
+
+.listaIndicados::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #3a86ff, #22427e);
+    border-radius: 10px;
+    border: 2px solid #0d1b2a;
+    /* Cria espaço ao redor */
+}
+
+.listaIndicados::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #2a6edb, #16345e);
 }
 
 .listaIndicados li {
@@ -141,6 +175,7 @@
     color: #d8e3f0;
     cursor: pointer;
     transition: background 0.25s ease, box-shadow 0.25s ease;
+
 }
 
 .listaIndicados li:hover {
