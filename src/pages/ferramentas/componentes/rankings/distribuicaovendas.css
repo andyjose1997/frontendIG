@@ -1,0 +1,188 @@
+/* ====== Container principal ====== */
+.distvendas-container {
+    background: linear-gradient(145deg, #0d1b2a, #1b263b);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 1.5rem auto;
+    color: #e0e6ed;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    max-width: 900px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+
+/* ====== Título ====== */
+.distvendas-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #f1f6ff;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 0.5rem;
+}
+
+/* ====== Total ====== */
+.distvendas-total {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+/* ====== Formulário ====== */
+.distvendas-form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.distvendas-form label {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.distvendas-form input {
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #3b4c63;
+    outline: none;
+    font-size: 1.4rem;
+    background: #1b263b;
+    color: #f1f6ff;
+    transition: border 0.2s;
+    width: 60px;
+    text-align: center;
+}
+
+.distvendas-form input:focus {
+    border-color: #4da8ff;
+}
+
+.distvendas-form button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 10px;
+    background: #0077ff;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+
+
+/* ====== Pré-visualização ====== */
+.distvendas-preview {
+    font-size: 1.3rem;
+    color: #4da8ff;
+    font-weight: 500;
+}
+
+/* ====== Modal ====== */
+.distvendas-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 27, 42, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.distvendas-modal-box {
+    background: #1b263b;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #f1f6ff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.distvendas-modal-box.sucesso {
+    border: 2px solid #4caf50;
+    color: #4caf50;
+}
+
+.distvendas-modal-box.erro {
+    border: 2px solid #ff5252;
+    color: #ff5252;
+}
+
+.distvendas-modal-btn {
+    margin-top: 1.2rem;
+    padding: 0.6rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    background: #4da8ff;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+
+
+/* ====== Lista de usuários ====== */
+.distvendas-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.distvendas-lista li {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.distvendas-lista li:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+
+
+/* Colunas da lista */
+.distvendas-id {
+    font-weight: bold;
+    color: #ccc;
+    margin-right: 0.8rem;
+}
+
+.distvendas-usuario {
+    flex: 1;
+    color: #f1f6ff;
+}
+
+.distvendas-grupo {
+    font-weight: bold;
+    color: #4da8ff;
+}
+
+/* ====== Animação ====== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

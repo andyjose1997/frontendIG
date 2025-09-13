@@ -32,7 +32,6 @@ export default function Vendas() {
                         <p>
                             <strong>Vendedor:</strong> {venda.vendedor.nome} {venda.vendedor.sobrenome}
                             {" — "} Recebeu: R$ {venda.vendedor.recebeu}
-                            {" — "} 📅 {venda.data}
                         </p>
                     )}
 
@@ -41,7 +40,6 @@ export default function Vendas() {
                         <p>
                             <strong>Host do vendedor:</strong> {venda.host_vendedor.nome} {venda.host_vendedor.sobrenome}
                             {" — "} Recebeu: R$ {venda.host_vendedor.recebeu}
-                            {" — "} 📅 {venda.data}
                         </p>
                     )}
 
@@ -49,7 +47,6 @@ export default function Vendas() {
                     {venda.comprador?.nome && (
                         <p>
                             <strong>Comprador:</strong> {venda.comprador.nome} {venda.comprador.sobrenome}
-                            {" — "} 📅 {venda.data}
                         </p>
                     )}
                 </div>

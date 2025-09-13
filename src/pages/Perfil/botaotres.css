@@ -1,3 +1,212 @@
-.experiencias-section.ranking {
-    background-color: #1a1b4b;
+/* ======================== */
+/* 🔹 Seção Ranking         */
+/* ======================== */
+.rankperfil-section {
+    padding: 2rem;
+    text-align: center;
+    color: #f1f1f1;
+    background: linear-gradient(135deg, #0d1b2a, #1b263b);
+    border-radius: 16px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+    margin: 1.5rem auto;
+    max-width: 850px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.rankperfil-section:hover {
+    transform: scale(1.01);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+}
+
+/* ======================== */
+/* 🔹 Títulos e informações */
+/* ======================== */
+.rankperfil-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    color: #f8f9fa;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.rankperfil-info {
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    color: #dbe4ee;
+}
+
+/* ======================== */
+/* 🔹 Botão principal       */
+/* ======================== */
+.rankperfil-btn {
+    padding: 0.8rem 1.8rem;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    margin-top: 1rem;
+}
+
+.rankperfil-btn:hover {
+    background: linear-gradient(135deg, #0056b3, #003d80);
+    transform: scale(1.07);
+}
+
+/* ======================== */
+/* 🔹 Lista de participantes*/
+/* ======================== */
+.rankperfil-lista {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem auto 0 auto;
+    max-width: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.rankperfil-lista li {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.4rem;
+    color: #e9ecef;
+}
+
+.rankperfil-lista li:nth-child(even) {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.rankperfil-lista li:hover {
+    background: rgba(77, 168, 255, 0.1);
+}
+
+.rankperfil-pontos {
+    font-weight: bold;
+    color: #4da8ff;
+}
+
+/* ======================== */
+/* 🔹 Modal Overlay         */
+/* ======================== */
+.rankperfil-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* ======================== */
+/* 🔹 Caixa do Modal        */
+/* ======================== */
+.rankperfil-modal-box {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 14px;
+    text-align: center;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    font-size: 1.2rem;
+    animation: scaleUp 0.25s ease-in-out;
+}
+
+/* Sucesso e erro */
+.rankperfil-modal-box.sucesso {
+    border-left: 6px solid #28a745;
+}
+
+.rankperfil-modal-box.erro {
+    border-left: 6px solid #dc3545;
+}
+
+.rankperfil-modal-box p {
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Botão modal */
+.rankperfil-modal-btn {
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    background: #007bff;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.rankperfil-modal-btn:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* ======================== */
+/* 🔹 Animações             */
+/* ======================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ======================== */
+/* 🔹 Responsividade        */
+/* ======================== */
+@media (max-width: 600px) {
+    .rankperfil-title {
+        font-size: 1.5rem;
+    }
+
+    .rankperfil-info {
+        font-size: 1rem;
+    }
+
+    .rankperfil-btn {
+        width: 100%;
+        font-size: 1.1rem;
+    }
+
+    .rankperfil-lista li {
+        font-size: 1rem;
+    }
+
+    .rankperfil-modal-box {
+        width: 95%;
+        padding: 1.5rem;
+    }
 }

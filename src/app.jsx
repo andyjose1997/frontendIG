@@ -57,7 +57,7 @@ function Home() {
         <h3>Precisa de ajuda?</h3>
         <p>Fale diretamente com um consultor pelo WhatsApp:</p>
         <a
-          href="https://wa.me/5511918547818"
+          href="https://wa.me/5511921352636"
           target="_blank"
           rel="noopener noreferrer"
           className="btnWhatsApp"

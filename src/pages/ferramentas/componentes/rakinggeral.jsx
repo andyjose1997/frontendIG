@@ -4,6 +4,7 @@ import Vendas from "./rankings/vendas";
 import DistribuicaoVendas from "./rankings/distribuicaovendas";
 import DistribuicaoQuiz from "./rankings/distribuicaoquiz";
 import CPP from "./rankings/cpp";
+import GruposVendas from "./rankings/gruposvendas";  // ✅ import do novo componente
 
 export default function RakingGeral() {
     const [componenteAtivo, setComponenteAtivo] = useState(null);
@@ -26,6 +27,12 @@ export default function RakingGeral() {
                     Distribuição de Tabelas Vendas
                 </button>
                 <button
+                    className={`ranking-botao ${componenteAtivo === "gruposVendas" ? "ativo" : ""}`}  // ✅ botão novo
+                    onClick={() => setComponenteAtivo("gruposVendas")}
+                >
+                    Grupos de Vendas
+                </button>
+                <button
                     className={`ranking-botao ${componenteAtivo === "distribuicaoQuiz" ? "ativo" : ""}`}
                     onClick={() => setComponenteAtivo("distribuicaoQuiz")}
                 >
@@ -37,6 +44,7 @@ export default function RakingGeral() {
                 >
                     CPP
                 </button>
+
             </div>
 
             <div className="ranking-conteudo">
@@ -44,6 +52,7 @@ export default function RakingGeral() {
                 {componenteAtivo === "distribuicaoVendas" && <DistribuicaoVendas />}
                 {componenteAtivo === "distribuicaoQuiz" && <DistribuicaoQuiz />}
                 {componenteAtivo === "cpp" && <CPP />}
+                {componenteAtivo === "gruposVendas" && <GruposVendas />} {/* ✅ renderização */}
             </div>
         </div>
     );

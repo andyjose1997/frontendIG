@@ -1,0 +1,107 @@
+/* ===== Container principal ===== */
+.rgpc-container {
+    background: linear-gradient(135deg, #0d1b2a, #1b263b);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 1.5rem auto;
+    max-width: 900px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+    color: #e0e6ed;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.rgpc-titulo {
+    text-align: center;
+    font-size: 3rem;
+    /* antes 2rem → +50% */
+    margin-bottom: 1.5rem;
+    color: #f8f9fa;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== Mensagens ===== */
+.rgpc-msg {
+    text-align: center;
+    font-size: 1.65rem;
+    /* antes 1.1rem → +50% */
+    color: #ced4da;
+}
+
+/* ===== Lista de grupos ===== */
+.rgpc-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* ===== Card do grupo ===== */
+.rgpc-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.rgpc-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.rgpc-card-titulo {
+    font-size: 1.95rem;
+    /* antes 1.3rem → +50% */
+    font-weight: bold;
+    color: #00d4ff;
+    margin-bottom: 0.8rem;
+}
+
+/* ===== Participantes ===== */
+.rgpc-participantes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rgpc-participante {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.9rem 1.2rem;
+    /* aumentei também padding para balancear */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.5rem;
+    /* antes 1rem → +50% */
+    transition: background 0.2s ease;
+}
+
+.rgpc-participante:last-child {
+    border-bottom: none;
+}
+
+.rgpc-participante:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+}
+
+.rgpc-nome {
+    font-weight: 500;
+    color: #f1f6ff;
+}
+
+.rgpc-pontos {
+    font-weight: bold;
+    color: #ffd166;
+}
+
+/* ===== Animação ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
