@@ -45,7 +45,7 @@ export default function Organizacao() {
                     <div key={u.id} className={`responsavel ${u.funcao}`}>
                         <img
                             className="foto-perfil"
-                            src={`${URL}/fotosperfis/${u.foto}`}
+                            src={u.foto?.startsWith("http") ? u.foto : `${URL}${u.foto}`}
                             alt={u.nome}
                         />
 

@@ -95,11 +95,21 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.pacote-geral h2 {
+    color: #282b5e;
+}
+
+.pacote-geral h2:hover {
+    color: #000000;
+}
+
 .pacote-geral:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12),
         0 4px 10px rgba(0, 0, 0, 0.06);
 }
+
+
 
 .Pacote {
     font-size: 50px;
