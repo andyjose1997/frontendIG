@@ -1,7 +1,7 @@
 import './botaotres.css';
 import { useEffect, useState } from "react";
 import { URL } from "../../config";
-import TorneioQuizzes from './torneioQuizzes';
+import TorneioQuizzes from './torneioquizzes';
 
 export default function BotaoTres() {
     const [mostrar, setMostrar] = useState("vendas"); // padrão = vendas
