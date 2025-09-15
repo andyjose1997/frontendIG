@@ -10,7 +10,9 @@ export default function IreneChat() {
     const [carregando, setCarregando] = useState(false);
     const [perguntas, setPerguntas] = useState([]); // sugestões vindas do backend
     const location = useLocation();
-    const isMensagens = location.pathname.toLowerCase().includes("mensagens");
+    const isEsquerda =
+        location.pathname.toLowerCase().includes("mensagens") ||
+        location.pathname.toLowerCase().includes("perfil");
 
     const mensagensFimRef = useRef(null);
     const usuarioId = localStorage.getItem("usuario_id");
@@ -117,7 +119,7 @@ export default function IreneChat() {
     }, []);
 
     return (
-        <div className={`irene-container ${isMensagens ? "esquerda" : "direita"}`}>
+        <div className={`irene-container ${isEsquerda ? "esquerda" : "direita"}`}>
             {!aberto && (
                 <button className="irene-botao" onClick={() => setAberto(true)}>
                     {largura <= 850 ? "💭" : "Assistente Virtual Irene"}

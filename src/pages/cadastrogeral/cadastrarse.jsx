@@ -154,9 +154,15 @@ export default function Cadastrarse() {
                     <div className="host-box">
                         <p className="host-texto-intro">Seu Host será...</p>
                         <img src={hostData.foto} alt="Foto do Host" className="host-foto" />
-                        <p className="host-nome"><b>{hostData.nome} {hostData.sobrenome}!!</b></p>
+                        <p className="host-nome">
+                            <b>{hostData.nome} {hostData.sobrenome}!!</b>
+                        </p>
+                        {hostData.cargo_exibido && (
+                            <p className="host-cargo">Cargo: {hostData.cargo_exibido}</p>
+                        )}
                     </div>
                 )}
+
 
                 {!hostData && (
                     <div className="host-verificacao">
@@ -218,7 +224,7 @@ export default function Cadastrarse() {
                         <button onClick={handleProximaEtapa} className="btn-verde btn-proxima-etapa">Próxima Etapa</button>
                     </form>
                 )}
-
+                <br />
                 {mensagemFinal && (
                     <div className="alerta-erro">{mensagemFinal}</div>
                 )}
@@ -237,7 +243,12 @@ export default function Cadastrarse() {
                     <div className="modalCadastro-host">
                         <h2 className="modal-titulo">Este é o usuário que te recomendou?</h2>
                         <img src={hostData.foto} alt="Foto do Host" className="host-foto" />
-                        <h3 className="modal-host-nome">{hostData.nome} {hostData.sobrenome}</h3>
+                        <h3 className="modal-host-nome">
+                            {hostData.nome} {hostData.sobrenome}
+                        </h3>
+                        {hostData.cargo_exibido && (
+                            <p className="modal-host-cargo"><strong>Cargo na plataforma:</strong> <br />  {hostData.cargo_exibido}</p>
+                        )}
                         <div className="botoes-modal">
                             <button className="btn-vermelho" onClick={() => { setMostrarModalHost(false); setHostData(null); setIdAnfitiao(""); }}>
                                 ❌ Esse não é
@@ -249,6 +260,7 @@ export default function Cadastrarse() {
                     </div>
                 </div>
             )}
+
 
             {mostrarTermos && (
                 <TermosModal

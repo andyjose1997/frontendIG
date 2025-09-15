@@ -12,24 +12,25 @@ import { CursosYouTube } from "./cursosYoutube/cursosyoutube";
 import youtubeImage from "./imagens/youtube.png";
 import irongoalsImage from "./imagens/irongoals.png";
 
+// Importando SweetAlert2
+import Swal from "sweetalert2";
+
 export default function Aprendizagem() {
     const [activeSection, setActiveSection] = useState("curriculo");
 
-    // Função para exibir a seção correta (Formulário, Cursos ou Cursos YouTube)
     const renderSection = () => {
         switch (activeSection) {
             case "curriculo":
-                return <FormularioCurriculo handleSubmit={handleSubmit} />; // Formulário
+                return <FormularioCurriculo handleSubmit={handleSubmit} />;
             case "cursos":
-                return <Cursos />; // Cursos
+                return <Cursos />;
             case "cursosYouTube":
-                return <CursosYouTube />; // Cursos YouTube
+                return <CursosYouTube />;
             default:
-                return <FormularioCurriculo handleSubmit={handleSubmit} />; // Exibe o FormularioCurriculo por padrão
+                return <FormularioCurriculo handleSubmit={handleSubmit} />;
         }
     };
 
-    // Função para processar o envio do formulário (você pode adicionar a lógica de envio aqui)
     const handleSubmit = async (e, form) => {
         e.preventDefault();
         try {
@@ -58,20 +59,20 @@ export default function Aprendizagem() {
             window.URL.revokeObjectURL(url);
         } catch (err) {
             console.error("Erro:", err);
-            alert("❌ Erro ao gerar currículo");
+            Swal.fire({
+                icon: "error",
+                title: "❌ Erro ao gerar currículo",
+                text: "Tente novamente mais tarde.",
+            });
         }
     };
 
     return (
         <div>
             <main className="aprendizagem-container">
-
                 <div className="sidebar">
-                    {/* 🔹 Botão de voltar no topo */}
                     <div className="back-button">
-                        <button onClick={() => window.history.back()}>◀️◀️◀️
-
-                        </button>
+                        <button onClick={() => window.history.back()}>◀️◀️◀️</button>
                     </div>
 
                     <div className="logo-container">
@@ -80,26 +81,20 @@ export default function Aprendizagem() {
                     </div>
 
                     <div className="button-container">
-                        <button onClick={() => setActiveSection("curriculo")}>📄 <pre>  </pre> Currículo Pessoal</button>
+                        <button onClick={() => setActiveSection("curriculo")}>
+                            📄 <pre>  </pre> Currículo Pessoal
+                        </button>
                         <button onClick={() => setActiveSection("cursos")}>
-                            <img
-                                src={irongoalsImage}  // Usando a imagem importada
-                                alt="Irongoals"
-                                className="irongoals-icon"
-                            />
-                            Cursos IronGoals</button>
+                            <img src={irongoalsImage} alt="Irongoals" className="irongoals-icon" />
+                            Cursos IronGoals
+                        </button>
                         <button onClick={() => setActiveSection("cursosYouTube")}>
-                            <img
-                                src={youtubeImage}  // Usando a imagem importada
-                                alt="YouTube"
-                                className="youtube-icon"
-                            />
+                            <img src={youtubeImage} alt="YouTube" className="youtube-icon" />
                             Cursos YouTube
                         </button>
                     </div>
                 </div>
 
-                {/* Renderizar a seção ativa */}
                 <div className="content">
                     {renderSection()}
                 </div>

@@ -513,6 +513,128 @@
     display: block;
 }
 
+/* =========================
+   🔹 Links que abrem modal
+   ========================= */
+.link-info {
+    /* azul padrão */
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 8px;
+    transition: color 0.25s ease, text-decoration 0.25s ease;
+}
+
+.link-info:hover {
+    color: #1e7fff;
+    /* azul mais forte */
+    text-decoration: underline;
+    /* sublinhado no hover */
+}
+
+/* =========================
+   🔹 Modal de informação (scrollbar premium)
+   ========================= */
+.textoModal {
+    font-size: 1.95rem;
+    line-height: 1.6;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    white-space: pre-line;
+    max-height: 800px;
+    overflow: auto;
+
+    /* 🔹 Rolagem suave */
+    scroll-behavior: smooth;
+
+    /* 🔹 Padding lateral para afastar do scroll */
+    padding-right: 8px;
+}
+
+/* Barra de rolagem moderna */
+.textoModal::-webkit-scrollbar {
+    width: 12px;
+    /* mais visível e confortável */
+}
+
+.textoModal::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    margin: 4px;
+    /* não encosta no topo/rodapé */
+}
+
+.textoModal::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #4da3ff, #1e7fff);
+    border-radius: 12px;
+
+    /* brilho sutil */
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.25);
+
+    /* borda interna para dar efeito "floating" */
+    border: 2px solid rgba(0, 0, 0, 0.25);
+
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.textoModal::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #1e7fff, #0056b3);
+    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.35);
+}
+
+/* 🔹 Firefox */
+.textoModal {
+    scrollbar-width: thin;
+    /* fino */
+    scrollbar-color: #1e7fff rgba(255, 255, 255, 0.06);
+}
+
+
+.alerta-temporario {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #4da3ff, #1e7fff);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 2rem !important;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    animation: fadeInOut 2s ease forwards;
+    z-index: 1000;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+/* 🔹 Para Firefox */
+.textoModal {
+    scrollbar-width: thin;
+    /* fino */
+    scrollbar-color: #4da3ff rgba(255, 255, 255, 0.1);
+    /* cor barra + trilho */
+}
+
+/* Reaproveita .overlayModal e .conteudoModal já existentes */
+
 .funcao-wrapper {
     display: inline-block;
     position: relative;

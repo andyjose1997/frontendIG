@@ -2,6 +2,7 @@
 import { useState } from "react";
 import "./cadastrarse.css";
 import { URL as BACKEND_URL } from "../../config"; // renomeado para não conflitar
+import Swal from "sweetalert2";
 
 export default function EscolherFotoPerfil() {
     const [fotoCarregada, setFotoCarregada] = useState(false);
@@ -82,10 +83,18 @@ export default function EscolherFotoPerfil() {
                 localStorage.setItem("usuario", JSON.stringify(usuario));
                 setFotoCarregada(true);
             } else {
-                alert("❌ Erro ao enviar a foto");
+                Swal.fire({
+                    icon: "error",
+                    title: "❌ Erro ao enviar a foto",
+                    text: "Tente novamente.",
+                });
             }
         } catch {
-            alert("⚠️ Erro de conexão");
+            Swal.fire({
+                icon: "warning",
+                title: "⚠️ Erro de conexão",
+                text: "Verifique sua internet e tente de novo.",
+            });
         }
     };
 
@@ -117,10 +126,18 @@ export default function EscolherFotoPerfil() {
                 localStorage.setItem("usuario", JSON.stringify(usuario));
                 setFotoCarregada(true);
             } else {
-                alert("❌ Erro ao salvar avatar");
+                Swal.fire({
+                    icon: "error",
+                    title: "❌ Erro ao salvar avatar",
+                    text: "Tente novamente.",
+                });
             }
         } catch {
-            alert("⚠️ Erro de conexão");
+            Swal.fire({
+                icon: "warning",
+                title: "⚠️ Erro de conexão",
+                text: "Verifique sua internet e tente de novo.",
+            });
         }
     };
 

@@ -9,9 +9,41 @@
     border-radius: 16px;
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
     margin: 1.5rem auto;
-    max-width: 850px;
+    max-width: 95%;
+    overflow-y: auto;
+    /* 🔹 ativa scroll vertical */
+    overflow-x: hidden;
+    /* 🔹 evita scroll horizontal */
     transition: transform 0.25s ease, box-shadow 0.25s ease;
+    max-height: 700px;
+    /* 🔹 limite de altura */
 }
+
+/* ===== Scrollbar personalizada ===== */
+.rankperfil-section::-webkit-scrollbar {
+    width: 10px;
+    /* largura da barra */
+}
+
+.rankperfil-section::-webkit-scrollbar-track {
+    background: #0d1b2a;
+    /* fundo da barra */
+    border-radius: 10px;
+}
+
+.rankperfil-section::-webkit-scrollbar-thumb {
+    background: #0571d6;
+    /* cor da barra */
+    border-radius: 10px;
+    border: 2px solid #0d1b2a;
+    /* espaço entre trilho e thumb */
+}
+
+.rankperfil-section::-webkit-scrollbar-thumb:hover {
+    background: #1e90ff;
+    /* cor ao passar o mouse */
+}
+
 
 .rankperfil-section:hover {
     transform: scale(1.01);
@@ -27,6 +59,7 @@
     font-weight: bold;
     color: #f8f9fa;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+
 }
 
 .rankperfil-info {

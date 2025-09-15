@@ -10,6 +10,7 @@
     font-family: "Segoe UI", Tahoma, sans-serif;
     text-align: center;
     transition: transform 0.3s ease;
+    height: 9000px !important;
 }
 
 .ranking-container:hover {

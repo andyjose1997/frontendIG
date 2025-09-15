@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import './indicados.css';
 import { URL } from "../../config";
+import Swal from "sweetalert2";
 
 export default function Indicados() {
     const [indicados, setIndicados] = useState([]);
@@ -47,7 +48,11 @@ export default function Indicados() {
 
             if (!res.ok) {
                 const erro = await res.json();
-                alert(erro.erro || "Erro ao buscar pessoa.");
+                Swal.fire({
+                    icon: "error",
+                    title: "Erro ao buscar pessoa",
+                    text: erro.erro || "Tente novamente.",
+                });
                 return;
             }
 
@@ -55,9 +60,13 @@ export default function Indicados() {
             setResultadoBusca(data);
         } catch (e) {
             console.error("Erro ao buscar pessoa:", e);
-            alert("Erro ao conectar com o servidor.");
+            Swal.fire({
+                icon: "error",
+                title: "Erro de conexão",
+                text: "Não foi possível conectar ao servidor.",
+            });
         }
-    };
+    }
 
     const voltar = () => {
         setModoBusca("padrao");

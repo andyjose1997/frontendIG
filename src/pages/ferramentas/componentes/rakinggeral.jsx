@@ -10,7 +10,7 @@ export default function RakingGeral() {
     const [componenteAtivo, setComponenteAtivo] = useState(null);
 
     return (
-        <div className="ranking-container">
+        <div className="rranking-container">
             <h1 className="ranking-titulo">Ranking Geral</h1>
 
             <div className="ranking-botoes">

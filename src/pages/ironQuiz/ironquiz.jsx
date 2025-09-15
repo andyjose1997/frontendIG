@@ -37,7 +37,7 @@ export default function IronQuiz() {
 
     return (
         <main>
-            <h1>🔥 Iron Quiz</h1>
+            <h1 className="ironquiztitle">🔥 Iron Quiz 🔥</h1>
 
             <div style={{ marginBottom: "20px" }}>
                 <Link to="/perfil">

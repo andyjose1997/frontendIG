@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { URL } from "../../config";
 import "./criarquiz.css";
+import autoTable from "jspdf-autotable";
+import Swal from "sweetalert2";
 
 export default function CriarQuiz() {
     const [tipo, setTipo] = useState("");
@@ -14,11 +16,12 @@ export default function CriarQuiz() {
     const [quizzes, setQuizzes] = useState([]);
     const [funcao, setFuncao] = useState("");
     const [confirmarApagar, setConfirmarApagar] = useState(null);
-    const [erros, setErros] = useState({}); // 👈 mensagens de erro personalizadas
-    const [nomes, setNomes] = useState([]); // 🔹 nomes vindos do banco
-    const [busca, setBusca] = useState(""); // termo de busca para admin
+    const [erros, setErros] = useState({});
+    const [nomes, setNomes] = useState([]);
+    const [busca, setBusca] = useState("");
 
     const id_criador = localStorage.getItem("usuario_id");
+
     useEffect(() => {
         const carregarNomes = async () => {
             try {
@@ -31,7 +34,7 @@ export default function CriarQuiz() {
         };
         carregarNomes();
     }, []);
-    // 🔹 Buscar função do usuário
+
     useEffect(() => {
         const carregarFuncao = async () => {
             try {
@@ -45,7 +48,6 @@ export default function CriarQuiz() {
         carregarFuncao();
     }, [id_criador]);
 
-    // 🔹 Carregar lista de quizzes
     useEffect(() => {
         const carregarQuizzes = async () => {
             try {
@@ -59,7 +61,6 @@ export default function CriarQuiz() {
         carregarQuizzes();
     }, []);
 
-    // 🔹 Aplicar filtro de visibilidade
     const quizzesFiltrados = quizzes.filter((q) => {
         if (["admin", "coordenador", "auditor"].includes(funcao?.trim().toLowerCase())) {
             return q.admin === 1 || q.id_criador === id_criador;
@@ -68,7 +69,6 @@ export default function CriarQuiz() {
         }
     });
 
-    // 🔹 Validação de perguntas
     const validarPerguntas = () => {
         let valido = true;
         const novosErros = {};
@@ -90,7 +90,6 @@ export default function CriarQuiz() {
                 errosPergunta.push("Todas as opções (A, B, C, D) precisam ser preenchidas.");
             if (!p.resposta_correta) errosPergunta.push("Selecione a opção correta.");
 
-            // checar duplicadas
             const opcoes = [p.a, p.b, p.c, p.d].map((x) => x.trim().toLowerCase());
             const duplicadas = opcoes.filter((x, i) => x && opcoes.indexOf(x) !== i);
             if (duplicadas.length > 0) errosPergunta.push("As opções não podem ser iguais.");
@@ -106,7 +105,7 @@ export default function CriarQuiz() {
     };
 
     const adicionarPergunta = () => {
-        if (!validarPerguntas()) return; // 🔹 só adiciona se todas as atuais forem válidas
+        if (!validarPerguntas()) return;
         setPerguntas([
             ...perguntas,
             { pergunta: "", a: "", b: "", c: "", d: "", resposta_correta: "" }
@@ -134,19 +133,15 @@ export default function CriarQuiz() {
 
         try {
             if (editando) {
-                // 🔹 Atualizar quiz existente
                 await fetch(`${URL}/quiz/apagar/${nome}`, { method: "DELETE" });
-                // apaga as perguntas e o tipo para recriar atualizado
             }
 
-            // Criar/atualizar tipo
             await fetch(`${URL}/quiz/tipos`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ tipo, nome, id_criador })
             });
 
-            // Inserir perguntas
             for (const p of perguntas) {
                 await fetch(`${URL}/quiz/perguntas`, {
                     method: "POST",
@@ -166,32 +161,50 @@ export default function CriarQuiz() {
             }
 
             setErros({});
-            alert(editando ? "✏️ Quiz atualizado com sucesso!" : "✅ Quiz salvo com sucesso!");
+            Swal.fire({
+                icon: "success",
+                title: editando ? "✏️ Quiz atualizado com sucesso!" : "✅ Quiz salvo com sucesso!",
+                showConfirmButton: false,
+                timer: 2000
+            });
 
-            // resetar formulário
             setTipo("");
             setNome("");
             setPerguntas([{ pergunta: "", a: "", b: "", c: "", d: "", resposta_correta: "" }]);
-            setEditando(false); // 🔹 sai do modo edição
+            setEditando(false);
 
             const res = await fetch(`${URL}/quiz/tipos`);
             setQuizzes(await res.json());
         } catch (err) {
             console.error("Erro ao salvar quiz:", err);
+            Swal.fire({
+                icon: "error",
+                title: "❌ Erro ao salvar quiz.",
+                text: "Tente novamente mais tarde."
+            });
             setErros({ geral: "❌ Erro ao salvar quiz." });
         }
     };
-
 
     const apagarQuiz = async (nomeQuiz) => {
         if (confirmarApagar === nomeQuiz) {
             try {
                 await fetch(`${URL}/quiz/apagar/${nomeQuiz}`, { method: "DELETE" });
-                alert(`🗑️ Quiz '${nomeQuiz}' apagado!`);
+                Swal.fire({
+                    icon: "warning",
+                    title: `🗑️ Quiz '${nomeQuiz}' apagado!`,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
                 setQuizzes(quizzes.filter((q) => q.nome !== nomeQuiz));
                 setConfirmarApagar(null);
             } catch (err) {
                 console.error("Erro ao apagar quiz:", err);
+                Swal.fire({
+                    icon: "error",
+                    title: "❌ Erro ao apagar quiz.",
+                    text: "Não foi possível remover este quiz."
+                });
                 setErros({ geral: "❌ Erro ao apagar quiz." });
             }
         } else {
@@ -221,13 +234,17 @@ export default function CriarQuiz() {
             setNome(nomeQuiz);
             setTipo(tipoQuiz);
             setPerguntas(perguntasFormatadas);
-            setEditando(true); // 🔹 agora está em modo edição
+            setEditando(true);
         } catch (err) {
             console.error("Erro ao carregar quiz para edição:", err);
+            Swal.fire({
+                icon: "error",
+                title: "❌ Erro ao carregar quiz.",
+                text: "Não foi possível carregar as perguntas."
+            });
             setErros({ geral: "❌ Erro ao carregar quiz para edição." });
         }
     };
-
 
     return (
         <div className="criarQuiz-container">
@@ -314,8 +331,6 @@ export default function CriarQuiz() {
                     </div>
                 </div>
 
-                {/* 🔹 Lista de quizzes filtrados */}
-                {/* 🔹 Lista de quizzes filtrados */}
                 {quizzesFiltrados.length > 0 && (
                     <div className="criarQuiz-lista">
                         <h3>📋 Quizzes Existentes</h3>
@@ -344,12 +359,10 @@ export default function CriarQuiz() {
                     </div>
                 )}
 
-                {/* 🔹 Lista completa para admin */}
                 {["admin", "coordenador", "auditor"].includes(funcao?.trim().toLowerCase()) && (
                     <div style={{ display: "none" }} className="criarQuiz-lista todos-quizzes">
                         <h3>📚 Todos os Quizzes</h3>
 
-                        {/* Campo de busca */}
                         <input
                             type="text"
                             placeholder="🔍 Buscar quiz pelo nome..."
@@ -384,8 +397,6 @@ export default function CriarQuiz() {
                         </ul>
                     </div>
                 )}
-
-
             </div>
         </div>
     );

@@ -54,7 +54,7 @@
     margin: 8px 0 16px 0;
     border: 1px solid #ddd;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 1.5rem !important;
     outline: none;
 
     /* 🔹 tipografia e UX */
@@ -84,10 +84,11 @@
 
 /* Host */
 .host-texto-intro {
-    font-size: 15px;
+    font-size: 2rem;
     color: #444;
     margin-bottom: 6px;
     font-weight: 500;
+    width: 200px;
 }
 
 .host-nome {
@@ -102,6 +103,7 @@
     color: #333;
     display: block;
     margin-bottom: 8px;
+    font-size: 1.9rem;
 }
 
 .btn-verificar-host {
@@ -161,7 +163,7 @@
 }
 
 .form-email-info {
-    font-size: 14px;
+    font-size: 1.5rem;
     color: #555;
     margin: 10px 0;
 }
@@ -171,6 +173,7 @@
     color: #444;
     margin-bottom: 6px;
     display: block;
+    font-size: 2rem !important;
 }
 
 /* Botão próxima etapa */
@@ -284,8 +287,8 @@
 
 /* ===== Foto do host ===== */
 .modalCadastro-host .host-foto {
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     object-fit: cover;
 
@@ -578,13 +581,14 @@
 }
 
 .modalCadastro-host img {
-    width: 200px;
-    height: 200px;
+    width: 250px !important;
+    height: 250px !important;
 }
 
-.modalCadastro-host h3 {
+.modalCadastro-host h3,
+.modalCadastro-host p {
     margin-bottom: 12px;
-    font-size: 20px;
+    font-size: 1.5rem;
     color: #222;
 }
 
@@ -871,8 +875,8 @@
    ALERTAS
 =========================== */
 .alerta-erro {
-    background: #ffe5e5;
-    color: #b30000;
+    background: #a00c0c;
+    color: #000000;
     padding: 12px 16px;
     border: 1px solid #ffcccc;
     border-radius: 10px;
@@ -921,7 +925,6 @@
     text-align: center;
     margin-top: 2rem;
     padding: 1rem 0;
-
     /* 🔹 consistência visual */
     font-family: "Segoe UI", Roboto, sans-serif;
 }
@@ -936,11 +939,11 @@
 
 .login-google>div {
     display: inline-block;
-
+    font-size: 2rem;
     /* 🔹 sombra e destaque */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     border-radius: 10px;
-
+    width: 400px;
     /* 🔹 leve transição no hover */
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }

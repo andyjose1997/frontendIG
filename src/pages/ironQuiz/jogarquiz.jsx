@@ -14,6 +14,10 @@ export default function JogarQuiz() {
     const [carregando, setCarregando] = useState(false);
     const [feedback, setFeedback] = useState(null); // {opcao, correta}
     const [pontosAcumulados, setPontosAcumulados] = useState(0);
+    const [preparando, setPreparando] = useState(false);
+    const [contador, setContador] = useState(5);
+    const [quizPreparando, setQuizPreparando] = useState(null);
+    const [contadorFeedback, setContadorFeedback] = useState(null);
 
     const id_jogador = localStorage.getItem("usuario_id");
 
@@ -21,7 +25,7 @@ export default function JogarQuiz() {
     useEffect(() => {
         const carregarQuizzes = async () => {
             try {
-                const res = await fetch(`${URL}/quiz/tipos_com_progresso/${id_jogador}`);
+                const res = await fetch(`${URL}/quiz/tipos_jogados_com_progresso/${id_jogador}`);
                 const data = await res.json();
                 setQuizzes(data);
             } catch (err) {
@@ -30,6 +34,7 @@ export default function JogarQuiz() {
         };
         carregarQuizzes();
     }, [id_jogador]);
+
 
     // 🔹 Timer
     useEffect(() => {
@@ -97,17 +102,17 @@ export default function JogarQuiz() {
         }
     };
 
-    // 🔹 Marcar como incorreta automaticamente
     const marcarComoIncorreta = async () => {
-        if (!perguntas || !perguntas[atual]) return;
+        if (!perguntas || !perguntas[atual] || bloqueado) return;
+        setBloqueado(true); // 🚨 trava aqui também
         await registrarResposta(perguntas[atual].id, 0);
         proximaPergunta();
     };
 
-    // 🔹 Responder pergunta
     const responder = async (opcao) => {
         if (bloqueado || feedback) return;
 
+        setBloqueado(true);
         const perguntaAtual = perguntas[atual];
         let pontos = 0;
         const correta = opcao === perguntaAtual.resposta_correta;
@@ -117,31 +122,51 @@ export default function JogarQuiz() {
         await registrarResposta(perguntaAtual.id, pontos);
 
         setFeedback({ opcao, correta });
+
+        // ✅ Atualiza acumulado
         setPontosAcumulados((prev) => prev + pontos);
 
-        setTimeout(() => {
-            setFeedback(null);
-            proximaPergunta();
+        // 🚨 Inicia contador regressivo de 5 segundos
+        let i = 5;
+        setContadorFeedback(i);
+        const interval = setInterval(() => {
+            i--;
+            setContadorFeedback(i);
+            if (i === 0) {
+                clearInterval(interval);
+                setFeedback(null);
+                setContadorFeedback(null);
+
+                if (atual + 1 === perguntas.length) {
+                    // 🔹 Última pergunta → só finaliza aqui
+                    setResultado(pontosAcumulados + pontos);
+                } else {
+                    // 🔹 Senão → próxima pergunta normal
+                    proximaPergunta();
+                }
+            }
         }, 1000);
     };
 
-    // 🔹 Próxima pergunta
     const proximaPergunta = async () => {
         if (atual + 1 < perguntas.length) {
             setAtual(atual + 1);
             setTempo(20);
             setBloqueado(false);
-        } else {
-            setResultado(pontosAcumulados);
         }
     };
 
-    // 🔹 Sair do quiz (conta como errado)
+    // 🔹 Sair do quiz → redireciona para iron_quiz
     const sairDoQuiz = async () => {
         if (perguntas && perguntas[atual]) {
             await registrarResposta(perguntas[atual].id, 0);
         }
-        setModalAberto(false);
+
+        const baseUrl = window.location.hostname === "localhost"
+            ? "http://localhost:5173"
+            : "https://irongoals.com";
+
+        window.location.href = `${baseUrl}/iron_quiz`;
     };
 
     // 🔹 Voltar se ainda está carregando
@@ -154,6 +179,23 @@ export default function JogarQuiz() {
     // 🔹 Separar listas
     const jogosSistema = quizzes.filter((q) => q.admin === 1);
     const jogosPublicos = quizzes.filter((q) => q.admin === 0);
+    const prepararQuiz = (nome) => {
+        setQuizPreparando(nome);
+        setPreparando(true);
+        setContador(5);
+
+        let i = 5;
+        const interval = setInterval(() => {
+            i--;
+            if (i === 0) {
+                clearInterval(interval);
+                setPreparando(false);
+                abrirQuiz(nome); // 🔹 só abre depois da contagem
+            } else {
+                setContador(i);
+            }
+        }, 1000);
+    };
 
     return (
         <div className="jogarQuiz-container">
@@ -167,7 +209,7 @@ export default function JogarQuiz() {
                         <button
                             className="jogarQuiz-btnAbrir"
                             disabled={q.respondidas >= q.total_perguntas}
-                            onClick={() => abrirQuiz(q.nome)}
+                            onClick={() => prepararQuiz(q.nome)}
                         >
                             {q.nome} ({q.respondidas}/{q.total_perguntas})
                         </button>
@@ -176,7 +218,8 @@ export default function JogarQuiz() {
             </ul>
 
             {/* Jogos Públicos */}
-            <div style={{ display: "none" }} >  <h3>🌍 Jogos Públicos</h3>
+            <div style={{ display: "none" }} >
+                <h3>🌍 Jogos Públicos</h3>
                 <ul className="jogarQuiz-lista">
                     {jogosPublicos.map((q) => (
                         <li key={q.id} className="jogarQuiz-item">
@@ -188,8 +231,15 @@ export default function JogarQuiz() {
                             </button>
                         </li>
                     ))}
-                </ul></div>
+                </ul>
+            </div>
 
+            {preparando && (
+                <div className="jogarQuiz-preparando">
+                    <h2>Prepare-se para o quiz de <span>{quizPreparando}</span></h2>
+                    <div className={`jogarQuiz-contador anim-${contador}`}>{contador}</div>
+                </div>
+            )}
 
             {/* Modal */}
             {modalAberto && (
@@ -201,7 +251,12 @@ export default function JogarQuiz() {
                                 <p>Você fez <strong>{resultado}</strong> pontos.</p>
                                 <button
                                     className="jogarQuiz-btnAbrir"
-                                    onClick={() => setModalAberto(false)}
+                                    onClick={() => {
+                                        const baseUrl = window.location.hostname === "localhost"
+                                            ? "http://localhost:5173"
+                                            : "https://irongoals.com";
+                                        window.location.href = `${baseUrl}/iron_quiz`;
+                                    }}
                                 >
                                     Fechar
                                 </button>
@@ -252,6 +307,15 @@ export default function JogarQuiz() {
                                         );
                                     })}
                                 </div>
+
+                                {/* Contador regressivo durante feedback */}
+                                {contadorFeedback !== null && (
+                                    <p className="jogarQuiz-contadorFeedback">
+                                        {atual + 1 === perguntas.length
+                                            ? `🏆 Sua pontuação final será exibida em ${contadorFeedback}...`
+                                            : `⏳ Próxima pergunta em ${contadorFeedback}...`}
+                                    </p>
+                                )}
 
                                 <div className="jogarQuiz-sair">
                                     <button className="jogarQuiz-btnSair" onClick={sairDoQuiz}>

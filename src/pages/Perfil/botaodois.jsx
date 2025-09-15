@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import './botaodois.css';
 import { URL } from '../../config';
+import Swal from 'sweetalert2';
 
 export default function BotaoDois() {
     const [experiencias, setExperiencias] = useState([]);
@@ -71,10 +72,18 @@ export default function BotaoDois() {
                 setNovaExperiencia({ nome: '', origem: '' });
                 setMostrarFormulario(false);
             } else {
-                alert("Erro: " + resultado.erro);
+                Swal.fire({
+                    icon: "error",
+                    title: "Erro ao adicionar experiência",
+                    text: resultado.erro || "Tente novamente.",
+                });
             }
         } catch (erro) {
-            alert("Erro ao conectar.");
+            Swal.fire({
+                icon: "error",
+                title: "Erro ao conectar",
+                text: "Não foi possível adicionar a experiência.",
+            });
         }
     };
 
@@ -93,10 +102,18 @@ export default function BotaoDois() {
                 setIndiceSelecionado(null);
             } else {
                 const erro = await resposta.json();
-                alert("Erro ao remover: " + erro.mensagem);
+                Swal.fire({
+                    icon: "error",
+                    title: "Erro ao remover",
+                    text: erro.mensagem || "Tente novamente.",
+                });
             }
         } catch (erro) {
-            alert("Erro ao remover.");
+            Swal.fire({
+                icon: "error",
+                title: "Erro ao remover",
+                text: "Não foi possível remover a experiência.",
+            });
         }
     };
 
@@ -135,10 +152,18 @@ export default function BotaoDois() {
             }
             else {
                 const erro = await resposta.json();
-                alert("Erro ao salvar: " + erro.mensagem);
+                Swal.fire({
+                    icon: "error",
+                    title: "Erro ao salvar edição",
+                    text: erro.mensagem || "Tente novamente.",
+                });
             }
         } catch (erro) {
-            alert("Erro ao salvar edição.");
+            Swal.fire({
+                icon: "error",
+                title: "Erro ao salvar edição",
+                text: "Não foi possível salvar as alterações.",
+            });
         }
     };
 

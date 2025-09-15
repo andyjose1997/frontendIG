@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import "./SalaCodigo.css";
+import Swal from "sweetalert2";
 
 export default function SalaCodigo() {
     const { nome } = useParams(); // nome do quiz vindo da rota
@@ -17,7 +18,11 @@ export default function SalaCodigo() {
 
     const entrarNaSala = () => {
         if (!codigo || !nomeJogador || !emojiSelecionado) {
-            alert("Preencha o código, seu nome e escolha um emoji!");
+            Swal.fire({
+                icon: "warning",
+                title: "Campos obrigatórios",
+                text: "Preencha o código, seu nome e escolha um emoji!",
+            });
             return;
         }
 
@@ -27,6 +32,14 @@ export default function SalaCodigo() {
             codigo,
             nomeJogador,
             emojiSelecionado
+        });
+
+        Swal.fire({
+            icon: "success",
+            title: "🚀 Entrando na sala!",
+            text: `Bem-vindo, ${nomeJogador}!`,
+            timer: 2000,
+            showConfirmButton: false
         });
     };
 

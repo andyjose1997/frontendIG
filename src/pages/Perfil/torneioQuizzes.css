@@ -1,0 +1,201 @@
+.alerta-quizzes {
+    margin: 10px auto;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    max-width: 300px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ===== Container dos botões ===== */
+.rankperfil-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+/* ===== Estilo base dos botões ===== */
+.rankperfil-botoes button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== Hover ===== */
+.rankperfil-botoes button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #2a5298, #1e3c72);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* ===== Botão ativo ===== */
+.rankperfil-botoes button.ativo {
+    background: linear-gradient(135deg, #ffb703, #ff8c00);
+    color: #222;
+    box-shadow: 0 6px 16px rgba(255, 140, 0, 0.6);
+}
+
+.botoes-quizzes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    justify-items: center;
+    margin-top: 15px;
+    max-width: 400px;
+    /* 🔹 controla largura máxima */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rankperfil-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.rankperfil-btn:hover {
+    background: linear-gradient(135deg, #0056b3, #003f7f);
+}
+
+.sem-quizzes {
+    margin-top: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ffc107;
+    /* amarelo destaque */
+    text-align: center;
+}
+
+/* ===== Ranking container geral ===== */
+.rankings-container {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ===== Cada bloco de ranking ===== */
+.ranking-box {
+    background: linear-gradient(135deg, #0d1b2a, #1b263b);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    color: #f1f1f1;
+    transition: transform 0.2s ease;
+}
+
+.ranking-box:hover {
+    transform: translateY(-4px);
+}
+
+/* ===== Título do ranking ===== */
+.ranking-title {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #f1c40f;
+    /* dourado */
+    text-align: center;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== Tabela ===== */
+.ranking-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    background: #0b1622;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.ranking-tabela th {
+    background: #007bff;
+    color: #fff;
+    padding: 10px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.ranking-tabela td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #2c3e50;
+    font-size: 1rem;
+}
+
+.ranking-tabela tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.ranking-tabela tr:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== Destaque para o primeiro lugar ===== */
+.ranking-tabela tr:first-child td {
+    font-weight: bold;
+    color: #f1c40f;
+    font-size: 1.1rem;
+}
+
+.ranking-container {
+    max-height: 700px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+    width: 87% !important;
+}
+
+/* ===== Scrollbar personalizada (Chrome, Edge, Safari) ===== */
+.ranking-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.ranking-container::-webkit-scrollbar-track {
+    background: #0d1b2a;
+    /* 🔹 cor do fundo do trilho */
+    border-radius: 10px;
+}
+
+.ranking-container::-webkit-scrollbar-thumb {
+    background: #0571d6;
+    /* 🔹 cor da barra */
+    border-radius: 10px;
+    border: 2px solid #0d1b2a;
+    /* 🔹 espaço entre trilho e barra */
+}
+
+.ranking-container::-webkit-scrollbar-thumb:hover {
+    background: #1e90ff;
+    /* 🔹 cor ao passar o mouse */
+}

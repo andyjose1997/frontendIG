@@ -335,3 +335,197 @@
     border-radius: 8px;
     font-size: 15px;
 }
+
+.jogarQuiz-preparando {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #0d1b2a, #1b263b, #0a192f);
+    background-size: 300% 300%;
+    animation: bgMove 8s ease infinite;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    z-index: 2000;
+    text-align: center;
+}
+
+@keyframes bgMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.jogarQuiz-preparando h2 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.jogarQuiz-preparando span {
+    color: #00e6ff;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(0, 230, 255, 0.8);
+}
+
+/* Contador base */
+.jogarQuiz-contador {
+    font-size: 7rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 12px #00e6ff, 0 0 24px #0077ff;
+    animation-duration: 0.9s;
+    animation-fill-mode: both;
+}
+
+/* Animações personalizadas */
+.anim-5 {
+    animation-name: slideLeft;
+}
+
+.anim-4 {
+    animation-name: slideTop;
+}
+
+.anim-3 {
+    animation-name: slideRight;
+}
+
+.anim-2 {
+    animation-name: slideBottom;
+}
+
+.anim-1 {
+    animation-name: zoomGlow;
+}
+
+/* Keyframes */
+@keyframes slideLeft {
+    from {
+        transform: translateX(-300px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideTop {
+    from {
+        transform: translateY(-300px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        transform: translateX(300px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideBottom {
+    from {
+        transform: translateY(300px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomGlow {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+        text-shadow: 0 0 5px #00e6ff;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+        text-shadow: 0 0 20px #00e6ff, 0 0 40px #0077ff;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        text-shadow: 0 0 15px #00e6ff, 0 0 30px #0077ff;
+    }
+}
+
+.jogarQuiz-btnOpcao {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 8px 0;
+    transition: all 0.3s ease;
+    background: #1e3a5f;
+    color: white;
+}
+
+.jogarQuiz-contadorFeedback {
+    margin-top: 12px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #04070a;
+    text-align: center;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.jogarQuiz-btnOpcao:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+.jogarQuiz-btnOpcao.correta {
+    background-color: #28a745 !important;
+    color: #fff;
+    box-shadow: 0 0 12px rgba(40, 167, 69, 0.7);
+}
+
+.jogarQuiz-btnOpcao.errada {
+    background-color: #dc3545 !important;
+    color: #fff;
+    box-shadow: 0 0 12px rgba(220, 53, 69, 0.7);
+}
