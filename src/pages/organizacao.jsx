@@ -38,36 +38,36 @@ export default function Organizacao() {
     // 🔹 Função para renderizar lista de usuários
     const renderUsuarios = (usuarios) => (
         <div className="responsaveis">
-            {usuarios.map((u) => {
-                const expandir = expandirIds[u.id] || false;
+            {usuarios
+                .filter((u) => u.id !== "a00002") // 🔹 remove usuário específico
+                .map((u) => {
+                    const expandir = expandirIds[u.id] || false;
+                    return (
+                        <div key={u.id} className={`responsavel ${u.funcao}`}>
+                            <img
+                                className="foto-perfil"
+                                src={u.foto?.startsWith("http") ? u.foto : `${URL}${u.foto}`}
+                                alt={u.nome}
+                            />
+                            <h2>{capitalize(u.nome)} {capitalize(u.sobrenome)}</h2>
+                            <h4 className="cargo">{capitalize(u.cargo)}</h4>
 
-                return (
-                    <div key={u.id} className={`responsavel ${u.funcao}`}>
-                        <img
-                            className="foto-perfil"
-                            src={u.foto?.startsWith("http") ? u.foto : `${URL}${u.foto}`}
-                            alt={u.nome}
-                        />
+                            <p className={`descricao ${expandir ? "aberta" : "fechada"}`}>
+                                {capitalize(u.responsabilidade)}
+                            </p>
 
+                            {u.responsabilidade?.length > 150 && (
+                                <button
+                                    className="btn-vermais"
+                                    onClick={() => toggleExpandir(u.id)}
+                                >
+                                    {expandir ? "Ver menos ▲" : "Ver mais ▼"}
+                                </button>
+                            )}
+                        </div>
+                    );
+                })}
 
-                        <h2>{capitalize(u.nome)} {capitalize(u.sobrenome)}</h2>
-                        <h4 className="cargo">{capitalize(u.cargo)}</h4>
-
-                        <p className={`descricao ${expandir ? "aberta" : "fechada"}`}>
-                            {capitalize(u.responsabilidade)}
-                        </p>
-
-                        {u.responsabilidade?.length > 150 && (
-                            <button
-                                className="btn-vermais"
-                                onClick={() => toggleExpandir(u.id)}
-                            >
-                                {expandir ? "Ver menos ▲" : "Ver mais ▼"}
-                            </button>
-                        )}
-                    </div>
-                );
-            })}
         </div>
     );
 
