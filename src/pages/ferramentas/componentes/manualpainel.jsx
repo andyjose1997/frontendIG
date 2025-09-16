@@ -183,6 +183,7 @@ export default function ManualPainel() {
         carregar();
     };
 
+    // 🔹 renderizar cláusulas como documento
     const renderDocumento = (lista, nivel = 0) =>
         lista
             .filter((c) => c.texto && c.texto.trim() !== "")
