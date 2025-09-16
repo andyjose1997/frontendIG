@@ -1,159 +1,152 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { URL } from "../../../config";
-import './recuperarsenha.css';
-import Rodape from "../rodape";
+import './perguntasseguranca.css';
 
-export default function RecuperarSenha() {
-    const [step, setStep] = useState(1);
-    const [loginField, setLoginField] = useState("");
-    const [perguntas, setPerguntas] = useState([]);
-    const [respostas, setRespostas] = useState(["", "", ""]);
-    const [novaSenha, setNovaSenha] = useState("");
-    const [confirmarSenha, setConfirmarSenha] = useState("");
+export default function PerguntasSeguranca() {
+    const [perguntas, setPerguntas] = useState({ p1: "", p2: "", p3: "" });
+    const [respostas, setRespostas] = useState({ r1: "", r2: "", r3: "" });
+    const [editando, setEditando] = useState(null);
     const [mensagem, setMensagem] = useState("");
-    const [usuarioId, setUsuarioId] = useState(null);
 
-    // Etapa 1: Buscar perguntas
-    const handleBuscar = async () => {
-        const res = await fetch(`${URL}/seguranca/recuperar-inicio`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ login: loginField })
-        });
-        const data = await res.json();
+    // 🔹 Buscar perguntas já salvas do backend
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) return;
 
-        if (!res.ok) {
-            setMensagem(data.erro || "Usuário não encontrado.");
+        fetch(`${URL}/seguranca/minhas-perguntas`, {
+            headers: { "Authorization": `Bearer ${token}` }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.perguntas && data.perguntas.length >= 3) {
+                    setPerguntas({
+                        p1: data.perguntas[0].pergunta,
+                        p2: data.perguntas[1].pergunta,
+                        p3: data.perguntas[2].pergunta
+                    });
+                    setRespostas({
+                        r1: data.perguntas[0].resposta,
+                        r2: data.perguntas[1].resposta,
+                        r3: data.perguntas[2].resposta
+                    });
+                }
+            })
+            .catch(() => setMensagem("❌ Erro ao carregar perguntas salvas."));
+    }, []);
+
+    const salvarPerguntas = async () => {
+        if (!respostas.r1 || !respostas.r2 || !respostas.r3) {
+            setMensagem("⚠️ Responda todas as perguntas antes de salvar.");
             return;
         }
-        setPerguntas(data.perguntas);
-        setUsuarioId(data.usuario_id);
-        setStep(2);
+
+        const token = localStorage.getItem("token");
+        try {
+            const res = await fetch(`${URL}/seguranca/salvar`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    pergunta1: perguntas.p1,
+                    resposta1: respostas.r1,
+                    pergunta2: perguntas.p2,
+                    resposta2: respostas.r2,
+                    pergunta3: perguntas.p3,
+                    resposta3: respostas.r3
+                })
+            });
+
+            const data = await res.json();
+            if (!res.ok) {
+                setMensagem(data.erro || "Erro ao salvar perguntas.");
+                return;
+            }
+            setMensagem("✅ Perguntas de segurança salvas com sucesso!");
+        } catch {
+            setMensagem("❌ Erro de conexão com o servidor.");
+        }
     };
 
-    // Etapa 2: Validar respostas
-    const handleValidar = async () => {
-        const res = await fetch(`${URL}/seguranca/validar`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ usuario_id: usuarioId, respostas })
-        });
-        const data = await res.json();
-
-        if (!res.ok) {
-            setMensagem(data.erro || "Respostas incorretas.");
-            return;
+    const renderPergunta = (campo, valor) => {
+        if (editando === campo) {
+            return (
+                <input
+                    type="text"
+                    value={valor}
+                    onChange={(e) => setPerguntas({ ...perguntas, [campo]: e.target.value })}
+                    onBlur={() => setEditando(null)}
+                    autoFocus
+                    style={{ width: "100%", padding: "5px" }}
+                />
+            );
+        } else {
+            return (
+                <span
+                    style={{ cursor: "pointer", fontWeight: "bold" }}
+                    onClick={() => setEditando(campo)}
+                >
+                    {valor || "Clique para editar a pergunta"}
+                </span>
+            );
         }
-        setStep(3);
-    };
-
-    // Etapa 3: Resetar senha
-    const handleResetarSenha = async () => {
-        if (novaSenha !== confirmarSenha) {
-            setMensagem("⚠️ As senhas não coincidem.");
-            return;
-        }
-
-        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.,*)(&%$#@!]).{8,}$/;
-        if (!regex.test(novaSenha)) {
-            setMensagem("⚠️ Senha deve ter 8+ caracteres, 1 maiúscula, 1 minúscula, 1 número e 1 símbolo.");
-            return;
-        }
-
-        const res = await fetch(`${URL}/seguranca/resetar-senha`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ usuario_id: usuarioId, nova_senha: novaSenha })
-        });
-        const data = await res.json();
-
-        if (!res.ok) {
-            setMensagem(data.erro || "Erro ao redefinir senha.");
-            return;
-        }
-        setMensagem("✅ Senha redefinida com sucesso! Faça login.");
-        setStep(4);
     };
 
     return (
-        <div className="recuperar-container">
-            <h2 className="recuperar-titulo">🔑 Recuperar Senha</h2>
-            {mensagem && <p className="recuperar-mensagem">{mensagem}</p>}
-
-            {step === 1 && (
-                <div className="recuperar-etapa etapa1">
-                    <p style={{ fontSize: "1.4rem" }} className="recuperar-instrucao">Digite seu ID ou Email:</p>
-                    <input
-                        className="recuperar-input"
-                        type="text"
-                        value={loginField}
-                        onChange={(e) => setLoginField(e.target.value)}
-                        placeholder="Digite seu ID ou Email"
-                    />
-                    <button className="recuperar-btn" onClick={handleBuscar}>
-                        Continuar
-                    </button>
-                </div>
-            )}
-
-            {step === 2 && (
-                <div className="recuperar-etapa etapa2">
-                    <h3 className="recuperar-subtitulo">Responda suas perguntas de segurança</h3>
-                    {perguntas.map((p, i) => (
-                        <div key={i} className="recuperar-pergunta-bloco">
-                            <label className="recuperar-label">{p}</label>
-                            <input
-                                className="recuperar-input"
-                                type="text"
-                                value={respostas[i]}
-                                onChange={(e) => {
-                                    const novas = [...respostas];
-                                    novas[i] = e.target.value;
-                                    setRespostas(novas);
-                                }}
-                                placeholder="Sua resposta"
-                            />
-                        </div>
-                    ))}
-                    <button className="recuperar-btn" onClick={handleValidar}>
-                        Validar
-                    </button>
-                </div>
-            )}
-
-            {step === 3 && (
-                <div className="recuperar-etapa etapa3">
-                    <h3 className="recuperar-subtitulo">Digite sua nova senha</h3>
-                    <input
-                        className="recuperar-input"
-                        type="password"
-                        value={novaSenha}
-                        onChange={(e) => setNovaSenha(e.target.value)}
-                        placeholder="Nova senha"
-                    />
-                    <input
-                        className="recuperar-input"
-                        type="password"
-                        value={confirmarSenha}
-                        onChange={(e) => setConfirmarSenha(e.target.value)}
-                        placeholder="Confirmar senha"
-                    />
-                    <button className="recuperar-btn" onClick={handleResetarSenha}>
-                        Redefinir Senha
-                    </button>
-                </div>
-            )}
-
-            {step === 4 && (
-                <div className="recuperar-etapa etapa4">
-                    <p className="recuperar-sucesso">✅ Senha alterada com sucesso!</p>
-                    <a className="recuperar-link" href="/login">Ir para Login</a>
-                </div>
-            )}
-
-            <div className="recuperar-rodape">
-                <Rodape />
+        <div className="perguntas-container">
+            <h2>🔐 Perguntas de Segurança</h2>
+            <p>Clique em uma pergunta para editá-la. Responda todas antes de salvar.</p>
+            <p style={{ fontSize: "1.3rem" }}>
+                Essas perguntas de segurança são fundamentais para proteger sua conta.
+                Caso você esqueça sua senha no futuro, será necessário responder corretamente
+                a elas para recuperar o acesso. Escolha perguntas e respostas que apenas você saiba.
+            </p>
+            <div className="pergunta-bloco">
+                <label>{renderPergunta("p1", perguntas.p1)}</label>
+                <input
+                    type="text"
+                    value={respostas.r1}
+                    onChange={(e) => setRespostas({ ...respostas, r1: e.target.value })}
+                    placeholder="Sua resposta"
+                />
             </div>
+
+            <div className="pergunta-bloco">
+                <label>{renderPergunta("p2", perguntas.p2)}</label>
+                <input
+                    type="text"
+                    value={respostas.r2}
+                    onChange={(e) => setRespostas({ ...respostas, r2: e.target.value })}
+                    placeholder="Sua resposta"
+                />
+            </div>
+
+            <div className="pergunta-bloco">
+                <label>{renderPergunta("p3", perguntas.p3)}</label>
+                <input
+                    type="text"
+                    value={respostas.r3}
+                    onChange={(e) => setRespostas({ ...respostas, r3: e.target.value })}
+                    placeholder="Sua resposta"
+                />
+            </div>
+
+            <div className="botoes">
+                <button className="botao-config" onClick={salvarPerguntas}>Salvar</button>
+                <a
+                    className="botao-voltar"
+                    href={
+                        window.location.hostname === "localhost"
+                            ? "http://localhost:5173/TelaConfig"
+                            : "https://irongoals.com/TelaConfig"
+                    }
+                >
+                    ← Voltar
+                </a>
+            </div>
+
+            {mensagem && <p className="status">{mensagem}</p>}
         </div>
     );
 }
