@@ -23,7 +23,7 @@ function Clausula({ clausula, onAddFilho, onSave, onDelete, nivel = 0 }) {
                     body: JSON.stringify(payload),
                 });
             } else {
-                await fetch(`${API_URL}/`, {
+                await fetch(API_URL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
@@ -112,7 +112,7 @@ export default function ManualPainel() {
 
     const carregar = async () => {
         try {
-            const res = await fetch(`${API_URL}/`);
+            const res = await fetch(API_URL);
             const data = await res.json();
             if (Array.isArray(data)) {
                 setClausulas(data);
@@ -134,7 +134,7 @@ export default function ManualPainel() {
         const novoNumero = `${pai.numero}.${filhos + 1}`;
 
         try {
-            await fetch(`${API_URL}/`, {
+            await fetch(API_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -155,7 +155,7 @@ export default function ManualPainel() {
         const novoNumero = (raizes.length + 1).toString();
 
         try {
-            await fetch(`${API_URL}/`, {
+            await fetch(API_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -180,13 +180,12 @@ export default function ManualPainel() {
         carregar();
     };
 
-    // 🔹 renderizar cláusulas como documento
     const renderDocumento = (lista, nivel = 0) =>
         lista
             .filter((c) => c.texto && c.texto.trim() !== "")
             .map((c) => (
                 <div key={c.id} style={{ marginLeft: nivel * 20 }}>
-                    <strong>Cláusula {c.numero}:</strong>{" "} <br />
+                    <strong>Cláusula {c.numero}:</strong> <br />
                     <span style={{ whiteSpace: "pre-line" }}>{c.texto}</span>
                     {c.filhos && renderDocumento(c.filhos, nivel + 1)}
                 </div>
