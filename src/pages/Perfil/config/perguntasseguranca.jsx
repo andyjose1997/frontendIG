@@ -76,6 +76,11 @@ export default function PerguntasSeguranca({ onVoltar }) {
         <div className="perguntas-container">
             <h2>🔐 Perguntas de Segurança</h2>
             <p>Clique em uma pergunta para editá-la. Responda todas antes de salvar.</p>
+            <p>
+                Essas perguntas de segurança são fundamentais para proteger sua conta.
+                Caso você esqueça sua senha no futuro, será necessário responder corretamente
+                a elas para recuperar o acesso. Escolha perguntas e respostas que apenas você saiba.
+            </p>
 
             <div className="pergunta-bloco">
                 <label>{renderPergunta("p1", perguntas.p1)}</label>
