@@ -9,6 +9,13 @@ function Clausula({ clausula, onAddFilho, onSave, onDelete, nivel = 0 }) {
     const [texto, setTexto] = useState(clausula.texto || "");
     const [editando, setEditando] = useState(!clausula.texto);
 
+    // 🔹 Função para cor baseada no número raiz
+    const getColor = () => {
+        const raiz = parseInt(clausula.numero.split(".")[0], 10);
+        if (isNaN(raiz)) return "inherit";
+        return raiz % 2 === 0 ? "green" : "blue"; // par = verde, ímpar = azul
+    };
+
     const salvar = async () => {
         const payload = {
             numero: clausula.numero,
@@ -18,14 +25,12 @@ function Clausula({ clausula, onAddFilho, onSave, onDelete, nivel = 0 }) {
 
         try {
             if (clausula.id) {
-                // atualizar existente
                 await fetch(`${API_URL}${clausula.id}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
                 });
             } else {
-                // criar nova
                 await fetch(API_URL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -41,10 +46,18 @@ function Clausula({ clausula, onAddFilho, onSave, onDelete, nivel = 0 }) {
     };
 
     return (
-        <div className="clausula-container" style={{ marginLeft: nivel * 30 }}>
+        <div
+            className="clausula-container"
+            style={{
+                marginLeft: nivel * 30,
+                borderLeft: `4px solid ${getColor()}`,
+                paddingLeft: "10px",
+            }}
+        >
             <button
                 className="clausula-btn"
                 onClick={() => setEditando(true)}
+                style={{ backgroundColor: getColor(), color: "black" }}
             >
                 Cláusula {clausula.numero}
             </button>
@@ -78,7 +91,11 @@ function Clausula({ clausula, onAddFilho, onSave, onDelete, nivel = 0 }) {
                         <p
                             className="clausula-texto"
                             onClick={() => setEditando(true)}
-                            style={{ cursor: "pointer", whiteSpace: "pre-line" }}
+                            style={{
+                                cursor: "pointer",
+                                whiteSpace: "pre-line",
+                                color: "black",
+                            }}
                         >
                             {clausula.texto}
                         </p>
@@ -183,13 +200,28 @@ export default function ManualPainel() {
         carregar();
     };
 
-    // 🔹 renderizar cláusulas como documento
     const renderDocumento = (lista, nivel = 0) =>
         lista
             .filter((c) => c.texto && c.texto.trim() !== "")
             .map((c) => (
-                <div key={c.id} style={{ marginLeft: nivel * 20 }}>
-                    <strong>Cláusula {c.numero}:</strong> <br />
+                <div
+                    key={c.id}
+                    style={{
+                        marginLeft: nivel * 20,
+                        color: "black",
+                    }}
+                >
+                    <strong
+                        style={{
+                            color:
+                                parseInt(c.numero.split(".")[0], 10) % 2 === 0
+                                    ? "green"
+                                    : "blue",
+                        }}
+                    >
+                        Cláusula {c.numero}:
+                    </strong>
+                    <br />
                     <span style={{ whiteSpace: "pre-line" }}>{c.texto}</span>
                     {c.filhos && renderDocumento(c.filhos, nivel + 1)}
                 </div>
