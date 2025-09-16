@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import "./manualpainel.css";
 import { URL } from "../../../config";
 
-const API_URL = `${URL}/clausulas`;
+// 🔹 API sempre com barra no final para evitar 405
+const API_URL = `${URL}/clausulas/`;
 
 function Clausula({ clausula, onAddFilho, onSave, onDelete, nivel = 0 }) {
     const [texto, setTexto] = useState(clausula.texto || "");
@@ -17,12 +18,14 @@ function Clausula({ clausula, onAddFilho, onSave, onDelete, nivel = 0 }) {
 
         try {
             if (clausula.id) {
-                await fetch(`${API_URL}/${clausula.id}`, {
+                // atualizar existente
+                await fetch(`${API_URL}${clausula.id}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
                 });
             } else {
+                // criar nova
                 await fetch(API_URL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -173,7 +176,7 @@ export default function ManualPainel() {
 
     const deletarClausula = async (id) => {
         try {
-            await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+            await fetch(`${API_URL}${id}`, { method: "DELETE" });
         } catch (err) {
             console.error("Erro ao deletar cláusula:", err);
         }
