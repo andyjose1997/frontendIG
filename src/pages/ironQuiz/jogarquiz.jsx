@@ -35,7 +35,6 @@ export default function JogarQuiz() {
         carregarQuizzes();
     }, [id_jogador]);
 
-
     // 🔹 Timer
     useEffect(() => {
         if (!modalAberto || bloqueado || carregando) return;
@@ -60,11 +59,11 @@ export default function JogarQuiz() {
         };
     }, [perguntas, atual]);
 
-    // 🔹 Abrir quiz
-    const abrirQuiz = async (nome) => {
+    // 🔹 Abrir quiz (com progresso)
+    const abrirQuiz = async (nome, respondidas = 0) => {
         setQuizSelecionado(nome);
         setModalAberto(true);
-        setAtual(0);
+        setAtual(respondidas);   // 👈 continua de onde parou
         setTempo(20);
         setBloqueado(false);
         setResultado(null);
@@ -104,7 +103,7 @@ export default function JogarQuiz() {
 
     const marcarComoIncorreta = async () => {
         if (!perguntas || !perguntas[atual] || bloqueado) return;
-        setBloqueado(true); // 🚨 trava aqui também
+        setBloqueado(true);
         await registrarResposta(perguntas[atual].id, 0);
         proximaPergunta();
     };
@@ -138,10 +137,8 @@ export default function JogarQuiz() {
                 setContadorFeedback(null);
 
                 if (atual + 1 === perguntas.length) {
-                    // 🔹 Última pergunta → só finaliza aqui
                     setResultado(pontosAcumulados + pontos);
                 } else {
-                    // 🔹 Senão → próxima pergunta normal
                     proximaPergunta();
                 }
             }
@@ -179,7 +176,9 @@ export default function JogarQuiz() {
     // 🔹 Separar listas
     const jogosSistema = quizzes.filter((q) => q.admin === 1);
     const jogosPublicos = quizzes.filter((q) => q.admin === 0);
-    const prepararQuiz = (nome) => {
+
+    // 🔹 Preparar quiz (contagem regressiva)
+    const prepararQuiz = (nome, respondidas = 0) => {
         setQuizPreparando(nome);
         setPreparando(true);
         setContador(5);
@@ -190,7 +189,7 @@ export default function JogarQuiz() {
             if (i === 0) {
                 clearInterval(interval);
                 setPreparando(false);
-                abrirQuiz(nome); // 🔹 só abre depois da contagem
+                abrirQuiz(nome, respondidas); // 👈 abre no progresso
             } else {
                 setContador(i);
             }
@@ -209,7 +208,7 @@ export default function JogarQuiz() {
                         <button
                             className="jogarQuiz-btnAbrir"
                             disabled={q.respondidas >= q.total_perguntas}
-                            onClick={() => prepararQuiz(q.nome)}
+                            onClick={() => prepararQuiz(q.nome, q.respondidas)}
                         >
                             {q.nome} ({q.respondidas}/{q.total_perguntas})
                         </button>
@@ -218,7 +217,7 @@ export default function JogarQuiz() {
             </ul>
 
             {/* Jogos Públicos */}
-            <div style={{ display: "none" }} >
+            <div style={{ display: "none" }}>
                 <h3>🌍 Jogos Públicos</h3>
                 <ul className="jogarQuiz-lista">
                     {jogosPublicos.map((q) => (
