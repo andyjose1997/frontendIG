@@ -11,6 +11,7 @@ export default function Indicados() {
     const [resultadoBusca, setResultadoBusca] = useState(null);
     const [filtroTipo, setFiltroTipo] = useState("nome");
     const [detalhe, setDetalhe] = useState(null);
+    const [mostrarModalInfo, setMostrarModalInfo] = useState(false); // ✅ adicionado
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -31,6 +32,7 @@ export default function Indicados() {
 
         setIndicados(data);
     };
+
     const supabaseBase =
         "https://sbeotetrpndvnvjgddyv.supabase.co/storage/v1/object/public/fotosdeperfis/";
 
@@ -38,6 +40,7 @@ export default function Indicados() {
         if (!foto) return "/Logo/perfilPadrao/M.png";
         return foto.startsWith("http") ? foto : supabaseBase + foto;
     };
+
     const buscarPessoa = async () => {
         const token = localStorage.getItem("token");
 
@@ -66,7 +69,7 @@ export default function Indicados() {
                 text: "Não foi possível conectar ao servidor.",
             });
         }
-    }
+    };
 
     const voltar = () => {
         setModoBusca("padrao");
@@ -78,6 +81,7 @@ export default function Indicados() {
 
     const abrirDetalhe = (pessoa) => setDetalhe(pessoa);
     const fecharDetalhe = () => setDetalhe(null);
+
     const formatarNome = (nomeCompleto) => {
         return nomeCompleto
             .toLowerCase()
@@ -88,7 +92,35 @@ export default function Indicados() {
 
     return (
         <div className="indicadosContainer">
-            <h2>Indicados</h2>
+            <h2
+                className="tituloIndicados"
+                onClick={() => setMostrarModalInfo(true)}
+            >
+                Indicados
+            </h2>
+
+            {mostrarModalInfo && (
+                <div className="modalFundo">
+                    <div className="modalDetalhe">
+                        <button
+                            className="fecharModalIndicado"
+                            onClick={() => setMostrarModalInfo(false)}
+                        >
+                            ✖
+                        </button> <br />
+                        <h2>Sobre os Indicados</h2>
+                        <p>
+                            Os <strong>indicados</strong> são as pessoas que se cadastraram utilizando o seu link de Host.
+                            <br /><br />
+                            Eles podem comprar serviços e pacotes na plataforma, e sempre que realizarem uma compra,
+                            você ganha dinheiro como Host.<br /> Para mais informação vá perfil e clica em seu ID
+                            <br /><br />
+                            Por enquanto, temos disponível apenas o <strong>pacote de R$60</strong>, mas em breve
+                            teremos mais opções de serviços e produtos dentro da IronGoals.
+                        </p>
+                    </div>
+                </div>
+            )}
 
             {modoBusca === "padrao" && (
                 <div className="botoesBusca">
@@ -131,8 +163,6 @@ export default function Indicados() {
                                                 alt="foto"
                                                 className="miniFotoSugestao"
                                             />
-
-
                                             <span>{formatarNome(`${pessoa.nome} ${pessoa.sobrenome}`)}</span>
                                         </li>
                                     ))
@@ -152,8 +182,6 @@ export default function Indicados() {
                         alt="Foto de perfil"
                         className="fotoPerfilMini"
                     />
-
-
                     <h3>{resultadoBusca.nome}</h3>
                     <p>ID: {resultadoBusca.id}</p>
                     <button onClick={voltar}>🔙 Voltar</button>
@@ -184,8 +212,6 @@ export default function Indicados() {
                             src={getFotoUrl(detalhe.foto)}
                             alt="Foto"
                         />
-
-
                         <h2>{formatarNome(`${detalhe.nome} ${detalhe.sobrenome}`)}</h2>
                         <a
                             href={`https://wa.me/${detalhe.whatsapp}`}

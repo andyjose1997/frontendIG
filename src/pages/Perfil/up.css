@@ -492,6 +492,35 @@
     position: relative;
 }
 
+/* Botão de fechar do modal */
+.textoModal button {
+    background: linear-gradient(135deg, #060f8f, #5b679c);
+    /* degradê moderno */
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px 18px;
+    margin-top: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+/* Hover */
+.textoModal button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* Ativo (quando clica) */
+.textoModal button:active {
+    transform: scale(0.97);
+}
+
 .id-msg {
     display: none;
     font-size: 1.45rem;

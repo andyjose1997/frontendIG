@@ -26,6 +26,7 @@ export default function Propaganda() {
 
     return (
         <section className="propaganda-scroll-vertical">
+            <h2>Recomendados</h2>
             {Array.isArray(propagandas) &&
                 propagandas.map((item) => (
                     <div

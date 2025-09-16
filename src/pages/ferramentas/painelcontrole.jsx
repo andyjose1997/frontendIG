@@ -11,6 +11,7 @@ import Propaganda from './componentes/propaganda';
 import IreneConfig from './componentes/irene/ireneconfig';
 import IreneConfigCompleta from './componentes/irene/ireneconfigcompleta';
 import './painelcontrole.css';
+import ManualPainel from './componentes/manualpainel';
 
 export default function PainelControle() {
     const navigate = useNavigate();
@@ -89,6 +90,13 @@ export default function PainelControle() {
                 >
                     Rankings gerais
                 </button>
+                <button
+                    className={painelAtivo === "manual" ? "controle-ativo" : ""}
+                    onClick={() => setPainelAtivo("manual")}
+                >
+                    Manual
+                </button>
+
             </div>
 
             {painelAtivo === "visualizarBanco" && <VisualizarBanco />}
@@ -98,6 +106,7 @@ export default function PainelControle() {
             {painelAtivo === "irene" && <IreneConfigCompleta />}
             {painelAtivo === "permitirFundadores" && <PermitirFundadores />}
             {painelAtivo === "listaUsuarios" && <ListaUsuariosSimples />}
+            {painelAtivo === "manual" && <ManualPainel />}
 
             {/* 🔹 Novo fluxo Info de Cadastro */}
             {painelAtivo === "infoCadastro" && (

@@ -305,9 +305,10 @@ export default function Up() {
             {mostrarModalInfo && (
                 <div className="overlayModal">
                     <div className="conteudoModal">
-                        <p className="textoModal">{mensagemModal}</p>
+
+                        <p className="textoModal">{mensagemModal}                         <button onClick={() => setMostrarModalInfo(false)}>← Fechar</button>
+                        </p>
                         <div className="botoesModal">
-                            <button onClick={() => setMostrarModalInfo(false)}>← Fechar</button>
                             <button
                                 onClick={() => {
                                     if (user) {
