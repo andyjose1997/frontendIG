@@ -82,7 +82,7 @@ export default function RecuperarSenha() {
 
             {step === 1 && (
                 <div className="recuperar-etapa etapa1">
-                    <p className="recuperar-instrucao">Digite seu ID ou Email:</p>
+                    <p style={{ fontSize: "1.4rem" }} className="recuperar-instrucao">Digite seu ID ou Email:</p>
                     <input
                         className="recuperar-input"
                         type="text"
