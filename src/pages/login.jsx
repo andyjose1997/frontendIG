@@ -8,7 +8,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 
 export default function Login() {
-    const [email, setEmail] = useState('');
+    const [loginField, setLoginField] = useState('');
     const [senha, setSenha] = useState('');
     const [showSenha, setShowSenha] = useState(false);
     const [mensagem, setMensagem] = useState('');
@@ -18,13 +18,13 @@ export default function Login() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // --- Email + senha ---
+    // --- Login com ID / Email / WhatsApp ---
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             const formData = new FormData();
-            formData.append("email", email);
+            formData.append("login", loginField); // 🔹 pode ser id, email ou whatsapp
             formData.append("senha", senha);
 
             const res = await fetch(`${URL}/login`, {
@@ -42,7 +42,7 @@ export default function Login() {
             // Salva token e usuário
             localStorage.setItem("token", data.token);
             localStorage.setItem("usuario", JSON.stringify(data.usuario));
-            localStorage.setItem("usuario_id", data.usuario.id); // 🔹 corrigido
+            localStorage.setItem("usuario_id", data.usuario.id);
 
             login(data.usuario, data.token);
             navigate("/inicio");
@@ -51,7 +51,6 @@ export default function Login() {
             setTipoMensagem("erro");
         }
     };
-
 
     // --- Login com Google ---
     const handleGoogleLogin = async (credentialResponse) => {
@@ -77,7 +76,7 @@ export default function Login() {
 
             localStorage.setItem("token", data.token);
             localStorage.setItem("usuario", JSON.stringify(data.usuario));
-            localStorage.setItem("usuario_id", data.usuario.id); // 🔹 corrigido
+            localStorage.setItem("usuario_id", data.usuario.id);
 
             login(data.usuario, data.token);
             navigate("/inicio");
@@ -89,19 +88,17 @@ export default function Login() {
         }
     };
 
-
     return (
         <div className="login-container">
             <div className="info-section">
                 <h2>Bem-vindo(a)!</h2>
-                <p>Ao fazer login, você pode:</p>
+                <p style={{ fontSize: "1.4rem" }} >Ao fazer login, você pode:</p>
                 <ul>
                     <li>📚 Acessar cursos organizados e sempre disponíveis</li>
                     <li>🎓 Conquistar certificados reconhecidos na plataforma</li>
                     <li>🤝 Receber suporte direto do seu anfitrião</li>
                     <li>🏆 Evoluir no ranking e desbloquear novas oportunidades</li>
                 </ul>
-
             </div>
 
             <div className="form-section">
@@ -115,17 +112,17 @@ export default function Login() {
 
                 {/* Login tradicional */}
                 <form onSubmit={handleSubmit} className="FormularioLogin">
-                    <label>Email:</label><br />
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Digite seu email"
+                    <label style={{ fontSize: "1.4rem" }} >ID, Email ou WhatsApp:</label><br />
+                    <input style={{ fontSize: "1.4rem" }}
+                        type="text"
+                        value={loginField}
+                        onChange={(e) => setLoginField(e.target.value)}
+                        placeholder="Digite seu ID, email ou WhatsApp"
                     /><br /><br />
 
-                    <label>Senha:</label><br />
+                    <label style={{ fontSize: "1.4rem" }} >Senha:</label><br />
                     <div className="senha-wrapper">
-                        <input
+                        <input style={{ fontSize: "1.4rem" }}
                             type={showSenha ? "text" : "password"}
                             value={senha}
                             onChange={(e) => setSenha(e.target.value)}
@@ -134,7 +131,7 @@ export default function Login() {
                     </div>
 
                     <br />
-                    <a id="EsqueciMinhaSenha" href="#">Esqueci minha senha</a><br /><br />
+                    <a style={{ fontSize: "1.4rem" }} id="EsqueciMinhaSenha" href="/recuperar-senha">Esqueci minha senha</a>
 
                     <button id="botaoInicio" type="submit">
                         Entrar

@@ -188,6 +188,31 @@ ul li:hover {
     border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+/* 🔹 Barra de rolagem personalizada */
+.modal-mensagens::-webkit-scrollbar {
+    width: 12px;
+    /* largura da barra */
+}
+
+.modal-mensagens::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+    /* trilho */
+    border-radius: 10px;
+}
+
+.modal-mensagens::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #4da3ff, #1e7fff);
+    /* barra */
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    /* espaço entre barra e trilho */
+}
+
+.modal-mensagens::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #6cb6ff, #3d92ff);
+}
+
+
 .modal-mensagens h2 {
     color: #ffcc00;
     margin-bottom: 20px;

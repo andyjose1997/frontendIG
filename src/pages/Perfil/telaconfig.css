@@ -2,12 +2,11 @@
 #ConfigGeral {
     display: grid;
     grid-template-areas:
-        "ConfigUp"
-        "ConfigBotoes"
-        "ConfigConteudo";
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr;
-    gap: 1.5rem;
+        "ConfigUp ConfigUp"
+        "ConfigBotoes ConfigConteudo";
+    grid-template-columns: 18% 1fr;
+    gap: 12px;
+    box-sizing: border-box;
 }
 
 /* ===== Header (Up) ===== */
@@ -23,31 +22,30 @@
 /* ===== Conteúdo ===== */
 #ConfigConteudo {
     grid-area: ConfigConteudo;
+    margin-top: 9px;
 }
 
-/* ===== Wrapper do botão voltar (mobile) ===== */
+/* ===== Botão Voltar (mobile) ===== */
 .config-voltar-wrapper {
     display: flex;
     justify-content: center;
     margin: 1rem 0;
 }
 
-/* ===== Botão Voltar exclusivo TelaConfig ===== */
 .config-voltar-botao {
+    background: #3a86ff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
     padding: 0.8rem 1.6rem;
     font-size: 1.1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(145deg, #3a86ff, #1747a1);
-    color: #fff;
+    font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    transition: background 0.25s ease, transform 0.2s ease;
+    max-height: 90px;
 }
 
 .config-voltar-botao:hover {
-    background: linear-gradient(145deg, #2a6edb, #0f2bb5);
+    background: #2a6edb;
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }

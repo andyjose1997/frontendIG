@@ -1,0 +1,138 @@
+/* Container principal */
+.perguntas-container {
+    background: linear-gradient(135deg, #1e5686, #0571d6);
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Título */
+.perguntas-container h2 {
+    font-size: 2.3rem;
+    margin-bottom: 12px;
+    text-align: center;
+    font-weight: bold;
+    color: #f0f0f0;
+}
+
+/* Subtexto */
+.perguntas-container p {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #f0f0f0;
+}
+
+/* Blocos de perguntas */
+.pergunta-bloco {
+    margin-bottom: 18px;
+}
+
+/* Pergunta (span editável) */
+.pergunta-bloco span {
+    display: inline-block;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 4px 6px;
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+.pergunta-bloco span:hover {
+    background: rgba(255, 255, 255, 0.15);
+    text-decoration: underline;
+    color: #000407;
+}
+
+/* Inputs */
+.pergunta-bloco input[type="text"] {
+    width: 95%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    margin-top: 6px;
+    font-size: 1.35rem;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.pergunta-bloco input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.pergunta-bloco input[type="text"]:focus {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+}
+
+/* Mensagem de status */
+.status {
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1rem;
+    color: #ffeb3b;
+    /* Amarelo para destaque */
+}
+
+/* Área dos botões */
+.botoes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Botão salvar */
+.botao-config {
+    background: #fff;
+    color: #1e5686;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.botao-config:hover {
+    background: #ffeb3b;
+    color: #1e5686;
+}
+
+.botao-voltar {
+    display: inline-block;
+    padding: 0.7rem 1.2rem;
+    background: #ccc;
+    /* mesma cor que já usava no botão */
+    color: #000;
+    /* cor do texto */
+    border-radius: 6px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-decoration: none;
+    /* 🔹 remove o underline */
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.botao-voltar:hover {
+    background: #bbb;
+    transform: scale(1.03);
+    /* 🔹 efeito de "pulsar" no hover */
+    text-decoration: none;
+    /* 🔹 garante que não volte o underline */
+}
+
+
+.botao-voltar:hover {
+    background: #fff;
+    color: #1e5686;
+}

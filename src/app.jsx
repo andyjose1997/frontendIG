@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import Layout from "./components/layout.jsx";
 import Loader from "./components/loader.jsx";
+import RecuperarSenha from "./pages/recuperacao/recuperarsenha.jsx";
 
 import Login from './pages/login.jsx';
 import Cursos from "./pages/cursos.jsx";
@@ -127,6 +128,8 @@ function AppRoutes() {
       {isLoading && <Loader />}
 
       <Routes>
+        <Route path="/recuperar-senha" element={<RecuperarSenha />} />
+
         {/* Rotas que usam Layout */}
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />

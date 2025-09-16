@@ -81,6 +81,36 @@ h2 {
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
 }
 
+.exportar-btn {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.exportar-btn:hover {
+    background: linear-gradient(135deg, #0056b3, #004494);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+.exportar-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.exportar-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
 /* ====== Botão Cláusula (número) ====== */
 .clausula-btn {
     background: #1e5686;

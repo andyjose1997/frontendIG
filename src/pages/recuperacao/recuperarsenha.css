@@ -1,0 +1,210 @@
+/* 🌐 Container principal */
+.recuperar-container {
+    max-width: 90%;
+    margin: 4rem auto;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    border-radius: 16px;
+    color: #fff;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 🔑 Título */
+.recuperar-titulo {
+    font-size: 3.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1px;
+    animation: slideDown 0.7s ease-out;
+}
+
+/* 📌 Mensagem (erro ou info) */
+.recuperar-mensagem {
+    margin-bottom: 1rem;
+    font-size: 1.95rem;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.8rem;
+    color: white;
+    border-radius: 8px;
+    animation: pulse 1.5s infinite alternate;
+}
+
+/* ✅ Mensagem de sucesso */
+.recuperar-sucesso {
+    font-size: 2.1rem;
+    margin: 1rem 0;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* 🔹 Bloco de etapas */
+.recuperar-etapa {
+    margin-bottom: 1.8rem;
+    text-align: left;
+    color: rgb(255, 255, 255);
+    animation: fadeInUp 0.6s ease-in-out;
+}
+
+.recuperar-subtitulo {
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+/* 📌 Labels */
+.recuperar-label {
+    display: block;
+    margin: 0.5rem 0 0.3rem;
+    font-weight: bold;
+    font-size: 2rem;
+    transition: color 0.3s ease;
+}
+
+.recuperar-label:hover {
+    color: #ffeb3b;
+}
+
+/* ✍️ Inputs */
+.recuperar-input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    font-size: 2rem;
+    background: #f9f9f9;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.recuperar-input:focus {
+    background: #fff;
+    box-shadow: 0 0 8px rgba(30, 144, 255, 0.8);
+    transform: scale(1.02);
+}
+
+/* 🔘 Botões */
+.recuperar-btn {
+    width: 100%;
+    padding: 0.9rem;
+    margin-top: 0.5rem;
+    border: none;
+    border-radius: 8px;
+    background: #00bfff;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.recuperar-btn:hover {
+    background: #009acd;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.recuperar-btn:active {
+    transform: scale(0.98);
+}
+
+/* 🔗 Link final */
+.recuperar-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #ffeb3b;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-size: 2rem;
+}
+
+.recuperar-link:hover {
+    text-decoration: underline;
+    color: #fff176;
+    transform: scale(1.05);
+}
+
+/* 📱 Responsividade */
+@media (max-width: 600px) {
+    .recuperar-container {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
+    }
+
+    .recuperar-titulo {
+        font-size: 2.2rem;
+    }
+
+    .recuperar-input {
+        font-size: 1.2rem;
+    }
+
+    .recuperar-btn {
+        font-size: 1.2rem;
+    }
+}
+
+/* Rodapé fixado */
+.recuperar-rodape {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+/* ✨ Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    from {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    to {
+        background: rgba(255, 255, 255, 0.25);
+    }
+}

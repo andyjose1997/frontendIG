@@ -9,6 +9,7 @@ export default function DadosConta({ onVoltar }) {
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
     const [email, setEmail] = useState("");
+    const [emailSecundario, setEmailSecundario] = useState("");
     const [frase, setFrase] = useState("");
     const [notificacoesAtivas, setNotificacoesAtivas] = useState(false);
 
@@ -38,6 +39,7 @@ export default function DadosConta({ onVoltar }) {
             setNome(data.nome || "");
             setSobrenome(data.sobrenome || "");
             setEmail(data.email || "");
+            setEmailSecundario(data.email_secundario || "");
             setFrase(data.comentario_perfil || "");
             setNotificacoesAtivas(data.notificacoes || false);
 
@@ -61,6 +63,7 @@ export default function DadosConta({ onVoltar }) {
                     nome: nome.trim(),
                     sobrenome: sobrenome.trim(),
                     email: email.trim(),
+                    email_secundario: emailSecundario.trim(),
                     comentario_perfil: frase,
                     notificacoes: notificacoesAtivas
                 })
@@ -94,6 +97,7 @@ export default function DadosConta({ onVoltar }) {
                 nome,
                 sobrenome,
                 email,
+                email_secundario: emailSecundario,
                 comentario_perfil: frase,
                 notificacoes: novoStatus
             })
@@ -138,6 +142,10 @@ export default function DadosConta({ onVoltar }) {
             </p>
 
             <p style={{ display: "none" }} ><strong>Email:</strong> {renderCampo("email", email, setEmail)}</p>
+
+            <p><strong>Email Secundário (recuperação): </strong>
+                {renderCampo("email_secundario", emailSecundario, setEmailSecundario)}
+            </p>
 
             <p><strong>Próxima Meta:</strong> {renderCampo("frase", frase, setFrase)}</p>
 

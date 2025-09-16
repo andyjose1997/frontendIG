@@ -51,6 +51,28 @@
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
 }
 
+/* 🔔 Botão de alerta */
+.alerta-perguntas {
+    border: 2px solid red !important;
+    animation: alertaPulse 1s infinite;
+}
+
+@keyframes alertaPulse {
+    0% {
+        box-shadow: 0 0 5px red;
+    }
+
+    50% {
+        box-shadow: 0 0 15px red;
+        transform: scale(1.05);
+    }
+
+    100% {
+        box-shadow: 0 0 5px red;
+        transform: scale(1);
+    }
+}
+
 .botao-config:hover {
     background: rgba(255, 255, 255, 0.25);
     transform: scale(1.05);
