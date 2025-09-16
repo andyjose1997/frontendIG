@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { URL } from "../../config";
+import { URL } from "../../../config";
 import './recuperarsenha.css';
 import Rodape from "../rodape";
 
