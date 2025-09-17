@@ -7,6 +7,7 @@ export default function Buscador() {
     const [showModal, setShowModal] = useState(false);
     const [countdown, setCountdown] = useState(15);
     const [naoLidas, setNaoLidas] = useState(0);
+    const [mostrarAvaliacao, setMostrarAvaliacao] = useState(false);
 
     const [sugestoes, setSugestoes] = useState([]);
     const [textoBusca, setTextoBusca] = useState("");
@@ -142,6 +143,26 @@ export default function Buscador() {
                         )}
                     </div>
                     <Link className="buscador-link" to="/TelaConfig">Configurações</Link>
+                    <Link
+                        className="buscador-link"
+                        to="#"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            const token = localStorage.getItem("token");
+                            const usuarioId = localStorage.getItem("usuario_id");
+
+                            if (token && usuarioId) {
+                                // ✅ já logado → vai para Avaliacao
+                                window.location.href = "/Avaliacao";
+                            } else {
+                                // ❌ não logado → abre modal de login
+                                setMostrarAvaliacao(true);
+                            }
+                        }}
+                    >
+                        Avalie-nos
+                    </Link>
+
                     <a className="buscador-logout" href="/" onClick={handleLogoutClick}>Logout</a>
                 </div>
             </div>

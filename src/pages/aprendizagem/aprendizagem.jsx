@@ -1,6 +1,5 @@
 // src/pages/Aprendizagem.jsx
 import "./aprendizagem.css";
-import Rodape from "../rodape";
 import { useState } from "react";
 import FormularioCurriculo from "./curriculo/curriculo";
 
@@ -99,7 +98,6 @@ export default function Aprendizagem() {
                     {renderSection()}
                 </div>
             </main>
-            <Rodape />
         </div>
     );
 }

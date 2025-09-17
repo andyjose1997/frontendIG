@@ -104,7 +104,10 @@ export default function ChavePix({ onVoltar }) {
         <>
             <section className="privacidade-config">
                 <h2>💳 Chave Pix</h2>
-                <p>Por padrão, usamos seu e-mail como chave Pix, mas você pode alterá-la.</p>
+                <p>Por favor coloque sua chave pix para receber as suas compensações conforme a sua CPP.
+                    <br />
+                    O sistema vai recomendar o seu email, mas pode confirmar ou alterar
+                </p>
 
                 <input
                     type="text"

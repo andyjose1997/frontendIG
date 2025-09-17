@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Layout from "./components/layout.jsx";
 import Loader from "./components/loader.jsx";
 import RecuperarSenha from "./pages/recuperacao/recuperarsenha.jsx";
+import Avaliacao from "./pages/areaafastada/avaliacao.jsx";
 
 import Login from './pages/login.jsx';
 import Cursos from "./pages/cursos.jsx";
@@ -129,6 +130,7 @@ function AppRoutes() {
 
       <Routes>
         <Route path="/recuperar-senha" element={<RecuperarSenha />} />
+        <Route path="/Avaliacao" element={<Avaliacao />} /> {/* 🔹 nova rota */}
 
         {/* Rotas que usam Layout */}
         <Route element={<Layout />}>

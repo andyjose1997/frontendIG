@@ -5,6 +5,7 @@ import HostModal from './hostmodal';
 import { useFerramentas } from '../../ferramentascontext';
 import ModalQrCode from './config/modalqrcode';
 import AlertaWhatsApp from "./alertawhatsapp";
+import ChavePix from './config/chavepix';
 
 export default function BotaoUm() {
     const [mostrarNivel, setMostrarNivel] = useState(false);
@@ -15,6 +16,28 @@ export default function BotaoUm() {
     const [numero, setNumero] = useState("");
     const [mostrarModal, setMostrarModal] = useState(false);
     const [alerta, setAlerta] = useState({ mostrar: false, tipo: "", mensagem: "" });
+    const [mostrarChavePix, setMostrarChavePix] = useState(false);
+    const [mostrarPacotes, setMostrarPacotes] = useState(false);
+
+    const linkAprendizagem = window.location.origin.includes("localhost")
+        ? "http://localhost:5173/aprendizagem"
+        : "https://irongoals.com/aprendizagem";
+
+    const [textoBotaoZap, setTextoBotaoZap] = useState("📱 WhatsApp");
+
+    useEffect(() => {
+        if (!numero) {
+            let mostrarAlternado = false;
+            const interval = setInterval(() => {
+                mostrarAlternado = !mostrarAlternado;
+                setTextoBotaoZap(mostrarAlternado ? "✏️ Escreva seu WhatsApp" : "📱 WhatsApp");
+            }, 3000);
+
+            return () => clearInterval(interval);
+        } else {
+            setTextoBotaoZap("📱 WhatsApp");
+        }
+    }, [numero]);
 
     const [idHost, setIdHost] = useState("");
     useEffect(() => {
@@ -135,17 +158,18 @@ export default function BotaoUm() {
         <div className="lista-vertical">
             {!mostrarFormularioZap ? (
                 <div className="whatsapp-tooltip-wrapper">
-                    <button onClick={() => setMostrarFormularioZap(true)} className="whatsapp-button">
-                        📱 WhatsApp
+                    <button onClick={() => setMostrarFormularioZap(true)} className="botao-acao">
+                        {textoBotaoZap}
                     </button>
+
                     <span className="whatsapp-tooltip">
                         Aqui pode colocar seu WhatsApp para se comunicar com seus indicados e o seu host
                     </span>
                 </div>
             ) : (
                 <div className="botoes-zap" ref={botoesZapRef}>
-                    <button onClick={() => window.open(`https://web.whatsapp.com/send?phone=${codigo}${numero}`, "_blank")}>🔗 Ir ao WhatsApp</button>
-                    <button onClick={() => setEditarZap(true)}>✏️ Editar WhatsApp</button>
+                    <button className="botao-acao" onClick={() => window.open(`https://web.whatsapp.com/send?phone=${codigo}${numero}`, "_blank")}>🔗 Ir ao WhatsApp</button>
+                    <button className="botao-acao" onClick={() => setEditarZap(true)}>✏️ Editar WhatsApp</button>
                 </div>
             )}
 
@@ -175,7 +199,7 @@ export default function BotaoUm() {
             )}
 
             <div className="indicacao-tooltip-wrapper">
-                <button onClick={() => setMostrarNivel(true)}>
+                <button onClick={() => setMostrarNivel(true)} className="botao-acao">
                     🔗 Meu link de indicação
                 </button>
                 <span className="indicacao-tooltip">
@@ -190,12 +214,19 @@ export default function BotaoUm() {
                     linkIndicacao={`${window.location.origin}/cadastro/${idHost}`}
                 />
             )}
+            <div className="pix-tooltip-wrapper">
+                <button onClick={() => setMostrarChavePix(true)} className="botao-acao">
+                    💳 Chave Pix
+                </button>
+                <span className="pix-tooltip">
+                    Aqui você pode visualizar e colocar sua chave Pix para suas compensações.
+                </span>
+            </div>
 
-            <button onClick={() => setMostrarPosicao(true)}>📍 Última Posição</button>
-            <button onClick={() => window.location.href = "/pacotes"}>📦 Pacotes</button>
-            <button onClick={() => setMostrarModal(true)}>🧭 Host</button>
+            <button onClick={() => setMostrarPacotes(true)} className="botao-acao">📦 Pacotes</button>
+            <button onClick={() => setMostrarModal(true)} className="botao-acao">🧭 Host</button>
             {["admin", "coordinador", "auditor"].includes(funcao.toLowerCase()) && (
-                <button onClick={() => setMostrarFerramentas(true)}>🛠 Painel de controle</button>
+                <button onClick={() => setMostrarFerramentas(true)} className="botao-acao">🛠 Painel de controle</button>
             )}
 
             {mostrarFerramentas && (
@@ -234,7 +265,7 @@ export default function BotaoUm() {
                             <div className="painel-botoes">
                                 <button
                                     type="button"
-                                    className="painel-btn-voltar"
+                                    className="botao-acao painel-btn-voltar"
                                     onClick={() => setMostrarFerramentas(false)}
                                 >
                                     Voltar
@@ -255,6 +286,42 @@ export default function BotaoUm() {
                     mensagem={alerta.mensagem}
                     onClose={() => setAlerta({ mostrar: false, tipo: "", mensagem: "" })}
                 />
+            )}
+            {mostrarPacotes && (
+                <div
+                    className="pacotes-modal-overlay"
+                    onClick={() => setMostrarPacotes(false)}
+                >
+                    <div
+                        className="pacotes-modal"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+
+                        {funcao.toLowerCase() === "explorer" ? (
+                            <p>
+                                Você não comprou nosso pacote. <br />
+                                <a href={linkAprendizagem} rel="noopener noreferrer">
+                                    Deseja comprar?
+                                </a>
+                            </p>
+                        ) : (
+                            <p>
+                                Você adquiriu o pacote <strong>Idiomas e Programação</strong>. <br />
+                                <a href={linkAprendizagem} rel="noopener noreferrer">
+                                    Deseja ir?
+                                </a>
+                            </p>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            {mostrarChavePix && (
+                <div className="pix-modal-overlay" onClick={() => setMostrarChavePix(false)}>
+                    <div className="pix-modal" onClick={(e) => e.stopPropagation()}>
+                        <ChavePix onVoltar={() => setMostrarChavePix(false)} />
+                    </div>
+                </div>
             )}
         </div>
     );

@@ -7,7 +7,7 @@ import { URL } from '../config';
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 
-export default function Login() {
+export default function Login({ redirectTo }) {
     const [loginField, setLoginField] = useState('');
     const [senha, setSenha] = useState('');
     const [showSenha, setShowSenha] = useState(false);
@@ -45,7 +45,9 @@ export default function Login() {
             localStorage.setItem("usuario_id", data.usuario.id);
 
             login(data.usuario, data.token);
-            navigate("/inicio");
+
+            // 🔹 Se veio com redirectTo (ex: modal Avalie-nos), usa ele. Caso contrário vai para /inicio
+            navigate(redirectTo || "/inicio");
         } catch (error) {
             setMensagem("Erro de conexão com o servidor.");
             setTipoMensagem("erro");
@@ -79,7 +81,9 @@ export default function Login() {
             localStorage.setItem("usuario_id", data.usuario.id);
 
             login(data.usuario, data.token);
-            navigate("/inicio");
+
+            // 🔹 Redirecionamento dinâmico
+            navigate(redirectTo || "/inicio");
 
         } catch (err) {
             console.error("Erro no login com Google:", err);
