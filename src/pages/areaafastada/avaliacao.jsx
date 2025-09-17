@@ -122,7 +122,7 @@ export default function Avaliacao() {
             </div>
 
             <div className="avaliacao-container">
-                <h2>Deixe sua Avaliação</h2>
+                <h2>Deixe sua Avaliação e diga-nos em que podemos melhorar</h2>
 
                 {/* Exibir média */}
                 {media && (
