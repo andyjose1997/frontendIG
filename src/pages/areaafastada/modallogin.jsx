@@ -6,7 +6,9 @@ export default function ModalLogin({ onClose }) {
     return (
         <div className="modal-login-fundo">
             <div className="modal-login-conteudo">
-                <button className="fechar-modal" onClick={onClose}>✖</button>
+                <button className="ffechar-modal" onClick={onClose}>✖</button>
+                <h2>Precisa fazer login para nos avaliar</h2>
+
                 {/* 🔹 Passa a prop redirectTo para Login */}
                 <Login redirectTo="/Avaliacao" />
             </div>
