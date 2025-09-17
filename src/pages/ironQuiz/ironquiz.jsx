@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { URL } from "../../config";
 import CriarQuiz from "./criarquiz";
 import JogarQuiz from "./jogarquiz";
+import './ironquiz.css'
 
 export default function IronQuiz() {
     const [modo, setModo] = useState(null);
@@ -36,39 +37,20 @@ export default function IronQuiz() {
     }, []);
 
     return (
-        <main>
-            <h1 className="ironquiztitle">🔥 Iron Quiz 🔥</h1>
+        <main className="ironquiz-container">
+            <h1 className="ironquiz-title">🔥 Iron Quiz 🔥</h1>
 
-            <div style={{ marginBottom: "20px" }}>
+            <div className="ironquiz-buttons">
                 <Link to="/perfil">
-                    <button style={{
-                        padding: "10px 16px",
-                        fontSize: "16px",
-                        border: "none",
-                        borderRadius: "8px",
-                        cursor: "pointer",
-                        backgroundColor: "#0162d1",
-                        color: "white",
-                        marginRight: "10px"
-                    }}>
+                    <button className="ironquiz-btn ironquiz-btn-perfil">
                         Ir para Perfil
                     </button>
                 </Link>
 
-                {/* 🔹 Botão Criar Quiz só aparece se a função for válida */}
                 {["admin", "auditor", "coordenador"].includes(funcao) && (
                     <button
                         onClick={() => setModo("criar")}
-                        style={{
-                            padding: "10px 16px",
-                            fontSize: "16px",
-                            border: "none",
-                            borderRadius: "8px",
-                            cursor: "pointer",
-                            backgroundColor: modo === "criar" ? "#28a745" : "#ccc",
-                            color: "white",
-                            marginRight: "10px"
-                        }}
+                        className={`ironquiz-btn ironquiz-btn-criar ${modo === "criar" ? "active" : ""}`}
                     >
                         ➕ Criar Quiz
                     </button>
@@ -76,22 +58,17 @@ export default function IronQuiz() {
 
                 <button
                     onClick={() => setModo("jogar")}
-                    style={{
-                        padding: "10px 16px",
-                        fontSize: "16px",
-                        border: "none",
-                        borderRadius: "8px",
-                        cursor: "pointer",
-                        backgroundColor: modo === "jogar" ? "#28a745" : "#ccc",
-                        color: "white"
-                    }}
+                    className={`ironquiz-btn ironquiz-btn-jogar ${modo === "jogar" ? "active" : ""}`}
                 >
                     🎮 Jogar Quiz
                 </button>
             </div>
 
-            {modo === "criar" && <CriarQuiz />}
-            {modo === "jogar" && <JogarQuiz />}
+            <div className="ironquiz-content">
+                {modo === "criar" && <CriarQuiz />}
+                {modo === "jogar" && <JogarQuiz />}
+            </div>
         </main>
     );
+
 }

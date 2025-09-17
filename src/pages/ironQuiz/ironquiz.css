@@ -1,0 +1,103 @@
+/* ===== Container Geral ===== */
+.ironquiz-container {
+    max-width: 1700px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: linear-gradient(145deg, #0d1b2a, #1b263b);
+    border-radius: 18px;
+    box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.45),
+        inset 0 0 10px rgba(255, 255, 255, 0.05);
+    color: #e8f0ff;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(6px);
+    min-height: 800px;
+}
+
+/* Hover com destaque sutil */
+.ironquiz-container:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 12px 36px rgba(0, 0, 0, 0.6),
+        inset 0 0 14px rgba(255, 255, 255, 0.07);
+}
+
+/* Suavizar títulos internos dentro do container */
+.ironquiz-container h1,
+.ironquiz-container h2,
+.ironquiz-container h3 {
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    letter-spacing: 0.5px;
+}
+
+
+/* ===== Título ===== */
+.ironquiz-title {
+    font-size: 3.4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #f1f6ff;
+    letter-spacing: 1px;
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== Área dos botões ===== */
+.ironquiz-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* ===== Botões ===== */
+.ironquiz-btn {
+    padding: 0.8rem 1.6rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #fff;
+    background: #3a3f58;
+    transition: all 0.25s ease;
+    min-width: 140px;
+}
+
+.ironquiz-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* ===== Perfis específicos ===== */
+.ironquiz-btn-perfil {
+    background: linear-gradient(145deg, #0162d1, #0080ff);
+}
+
+.ironquiz-btn-criar {
+    background: linear-gradient(145deg, #888, #aaa);
+}
+
+.ironquiz-btn-jogar {
+    background: linear-gradient(145deg, #888, #aaa);
+}
+
+/* Ativos */
+.ironquiz-btn-criar.active {
+    background: linear-gradient(145deg, #1e8e3e, #34c759);
+}
+
+.ironquiz-btn-jogar.active {
+    background: linear-gradient(145deg, #1e8e3e, #34c759);
+}
+
+/* ===== Conteúdo abaixo ===== */
+.ironquiz-content {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3);
+}

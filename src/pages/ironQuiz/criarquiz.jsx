@@ -247,26 +247,26 @@ export default function CriarQuiz() {
     };
 
     return (
-        <div className="criarQuiz-container">
-            <h2 className="criarQuiz-title">📝 Criar Novo Quiz</h2>
+        <div className="ironcriarquiz-container">
+            <h2 className="ironcriarquiz-title">📝 Criar Novo Quiz</h2>
 
-            <div className="criarQuiz-main">
+            <div className="ironcriarquiz-main">
                 {/* 🔹 Formulário */}
-                <div className="criarQuiz-formulario">
-                    <div className="criarQuiz-info">
+                <div className="ironcriarquiz-formulario">
+                    <div className="ironcriarquiz-info">
                         <input
-                            list="nomes-list"
+                            list="ironcriarquiz-nomes-list"
                             placeholder="Tipo do quiz (ex: html)"
                             value={tipo}
                             onChange={(e) => setTipo(e.target.value)}
                         />
-                        <datalist id="nomes-list">
+                        <datalist id="ironcriarquiz-nomes-list">
                             {nomes.map((n, i) => (
                                 <option key={i} value={n.nome} />
                             ))}
                         </datalist>
 
-                        {erros.tipo && <p className="erro">{erros.tipo}</p>}
+                        {erros.tipo && <p className="ironcriarquiz-erro">{erros.tipo}</p>}
 
                         <input
                             type="text"
@@ -274,12 +274,12 @@ export default function CriarQuiz() {
                             value={nome}
                             onChange={(e) => setNome(e.target.value)}
                         />
-                        {erros.nome && <p className="erro">{erros.nome}</p>}
+                        {erros.nome && <p className="ironcriarquiz-erro">{erros.nome}</p>}
                     </div>
 
-                    <div className="criarQuiz-perguntas">
+                    <div className="ironcriarquiz-perguntas">
                         {perguntas.map((p, index) => (
-                            <div key={index} className="criarQuiz-perguntaCard">
+                            <div key={index} className="ironcriarquiz-perguntaCard">
                                 <input
                                     type="text"
                                     placeholder="Digite a pergunta"
@@ -288,7 +288,7 @@ export default function CriarQuiz() {
                                 />
 
                                 {["a", "b", "c", "d"].map((opc) => (
-                                    <div key={opc} className="criarQuiz-opcaoLinha">
+                                    <div key={opc} className="ironcriarquiz-opcaoLinha">
                                         <input
                                             type="text"
                                             placeholder={`Opção ${opc.toUpperCase()}`}
@@ -301,7 +301,9 @@ export default function CriarQuiz() {
                                                 name={`resposta-${index}`}
                                                 value={opc.toUpperCase()}
                                                 checked={p.resposta_correta === opc.toUpperCase()}
-                                                onChange={(e) => atualizarPergunta(index, "resposta_correta", e.target.value)}
+                                                onChange={(e) =>
+                                                    atualizarPergunta(index, "resposta_correta", e.target.value)
+                                                }
                                             />
                                             Correta
                                         </label>
@@ -309,45 +311,55 @@ export default function CriarQuiz() {
                                 ))}
 
                                 {erros[`pergunta-${index}`] && (
-                                    <ul className="erro-lista">
+                                    <ul className="ironcriarquiz-erroLista">
                                         {erros[`pergunta-${index}`].map((msg, i) => (
-                                            <li key={i} className="erro">{msg}</li>
+                                            <li key={i} className="ironcriarquiz-erro">{msg}</li>
                                         ))}
                                     </ul>
                                 )}
 
-                                <button className="criarQuiz-btnRemover" onClick={() => removerPergunta(index)}>
+                                <button
+                                    className="ironcriarquiz-btnRemover"
+                                    onClick={() => removerPergunta(index)}
+                                >
                                     ❌ Remover pergunta
                                 </button>
                             </div>
                         ))}
                     </div>
 
-                    {erros.geral && <p className="erro">{erros.geral}</p>}
+                    {erros.geral && <p className="ironcriarquiz-erro">{erros.geral}</p>}
 
-                    <div className="criarQuiz-botoes">
-                        <button onClick={adicionarPergunta}>➕ Adicionar Pergunta</button>
-                        <button onClick={salvarQuiz}>✅ Salvar Quiz</button>
+                    <div className="ironcriarquiz-botoes">
+                        <button onClick={adicionarPergunta} className="ironcriarquiz-btnAdd">
+                            ➕ Adicionar Pergunta
+                        </button>
+                        <button onClick={salvarQuiz} className="ironcriarquiz-btnSalvar">
+                            ✅ Salvar Quiz
+                        </button>
                     </div>
                 </div>
 
                 {quizzesFiltrados.length > 0 && (
-                    <div className="criarQuiz-lista">
-                        <h3>📋 Quizzes Existentes</h3>
+                    <div className="ironcriarquiz-lista">
+                        <h3 className="ironcriarquiz-subtitle">📋 Quizzes Existentes</h3>
                         <ul>
                             {quizzesFiltrados.map((q) => (
-                                <li key={q.id} className="criarQuiz-item">
+                                <li key={q.id} className="ironcriarquiz-item">
                                     <span>{q.nome}</span>
-                                    <div className="criarQuiz-acoes">
+                                    <div className="ironcriarquiz-acoes">
                                         <button
-                                            className={`criarQuiz-btnApagar ${confirmarApagar === q.nome ? "confirmar" : ""}`}
+                                            className={`ironcriarquiz-btnApagar ${confirmarApagar === q.nome ? "confirmar" : ""
+                                                }`}
                                             onClick={() => apagarQuiz(q.nome)}
                                         >
-                                            {confirmarApagar === q.nome ? "Clique novamente para apagar" : "🗑️ Apagar"}
+                                            {confirmarApagar === q.nome
+                                                ? "Clique novamente para apagar"
+                                                : "🗑️ Apagar"}
                                         </button>
 
                                         <button
-                                            className="criarQuiz-btnEditar"
+                                            className="ironcriarquiz-btnEditar"
                                             onClick={() => editarQuiz(q.nome, q.tipo)}
                                         >
                                             ✏️ Editar
@@ -360,33 +372,36 @@ export default function CriarQuiz() {
                 )}
 
                 {["admin", "coordenador", "auditor"].includes(funcao?.trim().toLowerCase()) && (
-                    <div style={{ display: "none" }} className="criarQuiz-lista todos-quizzes">
-                        <h3>📚 Todos os Quizzes</h3>
+                    <div style={{ display: "none" }} className="ironcriarquiz-lista ironcriarquiz-todos">
+                        <h3 className="ironcriarquiz-subtitle">📚 Todos os Quizzes</h3>
 
                         <input
                             type="text"
                             placeholder="🔍 Buscar quiz pelo nome..."
                             value={busca}
                             onChange={(e) => setBusca(e.target.value)}
-                            className="criarQuiz-busca"
+                            className="ironcriarquiz-busca"
                         />
 
                         <ul>
                             {quizzes
                                 .filter((q) => q.nome.toLowerCase().includes(busca.toLowerCase()))
                                 .map((q) => (
-                                    <li key={q.id} className="criarQuiz-item">
+                                    <li key={q.id} className="ironcriarquiz-item">
                                         <span>{q.nome}</span>
-                                        <div className="criarQuiz-acoes">
+                                        <div className="ironcriarquiz-acoes">
                                             <button
-                                                className={`criarQuiz-btnApagar ${confirmarApagar === q.nome ? "confirmar" : ""}`}
+                                                className={`ironcriarquiz-btnApagar ${confirmarApagar === q.nome ? "confirmar" : ""
+                                                    }`}
                                                 onClick={() => apagarQuiz(q.nome)}
                                             >
-                                                {confirmarApagar === q.nome ? "Clique novamente para apagar" : "🗑️ Apagar"}
+                                                {confirmarApagar === q.nome
+                                                    ? "Clique novamente para apagar"
+                                                    : "🗑️ Apagar"}
                                             </button>
 
                                             <button
-                                                className="criarQuiz-btnEditar"
+                                                className="ironcriarquiz-btnEditar"
                                                 onClick={() => editarQuiz(q.nome, q.tipo)}
                                             >
                                                 ✏️ Editar
@@ -400,4 +415,5 @@ export default function CriarQuiz() {
             </div>
         </div>
     );
+
 }

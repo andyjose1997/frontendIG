@@ -1,531 +1,280 @@
-/* 🎮 Container principal */
-.jogarQuiz-container {
-    padding: 20px;
+/* ===== Container principal ===== */
+.ironjogarquiz-container {
+    padding: 2rem;
     max-width: 900px;
     margin: 0 auto;
-    font-family: "Segoe UI", Roboto, sans-serif;
+    color: #f5f7fa;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+    /* 🔹 Melhorias */
+    background: linear-gradient(145deg, #0f172a, #1e293b);
+    /* fundo sutil dark */
+    border-radius: 16px;
+    /* cantos mais modernos */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    /* sombra suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* suavidade */
 }
 
-/* 🔹 Título */
-.jogarQuiz-title {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #014581;
+
+
+/* ===== Títulos ===== */
+.ironjogarquiz-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
     text-align: center;
+    color: #3e73ff;
+
+    /* 🔹 Melhorias */
+    text-shadow: 0 2px 6px rgba(62, 115, 255, 0.4);
+    /* brilho sutil */
+    letter-spacing: 0.5px;
+    /* mais espaçamento entre letras */
+    line-height: 1.3;
+    /* melhor leitura */
+    border-bottom: 2px solid rgba(62, 115, 255, 0.3);
+    /* detalhe elegante */
+    padding-bottom: 0.5rem;
 }
 
-/* 🔹 Lista de quizzes */
-.jogarQuiz-lista {
+.ironjogarquiz-subtitle {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.8rem;
+    color: #f7f7f7;
+
+    /* 🔹 Melhorias */
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    border-left: 4px solid #3e73ff;
+    /* destaque lateral */
+    padding-left: 0.6rem;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== Listas ===== */
+.ironjogarquiz-lista {
     list-style: none;
     padding: 0;
-    margin: 0 0 20px 0;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
+    flex-wrap: wrap;
+    gap: 0.8rem;
 
-.jogarQuiz-item {
-    display: flex;
+    /* 🔹 Melhorias */
+    margin-top: 0.8rem;
     justify-content: center;
+    /* centraliza para melhor estética */
 }
 
-/* 🔹 Botão para abrir quiz */
-.jogarQuiz-btnAbrir {
-    padding: 12px 20px;
-    font-size: 18px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background: linear-gradient(135deg, #0162d1, #014581);
-    color: #fff;
-    font-weight: 600;
-    transition: transform 0.2s, opacity 0.2s;
-    min-width: 250px;
-    text-align: center;
-}
+.ironjogarquiz-item {
+    flex: 1 1 200px;
 
-.jogarQuiz-btnAbrir:hover {
-    transform: scale(1.05);
-    opacity: 0.9;
-}
-
-.jogarQuiz-btnAbrir:disabled {
-    background: #bbb;
-    cursor: not-allowed;
-}
-
-/* 🔹 Overlay do modal */
-.jogarQuiz-modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(15, 15, 25, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-}
-
-/* 🔹 Conteúdo do modal */
-.jogarQuiz-modalContent {
-    width: 90%;
-    height: 90%;
-    background: #fff;
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    animation: fadeInUp 0.4s ease;
-    position: relative;
-}
-
-/* 🔹 Status da pergunta */
-.jogarQuiz-status {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #333;
-    text-align: center;
-}
-
-/* 🔹 Barra de progresso */
-.jogarQuiz-progressBar {
-    width: 100%;
-    height: 10px;
-    background: #eee;
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
-
-.jogarQuiz-progressFill {
-    height: 100%;
-    background: linear-gradient(135deg, #0162d1, #014581);
-    width: 0%;
-    transition: width 0.4s ease;
-}
-
-/* 🔹 Pergunta */
-.jogarQuiz-pergunta {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #222;
-}
-
-/* 🔹 Timer */
-.jogarQuiz-tempo {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: #d32f2f;
-    font-weight: bold;
-    text-align: center;
-}
-
-/* 🔹 Opções */
-.jogarQuiz-opcoes {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex-grow: 1;
-    justify-content: center;
-}
-
-.jogarQuiz-btnOpcao {
-    padding: 14px;
-    font-size: 16px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background: #0162d1;
-    color: #fff;
-    font-weight: 500;
-    transition: transform 0.2s, background 0.3s;
-}
-
-.jogarQuiz-btnOpcao:hover:not(:disabled) {
-    transform: translateY(-2px);
-    background: #014581;
-}
-
-.jogarQuiz-btnOpcao:disabled {
-    background: #888;
-    cursor: not-allowed;
-}
-
-/* ✅ Correta */
-.jogarQuiz-btnOpcao.correta {
-    background: #28a745 !important;
-    position: relative;
-}
-
-.jogarQuiz-btnOpcao.correta::after {
-    content: " ✅";
-    font-size: 18px;
-    font-weight: bold;
-    margin-left: 8px;
-}
-
-/* ❌ Errada */
-.jogarQuiz-btnOpcao.errada {
-    background: #dc3545 !important;
-    position: relative;
-}
-
-.jogarQuiz-btnOpcao.errada::after {
-    content: " ❌";
-    font-size: 18px;
-    font-weight: bold;
-    margin-left: 8px;
-}
-
-/* 🔹 Estado de carregamento */
-.jogarQuiz-carregandoBox {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
-
-.jogarQuiz-carregando {
-    font-size: 18px;
-    text-align: center;
-    color: #555;
-}
-
-/* 🔹 Resultado final */
-.jogarQuiz-resultado {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
-
-.jogarQuiz-resultado h3 {
-    font-size: 24px;
-    color: #28a745;
-}
-
-/* 🔹 Botão Próxima */
-.jogarQuiz-proxima {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.jogarQuiz-btnProxima {
-    padding: 12px 20px;
-    font-size: 18px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background: #f39c12;
-    color: #fff;
-    font-weight: 600;
-    transition: background 0.3s, transform 0.2s;
-}
-
-.jogarQuiz-btnProxima:hover {
-    background: #e67e22;
-    transform: scale(1.05);
-}
-
-/* 🔹 Botão Sair */
-.jogarQuiz-sair {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-}
-
-.jogarQuiz-btnSair {
-    padding: 10px 18px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background: #e74c3c;
-    color: #fff;
-    font-weight: bold;
-    transition: background 0.3s, transform 0.2s;
-    margin-bottom: 70px;
-}
-
-.jogarQuiz-btnSair:hover {
-    background: #c0392b;
-    transform: scale(1.05);
-}
-
-/* 🔹 Botão Voltar (quando carregando) */
-.jogarQuiz-btnVoltar {
-    padding: 10px 18px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background: #777;
-    color: #fff;
-    font-weight: bold;
-    transition: background 0.3s, transform 0.2s;
-}
-
-.jogarQuiz-btnVoltar:hover {
-    background: #555;
-    transform: scale(1.05);
-}
-
-/* ✨ Animação do modal */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* 🔹 Container principal (form + listas) */
-.criarQuiz-main {
-    display: flex;
-    gap: 20px;
-    /* espaço entre form e listas */
-    align-items: flex-start;
-}
-
-/* 🔹 Formulário ocupa metade */
-.criarQuiz-formulario {
-    flex: 1;
-}
-
-/* 🔹 Container das listas */
-.criarQuiz-listas {
-    display: flex;
-    flex-direction: column;
-    /* empilha as listas */
-    gap: 20px;
-    flex: 1;
-    /* ocupa o mesmo espaço do form */
-}
-
-/* 🔹 Bloco de cada lista */
-.criarQuiz-lista {
-    background: #fff;
-    padding: 15px;
+    /* 🔹 Melhorias */
+    background: rgba(255, 255, 255, 0.05);
+    /* fundo suave para destaque */
     border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    padding: 0.6rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
-/* 🔹 Campo de busca */
-.criarQuiz-busca {
+.ironjogarquiz-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+
+.ironjogarquiz-btnAbrir {
     width: 100%;
-    padding: 10px 14px;
-    margin: 10px 0 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 15px;
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(145deg, #3e73ff, #2a56d6);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(62, 115, 255, 0.3);
 }
 
-.jogarQuiz-preparando {
+.ironjogarquiz-btnAbrir:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(62, 115, 255, 0.45);
+}
+
+.ironjogarquiz-btnAbrir:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ===== Modal ===== */
+.ironjogarquiz-modalOverlay {
     position: fixed;
     inset: 0;
-    background: linear-gradient(135deg, #0d1b2a, #1b263b, #0a192f);
-    background-size: 300% 300%;
-    animation: bgMove 8s ease infinite;
+    background: rgba(0, 0, 30, 0.8);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #fff;
-    z-index: 2000;
-    text-align: center;
+    z-index: 900;
 }
 
-@keyframes bgMove {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+.ironjogarquiz-modalContent {
+    background: #101322;
+    padding: 2rem;
+    border-radius: 18px;
+    max-width: 700px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    animation: fadeIn 0.4s ease;
 }
 
-.jogarQuiz-preparando h2 {
-    font-size: 2.2rem;
-    font-weight: 600;
-    margin-bottom: 25px;
-    letter-spacing: 1px;
-}
-
-.jogarQuiz-preparando span {
-    color: #00e6ff;
-    font-weight: bold;
-    text-shadow: 0 0 8px rgba(0, 230, 255, 0.8);
-}
-
-/* Contador base */
-.jogarQuiz-contador {
-    font-size: 7rem;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 0 0 12px #00e6ff, 0 0 24px #0077ff;
-    animation-duration: 0.9s;
-    animation-fill-mode: both;
-}
-
-/* Animações personalizadas */
-.anim-5 {
-    animation-name: slideLeft;
-}
-
-.anim-4 {
-    animation-name: slideTop;
-}
-
-.anim-3 {
-    animation-name: slideRight;
-}
-
-.anim-2 {
-    animation-name: slideBottom;
-}
-
-.anim-1 {
-    animation-name: zoomGlow;
-}
-
-/* Keyframes */
-@keyframes slideLeft {
+@keyframes fadeIn {
     from {
-        transform: translateX(-300px);
         opacity: 0;
+        transform: scale(0.9);
     }
 
     to {
-        transform: translateX(0);
         opacity: 1;
-    }
-}
-
-@keyframes slideTop {
-    from {
-        transform: translateY(-300px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideRight {
-    from {
-        transform: translateX(300px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideBottom {
-    from {
-        transform: translateY(300px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes zoomGlow {
-    0% {
-        transform: scale(0.3);
-        opacity: 0;
-        text-shadow: 0 0 5px #00e6ff;
-    }
-
-    50% {
-        transform: scale(1.2);
-        opacity: 1;
-        text-shadow: 0 0 20px #00e6ff, 0 0 40px #0077ff;
-    }
-
-    100% {
         transform: scale(1);
-        opacity: 1;
-        text-shadow: 0 0 15px #00e6ff, 0 0 30px #0077ff;
     }
 }
 
-.jogarQuiz-btnOpcao {
-    padding: 12px 18px;
-    border: none;
-    border-radius: 8px;
+/* ===== Progresso ===== */
+.ironjogarquiz-status {
     font-size: 1rem;
+    margin-bottom: 0.6rem;
+    color: #ddd;
+}
+
+.ironjogarquiz-progressBar {
+    width: 100%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+    overflow: hidden;
+}
+
+.ironjogarquiz-progressFill {
+    height: 100%;
+    background: #3e73ff;
+    transition: width 0.3s ease;
+}
+
+/* ===== Perguntas e opções ===== */
+.ironjogarquiz-pergunta {
+    font-size: 3.3rem;
+    margin: 1rem 0;
+    color: #f5f7fa;
+}
+
+.ironjogarquiz-tempo {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #ffcc70;
+}
+
+.ironjogarquiz-opcoes {
+    display: grid;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    width: 80%;
+    margin: auto auto;
+    font-size: 40px;
+    /* corrigido */
+}
+
+
+.ironjogarquiz-btnOpcao {
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    background: #1c1f36;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.25s ease;
     cursor: pointer;
-    margin: 8px 0;
-    transition: all 0.3s ease;
-    background: #1e3a5f;
-    color: white;
 }
 
-.jogarQuiz-contadorFeedback {
-    margin-top: 12px;
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #04070a;
+.ironjogarquiz-btnOpcao:hover:not(:disabled) {
+    background: #2a2e4a;
+    border-color: #3e73ff;
+}
+
+.ironjogarquiz-btnOpcao.correta {
+    background: #1f5130;
+    border-color: #28a745;
+}
+
+.ironjogarquiz-btnOpcao.errada {
+    background: #512626;
+    border-color: #e63946;
+}
+
+/* ===== Feedback ===== */
+.ironjogarquiz-contadorFeedback {
+    margin: 1rem 0;
+    font-style: italic;
+    color: #ccc;
+}
+
+/* ===== Resultado ===== */
+.ironjogarquiz-resultado {
     text-align: center;
-    animation: pulse 1s infinite;
 }
 
-@keyframes pulse {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.6;
-    }
-
-    100% {
-        opacity: 1;
-    }
+.ironjogarquiz-resultado h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
 }
 
-.jogarQuiz-btnOpcao:disabled {
-    opacity: 0.8;
-    cursor: not-allowed;
+/* ===== Preparação ===== */
+.ironjogarquiz-preparando {
+    text-align: center;
+    padding: 2rem;
 }
 
-.jogarQuiz-btnOpcao.correta {
-    background-color: #28a745 !important;
+.ironjogarquiz-preparando h2 {
+    margin-bottom: 1rem;
+}
+
+.ironjogarquiz-contador {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #3e73ff;
+}
+
+/* ===== Botões secundários ===== */
+.ironjogarquiz-btnVoltar,
+.ironjogarquiz-btnSair {
+    margin-top: 1rem;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.ironjogarquiz-btnVoltar {
+    background: #333;
     color: #fff;
-    box-shadow: 0 0 12px rgba(40, 167, 69, 0.7);
 }
 
-.jogarQuiz-btnOpcao.errada {
-    background-color: #dc3545 !important;
+.ironjogarquiz-btnVoltar:hover {
+    background: #444;
+}
+
+.ironjogarquiz-btnSair {
+    background: #e63946;
     color: #fff;
-    box-shadow: 0 0 12px rgba(220, 53, 69, 0.7);
+}
+
+.ironjogarquiz-btnSair:hover {
+    background: #c72c3a;
 }

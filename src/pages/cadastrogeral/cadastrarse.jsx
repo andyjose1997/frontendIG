@@ -255,8 +255,15 @@ export default function Cadastrarse() {
                             </button>
                             <button className="btn-verde" onClick={() => setMostrarModalHost(false)}>
                                 ✅ Esse mesmo
-                            </button>
-                        </div>
+                            </button><br />
+                        </div><br />
+                        <button
+                            className="btn-conhecer"
+                            onClick={() => window.open("/", "_blank")}
+                        >
+                            Quero conhecer o site antes de fazer o cadastro
+                        </button>
+
                     </div>
                 </div>
             )}

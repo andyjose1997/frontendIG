@@ -197,16 +197,16 @@ export default function JogarQuiz() {
     };
 
     return (
-        <div className="jogarQuiz-container">
-            <h2 className="jogarQuiz-title">🎮 Jogar Quiz</h2>
+        <div className="ironjogarquiz-container">
+            <h2 className="ironjogarquiz-title">🎮 Jogar Quiz</h2>
 
             {/* Jogos do Sistema */}
-            <h3>🛡️ Jogos do Sistema</h3>
-            <ul className="jogarQuiz-lista">
+            <h3 className="ironjogarquiz-subtitle">🛡️ Jogos do Sistema</h3>
+            <ul className="ironjogarquiz-lista">
                 {jogosSistema.map((q) => (
-                    <li key={q.id} className="jogarQuiz-item">
+                    <li key={q.id} className="ironjogarquiz-item">
                         <button
-                            className="jogarQuiz-btnAbrir"
+                            className="ironjogarquiz-btnAbrir"
                             disabled={q.respondidas >= q.total_perguntas}
                             onClick={() => prepararQuiz(q.nome, q.respondidas)}
                         >
@@ -218,12 +218,12 @@ export default function JogarQuiz() {
 
             {/* Jogos Públicos */}
             <div style={{ display: "none" }}>
-                <h3>🌍 Jogos Públicos</h3>
-                <ul className="jogarQuiz-lista">
+                <h3 className="ironjogarquiz-subtitle">🌍 Jogos Públicos</h3>
+                <ul className="ironjogarquiz-lista">
                     {jogosPublicos.map((q) => (
-                        <li key={q.id} className="jogarQuiz-item">
+                        <li key={q.id} className="ironjogarquiz-item">
                             <button
-                                className="jogarQuiz-btnAbrir"
+                                className="ironjogarquiz-btnAbrir"
                                 onClick={() => abrirQuiz(q.nome)}
                             >
                                 {q.nome}
@@ -234,26 +234,31 @@ export default function JogarQuiz() {
             </div>
 
             {preparando && (
-                <div className="jogarQuiz-preparando">
-                    <h2>Prepare-se para o quiz de <span>{quizPreparando}</span></h2>
-                    <div className={`jogarQuiz-contador anim-${contador}`}>{contador}</div>
+                <div className="ironjogarquiz-preparando">
+                    <h2>
+                        Prepare-se para o quiz de <span>{quizPreparando}</span>
+                    </h2>
+                    <div className={`ironjogarquiz-contador anim-${contador}`}>{contador}</div>
                 </div>
             )}
 
             {/* Modal */}
             {modalAberto && (
-                <div className="jogarQuiz-modalOverlay">
-                    <div className="jogarQuiz-modalContent">
+                <div className="ironjogarquiz-modalOverlay">
+                    <div className="ironjogarquiz-modalContent">
                         {resultado !== null ? (
-                            <div className="jogarQuiz-resultado">
+                            <div className="ironjogarquiz-resultado">
                                 <h3>🏆 Jogo finalizado!</h3>
-                                <p>Você fez <strong>{resultado}</strong> pontos.</p>
+                                <p>
+                                    Você fez <strong>{resultado}</strong> pontos.
+                                </p>
                                 <button
-                                    className="jogarQuiz-btnAbrir"
+                                    className="ironjogarquiz-btnAbrir"
                                     onClick={() => {
-                                        const baseUrl = window.location.hostname === "localhost"
-                                            ? "http://localhost:5173"
-                                            : "https://irongoals.com";
+                                        const baseUrl =
+                                            window.location.hostname === "localhost"
+                                                ? "http://localhost:5173"
+                                                : "https://irongoals.com";
                                         window.location.href = `${baseUrl}/iron_quiz`;
                                     }}
                                 >
@@ -261,10 +266,10 @@ export default function JogarQuiz() {
                                 </button>
                             </div>
                         ) : carregando || perguntas === null ? (
-                            <div className="jogarQuiz-carregandoBox">
-                                <p className="jogarQuiz-carregando">Carregando perguntas...</p>
+                            <div className="ironjogarquiz-carregandoBox">
+                                <p className="ironjogarquiz-carregando">Carregando perguntas...</p>
                                 <button
-                                    className="jogarQuiz-btnVoltar"
+                                    className="ironjogarquiz-btnVoltar"
                                     onClick={voltarDuranteCarregamento}
                                 >
                                     ⬅️ Voltar
@@ -273,31 +278,38 @@ export default function JogarQuiz() {
                         ) : perguntas.length > 0 ? (
                             <>
                                 {/* 🔹 Pontos + progresso */}
-                                <p className="jogarQuiz-status">
-                                    Pergunta {atual + 1}/{perguntas.length} — Pontos: {pontosAcumulados}
+                                <p className="ironjogarquiz-status">
+                                    Pergunta {atual + 1}/{perguntas.length} — Pontos:{" "}
+                                    {pontosAcumulados}
                                 </p>
-                                <div className="jogarQuiz-progressBar">
+                                <div className="ironjogarquiz-progressBar">
                                     <div
-                                        className="jogarQuiz-progressFill"
+                                        className="ironjogarquiz-progressFill"
                                         style={{
                                             width: `${((atual + 1) / perguntas.length) * 100}%`,
                                         }}
                                     />
                                 </div>
 
-                                <h3 className="jogarQuiz-pergunta">{perguntas[atual].pergunta}</h3>
-                                <p className="jogarQuiz-tempo">⏱️ Tempo restante: {tempo}s</p>
+                                <h3 className="ironjogarquiz-pergunta">
+                                    {perguntas[atual].pergunta}
+                                </h3>
+                                <p className="ironjogarquiz-tempo">
+                                    ⏱️ Tempo restante: {tempo}s
+                                </p>
 
-                                <div className="jogarQuiz-opcoes">
+                                <div style={{ fontSize: "4rem" }} className="ironjogarquiz-opcoes">
                                     {["a", "b", "c", "d"].map((opc) => {
-                                        const isSelected = feedback?.opcao === opc.toUpperCase();
+                                        const isSelected =
+                                            feedback?.opcao === opc.toUpperCase();
                                         const isCorrect = feedback?.correta && isSelected;
                                         const isWrong = !feedback?.correta && isSelected;
 
                                         return (
                                             <button
                                                 key={opc}
-                                                className={`jogarQuiz-btnOpcao ${isCorrect ? "correta" : ""} ${isWrong ? "errada" : ""}`}
+                                                className={`ironjogarquiz-btnOpcao ${isCorrect ? "correta" : ""
+                                                    } ${isWrong ? "errada" : ""}`}
                                                 disabled={bloqueado || !!feedback}
                                                 onClick={() => responder(opc.toUpperCase())}
                                             >
@@ -309,15 +321,18 @@ export default function JogarQuiz() {
 
                                 {/* Contador regressivo durante feedback */}
                                 {contadorFeedback !== null && (
-                                    <p className="jogarQuiz-contadorFeedback">
+                                    <p className="ironjogarquiz-contadorFeedback">
                                         {atual + 1 === perguntas.length
                                             ? `🏆 Sua pontuação final será exibida em ${contadorFeedback}...`
                                             : `⏳ Próxima pergunta em ${contadorFeedback}...`}
                                     </p>
                                 )}
 
-                                <div className="jogarQuiz-sair">
-                                    <button className="jogarQuiz-btnSair" onClick={sairDoQuiz}>
+                                <div className="ironjogarquiz-sair">
+                                    <button
+                                        className="ironjogarquiz-btnSair"
+                                        onClick={sairDoQuiz}
+                                    >
                                         🚪 Sair do Quiz
                                     </button>
                                 </div>

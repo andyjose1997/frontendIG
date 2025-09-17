@@ -136,6 +136,7 @@ export default function Buscador() {
 
                 <div className="buscador-direita">
                     <Link className="buscador-link" to="/perfil">Perfil</Link>
+
                     <div className="buscador-mensagens-wrapper">
                         <Link className="buscador-link" to="/Mensagens">Mensagens</Link>
                         {naoLidas > 0 && (

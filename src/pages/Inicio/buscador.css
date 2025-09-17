@@ -710,6 +710,8 @@
         justify-content: space-between;
         width: 100%;
         gap: 0.4rem;
+        gap: 25px;
+
     }
 
     .buscador-link,
