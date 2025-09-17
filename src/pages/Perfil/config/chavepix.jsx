@@ -161,13 +161,46 @@ export default function ChavePix({ onVoltar }) {
                 <div className="modal-overlay">
                     <div className="modal-mensagens">
                         <h2>Mensagens para Postar</h2>
-                        <p>Mensagem 1 exemplo.</p>
-                        <button onClick={() => copiarMensagem("Mensagem 1 exemplo.")}>Copiar</button>
+                        <p>🚀 Estou aprendendo idiomas e programação com a IronGoals! Bora crescer juntos?</p>
+                        <button onClick={() => copiarMensagem("🚀 Estou aprendendo idiomas e programação com a IronGoals! Bora crescer juntos?")}>Copiar</button>
                         <hr />
-                        <p>Mensagem 2 exemplo.</p>
-                        <button onClick={() => copiarMensagem("Mensagem 2 exemplo.")}>Copiar</button>
+
+                        <p>💡 Descobri uma plataforma incrível: IronGoals! Cursos + oportunidades reais.</p>
+                        <button onClick={() => copiarMensagem("💡 Descobri uma plataforma incrível: IronGoals! Cursos + oportunidades reais.")}>Copiar</button>
                         <hr />
-                        <p>Mensagem 3 exemplo.</p>
+
+                        <p>📚 Quer aprender e ainda ganhar dinheiro indicando amigos? Vem para o IronGoals!</p>
+                        <button onClick={() => copiarMensagem("📚 Quer aprender e ainda ganhar dinheiro indicando amigos? Vem para o IronGoals!")}>Copiar</button>
+                        <hr />
+
+                        <p>🌎 Idiomas, programação e crescimento pessoal em um só lugar: IronGoals!</p>
+                        <button onClick={() => copiarMensagem("🌎 Idiomas, programação e crescimento pessoal em um só lugar: IronGoals!")}>Copiar</button>
+                        <hr />
+
+                        <p>🔥 Conhecimento que abre portas e gera renda! Esse é o IronGoals.</p>
+                        <button onClick={() => copiarMensagem("🔥 Conhecimento que abre portas e gera renda! Esse é o IronGoals.")}>Copiar</button>
+                        <hr />
+
+                        <p>🎯 Se você busca estudar e evoluir de verdade, a IronGoals é o caminho!</p>
+                        <button onClick={() => copiarMensagem("🎯 Se você busca estudar e evoluir de verdade, a IronGoals é o caminho!")}>Copiar</button>
+                        <hr />
+
+                        <p>💻 Estou investindo no meu futuro com IronGoals. Bora comigo?</p>
+                        <button onClick={() => copiarMensagem("💻 Estou investindo no meu futuro com IronGoals. Bora comigo?")}>Copiar</button>
+                        <hr />
+
+                        <p>✨ Aprender nunca foi tão divertido! Descubra o IronGoals agora.</p>
+                        <button onClick={() => copiarMensagem("✨ Aprender nunca foi tão divertido! Descubra o IronGoals agora.")}>Copiar</button>
+                        <hr />
+
+                        <p>👥 Já ouviu falar do IronGoals? Plataforma que conecta estudo e oportunidades!</p>
+                        <button onClick={() => copiarMensagem("👥 Já ouviu falar do IronGoals? Plataforma que conecta estudo e oportunidades!")}>Copiar</button>
+                        <hr />
+
+                        <p>🏆 IronGoals é mais que cursos: é um desafio para evoluir todo dia!</p>
+                        <button onClick={() => copiarMensagem("🏆 IronGoals é mais que cursos: é um desafio para evoluir todo dia!")}>Copiar</button>
+                        <hr />
+
                         <button onClick={() => copiarMensagem("Mensagem 3 exemplo.")}>Copiar</button>
                         <br /><br />
                         <button className="botao-voltar" onClick={() => setMostrarMensagens(false)}>Voltar</button>
