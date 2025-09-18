@@ -255,43 +255,58 @@ export const CursosYouTube = () => {
                                             <button
                                                 className="certificado-botao"
                                                 onClick={async () => {
-                                                    const usuarioId = localStorage.getItem("usuario_id"); // 🔹 pega o id do usuário logado
-                                                    const cursoId = cursoSelecionado.id; // 🔹 pega o ID do curso (vem do banco)
+                                                    const usuarioId = localStorage.getItem("usuario_id");
+                                                    const cursoId = cursoSelecionado.id;
 
-                                                    if (!usuarioId) {
-                                                        alert("⚠️ Usuário não encontrado. Faça login novamente.");
-                                                        return;
-                                                    }
-
-                                                    if (!cursoId) {
-                                                        alert("⚠️ Curso inválido.");
+                                                    if (!usuarioId || !cursoId) {
+                                                        alert("⚠️ Usuário ou curso inválido.");
                                                         return;
                                                     }
 
                                                     try {
-                                                        // 🔹 Chama o backend para gerar e registrar o certificado
-                                                        const res = await fetch(
-                                                            `${URL}/certificados/gerar?usuario_id=${usuarioId}&curso_id=${cursoId}`
+                                                        // 🔹 1. Primeiro tenta pegar certificado já existente
+                                                        const resCheck = await fetch(
+                                                            `${URL}/certificados/detalhes-por-usuario-curso?usuario_id=${usuarioId}&curso_id=${cursoId}`
                                                         );
 
-                                                        if (!res.ok) {
-                                                            throw new Error("Erro ao gerar certificado");
+                                                        let codigoCertificado = null;
+
+                                                        if (resCheck.ok) {
+                                                            const existente = await resCheck.json();
+                                                            if (existente?.codigo) {
+                                                                codigoCertificado = existente.codigo;
+                                                            }
                                                         }
 
-                                                        // 🔹 Pega a URL final do certificado
-                                                        const blob = await res.blob();
-                                                        const url = window.URL.createObjectURL(blob);
+                                                        // 🔹 2. Se não existir, gera novo
+                                                        if (!codigoCertificado) {
+                                                            const resGerar = await fetch(
+                                                                `${URL}/certificados/gerar?usuario_id=${usuarioId}&curso_id=${cursoId}`
+                                                            );
 
-                                                        // 🔹 Abre em nova aba
-                                                        window.open(url, "_blank");
+                                                            if (!resGerar.ok) {
+                                                                throw new Error("Erro ao gerar certificado");
+                                                            }
+
+                                                            const data = await resGerar.json();
+                                                            codigoCertificado = data.arquivo_local.split("/").pop();
+                                                        }
+
+                                                        // 🔹 3. Redireciona sempre para o certificado
+                                                        const baseUrl = window.location.origin;
+                                                        const link = `${baseUrl}/historico-certificados-youtube/${codigoCertificado}`;
+                                                        window.open(link, "_blank");
+
                                                     } catch (err) {
                                                         console.error("Erro ao emitir certificado:", err);
-                                                        alert("⚠️ Não foi possível emitir o certificado.");
+                                                        alert("⚠️ Não foi possível emitir ou abrir o certificado.");
                                                     }
                                                 }}
                                             >
-                                                📜 Gerar Certificado
+                                                📜 Ver Certificado
                                             </button>
+
+
                                         </div>
                                     )}
                                 </>

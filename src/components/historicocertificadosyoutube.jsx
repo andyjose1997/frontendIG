@@ -6,45 +6,87 @@ import "./historicocertificadosyoutube.css";
 import Rodape from "../pages/rodape";
 
 export default function HistoricoCertificadosYouTube() {
-    const { codigo: codigoUrl } = useParams(); // 👈 pega da URL
+    const { codigo: codigoUrl } = useParams();
     const [codigo, setCodigo] = useState("");
-    const [pdfUrl, setPdfUrl] = useState(null);
+    const [certUrl, setCertUrl] = useState(null);
     const [dadosCertificado, setDadosCertificado] = useState(null);
 
-    // 🔹 Busca dados extras do certificado
     const buscarDetalhes = async (codigoBusca) => {
         try {
             const res = await fetch(`${URL}/certificados/detalhes/${codigoBusca}`);
-            if (!res.ok) return;
+            if (!res.ok) {
+                setDadosCertificado(null);
+                setCertUrl(null);
+                return;
+            }
             const data = await res.json();
             setDadosCertificado(data);
+            setCertUrl(data.link_publico || null);
         } catch {
             setDadosCertificado(null);
+            setCertUrl(null);
         }
     };
 
     const handleVerCertificado = () => {
         if (!codigo.trim()) return;
-        const url = `${URL}/certificados/ver/${codigo}`;
-        setPdfUrl(url);
         buscarDetalhes(codigo);
     };
 
-    // 👇 se tiver código na URL, já preenche e carrega
     useEffect(() => {
         if (codigoUrl) {
             setCodigo(codigoUrl);
-            const url = `${URL}/certificados/ver/${codigoUrl}`;
-            setPdfUrl(url);
             buscarDetalhes(codigoUrl);
         }
     }, [codigoUrl]);
+
+    // 🔹 Função para decidir se é PDF ou imagem
+    const renderCertificado = () => {
+        if (!certUrl) return null;
+
+        if (certUrl.toLowerCase().endsWith(".pdf")) {
+            return (
+                <div className="certificado-viewer">
+                    <iframe
+                        src={certUrl}
+                        width="100%"
+                        height="600px"
+                        title="Certificado PDF"
+                    ></iframe>
+                    <p>
+                        Se o certificado não abrir,{" "}
+                        <a href={certUrl} target="_blank" rel="noopener noreferrer">
+                            clique aqui para baixar
+                        </a>.
+                    </p>
+                </div>
+            );
+        }
+
+        if (certUrl.toLowerCase().endsWith(".png") || certUrl.toLowerCase().endsWith(".jpg")) {
+            return (
+                <div className="certificado-viewer">
+                    <img
+                        src={certUrl}
+                        alt="Certificado"
+                        style={{ maxWidth: "100%", border: "1px solid #ccc" }}
+                    />
+                    <p>
+                        <a href={certUrl} target="_blank" rel="noopener noreferrer">
+                            Abrir certificado em nova aba
+                        </a>
+                    </p>
+                </div>
+            );
+        }
+
+        return null;
+    };
 
     return (
         <main className="historico-certificados">
             <h1>📜 Certificados de Conclusão — YouTube via IronGoals</h1>
 
-            {/* 🔹 Busca por código */}
             <div className="busca-certificado">
                 <input
                     type="text"
@@ -55,7 +97,6 @@ export default function HistoricoCertificadosYouTube() {
                 <button onClick={handleVerCertificado}>Ver Certificado</button>
             </div>
 
-            {/* 🔹 Informações detalhadas */}
             {dadosCertificado && (
                 <div className="info-certificado">
                     <h2>Informações do Certificado</h2>
@@ -76,7 +117,6 @@ export default function HistoricoCertificadosYouTube() {
                         <li><strong>Status:</strong> ✅ Certificado válido e emitido pela IronGoals</li>
                     </ul>
 
-                    {/* 🔹 Lista de vídeos */}
                     {dadosCertificado.videos && dadosCertificado.videos.length > 0 && (
                         <div className="lista-videos">
                             <h3>🎬 Vídeos do Curso</h3>
@@ -90,19 +130,9 @@ export default function HistoricoCertificadosYouTube() {
                 </div>
             )}
 
-            {/* 🔹 PDF Viewer */}
-            {pdfUrl && (
-                <div className="certificado-viewer">
-                    <iframe
-                        src={pdfUrl}
-                        width="100%"
-                        height="600px"
-                        title="Certificado"
-                    ></iframe>
-                </div>
-            )}
+            {/* 🔹 Renderiza PDF ou PNG */}
+            {renderCertificado()}
 
-            {/* 🔹 Botão para IronGoals */}
             <div className="botoes-irongoals">
                 <a
                     href="https://irongoals.com"
@@ -114,7 +144,6 @@ export default function HistoricoCertificadosYouTube() {
                 </a>
             </div>
 
-            {/* 🔹 Rodapé */}
             <Rodape />
         </main>
     );
