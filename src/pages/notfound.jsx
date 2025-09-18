@@ -18,7 +18,7 @@ export default function NotFound() {
     return (
         <div className="notfound-container">
             <img
-                src="/public/logo/I_round.png"
+                src="/logo/I_round.png"
                 alt="Logo da IronGoals"
                 className="notfound-logo"
             />

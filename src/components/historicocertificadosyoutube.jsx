@@ -100,9 +100,16 @@ export default function HistoricoCertificadosYouTube() {
             {dadosCertificado && (
                 <div className="info-certificado">
                     <h2>Informações do Certificado</h2>
+                    <p className="texto-confianca">
+                        Este certificado foi emitido de forma autenticada pelo sistema IronGoals,
+                        utilizando registro único em banco de dados e validação online para garantir
+                        sua originalidade e veracidade. Cada código é exclusivo e pode ser conferido
+                        publicamente através desta página.
+                    </p>
+
                     <ul>
                         <li><strong>Aluno:</strong> {dadosCertificado.nome} {dadosCertificado.sobrenome}</li>
-                        <li><strong>Categoria:</strong> {dadosCertificado.categoria}</li>
+                        <li><strong>Categoria na IronGoals:</strong> {dadosCertificado.categoria}</li>
                         <li><strong>Curso:</strong> {dadosCertificado.curso}</li>
                         <li><strong>Instrutor:</strong> {dadosCertificado.instrutor}</li>
                         <li>
@@ -113,7 +120,7 @@ export default function HistoricoCertificadosYouTube() {
                         </li>
                         <li><strong>Data de Emissão:</strong> {dadosCertificado.data_emissao}</li>
                         <li><strong>Código:</strong> {dadosCertificado.codigo}</li>
-                        <li><strong>Nº Registro:</strong> {dadosCertificado.registro_interno}</li>
+                        <li  ><strong>Nº Registro:</strong> {dadosCertificado.registro_interno}</li>
                         <li><strong>Status:</strong> ✅ Certificado válido e emitido pela IronGoals</li>
                     </ul>
 
