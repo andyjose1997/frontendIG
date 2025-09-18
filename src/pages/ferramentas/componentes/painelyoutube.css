@@ -286,52 +286,30 @@
     background: #334155;
 }
 
-/* 🔹 Estilo dos cursos (nome principal) */
 .curso-item {
     cursor: pointer;
     flex: 1;
+
     font-weight: 600;
-    font-size: 1.2rem;
-    /* mesmo tamanho dos vídeos */
-    display: flex;
-    align-items: center;
-    gap: 6px;
 }
 
-/* Ícone padrão do curso */
-.curso-item::before {
-    content: "📚";
-    /* ícone curso */
-    font-size: 1.1rem;
-    margin-right: 6px;
-}
-
-/* Quando curso está ativo */
 .curso-item.ativo {
     color: #3b82f6;
     text-decoration: underline;
 }
 
-/* 🔹 Estilo dos vídeos dentro do curso */
+.videos-sublista {
+    margin-top: 0.6rem;
+    padding-left: 1rem;
+}
+
 .videos-sublista li {
-    font-size: 1.2rem;
-    /* mesmo tamanho do curso */
+    font-size: 1.35rem;
     background: #0f172a;
     margin: 0.4rem 0;
     padding: 0.4rem 0.6rem;
     border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 6px;
 }
-
-/* Ícone do vídeo */
-.videos-sublista li::before {
-    content: "🎬";
-    margin-right: 6px;
-}
-
 
 /* 🎬 Botão de apagar */
 .btn-apagar {
