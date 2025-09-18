@@ -1,0 +1,131 @@
+/* ===== Container do Quiz ===== */
+/* ===== Container do Quiz ===== */
+.quiz-curso {
+    margin-top: 2.5rem;
+    padding: 2.5rem;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #ffffff, #f1f5f9);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+/* 🔹 Efeito ao aparecer */
+.quiz-curso {
+    animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🔹 Interatividade */
+.quiz-curso:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ===== Mensagens ===== */
+.mensagem-quiz {
+    font-size: 1.8rem;
+    /* 🔹 2x maior */
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 10px;
+    color: #1e293b;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* ===== Pergunta ===== */
+.quiz-curso p {
+    font-size: 1.8rem;
+    /* 🔹 2x maior */
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: #0f172a;
+}
+
+/* ===== Opções ===== */
+.opcoes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.opcao {
+    padding: 1.2rem 2rem;
+    font-size: 1.6rem;
+    /* 🔹 2x maior */
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(145deg, #2563eb, #1e40af);
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.opcao:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.opcao:disabled {
+    opacity: 0.85;
+    cursor: not-allowed;
+}
+
+/* ===== Correto e Errado ===== */
+.opcao.correta {
+    background: linear-gradient(145deg, #10b981, #059669);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    animation: brilhoVerde 1s ease forwards;
+}
+
+.opcao.errada {
+    background: linear-gradient(145deg, #ef4444, #b91c1c);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    animation: brilhoVermelho 1s ease forwards;
+}
+
+/* ===== Animações de feedback ===== */
+@keyframes brilhoVerde {
+    0% {
+        box-shadow: 0 0 0px rgba(16, 185, 129, 0.8);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+    }
+
+    100% {
+        box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+    }
+}
+
+@keyframes brilhoVermelho {
+    0% {
+        box-shadow: 0 0 0px rgba(239, 68, 68, 0.8);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+    }
+
+    100% {
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+    }
+}

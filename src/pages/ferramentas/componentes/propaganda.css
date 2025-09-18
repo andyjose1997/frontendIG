@@ -11,6 +11,53 @@
     color: #f3f4f6;
 }
 
+/* Forçar texto da tabela */
+.ppropaganda-tabela th,
+.ppropaganda-tabela td {
+    color: #ffffff !important;
+    /* texto branco */
+}
+
+/* Links dentro da tabela */
+.ppropaganda-tabela a {
+    color: #4da6ff;
+    /* azul claro para destacar */
+    text-decoration: none;
+}
+
+.ppropaganda-tabela a:hover {
+    text-decoration: underline;
+    color: #00273d;
+}
+
+/* Labels dos formulários */
+.propaganda-label {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Inputs e textarea com texto branco */
+.propaganda-input {
+    color: #ffffff;
+    background-color: #1a1f36;
+    /* fundo escuro */
+    border: 1px solid #3a4a6a;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.propaganda-input::placeholder {
+    color: #cccccc;
+    /* placeholder cinza claro */
+}
+
+/* Títulos */
+.propaganda-titulo,
+.propaganda-modal-titulo {
+    color: #ffffff;
+}
+
+
 /* ===== Título ===== */
 .propaganda-titulo {
     text-align: center;
@@ -40,7 +87,7 @@
 }
 
 /* ===== Tabela ===== */
-.propaganda-tabela {
+.ppropaganda-tabela {
     width: 100%;
     border-collapse: collapse;
     margin-top: 1.5rem;
@@ -51,7 +98,7 @@
     font-size: 1.5rem;
 }
 
-.propaganda-tabela th {
+.ppropaganda-tabela th {
     background: #1e3a8a;
     color: #fff;
     padding: 16px;
@@ -60,15 +107,18 @@
     font-weight: 600;
 }
 
-.propaganda-tabela td {
+.ppropaganda-tabela td {
     padding: 16px;
     border-bottom: 1px solid #e5e7eb;
     font-size: 1.5rem;
     color: #374151;
 }
 
-.propaganda-tabela tr:hover td {
+.ppropaganda-tabela tr:hover td {
     background: #f9fafb;
+    color: #010f3d !important;
+    font-weight: bold;
+    font-size: 1.4rem;
 }
 
 /* ===== Links ===== */

@@ -129,7 +129,7 @@ export default function Propaganda() {
             {loading ? (
                 <p className="propaganda-loading">Carregando...</p>
             ) : (
-                <table className="propaganda-tabela">
+                <table className="ppropaganda-tabela">
                     <thead className="propaganda-tabela-head">
                         <tr>
                             <th>Site</th>

@@ -1,0 +1,421 @@
+/* ===== Container principal ===== */
+.cursos-container {
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+    /* 🔹 Estilo visual */
+    background: linear-gradient(145deg, #ffffff, #f3f4f6);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+    /* 🔹 Texto */
+    color: #1e293b;
+
+    /* 🔹 Transição suave para interações */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cursos-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+/* ===== Títulos principais ===== */
+.cursos-container h2 {
+    font-size: 3rem;
+    /* 🔹 Grande e destacado */
+    font-weight: 800;
+    color: #c90101;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    /* 🔹 Linha decorativa */
+    position: relative;
+    display: inline-block;
+}
+
+.cursos-container h2::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #2563eb, #1e3a8a);
+    border-radius: 2px;
+}
+
+/* ===== Subtítulos (nome do curso, etc.) ===== */
+.cursos-container h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #0f172a;
+    border-left: 5px solid #2563eb;
+    padding-left: 1rem;
+    line-height: 1.4;
+}
+
+/* ===== Títulos dos vídeos ===== */
+.cursos-container h4 {
+    font-size: 1.8rem;
+    /* 🔹 ligeiramente maior */
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1e293b;
+    line-height: 1.4;
+
+    /* 🔹 Detalhe decorativo sutil */
+    border-left: 4px solid #2563eb;
+    padding-left: 0.8rem;
+    transition: color 0.3s ease;
+}
+
+.cursos-container h4:hover {
+    color: #2563eb;
+}
+
+/* ===== Autor ===== */
+.autor {
+    font-size: 1.8rem;
+    /* 🔹 balanceado com h4 */
+    font-weight: 500;
+    font-style: italic;
+    color: #475569;
+    margin-left: 0.5rem;
+
+    /* 🔹 efeito visual mais sutil */
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.autor:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* ===== Botões de cursos ===== */
+.botoes-cursos {
+    display: flex;
+    flex-direction: column;
+    /* em coluna */
+    gap: 1.2rem;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+/* ===== Estilo de cada botão ===== */
+.curso-botao {
+    padding: 1.2rem 2.4rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #3b82f6, #1e3a8a);
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    max-width: 1980px;
+
+    /* Estilo visual */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease, transform 0.2s ease;
+}
+
+/* ===== Hover ===== */
+.curso-botao:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    background: linear-gradient(145deg, #2563eb, #1e40af);
+}
+
+/* ===== Clique (efeito ativo) ===== */
+.curso-botao:active {
+    transform: scale(0.97);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== Botão selecionado (ativo) ===== */
+.curso-botao.ativo {
+    background: linear-gradient(145deg, #1e40af, #172554);
+    box-shadow: 0 8px 20px rgba(30, 64, 175, 0.6);
+    border: 2px solid #3b82f6;
+}
+
+
+.curso-botao:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.curso-botao.ativo {
+    background: linear-gradient(145deg, #1e40af, #1e3a8a);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* ===== Lista de vídeos ===== */
+.lista-videos {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    /* 🔹 centralizado e limitado */
+}
+
+/* ===== Cada item da lista ===== */
+.video-item {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem 1.8rem;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+/* Hover elegante */
+.video-item:hover {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Ativo (selecionado) */
+.video-item.ativo {
+    border: 2px solid #2563eb;
+    background: #eff6ff;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+}
+
+/* Concluído */
+.video-item.concluido {
+    background: #ecfdf5;
+    border-left: 6px solid #10b981;
+    opacity: 0.95;
+}
+
+.video-item:hover {
+    background: #f1f5f9;
+}
+
+.video-item.ativo {
+    border: 2px solid #2563eb;
+    background: #e0f2fe;
+}
+
+.video-item.concluido {
+    opacity: 0.85;
+    background: #ecfdf5;
+    border-left: 6px solid #10b981;
+}
+
+/* ===== Títulos dos vídeos ===== */
+.video-titulo {
+    font-size: 1.8rem;
+    /* 🔹 maior para destaque */
+    font-weight: 600;
+    color: #1e293b;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0.4rem 0.6rem;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.video-titulo:hover {
+    color: #2563eb;
+    background-color: rgba(37, 99, 235, 0.1);
+    transform: translateX(4px);
+    /* leve movimento → sensação de link */
+}
+
+/* ===== Player do vídeo ===== */
+.video-player {
+    margin-top: 1.2rem;
+    padding: 1.2rem;
+    border-radius: 14px;
+    color: #f8fafc !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25) inset,
+        0 4px 12px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s ease;
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Conclusão do curso ===== */
+.curso-concluido {
+    margin-top: 2.5rem;
+    padding: 2.2rem;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #065f46;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+    animation: pulseSuccess 1s ease forwards;
+}
+
+/* Animação de destaque ao concluir */
+@keyframes pulseSuccess {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ===== Conclusão do curso ===== */
+.curso-concluido {
+    margin-top: 2.5rem;
+    padding: 2.5rem;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #065f46;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== Texto de parabéns animado ===== */
+.curso-concluido h3 {
+    animation: parabensLatindo 1.2s infinite ease-in-out;
+}
+
+/* Animação tipo “latindo/pulsando” */
+@keyframes parabensLatindo {
+    0% {
+        transform: scale(1);
+        color: #065f46;
+    }
+
+    25% {
+        transform: scale(1.08);
+        color: #0de4a7;
+    }
+
+    50% {
+        transform: scale(1.15);
+        color: #07885f;
+    }
+
+    75% {
+        transform: scale(1.08);
+        color: #034633;
+    }
+
+    90% {
+        transform: scale(1);
+        color: #011d15;
+    }
+}
+
+.curso-wrapper {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+
+.curso-botao {
+    background: #1e40af;
+    color: #fff;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 220px;
+}
+
+.curso-botao:hover {
+    background: #2563eb;
+}
+
+.curso-botao .progresso {
+    margin-left: 12px;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 6px;
+}
+
+/* Tooltip */
+.tooltip-descricao {
+    position: absolute;
+    bottom: 110%;
+    /* acima do botão */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0f172a;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    animation: fadeIn 0.2s ease;
+}
+
+.tooltip-descricao::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    /* seta para baixo */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #0f172a transparent transparent transparent;
+}
+
+/* Animação suave */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
