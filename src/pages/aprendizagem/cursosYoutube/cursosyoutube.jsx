@@ -19,6 +19,18 @@ export const CursosYouTube = () => {
 
     const usuarioId = localStorage.getItem("usuario_id");
 
+    // 🔹 Função para extrair o ID do vídeo a partir do iframe salvo no banco
+    const extrairVideoId = (iframe) => {
+        if (!iframe) return null;
+        const match = iframe.match(/src="([^"]+)"/);
+        if (!match) return null;
+        const url = match[1]; // exemplo: https://www.youtube.com/embed/NOebfEFJW6Y
+        if (url.includes("embed/")) {
+            return url.split("embed/")[1].split("?")[0];
+        }
+        return null;
+    };
+
     // Buscar cursos e progresso ao carregar
     useEffect(() => {
         if (!avisoOk) return;
@@ -204,7 +216,7 @@ export const CursosYouTube = () => {
                                                     <div className="video-player">
                                                         <h4>{video.titulo}</h4>
                                                         <YouTube
-                                                            videoId={video.codigo_iframe.split("embed/")[1].split("?")[0]}
+                                                            videoId={extrairVideoId(video.codigo_iframe)}
                                                             opts={opts}
                                                             onEnd={() => setMostrarPerguntas(true)}
                                                         />
@@ -280,10 +292,6 @@ export const CursosYouTube = () => {
                                             >
                                                 📜 Gerar Certificado
                                             </button>
-
-
-
-
                                         </div>
                                     )}
                                 </>
