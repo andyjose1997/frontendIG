@@ -419,3 +419,39 @@
         transform: translateX(-50%) translateY(0);
     }
 }
+
+.aviso-cursos {
+    background: #f0f4ff;
+    border-left: 6px solid #3e73ff;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0 2rem;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: #1e293b;
+}
+
+.aviso-cursos p {
+    margin: 0.5rem 0;
+}
+
+.aviso-cursos ul {
+    margin-top: 0.5rem;
+    padding-left: 1.2rem;
+}
+
+.ok-botao {
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    background: #3e73ff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.ok-botao:hover {
+    background: #1e56d6;
+}

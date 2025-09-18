@@ -15,6 +15,8 @@
 
 /* 🔹 Container principal */
 .irene-modal {
+    position: absolute;
+
     background: #ffffff;
     width: 800px;
     height: 800px;

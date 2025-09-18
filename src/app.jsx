@@ -5,6 +5,7 @@ import Layout from "./components/layout.jsx";
 import Loader from "./components/loader.jsx";
 import RecuperarSenha from "./pages/recuperacao/recuperarsenha.jsx";
 import Avaliacao from "./pages/areaafastada/avaliacao.jsx";
+import HistoricoCertificadosYouTube from "./components/historicocertificadosyoutube.jsx";
 
 import Login from './pages/login.jsx';
 import Cursos from "./pages/cursos.jsx";
@@ -131,6 +132,12 @@ function AppRoutes() {
       <Routes>
         <Route path="/recuperar-senha" element={<RecuperarSenha />} />
         <Route path="/Avaliacao" element={<Avaliacao />} /> {/* 🔹 nova rota */}
+        <Route
+          path="/historico-certificados-youtube/:codigo?"
+          element={<HistoricoCertificadosYouTube />}
+        />
+
+
 
         {/* Rotas que usam Layout */}
         <Route element={<Layout />}>

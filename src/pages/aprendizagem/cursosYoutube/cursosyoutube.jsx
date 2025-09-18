@@ -1,9 +1,9 @@
-// src/components/youtube/CursosYouTube.jsx
 import React, { useEffect, useState } from "react";
 import YouTube from "react-youtube";
 import { apiYoutube } from "./apiyoutube";
 import PerguntaCurso from "./perguntacurso";
 import "./cursosyoutube.css";
+import { URL } from "../../../config"; // 🔹 importa sua URL do backend
 
 export const CursosYouTube = () => {
     const [cursos, setCursos] = useState([]);
@@ -12,13 +12,16 @@ export const CursosYouTube = () => {
     const [videoSelecionado, setVideoSelecionado] = useState(null);
     const [perguntas, setPerguntas] = useState([]);
     const [mostrarPerguntas, setMostrarPerguntas] = useState(false);
-    const [progresso, setProgresso] = useState([]); // progresso de todos os cursos
+    const [progresso, setProgresso] = useState([]);
     const [hoverCurso, setHoverCurso] = useState(null);
+
+    const [avisoOk, setAvisoOk] = useState(false);
 
     const usuarioId = localStorage.getItem("usuario_id");
 
     // Buscar cursos e progresso ao carregar
     useEffect(() => {
+        if (!avisoOk) return;
         const carregar = async () => {
             try {
                 const cursosData = await apiYoutube.getCursos();
@@ -36,9 +39,8 @@ export const CursosYouTube = () => {
             }
         };
         carregar();
-    }, [usuarioId]);
+    }, [usuarioId, avisoOk]);
 
-    // Selecionar curso → carregar vídeos
     const handleSelecionarCurso = async (curso) => {
         setCursoSelecionado(curso);
         setVideoSelecionado(null);
@@ -54,7 +56,6 @@ export const CursosYouTube = () => {
         }
     };
 
-    // Voltar para lista
     const handleVoltar = () => {
         setCursoSelecionado(null);
         setVideos([]);
@@ -63,7 +64,6 @@ export const CursosYouTube = () => {
         setMostrarPerguntas(false);
     };
 
-    // Selecionar vídeo
     const handleSelecionarVideo = async (video) => {
         setVideoSelecionado(video);
         setMostrarPerguntas(false);
@@ -76,21 +76,18 @@ export const CursosYouTube = () => {
         }
     };
 
-    // Player options
     const opts = {
         height: "575",
         width: "820",
         playerVars: { autoplay: 0 },
     };
 
-    // Verificar se vídeo está concluído
     const isConcluido = (videoId) => {
         if (!cursoSelecionado) return false;
         const prog = progresso[cursoSelecionado.id] || [];
         return prog.some((p) => p.video_id === videoId && p.concluido);
     };
 
-    // % de progresso do curso
     const calcularProgressoCurso = (cursoId, totalVideos) => {
         if (!totalVideos || totalVideos === 0) return 0;
         const prog = progresso[cursoId] || [];
@@ -98,7 +95,6 @@ export const CursosYouTube = () => {
         return Math.round((concluidos / totalVideos) * 100);
     };
 
-    // Atualizar progresso local
     const handleConcluir = (videoId) => {
         if (!cursoSelecionado) return;
         setProgresso((prev) => {
@@ -115,120 +111,188 @@ export const CursosYouTube = () => {
         <div className="cursos-container">
             <h2>Cursos no YouTube</h2>
 
-            {/* Lista de cursos */}
-            {!cursoSelecionado && (
-                <div className="botoes-cursos">
-                    {cursos.map((curso) => (
-                        <div
-                            key={curso.id}
-                            className="curso-wrapper"
-                            onMouseEnter={() => setHoverCurso(curso.id)}
-                            onMouseLeave={() => setHoverCurso(null)}
-                        >
-                            <button
-                                onClick={() => handleSelecionarCurso(curso)}
-                                className="curso-botao"
-                            >
-                                {curso.titulo}
-                                <span className="progresso">
-                                    {calcularProgressoCurso(curso.id, curso.total_videos || 0)}%
-                                </span>
-                            </button>
+            {!avisoOk && (
+                <div className="aviso-cursos">
+                    <p>
+                        🔹 <strong>Atenção:</strong> Os vídeos exibidos aqui não pertencem à plataforma IronGoals.
+                        Eles são conteúdos gratuitos e públicos do YouTube, incorporados via <em>embed</em>.
+                    </p>
+                    <p>
+                        ✅ Nosso objetivo é organizar esses cursos de forma estruturada, com acompanhamento
+                        de progresso, perguntas interativas e emissão de certificado exclusivo IronGoals.
+                    </p>
+                    <p>
+                        🎥 Você pode assistir aos mesmos vídeos diretamente no YouTube sem custo, mas aqui
+                        oferecemos <strong>recursos adicionais</strong> como:
+                    </p>
+                    <ul>
+                        <li>📊 Progresso salvo automaticamente</li>
+                        <li>❓ Perguntas e testes interativos ao final de cada aula</li>
+                        <li>📜 Certificado de conclusão validado pela plataforma</li>
+                        <li>🏆 Pontuação e ranking interno</li>
+                    </ul>
 
-                            {/* Tooltip com descrição */}
-                            {hoverCurso === curso.id && (
-                                <div className="tooltip-descricao">
-                                    {curso.descricao || "Sem descrição disponível."}
-                                </div>
-                            )}
-                        </div>
-                    ))}
+                    <button className="ok-botao" onClick={() => setAvisoOk(true)}>
+                        Entendi, quero ver os cursos
+                    </button>
                 </div>
             )}
 
-            {/* Detalhes do curso */}
-            {cursoSelecionado && (
-                <div className="curso-detalhes">
-                    <div className="cabecalho-curso">
-                        <button className="voltar-botao" onClick={handleVoltar}>
-                            ⬅️ Voltar
-                        </button>
-                        <h3>
-                            {cursoSelecionado.titulo} –{" "}
-                            <span className="autor">
-                                <br />
-                                {cursoSelecionado.autor}
-                            </span>
-                        </h3>
-                    </div>
-
-                    {videos.length > 0 ? (
-                        <>
-                            <ul className="lista-videos">
-                                {videos.map((video, index) => (
-                                    <li
-                                        key={video.id}
-                                        className={`video-item ${videoSelecionado?.id === video.id ? "ativo" : ""} 
-                                            ${isConcluido(video.id) ? "concluido" : ""}`}
+            {avisoOk && (
+                <>
+                    {!cursoSelecionado && (
+                        <div className="botoes-cursos">
+                            {cursos.map((curso) => (
+                                <div
+                                    key={curso.id}
+                                    className="curso-wrapper"
+                                    onMouseEnter={() => setHoverCurso(curso.id)}
+                                    onMouseLeave={() => setHoverCurso(null)}
+                                >
+                                    <button
+                                        onClick={() => handleSelecionarCurso(curso)}
+                                        className="curso-botao"
                                     >
-                                        <div
-                                            className="video-titulo"
-                                            onClick={() => handleSelecionarVideo(video)}
-                                        >
-                                            {video.titulo} {isConcluido(video.id) && "✅"}
-                                        </div>
-
-                                        {videoSelecionado?.id === video.id && (
-                                            <div className="video-player">
-                                                <h4>{video.titulo}</h4>
-                                                <YouTube
-                                                    videoId={video.codigo_iframe.split("embed/")[1].split("?")[0]}
-                                                    opts={opts}
-                                                    onEnd={() => setMostrarPerguntas(true)}
-                                                />
-
-                                                {mostrarPerguntas && (
-                                                    <PerguntaCurso
-                                                        videoId={video.id}
-                                                        isUltimo={index === videos.length - 1}
-                                                        onConcluir={(id, fim) => {
-                                                            handleConcluir(id);
-                                                            if (fim) {
-                                                                setVideoSelecionado(null);
-                                                                setMostrarPerguntas(false);
-                                                                setPerguntas([]);
-                                                            } else {
-                                                                handleSelecionarVideo(videos[index + 1]);
-                                                            }
-                                                        }}
-                                                    />
-                                                )}
-                                            </div>
-                                        )}
-                                    </li>
-                                ))}
-                            </ul>
-
-                            {/* Conclusão do curso */}
-                            {(progresso[cursoSelecionado.id]?.filter((p) => p.concluido).length || 0) === videos.length && (
-                                <div className="curso-concluido">
-                                    <h3>
-                                        🎉 Parabéns, você concluiu o curso{" "}
-                                        <span className="curso-nome">
-                                            {cursoSelecionado.titulo}
+                                        {curso.titulo}
+                                        <span className="progresso">
+                                            {calcularProgressoCurso(curso.id, curso.total_videos || 0)}%
                                         </span>
-                                        !
-                                    </h3>
-                                    <button className="certificado-botao">
-                                        📜 Gerar Certificado
                                     </button>
+
+                                    {hoverCurso === curso.id && (
+                                        <div className="tooltip-descricao">
+                                            {curso.descricao || "Sem descrição disponível."}
+                                        </div>
+                                    )}
                                 </div>
-                            )}
-                        </>
-                    ) : (
-                        <p>Sem vídeos para este curso.</p>
+                            ))}
+                        </div>
                     )}
-                </div>
+
+                    {cursoSelecionado && (
+                        <div className="curso-detalhes">
+                            <div className="cabecalho-curso">
+                                <button className="voltar-botao" onClick={handleVoltar}>
+                                    ⬅️ Voltar
+                                </button>
+                                <h3>
+                                    {cursoSelecionado.titulo} –{" "}
+                                    <span className="autor">
+                                        <br />
+                                        {cursoSelecionado.autor}
+                                    </span>
+                                </h3>
+                            </div>
+
+                            {videos.length > 0 ? (
+                                <>
+                                    <ul className="lista-videos">
+                                        {videos.map((video, index) => (
+                                            <li
+                                                key={video.id}
+                                                className={`video-item ${videoSelecionado?.id === video.id ? "ativo" : ""} 
+                                                    ${isConcluido(video.id) ? "concluido" : ""}`}
+                                            >
+                                                <div
+                                                    className="video-titulo"
+                                                    onClick={() => handleSelecionarVideo(video)}
+                                                >
+                                                    {video.titulo} {isConcluido(video.id) && "✅"}
+                                                </div>
+
+                                                {videoSelecionado?.id === video.id && (
+                                                    <div className="video-player">
+                                                        <h4>{video.titulo}</h4>
+                                                        <YouTube
+                                                            videoId={video.codigo_iframe.split("embed/")[1].split("?")[0]}
+                                                            opts={opts}
+                                                            onEnd={() => setMostrarPerguntas(true)}
+                                                        />
+
+                                                        {mostrarPerguntas && (
+                                                            <PerguntaCurso
+                                                                videoId={video.id}
+                                                                isUltimo={index === videos.length - 1}
+                                                                onConcluir={(id, fim) => {
+                                                                    handleConcluir(id);
+                                                                    if (fim) {
+                                                                        setVideoSelecionado(null);
+                                                                        setMostrarPerguntas(false);
+                                                                        setPerguntas([]);
+                                                                    } else {
+                                                                        handleSelecionarVideo(videos[index + 1]);
+                                                                    }
+                                                                }}
+                                                            />
+                                                        )}
+                                                    </div>
+                                                )}
+                                            </li>
+                                        ))}
+                                    </ul>
+
+                                    {(progresso[cursoSelecionado.id]?.filter((p) => p.concluido).length || 0) === videos.length && (
+                                        <div className="curso-concluido">
+                                            <h3>
+                                                🎉 Parabéns, você concluiu o curso{" "}
+                                                <span className="curso-nome">
+                                                    {cursoSelecionado.titulo}
+                                                </span>
+                                                !
+                                            </h3>
+                                            <button
+                                                className="certificado-botao"
+                                                onClick={async () => {
+                                                    const usuarioId = localStorage.getItem("usuario_id"); // 🔹 pega o id do usuário logado
+                                                    const cursoId = cursoSelecionado.id; // 🔹 pega o ID do curso (vem do banco)
+
+                                                    if (!usuarioId) {
+                                                        alert("⚠️ Usuário não encontrado. Faça login novamente.");
+                                                        return;
+                                                    }
+
+                                                    if (!cursoId) {
+                                                        alert("⚠️ Curso inválido.");
+                                                        return;
+                                                    }
+
+                                                    try {
+                                                        // 🔹 Chama o backend para gerar e registrar o certificado
+                                                        const res = await fetch(
+                                                            `${URL}/certificados/gerar?usuario_id=${usuarioId}&curso_id=${cursoId}`
+                                                        );
+
+                                                        if (!res.ok) {
+                                                            throw new Error("Erro ao gerar certificado");
+                                                        }
+
+                                                        // 🔹 Pega a URL final do certificado
+                                                        const blob = await res.blob();
+                                                        const url = window.URL.createObjectURL(blob);
+
+                                                        // 🔹 Abre em nova aba
+                                                        window.open(url, "_blank");
+                                                    } catch (err) {
+                                                        console.error("Erro ao emitir certificado:", err);
+                                                        alert("⚠️ Não foi possível emitir o certificado.");
+                                                    }
+                                                }}
+                                            >
+                                                📜 Gerar Certificado
+                                            </button>
+
+
+
+
+                                        </div>
+                                    )}
+                                </>
+                            ) : (
+                                <p>Sem vídeos para este curso.</p>
+                            )}
+                        </div>
+                    )}
+                </>
             )}
         </div>
     );

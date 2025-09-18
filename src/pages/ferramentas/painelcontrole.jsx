@@ -12,7 +12,7 @@ import IreneConfig from './componentes/irene/ireneconfig';
 import IreneConfigCompleta from './componentes/irene/ireneconfigcompleta';
 import './painelcontrole.css';
 import ManualPainel from './componentes/manualpainel';
-import PainelYouTube from './componentes/painelyoutube';
+import PainelYouTube from './componentes/painelyoutube/painelyoutube';
 
 
 export default function PainelControle() {

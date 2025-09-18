@@ -1,0 +1,202 @@
+.historico-certificados {
+    max-width: 2000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+.historico-certificados h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 3rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #022f57;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Busca */
+.busca-certificado {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.busca-certificado input {
+    padding: 0.7rem 1rem;
+    border: 2px solid #1e5686;
+    border-radius: 8px;
+    font-size: 2rem;
+    width: 60%;
+    transition: 0.3s;
+}
+
+.certificado-viewer iframe {
+    height: 1700px;
+}
+
+.busca-certificado input:focus {
+    outline: none;
+    border-color: #0571d6;
+    box-shadow: 0 0 6px rgba(5, 113, 214, 0.4);
+}
+
+.busca-certificado button {
+    background: #0571d6;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1.2rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.busca-certificado button:hover {
+    background: #045bb3;
+}
+
+/* Tabela */
+.tabela-certificados {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tabela-certificados th,
+.tabela-certificados td {
+    border: 1px solid #ddd;
+    padding: 0.8rem;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.tabela-certificados th {
+    background: #1e5686;
+    color: #fff;
+    font-weight: bold;
+}
+
+.tabela-certificados tr:nth-child(even) {
+    background: #f4f7fb;
+}
+
+.tabela-certificados tr:hover {
+    background: #e1ecf9;
+}
+
+/* Botões IronGoals */
+.botoes-irongoals {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.btn-irongoals {
+    background: linear-gradient(135deg, #1e5686, #0571d6);
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.btn-irongoals:hover {
+    background: linear-gradient(135deg, #144063, #045bb3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Rodapé */
+.rodape {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Informações do Certificado */
+.info-certificado {
+    background: #ffffff;
+    padding: 1.5rem 2rem;
+    margin: 2rem auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-width: 1200px;
+}
+
+.info-certificado h2 {
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+    color: #022f57;
+    border-left: 6px solid #0571d6;
+    padding-left: 10px;
+}
+
+.info-certificado ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info-certificado ul li {
+    font-size: 1.2rem;
+    margin: 0.6rem 0;
+    color: #333;
+}
+
+.info-certificado ul li strong {
+    color: #022f57;
+}
+
+/* Lista de Vídeos */
+.lista-videos {
+    margin-top: 2rem;
+    padding: 1.2rem;
+    border-top: 2px solid #e1ecf9;
+}
+
+.lista-videos h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: #0571d6;
+}
+
+.lista-videos ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista-videos li {
+    font-size: 1.1rem;
+    padding: 0.5rem 0.8rem;
+    margin: 0.3rem 0;
+    background: #f4f7fb;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: 0.2s;
+}
+
+.lista-videos li::before {
+    content: "🎥";
+    font-size: 1.2rem;
+}
+
+.lista-videos li:hover {
+    background: #e1ecf9;
+}
