@@ -17,6 +17,11 @@ export default function PainelYouTube() {
         setTimeout(() => setAlerta({ mensagem: "", tipo: "" }), 3000);
     };
 
+    // 🔹 Emite evento global para atualizar lista
+    const atualizarLista = () => {
+        window.dispatchEvent(new Event("atualizarCursos"));
+    };
+
     return (
         <div className="painel-youtube">
             <h2>Gerenciamento do YouTube</h2>
@@ -79,9 +84,15 @@ export default function PainelYouTube() {
             {/* Área dividida */}
             <div className="youtube-layout">
                 <div className="youtube-conteudo">
-                    {subPainel === "cursos" && <FormularioCurso mostrarAlerta={mostrarAlerta} />}
-                    {subPainel === "videos" && <FormularioVideo mostrarAlerta={mostrarAlerta} />}
-                    {subPainel === "perguntas" && <FormularioPergunta mostrarAlerta={mostrarAlerta} />}
+                    {subPainel === "cursos" && (
+                        <FormularioCurso mostrarAlerta={mostrarAlerta} atualizarLista={atualizarLista} />
+                    )}
+                    {subPainel === "videos" && (
+                        <FormularioVideo mostrarAlerta={mostrarAlerta} atualizarLista={atualizarLista} />
+                    )}
+                    {subPainel === "perguntas" && (
+                        <FormularioPergunta mostrarAlerta={mostrarAlerta} atualizarLista={atualizarLista} />
+                    )}
                 </div>
 
                 {/* Lista lateral */}
@@ -100,6 +111,12 @@ function ListaCursos({ mostrarAlerta, setConfirmacao }) {
 
     useEffect(() => {
         carregarCursos();
+
+        // 🔹 Escuta evento para atualizar lista
+        const atualizar = () => carregarCursos();
+        window.addEventListener("atualizarCursos", atualizar);
+
+        return () => window.removeEventListener("atualizarCursos", atualizar);
     }, []);
 
     const carregarCursos = () => {
@@ -212,10 +229,8 @@ function ListaCursos({ mostrarAlerta, setConfirmacao }) {
     );
 }
 
-
 /* ================= FORMULÁRIOS ================= */
-
-function FormularioCurso({ mostrarAlerta }) {
+function FormularioCurso({ mostrarAlerta, atualizarLista }) {
     const [form, setForm] = useState({ titulo: "", autor: "", descricao: "" });
 
     const handleSubmit = async (e) => {
@@ -228,6 +243,7 @@ function FormularioCurso({ mostrarAlerta }) {
         if (res.ok) {
             mostrarAlerta("✅ Curso cadastrado com sucesso!", "sucesso");
             setForm({ titulo: "", autor: "", descricao: "" });
+            atualizarLista(); // 🔹 Atualiza lista
         } else {
             mostrarAlerta("❌ Erro ao cadastrar curso.", "erro");
         }
@@ -258,7 +274,8 @@ function FormularioCurso({ mostrarAlerta }) {
         </form>
     );
 }
-function FormularioVideo({ mostrarAlerta }) {
+
+function FormularioVideo({ mostrarAlerta, atualizarLista }) {
     const [form, setForm] = useState({ curso_id: "", titulo: "", codigo_iframe: "" });
     const [confirmacao, setConfirmacao] = useState({ mostrar: false, cursoNome: "", onConfirm: null });
 
@@ -277,14 +294,12 @@ function FormularioVideo({ mostrarAlerta }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // 🔹 Verifica se o curso existe
         const curso = await validarCurso();
         if (!curso) {
             mostrarAlerta("❌ ID do curso inválido!", "erro");
             return;
         }
 
-        // 🔹 Abre modal de confirmação
         setConfirmacao({
             mostrar: true,
             cursoNome: curso.titulo,
@@ -298,6 +313,7 @@ function FormularioVideo({ mostrarAlerta }) {
                 if (res.ok) {
                     mostrarAlerta("✅ Vídeo cadastrado!", "sucesso");
                     setForm({ curso_id: "", titulo: "", codigo_iframe: "" });
+                    atualizarLista(); // 🔹 Atualiza lista
                 } else {
                     mostrarAlerta("❌ Erro ao cadastrar vídeo.", "erro");
                 }
@@ -334,7 +350,6 @@ function FormularioVideo({ mostrarAlerta }) {
                 <button type="submit">Salvar Vídeo</button>
             </form>
 
-            {/* Modal de confirmação */}
             {confirmacao.mostrar && (
                 <div className="youtubemodal-overlay">
                     <div className="youtubemodal-confirmacao">
@@ -363,7 +378,7 @@ function FormularioVideo({ mostrarAlerta }) {
     );
 }
 
-function FormularioPergunta({ mostrarAlerta }) {
+function FormularioPergunta({ mostrarAlerta, atualizarLista }) {
     const [form, setForm] = useState({
         video_id: "",
         texto: "",
@@ -387,11 +402,9 @@ function FormularioPergunta({ mostrarAlerta }) {
 
     const validarVideo = async () => {
         try {
-            // 1. Checar se o vídeo existe
             const resVideo = await fetch(`${URL}/youtube/videos/${form.video_id}`);
             if (!resVideo.ok) return false;
 
-            // 2. Checar se já existe pergunta para esse vídeo
             const resPerguntas = await fetch(`${URL}/youtube/videos/${form.video_id}/perguntas`);
             const perguntas = await resPerguntas.json();
             if (perguntas.length > 0) return false;
@@ -405,20 +418,17 @@ function FormularioPergunta({ mostrarAlerta }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // 🔹 Verifica duplicadas
         if (!validarOpcoes()) {
             mostrarAlerta("❌ As opções não podem ser iguais!", "erro");
             return;
         }
 
-        // 🔹 Verifica vídeo
         const valido = await validarVideo();
         if (!valido) {
             mostrarAlerta("❌ ID do vídeo inválido ou já possui pergunta!", "erro");
             return;
         }
 
-        // 🔹 Envia se tudo ok
         const res = await fetch(`${URL}/youtube/perguntas`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -438,6 +448,7 @@ function FormularioPergunta({ mostrarAlerta }) {
                 opcao6: "",
                 resposta_correta: 1,
             });
+            atualizarLista(); // 🔹 Atualiza lista
         } else {
             mostrarAlerta("❌ Erro ao cadastrar pergunta.", "erro");
         }
