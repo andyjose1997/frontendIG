@@ -10,14 +10,20 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
     const [opcoes, setOpcoes] = useState([]);
     const [tentativas, setTentativas] = useState(0);
     const [mensagem, setMensagem] = useState("");
+    const [podeAvancar, setPodeAvancar] = useState(false);
 
-    // 🔹 Buscar perguntas quando abrir o vídeo
+    // 🔹 Resetar estados sempre que abrir um novo vídeo
     useEffect(() => {
         if (!video) return;
 
-        if (video.tempo_segundos) {
-            setTempoRestante(video.tempo_segundos);
-        }
+        // resetar tudo ao trocar de vídeo
+        setTempoRestante(video.tempo_segundos || null);
+        setPerguntas([]);
+        setPerguntaAtual(0);
+        setOpcoes([]);
+        setTentativas(0);
+        setMensagem("");
+        setPodeAvancar(false); // 🔹 reset aqui
 
         fetch(`${URL}/perguntas/por-video/${video.id}`)
             .then(res => {
@@ -50,7 +56,6 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
         }
     }, [tempoRestante, perguntas]);
 
-    // 🔹 Montar 4 opções incluindo a correta
     const prepararOpcoes = (pergunta) => {
         if (!pergunta) return;
 
@@ -69,7 +74,6 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
         setOpcoes(selecionadas);
     };
 
-    // 🔹 Salvar progresso no backend
     const salvarProgresso = () => {
         const usuarioId = localStorage.getItem("usuario_id");
 
@@ -86,14 +90,17 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
             .then(res => res.json())
             .then(data => {
                 console.log("📌 Progresso salvo:", data);
-                if (onConcluirVideo) {
-                    onConcluirVideo(video); // 🔹 avisa o pai que terminou
-                }
+                setPodeAvancar(true);
             })
             .catch(err => console.error("Erro ao salvar progresso:", err));
     };
 
-    // 🔹 Responder
+    const irParaProximo = () => {
+        if (onConcluirVideo) {
+            onConcluirVideo(video);
+        }
+    };
+
     const responder = (opcao) => {
         const pergunta = perguntas[perguntaAtual];
 
@@ -108,7 +115,7 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
                     setMensagem("");
                 } else {
                     setMensagem("");
-                    salvarProgresso(); // 🔹 Salva no banco e notifica
+                    salvarProgresso();
                 }
             }, 1000);
 
@@ -130,6 +137,11 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
         <div className="quizum-container">
             {tempoRestante === 0 && perguntas.length > 0 && (
                 <>
+                    {/* 🔹 Contagem de perguntas */}
+                    <p className="quizum-contagem">
+                        Pergunta {perguntaAtual + 1} de {perguntas.length}
+                    </p>
+
                     <h4>{perguntas[perguntaAtual]?.pergunta}</h4>
                     <ul className="quizum-options">
                         {opcoes.map((opcao, idx) => (
@@ -152,8 +164,16 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
                             {mensagem}
                         </p>
                     )}
+
+                    {podeAvancar && (
+                        <div className="quizum-avancar">
+                            <p>✅ Você concluiu este quiz! Pode ir para o próximo vídeo.</p>
+                            <button onClick={irParaProximo}>➡ Próximo Vídeo</button>
+                        </div>
+                    )}
                 </>
             )}
         </div>
     );
+
 }

@@ -15,7 +15,7 @@ import irongoalsImage from "./imagens/irongoals.png";
 import Swal from "sweetalert2";
 
 export default function Aprendizagem() {
-    const [activeSection, setActiveSection] = useState("curriculo");
+    const [activeSection, setActiveSection] = useState("cursos");
 
     const renderSection = () => {
         switch (activeSection) {

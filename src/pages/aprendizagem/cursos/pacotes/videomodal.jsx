@@ -21,19 +21,7 @@ export default function VideoModal({ video, onClose, onConcluirVideo }) {
                     allowFullScreen
                 ></iframe>
 
-                {video.exercicio_link && (
-                    <p className="videoum-exercicio">
-                        📘{" "}
-                        <a
-                            href={video.exercicio_link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="videoum-exercicio-link"
-                        >
-                            Acessar Exercício
-                        </a>
-                    </p>
-                )}
+
 
                 {/* 🔹 Passamos o callback para o Quiz */}
                 <QuizPerguntas video={video} onConcluirVideo={onConcluirVideo} />

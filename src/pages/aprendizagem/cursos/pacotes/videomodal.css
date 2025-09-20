@@ -252,3 +252,107 @@
         /* posição final normal */
     }
 }
+
+/* 🔹 Mensagem de avanço para o próximo vídeo */
+.quizum-avancar {
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px solid #28a745;
+    border-radius: 10px;
+    background: #e9f9ef;
+    text-align: center;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.quizum-avancar p {
+    color: #155724;
+    font-weight: bold;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+/* 🔹 Botão "Próximo Vídeo" */
+.quizum-avancar button {
+    background: linear-gradient(135deg, #28a745, #218838);
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.quizum-avancar button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #34d058, #28a745);
+}
+
+.quizum-avancar button:active {
+    transform: scale(0.95);
+}
+
+/* 🔹 Animação de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.videoum-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.videoum-content {
+    border-radius: 12px;
+    padding: 20px;
+    width: 80%;
+    max-width: 900px;
+
+    /* 🔹 Limite de altura */
+    max-height: 130vh;
+    overflow-y: auto;
+
+    /* 🔹 Sombras para destaque */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+
+    /* 🔹 Suavidade na rolagem */
+    scroll-behavior: smooth;
+}
+
+/* 🔹 Barra de rolagem profissional */
+.videoum-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.videoum-content::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.videoum-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #0571d6, #1e5686);
+    border-radius: 10px;
+    border: 2px solid #f0f0f0;
+}
+
+.videoum-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #1e5686, #03407d);
+}

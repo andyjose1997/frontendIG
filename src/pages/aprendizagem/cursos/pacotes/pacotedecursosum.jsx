@@ -13,8 +13,18 @@ export default function PacoteDeCursosUm() {
     const [progresso, setProgresso] = useState({});
     const [cursoConcluido, setCursoConcluido] = useState(false);
     const [certificados, setCertificados] = useState({}); // 🔹 {curso_id: codigo}
+    const [reloadKey, setReloadKey] = useState(0);
+
+    // 🔹 controla animação do texto
+    const [animarTexto, setAnimarTexto] = useState(true);
 
     const usuarioId = localStorage.getItem("usuario_id");
+
+    // 🔹 Desliga animação depois de 4s
+    useEffect(() => {
+        const timer = setTimeout(() => setAnimarTexto(false), 1000);
+        return () => clearTimeout(timer);
+    }, []);
 
     // 🔹 Buscar cursos e certificados ao montar
     useEffect(() => {
@@ -106,9 +116,17 @@ export default function PacoteDeCursosUm() {
     };
 
     return (
-        <section className="pacoteum-section">
+        <section className="pacoteum-section" key={reloadKey}>
             <div className="pacoteum-container">
                 <h2 className="pacoteum-titulo">🎓 Pacote de Cursos Exclusivos</h2>
+
+                {/* 🔹 Texto explicativo com animação controlada */}
+                <p className={`pacoteum-explicacao ${animarTexto ? "animar" : ""}`}>
+                    Todos os vídeos deste pacote são 100% produzidos pela plataforma IronGoals e
+                    estão hospedados no YouTube em modo <b>não listado</b>.
+                    Isso significa que eles não aparecem em buscas públicas do YouTube,
+                    mas podem ser acessados diretamente através dos links integrados na plataforma.
+                </p>
 
                 {!cursoAtivo ? (
                     cursos.length > 0 ? (
@@ -146,7 +164,19 @@ export default function PacoteDeCursosUm() {
                     )
                 ) : (
                     <div className="pacoteum-area-curso">
-                        <button onClick={voltarCursos} className="pacoteum-voltar-btn">⬅ Voltar para Cursos</button>
+                        <button
+                            onClick={() => {
+                                voltarCursos(); // volta pra lista
+                                setTimeout(() => {
+                                    setReloadKey(prev => prev + 1); // força recarregar componente
+                                    window.location.reload();       // 🔹 recarrega a página inteira
+                                }, 300);
+                            }}
+                            className="pacoteum-voltar-btn"
+                        >
+                            ⬅ Voltar para Cursos
+                        </button>
+
 
                         <h3 className="pacoteum-subtitulo">📺 Vídeos do Curso: {nomeCursoAtivo}</h3>
 

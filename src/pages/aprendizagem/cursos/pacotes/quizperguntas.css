@@ -108,3 +108,11 @@
         transform: translateY(0);
     }
 }
+
+.quizum-contagem {
+    font-size: 14px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 8px;
+    text-align: center;
+}
