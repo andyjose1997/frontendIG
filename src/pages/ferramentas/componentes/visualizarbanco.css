@@ -379,7 +379,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 500vh;
+    height: 400vh;
 
     display: flex;
     align-items: center;
@@ -733,7 +733,7 @@ select option {
 }
 
 /* 🔹 Botão Apagar */
-.btn-apagar {
+.bttn-apagar {
     background: linear-gradient(135deg, #f44336, #d32f2f);
     color: #fff;
     border: none;
@@ -746,19 +746,19 @@ select option {
     box-shadow: 0 4px 10px rgba(244, 67, 54, 0.25);
 }
 
-.btn-apagar:hover {
+.bttn-apagar:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(244, 67, 54, 0.35);
     opacity: 0.9;
 }
 
-.btn-apagar:active {
+.bttn-apagar:active {
     transform: scale(0.96);
 }
 
 /* 🔹 Espaçamento quando usados juntos */
 .btn-editar,
-.btn-apagar {
+.bttn-apagar {
     margin: 0 6px;
 }
 

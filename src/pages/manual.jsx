@@ -9,6 +9,7 @@ const API_URL = `${URL}/clausulas/`;
 export default function ManualDocumento() {
     const [clausulas, setClausulas] = useState([]);
     const [mostrarTopo, setMostrarTopo] = useState(false);
+    const [filtro, setFiltro] = useState(""); // 🔹 estado para filtro
     const navigate = useNavigate();
 
     const carregar = async () => {
@@ -33,7 +34,6 @@ export default function ManualDocumento() {
     // 🔹 Detectar scroll
     useEffect(() => {
         const handleScroll = () => {
-            console.log("ScrollY:", window.scrollY); // debug
             if (window.scrollY > 150) {
                 setMostrarTopo(true);
             } else {
@@ -47,6 +47,29 @@ export default function ManualDocumento() {
 
     const irParaTopo = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    // 🔹 Função para filtrar cláusulas
+    const filtrarClausulas = (lista) => {
+        if (!filtro.trim()) return lista;
+        const termo = filtro.toLowerCase();
+
+        const buscarRecursivo = (c) => {
+            const corresponde =
+                c.numero.toLowerCase().includes(termo) ||
+                (c.texto && c.texto.toLowerCase().includes(termo));
+
+            const filhosFiltrados = c.filhos
+                ? c.filhos.map(buscarRecursivo).filter(Boolean)
+                : [];
+
+            if (corresponde || filhosFiltrados.length > 0) {
+                return { ...c, filhos: filhosFiltrados };
+            }
+            return null;
+        };
+
+        return lista.map(buscarRecursivo).filter(Boolean);
     };
 
     // 🔹 Renderizar documento somente leitura
@@ -77,7 +100,23 @@ export default function ManualDocumento() {
             </button>
 
             <h1>Manual Geral IronGoals</h1>
-            <div className="documento-gerado">{renderDocumento(clausulas)}</div>
+
+            {/* 🔹 Campo de filtro */}
+            <div className="filtro-container">
+                <input
+                    type="text"
+                    placeholder="Filtrar cláusulas..."
+                    value={filtro}
+                    onChange={(e) => setFiltro(e.target.value)}
+                />
+                {filtro && (
+                    <button className="limpar-btn" onClick={() => setFiltro("")}>
+                        ❌ Limpar
+                    </button>
+                )}
+            </div>
+
+            <div className="documento-gerado">{renderDocumento(filtrarClausulas(clausulas))}</div>
 
             {/* ⬆️ Botão de topo */}
             {mostrarTopo && (

@@ -1,0 +1,188 @@
+/* ===========================
+   Container principal da área de pagamento
+=========================== */
+.pagar-container {
+    max-width: 1100px;
+    /* largura máxima da seção */
+    margin: 50px auto;
+    /* centraliza vertical/horizontal */
+    padding: 30px;
+    /* espaço interno confortável */
+    background: #e5e5e7;
+    /* fundo claro, neutro */
+    border-radius: 76px;
+    /* bordas bem arredondadas, premium */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    /* sombra suave */
+    text-align: center;
+    /* centraliza títulos e botões */
+    animation: fadeIn 0.6s ease-in-out;
+    /* animação de entrada */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    /* fonte limpa e legível */
+}
+
+/* ===========================
+   Estado de carregamento
+   Mostra enquanto os dados não chegaram
+=========================== */
+.pagar-loading {
+    text-align: center;
+    /* Centraliza no container */
+    font-size: 1rem;
+    /* Tamanho de texto padrão */
+    color: #1e5686;
+    /* Azul institucional IronGoals */
+    font-weight: 500;
+    /* Meio-negrito para dar destaque */
+    letter-spacing: 0.5px;
+    /* Espaçamento suave nas letras */
+    margin: 20px 0;
+    /* Respiro acima e abaixo */
+    animation: pulse 1.5s infinite;
+    /* Efeito de "pulsar" suave */
+}
+
+/* Animação para dar vida ao carregamento */
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+/* ===========================
+   Título principal da seção
+=========================== */
+.pagar-titulo {
+    font-size: 3rem;
+    /* Grande para ser o foco visual */
+    font-weight: bold;
+    /* Forte para reforçar hierarquia */
+    color: #1e5686;
+    /* Azul institucional IronGoals */
+    margin-bottom: 15px;
+    /* Espaço entre título e descrição */
+    line-height: 1.2;
+    /* Altura de linha confortável */
+    letter-spacing: 0.5px;
+    /* Pequeno espaçamento para elegância */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.08);
+    /* Suave destaque */
+}
+
+/* ===========================
+   Texto descritivo abaixo do título
+=========================== */
+.pagar-descricao {
+    font-size: 1.6rem;
+    /* Leitura confortável, destaque secundário */
+    color: #222222;
+    /* Cinza bem escuro em vez de preto puro */
+    line-height: 1.6;
+    /* Espaçamento entre linhas para facilitar leitura */
+    margin-bottom: 20px;
+    /* Respiro entre o texto e a próxima seção */
+    max-width: 850px;
+    /* Mantém colunas de texto legíveis */
+    margin-left: auto;
+    /* Centraliza dentro do container */
+    margin-right: auto;
+}
+
+/* ===========================
+   Lista de benefícios
+=========================== */
+.pagar-lista {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    text-align: left;
+    max-width: 590px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pagar-item {
+    background: #f5f9ff;
+    margin: 10px 0;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.pagar-item:hover {
+    background: #f5f9ff;
+    margin: 10px 0;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.pagar-aviso {
+    margin-top: 15px;
+    font-style: italic;
+    color: #555;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+}
+
+.pagar-botao {
+    margin-top: 20px;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.pagar-botao:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    opacity: 0.95;
+}
+
+.pagar-suporte {
+    margin-top: 25px;
+    font-size: 1.6rem;
+    color: #777;
+    font-style: italic;
+    line-height: 1.5;
+    letter-spacing: 0.4px;
+    text-align: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

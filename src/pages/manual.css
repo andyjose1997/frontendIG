@@ -11,6 +11,48 @@
     border-radius: 8px;
 }
 
+/* 🔹 Container do filtro */
+.filtro-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+/* 🔹 Input de filtro */
+.filtro-container input {
+    flex: 1;
+    padding: 10px 14px;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    max-width: 80%;
+    transition: all 0.2s ease;
+}
+
+.filtro-container input:focus {
+    border-color: #1c1e80;
+    box-shadow: 0 0 5px rgba(28, 30, 128, 0.3);
+}
+
+/* 🔹 Botão de limpar filtro */
+.limpar-btn {
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #eb2626, #a60000);
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.limpar-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
 .botao-retornar {
     display: inline-block;
     margin-bottom: 20px;

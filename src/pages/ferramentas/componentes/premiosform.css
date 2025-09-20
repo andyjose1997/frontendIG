@@ -1,0 +1,90 @@
+.premios-form {
+    background: #0a0157;
+    border-radius: 12px;
+    padding: 20px 25px;
+    max-width: 500px;
+    margin: 20px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.premios-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #edeef0;
+    font-size: 1.9rem;
+}
+
+.premios-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.premios-form label {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.premios-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-weight: 200;
+    font-size: 1.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.premios-form input:focus {
+    border-color: #fafafa;
+    box-shadow: 0 0 5px rgba(5, 113, 214, 0.5);
+}
+
+.premios-botoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.premios-botoes button {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.premios-botoes button[type="submit"] {
+    background: linear-gradient(135deg, #0571d6, #1e5686);
+    color: #fff;
+}
+
+.premios-botoes button[type="submit"]:hover {
+    background: linear-gradient(135deg, #1e5686, #034d99);
+    transform: translateY(-2px);
+}
+
+.premios-botoes .apagar {
+    background: #d9534f;
+    color: #fff;
+}
+
+.premios-botoes .apagar:hover {
+    background: #c9302c;
+    transform: translateY(-2px);
+}
+
+.premios-msg {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 600;
+    color: #e6e6e6;
+}
+
+.premios-msg:empty {
+    display: none;
+}

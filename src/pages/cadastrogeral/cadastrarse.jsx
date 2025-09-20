@@ -1,20 +1,19 @@
 // 📂 src/componentes/Cadastrarse.jsx
 import { useState, useEffect } from "react";
 import './cadastrarse.css';
-import EscolherFotoPerfil from "./escolherfotoperfil";
 import TermosModal from "./termosmodal";
 import AlertaTermos from "./alertatermos";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { URL } from "../../config";
 import ModalFundadores from "./modalfundadores";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import Redes from "./redes";
 
-
-
 export default function Cadastrarse() {
     const { idHost } = useParams();
+    const navigate = useNavigate();
+
     const [idAnfitiao, setIdAnfitiao] = useState(idHost || "");
     const [hostData, setHostData] = useState(null);
     const [mostrarModalHost, setMostrarModalHost] = useState(false);
@@ -24,6 +23,7 @@ export default function Cadastrarse() {
     const [mostrarAlerta, setMostrarAlerta] = useState(false);
     const [mostrarModalFundadores, setMostrarModalFundadores] = useState(false);
     const [mostrarLinks, setMostrarLinks] = useState(false);
+    const [carregandoCadastro, setCarregandoCadastro] = useState(false);
 
     const [email, setEmail] = useState("");
     const [emailVerificado, setEmailVerificado] = useState(false);
@@ -35,7 +35,6 @@ export default function Cadastrarse() {
     const [aceitouTermos, setAceitouTermos] = useState(false);
 
     const [mensagemFinal, setMensagemFinal] = useState("");
-    const [mostrarEscolherFoto, setMostrarEscolherFoto] = useState(false);
 
     // Funções auxiliares
     function capitalizeFirstLetter(string) {
@@ -105,8 +104,9 @@ export default function Cadastrarse() {
             });
 
             if (res.ok) {
+                // 🔹 Login com FormData (campo correto "login")
                 const loginForm = new FormData();
-                loginForm.append("email", email);
+                loginForm.append("login", email); // 👈 backend espera "login"
                 loginForm.append("senha", senha);
 
                 const loginRes = await fetch(`${URL}/login`, {
@@ -120,11 +120,8 @@ export default function Cadastrarse() {
                     localStorage.setItem("usuario", JSON.stringify(dados.usuario));
                     localStorage.setItem("usuario_id", dados.usuario.id);
 
-                    // 🔹 garante que o storage foi salvo antes de abrir o modal
-                    await new Promise(res => setTimeout(res, 200));
-
-                    setMostrarEscolherFoto(true);
-
+                    // 🔹 redireciona para início com modal de foto
+                    window.location.href = "/inicio";
                 }
             } else {
                 const erro = await res.json();
@@ -162,7 +159,6 @@ export default function Cadastrarse() {
                         )}
                     </div>
                 )}
-
 
                 {!hostData && (
                     <div className="host-verificacao">
@@ -263,11 +259,9 @@ export default function Cadastrarse() {
                         >
                             Quero conhecer o site antes de fazer o cadastro
                         </button>
-
                     </div>
                 </div>
             )}
-
 
             {mostrarTermos && (
                 <TermosModal
@@ -285,10 +279,13 @@ export default function Cadastrarse() {
 
                             setAceitouTermos(true);
                             setMostrarTermos(false);
-                            handleCadastroFinal();
+                            setCarregandoCadastro(true);
+                            await handleCadastroFinal();
+                            setCarregandoCadastro(false);
                         } catch {
                             setMostrarAlerta(true);
                             setMensagemFinal("⚠️ Erro ao verificar email no servidor.");
+                            setCarregandoCadastro(false);
                         }
                     }}
                 />
@@ -301,8 +298,12 @@ export default function Cadastrarse() {
                     onClose={() => setMostrarAlerta(false)}
                 />
             )}
-            {mostrarEscolherFoto && (
-                <EscolherFotoPerfil onClose={() => setMostrarEscolherFoto(false)} />
+            {carregandoCadastro && (
+                <div className="overlay-carregando">
+                    <div className="spinner-box">
+                        <p>⏳ Espere...</p>
+                    </div>
+                </div>
             )}
         </>
     );

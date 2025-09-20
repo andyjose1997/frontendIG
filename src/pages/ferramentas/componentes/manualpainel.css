@@ -10,6 +10,50 @@
     font-size: 2rem;
 }
 
+/* 🔹 Container do filtro */
+.filtro-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+/* 🔹 Input de filtro */
+.filtro-container input {
+    flex: 1;
+    max-width: 420px;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.filtro-container input:focus {
+    border-color: #1c1e80;
+    box-shadow: 0 0 6px rgba(28, 30, 128, 0.25);
+}
+
+/* 🔹 Botão limpar */
+.limpar-btn {
+    background: #eb2626;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.limpar-btn:hover {
+    transform: translateY(-2px);
+    background: #c71f1f;
+}
+
 /* ====== Título ====== */
 h2 {
     margin-bottom: 15px;

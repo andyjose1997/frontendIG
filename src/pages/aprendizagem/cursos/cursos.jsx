@@ -1,12 +1,13 @@
-// src/components/Cursos.jsx
-
 import React, { useEffect, useState } from "react";
 import PacoteDeCursosUm from "./pacotes/pacotedecursosum";
 import { URL } from "../../../config";
+import "./cursos.css";
+import ModalSuporte from "../../areaafastada/modalsuporte";
 
 export const Cursos = () => {
     const [categoria, setCategoria] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [mostrarSuporte, setMostrarSuporte] = useState(false); // ✅ controla modal
 
     // Buscar categoria do usuário logado
     useEffect(() => {
@@ -33,20 +34,38 @@ export const Cursos = () => {
             });
     }, []);
 
-    // Enquanto carrega a categoria
     if (loading) {
-        return <p>Carregando...</p>;
+        return <p className="pagar-loading">Carregando...</p>;
     }
 
-    // Se já é membro → mostra Pacote
     if (categoria === "member" || categoria === "mentor" || categoria === "founder") {
         return <PacoteDeCursosUm />;
     }
 
-    // Se não é membro → mostra botão de compra
     return (
-        <div>
+        <div className="pagar-container">
+            <h2 className="pagar-titulo">🎓 Torne sua categoria Member IronGoals</h2>
+
+            <p className="pagar-descricao">
+                Com a categoria <strong>Member</strong>, você desbloqueia um universo de oportunidades:
+                acesso integral aos cursos, certificados exclusivos que fortalecem seu currículo,
+                recursos de acompanhamento de desempenho e atualizações constantes para manter-se
+                competitivo no mercado.
+            </p>
+
+            <ul className="pagar-lista">
+                <li className="pagar-item">✅ Acesso ilimitado a todos os cursos</li>
+                <li className="pagar-item">✅ Certificado digital para cada curso concluído</li>
+                <li className="pagar-item">✅ Participação em rankings e desafios</li>
+                <li className="pagar-item">✅ Suporte e comunidade exclusiva</li>
+            </ul>
+
+            <p className="pagar-aviso">
+                O acesso é liberado automaticamente após a confirmação do pagamento.
+            </p>
+
             <button
+                className="pagar-botao"
                 onClick={async () => {
                     try {
                         const token = localStorage.getItem("token");
@@ -61,35 +80,30 @@ export const Cursos = () => {
                         const data = await response.json();
 
                         if (data.init_point) {
-                            // 🔹 Abre o checkout do MercadoPago em nova aba
                             window.open(data.init_point, "_blank");
                         } else {
                             alert("Erro ao iniciar pagamento.");
                         }
-
                     } catch (error) {
                         console.error("Erro:", error);
                         alert("Erro ao conectar com pagamento.");
                     }
                 }}
-                style={{
-                    marginTop: "20px",
-                    padding: "12px 20px",
-                    backgroundColor: "#28a745",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: "8px",
-                    fontSize: "16px",
-                    fontWeight: "bold",
-                    cursor: "pointer",
-                    transition: "background-color 0.3s"
-                }}
-
-                onMouseOver={(e) => (e.target.style.backgroundColor = "#218838")}
-                onMouseOut={(e) => (e.target.style.backgroundColor = "#28a745")}
             >
                 💳 Comprar Pacote de Cursos (R$60)
             </button>
+
+            {/* 🔹 Texto de suporte clicável */}
+            <p
+                className="pagar-suporte"
+                style={{ cursor: "pointer", textDecoration: "underline" }}
+                onClick={() => setMostrarSuporte(true)}
+            >
+                Em caso de dúvidas, clique aqui para falar com o suporte.
+            </p>
+
+            {/* 🔹 Renderiza o modal se mostrarSuporte = true */}
+            {mostrarSuporte && <ModalSuporte onClose={() => setMostrarSuporte(false)} />}
         </div>
     );
 };

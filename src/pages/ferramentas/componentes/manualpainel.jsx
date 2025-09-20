@@ -149,6 +149,7 @@ function Clausula({ clausula, onAddFilho, onAddIrmao, onSave, onDelete, nivel = 
 export default function ManualPainel() {
     const [clausulas, setClausulas] = useState([]);
     const [visualizar, setVisualizar] = useState(false);
+    const [filtro, setFiltro] = useState(""); // 🔹 novo estado
 
     const carregar = async () => {
         try {
@@ -258,6 +259,29 @@ export default function ManualPainel() {
         doc.save("Manual_Geral_IronGoals.pdf");
     };
 
+    // 🔹 Função para filtrar
+    const filtrarClausulas = (lista) => {
+        if (!filtro.trim()) return lista;
+        const termo = filtro.toLowerCase();
+
+        const buscarRecursivo = (c) => {
+            const corresponde =
+                c.numero.toLowerCase().includes(termo) ||
+                (c.texto && c.texto.toLowerCase().includes(termo));
+
+            const filhosFiltrados = c.filhos
+                ? c.filhos.map(buscarRecursivo).filter(Boolean)
+                : [];
+
+            if (corresponde || filhosFiltrados.length > 0) {
+                return { ...c, filhos: filhosFiltrados };
+            }
+            return null;
+        };
+
+        return lista.map(buscarRecursivo).filter(Boolean);
+    };
+
     // renderizar documento sempre branco/preto
     const renderDocumento = (lista, nivel = 0) =>
         lista
@@ -288,17 +312,30 @@ export default function ManualPainel() {
                 {visualizar ? "Voltar ao Editor" : "Visualizar Documento"}
             </button>
 
+            {/* 🔹 Campo de filtro */}
+            <div className="filtro-container">
+                <input
+                    type="text"
+                    placeholder="🔍 Filtrar cláusulas por número ou texto..."
+                    value={filtro}
+                    onChange={(e) => setFiltro(e.target.value)}
+                />
+                <button onClick={() => setFiltro("")} className="limpar-btn">
+                    ❌ Limpar
+                </button>
+            </div>
+
             {visualizar ? (
                 <div className="documento-gerado">
                     <h3>Documento Gerado</h3>
                     <button className="exportar-btn" onClick={exportarPDF}>
                         📄 Exportar PDF
                     </button>
-                    {renderDocumento(clausulas)}
+                    {renderDocumento(filtrarClausulas(clausulas))}
                 </div>
             ) : (
                 <div className="clausulas-arvore">
-                    {clausulas.map((c) => (
+                    {filtrarClausulas(clausulas).map((c) => (
                         <Clausula
                             key={c.id || c.numero}
                             clausula={c}

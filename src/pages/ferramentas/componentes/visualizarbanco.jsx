@@ -381,7 +381,7 @@ export default function VisualizarBanco() {
 
                                                     {(funcaoUsuario === "admin" || !linha.funcao) && (
                                                         <button
-                                                            className="btn-apagar"
+                                                            className="bttn-apagar"
                                                             onClick={() => handleApagarConta(linha.id)}
                                                         >
                                                             Apagar

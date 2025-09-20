@@ -4,9 +4,10 @@ import './torneioQuizzes.css'
 
 export default function TorneioQuizzes() {
     const [tipos, setTipos] = useState([]);
-    const [mensagem, setMensagem] = useState(""); // 🔹 controla alerta
-    const [mostrarMensagem, setMostrarMensagem] = useState(false); // 🔹 controla "em breve"
-    const [rankings, setRankings] = useState({}); // 🔹 guarda rankings por tipo
+    const [mensagem, setMensagem] = useState("");
+    const [mostrarMensagem, setMostrarMensagem] = useState(false);
+    const [rankings, setRankings] = useState({});
+    const [premiosRanking, setPremiosRanking] = useState([]);
 
     useEffect(() => {
         const carregarDados = async () => {
@@ -38,6 +39,13 @@ export default function TorneioQuizzes() {
                     await carregarRanking(item.tipo_quiz);
                 }
 
+                // 🔹 Carregar prêmios da coluna ranking
+                const resPremios = await fetch(`${URL}/premios/ranking`);
+                const dataPremios = await resPremios.json();
+                if (dataPremios.ranking) {
+                    setPremiosRanking(dataPremios.ranking);
+                }
+
             } catch (err) {
                 console.error("Erro ao carregar dados:", err);
             }
@@ -45,8 +53,6 @@ export default function TorneioQuizzes() {
 
         carregarDados();
     }, []);
-
-
 
     const capitalize = (str) => {
         if (!str) return "";
@@ -86,7 +92,6 @@ export default function TorneioQuizzes() {
                 setMensagem(`Você foi adicionado ao quiz de ${capitalize(tipo)} ✅`);
                 setTimeout(() => setMensagem(""), 3000);
 
-                // 🔹 Carregar ranking desse quiz
                 carregarRanking(tipo);
             }
         } catch (err) {
@@ -95,11 +100,19 @@ export default function TorneioQuizzes() {
     };
 
     return (
-        <div className="ranking-container">   {/* 🔹 container com scroll */}
+        <div className="ranking-container">
             <h2 className="rankperfil-title">🎯 Ranking Quizzes</h2>
+
+            {/* 🔹 Mostrar prêmio da coluna ranking */}
+            {premiosRanking.length > 0 && (
+                <p className="rankperfil-info">
+                    🎁 O prêmio é: <strong>{premiosRanking[0].ranking}</strong> até {premiosRanking[0].mes_ano}
+                </p>
+            )}
+
+
             <p className="rankperfil-info">Escolha um tipo de quiz:</p>
 
-            {/* 🔹 Alerta personalizado */}
             {mensagem && <div className="alerta-quizzes">{mensagem}</div>}
 
             <div className="botoes-quizzes">
@@ -120,7 +133,6 @@ export default function TorneioQuizzes() {
                 )}
             </div>
 
-            {/* 🔹 Rankings abaixo dos botões */}
             <div className="rankings-container">
                 {Object.keys(rankings).map((tipo) => (
                     <div key={tipo} className="ranking-box">

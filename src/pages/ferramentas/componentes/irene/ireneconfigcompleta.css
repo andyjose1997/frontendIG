@@ -17,7 +17,29 @@
     color: #fff;
     cursor: pointer;
     transition: 0.3s;
+    text-align: center;
 }
+
+.irene-completa {
+    display: flex;
+    flex-direction: column;
+    /* organiza em coluna */
+    justify-content: center;
+    /* centraliza no eixo vertical */
+    align-items: center;
+    /* centraliza no eixo horizontal */
+    text-align: center;
+    /* centraliza textos */
+    margin-top: 30px;
+}
+
+.botoes-irene {
+    display: flex;
+    gap: 15px;
+    /* espaçamento entre botões */
+    margin-top: 20px;
+}
+
 
 .botoes-irene button.ativo {
     background: #0162d1;

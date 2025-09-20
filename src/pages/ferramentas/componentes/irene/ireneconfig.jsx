@@ -12,9 +12,15 @@ export default function IreneConfig() {
     const [abaAtiva, setAbaAtiva] = useState("respostas");
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
     const [editarDados, setEditarDados] = useState(null);
+    const [pagina, setPagina] = useState(0);
 
     // Novo estado para abrir modal de conversa
     const [mostrarConversa, setMostrarConversa] = useState(null);
+
+    const paginar = (lista) => {
+        const inicio = pagina * 5;
+        return lista.slice(inicio, inicio + 5);
+    };
 
     // Estado para confirmar exclusão
     const [confirmarDelete, setConfirmarDelete] = useState(null);
@@ -117,6 +123,15 @@ export default function IreneConfig() {
         }
     };
 
+    // 🔹 Avançar página
+    const avancarPagina = (total) => {
+        if ((pagina + 1) * 5 < total) {
+            setPagina(pagina + 1);
+        } else {
+            setPagina(0);
+        }
+    };
+
     return (
         <div className="irene-config">
             <h2>⚙️ Configuração da Irene</h2>
@@ -128,25 +143,25 @@ export default function IreneConfig() {
             <div className="irene-tabs">
                 <button
                     className={abaAtiva === "perguntas" ? "ativo" : ""}
-                    onClick={() => setAbaAtiva("perguntas")}
+                    onClick={() => { setAbaAtiva("perguntas"); setPagina(0); }}
                 >
                     Perguntas
                 </button>
                 <button
                     className={abaAtiva === "respostas" ? "ativo" : ""}
-                    onClick={() => setAbaAtiva("respostas")}
+                    onClick={() => { setAbaAtiva("respostas"); setPagina(0); }}
                 >
                     Respostas
                 </button>
                 <button
                     className={abaAtiva === "keywords" ? "ativo" : ""}
-                    onClick={() => setAbaAtiva("keywords")}
+                    onClick={() => { setAbaAtiva("keywords"); setPagina(0); }}
                 >
                     Keywords
                 </button>
                 <button
                     className={abaAtiva === "naoRespondidas" ? "ativo" : ""}
-                    onClick={() => setAbaAtiva("naoRespondidas")}
+                    onClick={() => { setAbaAtiva("naoRespondidas"); setPagina(0); }}
                 >
                     Não Respondidas ({naoEncontradas.length})
                 </button>
@@ -155,110 +170,129 @@ export default function IreneConfig() {
             {/* 🔹 Conteúdo das abas */}
             <div className="irene-conteudo">
                 {abaAtiva === "perguntas" && (
-                    <ul>
-                        {perguntas.map((p) => (
-                            <li key={p.id}>
-                                <span className="texto">{p.pergunta}</span>
-                                <div className="acoes">
-                                    <button
-                                        className="editar"
-                                        onClick={() => abrirFormulario("editar", p)}
-                                    >
-                                        ✏️ Editar
-                                    </button>
-                                    <button
-                                        className="apagar"
-                                        onClick={() =>
-                                            handleDelete(p.id, "pergunta", carregarPerguntas)
-                                        }
-                                    >
-                                        {confirmarDelete === p.id ? "❗ Confirmar" : "🗑️ Apagar"}
-                                    </button>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
+                    <>
+                        <ul>
+                            {paginar(perguntas).map((p) => (
+                                <li key={p.id}>
+                                    <span className="texto">{p.pergunta}</span>
+                                    <div className="acoes">
+                                        <button
+                                            className="editar"
+                                            onClick={() => abrirFormulario("editar", p)}
+                                        >
+                                            ✏️ Editar
+                                        </button>
+                                        <button
+                                            className="apagar"
+                                            onClick={() =>
+                                                handleDelete(p.id, "pergunta", carregarPerguntas)
+                                            }
+                                        >
+                                            {confirmarDelete === p.id ? "❗ Confirmar" : "🗑️ Apagar"}
+                                        </button>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                        {perguntas.length > 5 && (
+                            <button className="proximos-btn" onClick={() => avancarPagina(perguntas.length)}>
+                                👉 Próximos 5
+                            </button>
+                        )}
+                    </>
                 )}
 
                 {abaAtiva === "respostas" && (
-                    <ul>
-                        {respostas.map((r) => (
-                            <li key={r.id}>
-                                <span className="texto">{r.resposta}</span>
-                                <div className="acoes">
-                                    <button
-                                        className="editar"
-                                        onClick={() => abrirFormulario("editar", r)}
-                                    >
-                                        ✏️ Editar
-                                    </button>
-                                    <button
-                                        className="apagar"
-                                        onClick={() =>
-                                            handleDelete(r.id, "resposta", carregarRespostas)
-                                        }
-                                    >
-                                        {confirmarDelete === r.id ? "❗ Confirmar" : "🗑️ Apagar"}
-                                    </button>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
+                    <>
+                        <ul>
+                            {paginar(respostas).map((r) => (
+                                <li key={r.id}>
+                                    <span className="texto">{r.resposta}</span>
+                                    <div className="acoes">
+                                        <button className="editar" onClick={() => abrirFormulario("editar", r)}>✏️ Editar</button>
+                                        <button className="apagar" onClick={() => handleDelete(r.id, "resposta", carregarRespostas)}>
+                                            {confirmarDelete === r.id ? "❗ Confirmar" : "🗑️ Apagar"}
+                                        </button>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                        {respostas.length > 5 && (
+                            <button className="proximos-btn" onClick={() => avancarPagina(respostas.length)}>
+                                👉 Próximos 5
+                            </button>
+                        )}
+                    </>
                 )}
 
                 {abaAtiva === "keywords" && (
-                    <ul>
-                        {keywords.map((k) => (
-                            <li key={k.id}>
-                                <span className="texto">{k.palavra}</span>
-                                <div className="acoes">
-                                    <button
-                                        className="editar"
-                                        onClick={() => abrirFormulario("editar", k)}
-                                    >
-                                        ✏️ Editar
-                                    </button>
-                                    <button
-                                        className="apagar"
-                                        onClick={() =>
-                                            handleDelete(k.id, "keyword", carregarKeywords)
-                                        }
-                                    >
-                                        {confirmarDelete === k.id ? "❗ Confirmar" : "🗑️ Apagar"}
-                                    </button>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
+                    <>
+                        <ul>
+                            {paginar(keywords).map((k) => (
+                                <li key={k.id}>
+                                    <span className="texto">{k.palavra}</span>
+                                    <div className="acoes">
+                                        <button
+                                            className="editar"
+                                            onClick={() => abrirFormulario("editar", k)}
+                                        >
+                                            ✏️ Editar
+                                        </button>
+                                        <button
+                                            className="apagar"
+                                            onClick={() =>
+                                                handleDelete(k.id, "keyword", carregarKeywords)
+                                            }
+                                        >
+                                            {confirmarDelete === k.id ? "❗ Confirmar" : "🗑️ Apagar"}
+                                        </button>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                        {keywords.length > 5 && (
+                            <button className="proximos-btn" onClick={() => avancarPagina(keywords.length)}>
+                                👉 Próximos 5
+                            </button>
+                        )}
+                    </>
                 )}
 
                 {abaAtiva === "naoRespondidas" && (
-                    <ul>
-                        {naoEncontradas.map((n) => (
-                            <li key={n.id}>
-                                <span className="texto">{n.pergunta}</span>
-                                <div className="acoes">
-                                    <button
-                                        className="editar"
-                                        onClick={() => setMostrarConversa(n)}
-                                    >
-                                        Ver conversa                                    </button>
-                                    <button
-                                        className="apagar"
-                                        onClick={() =>
-                                            handleDelete(
-                                                n.id,
-                                                "nao_encontradas",
-                                                carregarNaoEncontradas
-                                            )
-                                        }
-                                    >
-                                        {confirmarDelete === n.id ? "❗ Confirmar" : "🗑️ Apagar"}
-                                    </button>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
+                    <>
+                        <ul>
+                            {paginar(naoEncontradas).map((n) => (
+                                <li key={n.id}>
+                                    <span className="texto">{n.pergunta}</span>
+                                    <div className="acoes">
+                                        <button
+                                            className="editar"
+                                            onClick={() => setMostrarConversa(n)}
+                                        >
+                                            Ver conversa
+                                        </button>
+                                        <button
+                                            className="apagar"
+                                            onClick={() =>
+                                                handleDelete(
+                                                    n.id,
+                                                    "nao_encontradas",
+                                                    carregarNaoEncontradas
+                                                )
+                                            }
+                                        >
+                                            {confirmarDelete === n.id ? "❗ Confirmar" : "🗑️ Apagar"}
+                                        </button>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                        {naoEncontradas.length > 5 && (
+                            <button className="proximos-btn" onClick={() => avancarPagina(naoEncontradas.length)}>
+                                👉 Próximos 5
+                            </button>
+                        )}
+                    </>
                 )}
             </div>
 

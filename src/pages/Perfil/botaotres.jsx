@@ -7,7 +7,7 @@ export default function BotaoTres() {
     const [mostrar, setMostrar] = useState("vendas"); // padrão = vendas
 
     // ===============================
-    // 🔹 Torneio Vendas (seu código original)
+    // 🔹 Torneio Vendas
     // ===============================
     function TorneioVendas() {
         const [mensagem, setMensagem] = useState("");
@@ -18,19 +18,39 @@ export default function BotaoTres() {
         const [faltamDias, setFaltamDias] = useState(0);
         const [proximoTorneio, setProximoTorneio] = useState("");
         const [mostrarBotao, setMostrarBotao] = useState(false);
+        const [premiosVendas, setPremiosVendas] = useState([]);
 
         const id = localStorage.getItem("usuario_id");
+
+        // 🔹 Carregar prêmios de vendas
+        useEffect(() => {
+            const carregarPremios = async () => {
+                try {
+                    const res = await fetch(`${URL}/premios/vendas`);
+                    const data = await res.json();
+                    if (data.vendas) {
+                        setPremiosVendas(data.vendas);
+                    }
+                } catch (err) {
+                    console.error("Erro ao carregar prêmios de vendas:", err);
+                }
+            };
+
+            carregarPremios();
+        }, []);
+
+        // 🔹 Controla exibição do botão de entrada
         useEffect(() => {
             if (faltamDias <= 10) {
                 const timer = setTimeout(() => {
                     setMostrarBotao(true);
-                }, 2000); // 2 segundos
-
-                return () => clearTimeout(timer); // limpa se o componente desmontar
+                }, 2000);
+                return () => clearTimeout(timer);
             } else {
                 setMostrarBotao(false);
             }
         }, [faltamDias]);
+
         // 🔹 Buscar grupo do usuário
         useEffect(() => {
             const carregarGrupo = async () => {
@@ -90,10 +110,17 @@ export default function BotaoTres() {
             <section className="rankperfil-section">
                 <h2 className="rankperfil-title">🏆 Ranking Vendas</h2>
 
-                {/* 🔹 Sempre mostra os dias restantes */}
+                {/* 🔹 Exibir prêmios de vendas antes do texto de faltam dias */}
+
+
+                {/* 🔹 Sempre mostra os dias restantes + prêmio unificado */}
                 <p className="rankperfil-info">
                     Faltam <strong>{faltamDias}</strong> dias para o próximo torneio ({proximoTorneio}).
+                    {premiosVendas.length > 0 && (
+                        <> O prêmio é: <strong>{premiosVendas[0]}</strong></>
+                    )}
                 </p>
+
 
                 {/* 🔹 Se estiver em um grupo, mostra os detalhes do grupo */}
                 {grupo ? (
@@ -118,17 +145,14 @@ export default function BotaoTres() {
                             Você poderá solicitar entrada quando faltarem <strong>10 dias ou menos</strong>.
                         </p>
 
-                        {/* 🔹 Botão só aparece se faltarem 10 dias ou menos */}
                         {faltamDias <= 10 && mostrarBotao && (
                             <button className="rankperfil-btn" onClick={ativarTorneio}>
                                 Solicitar entrada no torneio
                             </button>
                         )}
-
                     </>
                 )}
 
-                {/* 🔹 Modal estilizado */}
                 {mostrarModal && (
                     <div className="rankperfil-modal-overlay">
                         <div className={`rankperfil-modal-box ${tipoMensagem}`}>
@@ -146,7 +170,6 @@ export default function BotaoTres() {
     // ===============================
     return (
         <div>
-            {/* 🔹 Botões para alternar */}
             <div className="rankperfil-botoes">
                 <button
                     className={mostrar === "vendas" ? "ativo" : ""}
@@ -162,7 +185,6 @@ export default function BotaoTres() {
                 </button>
             </div>
 
-            {/* 🔹 Alterna entre os dois */}
             {mostrar === "vendas" ? <TorneioVendas /> : <TorneioQuizzes />}
         </div>
     );

@@ -4,7 +4,8 @@ import Vendas from "./rankings/vendas";
 import DistribuicaoVendas from "./rankings/distribuicaovendas";
 import DistribuicaoQuiz from "./rankings/distribuicaoquiz";
 import CPP from "./rankings/cpp";
-import GruposVendas from "./rankings/gruposvendas";  // ✅ import do novo componente
+import GruposVendas from "./rankings/gruposvendas";
+import PremiosForm from "./premiosform";
 
 export default function RakingGeral() {
     const [componenteAtivo, setComponenteAtivo] = useState(null);
@@ -27,7 +28,7 @@ export default function RakingGeral() {
                     Distribuição de Tabelas Vendas
                 </button>
                 <button
-                    className={`ranking-botao ${componenteAtivo === "gruposVendas" ? "ativo" : ""}`}  // ✅ botão novo
+                    className={`ranking-botao ${componenteAtivo === "gruposVendas" ? "ativo" : ""}`}
                     onClick={() => setComponenteAtivo("gruposVendas")}
                 >
                     Grupos de Vendas
@@ -44,7 +45,12 @@ export default function RakingGeral() {
                 >
                     CPP
                 </button>
-
+                <button
+                    className={`ranking-botao ${componenteAtivo === "premiosForm" ? "ativo" : ""}`}  // ✅ novo botão
+                    onClick={() => setComponenteAtivo("premiosForm")}
+                >
+                    Prêmios
+                </button>
             </div>
 
             <div className="ranking-conteudo">
@@ -52,7 +58,8 @@ export default function RakingGeral() {
                 {componenteAtivo === "distribuicaoVendas" && <DistribuicaoVendas />}
                 {componenteAtivo === "distribuicaoQuiz" && <DistribuicaoQuiz />}
                 {componenteAtivo === "cpp" && <CPP />}
-                {componenteAtivo === "gruposVendas" && <GruposVendas />} {/* ✅ renderização */}
+                {componenteAtivo === "gruposVendas" && <GruposVendas />}
+                {componenteAtivo === "premiosForm" && <PremiosForm />} {/* ✅ renderização nova */}
             </div>
         </div>
     );
