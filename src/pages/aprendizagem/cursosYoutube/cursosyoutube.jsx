@@ -294,7 +294,7 @@ export const CursosYouTube = () => {
 
                                                         // 🔹 3. Redireciona sempre para o certificado
                                                         const baseUrl = window.location.origin;
-                                                        const link = `${baseUrl}/historico-certificados-youtube/${codigoCertificado}`;
+                                                        const link = `${baseUrl}/historico-certificados/${codigoCertificado}`;
                                                         window.open(link, "_blank");
 
                                                     } catch (err) {

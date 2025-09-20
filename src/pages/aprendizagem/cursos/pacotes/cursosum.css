@@ -1,0 +1,30 @@
+.video-bbbtn {
+    background: linear-gradient(to bottom, #007bff, #0047ab);
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* 🔹 Botão concluído (verde) */
+.video-bbbtn.concluido {
+    background: linear-gradient(to bottom, #28a745, #1e7e34) !important;
+    color: #fff !important;
+}
+
+.curso-bbtn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.curso-bbtn.concluido {
+    background-color: green !important;
+    color: white !important;
+}

@@ -133,7 +133,7 @@ function AppRoutes() {
         <Route path="/recuperar-senha" element={<RecuperarSenha />} />
         <Route path="/Avaliacao" element={<Avaliacao />} /> {/* 🔹 nova rota */}
         <Route
-          path="/historico-certificados-youtube/:codigo?"
+          path="/historico-certificados/:codigo?"
           element={<HistoricoCertificadosYouTube />}
         />
 
