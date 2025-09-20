@@ -6,11 +6,12 @@ export default function VideoModal({ video, onClose, onConcluirVideo }) {
     if (!video) return null;
 
     return (
-        <div className="video-modal-overlay">
-            <div className="video-modal-content">
-                <h3>{video.titulo}</h3>
+        <div className="videoum-overlay">
+            <div className="videoum-content">
+                <h3 className="videoum-title">{video.titulo}</h3>
 
                 <iframe
+                    className="videoum-iframe"
                     width="100%"
                     height="400"
                     src={video.link_embed}
@@ -21,8 +22,14 @@ export default function VideoModal({ video, onClose, onConcluirVideo }) {
                 ></iframe>
 
                 {video.exercicio_link && (
-                    <p style={{ marginTop: "15px" }}>
-                        📘 <a href={video.exercicio_link} target="_blank" rel="noopener noreferrer">
+                    <p className="videoum-exercicio">
+                        📘{" "}
+                        <a
+                            href={video.exercicio_link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="videoum-exercicio-link"
+                        >
                             Acessar Exercício
                         </a>
                     </p>
@@ -31,7 +38,7 @@ export default function VideoModal({ video, onClose, onConcluirVideo }) {
                 {/* 🔹 Passamos o callback para o Quiz */}
                 <QuizPerguntas video={video} onConcluirVideo={onConcluirVideo} />
 
-                <button className="video-modal-close" onClick={onClose}>
+                <button className="videoum-close" onClick={onClose}>
                     ❌ Fechar
                 </button>
             </div>

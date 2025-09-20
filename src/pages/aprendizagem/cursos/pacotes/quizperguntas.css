@@ -1,55 +1,110 @@
-.quiz-container {
-    margin-top: 20px;
-    text-align: left;
+/* ===================== */
+/* 📝 Container do Quiz  */
+/* ===================== */
+.quizum-container {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin: 20px auto;
+    max-width: 800px;
+    animation: quizum-fadeInUp 0.5s ease;
 }
 
-.quiz-container h4 {
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: #333;
+/* ===================== */
+/* ❓ Pergunta           */
+/* ===================== */
+.quizum-container h4 {
+    font-size: 1.9rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #004085;
+    text-align: center;
 }
 
-/* Lista de opções */
-.quiz-options {
+/* ===================== */
+/* 🔘 Lista de Opções    */
+/* ===================== */
+.quizum-options {
     list-style: none;
     padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* duas colunas */
+    gap: 12px;
 }
 
-.quiz-options li {
-    margin: 8px 0;
-}
-
-.quiz-options button {
+.quizum-options li button {
     width: 100%;
-    padding: 10px 14px;
-    border: 1px solid #007bff;
+    padding: 12px 15px;
+    border: none;
     border-radius: 6px;
-    background-color: #f8f9fa;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 15px;
-    color: #007bff;
-}
-
-.quiz-options button:hover {
-    background-color: #007bff;
+    font-size: 1.5rem;
+    font-weight: 500;
     color: #fff;
+    cursor: pointer;
+    background: linear-gradient(135deg, #007bff, #0047ab);
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* Mensagens */
-.quiz-message {
-    margin-top: 12px;
-    font-weight: bold;
+.quizum-options li button:hover {
+    background: linear-gradient(135deg, #0056b3, #003a75);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
 
-.quiz-message.success {
-    color: green;
+.quizum-options li button:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.quiz-message.error {
-    color: red;
+/* ===================== */
+/* 📢 Mensagens de Feedback */
+/* ===================== */
+.quizum-message {
+    margin-top: 15px;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    animation: quizum-fadeInUp 0.4s ease;
 }
 
-.quiz-message.warning {
-    color: orange;
+/* Sucesso */
+.quizum-message.success {
+    color: #155724;
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+/* Erro */
+.quizum-message.error {
+    color: #721c24;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+/* Aviso */
+.quizum-message.warning {
+    color: #856404;
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+}
+
+/* ===================== */
+/* 🎉 Animações          */
+/* ===================== */
+@keyframes quizum-fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

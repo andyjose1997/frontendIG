@@ -1,30 +1,674 @@
-.video-bbbtn {
-    background: linear-gradient(to bottom, #007bff, #0047ab);
+/* ===================== */
+/* 🎥 Botões de Vídeo (Profissional) */
+/* ===================== */
+.pacoteum-video-btn {
+    background: linear-gradient(135deg, #0069d9, #004a99);
     color: #fff;
     padding: 10px 15px;
+    /* 🔹 mantido */
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
+    /* 🔹 mantido */
     cursor: pointer;
     margin-bottom: 8px;
-    font-weight: bold;
+    /* 🔹 mantido */
+    font-weight: 600;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.3px;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
 }
 
-/* 🔹 Botão concluído (verde) */
-.video-bbbtn.concluido {
-    background: linear-gradient(to bottom, #28a745, #1e7e34) !important;
+/* Efeito de brilho sutil ao passar o mouse */
+.pacoteum-video-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: skewX(-20deg);
+    transition: left 0.4s ease;
+}
+
+.pacoteum-video-btn:hover::after {
+    left: 130%;
+}
+
+.pacoteum-video-btn:hover {
+    background: linear-gradient(135deg, #0056b3, #003a80);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+.pacoteum-video-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ✅ Botão concluído (verde elegante) */
+.pacoteum-video-btn.concluido {
+    background: linear-gradient(135deg, #2ecc71, #27ae60) !important;
     color: #fff !important;
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
 }
 
-.curso-bbtn {
-    background-color: #007bff;
-    color: white;
+.pacoteum-video-btn.concluido:hover {
+    background: linear-gradient(135deg, #27ae60, #1e8449) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(39, 174, 96, 0.4);
+}
+
+
+/* ✅ Botão concluído (verde) */
+.pacoteum-video-btn.concluido {
+    background: linear-gradient(135deg, #28a745, #1c7c33) !important;
+    color: #fff !important;
+    box-shadow: 0 3px 8px rgba(40, 167, 69, 0.4);
+}
+
+.pacoteum-video-btn.concluido:hover {
+    background: linear-gradient(135deg, #218838, #16632a) !important;
+}
+
+/* ===================== */
+/* 📚 Botões de Cursos (Profissional) */
+/* ===================== */
+.pacoteum-curso-btn {
+    background: linear-gradient(135deg, #0069d9, #004085);
+    color: #fff;
     padding: 10px 15px;
+    /* 🔹 mesmo tamanho */
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
+    /* 🔹 mesmo tamanho */
     cursor: pointer;
+    margin: 5px 0;
+    /* 🔹 mesmo tamanho */
+    font-weight: 600;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.4px;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
 }
 
-.curso-bbtn.concluido {
-    background-color: green !important;
-    color: white !important;
+/* Brilho sutil passando */
+.pacoteum-curso-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.15);
+    transform: skewX(-20deg);
+    transition: left 0.5s ease;
+}
+
+.pacoteum-curso-btn:hover::after {
+    left: 130%;
+}
+
+.pacoteum-curso-btn:hover {
+    background: linear-gradient(135deg, #0056b3, #002f6c);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+.pacoteum-curso-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ✅ Estado concluído (verde elegante) */
+.pacoteum-curso-btn.concluido {
+    background: linear-gradient(135deg, #2ecc71, #27ae60) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+}
+
+.pacoteum-curso-btn.concluido:hover {
+    background: linear-gradient(135deg, #27ae60, #1e8449) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(39, 174, 96, 0.4);
+}
+
+/* ===================== */
+/* 🔑 Texto Concluído (Profissional) */
+/* ===================== */
+.pacoteum-texto-concluido {
+    margin-top: 5px;
+    /* 🔹 mesmo */
+    font-size: 1.5rem;
+    /* 🔹 mesmo */
+    font-weight: 600;
+    /* 🔹 mesmo */
+    color: #28a745;
+    position: relative;
+    padding-left: 10px;
+    animation: fadeInUp 0.6s ease-in-out;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    border-left: 4px solid #28a745;
+}
+
+.pacoteum-texto-concluido b {
+    color: #1e7e34;
+    background: linear-gradient(90deg, #28a745, #1e7e34);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 🔹 Animação mais suave de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================== */
+/* 📜 Botão Certificado (Profissional) */
+/* ===================== */
+.pacoteum-btn-ver-certificado {
+    display: inline-block;
+    margin-top: 5px;
+    /* 🔹 mesmo */
+    padding: 8px 14px;
+    /* 🔹 mesmo */
+    background: linear-gradient(135deg, #ffd700, #ff9800);
+    color: #fff;
+    border-radius: 6px;
+    /* 🔹 mesmo */
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Brilho metálico em movimento */
+.pacoteum-btn-ver-certificado::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0.4) 0%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 100%);
+    transform: skewX(-25deg);
+    transition: left 0.6s ease;
+}
+
+.pacoteum-btn-ver-certificado:hover::after {
+    left: 130%;
+}
+
+.pacoteum-btn-ver-certificado:hover {
+    background: linear-gradient(135deg, #ffb300, #e67e00);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.pacoteum-btn-ver-certificado:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* ===================== */
+/* 🎉 Animações Extras (Profissional) */
+/* ===================== */
+@keyframes fadeInUpSmooth {
+    0% {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(-2px);
+        /* 🔹 leve overshoot */
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================== */
+/* ⬅ Botão Voltar (Profissional) */
+/* ===================== */
+.pacoteum-voltar-btn {
+    background: linear-gradient(135deg, #6c757d, #4a4f55);
+    color: #fff;
+    padding: 10px 15px;
+    /* 🔹 mesmo tamanho */
+    border: none;
+    border-radius: 6px;
+    /* 🔹 mesmo */
+    cursor: pointer;
+    margin-bottom: 15px;
+    /* 🔹 mesmo */
+    font-weight: 600;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.4px;
+    transition: all 0.25s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Brilho diagonal sutil */
+.pacoteum-voltar-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0.25) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            transparent 100%);
+    transform: skewX(-25deg);
+    transition: left 0.6s ease;
+}
+
+.pacoteum-voltar-btn:hover::after {
+    left: 130%;
+}
+
+.pacoteum-voltar-btn:hover {
+    background: linear-gradient(135deg, #545b62, #343a40);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.pacoteum-voltar-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ===================== */
+/* 🎉 Área Concluído (Profissional) */
+/* ===================== */
+.pacoteum-curso-concluido {
+    margin: 15px 0;
+    /* 🔹 mesmo */
+    padding: 15px;
+    /* 🔹 mesmo */
+    background: linear-gradient(135deg, #f0fff4, #d9fbe5);
+    border-left: 5px solid #28a745;
+    /* 🔹 mesmo tamanho */
+    border-radius: 6px;
+    /* 🔹 mesmo */
+    color: #155724;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    animation: fadeInUpSmooth 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Brilho diagonal bem sutil */
+.pacoteum-curso-concluido::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0.3) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            transparent 100%);
+    transform: skewX(-20deg);
+    transition: left 0.7s ease;
+}
+
+.pacoteum-curso-concluido:hover::before {
+    left: 120%;
+}
+
+.pacoteum-curso-concluido p {
+    margin: 5px 0;
+    /* 🔹 mesmo */
+    font-weight: 500;
+    /* 🔹 mesmo */
+    line-height: 1.4;
+}
+
+/* ===================== */
+/* 🧪 Botão de Teste (Profissional) */
+/* ===================== */
+.pacoteum-btn-emitir-teste {
+    margin-top: 10px;
+    /* 🔹 mesmo */
+    padding: 8px 14px;
+    /* 🔹 mesmo */
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    /* 🔹 mesmo */
+    font-weight: 600;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 3px 8px rgba(192, 57, 43, 0.35);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Brilho sutil em movimento */
+.pacoteum-btn-emitir-teste::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0.35) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            transparent 100%);
+    transform: skewX(-25deg);
+    transition: left 0.6s ease;
+}
+
+.pacoteum-btn-emitir-teste:hover::after {
+    left: 130%;
+}
+
+.pacoteum-btn-emitir-teste:hover {
+    background: linear-gradient(135deg, #c0392b, #922b21);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(192, 57, 43, 0.45);
+}
+
+.pacoteum-btn-emitir-teste:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(192, 57, 43, 0.3);
+}
+
+/* ===================== */
+/* 🏗️ Estrutura Geral (Profissional) */
+/* ===================== */
+.pacoteum-container {
+    padding: 20px;
+    /* 🔹 mesmo */
+    max-width: 2000px;
+    /* 🔹 largura máxima para centralizar */
+    /* 🔹 centraliza */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    /* 🔹 mesmo */
+    color: #2c3e50;
+    /* tom de cinza mais elegante */
+    line-height: 1.6;
+    /* 🔹 melhora a leitura */
+}
+
+/* Título principal dentro do container */
+.pacoteum-titulo {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #004085;
+    position: relative;
+}
+
+/* Linha decorativa abaixo do título */
+.pacoteum-titulo::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #007bff, #0047ab);
+    margin: 8px auto 0;
+    border-radius: 2px;
+}
+
+/* ===================== */
+/* 🎓 Título Principal (Profissional) */
+/* ===================== */
+.pacoteum-titulo {
+    font-size: 3rem;
+    /* 🔹 mesmo tamanho */
+    margin-bottom: 20px;
+    /* 🔹 mesmo */
+    color: #0047ab;
+    font-weight: 700;
+    /* mais consistente que "bold" */
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+/* Linha decorativa embaixo do título */
+.pacoteum-titulo::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    margin: 10px auto 0;
+    background: linear-gradient(90deg, #007bff, #0047ab);
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ===================== */
+/* 📚 Lista de Cursos (Profissional) */
+/* ===================== */
+.pacoteum-lista-cursos {
+    list-style: none;
+    padding: 0;
+    /* 🔹 mesmo */
+    margin: 0;
+    /* 🔹 mesmo */
+}
+
+.pacoteum-item-curso {
+    margin-bottom: 15px;
+    /* 🔹 mesmo */
+    padding: 12px;
+    background: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 123, 255, 0.1);
+}
+
+.pacoteum-item-curso:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    border-color: rgba(0, 123, 255, 0.25);
+}
+
+/* ===================== */
+/* ⏳ Carregando Cursos (Profissional) */
+/* ===================== */
+.pacoteum-carregando {
+    text-align: center;
+    /* 🔹 mesmo */
+    font-size: 1.2rem;
+    /* 🔹 mesmo */
+    color: #6c757d;
+    /* 🔹 mesmo tom base */
+    margin-top: 20px;
+    /* 🔹 mesmo */
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    position: relative;
+    display: inline-block;
+    padding-left: 25px;
+    /* espaço pro ícone animado */
+}
+
+/* Bolinha animada estilo "loading" */
+.pacoteum-carregando::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    margin-top: -7px;
+    border: 2px solid #6c757d;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: pacoteum-spin 1s linear infinite;
+}
+
+/* Animação de rotação */
+@keyframes pacoteum-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===================== */
+/* 📺 Área Curso Ativo (Profissional) */
+/* ===================== */
+.pacoteum-area-curso {
+    padding: 15px;
+    /* 🔹 mesmo */
+    border-radius: 6px;
+    /* 🔹 mesmo */
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-size: 2rem;
+    /* 🔹 mesmo */
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+/* Efeito de destaque ao passar o mouse */
+.pacoteum-area-curso:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 123, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+/* ===================== */
+/* 📺 Subtítulo Vídeos (Profissional) */
+/* ===================== */
+.pacoteum-subtitulo {
+    margin: 15px 0;
+    /* 🔹 mesmo */
+    font-size: 2rem;
+    /* 🔹 mesmo */
+    font-weight: 600;
+    /* 🔹 mesmo */
+    color: #0056b3;
+    letter-spacing: 0.3px;
+    text-align: left;
+    position: relative;
+    padding-left: 10px;
+}
+
+/* Linha decorativa à esquerda */
+.pacoteum-subtitulo::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 70%;
+    background: linear-gradient(180deg, #007bff, #004085);
+    border-radius: 2px;
+}
+
+/* ===================== */
+/* 🎥 Lista de Vídeos (Profissional) */
+/* ===================== */
+.pacoteum-lista-videos {
+    list-style: none;
+    padding: 0;
+    /* 🔹 mesmo */
+    margin: 0;
+    /* 🔹 mesmo */
+    font-size: 2rem;
+    /* 🔹 mesmo */
+}
+
+.pacoteum-item-video {
+    margin-bottom: 10px;
+    /* 🔹 mesmo */
+    padding: 10px 12px;
+    background: #ffffff;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 86, 179, 0.15);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+/* Efeito de destaque no hover */
+.pacoteum-item-video:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    border-color: rgba(0, 86, 179, 0.35);
+    background: linear-gradient(135deg, #ffffff, #f2f8ff);
+}
+
+/* ===================== */
+/* 📦 Section Principal  */
+/* ===================== */
+.pacoteum-section {
+    height: 150vh;
+    /* ocupa a altura da tela */
+    max-height: 130vh;
+    /* não ultrapassa */
+    overflow-y: auto;
+    /* ativa a rolagem vertical */
+    padding: 20px;
+    box-sizing: border-box;
+
+    /* 🔹 Estética */
+    background: #cfd7df;
+    border-radius: 8px;
+}
+
+/* ===================== */
+/* 🎚️ Scrollbar Custom   */
+/* ===================== */
+.pacoteum-section::-webkit-scrollbar {
+    width: 10px;
+    /* largura da barra */
+}
+
+.pacoteum-section::-webkit-scrollbar-track {
+    background: #e9ecef;
+    /* fundo do trilho */
+    border-radius: 6px;
+}
+
+.pacoteum-section::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #007bff, #0047ab);
+    border-radius: 6px;
+    border: 2px solid #e9ecef;
+    /* dá efeito de "acolchoado" */
+    transition: background 0.3s ease;
+}
+
+.pacoteum-section::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #0056b3, #003a75);
 }

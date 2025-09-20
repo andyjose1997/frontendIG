@@ -10,8 +10,20 @@
     min-height: 160vh;
     /* Garante que a altura total da tela será ocupada */
     font-family: 'Poppins', sans-serif;
-    background-color: #f7f7f7;
 }
+
+body {
+    background-image: url("./fundo.png");
+    background-size: cover;
+    /* cobre toda a tela */
+    background-repeat: no-repeat;
+    /* não repete */
+    background-position: center;
+    /* centralizado */
+    background-attachment: fixed;
+    /* fica fixo ao rolar a página */
+}
+
 
 /* Sidebar (área da esquerda) */
 .sidebar {
@@ -142,7 +154,7 @@ footer {
 }
 
 /* Responsividade */
-@media (max-width: 768px) {
+@media (max-width: 868px) {
     .aprendizagem-container {
         grid-template-columns: 100%;
         /* Sidebar e conteúdo ficam empilhados em telas menores */
@@ -150,7 +162,7 @@ footer {
     }
 
     .sidebar {
-        width: 100%;
+        width: 40%;
         padding: 5% 20px;
     }
 

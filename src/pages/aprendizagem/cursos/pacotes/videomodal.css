@@ -1,47 +1,254 @@
-/* Fundo escuro para modal */
-.video-modal-overlay {
+/* ===================== */
+/* 🎬 Fundo Escuro Modal (Profissional) */
+/* ===================== */
+.videoum-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    /* 🔹 mesmo */
     height: 100%;
+    /* 🔹 mesmo */
     background-color: rgba(0, 0, 0, 0.7);
+    /* 🔹 mesma cor */
     display: flex;
+    /* 🔹 mesmo */
     justify-content: center;
+    /* 🔹 mesmo */
     align-items: center;
+    /* 🔹 mesmo */
     z-index: 1000;
+    /* 🔹 mesmo */
+
+    /* 🔹 refinamentos */
+    backdrop-filter: blur(4px);
+    /* leve desfoque no fundo */
+    -webkit-backdrop-filter: blur(4px);
+    /* compatibilidade Safari */
+    transition: opacity 0.3s ease;
+    /* suavidade ao aparecer/desaparecer */
+    animation: videoum-fadeIn 0.3s ease;
+    overflow-y: auto;
+    /* garante scroll se conteúdo for grande */
 }
 
-/* Caixa central */
-.video-modal-content {
-    background: #fff;
+/* ===================== */
+/* 📦 Caixa Central (Profissional) */
+/* ===================== */
+.videoum-content {
+    background: #02125c;
+    /* 🔹 mesma cor */
     padding: 20px;
+    /* 🔹 mesmo */
     border-radius: 12px;
+    /* 🔹 mesmo */
     max-width: 800px;
+    /* 🔹 mesmo */
     width: 90%;
+    /* 🔹 mesmo */
     text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    /* 🔹 mesmo */
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+    /* 🔹 mesmo base */
+    animation: videoum-scaleIn 0.3s ease;
+
+    /* 🔹 refinamentos */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    /* borda sutil */
+    backdrop-filter: blur(6px);
+    /* efeito vidro */
+    -webkit-backdrop-filter: blur(6px);
+    /* compatibilidade Safari */
+    color: #f1f1f1;
+    /* texto claro sobre fundo escuro */
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Título do vídeo */
-.video-modal-content h3 {
+/* efeito ao passar o mouse (sutil) */
+.videoum-content:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+}
+
+/* ===================== */
+/* 🎥 Título do Vídeo (Profissional) */
+/* ===================== */
+.videoum-title {
     margin-bottom: 15px;
-    font-size: 20px;
-    color: #222;
+    /* 🔹 mesmo */
+    font-size: 3rem;
+    /* 🔹 mesmo */
+    color: #f3f3f3;
+    /* 🔹 mesma cor */
+    font-weight: 600;
+    /* 🔹 mesmo */
+    letter-spacing: 0.3px;
+    /* 🔹 mesmo */
+    text-align: center;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    /* destaque premium */
+    position: relative;
+    padding-bottom: 8px;
 }
 
-/* Botão fechar */
-.video-modal-close {
+/* linha decorativa abaixo do título */
+.videoum-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #007bff, #00d4ff);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ===================== */
+/* ▶️ Iframe do Vídeo (Profissional) */
+/* ===================== */
+.videoum-iframe {
+    border-radius: 20px;
+    /* 🔹 mesmo */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* borda sutil no dark */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    /* sombra mais elegante */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #000;
+    /* garante fundo sólido ao carregar */
+}
+
+/* 🔹 leve efeito ao focar ou passar o mouse */
+.videoum-iframe:hover,
+.videoum-iframe:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    border-color: rgba(0, 123, 255, 0.35);
+}
+
+/* ===================== */
+/* 📘 Link Exercício (Profissional) */
+/* ===================== */
+.videoum-exercicio {
     margin-top: 15px;
+    /* 🔹 mesmo */
+    font-size: 0.95rem;
+    /* 🔹 mesmo */
+    color: #444;
+    /* 🔹 mesma cor */
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    /* espaço entre ícone 📘 e link */
+    animation: videoum-fadeIn 0.4s ease;
+}
+
+.videoum-exercicio-link {
+    color: #007bff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.videoum-exercicio-link:hover {
+    color: #0056b3;
+    background: rgba(0, 123, 255, 0.1);
+    text-decoration: underline;
+}
+
+
+.videoum-exercicio-link {
+    color: #007bff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.videoum-exercicio-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* ===================== */
+/* ❌ Botão Fechar (Profissional) */
+/* ===================== */
+.videoum-close {
+    margin-top: 15px;
+    /* 🔹 mesmo */
     padding: 10px 16px;
+    /* 🔹 mesmo */
     border: none;
+    /* 🔹 mesmo */
     border-radius: 6px;
-    background-color: #dc3545;
+    /* 🔹 mesmo */
+    background: linear-gradient(135deg, #dc3545, #a71d2a);
+    /* 🔹 mesma cor */
     color: #fff;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.4px;
+    transition: all 0.25s ease;
+    box-shadow: 0 3px 8px rgba(172, 31, 31, 0.35);
+    /* sombra mais rica */
+    position: relative;
+    overflow: hidden;
 }
 
-.video-modal-close:hover {
-    background-color: #b02a37;
+/* Brilho em movimento */
+.videoum-close::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0.4) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            transparent 100%);
+    transform: skewX(-25deg);
+    transition: left 0.6s ease;
+}
+
+.videoum-close:hover::after {
+    left: 130%;
+}
+
+.videoum-close:hover {
+    background: linear-gradient(135deg, #c82333, #821822);
+    /* 🔹 mesma paleta */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(172, 31, 31, 0.45);
+}
+
+.videoum-close:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(172, 31, 31, 0.3);
+}
+
+/* ===================== */
+/* ✨ Animações (Profissional) */
+/* ===================== */
+@keyframes videoum-fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96) translateY(6px);
+        /* entra levemente menor e deslocado */
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        /* posição final normal */
+    }
 }

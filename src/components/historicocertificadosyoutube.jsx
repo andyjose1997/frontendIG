@@ -5,6 +5,9 @@ import { URL } from "../config";
 import "./historicocertificadosyoutube.css";
 import Rodape from "../pages/rodape";
 
+// 🔹 Importa a busca alternativa
+import { buscarDetalhesCodigo } from "./buscardetalhescodigo";
+
 export default function HistoricoCertificadosYouTube() {
     const { codigo: codigoUrl } = useParams();
     const [codigo, setCodigo] = useState("");
@@ -28,17 +31,53 @@ export default function HistoricoCertificadosYouTube() {
         }
     };
 
-    const handleVerCertificado = () => {
+    const handleVerCertificado = async () => {
         if (!codigo.trim()) return;
-        buscarDetalhes(codigo);
+
+        let data = null;
+
+        if (codigo.trim().length === 10) {
+            // 🔹 Se o código tem 10 caracteres → busca alternativa
+            data = await buscarDetalhesCodigo(codigo);
+            if (data) {
+                setDadosCertificado(data);
+                setCertUrl(data.link_publico || null);
+            } else {
+                setDadosCertificado(null);
+                setCertUrl(null);
+            }
+        } else {
+            // 🔹 Caso contrário → busca padrão
+            buscarDetalhes(codigo);
+        }
     };
 
     useEffect(() => {
         if (codigoUrl) {
             setCodigo(codigoUrl);
-            buscarDetalhes(codigoUrl);
+            if (codigoUrl.trim().length === 10) {
+                buscarDetalhesCodigo(codigoUrl).then((data) => {
+                    if (data) {
+                        setDadosCertificado(data);
+                        setCertUrl(data.link_publico || null);
+                    }
+                });
+            } else {
+                buscarDetalhes(codigoUrl);
+            }
         }
     }, [codigoUrl]);
+
+    // 🔹 Define o título dinamicamente
+    const getTitulo = () => {
+        if (codigo.trim().length === 8) {
+            return "📜 Certificados de Conclusão YouTube via IronGoals";
+        }
+        if (codigo.trim().length === 10) {
+            return "📜 Certificados de Conclusão via IronGoals";
+        }
+        return "📜 Certificados de Conclusão";
+    };
 
     // 🔹 Função para decidir se é PDF ou imagem
     const renderCertificado = () => {
@@ -85,7 +124,7 @@ export default function HistoricoCertificadosYouTube() {
 
     return (
         <main className="historico-certificados">
-            <h1>📜 Certificados de Conclusão — YouTube via IronGoals</h1>
+            <h1>{getTitulo()}</h1>
 
             <div className="busca-certificado">
                 <input
@@ -115,12 +154,12 @@ export default function HistoricoCertificadosYouTube() {
                         <li>
                             <strong>Canal do Autor:</strong>{" "}
                             <a href={dadosCertificado.canal_autor} target="_blank" rel="noopener noreferrer">
-                                {dadosCertificado.canal_autor}
+                                IronGoals
                             </a>
                         </li>
                         <li><strong>Data de Emissão:</strong> {dadosCertificado.data_emissao}</li>
                         <li><strong>Código:</strong> {dadosCertificado.codigo}</li>
-                        <li  ><strong>Nº Registro:</strong> {dadosCertificado.registro_interno}</li>
+                        <li><strong>Nº Registro:</strong> {dadosCertificado.registro_interno}</li>
                         <li><strong>Status:</strong> ✅ Certificado válido e emitido pela IronGoals</li>
                     </ul>
 

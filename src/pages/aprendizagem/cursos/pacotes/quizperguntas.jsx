@@ -107,7 +107,7 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
                     prepararOpcoes(perguntas[perguntaAtual + 1]);
                     setMensagem("");
                 } else {
-                    setMensagem("🎉 Você completou todas as perguntas!");
+                    setMensagem("");
                     salvarProgresso(); // 🔹 Salva no banco e notifica
                 }
             }, 1000);
@@ -127,11 +127,11 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
     };
 
     return (
-        <div className="quiz-container">
+        <div className="quizum-container">
             {tempoRestante === 0 && perguntas.length > 0 && (
                 <>
                     <h4>{perguntas[perguntaAtual]?.pergunta}</h4>
-                    <ul className="quiz-options">
+                    <ul className="quizum-options">
                         {opcoes.map((opcao, idx) => (
                             <li key={idx}>
                                 <button onClick={() => responder(opcao)}>
@@ -142,7 +142,7 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
                     </ul>
                     {mensagem && (
                         <p
-                            className={`quiz-message ${mensagem.includes("correta")
+                            className={`quizum-message ${mensagem.includes("correta")
                                 ? "success"
                                 : mensagem.includes("errada")
                                     ? "error"
