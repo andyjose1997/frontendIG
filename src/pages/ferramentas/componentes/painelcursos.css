@@ -30,12 +30,10 @@
     margin-bottom: 25px;
     font-size: 32px;
     font-weight: 700;
-    background: linear-gradient(90deg, #4facfe, #00f2fe);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     position: relative;
+    color: white !important;
 }
 
 /* 🔹 Linha de destaque abaixo do título */
