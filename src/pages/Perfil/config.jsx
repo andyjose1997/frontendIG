@@ -6,6 +6,7 @@ import ChavePix from './config/chavepix';
 import MudarSenha from './config/mudarsenha';
 import PerguntasSeguranca from './config/perguntasseguranca';
 import { URL } from '../../config';
+import { display } from 'html2canvas/dist/types/css/property-descriptors/display';
 
 export default function Config() {
     const [mostrarPrivacidade, setMostrarPrivacidade] = useState(false);
@@ -72,14 +73,14 @@ export default function Config() {
                     Alterar Chave Pix
                 </button>
 
-                <button className="botao-config">Gerenciar Assinatura</button>
+                <button style={{ display: "none" }} className="botao-config">Gerenciar Assinatura</button>
                 <button style={{ display: "none" }}
                     className="botao-config"
                     onClick={() => setMostrarPrivacidade(true)}
                 >
                     Tornar Conta Pública/Privada
                 </button>
-                <button className="botao-config">Fale Conosco</button>
+                <button style={{ display: "none" }} className="botao-config">Fale Conosco</button>
             </section>
         );
     }
