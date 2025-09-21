@@ -110,59 +110,63 @@ export default function BotaoTres() {
             <section className="rankperfil-section">
                 <h2 className="rankperfil-title">🏆 Ranking Vendas</h2>
 
-                {/* 🔹 Exibir prêmios de vendas antes do texto de faltam dias */}
-
-
-                {/* 🔹 Sempre mostra os dias restantes + prêmio unificado */}
-                <p className="rankperfil-info">
-                    Faltam <strong>{faltamDias}</strong> dias para o próximo torneio ({proximoTorneio}).
-                    {premiosVendas.length > 0 && (
-                        <> O prêmio é: <strong>{premiosVendas[0]}</strong></>
-                    )}
-                </p>
-
-
-                {/* 🔹 Se estiver em um grupo, mostra os detalhes do grupo */}
-                {grupo ? (
+                {premiosVendas.length > 0 ? (
                     <>
                         <p className="rankperfil-info">
-                            Você está no grupo <strong>{grupo}</strong>
-                        </p>
-                        <hr />
-
-                        <ul className="rankperfil-lista">
-                            {participantes.map((p, index) => (
-                                <li key={index}>
-                                    <span>{p.nome} {p.sobrenome}</span> |{" "}
-                                    <span className="rankperfil-pontos">{p.pontos} pts</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </>
-                ) : (
-                    <>
-                        <p className="rankperfil-info">
-                            Você poderá solicitar entrada quando faltarem <strong>10 dias ou menos</strong>.
+                            Faltam <strong>{faltamDias}</strong> dias para o próximo torneio ({proximoTorneio}).
+                            <> O prêmio é: <strong>{premiosVendas[0]}</strong></>
                         </p>
 
-                        {faltamDias <= 10 && mostrarBotao && (
-                            <button className="rankperfil-btn" onClick={ativarTorneio}>
-                                Solicitar entrada no torneio
-                            </button>
+                        {/* 🔹 Se estiver em um grupo, mostra os detalhes do grupo */}
+                        {grupo ? (
+                            <>
+                                <p className="rankperfil-info">
+                                    Você está no grupo <strong>{grupo}</strong>
+                                </p>
+                                <hr />
+
+                                <ul className="rankperfil-lista">
+                                    {participantes.map((p, index) => (
+                                        <li key={index}>
+                                            <span>{p.nome} {p.sobrenome}</span> |{" "}
+                                            <span className="rankperfil-pontos">{p.pontos} pts</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </>
+                        ) : (
+                            <>
+                                <p className="rankperfil-info">
+                                    Você poderá solicitar entrada quando faltarem <strong>10 dias ou menos</strong>.
+                                </p>
+
+                                {faltamDias <= 10 && mostrarBotao && (
+                                    <button className="rankperfil-btn" onClick={ativarTorneio}>
+                                        Solicitar entrada no torneio
+                                    </button>
+                                )}
+                            </>
                         )}
                     </>
+                ) : (
+                    <p className="rankperfil-info">
+                        Estamos aguardando o próximo torneio. ⏳
+                    </p>
                 )}
 
                 {mostrarModal && (
                     <div className="rankperfil-modal-overlay">
                         <div className={`rankperfil-modal-box ${tipoMensagem}`}>
                             <p>{mensagem}</p>
-                            <button className="rankperfil-modal-btn" onClick={() => setMostrarModal(false)}>OK</button>
+                            <button className="rankperfil-modal-btn" onClick={() => setMostrarModal(false)}>
+                                OK
+                            </button>
                         </div>
                     </div>
                 )}
             </section>
         );
+
     }
 
     // ===============================

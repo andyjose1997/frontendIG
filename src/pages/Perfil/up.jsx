@@ -280,7 +280,7 @@ export default function Up() {
                                         onChange={(e) => setComentario(e.target.value)}
                                         placeholder="Qual é a sua próxima meta?"
                                     />
-                                    <button className="botaoSalvar" onClick={handleSalvarComentario}>Salvar</button>
+                                    <button style={{ color: "white", }} onClick={handleSalvarComentario}>Salvar</button>
                                 </>
                             )}
                         </div>

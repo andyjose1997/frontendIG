@@ -5,14 +5,12 @@ import Feed from "./feed";
 import Buscador from "./buscador";
 import Propaganda from "./propaganda";
 import Indicados from "./indicados";
-import EscolherFotoPerfil from "../cadastrogeral/escolherfotoperfil"; // 🔹 importa o modal
 import './inicio.css';
 import { URL } from "../../config";
 
 function Inicio() {
     const [abaAtiva, setAbaAtiva] = useState("feed"); // 🔹 Feed aberto por padrão
     const [largura, setLargura] = useState(window.innerWidth);
-    const [mostrarEscolherFoto, setMostrarEscolherFoto] = useState(false);
 
     const navigate = useNavigate();
 
@@ -31,19 +29,6 @@ function Inicio() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    // 🔹 Verifica se a URL tem ?foto=1 → abre o modal
-    useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        if (params.get("foto") === "1") {
-            setMostrarEscolherFoto(true);
-
-            // 🔹 remove o parâmetro da URL sem recarregar a página
-            const url = new URL(window.location.href);
-            url.searchParams.delete("foto");
-            window.history.replaceState({}, document.title, url.pathname);
-        }
-    }, []);
-
     const isMobile = largura <= 700;
 
     return (
@@ -53,7 +38,7 @@ function Inicio() {
             </div>
 
             {/* 🔹 Mobile: botões + conteúdo central */}
-            {isMobile ? (
+            {isMobile && (
                 <>
                     <div className="acoes-topo">
                         <button
@@ -72,8 +57,7 @@ function Inicio() {
                             className={abaAtiva === "propaganda" ? "ativo" : ""}
                             onClick={() => setAbaAtiva("propaganda")}
                         >
-                            Recomendados
-                        </button>
+                            Recomendados                        </button>
                     </div>
 
                     <div className="conteudo-central">
@@ -82,8 +66,10 @@ function Inicio() {
                         {abaAtiva === "propaganda" && <Propaganda />}
                     </div>
                 </>
-            ) : (
-                // 🔹 Desktop: layout em grid
+            )}
+
+            {/* 🔹 Desktop: layout em grid */}
+            {!isMobile && (
                 <>
                     <div className="Indicados">
                         <Indicados />
@@ -95,11 +81,6 @@ function Inicio() {
                         <Propaganda />
                     </div>
                 </>
-            )}
-
-            {/* 🔹 Modal de escolher foto */}
-            {mostrarEscolherFoto && (
-                <EscolherFotoPerfil onClose={() => setMostrarEscolherFoto(false)} />
             )}
         </section>
     );

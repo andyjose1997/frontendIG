@@ -291,10 +291,10 @@
     transform: scale(1.1);
 }
 
-.botaoSalvar {
+.bbotaaaoSalvar {
     padding: 10px 20px;
-    background-color: #00ffae;
-    color: #000a3c;
+    background-color: #eff1f1 !important;
+    color: #ececec;
 
     border: none;
     border-radius: 10px;

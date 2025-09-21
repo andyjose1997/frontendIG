@@ -1,0 +1,450 @@
+/* ================================
+   Painel Cursos - IronGoals
+   Prefixo: icpn-
+================================ */
+
+/* 🔹 Container principal atualizado */
+.icpn-painel-cursos {
+    width: 1500px;
+    max-width: 80%;
+    margin: 40px auto;
+    padding: 30px;
+    background: linear-gradient(160deg, #1c1c28, #242437);
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    color: #f5f5f7;
+    font-family: "Segoe UI", "Roboto", sans-serif;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(6px);
+}
+
+/* 🔹 Efeito de foco ao passar o mouse */
+.icpn-painel-cursos:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* 🔹 Títulos */
+.icpn-painel-cursos h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+}
+
+/* 🔹 Linha de destaque abaixo do título */
+.icpn-painel-cursos h2::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    margin: 8px auto 0;
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(79, 172, 254, 0.7);
+}
+
+.icpn-painel-cursos h3 {
+    margin: 25px 0 12px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #61dafb;
+    text-shadow: 0 0 8px rgba(97, 218, 251, 0.3);
+    border-left: 4px solid #61dafb;
+    padding-left: 10px;
+    letter-spacing: 0.5px;
+}
+
+.icpn-painel-cursos h4 {
+    margin: 15px 0 8px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #9be2ff;
+    text-shadow: 0 0 6px rgba(155, 226, 255, 0.25);
+    border-bottom: 1px solid rgba(155, 226, 255, 0.3);
+    padding-bottom: 4px;
+    letter-spacing: 0.3px;
+}
+
+/* =======================
+   Formulários Modernos
+======================= */
+.icpn-form-curso,
+.icpn-painel-cursos form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 20px 0;
+    padding: 18px;
+    background: rgba(43, 43, 60, 0.6);
+    border: 1px solid rgba(97, 218, 251, 0.15);
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+}
+
+/* Inputs & Textareas */
+.icpn-form-curso input,
+.icpn-form-curso textarea,
+.icpn-painel-cursos input,
+.icpn-painel-cursos textarea {
+    padding: 12px 14px;
+    border: 1px solid rgba(97, 218, 251, 0.2);
+    border-radius: 10px;
+    background: #1e1e2e;
+    color: #f1f1f1;
+    width: 98%;
+    font-size: 2rem;
+    outline: none;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.15s;
+}
+
+.icpn-form-curso input:focus,
+.icpn-form-curso textarea:focus,
+.icpn-painel-cursos input:focus,
+.icpn-painel-cursos textarea:focus {
+    border-color: #61dafb;
+    box-shadow: 0 0 8px rgba(97, 218, 251, 0.4);
+    transform: scale(1.01);
+}
+
+/* Botões gerais */
+.icpn-painel-cursos button {
+    background: linear-gradient(135deg, #61dafb, #4abce0);
+    border: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #0a0a0a;
+    transition: background 0.3s, transform 0.15s, box-shadow 0.3s;
+}
+
+.icpn-painel-cursos button:hover {
+    background: linear-gradient(135deg, #4abce0, #2f9ecf);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 6px 18px rgba(97, 218, 251, 0.35);
+}
+
+.icpn-painel-cursos button:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 8px rgba(97, 218, 251, 0.2);
+}
+
+/* =======================
+   Lista de cursos moderna
+======================= */
+.icpn-lista-cursos ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1.4rem !important;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.icpn-lista-cursos li {
+    background: linear-gradient(145deg, #242434, #2f2f45);
+    margin: 0;
+    padding: 14px 18px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.4rem !important;
+
+    gap: 14px;
+    transition: transform 0.25s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(97, 218, 251, 0.15);
+    cursor: pointer;
+}
+
+.icpn-lista-cursos li:hover {
+    transform: translateX(6px) scale(1.02);
+    box-shadow: 0 6px 18px rgba(97, 218, 251, 0.25);
+    border-color: rgba(97, 218, 251, 0.3);
+}
+
+.icpn-lista-cursos li span {
+    flex: 1;
+    font-size: 2.0rem !important;
+    font-weight: 500;
+    color: #e9f6ff;
+    text-shadow: 0 0 5px rgba(97, 218, 251, 0.2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* =======================
+   Itens de vídeo refinados
+======================= */
+.icpn-video-item {
+    background: linear-gradient(160deg, #1f1f2e, #2b2b40);
+    padding: 16px 18px;
+    border-radius: 12px;
+    margin: 14px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 2rem;
+    border: 1px solid rgba(97, 218, 251, 0.15);
+    transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.25s ease;
+    cursor: pointer;
+}
+
+.icpn-video-item:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 10px 22px rgba(97, 218, 251, 0.28);
+    border-color: rgba(97, 218, 251, 0.45);
+}
+
+/* Título dentro do vídeo */
+.icpn-video-item p {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.6rem !important;
+    color: #9be2ff;
+    text-shadow: 0 0 6px rgba(155, 226, 255, 0.25);
+    letter-spacing: 0.4px;
+}
+
+.icpn-video-item p {
+    margin: 0;
+    font-weight: 600;
+    font-size: 17px;
+    color: #9be2ff;
+    text-shadow: 0 0 8px rgba(155, 226, 255, 0.35);
+    letter-spacing: 0.4px;
+    line-height: 1.4;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.icpn-video-item p:hover {
+    color: #c5f1ff;
+    transform: translateX(3px);
+}
+
+/* =======================
+   Itens de pergunta refinados
+======================= */
+.icpn-pergunta-item {
+    background: linear-gradient(145deg, #222236, #2e2e48);
+    margin: 12px 0;
+    padding: 14px 18px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(97, 218, 251, 0.18);
+    transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.25s ease;
+    cursor: pointer;
+}
+
+.icpn-pergunta-item:hover {
+    transform: translateX(8px) scale(1.01);
+    box-shadow: 0 6px 16px rgba(97, 218, 251, 0.25);
+    border-color: rgba(97, 218, 251, 0.45);
+    background: linear-gradient(145deg, #27273d, #343455);
+}
+
+.icpn-pergunta-item span {
+    font-size: 15px;
+    font-weight: 500;
+    color: #e9f6ff;
+    text-shadow: 0 0 5px rgba(97, 218, 251, 0.2);
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.icpn-pergunta-item:hover span {
+    color: #c4efff;
+}
+
+.icpn-pergunta-item span {
+    font-size: 15px;
+    font-weight: 500;
+    color: #e4f6ff;
+    text-shadow: 0 0 6px rgba(97, 218, 251, 0.25);
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+    line-height: 1.4;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.icpn-pergunta-item:hover span {
+    color: #c8f3ff;
+    transform: translateX(3px);
+}
+
+/* =======================
+   Modal Moderno
+======================= */
+.icpn-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 15, 25, 0.88);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(6px);
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.icpn-modal-content {
+    background: linear-gradient(160deg, #1a1a27, #232335);
+    padding: 28px;
+    border-radius: 18px;
+    max-width: 920px;
+    width: 92%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(97, 218, 251, 0.25);
+    animation: slideUp 0.35s ease forwards;
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: #61dafb #1a1a27;
+    /* Firefox */
+}
+
+/* Barra personalizada no Chrome/Edge/Safari */
+.icpn-modal-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.icpn-modal-content::-webkit-scrollbar-track {
+    background: #1a1a27;
+    border-radius: 12px;
+}
+
+.icpn-modal-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #61dafb, #4abce0);
+    border-radius: 12px;
+    border: 2px solid #1a1a27;
+    transition: background 0.3s ease;
+}
+
+.icpn-modal-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #4abce0, #2f9ecf);
+}
+
+
+/* Botão voltar dentro do modal */
+.icpn-btn-voltar {
+    margin-top: 18px;
+    width: 100%;
+    background: linear-gradient(135deg, #444, #555);
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.icpn-btn-voltar:hover {
+    background: linear-gradient(135deg, #555, #666);
+    transform: scale(1.03);
+}
+
+.icpn-btn-voltar:active {
+    transform: scale(0.95);
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* =======================
+   Alertas
+======================= */
+.icpn-alerta {
+    margin: 15px 0;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: 500;
+    animation: aparecer 0.3s ease;
+}
+
+.icpn-alerta.sucesso {
+    background: #1e4d2b;
+    color: #9dffb0;
+    border-left: 6px solid #31c96d;
+}
+
+.icpn-alerta.erro {
+    background: #4d1e1e;
+    color: #ff9d9d;
+    border-left: 6px solid #e03131;
+}
+
+.icpn-alerta.confirm {
+    background: #1e324d;
+    color: #9dc9ff;
+    border-left: 6px solid #317ae0;
+}
+
+.icpn-alerta-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.icpn-alerta-actions button {
+    flex: 1;
+}
+
+/* =======================
+   Animações
+======================= */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -13,6 +13,7 @@ import IreneConfigCompleta from './componentes/irene/ireneconfigcompleta';
 import './painelcontrole.css';
 import ManualPainel from './componentes/manualpainel';
 import PainelYouTube from './componentes/painelyoutube/painelyoutube';
+import PainelCursos from './componentes/painelcursos';
 
 
 export default function PainelControle() {
@@ -104,6 +105,12 @@ export default function PainelControle() {
                 >
                     YouTube
                 </button>
+                <button
+                    className={painelAtivo === "cursos" ? "controle-ativo" : ""}
+                    onClick={() => setPainelAtivo("cursos")}
+                >
+                    Cursos
+                </button>
 
 
             </div>
@@ -117,6 +124,7 @@ export default function PainelControle() {
             {painelAtivo === "listaUsuarios" && <ListaUsuariosSimples />}
             {painelAtivo === "manual" && <ManualPainel />}
             {painelAtivo === "youtube" && <PainelYouTube />}
+            {painelAtivo === "cursos" && <PainelCursos />}
 
             {/* 🔹 Novo fluxo Info de Cadastro */}
             {painelAtivo === "infoCadastro" && (

@@ -81,6 +81,17 @@ export default function Feed() {
                     {filtro === "muro" && "Muro de Serviços"}
                 </h1>
 
+                {filtro !== "sistema" && (
+                    <h3 className="mensagenpub">
+                        Publique aqui suas ideias e conquistas. Seus indicados e seu anfitrião poderão acompanhar tudo em tempo real.
+                    </h3>
+                )}
+                {filtro === "sistema" && (
+                    <h3 className="mensagenpub">
+                        Aqui verá os anuncios oficiais do sistema
+                    </h3>
+                )}
+
                 {(filtro !== "sistema" || ["admin", "auditor", "coordenador"].includes(funcaoUsuario)) && (
                     <Postar
                         novaPostagem={novaPostagem}

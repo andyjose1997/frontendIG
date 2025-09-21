@@ -43,6 +43,87 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* Estado: aguardando upload */
+.fotooo-aguarde {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #0d6efd;
+    /* azul destaque */
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    animation: pulseText 1.5s infinite;
+}
+
+/* Estado: foto carregada com sucesso */
+.fotooo-ok {
+    font-size: 1.4rem !important;
+    font-weight: 600;
+    color: #198754;
+    /* verde bootstrap */
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Botão final */
+.bbttn-fechar {
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.bbttn-fechar:hover {
+    background: linear-gradient(135deg, #0a58ca, #0d6efd);
+    transform: translateY(-2px);
+}
+
+.bbttn-fechar:active {
+    transform: translateY(1px);
+}
+
+/* 🔹 Animações */
+@keyframes pulseText {
+    0% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .PainelCadastro:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
