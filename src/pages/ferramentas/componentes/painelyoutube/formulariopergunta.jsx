@@ -112,7 +112,6 @@ export default function FormularioPergunta({ atualizarLista }) {
                     min="1"
                     max="6"
                     placeholder="Resposta correta"
-                    value={form.resposta_correta}
                     onChange={(e) => setForm({ ...form, resposta_correta: e.target.value })}
                     required
                 />
