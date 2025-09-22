@@ -22,6 +22,47 @@
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
 
+
+.lista-videos {
+    max-height: 700px;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0 auto;
+    width: 100%;
+
+    /* 🔹 Personalização geral da barra */
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: #2563eb #f1f5f9;
+    /* cor da barra e fundo (Firefox) */
+}
+
+/* 🔹 Para navegadores WebKit (Chrome, Edge, Safari) */
+.lista-videos::-webkit-scrollbar {
+    width: 8px;
+    /* largura da barra */
+}
+
+.lista-videos::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    /* fundo da barra */
+    border-radius: 10px;
+}
+
+.lista-videos::-webkit-scrollbar-thumb {
+    background-color: #2563eb;
+    /* cor da barra */
+    border-radius: 10px;
+    border: 2px solid #f1f5f9;
+    /* espaço entre barra e track */
+}
+
+.lista-videos::-webkit-scrollbar-thumb:hover {
+    background-color: #1e40af;
+    /* cor ao passar o mouse */
+}
+
+
 /* ===== Títulos principais ===== */
 .cursos-container h2 {
     font-size: 3rem;
@@ -346,6 +387,13 @@
     position: relative;
     display: inline-block;
     margin: 10px;
+    font-size: 2rem !important;
+
+}
+
+.curso-wrapper button {
+
+    font-size: 1.5rem !important;
 }
 
 .curso-botao {
@@ -388,7 +436,7 @@
     padding: 10px 14px;
     border-radius: 8px;
     font-size: 1.5rem;
-    width: 250px;
+    width: 850px;
     text-align: center;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
     z-index: 10;

@@ -121,7 +121,7 @@ export const CursosYouTube = () => {
 
     return (
         <div className="cursos-container">
-            <h2>Cursos no YouTube</h2>
+            <h2>Cursos YouTube</h2>
 
             {!avisoOk && (
                 <div className="aviso-cursos">
