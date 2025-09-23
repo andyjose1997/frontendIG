@@ -1,0 +1,70 @@
+/* 🔹 Fundo escurecido */
+.saldo-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    /* fundo escuro */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* 🔹 Caixa do modal */
+.saldo-modal {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: aparecerModal 0.3s ease-out;
+}
+
+/* 🔹 Título */
+.saldo-modal h2 {
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    color: #1e293b;
+}
+
+/* 🔹 Texto */
+.saldo-modal p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: #334155;
+}
+
+/* 🔹 Botão */
+.saldo-modal .botao-acao {
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: #1e5686;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.saldo-modal .botao-acao:hover {
+    background: #0571d6;
+}
+
+/* 🔹 Animação suave */
+@keyframes aparecerModal {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

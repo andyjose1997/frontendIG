@@ -6,6 +6,7 @@ import { useFerramentas } from '../../ferramentascontext';
 import ModalQrCode from './config/modalqrcode';
 import AlertaWhatsApp from "./alertawhatsapp";
 import ChavePix from './config/chavepix';
+import SaldoCPPModal from './SaldoCPPModal';
 
 export default function BotaoUm() {
     const [mostrarNivel, setMostrarNivel] = useState(false);
@@ -18,6 +19,7 @@ export default function BotaoUm() {
     const [alerta, setAlerta] = useState({ mostrar: false, tipo: "", mensagem: "" });
     const [mostrarChavePix, setMostrarChavePix] = useState(false);
     const [mostrarPacotes, setMostrarPacotes] = useState(false);
+    const [mostrarSaldoCPP, setMostrarSaldoCPP] = useState(false);
 
     const linkAprendizagem = window.location.origin.includes("localhost")
         ? "http://localhost:5173/aprendizagem"
@@ -196,6 +198,12 @@ export default function BotaoUm() {
                         💾 Salvar
                     </a>
                 </div>
+            )}
+            <button onClick={() => setMostrarSaldoCPP(true)} className="botao-acao">
+                💰 Saldo CPP
+            </button>
+            {mostrarSaldoCPP && (
+                <SaldoCPPModal onClose={() => setMostrarSaldoCPP(false)} />
             )}
 
             <div className="indicacao-tooltip-wrapper">

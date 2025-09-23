@@ -174,105 +174,66 @@ export default function VisualizarBanco() {
                         <p style={{ fontSize: "30px" }}>Total de registros: <strong>{dadosFiltrados.length}</strong></p>
                     </div>
 
-                    <div className="filtro-data">
-                        <label>📅 Filtrar por data de cadastro:</label>
-                        <div className="inputs-data">
-                            <input
-                                type="date"
-                                value={dataInicio}
-                                onChange={(e) => setDataInicio(e.target.value)}
-                            />
-                            <span>até</span>
-                            <input
-                                type="date"
-                                value={dataFim}
-                                onChange={(e) => setDataFim(e.target.value)}
-                            />
-                            <button className="botao-filtrar-data" onClick={() => {
-                                if (!dataInicio || !dataFim) {
-                                    setTotalFiltradoPorData(0);
-                                    return;
-                                }
 
-                                const total = dadosFiltrados.filter((linha) => {
-                                    const data = new Date(linha.data_cadastro);
-                                    const inicio = new Date(dataInicio);
-                                    const fim = new Date(dataFim);
-                                    return data >= inicio && data <= fim;
-                                }).length;
-
-                                setTotalFiltradoPorData(total);
-                            }}>
-                                Filtrar
+                    {/* 🔹 NOVOS BOTÕES PARA FILTRAR POR CATEGORIA */}
+                    <div className="filtro-categoria-botoes">
+                        <h3>🎯 Filtrar por categoria</h3>
+                        <div className="botoes-categorias">
+                            <button
+                                className="btn-explorer"
+                                onClick={() => setFiltrosPorColuna(prev => ({ ...prev, categoria: "explorer" }))}
+                            >
+                                Explorer
+                            </button>
+                            <button
+                                className="btn-member"
+                                onClick={() => setFiltrosPorColuna(prev => ({ ...prev, categoria: "member" }))}
+                            >
+                                Member
+                            </button>
+                            <button
+                                className="btn-mentor"
+                                onClick={() => setFiltrosPorColuna(prev => ({ ...prev, categoria: "mentor" }))}
+                            >
+                                Mentor
+                            </button>
+                            <button
+                                className="btn-founder"
+                                onClick={() => setFiltrosPorColuna(prev => ({ ...prev, categoria: "founder" }))}
+                            >
+                                Founder
+                            </button>
+                            <button
+                                className="btn-todos"
+                                onClick={() => setFiltrosPorColuna(prev => ({ ...prev, categoria: "" }))}
+                            >
+                                Todos
                             </button>
                         </div>
-
-                        {dataInicio && dataFim && (
-                            <p className="resultado-data">
-                                Usuários cadastrados nesse intervalo: <strong>{totalFiltradoPorData}</strong>
-                            </p>
-                        )}
-
-                        {/* 🔹 NOVOS BOTÕES PARA FILTRAR POR CATEGORIA */}
-                        <div className="filtro-categoria-botoes">
-                            <h3>🎯 Filtrar por categoria</h3>
-                            <div className="botoes-categorias">
-                                <button
-                                    className="btn-explorer"
-                                    onClick={() => setFiltrosPorColuna(prev => ({ ...prev, categoria: "explorer" }))}
-                                >
-                                    Explorer
-                                </button>
-                                <button
-                                    className="btn-member"
-                                    onClick={() => setFiltrosPorColuna(prev => ({ ...prev, categoria: "member" }))}
-                                >
-                                    Member
-                                </button>
-                                <button
-                                    className="btn-mentor"
-                                    onClick={() => setFiltrosPorColuna(prev => ({ ...prev, categoria: "mentor" }))}
-                                >
-                                    Mentor
-                                </button>
-                                <button
-                                    className="btn-founder"
-                                    onClick={() => setFiltrosPorColuna(prev => ({ ...prev, categoria: "founder" }))}
-                                >
-                                    Founder
-                                </button>
-                                <button
-                                    className="btn-todos"
-                                    onClick={() => setFiltrosPorColuna(prev => ({ ...prev, categoria: "" }))}
-                                >
-                                    Todos
-                                </button>
-                            </div>
-                        </div>
-                        {/* 🔹 NOVO INPUT COM DATALIST PARA FILTRAR PELO id_host */}
-                        <div className="filtro-idhost">
-                            <h3>🔑 Filtrar por Host</h3>
-                            <input
-                                list="lista-idhosts"
-                                placeholder="Selecione um Host..."
-                                onChange={(e) =>
-                                    setFiltrosPorColuna(prev => ({
-                                        ...prev,
-                                        id_host: e.target.value
-                                    }))
-                                }
-                            />
-                            <datalist id="lista-idhosts">
-                                {dados
-                                    .map(linha => linha.id_host) // pega valores da coluna
-                                    .filter((valor, index, self) => valor && self.indexOf(valor) === index) // remove duplicados e valores vazios
-                                    .map((valor, i) => (
-                                        <option key={i} value={valor} />
-                                    ))}
-                            </datalist>
-                        </div>
-
                     </div>
+                    {/* 🔹 NOVO INPUT COM DATALIST PARA FILTRAR PELO id_host */}
+                    <div className="filtro-idhost">
+                        <h3>🔑 Filtrar por Host</h3>
+                        <input
+                            list="lista-idhosts"
+                            placeholder="Selecione um Host..."
+                            onChange={(e) =>
+                                setFiltrosPorColuna(prev => ({
+                                    ...prev,
+                                    id_host: e.target.value
+                                }))
+                            }
+                        />
+                        <datalist id="lista-idhosts">
+                            {dados
+                                .map(linha => linha.id_host) // pega valores da coluna
+                                .filter((valor, index, self) => valor && self.indexOf(valor) === index) // remove duplicados e valores vazios
+                                .map((valor, i) => (
+                                    <option key={i} value={valor} />
+                                ))}
+                        </datalist>
+                    </div>
+
                     {/* 🔹 BOTÃO PARA COPIAR EMAILS FILTRADOS */}
                     <div className="filtro-emails">
                         <h3>📧 Ações rápidas</h3>
