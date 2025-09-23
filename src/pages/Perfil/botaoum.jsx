@@ -6,7 +6,7 @@ import { useFerramentas } from '../../ferramentascontext';
 import ModalQrCode from './config/modalqrcode';
 import AlertaWhatsApp from "./alertawhatsapp";
 import ChavePix from './config/chavepix';
-import SaldoCPPModal from './SaldoCPPModal';
+import SaldoCPPModal from './saldocppmodal';
 
 export default function BotaoUm() {
     const [mostrarNivel, setMostrarNivel] = useState(false);
@@ -14,6 +14,7 @@ export default function BotaoUm() {
     const [mostrarFormularioZap, setMostrarFormularioZap] = useState(false);
     const [editarZap, setEditarZap] = useState(false);
     const [codigo, setCodigo] = useState("+55");
+    const [ddd, setDdd] = useState("");
     const [numero, setNumero] = useState("");
     const [mostrarModal, setMostrarModal] = useState(false);
     const [alerta, setAlerta] = useState({ mostrar: false, tipo: "", mensagem: "" });
@@ -68,7 +69,12 @@ export default function BotaoUm() {
 
     const salvarWhatsapp = async () => {
         const token = localStorage.getItem("token");
-        const whatsappCompleto = `${codigo}${numero}`;
+
+        const codigoLimpo = codigo.replace(/\D/g, "").slice(0, 2); // 55
+        const dddLimpo = ddd.replace(/\D/g, "").slice(0, 2);       // 31
+        const numeroLimpo = numero.replace(/\D/g, "").slice(-9);   // 918547818
+
+        const whatsappCompleto = `+${codigoLimpo}${dddLimpo}${numeroLimpo}`;
 
         try {
             const response = await fetch(`${URL}/perfil/atualizar_whatsapp`, {
@@ -106,12 +112,13 @@ export default function BotaoUm() {
                 const data = await response.json();
 
                 if (response.ok && data.whatsapp) {
-                    const regex = /^(\+\d{1,4})(\d+)$/;
+                    const regex = /^(\+\d{2})(\d{2})(\d{8,9})$/;
                     const match = data.whatsapp.match(regex);
 
                     if (match) {
-                        setCodigo(match[1]);
-                        setNumero(match[2]);
+                        setCodigo(match[1]); // +55
+                        setDdd(match[2]);    // 11
+                        setNumero(match[3]); // 912345678
                     }
                 }
             } catch (error) {
@@ -170,13 +177,21 @@ export default function BotaoUm() {
                 </div>
             ) : (
                 <div className="botoes-zap" ref={botoesZapRef}>
-                    <button className="botao-acao" onClick={() => window.open(`https://web.whatsapp.com/send?phone=${codigo}${numero}`, "_blank")}>🔗 Ir ao WhatsApp</button>
+                    <button
+                        className="botao-acao"
+                        onClick={() =>
+                            window.open(`https://web.whatsapp.com/send?phone=${codigo}${ddd}${numero}`, "_blank")
+                        }
+                    >
+                        🔗 Ir ao WhatsApp
+                    </button>
                     <button className="botao-acao" onClick={() => setEditarZap(true)}>✏️ Editar WhatsApp</button>
                 </div>
             )}
 
             {editarZap && (
                 <div className="formulario-whatsapp">
+                    {/* Código do país */}
                     <select value={codigo} onChange={(e) => setCodigo(e.target.value)}>
                         <option value="+55">🇧🇷 +55 (Brasil)</option>
                         <option value="+1">🇺🇸 +1 (EUA)</option>
@@ -185,12 +200,33 @@ export default function BotaoUm() {
                         <option value="+33">🇫🇷 +33 (França)</option>
                         <option value="+49">🇩🇪 +49 (Alemanha)</option>
                     </select>
+
+                    {/* DDD */}
                     <input
                         type="tel"
-                        placeholder="Digite seu número"
-                        value={numero}
-                        onChange={(e) => setNumero(e.target.value)}
+                        placeholder="DDD (ex: 11)"
+                        value={ddd}
+                        onChange={(e) => setDdd(e.target.value.replace(/\D/g, ""))}
+                        maxLength={2}
                     />
+
+                    {/* Número */}
+                    <input
+                        type="tel"
+                        placeholder="Número (ex: 912345678)"
+                        value={numero}
+                        onChange={(e) => {
+                            let valor = e.target.value.replace(/\D/g, "");
+                            // se o usuário digitar junto com DDD, corta e pega só os 8 ou 9 últimos
+                            if (valor.length > 9) {
+                                valor = valor.slice(-9);
+                            }
+                            setNumero(valor);
+                        }}
+                        maxLength={9}
+                    />
+
+
                     <a
                         className="botao-salvar-forcado"
                         onClick={salvarWhatsapp}
@@ -199,6 +235,7 @@ export default function BotaoUm() {
                     </a>
                 </div>
             )}
+
             <button onClick={() => setMostrarSaldoCPP(true)} className="botao-acao">
                 💰 Saldo CPP
             </button>

@@ -6,54 +6,278 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
-    /* fundo escuro */
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
 }
 
-/* 🔹 Caixa do modal */
+/* 🔹 Caixa modal */
 .saldo-modal {
     background: #fff;
     border-radius: 16px;
     padding: 2rem;
-    width: 90%;
-    max-width: 450px;
+    width: 95%;
+    max-width: 1050px;
+    max-height: 90vh;
+    overflow-y: auto;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
     text-align: center;
     animation: aparecerModal 0.3s ease-out;
+
+    /* 🔹 Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #2563eb #f1f5f9;
 }
+
+.pix-ok {
+    margin-top: 1rem;
+    color: #065f46;
+    /* verde escuro */
+    font-weight: 500;
+}
+
+.pix-alerta {
+    margin-top: 1rem;
+    color: #dc2626 !important;
+    /* vermelho */
+    font-weight: bold;
+    animation: piscar 1s infinite;
+}
+
+@keyframes piscar {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+
+/* 🔹 Chrome, Edge e Safari */
+.saldo-modal::-webkit-scrollbar {
+    width: 10px;
+}
+
+.saldo-modal::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    /* fundo da barra */
+    border-radius: 8px;
+}
+
+.saldo-modal::-webkit-scrollbar-thumb {
+    background: #2563eb;
+    /* azul forte */
+    border-radius: 8px;
+    border: 2px solid #f1f5f9;
+    /* dá um efeito de espaço */
+}
+
+.saldo-modal::-webkit-scrollbar-thumb:hover {
+    background: #1e40af;
+    /* azul mais escuro no hover */
+}
+
 
 /* 🔹 Título */
 .saldo-modal h2 {
-    margin-bottom: 1rem;
-    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    font-size: 2.6rem;
     color: #1e293b;
 }
 
 /* 🔹 Texto */
 .saldo-modal p {
-    font-size: 1.2rem;
+    font-size: 1.9rem;
     margin: 0.5rem 0;
     color: #334155;
 }
 
-/* 🔹 Botão */
-.saldo-modal .botao-acao {
+/* 🔹 Lista de histórico */
+.historico-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.historico-item {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    transition: background 0.2s ease;
+}
+
+.historico-item:hover {
+    font-weight: 600;
+}
+
+/* 🔹 Botões */
+.painel-botoes {
     margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.botao-accao {
     padding: 0.6rem 1.2rem;
-    font-size: 1rem;
+    font-size: 1.95rem !important;
     border: none;
     border-radius: 8px;
-    background: #1e5686;
-    color: white;
+    background: #cacaca !important;
+    color: rgb(0, 0, 0) !important;
+    margin: 0 30px;
     cursor: pointer;
     transition: background 0.2s ease;
 }
 
-.saldo-modal .botao-acao:hover {
-    background: #0571d6;
+/* 🔹 Legenda do histórico */
+.legenda-historico {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: #1e293b;
+    /* cinza escuro moderno */
+}
+
+.legenda-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* 🔹 Container do título */
+.titulo-saldo {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* 🔹 Ícone ℹ */
+.info-tooltip {
+    position: relative;
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #2563eb;
+    /* azul */
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+/* 🔹 Texto do tooltip */
+.tooltip-text {
+    visibility: hidden;
+    width: 280px;
+    background-color: #1e293b;
+    color: #f1f5f9;
+    text-align: left;
+    padding: 0.75rem;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 10;
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* 🔹 Setinha do tooltip */
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent #1e293b transparent;
+}
+
+/* 🔹 Mostrar ao passar o mouse */
+.info-tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 🔹 Badge colorido */
+.badge {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.badge-amarelo {
+    background: #facc15;
+    /* amarelo */
+    border: 1px solid #eab308;
+}
+
+.badge-verde {
+    background: #10b981;
+    /* verde */
+    border: 1px solid #059669;
+}
+
+.botao-accao:hover {
+    background: #030c5e !important;
+    color: #ffffff !important;
+}
+
+/* 🔹 Espaço extra abaixo da linha "Venda do usuário" */
+.venda-usuario {
+    margin-bottom: 1rem;
+    /* pode ajustar (0.5rem, 1.5rem, etc.) */
+    font-weight: 600;
+    color: #001455 !important;
+    /* azul mais destacado, opcional */
+}
+
+/* Estilo base */
+.historico-item {
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    transition: background 0.2s ease;
+}
+
+/* Fundo verde para vendas normais (host) */
+.fundo-verde {
+    background: #d1fae5;
+    /* verde claro */
+    border: 1px solid #10b981;
+    /* verde mais forte */
+}
+
+/* Fundo amarelo para vendas do usuário (hoshost) */
+.fundo-amarelo {
+    background: #fef9c3;
+    /* amarelo claro */
+    border: 1px solid #facc15;
+    /* amarelo mais forte */
+}
+
+/* 🔹 Mensagem de erro */
+.erro {
+    color: #dc2626;
+    font-weight: bold;
 }
 
 /* 🔹 Animação suave */
