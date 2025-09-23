@@ -45,6 +45,23 @@ export default function Bandeja() {
         }
     };
 
+    // 🔹 Atualização automática sem atrapalhar quem está digitando
+    useEffect(() => {
+        const intervalo = setInterval(() => {
+            const ativo = document.activeElement;
+            const estaDigitando = ativo && (ativo.tagName === "INPUT" || ativo.tagName === "TEXTAREA");
+
+            if (!estaDigitando) {
+                if (selecionado) {
+                    carregarMensagens(selecionado); // atualiza conversa aberta
+                } else {
+                    carregarUsuarios(busca); // atualiza lista de contatos
+                }
+            }
+        }, 5000); // atualiza a cada 5 segundos (pode ajustar o tempo)
+
+        return () => clearInterval(intervalo); // limpa quando desmontar
+    }, [selecionado, busca]);
 
     useEffect(() => {
         if (userId) carregarUsuarios(busca);
