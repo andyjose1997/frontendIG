@@ -7,10 +7,20 @@ export default function SaldoCPPModal({ onClose }) {
     const [saldoAtual, setSaldoAtual] = useState(null);
     const [saldoProximaSemana, setSaldoProximaSemana] = useState(null);
     const [chavePix, setChavePix] = useState("");
+    const [diaPagamento, setDiaPagamento] = useState(null); // 👈 novo estado
     const [carregando, setCarregando] = useState(true);
     const [erro, setErro] = useState(null);
     const [mostrarHistorico, setMostrarHistorico] = useState(false);
-    const [mostrarInfo, setMostrarInfo] = useState(false); // 👈 novo estado para modal info
+    const [mostrarInfo, setMostrarInfo] = useState(false);
+
+    // 🔹 Mapeamento de número → dia da semana
+    const diasSemana = {
+        2: "Segundas-feira",
+        3: "Terças-feira",
+        4: "Quartas-feira",
+        5: "Quintas-feira",
+        6: "Sextas-feira"
+    };
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -34,12 +44,14 @@ export default function SaldoCPPModal({ onClose }) {
         })
             .then(res => res.json())
             .then(data => {
-                if (data && data.chave_pix) {
-                    setChavePix(data.chave_pix);
+                if (data) {
+                    if (data.chave_pix) setChavePix(data.chave_pix);
+                    if (data.cpp) setDiaPagamento(data.cpp);
                 }
             })
             .catch(() => {
                 setChavePix("");
+                setDiaPagamento(null);
             });
     }, []);
 
@@ -52,7 +64,6 @@ export default function SaldoCPPModal({ onClose }) {
         );
     }
 
-    // 👇 Modal de informações
     if (mostrarInfo) {
         return (
             <div className="saldo-modal-overlay" onClick={() => setMostrarInfo(false)}>
@@ -99,9 +110,18 @@ export default function SaldoCPPModal({ onClose }) {
                             {saldoProximaSemana?.toFixed(2)}
                         </p>
 
+                        {/* 🔹 Mostrar dia de pagamento */}
+                        {diaPagamento && (
+                            <p className="dia-pagamento">
+                                <strong>Seu dia de pagamento é nas{" "}
+                                    {diasSemana[diaPagamento] || `Dia ${diaPagamento}`}s</strong>
+                            </p>
+                        )}
+
+                        {/* 🔹 Exibir chave PIX */}
                         {chavePix ? (
                             <p className="pix-ok">
-                                <strong>Seu PIX informado é:</strong> {chavePix}
+                                <strong>Seu PIX informado é: </strong><span style={{ textDecoration: "underline" }} >{chavePix}</span>
                             </p>
                         ) : (
                             <p className="pix-alerta">
@@ -124,6 +144,6 @@ export default function SaldoCPPModal({ onClose }) {
                     </button>
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
