@@ -10,6 +10,7 @@ import LinksRedes from './componentes/linksredes';
 import Propaganda from './componentes/propaganda';
 import IreneConfig from './componentes/irene/ireneconfig';
 import IreneConfigCompleta from './componentes/irene/ireneconfigcompleta';
+import Indicadores from './componentes/indicadores';
 import './painelcontrole.css';
 import ManualPainel from './componentes/manualpainel';
 import PainelYouTube from './componentes/painelyoutube/painelyoutube';
@@ -73,12 +74,14 @@ export default function PainelControle() {
                     Permitir Fundadores
                 </button>
 
-                <button
-                    className={painelAtivo === "linksRedes" ? "controle-ativo" : ""}
-                    onClick={() => setPainelAtivo("linksRedes")}
+
+                <button style={{ display: "block" }}
+                    className={painelAtivo === "indicadores" ? "controle-ativo" : ""}
+                    onClick={() => setPainelAtivo("indicadores")}
                 >
-                    Redes sociais
+                    Indicadores
                 </button>
+
 
                 <button
                     className={painelAtivo === "propaganda" ? "controle-ativo" : ""}
@@ -125,6 +128,7 @@ export default function PainelControle() {
             {painelAtivo === "manual" && <ManualPainel />}
             {painelAtivo === "youtube" && <PainelYouTube />}
             {painelAtivo === "cursos" && <PainelCursos />}
+            {painelAtivo === "indicadores" && <Indicadores />}
 
             {/* 🔹 Novo fluxo Info de Cadastro */}
             {painelAtivo === "infoCadastro" && (

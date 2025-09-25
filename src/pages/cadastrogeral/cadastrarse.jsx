@@ -247,7 +247,7 @@ export default function Cadastrarse() {
                         )}
                         <div className="botoes-modal">
                             <button className="btn-vermelho" onClick={() => { setMostrarModalHost(false); setHostData(null); setIdAnfitiao(""); }}>
-                                ❌ Esse não é
+                                ❌ Não é esse
                             </button>
                             <button className="btn-verde" onClick={() => setMostrarModalHost(false)}>
                                 ✅ Esse mesmo

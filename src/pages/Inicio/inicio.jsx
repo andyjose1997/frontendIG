@@ -5,24 +5,48 @@ import Feed from "./feed";
 import Buscador from "./buscador";
 import Propaganda from "./propaganda";
 import Indicados from "./indicados";
+import ModalVideo from "./bv";
 import './inicio.css';
 import { URL } from "../../config";
 
 function Inicio() {
-    const [abaAtiva, setAbaAtiva] = useState("feed"); // 🔹 Feed aberto por padrão
+    const [abaAtiva, setAbaAtiva] = useState("feed");
     const [largura, setLargura] = useState(window.innerWidth);
+    const [mostrarVideo, setMostrarVideo] = useState(false);
 
     const navigate = useNavigate();
 
-    // 🔐 Proteção da rota
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (!token) {
             navigate("/login");
+            return;
         }
+
+        // 🔹 Buscar se já assistiu
+        fetch(`${URL}/usuarios/me`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.assistiu === 0) {
+                    setMostrarVideo(true);
+                }
+            });
     }, [navigate]);
 
-    // 🔹 Monitorar resize
+    const handleCloseVideo = () => {
+        const token = localStorage.getItem("token");
+        fetch(`${URL}/usuarios/assistiu`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({ assistiu: 1 })
+        }).then(() => setMostrarVideo(false));
+    };
+
     useEffect(() => {
         const handleResize = () => setLargura(window.innerWidth);
         window.addEventListener("resize", handleResize);
@@ -31,35 +55,26 @@ function Inicio() {
 
     const isMobile = largura <= 700;
 
+    // 🔹 Se ainda não assistiu, mostra SOMENTE o vídeo
+    if (mostrarVideo) {
+        return <ModalVideo onClose={handleCloseVideo} />;
+    }
+
+    // 🔹 Caso contrário, mostra o site normal
     return (
         <section id="contenedor">
             <div className="Buscador">
                 <Buscador />
             </div>
 
-            {/* 🔹 Mobile: botões + conteúdo central */}
+            {/* 🔹 Mobile */}
             {isMobile && (
                 <>
                     <div className="acoes-topo">
-                        <button
-                            className={abaAtiva === "indicados" ? "ativo" : ""}
-                            onClick={() => setAbaAtiva("indicados")}
-                        >
-                            Indicados
-                        </button>
-                        <button
-                            className={abaAtiva === "feed" ? "ativo" : ""}
-                            onClick={() => setAbaAtiva("feed")}
-                        >
-                            Feed
-                        </button>
-                        <button
-                            className={abaAtiva === "propaganda" ? "ativo" : ""}
-                            onClick={() => setAbaAtiva("propaganda")}
-                        >
-                            Recomendados                        </button>
+                        <button className={abaAtiva === "indicados" ? "ativo" : ""} onClick={() => setAbaAtiva("indicados")}>Indicados</button>
+                        <button className={abaAtiva === "feed" ? "ativo" : ""} onClick={() => setAbaAtiva("feed")}>Feed</button>
+                        <button className={abaAtiva === "propaganda" ? "ativo" : ""} onClick={() => setAbaAtiva("propaganda")}>Recomendados</button>
                     </div>
-
                     <div className="conteudo-central">
                         {abaAtiva === "indicados" && <Indicados />}
                         {abaAtiva === "feed" && <Feed />}
@@ -68,18 +83,12 @@ function Inicio() {
                 </>
             )}
 
-            {/* 🔹 Desktop: layout em grid */}
+            {/* 🔹 Desktop */}
             {!isMobile && (
                 <>
-                    <div className="Indicados">
-                        <Indicados />
-                    </div>
-                    <div className="Feed">
-                        <Feed />
-                    </div>
-                    <div className="Propaganda">
-                        <Propaganda />
-                    </div>
+                    <div className="Indicados"><Indicados /></div>
+                    <div className="Feed"><Feed /></div>
+                    <div className="Propaganda"><Propaganda /></div>
                 </>
             )}
         </section>

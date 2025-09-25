@@ -8,11 +8,15 @@ export default function Buscador() {
     const [countdown, setCountdown] = useState(15);
     const [naoLidas, setNaoLidas] = useState(0);
     const [mostrarAvaliacao, setMostrarAvaliacao] = useState(false);
+    const [videoHtml, setVideoHtml] = useState("");
 
     const [sugestoes, setSugestoes] = useState([]);
     const [textoBusca, setTextoBusca] = useState("");
     const [detalhe, setDetalhe] = useState(null);
     const [carregando, setCarregando] = useState(false);
+
+    // 🔹 Novo estado para modal do vídeo
+    const [mostrarVideo, setMostrarVideo] = useState(false);
 
     function handleLogoutClick(e) {
         e.preventDefault();
@@ -81,6 +85,19 @@ export default function Buscador() {
         return () => clearInterval(intervalo);
     }, []);
 
+    async function abrirVideo() {
+        try {
+            const resp = await fetch(`${URL}/indicacoes/buscador`, {
+                headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+            });
+            if (!resp.ok) throw new Error("Vídeo não encontrado");
+            const data = await resp.json();
+            setVideoHtml(data.video); // iframe inteiro do banco
+            setMostrarVideo(true);
+        } catch (err) {
+            console.error("Erro ao carregar vídeo:", err);
+        }
+    }
     useEffect(() => {
         let timer;
         if (showModal && countdown > 0) {
@@ -106,6 +123,14 @@ export default function Buscador() {
                 <div className="buscador-esquerda">
                     <img className="buscador-logo" src="/Logo/I_round.png" alt="Logo IronGoals" />
                     <h3 className="buscador-titulo">IronGoals</h3>
+
+                    <button
+                        className="buscador-info-btn"
+                        onClick={abrirVideo}
+                    >
+                        ℹ
+                    </button>
+
                 </div>
 
                 <div className="buscador-centro">
@@ -153,10 +178,8 @@ export default function Buscador() {
                             const usuarioId = localStorage.getItem("usuario_id");
 
                             if (token && usuarioId) {
-                                // ✅ já logado → vai para Avaliacao
                                 window.location.href = "/Avaliacao";
                             } else {
-                                // ❌ não logado → abre modal de login
                                 setMostrarAvaliacao(true);
                             }
                         }}
@@ -167,6 +190,18 @@ export default function Buscador() {
                     <a className="buscador-logout" href="/" onClick={handleLogoutClick}>Logout</a>
                 </div>
             </div>
+
+            {mostrarVideo && (
+                <div className="video-overlay">
+                    <div className="video-box">
+                        <button className="video-fechar" onClick={() => setMostrarVideo(false)}>✖</button>
+
+                        {/* 🔹 Renderiza o iframe que veio do banco */}
+                        <div dangerouslySetInnerHTML={{ __html: videoHtml }} />
+                    </div>
+                </div>
+            )}
+
 
             {showModal && (
                 <div className="sair-overlay">
@@ -187,7 +222,6 @@ export default function Buscador() {
                 </div>
             )}
 
-
             {detalhe && (
                 <div className="detalhe-overlay">
                     <div className="detalhe-box">
@@ -197,8 +231,6 @@ export default function Buscador() {
                             src={detalhe.foto || "/Logo/perfilPadrao/M.png"}
                             alt="Foto"
                         />
-
-
                         <h2 className="detalhe-nome">{detalhe.nome} {detalhe.sobrenome}</h2>
                         <a
                             href={`https://wa.me/${detalhe.whatsapp}`}
