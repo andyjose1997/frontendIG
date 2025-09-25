@@ -10,18 +10,11 @@ export default function VideoModal({ video, onClose, onConcluirVideo }) {
             <div className="videoum-content">
                 <h3 className="videoum-title">{video.titulo}</h3>
 
-                <iframe
+                {/* 🔹 Renderiza exatamente o embed vindo do banco */}
+                <div
                     className="videoum-iframe"
-                    width="100%"
-                    height="400"
-                    src={video.link_embed}
-                    title={video.titulo}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                ></iframe>
-
-
+                    dangerouslySetInnerHTML={{ __html: video.link_embed }}
+                />
 
                 {/* 🔹 Passamos o callback para o Quiz */}
                 <QuizPerguntas video={video} onConcluirVideo={onConcluirVideo} />

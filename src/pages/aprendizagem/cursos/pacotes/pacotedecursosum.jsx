@@ -123,8 +123,8 @@ export default function PacoteDeCursosUm() {
                 {/* 🔹 Texto explicativo com animação controlada */}
                 <p className={`pacoteum-explicacao ${animarTexto ? "animar" : ""}`}>
                     Todos os vídeos deste pacote são 100% produzidos pela plataforma IronGoals e
-                    estão hospedados no YouTube em modo <b>não listado</b>.
-                    Isso significa que eles não aparecem em buscas públicas do YouTube,
+                    estão hospedados no <b>Vimeo</b> em modo <b>privado</b>.
+                    Isso significa que eles não aparecem em buscas públicas do Vimeo,
                     mas podem ser acessados diretamente através dos links integrados na plataforma.
                 </p>
 
