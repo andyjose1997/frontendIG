@@ -132,8 +132,11 @@ export default function BotaoUm() {
     useEffect(() => {
         const handleDoubleClickOutside = (e) => {
             if (mostrarFormularioZap && botoesZapRef.current && !botoesZapRef.current.contains(e.target)) {
-                setMostrarFormularioZap(false);
-                setEditarZap(false);
+                // 🔹 Só fecha se o clique não for em um input, select ou botão
+                if (!["INPUT", "SELECT", "BUTTON"].includes(e.target.tagName)) {
+                    setMostrarFormularioZap(false);
+                    setEditarZap(false);
+                }
             }
         };
 
@@ -142,6 +145,7 @@ export default function BotaoUm() {
             document.removeEventListener("dblclick", handleDoubleClickOutside);
         };
     }, [mostrarFormularioZap]);
+
 
     const [mostrarFerramentas, setMostrarFerramentas] = useState(false);
     const [funcao, setFuncao] = useState("");
