@@ -212,8 +212,14 @@ export default function BotaoTres() {
             {mostrar === "vendas" ? <TorneioVendas /> : <TorneioQuizzes />}
 
             {mostrarModal && (
-                <div className="rankperfil-modal-overlay">
-                    <div className="rankperfil-modal-content">
+                <div
+                    className="rankperfil-modal-overlay"
+                    onClick={() => setMostrarModal(false)} // 👉 clicar fora fecha
+                >
+                    <div
+                        className="rankperfil-modal-content"
+                        onClick={(e) => e.stopPropagation()} // 👉 impede que clique dentro feche
+                    >
                         <span
                             className="rankperfil-modal-close"
                             onClick={() => setMostrarModal(false)}
@@ -224,6 +230,7 @@ export default function BotaoTres() {
                     </div>
                 </div>
             )}
+
         </div>
     );
 }

@@ -106,7 +106,7 @@ export default function TorneioQuizzes() {
             {/* 🔹 Mostrar prêmio da coluna ranking */}
             {premiosRanking.length > 0 && (
                 <p className="rankperfil-info">
-                    🎁 O prêmio é: <strong>{premiosRanking[0].ranking}</strong> até {premiosRanking[0].mes_ano}
+                    🎁 O prêmio é: <strong>{premiosRanking[0].ranking}</strong> até o último dia de {premiosRanking[0].mes_ano}
                 </p>
             )}
 
