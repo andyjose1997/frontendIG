@@ -291,6 +291,94 @@
     transform: scale(1.1);
 }
 
+/* 🔹 Botão ℹ */
+.botaoInfo {
+    margin-left: 8px;
+    background: transparent;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botaoInfo:hover {
+    background: #0571d6;
+    transform: scale(1.1);
+}
+
+/* 🔹 Overlay do modal de vídeo */
+.overlayModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* 🔹 Conteúdo do modal */
+.conteudoModal {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    max-width: 800px;
+    width: 90%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: aparecer 0.3s ease-in-out;
+}
+
+/* 🔹 Estilo do vídeo (iframe) */
+.conteudoModal iframe {
+    width: 100%;
+    height: 450px;
+    border-radius: 10px;
+    border: none;
+}
+
+/* 🔹 Botão de fechar dentro do modal */
+.conteudoModal button {
+    margin-top: 15px;
+    padding: 8px 14px;
+    border: none;
+    background: #1e5686;
+    color: white;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.conteudoModal button:hover {
+    background: #0571d6;
+    transform: scale(1.05);
+}
+
+/* 🔹 Animação */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 .bbotaaaoSalvar {
     padding: 10px 20px;
     background-color: #eff1f1 !important;

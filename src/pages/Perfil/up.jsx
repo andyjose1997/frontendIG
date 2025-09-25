@@ -15,6 +15,10 @@ export default function Up() {
     const [mostrarModalInfo, setMostrarModalInfo] = useState(false);
     const [mensagemModal, setMensagemModal] = useState("");
 
+    // 🔹 Modal de vídeo (perfil)
+    const [mostrarModalVideo, setMostrarModalVideo] = useState(false);
+    const [video, setVideo] = useState("");
+
     const inputFileRef = useRef(null);
 
     const mostrarAlerta = (texto) => {
@@ -137,6 +141,19 @@ export default function Up() {
         }
     }
 
+    // 🔹 Abrir modal de vídeo (perfil)
+    function abrirVideoPerfil() {
+        fetch(`${URL}/indicacoes/perfil`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.video) {
+                    setVideo(data.video);
+                    setMostrarModalVideo(true);
+                }
+            })
+            .catch(err => console.error("❌ Erro ao carregar vídeo:", err));
+    }
+
     return (
         <main>
             <div id="blocoPerfil">
@@ -167,6 +184,13 @@ export default function Up() {
                                     ? user.categoria.charAt(0).toUpperCase() + user.categoria.slice(1).toLowerCase()
                                     : "Explorer"})
                             </span>
+                            {/* 🔹 Botão ℹ do lado da categoria */}
+                            <button
+                                className="botaoInfo"
+                                onClick={abrirVideoPerfil}
+                            >
+                                ℹ
+                            </button>
                         </h1>
                         <h2>
                             <span
@@ -326,6 +350,16 @@ export default function Up() {
                         </div>
                     </div>
                     {alerta && <div className="alerta-temporario">{alerta}</div>}
+                </div>
+            )}
+
+            {/* Modal de Vídeo (Perfil) */}
+            {mostrarModalVideo && (
+                <div className="overlayModal">
+                    <div className="conteudoModal">
+                        <div dangerouslySetInnerHTML={{ __html: video }} />
+                        <button onClick={() => setMostrarModalVideo(false)}>← Fechar</button>
+                    </div>
                 </div>
             )}
 
