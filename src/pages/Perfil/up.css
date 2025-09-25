@@ -315,12 +315,12 @@
 }
 
 /* 🔹 Overlay do modal de vídeo */
-.overlayModal {
+.yoverlayModal {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
@@ -329,7 +329,7 @@
 }
 
 /* 🔹 Conteúdo do modal */
-.conteudoModal {
+.yconteudoModal {
     background: #fff;
     border-radius: 12px;
     padding: 16px;
@@ -341,7 +341,7 @@
 }
 
 /* 🔹 Estilo do vídeo (iframe) */
-.conteudoModal iframe {
+.yconteudoModal iframe {
     width: 100%;
     height: 450px;
     border-radius: 10px;
@@ -349,7 +349,7 @@
 }
 
 /* 🔹 Botão de fechar dentro do modal */
-.conteudoModal button {
+.yconteudoModal button {
     margin-top: 15px;
     padding: 8px 14px;
     border: none;
@@ -361,7 +361,7 @@
     transition: background 0.3s, transform 0.2s;
 }
 
-.conteudoModal button:hover {
+.yconteudoModal button:hover {
     background: #0571d6;
     transform: scale(1.05);
 }

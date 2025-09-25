@@ -5,13 +5,29 @@ import TorneioQuizzes from './torneioquizzes';
 
 export default function BotaoTres() {
     const [mostrar, setMostrar] = useState("vendas"); // padrão = vendas
+    const [mostrarModal, setMostrarModal] = useState(false);
+    const [video, setVideo] = useState("");
 
     // ===============================
-    // 🔹 Torneio Vendas
+    // 🔹 Buscar vídeo da indicação
     // ===============================
+    const abrirModal = async () => {
+        try {
+            const res = await fetch(`${URL}/indicacoes/ranking`);
+            const data = await res.json();
+
+            if (data.video) {
+                setVideo(data.video);
+                setMostrarModal(true);
+            }
+        } catch (err) {
+            console.error("Erro ao buscar vídeo da indicação:", err);
+        }
+    };
+
     function TorneioVendas() {
         const [mensagem, setMensagem] = useState("");
-        const [mostrarModal, setMostrarModal] = useState(false);
+        const [mostrarAviso, setMostrarAviso] = useState(false);
         const [tipoMensagem, setTipoMensagem] = useState("sucesso");
         const [grupo, setGrupo] = useState(null);
         const [participantes, setParticipantes] = useState([]);
@@ -88,7 +104,7 @@ export default function BotaoTres() {
             if (!id) {
                 setMensagem("⚠️ Usuário não identificado!");
                 setTipoMensagem("erro");
-                setMostrarModal(true);
+                setMostrarAviso(true);
                 return;
             }
 
@@ -102,7 +118,7 @@ export default function BotaoTres() {
                 setMensagem("❌ Erro ao ativar torneio. Tente novamente.");
                 setTipoMensagem("erro");
             } finally {
-                setMostrarModal(true);
+                setMostrarAviso(true);
             }
         };
 
@@ -117,29 +133,33 @@ export default function BotaoTres() {
                             <> O prêmio é: <strong>{premiosVendas[0]}</strong></>
                         </p>
 
-                        {/* 🔹 Se estiver em um grupo, mostra os detalhes do grupo */}
                         {grupo ? (
-                            <>
+                            grupo === "Aguardando" ? (
                                 <p className="rankperfil-info">
-                                    Você está no grupo <strong>{grupo}</strong>
+                                    🎉 Sua solicitação foi confirmada! Agora você está <strong>aguardando a formação dos grupos</strong>.
                                 </p>
-                                <hr />
+                            ) : (
+                                <>
+                                    <p className="rankperfil-info">
+                                        Você está no grupo <strong>{grupo}</strong>
+                                    </p>
+                                    <hr />
 
-                                <ul className="rankperfil-lista">
-                                    {participantes.map((p, index) => (
-                                        <li key={index}>
-                                            <span>{p.nome} {p.sobrenome}</span> |{" "}
-                                            <span className="rankperfil-pontos">{p.pontos} pts</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </>
+                                    <ul className="rankperfil-lista">
+                                        {participantes.map((p, index) => (
+                                            <li key={index}>
+                                                <span>{p.nome} {p.sobrenome}</span> |{" "}
+                                                <span className="rankperfil-pontos">{p.pontos} pts</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </>
+                            )
                         ) : (
                             <>
                                 <p className="rankperfil-info">
                                     Você poderá solicitar entrada quando faltarem <strong>10 dias ou menos</strong>.
                                 </p>
-
                                 {faltamDias <= 10 && mostrarBotao && (
                                     <button className="rankperfil-btn" onClick={ativarTorneio}>
                                         Solicitar entrada no torneio
@@ -147,6 +167,7 @@ export default function BotaoTres() {
                                 )}
                             </>
                         )}
+
                     </>
                 ) : (
                     <p className="rankperfil-info">
@@ -154,11 +175,11 @@ export default function BotaoTres() {
                     </p>
                 )}
 
-                {mostrarModal && (
+                {mostrarAviso && (
                     <div className="rankperfil-modal-overlay">
                         <div className={`rankperfil-modal-box ${tipoMensagem}`}>
                             <p>{mensagem}</p>
-                            <button className="rankperfil-modal-btn" onClick={() => setMostrarModal(false)}>
+                            <button className="rankperfil-modal-btn" onClick={() => setMostrarAviso(false)}>
                                 OK
                             </button>
                         </div>
@@ -166,12 +187,8 @@ export default function BotaoTres() {
                 )}
             </section>
         );
-
     }
 
-    // ===============================
-    // 🔹 Render principal
-    // ===============================
     return (
         <div>
             <div className="rankperfil-botoes">
@@ -187,9 +204,26 @@ export default function BotaoTres() {
                 >
                     Torneio Quizzes
                 </button>
+                <button className="rankperfil-info-btn" onClick={abrirModal}>
+                    ℹ
+                </button>
             </div>
 
             {mostrar === "vendas" ? <TorneioVendas /> : <TorneioQuizzes />}
+
+            {mostrarModal && (
+                <div className="rankperfil-modal-overlay">
+                    <div className="rankperfil-modal-content">
+                        <span
+                            className="rankperfil-modal-close"
+                            onClick={() => setMostrarModal(false)}
+                        >
+                            &times;
+                        </span>
+                        <div dangerouslySetInnerHTML={{ __html: video }} />
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

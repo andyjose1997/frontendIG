@@ -355,8 +355,8 @@ export default function Up() {
 
             {/* Modal de Vídeo (Perfil) */}
             {mostrarModalVideo && (
-                <div className="overlayModal">
-                    <div className="conteudoModal">
+                <div className="yoverlayModal">
+                    <div className="yconteudoModal">
                         <div dangerouslySetInnerHTML={{ __html: video }} />
                         <button onClick={() => setMostrarModalVideo(false)}>← Fechar</button>
                     </div>

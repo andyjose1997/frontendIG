@@ -19,6 +19,96 @@
     /* 🔹 limite de altura */
 }
 
+/* ===== Botão de informação ===== */
+.rankperfil-info-btn {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #1e5686;
+    margin-left: 10px;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.rankperfil-info-btn:hover {
+    color: #0571d6;
+    transform: scale(1.1);
+}
+
+/* ===== Overlay do modal ===== */
+.rankperfil-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    animation: fadeIn 0.3s ease;
+}
+
+/* ===== Conteúdo do modal ===== */
+.rankperfil-modal-content {
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    max-width: 800px;
+    width: 90%;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: slideUp 0.3s ease;
+}
+
+/* ===== Botão de fechar ===== */
+.rankperfil-modal-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 26px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.rankperfil-modal-close:hover {
+    color: #d63031;
+}
+
+/* ===== Iframe dentro do modal ===== */
+.rankperfil-modal-content iframe {
+    width: 100%;
+    height: 450px;
+    border-radius: 10px;
+    border: none;
+}
+
+/* ===== Animações ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 /* ===== Scrollbar personalizada ===== */
 .rankperfil-section::-webkit-scrollbar {
     width: 10px;
