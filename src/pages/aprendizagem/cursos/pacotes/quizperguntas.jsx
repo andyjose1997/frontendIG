@@ -1,45 +1,38 @@
-// src/components/QuizPerguntas.jsx
 import React, { useEffect, useState } from "react";
 import { URL } from "../../../../config";
 import './quizperguntas.css';
 
 export default function QuizPerguntas({ video, onConcluirVideo }) {
-    const [tempoRestante, setTempoRestante] = useState(null);
+    const [tempoRestante, setTempoRestante] = useState(90); // 1m30
     const [perguntas, setPerguntas] = useState([]);
     const [perguntaAtual, setPerguntaAtual] = useState(0);
     const [opcoes, setOpcoes] = useState([]);
     const [tentativas, setTentativas] = useState(0);
     const [mensagem, setMensagem] = useState("");
     const [podeAvancar, setPodeAvancar] = useState(false);
+    const [mostrarPerguntas, setMostrarPerguntas] = useState(false); // 🔹 controla exibição
 
-    // 🔹 Resetar estados sempre que abrir um novo vídeo
+    // 🔹 Reset ao trocar vídeo
     useEffect(() => {
         if (!video) return;
 
-        // resetar tudo ao trocar de vídeo
-        setTempoRestante(video.tempo_segundos || null);
+        setTempoRestante(90); // sempre 1m30
         setPerguntas([]);
         setPerguntaAtual(0);
         setOpcoes([]);
         setTentativas(0);
         setMensagem("");
-        setPodeAvancar(false); // 🔹 reset aqui
+        setPodeAvancar(false);
+        setMostrarPerguntas(false);
 
         fetch(`${URL}/perguntas/por-video/${video.id}`)
-            .then(res => {
-                if (!res.ok) throw new Error("Erro na API");
-                return res.json();
-            })
-            .then(data => {
-                console.log("📌 Perguntas recebidas:", data);
-                setPerguntas(data);
-            })
+            .then(res => res.json())
+            .then(data => setPerguntas(data))
             .catch(err => console.error("Erro ao carregar perguntas:", err));
     }, [video]);
 
-    // 🔹 Contagem regressiva do tempo invisível
+    // 🔹 Contagem regressiva
     useEffect(() => {
-        if (tempoRestante === null) return;
         if (tempoRestante <= 0) return;
 
         const intervalo = setInterval(() => {
@@ -48,13 +41,6 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
 
         return () => clearInterval(intervalo);
     }, [tempoRestante]);
-
-    // 🔹 Preparar opções quando o tempo zerar
-    useEffect(() => {
-        if (tempoRestante === 0 && perguntas.length > 0) {
-            prepararOpcoes(perguntas[0]);
-        }
-    }, [tempoRestante, perguntas]);
 
     const prepararOpcoes = (pergunta) => {
         if (!pergunta) return;
@@ -88,17 +74,12 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
             })
         })
             .then(res => res.json())
-            .then(data => {
-                console.log("📌 Progresso salvo:", data);
-                setPodeAvancar(true);
-            })
+            .then(() => setPodeAvancar(true))
             .catch(err => console.error("Erro ao salvar progresso:", err));
     };
 
     const irParaProximo = () => {
-        if (onConcluirVideo) {
-            onConcluirVideo(video);
-        }
+        if (onConcluirVideo) onConcluirVideo(video);
     };
 
     const responder = (opcao) => {
@@ -135,9 +116,24 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
 
     return (
         <div className="quizum-container">
-            {tempoRestante === 0 && perguntas.length > 0 && (
+            {/* 🔹 Botão liberado só após 90s */}
+            {!mostrarPerguntas && (
+                <button
+                    className="quizum-botao-ver"
+                    onClick={() => {
+                        setMostrarPerguntas(true);
+                        prepararOpcoes(perguntas[0]);
+                    }}
+                    disabled={tempoRestante > 0}
+                >
+                    {tempoRestante > 0
+                        ? ``
+                        : "👉 Ver Pergunta"}
+                </button>
+            )}
+
+            {mostrarPerguntas && perguntas.length > 0 && (
                 <>
-                    {/* 🔹 Contagem de perguntas */}
                     <p className="quizum-contagem">
                         Pergunta {perguntaAtual + 1} de {perguntas.length}
                     </p>
@@ -152,15 +148,11 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
                             </li>
                         ))}
                     </ul>
+
                     {mensagem && (
-                        <p
-                            className={`quizum-message ${mensagem.includes("correta")
-                                ? "success"
-                                : mensagem.includes("errada")
-                                    ? "error"
-                                    : "warning"
-                                }`}
-                        >
+                        <p className={`quizum-message ${mensagem.includes("correta") ? "success" :
+                            mensagem.includes("errada") ? "error" : "warning"
+                            }`}>
                             {mensagem}
                         </p>
                     )}
@@ -175,5 +167,4 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
             )}
         </div>
     );
-
 }

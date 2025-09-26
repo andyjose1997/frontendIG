@@ -37,7 +37,7 @@ export default function FormularioCurso({ mostrarAlerta, atualizarLista }) {
                 onChange={(e) => setForm({ ...form, autor: e.target.value })}
             />
             <textarea
-                placeholder="Descrição"
+                placeholder="link"
                 value={form.descricao}
                 onChange={(e) => setForm({ ...form, descricao: e.target.value })}
             />
