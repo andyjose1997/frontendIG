@@ -10,11 +10,32 @@ export default function BotaoDois() {
     const [indiceSelecionado, setIndiceSelecionado] = useState(null);
     const [modoEdicao, setModoEdicao] = useState(false);
     const [experienciaEditada, setExperienciaEditada] = useState({ nome: '', origem: '' });
+    const [temCertificado, setTemCertificado] = useState(false);
 
     const user = JSON.parse(localStorage.getItem("user"));
     const idUsuario = user?.id || "";
 
     const containerRef = useRef(null);
+    useEffect(() => {
+        const verificarCertificados = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                const resposta = await fetch(`${URL}/certificados/usuario`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const data = await resposta.json();
+                if (resposta.ok) {
+                    setTemCertificado(data.tem_certificado);
+                }
+            } catch (erro) {
+                console.error("Erro ao verificar certificados:", erro);
+            }
+        };
+
+        if (idUsuario) {
+            verificarCertificados();
+        }
+    }, [idUsuario]);
 
     useEffect(() => {
         function handleClickOutside(event) {

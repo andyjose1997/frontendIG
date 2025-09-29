@@ -50,7 +50,7 @@ h2,
     transition: color 0.3s ease;
 }
 
-h2:hover,
+.mensagens-container h2:hover,
 .grupo-titulo:hover {
     color: #ffffff;
 }

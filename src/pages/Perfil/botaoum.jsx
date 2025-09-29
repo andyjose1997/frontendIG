@@ -7,6 +7,7 @@ import ModalQrCode from './config/modalqrcode';
 import AlertaWhatsApp from "./alertawhatsapp";
 import ChavePix from './config/chavepix';
 import SaldoCPPModal from './saldocppmodal';
+import CertificadosModal from './Certificadosmodal';
 
 export default function BotaoUm() {
     const [mostrarNivel, setMostrarNivel] = useState(false);
@@ -21,12 +22,37 @@ export default function BotaoUm() {
     const [mostrarChavePix, setMostrarChavePix] = useState(false);
     const [mostrarPacotes, setMostrarPacotes] = useState(false);
     const [mostrarSaldoCPP, setMostrarSaldoCPP] = useState(false);
+    const [temCertificado, setTemCertificado] = useState(false);
+    const [mostrarCertificados, setMostrarCertificados] = useState(false);
+    const [certificados, setCertificados] = useState([]);
 
     const linkAprendizagem = window.location.origin.includes("localhost")
         ? "http://localhost:5173/aprendizagem"
         : "https://irongoals.com/aprendizagem";
 
     const [textoBotaoZap, setTextoBotaoZap] = useState("📱 WhatsApp");
+    useEffect(() => {
+        const verificarCertificados = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                const res = await fetch(`${URL}/certificados/usuario`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    setTemCertificado(data.tem_certificado);
+                } else {
+                    console.error("Erro na API de certificados:", data);
+                }
+            } catch (err) {
+                console.error("Erro ao verificar certificados:", err);
+            }
+        };
+
+        verificarCertificados();
+    }, []);
 
     useEffect(() => {
         if (!numero) {
@@ -66,6 +92,21 @@ export default function BotaoUm() {
                 setIdHost(data.id_host);
             });
     }, []);
+    const carregarCertificados = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            const res = await fetch(`${URL}/meus_certificados`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            const data = await res.json();
+            if (res.ok) {
+                setCertificados(data);
+                setMostrarCertificados(true);
+            }
+        } catch (err) {
+            console.error("Erro ao carregar certificados:", err);
+        }
+    };
 
     const salvarWhatsapp = async () => {
         const token = localStorage.getItem("token");
@@ -271,11 +312,26 @@ export default function BotaoUm() {
                     Aqui você pode visualizar e colocar sua chave Pix para suas compensações.
                 </span>
             </div>
+            {temCertificado && (
+                <button
+                    onClick={carregarCertificados}
+                    className="botao-acao"
+                >
+                    📜 Certificados
+                </button>
+            )}
+
 
             <button onClick={() => setMostrarPacotes(true)} className="botao-acao">📦 Pacotes</button>
             <button onClick={() => setMostrarModal(true)} className="botao-acao">🧭 Host</button>
             {["admin", "coordinador", "auditor"].includes(funcao.toLowerCase()) && (
                 <button onClick={() => setMostrarFerramentas(true)} className="botao-acao">🛠 Painel de controle</button>
+            )}
+            {mostrarCertificados && (
+                <CertificadosModal
+                    certificados={certificados}
+                    onClose={() => setMostrarCertificados(false)}
+                />
             )}
 
             {mostrarFerramentas && (

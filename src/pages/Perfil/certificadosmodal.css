@@ -1,0 +1,147 @@
+/* 🔲 Fundo escuro translúcido */
+.certificados-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    backdrop-filter: blur(4px);
+}
+
+/* 📦 Caixa do modal */
+.certificados-modal {
+    background: #0d0858;
+    padding: 25px 30px;
+    border-radius: 16px;
+    width: 60%;
+    max-width: 900px;
+    max-height: 75%;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    animation: slideDown 0.3s ease-out;
+}
+
+/* Barra lateral do scroll apenas dentro do modal */
+.certificados-modal::-webkit-scrollbar {
+    width: 10px;
+    /* largura da barra */
+}
+
+.certificados-modal::-webkit-scrollbar-track {
+    background: #1a144d;
+    /* fundo da barra */
+    border-radius: 10px;
+}
+
+.certificados-modal::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #0571d6, #1e5686);
+    border-radius: 10px;
+    border: 2px solid #0d0858;
+    /* cria efeito de “espacinho” */
+}
+
+.certificados-modal::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #1e8fff, #0a4ca5);
+}
+
+/* Firefox */
+.certificados-modal {
+    scrollbar-width: thin;
+    /* fino */
+    scrollbar-color: #0571d6 #1a144d;
+    /* cor do thumb e track */
+}
+
+
+/* 🏷️ Título */
+.certificados-modal h2 {
+    margin-bottom: 20px;
+    font-size: 2.6rem;
+    color: #fcfeff;
+    font-weight: bold;
+    border-bottom: 2px solid #e5eaf0;
+    padding-bottom: 10px;
+}
+
+/* 📑 Lista ordenada */
+.certificados-modal ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+/* Cada item */
+.certificados-modal li {
+    margin: 12px 0;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    transition: transform 0.2s ease, background 0.2s ease;
+    border-radius: 8px;
+    padding: 6px 10px;
+}
+
+/* Links clicáveis */
+.certificados-modal a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    display: block;
+    transition: color 0.2s ease;
+}
+
+/* Hover elegante */
+.certificados-modal li:hover {
+    transform: translateX(3px);
+}
+
+.certificados-modal a:hover {
+    color: #a8c6e4;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* Botão de fechar */
+.certificados-modal .botao-acao {
+    background: #1e5686;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    margin-top: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.3s ease;
+}
+
+.certificados-modal .botao-acao:hover {
+    background: #0571d6;
+}
+
+/* 🔽 Animação de entrada */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 📱 Responsividade */
+@media (max-width: 768px) {
+    .certificados-modal {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .certificados-modal h2 {
+        font-size: 1.3rem;
+    }
+}
