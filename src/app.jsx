@@ -1,5 +1,6 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useAuth } from "./authcontext.jsx"; // ✅ importa hook do contexto
 
 import Layout from "./components/layout.jsx";
 import Loader from "./components/loader.jsx";
@@ -29,6 +30,15 @@ import IronQuiz from "./pages/ironQuiz/ironquiz.jsx";
 import { Link } from "react-router-dom";
 import { URL } from "./config.jsx";
 
+function HomeRedirect() {
+  const { user } = useAuth(); // supondo que user != null significa logado
+
+  if (user) {
+    return <Navigate to="/inicio" replace />;
+  }
+
+  return <Home />;
+}
 
 function Home() {
   return (
@@ -141,7 +151,7 @@ function AppRoutes() {
 
         {/* Rotas que usam Layout */}
         <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomeRedirect />} />
           <Route path="/cursos" element={<Cursos />} />
           <Route path="/cadastrarse" element={<Cadastrarse />} />
           <Route

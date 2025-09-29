@@ -96,7 +96,18 @@ export default function PainelCursos() {
         e.preventDefault();
         const body = Object.fromEntries(new FormData(e.target).entries());
         body.curso_id = cursoId;
+        if (body.tempo) {
+            const partes = body.tempo.split(":").map(Number);
+            let segundos = 0;
+            if (partes.length === 2) {
+                segundos = partes[0] * 60 + partes[1];
+            } else if (partes.length === 3) {
+                segundos = partes[0] * 3600 + partes[1] * 60 + partes[2];
+            }
+            body.tempo_segundos = segundos;
+        }
 
+        delete body.tempo; // não precisamos enviar "tempo", só "tempo_segundos"
         try {
             if (videoEditando) {
                 const res = await fetch(`${URL}/videos/${videoEditando.id}`, {
@@ -274,10 +285,23 @@ export default function PainelCursos() {
                             required
                             defaultValue={videoEditando?.link_embed || ""}
                         ></textarea>
+
+                        {/* 🔹 Novo campo de tempo */}
+                        <input
+                            name="tempo"
+                            placeholder="Tempo (mm:ss)"
+                            defaultValue={
+                                videoEditando?.tempo_segundos
+                                    ? new Date(videoEditando.tempo_segundos * 1000).toISOString().substr(14, 5)
+                                    : ""
+                            }
+                        />
+
                         <button type="submit">
                             {videoEditando ? "✏️ Atualizar Vídeo" : "Salvar Vídeo"}
                         </button>
                     </form>
+
 
                     {/* Lista de vídeos */}
                     <div className="icpn-lista-videos">
@@ -318,7 +342,7 @@ export default function PainelCursos() {
                         {[...Array(8)].map((_, i) => (
                             <input key={i} name={`resposta${i + 1}`} placeholder={`Resposta ${i + 1}`} defaultValue={perguntaEditando?.[`resposta${i + 1}`] || ""} />
                         ))}
-                        <input name="correta" type="number" placeholder="Número da resposta correta" required defaultValue={perguntaEditando?.correta || ""} />
+                        <input style={{ display: "NONE" }} readOnly value={1} name="correta" type="number" placeholder="Número da resposta correta" required defaultValue={perguntaEditando?.correta || ""} />
                         <button type="submit">{perguntaEditando ? "✏️ Atualizar Pergunta" : "Salvar Pergunta"}</button>
                     </form>
 
