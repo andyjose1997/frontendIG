@@ -7,7 +7,7 @@ import ModalQrCode from './config/modalqrcode';
 import AlertaWhatsApp from "./alertawhatsapp";
 import ChavePix from './config/chavepix';
 import SaldoCPPModal from './saldocppmodal';
-import CertificadosModal from './Certificadosmodal';
+import CertificadosModal from './certificadosmodal';
 
 export default function BotaoUm() {
     const [mostrarNivel, setMostrarNivel] = useState(false);
