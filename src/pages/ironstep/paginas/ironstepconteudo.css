@@ -1,0 +1,149 @@
+.clases-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.clase-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    border-radius: 40px;
+    /* arredonda igual a imagem */
+    overflow: hidden;
+    /* evita que a imagem ultrapasse os cantos arredondados */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.clase-btn:hover {
+    transform: translateY(-8px) scale(1.05);
+    filter: brightness(1.15);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.clase-icon-only {
+    width: 600px;
+    height: 500px;
+    border-radius: 40px;
+    transition: transform 0.3s ease;
+}
+
+/* 🔹 Animação de "zoom suave" ao passar o mouse */
+.clase-btn:hover .clase-icon-only {
+    transform: scale(1.1);
+}
+
+.section-container-ironstep h3 {
+    text-align: center;
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: #f1f2f5;
+    margin-bottom: 1.8rem;
+
+    letter-spacing: 1px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* 🔹 Container geral dos cursos */
+.cursos-container {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: #00095e !important;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* 🔹 botão voltar */
+.back-btn {
+    background: #b1aeae;
+    border: none;
+    color: #000058;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.back-btn:hover {
+    color: #ffffff;
+    font-weight: bolder;
+    transform: translateX(-4px);
+}
+
+/* 🔹 título */
+.cursos-container h4 {
+    font-size: 2.2rem !important;
+    font-weight: 700;
+    color: #f3f3f3 !important;
+    margin-bottom: 1rem;
+    border-left: 4px solid #041582;
+    padding-left: 0.6rem;
+}
+
+/* 🔹 lista dos cursos */
+.cursos-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-top: 1rem;
+    justify-content: flex-start;
+}
+
+/* 🔹 botão de curso */
+.curso-bttn {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+
+    padding: 1rem 1.5rem;
+    min-width: 240px;
+    max-width: 780px;
+
+    background: linear-gradient(135deg, #041582, #0625a3);
+    color: #fff;
+
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+
+    font-size: 1.8rem;
+    font-weight: 600;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* 🔹 ícone do curso (maior para destaque) */
+.curso-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* 🔹 efeito hover moderno */
+.curso-bttn:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+    background: linear-gradient(135deg, #0625a3, #0845e0);
+}
+
+/* 🔹 animação de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

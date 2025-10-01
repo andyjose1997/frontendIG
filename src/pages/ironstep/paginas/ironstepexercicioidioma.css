@@ -1,0 +1,204 @@
+/* Container da fase */
+.fase-container {
+    background: rgba(0, 0, 0, 0.65);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    margin-top: 1rem;
+    min-height: 1300px;
+    text-align: center;
+    color: #fff;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fase-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #ffd700;
+}
+
+.fase-container p {
+    font-size: 2.4rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Botão de fechar */
+.close-bttn {
+    background: #c62828;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.close-bttn:hover {
+    background: #e53935;
+    transform: scale(1.05);
+}
+
+/* Lista de opções */
+.opcoes-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    align-items: center;
+}
+
+/* Botões de opção */
+.opcao-bttn {
+    background: linear-gradient(135deg, #0571d6, #041582);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    font-size: 2rem;
+    cursor: pointer;
+    width: 50%;
+    min-width: 450px;
+    transition: all 0.3s ease;
+}
+
+.opcao-bttn:hover {
+    background: linear-gradient(135deg, #041582, #0571d6);
+    transform: scale(1.05);
+}
+
+.opcao-bttn.active {
+    background: #ffd700;
+    color: #000;
+    font-weight: bold;
+}
+
+/* Input de tradução/completar */
+.input-fase {
+    width: 100%;
+    max-width: 350px;
+    padding: 0.8rem;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Botão de confirmar/avançar */
+.next-bttn {
+    background: #00c853;
+    color: #fff;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.next-bttn:hover {
+    background: #00e676;
+    transform: scale(1.05);
+}
+
+/* Checkbox multipla escolha */
+.opcoes-lista label {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 450px;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.fullscreen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #020b3a;
+    /* fundo escuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    margin-top: 8%;
+}
+
+.fase-container {
+    width: 100%;
+    background: #0a1a5c;
+    border-radius: 12px;
+    padding: 2rem;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    overflow-y: auto;
+    height: 100%;
+}
+
+.opcoes-lista label:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.opcoes-lista input[type="checkbox"] {
+    margin-right: 0.6rem;
+    transform: scale(1.2);
+}
+
+/* Mensagem final */
+.fase-container h2:last-child {
+    color: #4caf50;
+    font-size: 2.6rem;
+    margin-top: 1rem;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #041582, #0625a3);
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.countdown-container span {
+    font-size: 4rem;
+    margin: 0 0.5rem;
+    color: #ffcc00;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

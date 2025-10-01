@@ -2,6 +2,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './botoes.css';
 import { URL } from '../../config';
+import logo from "../ironstep/logos/logo.jpg";
+import { jwtDecode } from "jwt-decode"; // ✅ forma correta
 
 export default function Botoes() {
     const location = useLocation();
@@ -56,6 +58,39 @@ export default function Botoes() {
         return () => clearInterval(intervalo);
     }, []);
 
+    async function handleIronStep() {
+        try {
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                alert("Usuário não autenticado.");
+                return;
+            }
+
+            const resposta = await fetch(`${URL}/ironstep_status/iniciar`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + token
+                }
+            });
+
+            if (!resposta.ok) {
+                throw new Error("Erro ao iniciar status");
+            }
+
+            const data = await resposta.json();
+
+            // 🔹 salva status no localStorage
+            localStorage.setItem("ironstep_status", JSON.stringify(data.status));
+
+            navigate('/ironstep');
+        } catch (err) {
+            console.error("Erro ao iniciar IronStep:", err);
+            alert("Não foi possível iniciar o IronStep.");
+        }
+    }
+
     return (
         <>
             <aside className="botoa-container">
@@ -85,6 +120,22 @@ export default function Botoes() {
                     <span className="tooltip-text">
                         Participe dos quizzes do sistema e ganhe compensações se vencer os torneios.
                     </span>
+                </div>
+                <div className="tooltip-wrapper">
+                    <div className="tooltip-wrapper">
+                        {window.location.hostname === "localhost" && (
+                            <button onClick={handleIronStep}>
+                                <img src={logo} alt="IronStep" className="logo-btn" />
+                                <span className="link-text">IronStep</span>
+                            </button>
+                        )}
+
+                        <span className="tooltip-text">
+                            Exercícios práticos de idiomas, programação e pacote Office com
+                            pontuação e desafios diários.
+                        </span>
+                    </div>
+
                 </div>
 
                 <div className="tooltip-wrapper">
@@ -120,7 +171,6 @@ export default function Botoes() {
                     </div>
                 </div>
             )}
-
         </>
     );
 }

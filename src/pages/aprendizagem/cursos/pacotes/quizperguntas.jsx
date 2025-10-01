@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { URL } from "../../../../config";
+import Player from "@vimeo/player";
 import './quizperguntas.css';
 
 export default function QuizPerguntas({ video, onConcluirVideo }) {
-    const [tempoRestante, setTempoRestante] = useState(90); // 1m30
     const [perguntas, setPerguntas] = useState([]);
     const [perguntaAtual, setPerguntaAtual] = useState(0);
     const [opcoes, setOpcoes] = useState([]);
     const [tentativas, setTentativas] = useState(0);
     const [mensagem, setMensagem] = useState("");
     const [podeAvancar, setPodeAvancar] = useState(false);
-    const [mostrarPerguntas, setMostrarPerguntas] = useState(false); // 🔹 controla exibição
+    const [mostrarPerguntas, setMostrarPerguntas] = useState(false);
+    const [videoFinalizado, setVideoFinalizado] = useState(false); // 🔹 novo estado
 
     // 🔹 Reset ao trocar vídeo
     useEffect(() => {
         if (!video) return;
 
-        setTempoRestante(90); // sempre 1m30
         setPerguntas([]);
         setPerguntaAtual(0);
         setOpcoes([]);
@@ -24,23 +24,33 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
         setMensagem("");
         setPodeAvancar(false);
         setMostrarPerguntas(false);
+        setVideoFinalizado(false);
 
         fetch(`${URL}/perguntas/por-video/${video.id}`)
             .then(res => res.json())
             .then(data => setPerguntas(data))
             .catch(err => console.error("Erro ao carregar perguntas:", err));
+
+        const iframe = document.querySelector("iframe");
+        if (iframe) {
+            const player = new Player(iframe);
+
+            player.on("ended", () => {
+                console.log("🎬 Vídeo finalizado → liberando perguntas");
+                setVideoFinalizado(true); // 🔹 só marca como finalizado
+            });
+
+            return () => player.unload();
+        }
     }, [video]);
 
-    // 🔹 Contagem regressiva
+    // 🔹 Agora, só libera perguntas quando tiver `perguntas` carregadas e vídeo finalizado
     useEffect(() => {
-        if (tempoRestante <= 0) return;
-
-        const intervalo = setInterval(() => {
-            setTempoRestante(prev => prev - 1);
-        }, 1000);
-
-        return () => clearInterval(intervalo);
-    }, [tempoRestante]);
+        if (videoFinalizado && perguntas.length > 0) {
+            setMostrarPerguntas(true);
+            prepararOpcoes(perguntas[0]);
+        }
+    }, [videoFinalizado, perguntas]);
 
     const prepararOpcoes = (pergunta) => {
         if (!pergunta) return;
@@ -116,22 +126,6 @@ export default function QuizPerguntas({ video, onConcluirVideo }) {
 
     return (
         <div className="quizum-container">
-            {/* 🔹 Botão liberado só após 90s */}
-            {!mostrarPerguntas && (
-                <button
-                    className="quizum-botao-ver"
-                    onClick={() => {
-                        setMostrarPerguntas(true);
-                        prepararOpcoes(perguntas[0]);
-                    }}
-                    disabled={tempoRestante > 0}
-                >
-                    {tempoRestante > 0
-                        ? ``
-                        : "👉 Ver Pergunta"}
-                </button>
-            )}
-
             {mostrarPerguntas && perguntas.length > 0 && (
                 <>
                     <p className="quizum-contagem">

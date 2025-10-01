@@ -166,7 +166,7 @@ textarea:focus {
 }
 
 /* ===== Botão salvar ===== */
-button {
+.avaliacao-container button {
     background: linear-gradient(135deg, #3a86ff, #1c1e80);
     color: white;
     border: none;

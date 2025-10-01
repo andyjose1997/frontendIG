@@ -1,0 +1,237 @@
+.vidas-container {
+    display: flex;
+    justify-content: flex-start;
+    /* alinhado à esquerda */
+    gap: 1rem;
+    margin: 1rem 0;
+    padding: 0.8rem 1.5rem;
+
+    /* 🔹 Fundo moderno em azul */
+    background: linear-gradient(135deg, #041582, #0625a3);
+    width: 100px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+
+    /* 🔹 Grudado no topo ao rolar */
+    position: sticky;
+    top: 80px;
+    /* ajusta conforme altura do header */
+    z-index: 1000;
+
+    /* 🔹 Tipografia moderna (se quiser incluir título depois) */
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-weight: 500;
+    color: #fff;
+
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vidas-container:hover {
+    background: linear-gradient(135deg, #0520a1, #0832c7);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.vida-infinito {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffd700;
+    /* dourado para destacar */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+    animation: pulse 1.5s infinite;
+}
+
+/* Efeito de brilho */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.vida-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 🔹 Efeito metálico */
+.vida-circle.metal {
+    background: radial-gradient(circle at 30% 30%, #f5f5f5, #aaa, #555);
+    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.6),
+        inset 4px 4px 8px rgba(0, 0, 0, 0.6),
+        0 0 12px rgba(180, 180, 180, 0.7);
+    border: 2px solid #ccc;
+}
+
+/* 🔹 Sem vida */
+.vida-circle.empty {
+    background: radial-gradient(circle at 30% 30%, #000, #111, #222);
+    box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 0.2),
+        inset 3px 3px 6px rgba(0, 0, 0, 0.8);
+    border: 2px solid #333;
+}
+
+/* Wrapper */
+.vidas-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.5rem;
+}
+
+/* Botão Premium */
+.premium-btn {
+    background: linear-gradient(90deg, #0571d6, #1e5686);
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.premium-btn:hover {
+    background: linear-gradient(90deg, #1e5686, #0571d6);
+}
+
+/* Overlay do modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* Conteúdo do modal */
+.modal-content.premium-modal {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Título e subtítulo */
+.modal-title {
+    font-size: 1.8rem;
+    color: #1e5686;
+    margin-bottom: 0.5rem;
+}
+
+.modal-subtitle {
+    color: #444;
+    margin-bottom: 2rem;
+}
+
+/* Cards de preços */
+.precos-container {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.preco-card {
+    flex: 1;
+    min-width: 220px;
+    border-radius: 12px;
+    padding: 1.5rem;
+    background: #f9f9f9;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.preco-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.preco-card h3 {
+    color: #0571d6;
+    margin-bottom: 0.5rem;
+}
+
+.preco-card .preco {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin: 0.5rem 0 1rem 0;
+}
+
+.preco-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    color: #333;
+}
+
+.preco-card ul li {
+    margin: 0.4rem 0;
+    font-size: 0.9rem;
+}
+
+/* Botões */
+.btn-assinar {
+    background: linear-gradient(90deg, #0571d6, #1e5686);
+    color: white;
+    font-weight: bold;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.btn-assinar:hover {
+    background: linear-gradient(90deg, #1e5686, #0571d6);
+}
+
+/* Botão fechar */
+.fechar-btn {
+    margin-top: 1.5rem;
+    background: #bbb;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.fechar-btn:hover {
+    background: #999;
+}
+
+/* Animação */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

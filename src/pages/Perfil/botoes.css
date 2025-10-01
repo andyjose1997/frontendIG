@@ -34,26 +34,31 @@
     transform: translateY(-2px);
 }
 
-.botoa-container img {
-    width: 70px;
-    height: auto;
-
-    display: block;
-    margin: 2rem auto 1.5rem auto;
-
-    /* 🔹 Estética */
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-
-    /* 🔹 Transições suaves */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
 .botoa-container img:hover {
     transform: scale(1.08);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
+/* Só para a logo grande no topo da sidebar */
+.sidebar-logo {
+    width: 70px;
+    height: auto;
+    display: block;
+    margin: 2rem auto 1.5rem auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo-btn {
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    object-fit: contain;
+    display: inline-block;
+    vertical-align: middle;
+}
 
 .tooltip-wrapper {
     position: relative;

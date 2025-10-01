@@ -1,0 +1,271 @@
+.ironstep-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 2rem;
+
+    background-color: #0b3d74;
+    /* mantém a mesma cor */
+    color: #fff;
+    /* mantém a mesma cor */
+
+    border-radius: 14px;
+    margin-bottom: 2rem;
+
+    /* 🔹 sombra mais elegante */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+
+    /* 🔹 adiciona efeito suave */
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.3s ease;
+}
+
+.ironstep-header:hover {
+    transform: translateY(-3px);
+    /* leve elevação */
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+.ironstep-infos {
+    display: flex;
+    flex-direction: row;
+    /* mantém em linha */
+    justify-content: space-between;
+    /* joga um h3 pra cada lado */
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+
+    /* 🔹 estilo moderno */
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* 🔹 leve brilho */
+    backdrop-filter: blur(4px);
+
+    /* 🔹 transição suave */
+    transition: all 0.25s ease;
+}
+
+.ironstep-infos:hover {
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ironstep-infos h3 {
+    font-size: 2.2rem;
+    /* mantém tamanho */
+    font-weight: 500;
+    margin-top: -180px;
+    /* mantém posição */
+    font-family: "Segoe UI", Roboto, sans-serif;
+    color: #fff;
+    /* mantém cor */
+
+    /* 🔹 modernização */
+    letter-spacing: 0.5px;
+    /* leve espaçamento entre letras */
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    /* brilho elegante */
+    transition: transform 0.25s ease, text-shadow 0.25s ease;
+}
+
+.ironstep-infos h3:hover {
+    transform: scale(1.05);
+    /* leve aumento */
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+    /* destaca mais */
+}
+
+/* alinhamentos continuam */
+.info-left {
+    text-align: left;
+}
+
+.info-right {
+    text-align: right;
+}
+
+/* Logo central */
+.ironstep-logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+
+    /* 🔹 modernização */
+    padding: 0.5rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    /* leve fundo translúcido */
+    backdrop-filter: blur(4px);
+    /* efeito vidro suave */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ironstep-logo-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.ironstep-logo {
+    height: 220px;
+    /* mantém */
+    width: 280px;
+    /* mantém */
+    border-radius: 25px;
+    /* mantém */
+
+    /* 🔹 modernização */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    /* sombra elegante */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+.ironstep-logo:hover {
+    transform: scale(1.05);
+    /* leve aumento */
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    filter: brightness(1.05);
+    /* dá um "glow" suave */
+}
+
+/* Foto + nome */
+.ironstep-userinfo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+
+    /* 🔹 modernização */
+    padding: 0.8rem 1.2rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    /* fundo sutil translúcido */
+    backdrop-filter: blur(4px);
+    /* efeito vidro */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ironstep-userinfo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.ironstep-foto {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    /* mantém circular */
+    object-fit: cover;
+    border: 2px solid #fff;
+    /* mantém cor da borda */
+
+    /* 🔹 modernização */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    /* sombra mais elegante */
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.3s ease;
+}
+
+.ironstep-foto:hover {
+    transform: scale(1.08);
+    /* leve aumento */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    filter: brightness(1.05);
+    /* brilho suave no hover */
+}
+
+.ironstep-userinfo h2 {
+    font-size: 3.5rem;
+    /* mantém tamanho */
+    font-weight: 600;
+    margin: 0;
+    color: white;
+    /* mantém cor */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+    /* 🔹 modernização */
+    letter-spacing: 1px;
+    /* espaçamento sutil entre letras */
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+    /* brilho elegante */
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.ironstep-userinfo h2:hover {
+    transform: scale(1.04);
+    /* leve destaque */
+    text-shadow: 0 5px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* 🔹 Responsividade para telas pequenas */
+@media (max-width: 660px) {
+    .ironstep-infos {
+        flex-direction: column;
+        /* empilha os h3 */
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
+        margin-bottom: 0;
+
+        /* 🔹 modernização */
+        gap: 0.5rem;
+        /* espaço consistente entre infos */
+        padding: 0.5rem 0;
+    }
+
+    .ironstep-infos h3 {
+        font-size: 1.4rem;
+        /* mantém tamanho */
+        margin: 0.3rem 0;
+        text-align: center;
+
+        /* 🔹 modernização */
+        letter-spacing: 0.3px;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+        transition: transform 0.25s ease;
+    }
+
+    .ironstep-infos h3:hover {
+        transform: scale(1.05);
+    }
+
+    /* joga a seção de infos abaixo do userinfo */
+    .ironstep-header {
+        flex-direction: column;
+        padding: 1rem;
+        /* 🔹 respiro melhor em telas pequenas */
+    }
+
+    .ironstep-userinfo {
+        flex-direction: column;
+        text-align: center;
+
+        /* 🔹 modernização */
+        padding: 0.5rem 0;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .ironstep-userinfo h2 {
+        margin-bottom: 0.5rem;
+        font-size: 2.5rem;
+        /* 🔹 reduz um pouco pra caber melhor */
+    }
+}
+
+.ironstep-link {
+    color: white;
+    text-decoration: none;
+    /* 🔹 remove a linha */
+    transition: color 0.25s ease;
+    font-weight: inherit;
+    /* mantém peso do h2 */
+}
+
+.ironstep-link:hover {
+    color: #f5f5f5;
+    /* efeito no hover */
+    text-decoration: none;
+    /* 🔹 garante que não volte */
+}

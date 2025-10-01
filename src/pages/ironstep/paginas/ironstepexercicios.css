@@ -1,0 +1,133 @@
+.exercicios-container {
+    margin-top: 1.5rem;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, #041582, #0625a3);
+    border-radius: 18px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+    color: #fff;
+    animation: fadeIn 0.4s ease-in-out;
+    position: relative;
+}
+
+.exercicios-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 1800px;
+    width: 90%;
+    position: relative;
+}
+
+/* 🔹 Linha central */
+.exercicios-lista::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 2px;
+    transform: translateX(-50%);
+}
+
+/* 🔹 Cada item */
+.exercicio-item {
+    position: relative;
+    background: #fff;
+    color: #333;
+    padding: 1.6rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    width: 80%;
+    font-size: 1.3rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+/* Bolinha */
+.exercicio-item::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+/* Alternância lados */
+.exercicio-item:nth-child(odd) {
+    margin-left: 0;
+    align-self: flex-start;
+}
+
+.exercicio-item:nth-child(odd)::before {
+    right: -42px;
+    background: #888;
+}
+
+.exercicio-item:nth-child(even) {
+    margin-left: auto;
+    align-self: flex-end;
+}
+
+.exercicio-item:nth-child(even)::before {
+    left: -42px;
+    background: #888;
+}
+
+/* Estados */
+.exercicio-item.completed {
+    background: #e7ffe7;
+    color: #1c7c1c;
+    border: 2px solid #2ecc71;
+}
+
+.exercicio-item.completed::before {
+    background: #2ecc71;
+}
+
+.exercicio-item.disabled {
+    background: #f0f0f0;
+    color: #aaa;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.exercicio-item.disabled::before {
+    background: #ccc;
+}
+
+.exercicio-item:not(.disabled):hover {
+    transform: translateY(-3px);
+    background: #f7faff;
+}
+
+/* Check ✔ */
+.checkmark {
+    margin-left: 8px;
+    font-size: 1.2rem;
+    color: #2ecc71;
+}
+
+/* Entrada animada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

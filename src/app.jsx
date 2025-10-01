@@ -7,6 +7,7 @@ import Loader from "./components/loader.jsx";
 import RecuperarSenha from "./pages/recuperacao/recuperarsenha.jsx";
 import Avaliacao from "./pages/areaafastada/avaliacao.jsx";
 import HistoricoCertificadosYouTube from "./components/historicocertificadosyoutube.jsx";
+import IronStep from "./pages/ironstep/ironstep.jsx";
 
 import Login from './pages/login.jsx';
 import Cursos from "./pages/cursos.jsx";
@@ -147,6 +148,14 @@ function AppRoutes() {
           element={<HistoricoCertificadosYouTube />}
         />
 
+        <Route
+          path="/ironstep"
+          element={
+            <PrivateRoute>
+              <IronStep />
+            </PrivateRoute>
+          }
+        />
 
 
         {/* Rotas que usam Layout */}
