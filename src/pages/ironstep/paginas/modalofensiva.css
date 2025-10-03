@@ -1,0 +1,560 @@
+.ofensiva-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+
+    /* 🔹 Fundo moderno com degradê sutil + vidro fosco */
+    background: linear-gradient(180deg,
+            rgba(0, 0, 0, 0.75) 0%,
+            rgba(0, 0, 0, 0.6) 50%,
+            rgba(0, 0, 0, 0.75) 100%);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    /* 🔹 Suavidade de entrada */
+    animation: fadeOverlay 0.45s ease-out;
+}
+
+/* ✨ Animação de entrada mais elegante */
+@keyframes fadeOverlay {
+    from {
+        opacity: 0;
+        transform: scale(1.02);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.ofensiva-modal-conteudo {
+    background: #020363;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 1400px;
+    width: 90%;
+    max-height: 90vh;
+    margin-top: -620px;
+    overflow-y: auto;
+    position: relative;
+
+    /* 🔹 Sombra suave para destacar do fundo */
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+
+    /* 🔹 Bordas internas para dar profundidade */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    /* 🔹 Transições suaves ao aparecer/interagir */
+    animation: slideModal 0.45s ease-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* 🚀 só dentro do conteúdo pode interagir */
+    pointer-events: auto;
+}
+
+/* 🔹 Animação de entrada elegante */
+@keyframes slideModal {
+    from {
+        transform: translateY(-25px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 🔹 Pequeno efeito no hover pra dar vida */
+.ofensiva-modal-conteudo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 34px rgba(0, 0, 0, 0.65);
+}
+
+/* 🔹 Título */
+.ofensiva-modal-conteudo h2 {
+    margin-bottom: 20px;
+    font-size: 2.3rem;
+    text-align: center;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+
+    /* 🔹 Toque moderno */
+    text-transform: uppercase;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5),
+        0 0 12px rgba(255, 255, 255, 0.15);
+
+    /* 🔹 Linha sutil embaixo */
+    position: relative;
+}
+
+.ofensiva-modal-conteudo h2::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #1e5686, #0571d6);
+    box-shadow: 0 0 6px rgba(5, 113, 214, 0.6);
+}
+
+.ofensiva-modal-conteudo h1 {
+    margin-bottom: 20px;
+    font-size: 2.3rem;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+
+    /* 🔹 Efeito moderno */
+
+
+    /* 🔹 Sombra luminosa para impacto */
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.6),
+        0 0 14px rgba(62, 115, 255, 0.4);
+
+    /* 🔹 Entrada suave */
+    animation: tituloFade 0.6s ease-in-out;
+}
+
+@keyframes tituloFade {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🔹 Container horizontal da semana */
+.ofensiva-semana-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    gap: 12px;
+
+    /* 🔹 Aparência mais premium */
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    /* 🔹 Suavidade ao aparecer */
+    animation: fadeContainer 0.5s ease-in-out;
+    transition: all 0.3s ease;
+}
+
+@keyframes fadeContainer {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🔹 Cada caixa de dia */
+.ofensiva-dia-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 14%;
+    font-size: 2.4rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    /* 🔹 Aparência de card moderno */
+    padding: 8px 0;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+
+    cursor: default;
+}
+
+.ofensiva-dia-box:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.ofensiva-navegacao-semanas {
+    margin-top: 25px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    /* 🔹 Aparência de barra moderna */
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.04),
+        0 4px 10px rgba(0, 0, 0, 0.35);
+
+    /* 🔹 Suavidade ao aparecer */
+    animation: fadeNav 0.5s ease-in-out;
+    transition: all 0.3s ease;
+}
+
+@keyframes fadeNav {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.semana-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+
+    /* 🔹 Suavidade */
+    transition: all 0.25s ease-in-out;
+
+    /* 🔹 Efeito 3D básico */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* 🔹 Versão preta */
+.semana-preta {
+    background: #222;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 🔹 Versão verde */
+.semana-verde {
+    background: #28a745;
+    color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.45);
+}
+
+/* 🔹 Hover */
+.semana-btn:hover {
+    transform: translateY(-3px) scale(1.07);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+    filter: brightness(1.1);
+}
+
+/* 🔹 Clique */
+.semana-btn:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) inset;
+}
+
+/* 🔹 Bolinhas modernas */
+.ofensiva-bolinha {
+    width: 30px;
+    height: 40px;
+    border-radius: 50%;
+    margin-bottom: 6px;
+    border: #00cc44 solid 3px;
+
+    /* 🔹 Efeito 3D + profundidade */
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent 70%);
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.1),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.25),
+        0 0 8px rgba(0, 0, 0, 0.35);
+
+    transition: all 0.3s ease;
+}
+
+/* 🔹 Estado inativo (preto) */
+.ofensiva-bolinha.ofensiva-preta {
+    background: linear-gradient(145deg, #222 0%, #333 100%);
+    border: 1px solid #666;
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.05),
+        inset 0 -2px 6px rgba(0, 0, 0, 0.5),
+        0 0 6px rgba(0, 0, 0, 0.4);
+}
+
+/* 🔹 Estado ativo (verde) */
+.ofensiva-bolinha.ofensiva-verde {
+    background: linear-gradient(145deg, #00e650 0%, #00cc44 100%);
+    box-shadow:
+        inset 0 2px 6px rgba(255, 255, 255, 0.2),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.25),
+        0 0 12px rgba(0, 204, 68, 0.65);
+    animation: pulsar 1.2s infinite ease-in-out;
+}
+
+/* 🔹 Animação já existente */
+@keyframes pulsar {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.12);
+        opacity: 0.85;
+    }
+}
+
+/* 🔹 Dia da semana */
+.ofensiva-dia-box span {
+    font-weight: 600;
+    margin-top: 6px;
+    color: #ddd;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+
+    /* 🔹 Toque moderno */
+    text-transform: uppercase;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.ofensiva-dia-box:hover span {
+    color: #fff;
+    transform: scale(1.05);
+}
+
+/* 🔹 Número da data */
+.ofensiva-dia-box small {
+    color: #aaa;
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+
+    /* 🔹 Toque sutil de profundidade */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.ofensiva-dia-box:hover small {
+    color: #fff;
+    transform: scale(1.08);
+}
+
+/* 🔹 Botão fechar moderno */
+.ofensiva-fechar-btn {
+    margin-top: 14px;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #0571d6, #1e5686);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.95rem;
+    letter-spacing: 0.5px;
+
+    /* 🔹 Profundidade */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1);
+
+    transition: all 0.3s ease;
+}
+
+/* 🔹 Hover com brilho */
+.ofensiva-fechar-btn:hover {
+    background: linear-gradient(90deg, #1e5686, #0571d6);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45),
+        0 0 10px rgba(5, 113, 214, 0.5);
+}
+
+/* 🔹 Clique */
+.ofensiva-fechar-btn:active {
+    transform: scale(0.95);
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* 🔹 Container da lista de exercícios */
+.ofensiva-exercicios-lista {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    /* leve transparência */
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* 🔹 Título da lista */
+.ofensiva-exercicios-lista h3 {
+    margin-bottom: 10px;
+    font-size: 1.9rem;
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 5px;
+}
+
+/* 🔹 Lista de exercícios */
+.ofensiva-exercicios-lista ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+/* 🔹 Cada item da lista */
+.ofensiva-exercicios-lista li {
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    background: linear-gradient(90deg, #0571d6, #1e5686);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    transition: transform 0.2s ease, background 0.3s ease;
+    cursor: default;
+}
+
+/* 🔹 Hover dos itens */
+.ofensiva-exercicios-lista li:hover {
+    transform: translateX(5px);
+    background: linear-gradient(90deg, #1e5686, #0571d6);
+}
+
+/* 🔹 Texto do exercício em destaque */
+.ofensiva-exercicios-lista li strong {
+    font-weight: 700;
+    font-size: 2rem;
+    color: #ffd700;
+    /* dourado para destaque */
+}
+
+/* 🔹 Mensagem quando não tem exercícios */
+.ofensiva-exercicios-lista p {
+    color: #ccc;
+    font-style: italic;
+    margin: 10px 0 0;
+    font-size: 2rem;
+
+    text-align: center;
+}
+
+/* 🔹 Animação suave */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🔹 Responsividade até 980px */
+@media (max-width: 980px) {
+    .ofensiva-modal-conteudo {
+        max-width: 95%;
+        margin-top: -400px;
+        /* reduzido para caber melhor em telas médias */
+        padding: 16px;
+    }
+
+    .ofensiva-semana-container {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .ofensiva-dia-box {
+        width: 22%;
+        /* 4 por linha */
+        font-size: 1.8rem;
+    }
+
+    .ofensiva-exercicios-lista li {
+        font-size: 1.6rem;
+    }
+}
+
+/* 🔹 Responsividade até 500px */
+@media (max-width: 500px) {
+    .ofensiva-modal-conteudo {
+        max-width: 100%;
+        margin-top: -200px;
+        /* modal centralizado melhor em celular */
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .ofensiva-semana-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .ofensiva-dia-box {
+        width: 28%;
+        /* 3 por linha */
+        font-size: 1.3rem;
+        padding: 6px;
+    }
+
+    .ofensiva-dia-box span {
+        font-size: 0.9rem;
+    }
+
+    .ofensiva-dia-box small {
+        font-size: 1rem;
+    }
+
+    .ofensiva-exercicios-lista h3 {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+
+    .ofensiva-exercicios-lista li {
+        font-size: 1.2rem;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .ofensiva-exercicios-lista li strong {
+        font-size: 1.3rem;
+    }
+
+    .ofensiva-fechar-btn {
+        font-size: 1.4rem;
+        padding: 10px 16px;
+    }
+}

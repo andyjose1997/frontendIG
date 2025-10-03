@@ -30,8 +30,13 @@ export default function Buscador() {
     }
 
     function handleConfirmLogout() {
-        window.location.href = '/';
+        // limpar storage
+        localStorage.clear();  // limpa tudo (ou use removeItem se quiser só alguns)
+
+        // redirecionar
+        window.location.href = '/login';
     }
+
 
     async function buscarUsuarios(texto) {
         if (texto.trim() === "") {

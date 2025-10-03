@@ -1,0 +1,128 @@
+.ranking-extension {
+    width: 100%;
+    background: linear-gradient(180deg, #0a1a33, #102a52);
+    color: #f9f9f9;
+    padding: 2rem 1rem;
+    text-align: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+    animation: slideDown 0.4s ease-in-out;
+    position: relative;
+}
+
+.ranking-extension h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #1ed760;
+    text-shadow: 0px 2px 6px rgba(30, 215, 96, 0.5);
+}
+
+.ranking-extension h3 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #1ed760;
+    text-shadow: 0px 2px 6px rgba(30, 215, 96, 0.5);
+}
+
+.ranking-extension p {
+    font-size: 2rem;
+    margin: 0.5rem 0;
+    font-weight: 500;
+}
+
+/* tabela de ranking */
+.ranking-table {
+    width: 100%;
+    margin-top: 1rem;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.ranking-table th,
+.ranking-table td {
+    padding: 12px;
+    font-size: 4rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ranking-table th {
+    background: rgba(0, 0, 0, 0.3);
+    color: #1ed760;
+    font-size: 2.1rem;
+}
+
+.ranking-table tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.meu-ranking {
+    background: rgba(30, 215, 96, 0.25);
+    font-weight: bold;
+}
+
+/* botão fechar */
+.ranking-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: #d62828;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.ranking-close:hover {
+    background: #a61c1c;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.meu-ranking {
+    background: rgba(30, 215, 96, 0.35);
+    /* verde ofuscado */
+    font-weight: bold;
+    color: #fff;
+    box-shadow: inset 0 0 10px rgba(30, 215, 96, 0.6);
+    transition: background 0.3s ease;
+}
+
+.meu-ranking:hover {
+    background: rgba(30, 215, 96, 0.5);
+}
+
+/* célula de usuário: foto + nome */
+.user-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 3rem;
+    justify-content: flex-start;
+    padding-left: 10px;
+}
+
+/* foto de perfil do ranking */
+.user-foto {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #1ed760;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}

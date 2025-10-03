@@ -60,13 +60,16 @@ export default function IronStepVidas({ vidas = 0 }) {
             )}
 
             {/* 🔹 Botão para abrir modal */}
-            <button className="premium-btn" onClick={() => setShowModal(true)}>
-                Seja Premium
-            </button>
+            {vidasAtuais < 4 && (
+                <button className="premium-btn" onClick={() => setShowModal(true)}>
+                    Seja Premium
+                </button>
+            )}
+
 
             {/* 🔹 Modal de preços */}
             {showModal && (
-                <div className="modal-overlay">
+                <div className="modal-ironstep-overlay">
                     <div className="modal-content premium-modal">
                         <h2 className="modal-title">✨ Torne-se Premium ✨</h2>
                         <p className="modal-subtitle">
@@ -75,6 +78,8 @@ export default function IronStepVidas({ vidas = 0 }) {
 
                         <div className="precos-container">
                             <div className="preco-card mensal">
+
+
                                 <h3>Plano Mensal</h3>
                                 <p className="preco">R$ 8,00</p>
                                 <ul>
@@ -100,7 +105,7 @@ export default function IronStepVidas({ vidas = 0 }) {
                             </div>
                         </div>
 
-                        <button className="fechar-btn" onClick={() => setShowModal(false)}>
+                        <button className="fechar-irontep-btn" onClick={() => setShowModal(false)}>
                             Fechar
                         </button>
                     </div>

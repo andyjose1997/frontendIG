@@ -94,11 +94,11 @@
 
 /* ===== Subtítulos (nome do curso, etc.) ===== */
 .cursos-container h3 {
-    font-size: 2.2rem;
+    font-size: 2.6rem;
     font-weight: 700;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    color: #0f172a;
+    color: #fdfdfd;
     border-left: 5px solid #2563eb;
     padding-left: 1rem;
     line-height: 1.4;
@@ -125,11 +125,11 @@
 
 /* ===== Autor ===== */
 .autor {
-    font-size: 1.8rem;
+    font-size: 2.3rem;
     /* 🔹 balanceado com h4 */
     font-weight: 500;
     font-style: italic;
-    color: #475569;
+    color: #ffffff;
     margin-left: 0.5rem;
 
     /* 🔹 efeito visual mais sutil */

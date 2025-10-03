@@ -21,6 +21,56 @@
     position: relative;
 }
 
+.exercicio-item {
+    background: #fff;
+    margin: 1rem 0;
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    color: #000;
+    list-style: none;
+}
+
+
+.exercicio-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.exercicios-lista {
+    border-collapse: collapse;
+    /* junta bordas */
+}
+
+.exercicios-lista td,
+.exercicios-lista th {
+    border: none !important;
+    /* remove todas */
+}
+
+.exercicio-titulo {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: #1e5686;
+    margin-bottom: 0.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exercicio-info {
+    font-size: 1.95rem;
+    color: #333;
+    margin-left: 0.5rem;
+}
+
+.exercicio-info p {
+    margin: 0.2rem 0;
+    font-size: 1.9rem;
+    line-height: 1.4;
+}
+
 /* 🔹 Linha central */
 .exercicios-lista::before {
     content: "";
@@ -28,6 +78,9 @@
     left: 50%;
     top: 0;
     bottom: 0;
+
+    display: none;
+
     width: 4px;
     background: rgba(255, 255, 255, 0.25);
     border-radius: 2px;
@@ -87,9 +140,13 @@
 
 /* Estados */
 .exercicio-item.completed {
-    background: #e7ffe7;
-    color: #1c7c1c;
-    border: 2px solid #2ecc71;
+    background: #01cf01;
+    color: #f1faf1 !important;
+    border: 6px solid #2ecc71;
+}
+
+.carreg {
+    font-size: 3rem;
 }
 
 .exercicio-item.completed::before {
@@ -130,4 +187,36 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.back-bttn {
+    background: linear-gradient(135deg, #0571d6, #041582);
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    padding: 0.7rem 1.4rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    font-size: 1.6rem;
+
+    /* 🔹 Agora gruda quando rolar */
+    position: sticky;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
+}
+
+.back-bttn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    background: gray;
+    display: none;
+    /* ou outra cor que destaque */
+}
+
+.back-bttn:hover {
+    background: linear-gradient(135deg, #041582, #0571d6);
+    transform: scale(1.05);
 }

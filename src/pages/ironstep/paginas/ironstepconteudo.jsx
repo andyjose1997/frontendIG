@@ -7,7 +7,6 @@ import IronStepExercicios from "./ironstepexercicios";
 // 🔹 importa as imagens de CLASSES
 import idiomasImg from "./logos/clases/idiomas.png";
 import programacaoImg from "./logos/clases/programacao.png";
-import pacoteofficeImg from "./logos/clases/pacoteoffice.png";
 
 // 🔹 importa as imagens de CURSOS
 import css3Img from "./logos/cursos/css3.png";
@@ -52,7 +51,6 @@ export default function IronStepConteudo() {
     const iconMap = {
         "Idiomas": idiomasImg,
         "Programação": programacaoImg,
-        "Pacote Office": pacoteofficeImg
     };
 
     // 🔹 pega logo do curso mesmo com nome diferente
@@ -114,20 +112,23 @@ export default function IronStepConteudo() {
                     {!selectedClase ? (
                         // 🔹 mostra CLASSES
                         <div className="clases-container">
-                            {clases.map((clase) => (
-                                <button
-                                    key={clase.id}
-                                    className="clase-btn"
-                                    onClick={() => handleClaseClick(clase.id)}
-                                >
-                                    <img
-                                        src={iconMap[clase.clase] || idiomasImg}
-                                        alt={clase.clase}
-                                        className="clase-icon-only"
-                                    />
-                                </button>
-                            ))}
+                            {clases
+                                .filter(c => c.clase === "Idiomas" || c.clase === "Programação")
+                                .map((clase) => (
+                                    <button
+                                        key={clase.id}
+                                        className="clase-btn"
+                                        onClick={() => handleClaseClick(clase.id)}
+                                    >
+                                        <img
+                                            src={iconMap[clase.clase] || idiomasImg}
+                                            alt={clase.clase}
+                                            className="clase-icon-only"
+                                        />
+                                    </button>
+                                ))}
                         </div>
+
                     ) : !selectedCurso ? (
                         // 🔹 mostra CURSOS da classe selecionada
                         <div className="cursos-container">

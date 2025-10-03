@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { URL } from "../../../config";
 import "./ironstepexercicioidioma.css";
+import PremiumModal from "./premium";
+import ExercicioTipos from "./exercisios/exerciciosidioma";
 
-export default function IronStepExercicioIdioma({ exercicioId, onClose }) {
+export default function ExercicioIdiomas({ exercicioId, onClose }) {
     const [fases, setFases] = useState([]);
     const [faseAtual, setFaseAtual] = useState(0);
     const [loading, setLoading] = useState(true);
@@ -15,7 +17,9 @@ export default function IronStepExercicioIdioma({ exercicioId, onClose }) {
     const [bloqueado, setBloqueado] = useState(false);
     const [entrando, setEntrando] = useState(true);
     const [respondidas, setRespondidas] = useState([]);
-    const [erros, setErros] = useState(0); // 🔹 novo contador de erros
+    const [erros, setErros] = useState(0);
+    const [showPremium, setShowPremium] = useState(false);
+    const [reiniciar, setReiniciar] = useState(false);
 
     // Timer de entrada
     const [countdown, setCountdown] = useState(3);
@@ -29,6 +33,7 @@ export default function IronStepExercicioIdioma({ exercicioId, onClose }) {
 
     const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
+    // 🔹 Carregar fases e vidas
     useEffect(() => {
         if (!exercicioId) return;
 
@@ -43,7 +48,6 @@ export default function IronStepExercicioIdioma({ exercicioId, onClose }) {
                 setLoading(false);
                 setEntrando(true);
 
-                // espera 1s antes de começar
                 setTimeout(() => setEntrando(false), 1000);
             })
             .catch(err => {
@@ -59,7 +63,7 @@ export default function IronStepExercicioIdioma({ exercicioId, onClose }) {
             .catch(err => console.error("Erro ao carregar vidas:", err));
     }, [exercicioId]);
 
-
+    // 🔹 Timer de contagem regressiva
     useEffect(() => {
         if (!pronto && countdown > 0) {
             const timer = setTimeout(() => {
@@ -76,23 +80,52 @@ export default function IronStepExercicioIdioma({ exercicioId, onClose }) {
         }
     }, [countdown, pronto]);
 
-
+    // 🔹 Configurar opções para cada fase
     useEffect(() => {
         if (fases.length > 0) {
             const fase = fases[faseAtual];
             if (fase) {
-                const todas = [
-                    ...(fase.opcoes?.split(";") || []),
-                    ...(fase.correta?.split(";") || [])
-                ];
-                setOpcoesAtuais(shuffle(todas));
+                if (fase.tipo === "montar") {
+                    const palavras = fase.correta ? fase.correta.split(" ") : [];
+                    const extras = fase.opcoes ? fase.opcoes.split(";") : [];
+                    setOpcoesAtuais(shuffle([...palavras, ...extras]));
+                } else if (fase.tipo === "multipla" || fase.tipo === "completar") {
+                    const todas = [
+                        ...(fase.opcoes?.split(";") || []),
+                        ...(fase.correta ? fase.correta.split(";") : [])
+                    ];
+                    setOpcoesAtuais(shuffle(todas));
+                } else {
+                    setOpcoesAtuais([]);
+                }
             }
         }
     }, [faseAtual, fases]);
 
-    if (loading) return <p>Carregando fases...</p>;
+    if (loading) return <p style={{ fontSize: "2rem" }}>Carregando fases...</p>;
     if (!fases.length) return <p>Nenhuma fase encontrada.</p>;
-    if (bloqueado) return <h2>💀 Você errou 5 vezes. Tente novamente!</h2>;
+    if (bloqueado || vidas === 0) {
+        return (
+            <div className="fullscreennn">
+                <div className="fase-container">
+                    <h2>💔 Você ficou sem vidas!</h2>
+                    <p>Você pode tentar novamente amanhã, ou desbloquear vidas ilimitadas com a conta <strong>Premium</strong>.</p>
+
+                    <div style={{ marginTop: "1.5rem" }}>
+                        <button className="next-bttn" onClick={onClose}>Fechar</button>
+                        <button
+                            className="premiumm-btttn"
+                            onClick={() => setShowPremium(true)}
+                        >
+                            Quero ser Premium
+                        </button>
+                        <br /> <br /><br />
+                        {showPremium && <PremiumModal onClose={() => setShowPremium(false)} />}
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     const fase = fases[faseAtual];
     const normalizar = (txt) => txt.toLowerCase().replace(/[^a-z0-9]/gi, "");
@@ -100,21 +133,26 @@ export default function IronStepExercicioIdioma({ exercicioId, onClose }) {
     const proximaFase = () => {
         setFeedback(null);
 
-        // Se já acertou 5 → finaliza
-        if (acertos >= 5) {
+        // 👉 Se errou 5 vezes, reinicia
+        if (erros >= 5) {
+            alert("❌ Você errou 5 vezes! O exercício será reiniciado.");
+            setErros(0);
+            setAcertos(0);
+            setRespondidas([]);
+            setFaseAtual(0);
+            setResposta("");
+            setSelecionados([]);
+            return;
+        }
+
+        // 👉 Se já atingiu 6 acertos, finaliza
+        if (acertos >= 6) {
             finalizarExercicio();
             return;
         }
 
-        // Se já errou 5 → bloqueia
-        if (erros >= 5) {
-            setBloqueado(true);
-            return;
-        }
-
-        // Busca próxima fase que ainda não foi respondida
+        // 👉 Vai para próxima fase não respondida
         const naoRespondidas = fases.filter(f => !respondidas.includes(f.id));
-
         if (naoRespondidas.length > 0) {
             const proxima = naoRespondidas[0];
             const index = fases.findIndex(f => f.id === proxima.id);
@@ -122,10 +160,15 @@ export default function IronStepExercicioIdioma({ exercicioId, onClose }) {
             setResposta("");
             setSelecionados([]);
         } else {
-            finalizarExercicio();
+            // 🔹 Recomeça as fases até acertar 6 ou errar 5
+            setRespondidas([]);
+            setFaseAtual(0);
+            setResposta("");
+            setSelecionados([]);
         }
     };
 
+    // 🔹 Descontar vida no erro
     const descontarVida = () => {
         if (!usuarioId) return;
         const token = localStorage.getItem("token");
@@ -141,31 +184,46 @@ export default function IronStepExercicioIdioma({ exercicioId, onClose }) {
             .catch(err => console.error("Erro ao descontar vida:", err));
     };
 
+    // 🔹 Validação da resposta
     const validarResposta = () => {
         let correto = false;
 
-        if (fase.tipo === "completar") correto = resposta === fase.correta;
-        if (fase.tipo === "traducao") correto = normalizar(resposta) === normalizar(fase.correta);
+        if (fase.tipo === "completar") {
+            correto = resposta === fase.correta;
+        }
+        if (fase.tipo === "traducao") {
+            correto = normalizar(resposta) === normalizar(fase.correta);
+        }
         if (fase.tipo === "multipla") {
-            const corretas = fase.correta.split(";").map(c => c.trim()).filter(c => c.length > 0);
-            const selecionadasOrdenadas = [...selecionados].sort();
-            const corretasOrdenadas = [...corretas].sort();
-            correto = JSON.stringify(corretasOrdenadas) === JSON.stringify(selecionadasOrdenadas);
+            const normalizarArray = (arr) =>
+                arr.map(c => c.trim().toLowerCase()).filter(c => c.length > 0).sort();
+            const corretas = normalizarArray(fase.correta.split(";"));
+            const selecionadasNormalizadas = normalizarArray(selecionados);
+            correto = JSON.stringify(corretas) === JSON.stringify(selecionadasNormalizadas);
+        }
+        if (fase.tipo === "montar") {
+            correto = normalizar(resposta) === normalizar(fase.correta);
         }
 
-        // Marca fase como respondida
         setRespondidas(prev => [...prev, fase.id]);
 
         if (correto) {
-            setAcertos(prev => prev + 1);
+            setAcertos(prev => {
+                const novos = prev + 1;
+                if (novos === 6) {
+                    finalizarExercicio();
+                }
+                return novos;
+            });
             setFeedback({ tipo: "acerto", msg: "✅ Você acertou!" });
         } else {
-            setErros(prev => prev + 1); // 🔹 conta erro
+            setErros(prev => prev + 1);
             descontarVida();
             setFeedback({ tipo: "erro", msg: `❌ Você errou! Resposta correta: ${fase.correta}` });
         }
     };
 
+    // 🔹 Finalizar exercício
     const finalizarExercicio = () => {
         const fim = Date.now();
         const tempoSegundos = Math.floor((fim - startTime) / 1000);
@@ -193,9 +251,9 @@ export default function IronStepExercicioIdioma({ exercicioId, onClose }) {
     };
 
     return (
-        <div className="fullscreen-overlay">
+        <div className="fullscreennn">
             <div className="fase-container">
-                <button className="close-bttn" onClick={onClose}>✖ Fechar</button>
+                <button className="clossse-bttn" onClick={onClose}>✖ Fechar</button>
 
                 {entrando ? (
                     <div className="countdown-container">
@@ -204,7 +262,7 @@ export default function IronStepExercicioIdioma({ exercicioId, onClose }) {
                 ) : !pontuacaoFinal ? (
                     <>
                         <h2>{fase.descricao}</h2>
-                        <p><strong>Frase:</strong> {fase.frase}</p>
+                        <p><strong>Traduza:</strong> {fase.frase}</p>
 
                         {feedback ? (
                             <div className={`feedback ${feedback.tipo}`}>
@@ -212,57 +270,15 @@ export default function IronStepExercicioIdioma({ exercicioId, onClose }) {
                                 <button className="next-bttn" onClick={proximaFase}>Próxima</button>
                             </div>
                         ) : (
-                            <>
-                                {fase.tipo === "completar" && (
-                                    <div className="opcoes-lista">
-                                        {opcoesAtuais.map((op, idx) => (
-                                            <button
-                                                key={idx}
-                                                className={`opcao-bttn ${resposta === op ? "active" : ""}`}
-                                                onClick={() => setResposta(op)}
-                                            >
-                                                {op}
-                                            </button>
-                                        ))}
-                                        <button className="next-bttn" onClick={validarResposta}>Confirmar</button>
-                                    </div>
-                                )}
-
-                                {fase.tipo === "traducao" && (
-                                    <div>
-                                        <input
-                                            type="text"
-                                            placeholder="Digite a tradução..."
-                                            className="input-fase"
-                                            value={resposta}
-                                            onChange={(e) => setResposta(e.target.value)}
-                                        />
-                                        <button className="next-bttn" onClick={validarResposta}>Confirmar</button>
-                                    </div>
-                                )}
-
-                                {fase.tipo === "multipla" && (
-                                    <div className="opcoes-lista">
-                                        {opcoesAtuais.map((op, idx) => (
-                                            <label key={idx}>
-                                                <input
-                                                    type="checkbox"
-                                                    value={op}
-                                                    onChange={(e) => {
-                                                        if (e.target.checked) {
-                                                            setSelecionados([...selecionados, op]);
-                                                        } else {
-                                                            setSelecionados(selecionados.filter((s) => s !== op));
-                                                        }
-                                                    }}
-                                                />
-                                                {op}
-                                            </label>
-                                        ))}
-                                        <button className="next-bttn" onClick={validarResposta}>Confirmar</button>
-                                    </div>
-                                )}
-                            </>
+                            <ExercicioTipos
+                                fase={fase}
+                                opcoesAtuais={opcoesAtuais}
+                                resposta={resposta}
+                                setResposta={setResposta}
+                                selecionados={selecionados}
+                                setSelecionados={setSelecionados}
+                                validarResposta={validarResposta}
+                            />
                         )}
                     </>
                 ) : (

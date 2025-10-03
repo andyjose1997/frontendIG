@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { URL } from "../../../config";
 import "./ironstepexercicios.css";
 import IronStepExercicioIdioma from "./ironstepexercicioidioma";
+import ExercicioProgramacao from "./ironstepexercicioprogramacao";
 
 export default function IronStepExercicios({ cursoId, onBack }) {
     const [exercicios, setExercicios] = useState([]);
@@ -13,7 +14,6 @@ export default function IronStepExercicios({ cursoId, onBack }) {
     const token = localStorage.getItem("token");
     const usuarioId = localStorage.getItem("usuario_id");
 
-    // 🔹 Função para buscar exercícios concluídos do banco
     async function atualizarConcluidos() {
         try {
             const res = await fetch(`${URL}/ironstep/concluidos/${usuarioId}`, {
@@ -26,7 +26,6 @@ export default function IronStepExercicios({ cursoId, onBack }) {
         }
     }
 
-    // 🔹 Carregar exercícios + concluídos
     useEffect(() => {
         if (!cursoId) return;
 
@@ -56,15 +55,13 @@ export default function IronStepExercicios({ cursoId, onBack }) {
 
         carregarDados();
 
-        // 🔄 Atualiza automaticamente a cada 10s
         const interval = setInterval(() => {
             atualizarConcluidos();
         }, 10000);
 
-        return () => clearInterval(interval); // limpa quando desmontar
+        return () => clearInterval(interval);
     }, [cursoId, token, usuarioId]);
 
-    // 🔹 Quando concluir um exercício, atualiza no banco e reflete na tela
     async function handleComplete(exercicioId) {
         await atualizarConcluidos();
         setExercicioSelecionado(null);
@@ -78,47 +75,93 @@ export default function IronStepExercicios({ cursoId, onBack }) {
         setExercicioSelecionado(ex);
     }
 
+    useEffect(() => {
+        if (exercicios.length > 0) {
+            const primeiroNaoFeito = exercicios.find(ex => !completos.includes(ex.id));
+            if (primeiroNaoFeito) {
+                const element = document.getElementById(`exercicio-${primeiroNaoFeito.id}`);
+                if (element) {
+                    element.scrollIntoView({ behavior: "smooth", block: "center" });
+                }
+            }
+        }
+    }, [exercicios, completos]);
+
+    // 🔹 decide qual componente abrir
+    function renderExercicioSelecionado() {
+        if (!exercicioSelecionado) return null;
+
+        if (exercicioSelecionado.tipo_exercicio === "Prática" ||
+            exercicioSelecionado.tipo_exercicio === "Programação") {
+            return (
+                <ExercicioProgramacao
+                    exercicioId={exercicioSelecionado.id}
+                    onClose={() => setExercicioSelecionado(null)}
+                />
+            );
+        } else {
+            return (
+                <IronStepExercicioIdioma
+                    exercicioId={exercicioSelecionado.id}
+                    onClose={() => setExercicioSelecionado(null)}
+                    onComplete={handleComplete}
+                />
+            );
+        }
+    }
+
     return (
-        <div className="exercicios-container">
-            <button className="back-bttn" onClick={onBack}>
+        <>
+            <button
+                className="back-bttn"
+                onClick={onBack}
+                disabled={!!exercicioSelecionado}
+            >
                 ⬅ Voltar
             </button>
-            <h2 style={{ color: "white", textAlign: "center", marginBottom: "1rem" }}>
-                {cursoNome}
-            </h2>
 
-            {loading ? (
-                <p>Carregando exercícios...</p>
-            ) : (
-                <>
-                    {!exercicioSelecionado ? (
-                        <ul className="exercicios-lista">
-                            {exercicios.map((ex, index) => {
-                                const liberado =
-                                    index === 0 || completos.includes(exercicios[index - 1].id);
-                                const jaFeito = completos.includes(ex.id);
+            <div className="exercicios-container">
+                <h2 style={{ color: "white", textAlign: "center", marginBottom: "1rem" }}>
+                    {cursoNome}
+                </h2>
 
-                                return (
-                                    <li
-                                        key={ex.id}
-                                        className={`exercicio-item ${jaFeito ? "completed" : ""} ${liberado ? "" : "disabled"}`}
-                                        onClick={() => liberado && handleExercicioClick(ex)}
-                                    >
-                                        {ex.exercicio}
-                                        {jaFeito && <span className="checkmark">✔</span>}
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    ) : (
-                        <IronStepExercicioIdioma
-                            exercicioId={exercicioSelecionado.id}
-                            onClose={() => setExercicioSelecionado(null)}
-                            onComplete={handleComplete}
-                        />
-                    )}
-                </>
-            )}
-        </div>
+                {loading ? (
+                    <p className="carreg">Carregando exercícios...</p>
+                ) : (
+                    <>
+                        {!exercicioSelecionado ? (
+                            <ul className="exercicios-lista">
+                                {exercicios.map((ex, index) => {
+                                    const liberado =
+                                        index === 0 || completos.includes(exercicios[index - 1].id);
+                                    const jaFeito = completos.includes(ex.id);
+
+                                    return (
+                                        <li
+                                            id={`exercicio-${ex.id}`}
+                                            key={ex.id}
+                                            className={`exercicio-item ${jaFeito ? "completed" : ""} ${liberado ? "" : "disabled"}`}
+                                            onClick={() => liberado && handleExercicioClick(ex)}
+                                        >
+                                            <div className="exercicio-titulo">
+                                                {ex.exercicio}
+                                                {jaFeito && <span className="checkmark">✔</span>}
+                                            </div>
+                                            <div className="exercicio-info">
+                                                <p><strong>Descrição:</strong> {ex.descricao}</p>
+                                                <p><strong>Tipo:</strong> {ex.tipo_exercicio}</p>
+                                                <p><strong>Pontos:</strong> {ex.pontos}</p>
+                                            </div>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        ) : (
+                            renderExercicioSelecionado()
+                        )}
+                    </>
+                )}
+            </div>
+        </>
     );
 }

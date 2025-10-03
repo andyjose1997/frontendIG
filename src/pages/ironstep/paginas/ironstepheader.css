@@ -199,28 +199,25 @@
 }
 
 /* 🔹 Responsividade para telas pequenas */
-@media (max-width: 660px) {
+/* 🔹 Até 960px: ainda lado a lado, mas mais compacto */
+@media (max-width: 960px) {
     .ironstep-infos {
-        flex-direction: column;
-        /* empilha os h3 */
+        flex-direction: row;
+        /* mantém lado a lado */
         justify-content: center;
+        /* centraliza os itens */
         align-items: center;
         margin-top: 1rem;
         margin-bottom: 0;
-
-        /* 🔹 modernização */
-        gap: 0.5rem;
-        /* espaço consistente entre infos */
+        gap: 9.2rem;
+        /* espaço entre eles */
         padding: 0.5rem 0;
     }
 
     .ironstep-infos h3 {
-        font-size: 1.4rem;
-        /* mantém tamanho */
+        font-size: 1.6rem;
         margin: 0.3rem 0;
         text-align: center;
-
-        /* 🔹 modernização */
         letter-spacing: 0.3px;
         text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
         transition: transform 0.25s ease;
@@ -230,18 +227,14 @@
         transform: scale(1.05);
     }
 
-    /* joga a seção de infos abaixo do userinfo */
     .ironstep-header {
         flex-direction: column;
         padding: 1rem;
-        /* 🔹 respiro melhor em telas pequenas */
     }
 
     .ironstep-userinfo {
         flex-direction: column;
         text-align: center;
-
-        /* 🔹 modernização */
         padding: 0.5rem 0;
         border-radius: 10px;
         background: rgba(255, 255, 255, 0.05);
@@ -250,7 +243,21 @@
     .ironstep-userinfo h2 {
         margin-bottom: 0.5rem;
         font-size: 2.5rem;
-        /* 🔹 reduz um pouco pra caber melhor */
+    }
+}
+
+/* 🔹 Até 500px: agora sim empilha */
+@media (max-width: 500px) {
+    .ironstep-infos {
+        flex-direction: column;
+        /* empilha */
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .ironstep-infos h3 {
+        font-size: 1.3rem;
+        text-align: center;
     }
 }
 
@@ -268,4 +275,40 @@
     /* efeito no hover */
     text-decoration: none;
     /* 🔹 garante que não volte */
+}
+
+/* 🔶 Laranja piscando */
+.alerta-laranja {
+    color: #ff8800 !important;
+    font-weight: bold;
+    animation: piscar 1.2s infinite;
+}
+
+/* 🟢 Verde piscando */
+.alerta-verde {
+    color: #00cc44 !important;
+    font-weight: bold;
+    animation: piscar 1.2s infinite;
+}
+
+/* ⚪ Branco piscando */
+.alerta-branco {
+    color: #ffffff !important;
+    font-weight: bold;
+    animation: piscar 1.2s infinite;
+}
+
+/* 🔹 Animação genérica */
+@keyframes piscar {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

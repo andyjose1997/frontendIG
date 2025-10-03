@@ -1,0 +1,496 @@
+/* 🔹 Tela inteira moderna */
+.pro-fullscreennn {
+    position: fixed;
+    inset: 0;
+    /* substitui top/left/right/bottom */
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #0a2652, #113e86);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    /* 🔹 Modernizações */
+    animation: fadeOverlay 0.5s ease-in-out;
+    backdrop-filter: blur(6px);
+    /* vidro fosco */
+    -webkit-backdrop-filter: blur(6px);
+
+    box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.4);
+    /* profundidade */
+}
+
+/* 🔹 Container da fase moderno */
+.pro-fase-container {
+    background: #121826;
+    color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 1200px;
+    width: 95%;
+    text-align: center;
+    position: relative;
+
+    /* 🔹 Modernizações */
+    animation: fadeIn 0.4s ease-in-out;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55),
+        0 0 12px rgba(79, 156, 255, 0.15);
+    /* profundidade + brilho sutil */
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    /* borda leve para destaque */
+    backdrop-filter: blur(4px);
+    /* suaviza o fundo */
+    -webkit-backdrop-filter: blur(4px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pro-fase-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.6),
+        0 0 16px rgba(79, 156, 255, 0.2);
+}
+
+/* 🔹 Botão fechar moderno */
+.pro-clossse-bttn {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #ff5555;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+
+    /* 🔹 Modernizações */
+    transition: transform 0.25s ease, color 0.25s ease, text-shadow 0.25s ease;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    /* destaque sutil */
+}
+
+.pro-clossse-bttn:hover {
+    transform: scale(1.2) rotate(8deg);
+    /* efeito dinâmico */
+    color: #ff7777;
+    /* leve clareada no hover */
+    text-shadow: 0 4px 12px rgba(255, 85, 85, 0.6);
+}
+
+/* 🔹 Texto da frase moderno */
+.pro-fase-frase {
+    background: #1f2937;
+    padding: 1rem;
+    border-radius: 8px;
+    color: #eee;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    white-space: pre-wrap;
+    text-align: left;
+
+    /* 🔹 Modernizações */
+    line-height: 1.6;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    /* borda sutil */
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
+    /* profundidade interna */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pro-fase-frase:hover {
+    transform: scale(1.01);
+    /* efeito leve */
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.45),
+        0 0 8px rgba(79, 156, 255, 0.25);
+    /* brilho sutil */
+}
+
+/* 🔹 Feedback moderno */
+.pro-feedback {
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+
+    /* 🔹 Modernizações */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: pulseFeedback 0.4s ease;
+}
+
+.pro-feedback.acerto {
+    background: rgba(0, 255, 100, 0.15);
+    color: #1eff7a;
+    border: 1px solid #1eff7a;
+    text-shadow: 0 0 6px rgba(30, 255, 122, 0.4);
+}
+
+.pro-feedback.erro {
+    background: rgba(255, 50, 50, 0.15);
+    color: #ff4b4b;
+    border: 1px solid #ff4b4b;
+    text-shadow: 0 0 6px rgba(255, 75, 75, 0.4);
+}
+
+/* 🔹 Pequena animação de entrada */
+@keyframes pulseFeedback {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 🔹 Input e Textarea modernos */
+.pro-resposta-input {
+    width: 90%;
+    padding: 0.8rem;
+    margin: 0.6rem auto;
+    border-radius: 8px;
+    border: 1px solid #444;
+    font-size: 1.3rem;
+    background: #1a2133;
+    color: #f9f9f9;
+
+    /* 🔹 Modernizações */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.3px;
+}
+
+.pro-resposta-input::placeholder {
+    color: #888;
+    opacity: 0.9;
+    transition: color 0.3s ease;
+}
+
+.pro-resposta-input:focus {
+    outline: none;
+    border-color: #4f9cff;
+    box-shadow: 0 0 8px rgba(79, 156, 255, 0.6);
+    transform: scale(1.02);
+    /* leve destaque */
+}
+
+.pro-resposta-input:focus::placeholder {
+    color: #4f9cff;
+    /* muda a cor do placeholder no foco */
+}
+
+/* 🔹 Botão validar moderno */
+.pro-validar-bttn {
+    margin-top: 1rem;
+    background: linear-gradient(90deg, #4f9cff, #1e5686);
+    color: #fff;
+    font-weight: bold;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    /* 🔹 Modernizações */
+    transition: transform 0.25s ease, background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.pro-validar-bttn:hover {
+    background: linear-gradient(90deg, #1e5686, #4f9cff);
+    transform: scale(1.07) translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4),
+        0 0 10px rgba(79, 156, 255, 0.4);
+    /* brilho sutil */
+}
+
+/* 🔹 Palavras disponíveis (montar_codigo) modernas */
+.pro-montar-palavras {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin: 1rem 0;
+
+    /* 🔹 Modernização */
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+}
+
+.pro-montar-palavra {
+    background: #1e5686;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+
+    /* 🔹 Modernizações */
+    transition: transform 0.25s ease, background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.3px;
+}
+
+.pro-montar-palavra:hover {
+    background: #0571d6;
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35),
+        0 0 8px rgba(5, 113, 214, 0.4);
+    /* brilho azul suave */
+}
+
+/* 🔹 Palavras escolhidas */
+/* 🔹 Palavras escolhidas modernas */
+.pro-montar-escolhidas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    padding: 0.6rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    min-height: 50px;
+
+    /* 🔹 Modernizações */
+    border: 1px dashed rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
+    transition: box-shadow 0.3s ease;
+}
+
+.pro-montar-escolhida {
+    background: #2b7a2b;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
+
+    /* 🔹 Modernizações */
+    transition: transform 0.25s ease, background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.3px;
+}
+
+.pro-montar-escolhida:hover {
+    background: #3fa33f;
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35),
+        0 0 8px rgba(63, 163, 63, 0.4);
+    /* brilho verde suave */
+}
+
+/* 🔹 Opções de erro/tradução modernas */
+.pro-opcoes-erro {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin: 1rem 0;
+
+    /* 🔹 Modernizações */
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
+    transition: box-shadow 0.3s ease;
+}
+
+.pro-opcoes-erro:hover {
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.35),
+        0 0 10px rgba(79, 156, 255, 0.15);
+    /* brilho sutil no hover */
+}
+
+
+/* 🔹 Botões de erro/tradução modernos */
+.pro-erro-bttn {
+    background: #292e3b;
+    color: #ddd;
+    font-weight: 600;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+
+    /* 🔹 Modernizações */
+    transition: transform 0.25s ease, background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.3px;
+}
+
+.pro-erro-bttn:hover {
+    background: #3a4257;
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35),
+        0 0 8px rgba(79, 156, 255, 0.25);
+    /* brilho azul sutil */
+    color: #fff;
+}
+
+/* 🔹 Estado selecionado */
+.pro-erro-bttn.pro-selecionado {
+    background: #4f9cff;
+    border-color: #4f9cff;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(79, 156, 255, 0.5);
+}
+
+.pro-erro-bttn.pro-selecionado {
+    background: #4f9cff;
+    border-color: #4f9cff;
+    color: white;
+}
+
+/* 🔹 Botões de navegação modernos */
+.pro-next-bttn {
+    margin: 0.6rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background: #1e5686;
+    color: #fff;
+
+    /* 🔹 Modernizações */
+    transition: transform 0.25s ease, background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.4px;
+}
+
+.pro-next-bttn:hover {
+    background: #0571d6;
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35),
+        0 0 8px rgba(5, 113, 214, 0.35);
+    /* glow azul */
+}
+
+/* 🔹 Botão premium moderno */
+.pro-premiumm-btttn {
+    margin: 0.6rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background: #ffd700;
+    color: #222;
+
+    /* 🔹 Modernizações */
+    transition: transform 0.25s ease, background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25),
+        0 0 10px rgba(255, 215, 0, 0.4);
+    /* brilho dourado */
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.pro-premiumm-btttn:hover {
+    background: #e6c200;
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35),
+        0 0 14px rgba(230, 194, 0, 0.6);
+    /* brilho dourado mais intenso */
+}
+
+/* ======================= 🔹 RESPONSIVIDADE ======================= */
+
+/* 🔹 Até 900px */
+@media (max-width: 900px) {
+    .pro-fase-container {
+        max-width: 95%;
+        padding: 1.5rem;
+        border-radius: 10px;
+    }
+
+    .pro-fase-frase {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+
+    .pro-resposta-input {
+        width: 95%;
+        font-size: 1.1rem;
+    }
+
+    .pro-validar-bttn,
+    .pro-next-bttn,
+    .pro-premiumm-btttn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .pro-montar-palavra,
+    .pro-montar-escolhida,
+    .pro-erro-bttn {
+        font-size: 0.95rem;
+        padding: 0.5rem 0.9rem;
+    }
+}
+
+/* 🔹 Até 500px (mobile) */
+@media (max-width: 500px) {
+    .pro-fase-container {
+        max-width: 100%;
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+    .pro-clossse-bttn {
+        font-size: 1.2rem;
+        top: 10px;
+        right: 10px;
+    }
+
+    .pro-fase-frase {
+        font-size: 0.95rem;
+        padding: 0.7rem;
+        margin: 0.8rem 0;
+    }
+
+    .pro-feedback {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+
+    .pro-resposta-input {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.6rem;
+    }
+
+    .pro-validar-bttn,
+    .pro-next-bttn,
+    .pro-premiumm-btttn {
+        width: 100%;
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    .pro-montar-palavra,
+    .pro-montar-escolhida,
+    .pro-erro-bttn {
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+        text-align: center;
+    }
+
+    .pro-montar-palavras,
+    .pro-montar-escolhidas,
+    .pro-opcoes-erro {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+}

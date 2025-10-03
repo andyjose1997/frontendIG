@@ -17,7 +17,7 @@ export const Cursos = () => {
             return;
         }
 
-        fetch(`${URL}/me`, {
+        fetch(`${URL}/pagamento/me`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`

@@ -1,237 +1,704 @@
+/* ===== Wrapper fixo das vidas ===== */
+.vidas-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+
+    position: fixed;
+    top: 80px;
+    /* mantido */
+    left: 20px;
+    /* mantido */
+    z-index: 2000;
+    /* 🔹 Toque moderno */
+    padding: 0.5rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    /* fundo sutil transparente */
+    backdrop-filter: blur(6px);
+    /* efeito vidro suave */
+    -webkit-backdrop-filter: blur(6px);
+    /* compatibilidade Safari */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vidas-wrapper:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* ===== Caixinha das vidas ===== */
 .vidas-container {
     display: flex;
     justify-content: flex-start;
-    /* alinhado à esquerda */
+    align-items: center;
     gap: 1rem;
-    margin: 1rem 0;
     padding: 0.8rem 1.5rem;
 
-    /* 🔹 Fundo moderno em azul */
-    background: linear-gradient(135deg, #041582, #0625a3);
+    background: linear-gradient(135deg, #118f06, #157e01);
+    /* cores mantidas */
     width: 100px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 
-    /* 🔹 Grudado no topo ao rolar */
-    position: sticky;
-    top: 80px;
-    /* ajusta conforme altura do header */
-    z-index: 1000;
+    /* 🔹 sombra mais suave e moderna */
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.25),
+        inset 0 1px 3px rgba(255, 255, 255, 0.15);
 
-    /* 🔹 Tipografia moderna (se quiser incluir título depois) */
     font-family: 'Segoe UI', Roboto, sans-serif;
     font-weight: 500;
     color: #fff;
 
-    transition: background 0.3s ease, box-shadow 0.3s ease;
+    /* 🔹 suavidade geral */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+
+    /* 🔹 animação de radiação refinada */
+    animation: radiar 2.8s infinite alternate ease-in-out;
+}
+
+/* ===== Animação de brilho pulsante refinada ===== */
+@keyframes radiar {
+    0% {
+        box-shadow:
+            0 0 10px rgba(4, 21, 130, 0.35),
+            0 0 20px rgba(6, 37, 163, 0.2);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow:
+            0 0 25px rgba(4, 21, 130, 0.7),
+            0 0 50px rgba(6, 37, 163, 0.45);
+        transform: scale(1.05);
+    }
+
+    100% {
+        box-shadow:
+            0 0 15px rgba(4, 21, 130, 0.5),
+            0 0 35px rgba(6, 37, 163, 0.3);
+        transform: scale(1);
+    }
 }
 
 .vidas-container:hover {
-    background: linear-gradient(135deg, #0520a1, #0832c7);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.3),
+        inset 0 2px 6px rgba(255, 255, 255, 0.1);
 }
 
+
+/* ===== Vidas infinitas (👑) ===== */
 .vida-infinito {
     font-size: 1.5rem;
+    /* mantido */
     font-weight: bold;
+    /* mantido */
     color: #ffd700;
-    /* dourado para destacar */
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
-    animation: pulse 1.5s infinite;
+    /* dourado mantido */
+
+    /* 🔹 brilho mais elegante */
+    text-shadow:
+        0 0 6px rgba(255, 215, 0, 0.8),
+        0 0 14px rgba(255, 215, 0, 0.6),
+        0 0 24px rgba(255, 215, 0, 0.4);
+
+    /* 🔹 animação de pulsar refinada */
+    animation: pulse 1.8s infinite ease-in-out;
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
 }
 
-/* Efeito de brilho */
+/* ===== Animação de brilho dourado ===== */
 @keyframes pulse {
     0% {
         transform: scale(1);
         opacity: 1;
+        text-shadow:
+            0 0 6px rgba(255, 215, 0, 0.8),
+            0 0 14px rgba(255, 215, 0, 0.6);
     }
 
     50% {
-        transform: scale(1.2);
-        opacity: 0.8;
+        transform: scale(1.25);
+        opacity: 0.9;
+        text-shadow:
+            0 0 12px rgba(255, 215, 0, 1),
+            0 0 28px rgba(255, 215, 0, 0.9),
+            0 0 42px rgba(255, 215, 0, 0.6);
     }
 
     100% {
         transform: scale(1);
         opacity: 1;
+        text-shadow:
+            0 0 6px rgba(255, 215, 0, 0.8),
+            0 0 14px rgba(255, 215, 0, 0.6);
     }
 }
 
+/* ===== Base dos círculos de vida ===== */
 .vida-circle {
     width: 20px;
+    /* mantido */
     height: 20px;
+    /* mantido */
     border-radius: 50%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* mantido */
+
+    cursor: default;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 }
 
-/* 🔹 Efeito metálico */
+/* 🔹 Círculos ativos (com vida) – efeito metálico polido */
 .vida-circle.metal {
-    background: radial-gradient(circle at 30% 30%, #f5f5f5, #aaa, #555);
-    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.6),
-        inset 4px 4px 8px rgba(0, 0, 0, 0.6),
-        0 0 12px rgba(180, 180, 180, 0.7);
-    border: 2px solid #ccc;
+    background: radial-gradient(circle at 30% 30%, #fdfdfd, #c0c0c0, #5a5a5a);
+    border: 2px solid #d6d6d6;
+    box-shadow:
+        inset -3px -3px 6px rgba(255, 255, 255, 0.5),
+        inset 3px 3px 6px rgba(0, 0, 0, 0.5),
+        0 0 8px rgba(180, 180, 180, 0.6);
 }
 
-/* 🔹 Sem vida */
+/* 🔹 Círculos vazios (sem vida) – efeito fosco */
 .vida-circle.empty {
-    background: radial-gradient(circle at 30% 30%, #000, #111, #222);
-    box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 0.2),
-        inset 3px 3px 6px rgba(0, 0, 0, 0.8);
+    background: radial-gradient(circle at 30% 30%, #1a1a1a, #111, #000);
     border: 2px solid #333;
+    box-shadow:
+        inset -2px -2px 4px rgba(255, 255, 255, 0.15),
+        inset 2px 2px 5px rgba(0, 0, 0, 0.8);
+    opacity: 0.7;
 }
 
-/* Wrapper */
-.vidas-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 0.5rem;
+/* 🔹 Efeito hover sutil */
+.vida-circle:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
 }
 
-/* Botão Premium */
+/* ===== Botão Premium ===== */
 .premium-btn {
     background: linear-gradient(90deg, #0571d6, #1e5686);
-    color: white;
+    /* cores mantidas */
+    color: #fff;
     font-weight: bold;
     padding: 0.5rem 1rem;
+    font-size: 1rem;
+    /* mantido */
     border: none;
     border-radius: 8px;
+    /* mantido */
     cursor: pointer;
-    transition: 0.3s;
+
+    /* 🔹 Toque moderno */
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
 }
 
 .premium-btn:hover {
     background: linear-gradient(90deg, #1e5686, #0571d6);
+    /* inversão mantida */
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
 }
 
-/* Overlay do modal */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
+.premium-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 
-/* Conteúdo do modal */
+/* ===== Conteúdo centralizado do Modal Premium ===== */
 .modal-content.premium-modal {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 16px;
-    max-width: 600px;
-    width: 90%;
+    background: linear-gradient(160deg, #ddd8d8, #f7f9fc);
+    /* cores mantidas */
+    border-radius: 20px;
+    /* mantido */
+    padding: 2rem 2.5rem;
+    /* mantido */
+    max-width: 1700px;
+    /* mantido */
+    width: 93%;
+    /* mantido */
     text-align: center;
-    animation: fadeIn 0.3s ease;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
-}
+    position: relative;
 
-/* Título e subtítulo */
-.modal-title {
-    font-size: 1.8rem;
-    color: #1e5686;
-    margin-bottom: 0.5rem;
-}
+    /* 🔹 Toque moderno */
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25),
+        0 0 10px rgba(255, 255, 255, 0.4) inset;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    /* compatibilidade Safari */
 
-.modal-subtitle {
-    color: #444;
-    margin-bottom: 2rem;
-}
-
-/* Cards de preços */
-.precos-container {
     display: flex;
-    gap: 1.5rem;
+    flex-direction: column;
     justify-content: center;
-    flex-wrap: wrap;
+
+    /* 🔹 Controle da altura */
+    max-height: 1220px;
+    overflow-y: auto;
+
+    /* 🔹 Animação suave de entrada */
+    animation: slideUp 0.5s ease, fadeIn 0.5s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.preco-card {
-    flex: 1;
-    min-width: 220px;
-    border-radius: 12px;
-    padding: 1.5rem;
-    background: #f9f9f9;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* Hover no modal (leve efeito de foco) */
+.modal-content.premium-modal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.3),
+        0 0 14px rgba(255, 255, 255, 0.5) inset;
 }
 
-.preco-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+/* Animações extras */
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
-.preco-card h3 {
-    color: #0571d6;
-    margin-bottom: 0.5rem;
-}
-
-.preco-card .preco {
-    font-size: 1.6rem;
-    font-weight: bold;
-    margin: 0.5rem 0 1rem 0;
-}
-
-.preco-card ul {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
-    color: #333;
-}
-
-.preco-card ul li {
-    margin: 0.4rem 0;
-    font-size: 0.9rem;
-}
-
-/* Botões */
-.btn-assinar {
-    background: linear-gradient(90deg, #0571d6, #1e5686);
-    color: white;
-    font-weight: bold;
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-    width: 100%;
-}
-
-.btn-assinar:hover {
-    background: linear-gradient(90deg, #1e5686, #0571d6);
-}
-
-/* Botão fechar */
-.fechar-btn {
-    margin-top: 1.5rem;
-    background: #bbb;
-    color: white;
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.fechar-btn:hover {
-    background: #999;
-}
-
-/* Animação */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: scale(0.9);
     }
 
     to {
         opacity: 1;
-        transform: scale(1);
+    }
+}
+
+/* ===== Título chamativo do Modal ===== */
+.modal-title {
+    font-size: 2rem !important;
+    /* mantido */
+    color: #1e5686 !important;
+    /* mantido */
+    margin-bottom: 0.5rem;
+    /* mantido */
+    font-weight: 700;
+    /* mantido */
+
+    /* 🔹 Estilo refinado */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.2),
+        0 2px 6px rgba(30, 86, 134, 0.35);
+
+    /* 🔹 Efeito de destaque */
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.4rem;
+}
+
+/* Linha de destaque abaixo do título */
+.modal-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #0571d6, #1e5686);
+    box-shadow: 0 0 6px rgba(30, 86, 134, 0.6);
+}
+
+/* ===== Subtítulo do Modal ===== */
+.modal-subtitle {
+    font-size: 1.5rem;
+    /* mantido */
+    color: #444;
+    /* mantido */
+    margin-bottom: 2rem;
+    /* mantido */
+    line-height: 1.5;
+    /* mantido */
+
+    /* 🔹 Estilo refinado */
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+
+    /* 🔹 Suavidade de entrada */
+    animation: fadeInSubtitle 0.8s ease;
+    opacity: 0.95;
+}
+
+/* Animação de aparição */
+@keyframes fadeInSubtitle {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 0.95;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Layout dos Cards de Preço ===== */
+.precos-container {
+    display: flex;
+    gap: 1.5rem;
+    /* mantido */
+    justify-content: center;
+    flex-wrap: wrap;
+
+    /* 🔹 Toque moderno */
+    align-items: stretch;
+    /* cards sempre alinhados */
+    padding: 1rem 0;
+    /* respiro vertical */
+    max-width: 1200px;
+    /* limite de largura */
+    margin: 0 auto;
+    /* centraliza container */
+
+    /* 🔹 Efeito suave de entrada */
+    animation: fadeInCards 0.7s ease;
+}
+
+/* Animação de aparição */
+@keyframes fadeInCards {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Card de Preço ===== */
+.preco-card {
+    flex: 1;
+    min-width: 350px;
+    /* mantido */
+    background: #fff;
+    /* mantido */
+    max-height: 900px;
+    border-radius: 16px;
+    /* mantido */
+    padding: 1.8rem 1.2rem;
+    /* mantido */
+
+    /* 🔹 sombra mais sofisticada */
+    box-shadow:
+        0 6px 14px rgba(0, 0, 0, 0.12),
+        0 2px 4px rgba(0, 0, 0, 0.06);
+
+    border: 2px solid transparent;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border 0.25s ease;
+
+    /* 🔹 efeito de entrada */
+    animation: fadeUpCard 0.6s ease both;
+}
+
+/* Hover refinado */
+.preco-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.2),
+        0 6px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid #0571d6;
+}
+
+/* Animação de entrada */
+@keyframes fadeUpCard {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Card Mensal ===== */
+.preco-card.mensal {
+    background: linear-gradient(160deg, #e6f2ff, #f9fbfd);
+    /* mantido */
+    border: 2px solid rgba(5, 113, 214, 0.2);
+}
+
+/* ===== Card Anual (destaque) ===== */
+.preco-card.anual {
+    background: linear-gradient(160deg, #fff7e6, #fffdf9);
+    /* mantido */
+    border: 2px solid #ffd700;
+    /* mantido */
+    position: relative;
+    overflow: hidden;
+
+    /* 🔹 Sombra dourada discreta */
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.18),
+        0 0 12px rgba(255, 215, 0, 0.35);
+}
+
+/* ===== Badge especial para o Anual ===== */
+.preco-card.anual::before {
+    content: "🌟 Mais Popular";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background: #ffd700;
+    color: #000;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 12px;
+    white-space: nowrap;
+
+    /* 🔹 Sombras e brilho */
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.25),
+        inset 0 1px 3px rgba(255, 255, 255, 0.3);
+
+    /* 🔹 Animação leve */
+    animation: badgePulse 2.5s infinite ease-in-out;
+    margin-top: 20px;
+}
+
+/* Animação de destaque do badge */
+@keyframes badgePulse {
+
+    0%,
+    100% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25),
+            0 0 6px rgba(255, 215, 0, 0.6);
+    }
+
+    50% {
+        transform: translateX(-50%) scale(1.05);
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35),
+            0 0 12px rgba(255, 215, 0, 0.9);
+    }
+}
+
+/* ===== Título dos Cards ===== */
+.preco-card h3 {
+    font-size: 1.4rem;
+    /* mantido */
+    color: #1e5686;
+    /* mantido */
+    margin-bottom: 0.5rem;
+    /* mantido */
+    font-weight: 600;
+    /* mantido */
+
+    /* 🔹 Estilo refinado */
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+
+    /* 🔹 Linha decorativa */
+    position: relative;
+    padding-bottom: 0.4rem;
+}
+
+.preco-card h3::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #0571d6, #1e5686);
+    box-shadow: 0 0 6px rgba(30, 86, 134, 0.4);
+}
+
+/* ===== Valor principal ===== */
+.preco-card .preco {
+    font-size: 1.8rem;
+    /* mantido */
+    font-weight: bold;
+    /* mantido */
+    margin: 0.5rem 0 1rem 0;
+    /* mantido */
+    color: #000;
+    /* mantido */
+
+    /* 🔹 Destaque elegante */
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+    /* 🔹 Pequeno brilho para premium */
+    background: transparent;
+}
+
+/* ===== Texto auxiliar (ex: "economize") ===== */
+.preco-card small {
+    display: block;
+    color: #666;
+    /* mantido */
+    margin-bottom: 1rem;
+    /* mantido */
+    font-size: 0.9rem;
+
+    /* 🔹 Estilo refinado */
+    text-align: center;
+    letter-spacing: 0.3px;
+    opacity: 0.85;
+}
+
+/* ===== Lista de benefícios ===== */
+.preco-card ul {
+    list-style: none;
+    /* sem marcadores padrão */
+    padding: 0;
+    margin: 1rem 0 1.5rem 0;
+    color: #333;
+    /* mantido */
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    /* espaçamento uniforme */
+}
+
+/* ===== Cada item da lista ===== */
+.preco-card ul li {
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    /* 🔹 Efeito clean */
+    padding: 0.3rem 0;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Ícone ✔ fica mais suave e alinhado */
+.preco-card ul li::before {
+    content: "✔";
+    color: #0571d6;
+    /* azul consistente com premium */
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* Hover sutil em cada item */
+.preco-card ul li:hover {
+    color: #1e5686;
+    transform: translateX(4px);
+}
+
+/* ===== Botões de Assinar ===== */
+.btn-assinar {
+    background: linear-gradient(90deg, #0571d6, #1e5686);
+    /* cores mantidas */
+    color: #fff;
+    font-weight: bolder;
+    padding: 0.8rem 1.2rem;
+    /* mantido */
+    border: none;
+    border-radius: 10px;
+    /* mantido */
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+
+    /* 🔹 Toque moderno */
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+}
+
+/* Hover refinado */
+.btn-assinar:hover {
+    background: linear-gradient(90deg, #1e5686, #0571d6);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+}
+
+/* Efeito de clique */
+.btn-assinar:active {
+    transform: scale(0.96);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Botão Fechar ===== */
+.fechar-irontep-btn {
+    margin-top: 1.8rem;
+    /* mantido */
+    background: #0b028afa;
+    /* mantido */
+    color: #fff;
+    /* mantido */
+    padding: 0.7rem 1.4rem;
+    /* mantido */
+    border: none;
+    border-radius: 10px;
+    /* mantido */
+    cursor: pointer;
+    font-weight: bold;
+    /* mantido */
+
+    /* 🔹 Aparência moderna */
+    letter-spacing: 0.4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+}
+
+/* Hover refinado */
+.fechar-irontep-btn:hover {
+    background: #999;
+    /* mantido */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Clique */
+.fechar-irontep-btn:active {
+    transform: scale(0.96);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+
+/* 🔹 Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
