@@ -123,12 +123,11 @@ export default function Botoes() {
                 </div>
                 <div className="tooltip-wrapper">
                     <div className="tooltip-wrapper">
-                        {window.location.hostname === "localhost" && (
-                            <button onClick={handleIronStep}>
-                                <img src={logo} alt="IronStep" className="logo-btn" />
-                                <span className="link-text">IronStep</span>
-                            </button>
-                        )}
+                        <button onClick={handleIronStep}>
+                            <img src={logo} alt="IronStep" className="logo-btn" />
+                            <span className="link-text">IronStep</span>
+                        </button>
+
 
                         <span className="tooltip-text">
                             Exercícios práticos de idiomas, programação e pacote Office com
