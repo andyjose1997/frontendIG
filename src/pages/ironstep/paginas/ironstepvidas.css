@@ -702,3 +702,66 @@
         transform: translateY(0);
     }
 }
+
+/* 🔹 Ajuste para telas pequenas (até 500px) */
+@media (max-width: 500px) {
+    .vidas-wrapper {
+        align-items: center;
+        left: 10px;
+        /* mais perto da borda */
+    }
+
+    .vidas-container {
+        flex-direction: column;
+        /* bolhinhas em coluna */
+        width: auto;
+        padding: 1rem;
+        gap: 0.8rem;
+    }
+
+    .vida-infinito {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        font-size: 1.3rem;
+        /* um pouco maior para destaque */
+    }
+
+    .vida-circle {
+        width: 24px;
+        height: 24px;
+    }
+
+    .premium-btn {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+}
+
+/* Esconde versão mobile por padrão */
+.premium-mobile {
+    display: none;
+}
+
+/* Quando a tela for até 500px */
+@media (max-width: 500px) {
+    .premium-desktop {
+        display: none;
+        /* esconde botão com texto */
+    }
+
+    .premium-mobile {
+        display: inline-flex;
+        /* mostra só emoji */
+        font-size: 1.6rem;
+        padding: 0.6rem;
+        justify-content: center;
+        align-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+    }
+}

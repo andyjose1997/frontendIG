@@ -15,6 +15,7 @@ import './painelcontrole.css';
 import ManualPainel from './componentes/manualpainel';
 import PainelYouTube from './componentes/painelyoutube/painelyoutube';
 import PainelCursos from './componentes/painelcursos';
+import PainelIronStep from './componentes/ironstep/painelironstep';
 
 
 export default function PainelControle() {
@@ -114,6 +115,14 @@ export default function PainelControle() {
                 >
                     Cursos
                 </button>
+                <button
+                    className={painelAtivo === "ironstep" ? "controle-ativo" : ""}
+                    onClick={() => setPainelAtivo("ironstep")}
+                >
+                    IronStep
+                </button>
+
+
 
 
             </div>
@@ -129,6 +138,7 @@ export default function PainelControle() {
             {painelAtivo === "youtube" && <PainelYouTube />}
             {painelAtivo === "cursos" && <PainelCursos />}
             {painelAtivo === "indicadores" && <Indicadores />}
+            {painelAtivo === "ironstep" && <PainelIronStep />}
 
             {/* 🔹 Novo fluxo Info de Cadastro */}
             {painelAtivo === "infoCadastro" && (

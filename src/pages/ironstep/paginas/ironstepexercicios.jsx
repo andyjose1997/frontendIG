@@ -41,10 +41,12 @@ export default function IronStepExercicios({ cursoId, onBack }) {
                 ]);
 
                 const exerciciosData = await exRes.json();
-                const concluidosData = await concluidosRes.json();
+                console.log("📌 DEBUG EXERCICIOS DATA:", exerciciosData);
 
-                setExercicios(exerciciosData.exercicios || []);
-                setCursoNome(exerciciosData.curso || "");
+                const concluidosData = await concluidosRes.json();
+                setExercicios(exerciciosData.exercicios || exerciciosData || []);
+                setCursoNome(exerciciosData.curso || exerciciosData.curso_nome || "");
+
                 setCompletos(concluidosData.concluidos || []);
                 setLoading(false);
             } catch (err) {
@@ -144,14 +146,15 @@ export default function IronStepExercicios({ cursoId, onBack }) {
                                             onClick={() => liberado && handleExercicioClick(ex)}
                                         >
                                             <div className="exercicio-titulo">
-                                                {ex.exercicio}
+                                                {ex.exercicio || ex.exercisio}
                                                 {jaFeito && <span className="checkmark">✔</span>}
                                             </div>
-                                            <div className="exercicio-info">
+                                            <div className="exercicio-infoo">
                                                 <p><strong>Descrição:</strong> {ex.descricao}</p>
-                                                <p><strong>Tipo:</strong> {ex.tipo_exercicio}</p>
+                                                <p><strong>Tipo:</strong> {ex.tipo_exercicio || ex.tipo_exercisio}</p>
                                                 <p><strong>Pontos:</strong> {ex.pontos}</p>
                                             </div>
+
                                         </li>
                                     );
                                 })}

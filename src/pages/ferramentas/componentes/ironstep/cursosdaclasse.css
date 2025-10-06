@@ -1,0 +1,326 @@
+.painel-cursos-classe {
+    background: rgba(18, 24, 38, 0.9);
+    padding: 2rem;
+    border-radius: 16px;
+    margin-top: 1rem;
+    width: 1200px;
+    color: #f5f5f5;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.painel-cursos-classe h2 {
+    margin-bottom: 1.5rem;
+    color: #4fc3f7;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.voltar-botao {
+    background: linear-gradient(135deg, #444, #666);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.voltar-botao:hover {
+    background: linear-gradient(135deg, #666, #888);
+    transform: translateX(-3px);
+}
+
+/* Grade de cursos */
+.cursos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.curso-card {
+    background: rgba(43, 53, 80, 0.85);
+    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.curso-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+.curso-info h3 {
+    margin: 0 0 0.3rem 0;
+    color: #ffffff;
+    font-size: 3rem;
+}
+
+.curso-info p {
+    margin: 0;
+    font-size: 1.95rem;
+    color: #aaa;
+}
+
+/* Botões */
+.curso-acoes {
+    margin-top: 0.8rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.curso-acoes button {
+    flex: 1;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.55rem;
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.curso-acoes button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.15);
+}
+
+.btn-editar {
+    background: linear-gradient(135deg, #1e88e5, #42a5f5);
+    color: #fff;
+}
+
+.btn-entrar {
+    background: linear-gradient(135deg, #43a047, #66bb6a);
+    color: #fff;
+}
+
+.btn-apagar {
+    background: linear-gradient(135deg, #e53935, #ef5350);
+    color: #fff;
+}
+
+/* Botão adicionar */
+.btn-adicionar {
+    display: block;
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, #ff9800, #ffb74d);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.btn-adicionar:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.novo-curso-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.novo-curso-form input {
+    flex: 1;
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background: #2b3550;
+    color: #fff;
+}
+
+.btn-salvar {
+    background: linear-gradient(135deg, #43a047, #66bb6a);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+}
+
+.btn-cancelar {
+    background: linear-gradient(135deg, #e53935, #ef5350);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+}
+
+/* Container principal */
+.painel-cursos-classe {
+    background: rgba(18, 24, 38, 0.9);
+    padding: 2rem;
+    border-radius: 16px;
+    margin-top: 1rem;
+    color: #f5f5f5;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Cartões */
+.curso-card {
+    background: rgba(43, 53, 80, 0.85);
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.curso-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Nome do curso */
+.curso-info h3 {
+    margin: 0;
+    font-size: 2.2rem;
+    color: #fff;
+}
+
+/* 🔹 Input quando edita */
+.curso-info input {
+    padding: 0.5rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid #4fc3f7;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1rem;
+    width: 200px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.curso-info input:focus {
+    border: 1px solid #81d4fa;
+}
+
+/* Botões de ação */
+.curso-acoes button {
+    margin-left: 0.5rem;
+    padding: 0.5rem 0.8rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.curso-acoes button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.15);
+}
+
+/* Botões edição/salvar/cancelar */
+.btn-salvar {
+    background: linear-gradient(135deg, #43a047, #66bb6a);
+    color: #fff;
+}
+
+.btn-cancelar {
+    background: linear-gradient(135deg, #e53935, #ef5350);
+    color: #fff;
+}
+
+.btn-editar {
+    background: linear-gradient(135deg, #1e88e5, #42a5f5);
+    color: #fff;
+}
+
+.btn-apagar {
+    background: linear-gradient(135deg, #e53935, #ef5350);
+    color: #fff;
+}
+
+.btn-entrar {
+    background: linear-gradient(135deg, #ff9800, #ffb74d);
+    color: #fff;
+}
+
+/* 🔹 Modal de confirmação customizado */
+.confirm-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto auto;
+    z-index: 2000;
+}
+
+.confirm-box {
+    background: #1e1e2f;
+    color: #fff;
+    padding: 2rem;
+    border-radius: 14px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.3s ease;
+}
+
+.confirm-box h3 {
+    margin-bottom: 1rem;
+    color: #f44336;
+}
+
+.confirm-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.confirm-buttons button {
+    flex: 1;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.confirm-buttons .btn-confirmar {
+    background: linear-gradient(135deg, #e53935, #ef5350);
+    color: #fff;
+}
+
+.confirm-buttons .btn-cancelar {
+    background: linear-gradient(135deg, #555, #777);
+    color: #fff;
+}
+
+.confirm-buttons button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.15);
+}
+
+/* Animação modal */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -185,11 +185,24 @@ export default function ExercicioIdiomas({ exercicioId, onClose }) {
     };
 
     // 🔹 Validação da resposta
+    // 🔹 Validação da resposta
     const validarResposta = () => {
         let correto = false;
 
         if (fase.tipo === "completar") {
-            correto = resposta === fase.correta;
+            if (resposta.trim().toLowerCase() === fase.correta.trim().toLowerCase()) {
+                correto = true;
+
+                // Se não for exatamente igual, dá feedback avisando
+                if (resposta.trim() !== fase.correta.trim()) {
+                    setFeedback({
+                        tipo: "aviso",
+                        msg: `✅ Sua resposta está certa, mas a forma correta é: ${fase.correta}`
+                    });
+                }
+            } else {
+                correto = false;
+            }
         }
         if (fase.tipo === "traducao") {
             correto = normalizar(resposta) === normalizar(fase.correta);
@@ -215,13 +228,18 @@ export default function ExercicioIdiomas({ exercicioId, onClose }) {
                 }
                 return novos;
             });
-            setFeedback({ tipo: "acerto", msg: "✅ Você acertou!" });
+
+            // Se já não setou aviso acima, mostra acerto normal
+            if (!feedback || feedback.tipo !== "aviso") {
+                setFeedback({ tipo: "acerto", msg: "✅ Você acertou!" });
+            }
         } else {
             setErros(prev => prev + 1);
             descontarVida();
             setFeedback({ tipo: "erro", msg: `❌ Você errou! Resposta correta: ${fase.correta}` });
         }
     };
+
 
     // 🔹 Finalizar exercício
     const finalizarExercicio = () => {
@@ -262,7 +280,7 @@ export default function ExercicioIdiomas({ exercicioId, onClose }) {
                 ) : !pontuacaoFinal ? (
                     <>
                         <h2>{fase.descricao}</h2>
-                        <p><strong>Traduza:</strong> {fase.frase}</p>
+                        <p><strong></strong> {fase.frase}</p>
 
                         {feedback ? (
                             <div className={`feedback ${feedback.tipo}`}>

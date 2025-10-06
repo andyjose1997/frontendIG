@@ -191,6 +191,8 @@ export default function BotaoTres() {
 
     return (
         <div>
+            <br /><br />
+
             <div className="rankperfil-botoes">
                 <button
                     className={mostrar === "vendas" ? "ativo" : ""}

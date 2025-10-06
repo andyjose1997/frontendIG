@@ -1,0 +1,260 @@
+/* Container principal */
+.painel-exercicios-curso {
+    padding: 2rem;
+    background: #0d1117;
+    color: #f0f6fc;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.3s ease-in-out;
+
+    /* 🔹 em vez de width fixa, usamos max-width */
+    max-width: 1600px;
+    margin: 0 auto;
+    /* centraliza */
+    width: 100%;
+}
+
+.painel-exercicios-curso h2 {
+    margin-bottom: 2.5rem;
+    text-align: center;
+    color: #58a6ff;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.voltar-botao {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    background: #21262d;
+    color: #f0f6fc;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.voltar-botao:hover {
+    background: #30363d;
+}
+
+/* Grid de exercícios */
+.exercicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    /* 🔹 gap menor para caber melhor */
+}
+
+/* Card de exercício */
+.exercicio-card {
+    background: #161b22;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid #30363d;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    /* 🔹 largura mínima para manter legibilidade */
+    min-width: 280px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.exercicio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+.exercicio-info h3 {
+    color: #f0f6fc;
+    margin-bottom: 0.6rem;
+    font-size: 2.2rem;
+}
+
+.exercicio-info p {
+    margin: 0.3rem 0;
+    font-size: 1.9rem;
+    color: #c9d1d9;
+}
+
+/* Ações */
+.exercicio-acoes,
+.acao-editar {
+    margin-top: 0.8rem;
+    display: flex;
+    gap: 0.6rem;
+    justify-content: flex-end;
+}
+
+.btn-editar,
+.btn-entrar,
+.btn-apagar,
+.btn-salvar,
+.btn-cancelar,
+.btn-adicionar,
+.btn-confirmar {
+    padding: 0.4rem 0.7rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 1.9rem;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.btn-editar {
+    background: #238636;
+    color: #fff;
+}
+
+.btn-editar:hover {
+    background: #2ea043;
+    transform: scale(1.05);
+}
+
+.btn-entrar {
+    background: #1f6feb;
+    color: #fff;
+}
+
+.btn-entrar:hover {
+    background: #388bfd;
+    transform: scale(1.05);
+}
+
+.btn-apagar {
+    background: #da3633;
+    color: #fff;
+}
+
+.btn-apagar:hover {
+    background: #f85149;
+    transform: scale(1.05);
+}
+
+.btn-salvar {
+    background: #238636;
+    color: #fff;
+}
+
+.btn-salvar:hover {
+    background: #2ea043;
+    transform: scale(1.05);
+}
+
+.btn-cancelar {
+    background: #6e7681;
+    color: #fff;
+}
+
+.btn-cancelar:hover {
+    background: #8b949e;
+    transform: scale(1.05);
+}
+
+.btn-adicionar {
+    margin-top: 1.5rem;
+    padding: 0.7rem 1.2rem;
+    background: #1f6feb;
+    color: #fff;
+    border-radius: 8px;
+    font-weight: bold;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-adicionar:hover {
+    background: #388bfd;
+    transform: translateY(-2px);
+}
+
+/* Formulário */
+.exercicio-edit-form input,
+.exercicio-edit-form textarea,
+.novo-exercicio-form input,
+.novo-exercicio-form textarea {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    background: #0d1117;
+    color: #f0f6fc;
+    resize: none;
+    font-size: 1.9rem !important;
+}
+
+/* Modal */
+.confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.confirm-box {
+    background: #161b22;
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid #30363d;
+    text-align: center;
+    color: #f0f6fc;
+    max-width: 400px;
+    width: 90%;
+}
+
+.confirm-box h3 {
+    margin-bottom: 1rem;
+    color: #f85149;
+}
+
+.confirm-buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Animação */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🔹 Responsividade extra */
+@media (max-width: 768px) {
+    .painel-exercicios-curso {
+        padding: 1rem;
+    }
+
+    .exercicio-info h3 {
+        font-size: 1.6rem;
+    }
+
+    .exercicio-info p {
+        font-size: 1.4rem;
+    }
+
+    .btn-editar,
+    .btn-entrar,
+    .btn-apagar,
+    .btn-salvar,
+    .btn-cancelar,
+    .btn-adicionar,
+    .btn-confirmar {
+        font-size: 1.4rem;
+        padding: 0.3rem 0.6rem;
+    }
+}

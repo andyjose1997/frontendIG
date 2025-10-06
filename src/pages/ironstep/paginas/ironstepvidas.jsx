@@ -46,7 +46,11 @@ export default function IronStepVidas({ vidas = 0 }) {
             {/* 🔹 Mostrar as vidas */}
             {vidasAtuais >= 4 ? (
                 <div className="vidas-container" data-tooltip="Vidas infinitas">
-                    <div className="vida-infinito">👑👑👑</div>
+                    <div className="vida-infinito">
+                        <span>👑</span>
+                        <span>👑</span>
+                        <span>👑</span>
+                    </div>
                 </div>
             ) : (
                 <div className="vidas-container" data-tooltip="São as vidas">
@@ -61,10 +65,20 @@ export default function IronStepVidas({ vidas = 0 }) {
 
             {/* 🔹 Botão para abrir modal */}
             {vidasAtuais < 4 && (
-                <button className="premium-btn" onClick={() => setShowModal(true)}>
-                    Seja Premium
-                </button>
+                <>
+                    {/* Versão normal (desktop) */}
+                    <button className="premium-btn premium-desktop" onClick={() => setShowModal(true)}>
+                        💎 Seja Premium
+                    </button>
+
+                    {/* Versão só emoji (mobile) */}
+                    <button className="premium-btn premium-mobile" onClick={() => setShowModal(true)}>
+                        💎
+                    </button>
+                </>
             )}
+
+
 
 
             {/* 🔹 Modal de preços */}

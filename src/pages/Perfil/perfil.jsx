@@ -66,8 +66,7 @@ export default function Perfil() {
                     {/* Botão Dois */}
                     {!modoMobileBotaoDois && (
                         <button className="abrir-botaoDois" onClick={() => setModoMobileBotaoDois(true)}>
-                            Experiências
-                        </button>
+                            IronStep                        </button>
                     )}
                     {modoMobileBotaoDois && (
                         <div className="perfil-modal-overlay">

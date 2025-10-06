@@ -1,0 +1,287 @@
+/* ===== Painel principal ===== */
+.pro-painel-exercicios-curso {
+    padding: 2rem;
+    background: #121826;
+    color: #f9f9f9;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    margin: 2rem auto;
+    max-width: 1300px;
+    width: 100%;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+}
+
+/* Títulos */
+.pro-painel-exercicios-curso h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #58a6ff;
+    border-bottom: 2px solid #2d3a4e;
+    padding-bottom: 0.5rem;
+}
+
+.pro-painel-exercicios-curso h3 {
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    color: #f1f1f1;
+    border-top: 1px solid #2d3a4e;
+    padding-top: 0.8rem;
+}
+
+/* Botões base */
+.pro-voltar-botao,
+.pro-btn-adicionar,
+.pro-btn-entrar,
+.pro-btn-apagar,
+.pro-btn-salvar,
+.pro-btn-cancelar {
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.25s ease;
+}
+
+/* Hover genérico */
+.pro-voltar-botao:hover,
+.pro-btn-adicionar:hover,
+.pro-btn-entrar:hover,
+.pro-btn-apagar:hover,
+.pro-btn-salvar:hover,
+.pro-btn-cancelar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos específicos */
+.pro-voltar-botao {
+    background: #444;
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+.pro-voltar-botao:hover {
+    background: #666;
+}
+
+.pro-btn-adicionar {
+    background: #1e90ff;
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+.pro-btn-adicionar:hover {
+    background: #3182ce;
+}
+
+.pro-btn-entrar {
+    background: #2ecc71;
+    color: #fff;
+}
+
+.pro-btn-entrar:hover {
+    background: #27ae60;
+}
+
+.pro-btn-apagar {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.pro-btn-apagar:hover {
+    background: #c0392b;
+}
+
+.pro-btn-salvar {
+    background: #2ecc71;
+    color: #fff;
+}
+
+.pro-btn-salvar:hover {
+    background: #27ae60;
+}
+
+.pro-btn-cancelar {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.pro-btn-cancelar:hover {
+    background: #c0392b;
+}
+
+/* ===== Grid de cards ===== */
+.pro-exercicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.pro-exercicio-card {
+    background: #1c2333;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pro-exercicio-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+.pro-exercicio-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.pro-exercicio-info p {
+    font-size: 1rem;
+    margin: 0.3rem 0;
+    color: #ccc;
+}
+
+.pro-exercicio-acoes {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+/* ===== Preview ===== */
+.pro-fase-container {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #0f172a;
+    border-radius: 10px;
+    border: 1px solid #2d3a4e;
+}
+
+.pro-fase-frase {
+    background: #1e293b;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 1rem;
+    margin: 0.5rem 0 1rem;
+    color: #f9f9f9;
+}
+
+/* Inputs */
+.pro-resposta-input {
+    padding: 0.75rem;
+    border: 1px solid #444;
+    border-radius: 8px;
+    width: 100%;
+    background: #1e293b;
+    color: #fff;
+    font-size: 1rem;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pro-resposta-input:focus {
+    border: 1px solid #1e90ff;
+    box-shadow: 0 0 6px rgba(30, 144, 255, 0.6);
+    outline: none;
+}
+
+/* Montar código */
+.pro-montar-palavras,
+.pro-montar-escolhidas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.pro-montar-palavra,
+.pro-montar-escolhida {
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.pro-montar-palavra {
+    background: #334155;
+    color: #fff;
+}
+
+.pro-montar-palavra:hover {
+    background: #475569;
+}
+
+.pro-montar-escolhida {
+    background: #2563eb;
+    color: #fff;
+}
+
+/* Opções erro/tradução */
+.pro-opcoes-erro {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.pro-erro-bttn {
+    background: #475569;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.pro-erro-bttn:hover {
+    background: #64748b;
+}
+
+/* ===== Formulário ===== */
+.pro-novo-exercicio-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    background: #1c2333;
+    padding: 1.8rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.pro-novo-exercicio-form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #ddd;
+}
+
+.pro-novo-exercicio-form textarea,
+.pro-novo-exercicio-form input,
+.pro-novo-exercicio-form select {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background: #0f172a;
+    color: #fff;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pro-novo-exercicio-form textarea:focus,
+.pro-novo-exercicio-form input:focus,
+.pro-novo-exercicio-form select:focus {
+    outline: none;
+    border: 1px solid #1e90ff;
+    box-shadow: 0 0 6px rgba(30, 144, 255, 0.6);
+}

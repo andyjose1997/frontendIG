@@ -1,73 +1,84 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import "./modalranking.css";
-import { URL } from "../../../config";
 
-export default function ModalRanking({ onClose, ranking, usuarioId }) {
-    const [dadosRanking, setDadosRanking] = useState(ranking);
+export default function ModalRankingNivel({ nivel, usuarios, onClose }) {
+    const [ranking, setRanking] = useState([]);
+    const [prevRanking, setPrevRanking] = useState([]);
+    const containerRef = useRef(null);
 
-    // 🔹 Atualiza ranking sozinho a cada 30 segundos
+    // 🔹 Atualiza ranking sozinho a cada 20s
     useEffect(() => {
-        const fetchRanking = async () => {
+        async function fetchRanking() {
             try {
-                const res = await fetch(`${URL}/ranking/${usuarioId}`, {
+                const res = await fetch(`${process.env.REACT_APP_API}/status/nivel/${nivel}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`
                     }
                 });
-                if (res.ok) {
-                    const data = await res.json();
-                    setDadosRanking(data);
-                }
+                const data = await res.json();
+                setPrevRanking(ranking); // salva estado anterior
+                setRanking(data);        // novo ranking
             } catch (err) {
                 console.error("Erro ao atualizar ranking:", err);
             }
-        };
+        }
 
-        // primeira atualização
-        fetchRanking();
-
-        // intervalo a cada 30s
-        const interval = setInterval(fetchRanking, 30000);
-
-        // limpa quando o componente desmontar
+        fetchRanking(); // primeira carga
+        const interval = setInterval(fetchRanking, 20000);
         return () => clearInterval(interval);
-    }, [usuarioId]);
+    }, [nivel]);
+
+    // 🔹 Fecha ao clicar fora
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (containerRef.current && !containerRef.current.contains(event.target)) {
+                onClose();
+            }
+        }
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
+    }, [onClose]);
 
     return (
-        <div className="ranking-extension">
-            <button className="ranking-close" onClick={onClose}>X</button>
-            <p><strong>Nível:</strong> {dadosRanking.nivel}</p>
-            <p><strong>Posição:</strong> {dadosRanking.posicao}</p>
-            <p><strong>Pontos do mês:</strong> {dadosRanking.pontos}</p>
+        <div ref={containerRef} className="rankingg-container-inline">
+            <h2>Ranking do Nível: {nivel}</h2>
+            <div className="ranking-table-wrapper">
 
-            {/* 🔹 Ranking Geral */}
-            <h3 style={{ marginTop: "1.5rem" }}>Ranking Geral ({dadosRanking.nivel})</h3>
-            <table className="ranking-table">
-                <tbody>
-                    {dadosRanking.ranking_geral && dadosRanking.ranking_geral.map((item) => (
-                        <tr
-                            key={item.usuario_id}
-                            className={
-                                String(item.usuario_id).trim().toLowerCase() ===
-                                    String(usuarioId).trim().toLowerCase()
-                                    ? "meu-ranking"
-                                    : ""
-                            }
-                        >
-                            <td>{item.posicao}</td>
-                            <td className="user-cell">
-                                <img
-                                    src={item.foto || "/fotos/padrao.png"}
-                                    alt={`${item.nome} ${item.sobrenome}`}
-                                    className="user-foto"
-                                />
-                                {item.nome} {item.sobrenome}
-                            </td>
-                            <td>{item.pontos}</td>
+                <table className="rankingg-table">
+                    <thead>
+                        <tr>
+                            <th>Posição</th>
+                            <th>Nome</th>
+                            <th>Pontos</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <AnimatePresence>
+                        <tbody>
+                            {ranking.map((user, index) => {
+                                const isMe = String(user.usuario_id) === String(usuarios.id);
+                                return (
+                                    <motion.tr
+                                        key={user.usuario_id}
+                                        layout  // 🔹 framer-motion faz a transição automática
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: 10 }}
+                                        transition={{ duration: 0.4 }}
+                                        className={isMe ? "ranking-me" : ""}
+                                    >
+                                        <td>{index + 1}º</td>
+                                        <td>
+                                            {user.nome} {user.sobrenome} {isMe && "⭐"}
+                                        </td>
+                                        <td>{user.pontos_mes}</td>
+                                    </motion.tr>
+                                );
+                            })}
+                        </tbody>
+                    </AnimatePresence>
+                </table>
+            </div>
         </div>
     );
 }

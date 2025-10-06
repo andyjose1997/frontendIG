@@ -174,6 +174,20 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
+@media (max-width: 1300px) {
+    .link-text {
+        font-size: 1.6rem;
+    }
+
+    .tooltip-wrapper button {
+        min-width: 300px;
+    }
+
+    .botoa-container {
+        min-width: 340px;
+    }
+}
+
 /* 🔹 Mobile: reduzir espaço */
 @media (max-width: 500px) {
     .botoa-container button {

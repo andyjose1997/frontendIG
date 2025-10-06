@@ -38,9 +38,11 @@ export default function IronStepConteudo() {
         })
             .then(res => res.json())
             .then(data => {
-                setClases(data.clases || []);
+                console.log("📌 DEBUG CLASES:", data); // <-- vai mostrar exatamente o que chega
+                setClases(data.clases || data || []);
                 setLoading(false);
             })
+
             .catch(err => {
                 console.error("Erro ao carregar classes:", err);
                 setLoading(false);
@@ -83,13 +85,15 @@ export default function IronStepConteudo() {
                 "Authorization": `Bearer ${token}`
             }
         })
-            .then(res => res.json())
+            .then(res => res.json()) // converte Response em JSON
             .then(data => {
-                setCursos(data.cursos || []);
+                console.log("📌 DEBUG CURSOS JSON:", data); // agora você vê o objeto real
+                setCursos(data.cursos || data || []);
             })
             .catch(err => {
                 console.error("Erro ao carregar cursos:", err);
             });
+
     };
 
     const handleBackClase = () => {

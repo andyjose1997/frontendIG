@@ -69,7 +69,7 @@ export const Cursos = () => {
                 onClick={async () => {
                     try {
                         const token = localStorage.getItem("token");
-                        const response = await fetch(`${URL}/criar-preferencia`, {
+                        const response = await fetch(`${URL}/pagamento/criar-preferencia`, {
                             method: "POST",
                             headers: {
                                 "Authorization": `Bearer ${token}`,

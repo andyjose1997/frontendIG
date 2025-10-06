@@ -4,7 +4,7 @@ import { URL } from "../../config";
 
 export default function ModalVideo({ onClose }) {
     const [podeFechar, setPodeFechar] = useState(false);
-    const [contador, setContador] = useState(90); // 90 segundos = 1min30s
+    const [contador, setContador] = useState(12); // 90 segundos = 1min30s
 
     // 🔹 Contador regressivo
     useEffect(() => {
