@@ -105,3 +105,47 @@
 
     justify-content: center;
 }
+
+/* 💬 Mensagem de incentivo abaixo do título */
+.mensagem-cadastro {
+    margin-top: 0.8rem;
+    font-size: 1.1rem;
+    color: #ffd166;
+    /* tom dourado vibrante */
+    text-align: center;
+    font-weight: 500;
+    animation: fadeInMensagem 1.2s ease forwards;
+    opacity: 0;
+}
+
+/* ✨ Animação suave de entrada */
+@keyframes fadeInMensagem {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+        text-shadow: none;
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(0);
+        text-shadow: 0 0 8px rgba(255, 209, 102, 0.6);
+    }
+
+    100% {
+        opacity: 1;
+        text-shadow: 0 0 12px rgba(255, 209, 102, 0.9);
+    }
+}
+
+/* 🪄 Destacar o texto em negrito */
+.mensagem-cadastro strong {
+    color: #fff8e7;
+    text-shadow: 0 0 10px rgba(255, 209, 102, 0.9);
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+.mensagem-cadastro strong:hover {
+    transform: scale(1.05);
+}

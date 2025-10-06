@@ -149,9 +149,7 @@ export default function CPP() {
                                 <th>Sobrenome</th>
                                 <th>Email</th>
                                 <th>Pix</th>
-                                <th>Saldo Host</th>
-                                <th>Saldo HosHost</th>
-                                <th>Total</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -161,11 +159,8 @@ export default function CPP() {
                                     <td>{p.sobrenome}</td>
                                     <td>{p.email}</td>
                                     <td>{p.pix ? p.pix : "Sem chave Pix"}</td>
-                                    <td>R$ {p.saldo_host.toFixed(2)}</td>
-                                    <td>R$ {p.saldo_hoshost.toFixed(2)}</td>
-                                    <td>
-                                        <strong>R$ {p.total.toFixed(2)}</strong>
-                                    </td>
+
+
                                 </tr>
                             ))}
                         </tbody>
