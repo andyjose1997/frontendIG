@@ -95,7 +95,7 @@ export default function PainelControle() {
                     className={painelAtivo === "rankingGeral" ? "controle-ativo" : ""}
                     onClick={() => setPainelAtivo("rankingGeral")}
                 >
-                    Rankings gerais
+                    Rankings gerais & CPP
                 </button>
                 <button
                     className={painelAtivo === "manual" ? "controle-ativo" : ""}
