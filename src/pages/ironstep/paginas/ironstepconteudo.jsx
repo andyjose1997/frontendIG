@@ -40,8 +40,18 @@ export default function IronStepConteudo() {
             .then(data => {
                 console.log("📌 DEBUG CLASES:", data); // <-- vai mostrar exatamente o que chega
                 setClases(data.clases || data || []);
+
+                // 🔹 Clique automático na classe "Idiomas"
+                const lista = data.clases || data || [];
+                const classeIdiomas = lista.find(c => c.clase === "Idiomas");
+                if (classeIdiomas) {
+                    handleClaseClick(classeIdiomas.id);
+                }
+
                 setLoading(false);
             })
+
+
 
             .catch(err => {
                 console.error("Erro ao carregar classes:", err);
@@ -136,9 +146,7 @@ export default function IronStepConteudo() {
                     ) : !selectedCurso ? (
                         // 🔹 mostra CURSOS da classe selecionada
                         <div className="cursos-container">
-                            <button className="back-btn" onClick={handleBackClase}>
-                                ⬅ Voltar
-                            </button>
+
                             <h4>Cursos disponíveis:</h4>
                             <div className="cursos-lista">
                                 {cursos.map((curso) => (

@@ -92,6 +92,8 @@ export default function IronStepExercicios({ cursoId, onBack }) {
     // 🔹 decide qual componente abrir
     function renderExercicioSelecionado() {
         if (!exercicioSelecionado) return null;
+        console.log("🔍 Tipo do exercício selecionado:", exercicioSelecionado.tipo_exercicio);
+        console.log("🆔 ID do exercício selecionado:", exercicioSelecionado.id);
 
         if (exercicioSelecionado.tipo_exercicio === "Prática" ||
             exercicioSelecionado.tipo_exercicio === "Programação") {
@@ -101,6 +103,7 @@ export default function IronStepExercicios({ cursoId, onBack }) {
                     onClose={() => setExercicioSelecionado(null)}
                 />
             );
+
         } else {
             return (
                 <IronStepExercicioIdioma

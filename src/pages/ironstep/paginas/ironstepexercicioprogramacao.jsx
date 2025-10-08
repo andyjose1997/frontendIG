@@ -4,6 +4,8 @@ import "./ironstepexercicioprogramacao.css";
 import PremiumModal from "./premium";
 
 export default function ExercicioProgramacao({ exercicioId, onClose }) {
+    console.log("🚀 exercicioId recebido:", exercicioId); // 👈 coloca AQUI
+
     const [fases, setFases] = useState([]);
     const [faseAtual, setFaseAtual] = useState(0);
     const [loading, setLoading] = useState(true);
@@ -48,7 +50,7 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
 
         const token = localStorage.getItem("token");
 
-        fetch(`${URL}/programacao/fase_programacao/${exercicioId}`, {
+        fetch(`${URL}/ironstep/fasesprogramacao/${exercicioId}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(res => res.json())
@@ -285,7 +287,7 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
     return (
         <div className="pro-fullscreennn">
             <div className="pro-fase-container">
-                <button className="pro-clossse-bttn" onClick={onClose}>✖ Fechar</button>
+                <button className="pro-clossse-bttn" onClick={onClose}>✖ Fecsshar</button>
                 <br /><br /><br />
 
                 {entrando ? (

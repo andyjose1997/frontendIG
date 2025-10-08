@@ -38,6 +38,15 @@ export default function PainelEditarIronStep() {
     useEffect(() => {
         carregarClasses();
     }, []);
+    useEffect(() => {
+        // 🔹 Assim que as classes forem carregadas, entra automaticamente em "Idiomas"
+        if (classes.length > 0 && !classeSelecionada) {
+            const idiomas = classes.find(c => c.clase.toLowerCase() === "idiomas");
+            if (idiomas) {
+                setClasseSelecionada(idiomas);
+            }
+        }
+    }, [classes]);
 
     // 🔹 Adicionar classe
     const adicionarClasse = async () => {

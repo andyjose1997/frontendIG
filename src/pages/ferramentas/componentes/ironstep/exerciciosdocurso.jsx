@@ -154,27 +154,17 @@ export default function ExerciciosDoCurso({ cursoId, nomeCurso, onVoltar }) {
     }
 
     // 🔹 Se entrou em um exercício
+    // 🔹 Se entrou em um exercício → sempre vai para FasesDoExercicio
     if (exercicioSelecionado) {
-        const tipo = exercicioSelecionado.tipo_exercisio?.toLowerCase();
-
-        if (["programacao", "prática", "pratica"].includes(tipo)) {
-            return (
-                <FasesDoExercicioProgramacao
-                    exercicioId={exercicioSelecionado.id}
-                    nomeExercicio={exercicioSelecionado.exercisio}
-                    onVoltar={() => setExercicioSelecionado(null)}
-                />
-            );
-        } else {
-            return (
-                <FasesDoExercicio
-                    exercicioId={exercicioSelecionado.id}
-                    nomeExercicio={exercicioSelecionado.exercisio}
-                    onVoltar={() => setExercicioSelecionado(null)}
-                />
-            );
-        }
+        return (
+            <FasesDoExercicio
+                exercicioId={exercicioSelecionado.id}
+                nomeExercicio={exercicioSelecionado.exercisio}
+                onVoltar={() => setExercicioSelecionado(null)}
+            />
+        );
     }
+
 
     return (
         <div className="painel-exercicios-curso">

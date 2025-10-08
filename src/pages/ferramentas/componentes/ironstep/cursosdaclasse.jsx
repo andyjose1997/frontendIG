@@ -117,8 +117,7 @@ export default function CursosDaClasse({ classeId, nomeClasse, onVoltar }) {
 
     return (
         <div className="painel-cursos-classe">
-            <h2>📚 Cursos da Classe: {nomeClasse}</h2>
-            <button className="voltar-botao" onClick={onVoltar}>⬅ Voltar</button>
+            <h2>📚 Cursos </h2>
 
             {cursos.length > 0 ? (
                 <div className="cursos-grid">
