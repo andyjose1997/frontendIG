@@ -48,7 +48,7 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
 
         const token = localStorage.getItem("token");
 
-        fetch(`${URL}/ironstep/fasesprogramacao/${exercicioId}`, {
+        fetch(`${URL}/programacao/fase_programacao/${exercicioId}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(res => res.json())
