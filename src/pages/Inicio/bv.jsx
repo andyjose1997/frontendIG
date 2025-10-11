@@ -41,7 +41,7 @@ export default function ModalVideo({ onClose }) {
         <div className="modal-overlay">
             <div className="modal-content">
                 <iframe
-                    src="https://www.youtube.com/embed/woWqstLf8y0"
+                    src="https://www.youtube.com/embed/a1kb7Ltq9EY"
                     title="Boas vindas"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
