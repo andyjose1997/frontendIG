@@ -17,6 +17,11 @@ export default function FormularioFaseIdioma({ faseInicial, onVoltar, onSalvar }
     };
 
     const handleSalvar = () => {
+        // 🔹 Validação dos campos obrigatórios
+        if (!fase.descricao.trim() || !fase.tipo.trim() || !fase.correta.trim()) {
+            alert("Preencha todos os campos obrigatórios: descrição, tipo e resposta correta.");
+            return;
+        }
         if (onSalvar) onSalvar(fase);
     };
 
@@ -68,6 +73,7 @@ export default function FormularioFaseIdioma({ faseInicial, onVoltar, onSalvar }
                         placeholder={placeholder.descricao}
                         value={fase.descricao}
                         onChange={(e) => handleChange("descricao", e.target.value)}
+                        required
                     />
                 </label>
 
@@ -86,12 +92,13 @@ export default function FormularioFaseIdioma({ faseInicial, onVoltar, onSalvar }
                     <select
                         value={fase.tipo}
                         onChange={(e) => handleChange("tipo", e.target.value)}
+                        required
                     >
                         <option value="">Selecione o tipo...</option>
                         <option value="completar">Completar</option>
                         <option value="traducao">Tradução</option>
                         <option value="multipla">Múltipla escolha</option>
-                        <option value="montar">Montar frase</option>
+                        <option value="montar">Montar frase/Palavra</option>
                     </select>
                 </label>
 
@@ -111,6 +118,7 @@ export default function FormularioFaseIdioma({ faseInicial, onVoltar, onSalvar }
                         placeholder={placeholder.correta}
                         value={fase.correta}
                         onChange={(e) => handleChange("correta", e.target.value)}
+                        required
                     />
                 </label>
 
