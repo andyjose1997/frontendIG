@@ -38,7 +38,7 @@ export default function PropagandaInterna({ onVoltar }) {
 
     return (
         <div className="propaganda-interna">
-            <button className="btn-voltar" onClick={onVoltar}>
+            <button className="btn-vollltar" onClick={onVoltar}>
                 ⬅ Voltar
             </button>
 
