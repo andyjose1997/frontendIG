@@ -235,11 +235,11 @@
     flex: 1;
 }
 
-.propaganda-info h3 {
+.propaganda-info a h3 {
     margin: 0;
-    color: #ffcc4d;
+    color: #eeeeee !important;
     font-weight: 600;
-    font-size: 2rem;
+    font-size: 2.2rem;
 
     transition: color 0.3s ease;
 }
@@ -254,9 +254,10 @@
 
 .propaganda-info p {
     color: #ccc;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     margin: 8px 0 12px;
     line-height: 1.5;
-    font-size: 0.95rem;
+    font-size: 1.25rem;
 }
 
 /* ======= DIAS RESTANTES ======= */
@@ -267,7 +268,7 @@
     padding: 6px 12px;
     border-radius: 30px;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     box-shadow: 0 0 10px rgba(255, 204, 77, 0.3);
     letter-spacing: 0.5px;
 }
@@ -276,7 +277,7 @@
 
 /* 🟡 Mercado Livre */
 .plataforma-mercado-livre {
-    background: linear-gradient(135deg, #887a00, #ecc203);
+    color: white;
     border: 1px solid #e6b800;
     box-shadow: 0 0 20px rgba(255, 235, 59, 0.3);
 }
@@ -284,7 +285,7 @@
 
 
 .plataforma-mercado-livre .propaganda-info h3 {
-    color: #222;
+    color: yellow !important;
 }
 
 .plataforma-mercado-livre .dias-restantes {
@@ -294,13 +295,12 @@
 
 /* ⚫ Amazon */
 .plataforma-amazon {
-    background: linear-gradient(135deg, #232f3e, #0f1111);
     border: 1px solid #555;
     box-shadow: 0 0 20px rgba(35, 47, 62, 0.4);
 }
 
 .plataforma-amazon .propaganda-info h3 {
-    color: #ff9900;
+    color: #b6fdfa !important;
 }
 
 .plataforma-amazon .dias-restantes {
@@ -310,13 +310,12 @@
 
 /* 🟠 Shopee */
 .plataforma-shopee {
-    background: linear-gradient(135deg, #ff7043, #ee4d2d);
     border: 1px solid #d84315;
     box-shadow: 0 0 20px rgba(238, 77, 45, 0.4);
 }
 
 .plataforma-shopee .propaganda-info h3 {
-    color: #fff;
+    color: #d84315 !important;
 }
 
 .plataforma-shopee .dias-restantes {

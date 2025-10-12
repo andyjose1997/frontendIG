@@ -60,7 +60,7 @@ export default function PropagandaInterna({ onVoltar }) {
             />
 
             {loading ? (
-                <p>Carregando propagandas...</p>
+                <p>Carregando...</p>
             ) : conteudosFiltrados.length === 0 ? (
                 <p>Nenhuma propaganda interna ativa encontrada.</p>
             ) : (
@@ -85,11 +85,7 @@ export default function PropagandaInterna({ onVoltar }) {
                                         <h3>{item.produto}</h3>
                                     </a>
                                     <p>{item.descricao || "Sem descrição."}</p>
-                                    <span className="dias-restantes">
-                                        ⏳ {item.dias_restantes} dia
-                                        {item.dias_restantes !== 1 ? "s" : ""} restante
-                                        {item.dias_restantes !== 1 ? "s" : ""}
-                                    </span>
+
                                 </div>
                             </div>
                         ))}
