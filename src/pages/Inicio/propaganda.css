@@ -84,3 +84,242 @@
     text-align: left;
     /* mantém link alinhado */
 }
+
+/* ======= CONTAINER GERAL ======= */
+.propaganda-interna {
+    padding: 40px;
+    background: radial-gradient(circle at top left, #14161d 0%, #0b0c10 100%);
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    border-radius: 16px;
+    max-width: 1100px;
+    height: 100%;
+    max-height: 800px;
+    /* 🔹 Limite de altura total */
+    margin: 40px auto;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* impede que o conteúdo ultrapasse */
+}
+
+/* ======= LISTA DE PROPAGANDAS ======= */
+.propaganda-lista {
+    flex: 1;
+    /* 🔹 Ocupa o espaço restante */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-right: 6px;
+    scroll-behavior: smooth;
+    border-radius: 10px;
+    padding-bottom: 10px;
+}
+
+/* Scroll bonito */
+.propaganda-lista::-webkit-scrollbar {
+    width: 8px;
+}
+
+.propaganda-lista::-webkit-scrollbar-thumb {
+    background: #ffcc4d;
+    border-radius: 6px;
+}
+
+.propaganda-lista::-webkit-scrollbar-thumb:hover {
+    background: #e6b800;
+}
+
+/* ======= BOTÃO VOLTAR ======= */
+.btn-voltar {
+    background: linear-gradient(90deg, #3a3f47, #22252a);
+    border: 1px solid #555;
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+}
+
+.btn-voltar:hover {
+    background: linear-gradient(90deg, #ffcc4d, #e6b800);
+    color: #000;
+    box-shadow: 0 0 12px rgba(255, 204, 77, 0.4);
+}
+
+/* ======= CABEÇALHO ======= */
+.propaganda-interna h2 {
+    color: #ffcc4d;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.propaganda-interna .descricao {
+    text-align: center;
+    color: #b0b0b0;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+/* ======= CAMPO DE FILTRO ======= */
+.propaganda-filtro {
+    width: 100%;
+    max-width: 420px;
+    display: block;
+    margin: 0 auto 30px auto;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 1rem;
+    border: 1px solid #2e2f36;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.propaganda-filtro:focus {
+    border-color: #ffcc4d;
+    box-shadow: 0 0 10px rgba(255, 204, 77, 0.4);
+}
+
+.propaganda-filtro::placeholder {
+    color: #888;
+}
+
+
+/* ======= CARD ======= */
+.propaganda-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 18px;
+    border-radius: 14px;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+}
+
+.propaganda-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 18px rgba(255, 204, 77, 0.25);
+}
+
+/* ======= IMAGEM ======= */
+.propaganda-img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #ffcc4d33;
+    box-shadow: 0 0 10px rgba(255, 204, 77, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.propaganda-card:hover .propaganda-img {
+    transform: scale(1.05);
+}
+
+/* ======= INFORMAÇÕES ======= */
+.propaganda-info {
+    flex: 1;
+}
+
+.propaganda-info h3 {
+    margin: 0;
+    color: #ffcc4d;
+    font-weight: 600;
+    font-size: 2rem;
+
+    transition: color 0.3s ease;
+}
+
+.propaganda-info a {
+    text-decoration: none;
+}
+
+.propaganda-info a:hover h3 {
+    color: #fff;
+}
+
+.propaganda-info p {
+    color: #ccc;
+    margin: 8px 0 12px;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+/* ======= DIAS RESTANTES ======= */
+.dias-restantes {
+    display: inline-block;
+    background: linear-gradient(90deg, #ffcc4d, #f0b200);
+    color: #222;
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 0 10px rgba(255, 204, 77, 0.3);
+    letter-spacing: 0.5px;
+}
+
+/* ======= ESTILO POR PLATAFORMA ======= */
+
+/* 🟡 Mercado Livre */
+.plataforma-mercado-livre {
+    background: linear-gradient(135deg, #887a00, #ecc203);
+    border: 1px solid #e6b800;
+    box-shadow: 0 0 20px rgba(255, 235, 59, 0.3);
+}
+
+
+
+.plataforma-mercado-livre .propaganda-info h3 {
+    color: #222;
+}
+
+.plataforma-mercado-livre .dias-restantes {
+    background: #222;
+    color: #ffeb3b;
+}
+
+/* ⚫ Amazon */
+.plataforma-amazon {
+    background: linear-gradient(135deg, #232f3e, #0f1111);
+    border: 1px solid #555;
+    box-shadow: 0 0 20px rgba(35, 47, 62, 0.4);
+}
+
+.plataforma-amazon .propaganda-info h3 {
+    color: #ff9900;
+}
+
+.plataforma-amazon .dias-restantes {
+    background: #ff9900;
+    color: #111;
+}
+
+/* 🟠 Shopee */
+.plataforma-shopee {
+    background: linear-gradient(135deg, #ff7043, #ee4d2d);
+    border: 1px solid #d84315;
+    box-shadow: 0 0 20px rgba(238, 77, 45, 0.4);
+}
+
+.plataforma-shopee .propaganda-info h3 {
+    color: #fff;
+}
+
+.plataforma-shopee .dias-restantes {
+    background: #fff;
+    color: #ee4d2d;
+}

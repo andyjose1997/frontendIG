@@ -1,10 +1,11 @@
-// 📂 src/componentes/Propaganda.jsx
 import { useEffect, useState } from "react";
 import "./propaganda.css";
 import { URL } from "../../config";
+import PropagandaInterna from "./PropagandaInterna"; // 🔹 novo componente
 
 export default function Propaganda() {
     const [propagandas, setPropagandas] = useState([]);
+    const [mostrarInterna, setMostrarInterna] = useState(false);
 
     useEffect(() => {
         fetch(`${URL}/propagandas`)
@@ -13,16 +14,15 @@ export default function Propaganda() {
                 return res.json();
             })
             .then((data) => {
-                // 🔹 Garante que só entra array no estado
-                if (Array.isArray(data)) {
-                    setPropagandas(data);
-                } else {
-                    console.error("Resposta inesperada:", data);
-                    setPropagandas([]);
-                }
+                if (Array.isArray(data)) setPropagandas(data);
+                else setPropagandas([]);
             })
             .catch((err) => console.error("Erro ao carregar propagandas:", err));
     }, []);
+
+    if (mostrarInterna) {
+        return <PropagandaInterna onVoltar={() => setMostrarInterna(false)} />;
+    }
 
     return (
         <section className="propaganda-scroll-vertical">
@@ -32,10 +32,21 @@ export default function Propaganda() {
                     <div
                         key={item.id}
                         className={`propaganda-item ${item.site?.toLowerCase() || ""}`}
+                        onClick={() => {
+                            if (!item.link) setMostrarInterna(true);
+                        }}
                     >
-                        <a href={item.link} target="_blank" rel="noopener noreferrer">
-                            <h3>{item.site}</h3>
-                        </a>
+                        {item.link ? (
+                            <a
+                                href={item.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <h3>{item.site}</h3>
+                            </a>
+                        ) : (
+                            <h3 className="clicavel">{item.site}</h3>
+                        )}
                         <p>{item.comentario}</p>
                     </div>
                 ))}
