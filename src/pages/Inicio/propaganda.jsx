@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./propaganda.css";
 import { URL } from "../../config";
-import PropagandaInterna from "./PropagandaInterna"; // 🔹 novo componente
+import PropagandaInterna from "./propagandainterna"; // 🔹 novo componente
 
 export default function Propaganda() {
     const [propagandas, setPropagandas] = useState([]);
