@@ -6,7 +6,7 @@ export default function PropagandaInterna({ onVoltar }) {
     const [conteudos, setConteudos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filtro, setFiltro] = useState("");
-    const [quantidadeVisivel, setQuantidadeVisivel] = useState(10); // 🔹 controla quantos aparecem
+    const [quantidadeVisivel, setQuantidadeVisivel] = useState(10);
 
     // 🔹 Buscar propagandas ativas
     useEffect(() => {
@@ -28,12 +28,11 @@ export default function PropagandaInterna({ onVoltar }) {
         carregarConteudos();
     }, []);
 
-    // 🔹 Filtrar por produto (busca global)
+    // 🔹 Filtrar por produto
     const conteudosFiltrados = conteudos.filter((item) =>
         item.produto.toLowerCase().includes(filtro.toLowerCase())
     );
 
-    // 🔹 Mostrar apenas os primeiros X
     const conteudosVisiveis = conteudosFiltrados.slice(0, quantidadeVisivel);
 
     return (
@@ -55,7 +54,7 @@ export default function PropagandaInterna({ onVoltar }) {
                 value={filtro}
                 onChange={(e) => {
                     setFiltro(e.target.value);
-                    setQuantidadeVisivel(10); // 🔹 reseta para os primeiros 10 sempre que filtra
+                    setQuantidadeVisivel(10);
                 }}
             />
 
@@ -71,11 +70,40 @@ export default function PropagandaInterna({ onVoltar }) {
                                 key={item.id}
                                 className={`propaganda-card plataforma-${item.plataforma?.toLowerCase().replace(/\s/g, '-')}`}
                             >
-                                <img
-                                    src={item.imagem_url}
-                                    alt={item.produto}
-                                    className="propaganda-img"
-                                />
+                                {/* 🔹 IMAGEM */}
+                                <div>
+                                    <img
+                                        src={item.imagem_url}
+                                        alt={item.produto}
+                                        className="propaganda-img"
+                                    />
+
+                                    {/* 💰 PREÇO ABAIXO DA IMAGEM */}
+                                    <p className="preco-info">
+                                        <strong>De:</strong>{" "}
+                                        <span
+                                            style={{
+                                                textDecoration: "line-through",
+                                                color: "#ff4d4d",
+                                            }}
+                                        >
+                                            R$ {item.preco_de ? Number(item.preco_de).toFixed(2) : "0.00"}
+                                        </span>
+                                        &nbsp;&nbsp;
+                                        <strong><br /> Por:</strong>{" "}
+                                        <span
+                                            style={{
+                                                color: "#4dff88",
+                                                fontWeight: "bold",
+                                            }}
+                                        >
+                                            R$ {item.preco_por ? Number(item.preco_por).toFixed(2) : "0.00"}
+                                        </span>
+                                    </p>
+                                </div>
+
+
+                                {/* 🔹 INFORMAÇÕES */}
                                 <div className="propaganda-info">
                                     <a
                                         href={item.link || "#"}
@@ -85,7 +113,7 @@ export default function PropagandaInterna({ onVoltar }) {
                                         <h3>{item.produto}</h3>
                                     </a>
                                     <p>{item.descricao || "Sem descrição."}</p>
-
+                                    <p style={{ display: "none" }} ><strong>{item.dias}</strong> dias</p>
                                 </div>
                             </div>
                         ))}

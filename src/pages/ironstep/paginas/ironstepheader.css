@@ -237,7 +237,7 @@
         text-align: center;
         padding: 0.5rem 0;
         border-radius: 10px;
-        background: rgba(255, 255, 255, 0.05);
+        background: transparent !important;
     }
 
     .ironstep-userinfo h2 {
@@ -253,6 +253,10 @@
         /* empilha */
         align-items: center;
         gap: 0.6rem;
+    }
+
+    .ironstep-link {
+        font-size: 29px;
     }
 
     .ironstep-infos h3 {
@@ -310,5 +314,12 @@
 
     100% {
         opacity: 1;
+    }
+}
+
+/* 🔹 Esconde a logo central em telas menores que 954px */
+@media (max-width: 954px) {
+    .ironstep-logo-container {
+        display: none !important;
     }
 }

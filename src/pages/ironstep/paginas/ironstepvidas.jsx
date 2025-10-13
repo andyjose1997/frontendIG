@@ -47,10 +47,17 @@ export default function IronStepVidas({ vidas = 0 }) {
             {vidasAtuais >= 4 ? (
                 <div className="vidas-container" data-tooltip="Vidas infinitas">
                     <div className="vida-infinito">
-                        <span>👑</span>
-                        <span>👑</span>
-                        <span>👑</span>
+                        {window.innerWidth < 500 ? (
+                            <span>💎</span> // apenas 1 diamante em telas pequenas
+                        ) : (
+                            <>
+                                <span>💎</span>
+                                <span>💎</span>
+                                <span>💎</span>
+                            </>
+                        )}
                     </div>
+
                 </div>
             ) : (
                 <div className="vidas-container" data-tooltip="São as vidas">

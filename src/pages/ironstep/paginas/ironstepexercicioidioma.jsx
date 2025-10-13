@@ -133,7 +133,6 @@ export default function ExercicioIdiomas({ exercicioId, onClose }) {
     const proximaFase = () => {
         setFeedback(null);
 
-        // 👉 Se errou 5 vezes, reinicia
         if (erros >= 5) {
             alert("❌ Você errou 5 vezes! O exercício será reiniciado.");
             setErros(0);
@@ -145,28 +144,37 @@ export default function ExercicioIdiomas({ exercicioId, onClose }) {
             return;
         }
 
-        // 👉 Se já atingiu 6 acertos, finaliza
         if (acertos >= 6) {
             finalizarExercicio();
             return;
         }
 
-        // 👉 Vai para próxima fase não respondida
-        const naoRespondidas = fases.filter(f => !respondidas.includes(f.id));
-        if (naoRespondidas.length > 0) {
-            const proxima = naoRespondidas[0];
+        // 🔹 Mantém só as fases ainda não acertadas
+        const fasesNaoAcertadas = fases.filter(
+            f => !respondidas.includes(f.id) || f.errou
+        );
+
+        if (fasesNaoAcertadas.length > 0) {
+            const proxima = fasesNaoAcertadas[0];
             const index = fases.findIndex(f => f.id === proxima.id);
             setFaseAtual(index);
             setResposta("");
             setSelecionados([]);
         } else {
-            // 🔹 Recomeça as fases até acertar 6 ou errar 5
-            setRespondidas([]);
-            setFaseAtual(0);
+            // 🔄 Se todas já foram acertadas ou erradas sem acerto, recomeça as erradas
+            const fasesErradas = fases.filter(f => f.errou);
+            if (fasesErradas.length > 0) {
+                const proxima = fasesErradas[0];
+                const index = fases.findIndex(f => f.id === proxima.id);
+                setFaseAtual(index);
+            } else {
+                setFaseAtual(0);
+            }
             setResposta("");
             setSelecionados([]);
         }
     };
+
 
     // 🔹 Descontar vida no erro
     const descontarVida = () => {

@@ -617,3 +617,27 @@
     border-color: #ffcc4d;
     background-color: #24242f;
 }
+
+/* 🔹 Limite de altura e rolagem vertical para o formulário de conteúdo interno */
+.propaganda-modal-conteudo form {
+    max-height: 800px;
+    overflow-y: auto;
+    padding-right: 10px;
+    /* evita que a barra sobreponha o conteúdo */
+    scrollbar-width: thin;
+    scrollbar-color: #ffaa00 #2a2a36;
+}
+
+/* Estilo da barra de rolagem (para navegadores baseados em WebKit) */
+.propaganda-modal-conteudo form::-webkit-scrollbar {
+    width: 8px;
+}
+
+.propaganda-modal-conteudo form::-webkit-scrollbar-thumb {
+    background-color: #ffaa00;
+    border-radius: 6px;
+}
+
+.propaganda-modal-conteudo form::-webkit-scrollbar-track {
+    background-color: #2a2a36;
+}

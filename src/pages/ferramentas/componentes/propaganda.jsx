@@ -35,6 +35,9 @@ export default function Propaganda() {
     const [descricao, setDescricao] = useState("");
     const [linkProduto, setLinkProduto] = useState("");
     const [dias, setDias] = useState("");
+    const [precoDe, setPrecoDe] = useState("");
+    const [precoPor, setPrecoPor] = useState("");
+
     const [imagem, setImagem] = useState(null);
     const [preview, setPreview] = useState(null);
 
@@ -82,6 +85,19 @@ export default function Propaganda() {
         setOrdem(item.ordem);
         setMostrarEditar(true);
     };
+    // 🔹 Carrega os dados do item selecionado no formulário
+    const carregarConteudoParaEdicao = (item) => {
+        setProduto(item.produto || "");
+        setDescricao(item.descricao || "");
+        setLinkProduto(item.link || "");
+        setDias(item.dias || "");
+        setPrecoDe(item.preco_de || "");
+        setPrecoPor(item.preco_por || "");
+        setPlataforma(item.plataforma || "Outros");
+        setPreview(item.imagem_url || null);
+        setEditarConteudoId(item.id);
+        setMostrarExtra(true);
+    };
 
     const editarPropaganda = async (e) => {
         e.preventDefault();
@@ -104,7 +120,7 @@ export default function Propaganda() {
     const apagarPropaganda = async (id) => {
         if (!window.confirm("Tem certeza que deseja apagar esta propaganda?")) return;
         try {
-            const res = await fetch(`${URL}/propagandas/${id}`, { method: "DELETE" });
+            const res = await fetch(`${URL}/propagandas/conteudo/${idPropagandaExtra}`);
             if (res.ok) carregarPropagandas();
         } catch (error) {
             console.error("Erro:", error);
@@ -133,7 +149,10 @@ export default function Propaganda() {
         formData.append("link", linkProduto);
         formData.append("plataforma", plataforma);
         formData.append("descricao", descricao);
+        formData.append("preco_de", precoDe);
+        formData.append("preco_por", precoPor);
         formData.append("dias", dias);
+
 
         // 🔹 Só adiciona 'imagem' se for nova
         if (imagem) {
@@ -184,6 +203,8 @@ export default function Propaganda() {
         setDescricao("");
         setLinkProduto("");
         setDias("");
+        setPrecoDe("");
+        setPrecoPor("");
         setImagem(null);
         setPreview(null);
     };
@@ -339,25 +360,37 @@ export default function Propaganda() {
                             <div className="lista-conteudos">
                                 {listaConteudos.map((item) => (
                                     <div key={item.id} className="conteudo-card">
-                                        <img src={item.imagem_url} alt={item.produto} />
+                                        <div className="imagem-container">
+                                            <img src={item.imagem_url} alt={item.produto} className="imagem-conteudo" />
+
+                                            {/* 💰 Preço abaixo da imagem */}
+                                            <p className="preco-info">
+                                                💰 <strong>De:</strong>{" "}
+                                                <span style={{ textDecoration: "line-through", color: "#ff4d4d" }}>
+                                                    R$ {item.preco_de ? Number(item.preco_de).toFixed(2) : "0.00"}
+                                                </span>
+                                                &nbsp;&nbsp;
+                                                <strong>Por:</strong>{" "}
+                                                <span style={{ color: "#4dff88", fontWeight: "bold" }}>
+                                                    R$ {item.preco_por ? Number(item.preco_por).toFixed(2) : "0.00"}
+                                                </span>
+                                            </p>
+                                        </div>
+
                                         <div className="conteudo-info">
                                             <h4>{item.produto}</h4>
                                             <p>{item.descricao || "Sem descrição"}</p>
                                             <p><strong>{item.dias}</strong> dias</p>
+
                                             <div className="conteudo-botoes">
                                                 <button
                                                     className="propaganda-btn editar"
-                                                    onClick={() => {
-                                                        setProduto(item.produto);
-                                                        setDescricao(item.descricao);
-                                                        setLinkProduto(item.link);
-                                                        setDias(item.dias);
-                                                        setPreview(item.imagem_url);
-                                                        setEditarConteudoId(item.id);
-                                                    }}
+                                                    onClick={() => carregarConteudoParaEdicao(item)}
                                                 >
                                                     Editar
                                                 </button>
+
+
                                                 <button
                                                     className="propaganda-btn apagar"
                                                     onClick={async () => {
@@ -384,6 +417,7 @@ export default function Propaganda() {
                                 ))}
                             </div>
                         )}
+
 
                         <form className="propaganda-form" onSubmit={enviarConteudoExtra}>
                             <label>Imagem</label>
@@ -433,6 +467,26 @@ export default function Propaganda() {
 
                             <label>Descrição</label>
                             <textarea className="propaganda-input" value={descricao} onChange={(e) => setDescricao(e.target.value)} />
+
+                            <label>Preço de:</label>
+                            <input
+                                type="number"
+                                step="0.01"
+                                className="propaganda-input"
+                                value={precoDe}
+                                onChange={(e) => setPrecoDe(e.target.value)}
+                                placeholder="ex: 199.90"
+                            />
+
+                            <label>Preço por:</label>
+                            <input
+                                type="number"
+                                step="0.01"
+                                className="propaganda-input"
+                                value={precoPor}
+                                onChange={(e) => setPrecoPor(e.target.value)}
+                                placeholder="ex: 149.90"
+                            />
 
                             <label>Tempo (dias)</label>
                             <input type="number" className="propaganda-input" value={dias} onChange={(e) => setDias(e.target.value)} required />
