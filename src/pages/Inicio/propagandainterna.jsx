@@ -41,7 +41,7 @@ export default function PropagandaInterna({ onVoltar }) {
                 ⬅ Voltar
             </button>
 
-            <h2>📢 Propaganda Interna</h2>
+            <h2>📢 Ofertas nas plataformas</h2>
             <p className="descricao">
                 Estas são as propagandas internas ativas no momento.
                 Apenas conteúdos ainda dentro do prazo de exibição são mostrados.
