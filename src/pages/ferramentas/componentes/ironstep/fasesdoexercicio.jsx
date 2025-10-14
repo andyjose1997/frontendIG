@@ -123,7 +123,7 @@ export default function FasesDoExercicio({ exercicioId, nomeExercicio, onVoltar 
 
     return (
         <div className="painel-exercicios-curso">
-            <h2>📖 Fases do Exercício ({tipoFase}): {nomeExercicio}</h2>
+            <h2>📖 Fases do Exercício: {nomeExercicio}</h2>
             <button className="voltar-botao" onClick={onVoltar}>⬅ Voltar</button>
 
             {/* Adicionar nova fase */}

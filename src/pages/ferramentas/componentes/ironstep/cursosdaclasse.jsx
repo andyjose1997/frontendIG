@@ -184,7 +184,7 @@ export default function CursosDaClasse({ classeId, nomeClasse, onVoltar }) {
                     ))}
                 </div>
             ) : (
-                <p>Nenhum curso encontrado para esta classe.</p>
+                <p>Nenhum curso encontrado.</p>
             )}
 
             {!mostrarInput ? (

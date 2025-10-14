@@ -164,11 +164,36 @@ export default function ExerciciosDoCurso({ cursoId, nomeCurso, onVoltar }) {
             />
         );
     }
+    // 🔹 Função para copiar os exercícios (com instrução no topo)
+    const copiarExercicios = () => {
+        if (!exercicios.length) {
+            alert("Nenhum exercício disponível para copiar.");
+            return;
+        }
+
+        // 🔸 Instrução inicial
+        const instrucao = "me da mais exercicios como este (seguindo o mesmo padrão abaixo)\n\n";
+
+        // 🔸 Monta o texto com nome e descrição
+        const texto = exercicios
+            .map((ex) => `${ex.exercisio}\nDescrição: ${ex.descricao}`)
+            .join("\n\n");
+
+        // 🔸 Junta instrução + exercícios
+        const textoFinal = instrucao + texto;
+
+        // 🔸 Copia para a área de transferência
+        navigator.clipboard.writeText(textoFinal)
+            .then(() => alert("📋 Instrução e exercícios copiados com sucesso!"))
+            .catch(() => alert("Erro ao copiar para a área de transferência."));
+    };
 
 
     return (
         <div className="painel-exercicios-curso">
             <h2>📝 Exercícios do Curso: {nomeCurso}</h2>
+            <button className="btn-copiar" onClick={copiarExercicios}>📋 Copiar todos os exercícios deste curso</button>
+            <br /> <br />
             <button className="voltar-botao" onClick={onVoltar}>⬅ Voltar</button>
 
             {exercicios.length > 0 ? (
