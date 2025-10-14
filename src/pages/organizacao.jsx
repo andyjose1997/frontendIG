@@ -46,9 +46,14 @@ export default function Organizacao() {
                         <div key={u.id} className={`responsavel ${u.funcao}`}>
                             <img
                                 className="foto-perfil"
-                                src={u.foto?.startsWith("http") ? u.foto : `${URL}${u.foto}`}
+                                src={
+                                    u.foto
+                                        ? (u.foto.startsWith("http") ? u.foto : `${URL}${u.foto}`)
+                                        : "/public/Logo/perfilPadrao/M.png"
+                                }
                                 alt={u.nome}
                             />
+
                             <h2>{capitalize(u.nome)} {capitalize(u.sobrenome)}</h2>
                             <h4 className="cargo">{capitalize(u.cargo)}</h4>
 
