@@ -49,7 +49,7 @@ export default function Organizacao() {
                                 src={
                                     u.foto
                                         ? (u.foto.startsWith("http") ? u.foto : `${URL}${u.foto}`)
-                                        : "/public/Logo/perfilPadrao/M.png"
+                                        : "/Logo/perfilPadrao/M.png"
                                 }
                                 alt={u.nome}
                             />
