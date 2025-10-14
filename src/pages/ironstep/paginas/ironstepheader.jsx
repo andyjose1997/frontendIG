@@ -104,7 +104,11 @@ export default function IronStepHeader({ usuarios }) {
 
                 {/* Foto + Nome */}
                 <div className="ironstep-userinfo">
-                    <img src={usuarios.foto} alt="Foto de perfil" className="ironstep-foto" />
+                    <img
+                        src={usuarios.foto ? usuarios.foto : "/Logo/perfilPadrao/M.png"}
+                        alt="Foto de perfil"
+                        className="ironstep-foto"
+                    />
                     <h2>
                         <a href="https://irongoals.com/perfil" className="ironstep-link">
                             {usuarios.nome} {usuarios.sobrenome}
