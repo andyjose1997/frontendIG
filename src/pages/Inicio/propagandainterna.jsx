@@ -116,21 +116,21 @@ export default function PropagandaInterna({ onVoltar }) {
                                 </div>
                             </div>
                         ))}
+                        {quantidadeVisivel < conteudosFiltrados.length && (
+                            <div style={{ textAlign: "center", marginTop: "20px" }}>
+                                <button
+                                    className="btn-ver-mais"
+                                    onClick={() =>
+                                        setQuantidadeVisivel((prev) => prev + 10)
+                                    }
+                                >
+                                    🔽 Ver mais
+                                </button>
+                            </div>
+                        )}
                     </div>
 
-                    {/* 🔹 Botão Ver Mais */}
-                    {quantidadeVisivel < conteudosFiltrados.length && (
-                        <div style={{ textAlign: "center", marginTop: "20px" }}>
-                            <button
-                                className="btn-ver-mais"
-                                onClick={() =>
-                                    setQuantidadeVisivel((prev) => prev + 10)
-                                }
-                            >
-                                🔽 Ver mais
-                            </button>
-                        </div>
-                    )}
+
                 </>
             )}
         </div>
