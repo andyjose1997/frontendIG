@@ -43,8 +43,7 @@ export default function PropagandaInterna({ onVoltar }) {
 
             <h2>📢 Ofertas nas plataformas</h2>
             <p className="descricao">
-                Estas são as propagandas internas ativas no momento.
-                Apenas conteúdos ainda dentro do prazo de exibição são mostrados.
+                Aqui te mostramos as melhores ofertas do mercado
             </p>
 
             <input
