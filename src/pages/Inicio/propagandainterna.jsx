@@ -25,38 +25,8 @@ export default function PropagandaInterna({ onVoltar }) {
                 setLoading(false);
             }
         };
-
-        // 🔹 Primeira carga
         carregarConteudos();
-
-        // 🔹 Conecta ao WebSocket para atualizações automáticas
-        const socket = new WebSocket(`${URL.replace("http", "ws")}/ws/propagandas`);
-
-        socket.onopen = () => {
-            console.log("🔗 Conectado ao servidor de atualizações de propagandas");
-        };
-
-        socket.onmessage = (event) => {
-            const msg = JSON.parse(event.data);
-            if (msg.acao === "atualizar") {
-                console.log("📢 Atualização recebida — recarregando lista...");
-                carregarConteudos(); // 🔁 Atualiza automaticamente
-            }
-        };
-
-        socket.onerror = (err) => {
-            console.error("❌ Erro no WebSocket:", err);
-        };
-
-        socket.onclose = () => {
-            console.log("🔌 Conexão WebSocket encerrada");
-        };
-
-        // 🔹 Fecha conexão ao sair da página
-        return () => socket.close();
     }, []);
-
-
 
     // 🔹 Filtrar por produto
     const conteudosFiltrados = conteudos.filter((item) =>
@@ -73,7 +43,7 @@ export default function PropagandaInterna({ onVoltar }) {
 
             <h2>📢 Ofertas nas plataformas</h2>
             <p className="descricao">
-                Aqui te mostramos as melhores ofertas do mercado
+                Aqui te mostramos as melhores ofertas do mercado brasileiro
             </p>
 
             <input
