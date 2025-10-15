@@ -144,7 +144,7 @@ export default function ExercicioIdiomas({ exercicioId, onClose }) {
             return;
         }
 
-        if (acertos >= 6) {
+        if (acertos >= 5) {
             finalizarExercicio();
             return;
         }

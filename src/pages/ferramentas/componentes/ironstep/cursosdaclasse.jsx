@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { URL } from "../../../../config";
 import "./cursosdaclasse.css";
 import ExerciciosDoCurso from "./exerciciosdocurso";
+import Rankings from "./rankings"; // 🔹 área de teste temporária
 
 export default function CursosDaClasse({ classeId, nomeClasse, onVoltar }) {
     const [cursos, setCursos] = useState([]);
@@ -11,6 +12,7 @@ export default function CursosDaClasse({ classeId, nomeClasse, onVoltar }) {
     const [editandoNome, setEditandoNome] = useState("");
     const [confirmarId, setConfirmarId] = useState(null);
     const [cursoSelecionado, setCursoSelecionado] = useState(null);
+    const [mostrarRankings, setMostrarRankings] = useState(false); // 🔹 novo estado
 
     // 🔹 Buscar cursos dessa classe
     const carregarCursos = async () => {
@@ -114,9 +116,20 @@ export default function CursosDaClasse({ classeId, nomeClasse, onVoltar }) {
             />
         );
     }
+    // 🔹 Se clicou em Rankings → abre o componente de teste
+    if (mostrarRankings) {
+        return <Rankings onVoltar={() => setMostrarRankings(false)} />;
+    }
 
     return (
         <div className="painel-cursos-classe">
+            <button
+                className="btn-rankings"
+                onClick={() => setMostrarRankings(true)}
+            >
+                🏆 Rankings
+            </button>
+
             <h2>📚 Cursos </h2>
 
             {cursos.length > 0 ? (

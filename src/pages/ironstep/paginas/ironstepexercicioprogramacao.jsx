@@ -4,7 +4,7 @@ import "./ironstepexercicioprogramacao.css";
 import PremiumModal from "./premium";
 
 export default function ExercicioProgramacao({ exercicioId, onClose }) {
-    console.log("🚀 exercicioId recebido:", exercicioId); // 👈 coloca AQUI
+    console.log("🚀 exercicioId recebido:", exercicioId);
 
     const [fases, setFases] = useState([]);
     const [faseAtual, setFaseAtual] = useState(0);
@@ -24,38 +24,55 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
     const [acertos, setAcertos] = useState(0);
 
     const [feedback, setFeedback] = useState(null);
-
     const [entrando, setEntrando] = useState(true);
     const [countdown, setCountdown] = useState(3);
     const [pronto, setPronto] = useState(false);
-
     const [showPremium, setShowPremium] = useState(false);
 
     const usuarioId = localStorage.getItem("usuario_id");
-
     const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
-    // 🔹 Normalizador universal
     const normalizarTexto = (txt) => {
-        return txt
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .trim();
+        return txt.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
     };
 
-    // 🔹 Carregar fases e vidas
+    // 🔹 Carregar fases e vidas (com cache)
     useEffect(() => {
         if (!exercicioId) return;
 
         const token = localStorage.getItem("token");
+        const cacheKey = `fases_${exercicioId}`;
 
+        // 🔸 tenta recuperar do sessionStorage
+        const cache = sessionStorage.getItem(cacheKey);
+        if (cache) {
+            console.log("⚡ Carregando fases do cache");
+            setFases(JSON.parse(cache));
+            setLoading(false);
+            setEntrando(true);
+            setTimeout(() => setEntrando(false), 1000);
+            return;
+        }
+
+        // 🔸 se não houver cache, busca do backend
         fetch(`${URL}/ironstep/fasesprogramacao/${exercicioId}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(res => res.json())
             .then(data => {
-                setFases(data.fases || []);
+                const fasesUnicas = [];
+                const idsVistos = new Set();
+
+                (data.fases || []).forEach(f => {
+                    if (!idsVistos.has(f.id)) {
+                        idsVistos.add(f.id);
+                        fasesUnicas.push(f);
+                    }
+                });
+
+                setFases(fasesUnicas);
+                sessionStorage.setItem(cacheKey, JSON.stringify(fasesUnicas)); // salva no cache
+                console.log("✅ Fases únicas carregadas:", fasesUnicas.map(f => f.id));
                 setStartTime(Date.now());
                 setLoading(false);
                 setEntrando(true);
@@ -74,6 +91,7 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
             .catch(err => console.error("Erro ao carregar vidas:", err));
     }, [exercicioId]);
 
+
     // 🔹 Timer de contagem regressiva
     useEffect(() => {
         if (!pronto && countdown > 0) {
@@ -86,7 +104,6 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
                     return prev - 1;
                 });
             }, 1000);
-
             return () => clearTimeout(timer);
         }
     }, [countdown, pronto]);
@@ -97,7 +114,6 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
             const fase = fases[faseAtual];
             if (!fase) return;
 
-            // sempre resetar selecionados/opções quando muda de fase
             setSelecionados([]);
             setOpcoesAtuais([]);
 
@@ -107,25 +123,16 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
                     ? fase.opcoes.split(";")
                     : ["<div>", "<section>", "<span>", "<h1>"];
                 setOpcoesAtuais(shuffle([...partes, ...extras]));
-            }
-            else if (fase.tipo === "identificar_erro" || fase.tipo === "traducao_codigo") {
+            } else if (fase.tipo === "identificar_erro" || fase.tipo === "traducao_codigo") {
                 let todas = [];
-
                 if (fase.correta) todas.push(...fase.correta.split(";"));
                 if (fase.opcoes && fase.opcoes.trim() !== "") {
                     todas.push(...fase.opcoes.split(";"));
                 } else {
-                    todas.push(
-                        "<header> ... </header>",
-                        "<footer> ... </footer>",
-                        "<main> ... </main>",
-                        "<article> ... </article>"
-                    );
+                    todas.push("<header> ... </header>", "<footer> ... </footer>", "<main> ... </main>", "<article> ... </article>");
                 }
-
                 setOpcoesAtuais(shuffle([...new Set(todas)]));
-            }
-            else {
+            } else {
                 setOpcoesAtuais([]);
             }
         }
@@ -140,13 +147,9 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
                 <div className="pro-fase-container">
                     <h2>💔 Você ficou sem vidas!</h2>
                     <p>Você pode tentar novamente amanhã, ou desbloquear vidas ilimitadas com a conta <strong>Premium</strong>.</p>
-
                     <div style={{ marginTop: "1.5rem" }}>
                         <button className="pro-next-bttn" onClick={onClose}>Fechar</button>
-                        <button
-                            className="pro-premiumm-btttn"
-                            onClick={() => setShowPremium(true)}
-                        >
+                        <button className="pro-premiumm-btttn" onClick={() => setShowPremium(true)}>
                             Quero ser Premium
                         </button>
                         {showPremium && <PremiumModal onClose={() => setShowPremium(false)} />}
@@ -158,7 +161,6 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
 
     const fase = fases[faseAtual];
 
-    // 🔹 Descontar vida no erro
     const descontarVida = () => {
         if (!usuarioId) return;
         const token = localStorage.getItem("token");
@@ -177,26 +179,22 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
     // 🔹 Validação da resposta
     const validarResposta = () => {
         let correto = false;
-
         if (fase.tipo === "completar_codigo") {
             correto = normalizarTexto(resposta) === normalizarTexto(fase.correta);
         }
         if (fase.tipo === "traducao_codigo" || fase.tipo === "identificar_erro") {
             const normalizarArray = (arr) =>
                 arr.map(c => normalizarTexto(c)).filter(c => c.length > 0).sort();
-
             const corretas = normalizarArray(fase.correta.split(";"));
             const selecionadasNormalizadas = normalizarArray(selecionados);
-
             correto = JSON.stringify(corretas) === JSON.stringify(selecionadasNormalizadas);
         }
-
         if (fase.tipo === "montar_codigo") {
             const respostaMontada = selecionados.join(" ");
             correto = normalizarTexto(respostaMontada) === normalizarTexto(fase.correta);
         }
 
-        setRespondidas(prev => [...prev, fase.id]);
+        setRespondidas(prev => [...new Set([...prev, fase.id])]);
 
         if (correto) {
             setAcertos(prev => prev + 1);
@@ -208,39 +206,29 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
         }
     };
 
-    // 🔹 Ir para próxima fase
+    // 🔹 Ir para próxima fase (garantido sem repetição)
     const proximaFase = () => {
         setFeedback(null);
 
-        if (acertos >= 5) {
+        // Remove a fase atual completamente
+        const novasFases = fases.filter(f => f.id !== fase.id);
+        setFases(novasFases);
+        sessionStorage.setItem(`fases_${exercicioId}`, JSON.stringify(novasFases));
+
+        setRespondidas(prev => [...new Set([...prev, fase.id])]);
+
+        if (novasFases.length === 0) {
             finalizarExercicio();
             return;
         }
 
-        if (erros >= 5) {
-            alert("❌ Você errou 5 vezes seguidas! O exercício será reiniciado.");
-            setErros(0);
-            setAcertos(0);
-            setRespondidas([]);
-            setFaseAtual(0);
-            setResposta("");
-            setSelecionados([]);
-            return;
-        }
-
-        const naoRespondidas = fases.filter(f => !respondidas.includes(f.id));
-        if (naoRespondidas.length > 0) {
-            const proxima = naoRespondidas[0];
-            const index = fases.findIndex(f => f.id === proxima.id);
-            setFaseAtual(index);
-            setResposta("");
-            setSelecionados([]);
-        } else {
-            finalizarExercicio();
-        }
+        // Define nova fase (primeira da lista restante)
+        setFaseAtual(0);
+        setResposta("");
+        setSelecionados([]);
+        console.log("➡️ Próxima fase:", novasFases[0].id, novasFases[0].descricao);
     };
 
-    // 🔹 Finalizar exercício
     const finalizarExercicio = () => {
         const fim = Date.now();
         const tempoSegundos = Math.floor((fim - startTime) / 1000);
@@ -250,31 +238,23 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
         setPontuacaoFinal(pontosGanhos);
 
         const token = localStorage.getItem("token");
-
         fetch(`${URL}/ironstep/finalizar/${exercicioId}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
-            body: JSON.stringify({
-                usuario_id: usuarioId,
-                pontos: pontosGanhos
-            })
+            body: JSON.stringify({ usuario_id: usuarioId, pontos: pontosGanhos })
         })
             .then(res => res.json())
             .then(data => console.log("Ranking atualizado:", data))
             .catch(err => console.error("Erro ao salvar ranking:", err));
     };
 
-    // 🔹 Clique em opção multipla
-    // 🔹 Clique em opção multipla
     const toggleOpcao = (op) => {
         if (fase.tipo === "identificar_erro") {
-            // só uma opção pode ser escolhida
             setSelecionados([op]);
         } else {
-            // tradução pode ser múltipla
             if (selecionados.includes(op)) {
                 setSelecionados(selecionados.filter(s => s !== op));
             } else {
@@ -282,7 +262,6 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
             }
         }
     };
-
 
     return (
         <div className="pro-fullscreennn">
@@ -318,10 +297,9 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
 
                                 {fase.tipo === "montar_codigo" && (
                                     <div>
-                                        {/* 🔹 Palavras disponíveis */}
                                         <div className="pro-montar-palavras">
                                             {opcoesAtuais
-                                                .filter(op => !selecionados.includes(op)) // só mostra se não foi escolhida
+                                                .filter(op => !selecionados.includes(op))
                                                 .map((op, i) => (
                                                     <button
                                                         key={i}
@@ -332,8 +310,6 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
                                                     </button>
                                                 ))}
                                         </div>
-
-                                        {/* 🔹 Palavras já escolhidas */}
                                         <div className="pro-montar-escolhidas">
                                             {selecionados.map((sel, i) => (
                                                 <button
@@ -349,7 +325,6 @@ export default function ExercicioProgramacao({ exercicioId, onClose }) {
                                         </div>
                                     </div>
                                 )}
-
 
                                 {(fase.tipo === "identificar_erro" || fase.tipo === "traducao_codigo") && (
                                     <div className="pro-opcoes-erro">

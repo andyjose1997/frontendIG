@@ -153,7 +153,6 @@ export default function ExerciciosDoCurso({ cursoId, nomeCurso, onVoltar }) {
         );
     }
 
-    // 🔹 Se entrou em um exercício
     // 🔹 Se entrou em um exercício → sempre vai para FasesDoExercicio
     if (exercicioSelecionado) {
         return (

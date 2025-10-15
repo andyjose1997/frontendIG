@@ -1,0 +1,198 @@
+/* ===============================
+   🌟 ESTILO GERAL
+   =============================== */
+.rankings-teste {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #0a0a0a, #1a1a1a 40%, #222 80%);
+    color: #f5f5f5;
+    font-family: "Poppins", sans-serif;
+    animation: fadeIn 0.5s ease-in-out;
+    width: 80%;
+}
+
+.rankings-teste h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===============================
+   🧩 BOTÕES DE NÍVEL
+   =============================== */
+.niveis-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 40px;
+}
+
+.btn-nivel {
+    background: linear-gradient(135deg, #0072ff, #00c6ff);
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 2rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-width: 140px;
+}
+
+.btn-nivel:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 10px #00aaff;
+}
+
+.btn-nivel:active {
+    transform: scale(0.95);
+}
+
+/* ===============================
+   🧮 TABELA DE RANKING
+   =============================== */
+.usuarios-container {
+    width: 96%;
+    max-width: 1700px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 20px 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 0.4s ease-in-out;
+}
+
+.usuarios-container h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00bfff;
+    font-weight: 600;
+}
+
+.tabela-ranking {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #111;
+}
+
+.tabela-ranking th,
+.tabela-ranking td {
+    padding: 14px 12px;
+    text-align: center;
+    font-size: 1.35rem;
+    color: #f0f0f0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tabela-ranking th {
+    background: linear-gradient(90deg, #0072ff, #00c6ff);
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tabela-ranking tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.tabela-ranking tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* 🥇🥈🥉 Destaques do Top 3 */
+.tabela-ranking tr:nth-child(1) td {
+    background: linear-gradient(90deg, #ffd70033, #ffcc0044);
+    font-weight: 700;
+}
+
+.tabela-ranking tr:nth-child(2) td {
+    background: linear-gradient(90deg, #c0c0c033, #b0b0b044);
+    font-weight: 600;
+}
+
+.tabela-ranking tr:nth-child(3) td {
+    background: linear-gradient(90deg, #cd7f3233, #b8733344);
+    font-weight: 600;
+}
+
+/* ===============================
+   🔙 BOTÃO VOLTAR
+   =============================== */
+.btn-voltar {
+    margin-top: 25px;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+    box-shadow: 0 0 8px rgba(255, 50, 50, 0.4);
+}
+
+.btn-voltar:hover {
+    background: linear-gradient(135deg, #ff4b2b, #ff416c);
+    transform: translateY(-2px);
+}
+
+/* ===============================
+   📱 RESPONSIVIDADE
+   =============================== */
+@media (max-width: 768px) {
+    .rankings-teste h2 {
+        font-size: 1.6rem;
+    }
+
+    .usuarios-container {
+        padding: 15px;
+    }
+
+    .tabela-ranking th,
+    .tabela-ranking td {
+        padding: 10px 6px;
+        font-size: 0.85rem;
+    }
+
+    .btn-nivel {
+        font-size: 0.9rem;
+        min-width: 120px;
+    }
+}
+
+/* ===============================
+   ✨ ANIMAÇÕES
+   =============================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { URL } from "../../../../config";
 import "./painelironstep.css";
 import CursosDaClasse from "./cursosdaclasse";
+import Rankings from "./rankings"; // 🔹 novo arquivo de teste
 
 export default function PainelEditarIronStep() {
     const [classes, setClasses] = useState([]);
     const [classeSelecionada, setClasseSelecionada] = useState(null);
+    const [mostrarRankings, setMostrarRankings] = useState(false); // 🔹 novo estado
 
     const [novaClasse, setNovaClasse] = useState("");
     const [mostrarInput, setMostrarInput] = useState(false);
@@ -122,9 +124,17 @@ export default function PainelEditarIronStep() {
             />
         );
     }
-
+    if (mostrarRankings) {
+        return <RankingsTeste onVoltar={() => setMostrarRankings(false)} />;
+    };
     return (
         <div className="painel-editar-ironstep">
+            <button
+                className="btn-rankings"
+                onClick={() => setMostrarRankings(true)}
+            >
+                🏆 Rankings
+            </button>
             <h2>⚙️ Gerenciar Classes</h2>
 
             <div className="cursos-grid">

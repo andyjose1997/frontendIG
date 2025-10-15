@@ -155,7 +155,7 @@ export default function IronStepExercicios({ cursoId, onBack }) {
                                             <div className="exercicio-infoo">
                                                 <p><strong>Descrição:</strong> {ex.descricao}</p>
                                                 <p><strong>Tipo:</strong> {ex.tipo_exercicio || ex.tipo_exercisio}</p>
-                                                <p><strong>Pontos:</strong> {ex.pontos}</p>
+                                                <p><strong>Pontos: {ex.pontos}, </strong>seja rápido! Cada 30 segundos custam 1 ponto</p>
                                             </div>
 
                                         </li>

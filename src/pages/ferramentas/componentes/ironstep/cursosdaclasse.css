@@ -8,6 +8,22 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
+.btn-rankings {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-rankings:hover {
+    background-color: #0056b3;
+}
+
 .painel-cursos-classe h2 {
     margin-bottom: 2.5rem;
     color: #4fc3f7;
