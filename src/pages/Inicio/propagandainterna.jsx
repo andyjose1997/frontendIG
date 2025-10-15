@@ -48,7 +48,7 @@ export default function PropagandaInterna({ onVoltar }) {
 
             <input
                 type="text"
-                placeholder="🔍 Filtrar por produto..."
+                placeholder="🔍 Buscar produto..."
                 className="propaganda-filtro"
                 value={filtro}
                 onChange={(e) => {
