@@ -234,7 +234,6 @@ export default function ExerciciosDoCurso({ cursoId, nomeCurso, onVoltar }) {
                                     <div className="exercicio-info">
                                         <h3>{ex.exercisio}</h3>
                                         <p><b>Descrição:</b> {ex.descricao}</p>
-                                        <p><b>Tipo:</b> {ex.tipo_exercisio}</p>
                                         <p><b>Pontos:</b> {ex.pontos}</p>
                                         <p><b>ID:</b> {ex.id}</p>
                                         {/* 🔹 Contagem de fases */}
