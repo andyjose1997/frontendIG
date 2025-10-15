@@ -478,7 +478,7 @@ export default function Propaganda() {
                                 placeholder="ex: 199.90"
                             />
 
-                            <label>Preço por:</label>
+                            <label>Preço:</label>
                             <input
                                 type="number"
                                 step="0.01"
