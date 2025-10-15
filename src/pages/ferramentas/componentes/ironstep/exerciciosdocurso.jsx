@@ -212,7 +212,7 @@ export default function ExerciciosDoCurso({ cursoId, nomeCurso, onVoltar }) {
                                         onChange={(e) => setEditandoDados({ ...editandoDados, descricao: e.target.value })}
                                         placeholder="Descrição"
                                     />
-                                    <input
+                                    <input style={{ display: "none" }}
                                         type="text"
                                         value={editandoDados.tipo_exercisio || ""}
                                         onChange={(e) => setEditandoDados({ ...editandoDados, tipo_exercisio: e.target.value })}
@@ -284,7 +284,7 @@ export default function ExerciciosDoCurso({ cursoId, nomeCurso, onVoltar }) {
                         value={novoExercicio.descricao}
                         onChange={(e) => setNovoExercicio({ ...novoExercicio, descricao: e.target.value })}
                     />
-                    <input
+                    <input style={{ display: "none" }}
                         type="text"
                         placeholder="Tipo de exercício"
                         value={novoExercicio.tipo_exercisio}
