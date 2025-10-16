@@ -28,6 +28,8 @@ export default function ExercicioTipos({
                     <button className="next-bttn" onClick={validarResposta}>
                         Confirmar
                     </button>
+                    <br /><br /><br /><br /><br /><br />
+
                 </div>
             )}
 
@@ -44,6 +46,8 @@ export default function ExercicioTipos({
                     <button className="next-bttn" onClick={validarResposta}>
                         Confirmar
                     </button>
+                    <br /><br /><br /><br /><br /><br />
+
                 </div>
             )}
 
@@ -69,6 +73,8 @@ export default function ExercicioTipos({
                     <button className="next-bttn" onClick={validarResposta}>
                         Confirmar
                     </button>
+                    <br /><br /><br /><br /><br /><br />
+
                 </div>
             )}
 
@@ -114,6 +120,8 @@ export default function ExercicioTipos({
                     <button className="next-bttn" onClick={validarResposta}>
                         Confirmar
                     </button>
+                    <br /><br /><br /><br /><br /><br />
+
                 </div>
             )}
 
