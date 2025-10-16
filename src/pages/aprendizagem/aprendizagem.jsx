@@ -2,6 +2,7 @@
 import "./aprendizagem.css";
 import { useState } from "react";
 import FormularioCurriculo from "./curriculo/curriculo";
+import Portfolio from "./portfolio/portfolio";
 
 // Importando os componentes Cursos e CursosYouTube
 import { Cursos } from "./cursos/cursos";
@@ -25,10 +26,13 @@ export default function Aprendizagem() {
                 return <Cursos />;
             case "cursosYouTube":
                 return <CursosYouTube />;
+            case "portfolio":
+                return <Portfolio />;
             default:
                 return <FormularioCurriculo handleSubmit={handleSubmit} />;
         }
     };
+
 
     const handleSubmit = async (e, form) => {
         e.preventDefault();
@@ -79,25 +83,31 @@ export default function Aprendizagem() {
                         <h1>Área de Aprendizagem</h1>
                     </div>
 
+                    {/* CURRICULO DESCONTINUADO POR ENQUANTO */}
                     <div className="button-container">
-                        <button onClick={() => setActiveSection("curriculo")}>
+                        <button style={{ display: "none" }} onClick={() => setActiveSection("curriculo")}>
                             📄 <pre>  </pre> Currículo Pessoal
                         </button>
                         <button onClick={() => setActiveSection("cursos")}>
                             <img src={irongoalsImage} alt="Irongoals" className="irongoals-icon" />
-                            Cursos IronGoals
+                            <pre> </pre> Cursos IronGoals
                         </button>
                         <button onClick={() => setActiveSection("cursosYouTube")}>
                             <img src={youtubeImage} alt="YouTube" className="youtube-icon" />
                             Cursos YouTube
                         </button>
+                        <button onClick={() => setActiveSection("portfolio")}>
+                            💼<pre>   </pre> Portfólio IronGoals
+                        </button>
+
+
                     </div>
                 </div>
 
                 <div className="content">
                     {renderSection()}
                 </div>
-            </main>
-        </div>
+            </main >
+        </div >
     );
 }

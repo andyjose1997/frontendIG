@@ -90,7 +90,7 @@ export default function FormularioCurriculo({ isVisible, toggleVisibility }) {
     return (
         <div className={`form-curriculo-container ${isVisible ? "active" : ""}`}>
             <div className="form-curriculo">
-                <h2>Gerador de curriculo para uma empresa especifica ainda precisa fazer seu curriculo completo</h2>
+                <h2>Gerador de curriculo para uma empresa especifica</h2>
                 <form className="form-curriculo-form" onSubmit={handleSubmit}>
                     <h3>Dados Pessoais</h3>
                     <input type="text" placeholder="Nome" name="nome" value={form.nome} onChange={handleChange} required maxLength={30} />

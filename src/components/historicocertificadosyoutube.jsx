@@ -71,7 +71,7 @@ export default function HistoricoCertificadosYouTube() {
     // 🔹 Define o título dinamicamente
     const getTitulo = () => {
         if (codigo.trim().length === 8) {
-            return "📜 Certificados de Conclusão YouTube via IronGoals";
+            return "Certificados de Conclusão YouTube via IronGoals";
         }
         if (codigo.trim().length === 10) {
             return "📜 Certificados de Conclusão via IronGoals";
@@ -152,9 +152,9 @@ export default function HistoricoCertificadosYouTube() {
                         <li><strong>Curso:</strong> {dadosCertificado.curso}</li>
                         <li><strong>Instrutor:</strong> {dadosCertificado.instrutor}</li>
                         <li>
-                            <strong>Canal do Autor:</strong>{" "}
+                            <strong></strong>{" "}
                             <a href={dadosCertificado.canal_autor} target="_blank" rel="noopener noreferrer">
-                                IronGoals
+                                Canal do Autor
                             </a>
                         </li>
                         <li><strong>Data de Emissão:</strong> {dadosCertificado.data_emissao}</li>

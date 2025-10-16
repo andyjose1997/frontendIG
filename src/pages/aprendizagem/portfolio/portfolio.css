@@ -1,0 +1,1549 @@
+/* === PORTFOLIO PRINCIPAL === */
+.portfolio-container {
+    max-width: 1700px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 2rem;
+
+    /* 🎨 Cores e fundo */
+    background: radial-gradient(circle at top left, #09026d 0%, #0b0b0b 60%, #021464 100%);
+    color: #f5f7fa;
+
+    /* 🧩 Tipografia e aparência geral */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.4px;
+    line-height: 1.6;
+
+    /* 🌟 Borda e sombras modernas */
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 18px;
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.5),
+        inset 0 0 12px rgba(255, 255, 255, 0.02);
+
+    /* 💡 Iluminação sutil */
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    /* ✨ Animação de entrada suave */
+    animation: fadeIn 0.6s ease-out;
+    transition: all 0.4s ease-in-out;
+
+    /* 📱 Layout responsivo suave */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.portfolio-container h2 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #3e73ff;
+    margin-bottom: 0.5rem;
+
+    /* 🌟 Melhorias visuais */
+    text-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.4),
+        0 0 8px rgba(62, 115, 255, 0.25);
+    /* leve brilho azul */
+    letter-spacing: 0.5px;
+    text-transform: none;
+
+    /* 💫 Efeito sutil de destaque */
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.portfolio-container h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 3px;
+    background: linear-gradient(90deg, #3e73ff, transparent);
+    border-radius: 2px;
+    opacity: 0.8;
+    transition: width 0.4s ease;
+}
+
+.portfolio-container h2:hover::after {
+    width: 120px;
+    opacity: 1;
+}
+
+.portfolio-container p {
+    text-align: center;
+    color: #cfd6e6;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    /* 🌟 Melhorias visuais */
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+    opacity: 0.9;
+
+    /* 💫 Efeito de entrada suave */
+    animation: fadeText 0.8s ease forwards;
+
+    /* 🔹 Brilho sutil azul acinzentado */
+    text-shadow: 0 0 8px rgba(62, 115, 255, 0.15);
+
+    /* 🩵 Suavidade de leitura */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@keyframes fadeText {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 0.9;
+        transform: translateY(0);
+    }
+}
+
+/* === BOTÕES PRINCIPAIS === */
+.portfolio-botoes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* 🎯 Botão moderno e profissional */
+.portfolio-botoes button {
+    background: linear-gradient(90deg, #0571d6, #1e5686);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.3),
+        inset 0 0 8px rgba(255, 255, 255, 0.05);
+    transition:
+        transform 0.25s ease,
+        background 0.4s ease,
+        box-shadow 0.3s ease,
+        filter 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ✨ Hover com brilho e movimento */
+.portfolio-botoes button:hover::before {
+    left: 120%;
+}
+
+.portfolio-botoes button:hover {
+    transform: translateY(-2px) scale(1.04);
+    background: linear-gradient(90deg, #1e5686, #0571d6);
+    box-shadow:
+        0 8px 16px rgba(0, 0, 0, 0.4),
+        0 0 12px rgba(62, 115, 255, 0.25);
+    filter: brightness(1.05);
+}
+
+/* 🔵 Estado ativo */
+.portfolio-botoes button.ativo {
+    outline: 2px solid #4ea3ff;
+    box-shadow:
+        0 0 15px rgba(62, 115, 255, 0.7),
+        0 0 25px rgba(62, 115, 255, 0.3);
+    filter: brightness(1.1);
+    position: relative;
+}
+
+/* 💫 Pulsar leve no ativo */
+.portfolio-botoes button.ativo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(62, 115, 255, 0.35);
+    animation: pulsarBrilho 1.8s infinite ease-in-out;
+}
+
+@keyframes pulsarBrilho {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* === FORMULÁRIOS === */
+.portfolio-form {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    width: 50%;
+    /* ✨ Profundidade e textura */
+    box-shadow:
+        inset 0 0 12px rgba(255, 255, 255, 0.03),
+        0 6px 18px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+
+    /* 💡 Brilho e contraste sutis */
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    /* 🎬 Animação e transição */
+    animation: slideDown 0.4s ease;
+    transition: all 0.4s ease;
+
+    /* 🧭 Layout equilibrado */
+    display: flex;
+    flex-direction: column;
+    margin: auto auto;
+    gap: 0.8rem;
+    margin-bottom: 40px;
+}
+
+/* 💫 Efeito suave ao passar o mouse */
+.portfolio-form:hover {
+    box-shadow:
+        inset 0 0 14px rgba(62, 115, 255, 0.05),
+        0 8px 22px rgba(0, 0, 0, 0.5);
+    border-color: rgba(62, 115, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+/* 🔹 Animação de entrada */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.portfolio-form input,
+.portfolio-form select,
+.portfolio-form textarea {
+    width: 96%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #f5f7fa;
+    font-size: 1.4rem;
+
+    /* ✨ Melhoria visual e sensorial */
+    box-shadow:
+        inset 0 1px 3px rgba(255, 255, 255, 0.05),
+        0 2px 6px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    transition:
+        border 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.25s ease;
+}
+
+/* 💡 Efeito de foco */
+.portfolio-form input:focus,
+.portfolio-form select:focus,
+.portfolio-form textarea:focus {
+    border-color: #3e73ff;
+    background: rgba(62, 115, 255, 0.08);
+    box-shadow:
+        0 0 8px rgba(62, 115, 255, 0.25),
+        inset 0 0 10px rgba(62, 115, 255, 0.05);
+    transform: scale(1.01);
+    outline: none;
+}
+
+/* 🖱️ Ao passar o mouse */
+.portfolio-form input:hover,
+.portfolio-form select:hover,
+.portfolio-form textarea:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ✍️ Textarea refinado */
+.portfolio-form textarea {
+    resize: none;
+    min-height: 100px;
+    line-height: 1.6;
+}
+
+/* 🔹 Placeholder elegante */
+.portfolio-form input::placeholder,
+.portfolio-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-style: italic;
+    transition: color 0.3s ease;
+}
+
+.portfolio-form input:focus::placeholder,
+.portfolio-form textarea:focus::placeholder {
+    color: rgba(62, 115, 255, 0.5);
+}
+
+.portfolio-form button {
+    background: linear-gradient(90deg, #0571d6, #1e5686);
+    color: #fff;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+
+    /* ⚡ Efeitos visuais premium */
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.4),
+        inset 0 0 8px rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.3s ease,
+        filter 0.3s ease,
+        background 0.4s ease;
+}
+
+/* ✨ Reflexo de luz diagonal */
+.portfolio-form button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0.15) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            transparent 100%);
+    transform: skewX(-20deg);
+    transition: all 0.6s ease;
+}
+
+/* 💫 Hover: brilho e movimento */
+.portfolio-form button:hover::before {
+    left: 130%;
+}
+
+.portfolio-form button:hover {
+    transform: translateY(-2px) scale(1.04);
+    background: linear-gradient(90deg, #1e5686, #0571d6);
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.5),
+        0 0 10px rgba(62, 115, 255, 0.3);
+    filter: brightness(1.08);
+}
+
+/* 🖱️ Efeito ao clicar */
+.portfolio-form button:active {
+    transform: scale(0.98);
+    box-shadow:
+        inset 0 2px 8px rgba(0, 0, 0, 0.5),
+        0 2px 6px rgba(62, 115, 255, 0.3);
+}
+
+/* 🔹 Animação suave de foco */
+.portfolio-form button:focus-visible {
+    outline: 2px solid rgba(62, 115, 255, 0.7);
+    outline-offset: 2px;
+}
+
+/* === GRID PRINCIPAL === */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* 🎯 Cartões principais */
+.portfolio-coluna {
+    background: linear-gradient(145deg, #0f172a, #1e293b);
+    border-radius: 14px;
+    padding: 1.2rem;
+
+    /* ✨ Profundidade e contraste */
+    box-shadow:
+        0 6px 15px rgba(0, 0, 0, 0.4),
+        inset 0 0 12px rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    /* 🎬 Movimento e luz suave */
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.4s ease,
+        filter 0.3s ease;
+}
+
+
+/* 🩵 Hover moderno e flutuante */
+.portfolio-coluna:hover {
+    transform: translateY(-6px);
+    box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.55),
+        0 0 18px rgba(62, 115, 255, 0.15);
+    border-color: rgba(62, 115, 255, 0.2);
+    filter: brightness(1.05);
+}
+
+.portfolio-coluna:hover::before {
+    opacity: 1;
+}
+
+/* 🧩 Título dentro das colunas */
+.portfolio-coluna h3 {
+    font-size: 1.8rem;
+    color: #4ea3ff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.4rem;
+    margin-bottom: 1rem;
+
+    /* 🔹 Efeito discreto */
+    text-shadow: 0 0 6px rgba(62, 115, 255, 0.25);
+    letter-spacing: 0.3px;
+    transition: color 0.3s ease;
+}
+
+.portfolio-coluna:hover h3 {
+    color: #68b1ff;
+}
+
+.item-box {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    padding: 0.9rem;
+    margin-bottom: 1rem;
+
+    /* ✨ Profundidade e textura */
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.25),
+        inset 0 0 8px rgba(255, 255, 255, 0.02);
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
+}
+
+/* 💫 Interação moderna */
+.item-box:hover {
+    background: rgba(62, 115, 255, 0.08);
+    border-color: rgba(62, 115, 255, 0.2);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.35),
+        0 0 10px rgba(62, 115, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+
+/* 🔹 Tipografia refinada */
+.item-box strong {
+    display: block;
+    color: #f5f7fa;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.2px;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.item-box small {
+    color: #aab3c4;
+    margin-bottom: 0.3rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.5rem !important;
+    opacity: 0.9;
+}
+
+/* 🩵 Texto descritivo (p) */
+.item-box p {
+    color: #cfd6e6;
+    font-size: 1.35rem !important;
+    line-height: 1.5;
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+}
+
+.item-box:hover p {
+    opacity: 1;
+}
+
+.item-box p {
+    color: #cfd6e6;
+    font-size: 1.25rem;
+
+    /* ✨ Melhorias sutis e profissionais */
+    line-height: 1.6;
+    letter-spacing: 0.2px;
+    opacity: 0.9;
+
+    /* 💫 Toque de suavidade e leitura */
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+
+    /* 🔹 Transição de realce ao hover */
+    transition: opacity 0.3s ease, transform 0.25s ease;
+}
+
+.item-box:hover p {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+/* === AÇÕES === */
+.acoes-linha {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+
+    /* ✨ Organização e alinhamento visual */
+    justify-content: flex-start;
+    align-items: center;
+
+    /* 💫 Aparência limpa e fluida */
+    padding-top: 0.4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+/* 🔹 Transição sutil quando o item-box é hover */
+.item-box:hover .acoes-linha {
+    border-top-color: rgba(62, 115, 255, 0.15);
+}
+
+.acoes-linha button {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+
+    /* ✨ Profundidade e toque moderno */
+    box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.3),
+        inset 0 0 6px rgba(255, 255, 255, 0.05);
+    transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.2s ease,
+        filter 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.acoes-linha button:hover {
+    background: rgba(62, 115, 255, 0.4);
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.4),
+        0 0 10px rgba(62, 115, 255, 0.25);
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+}
+
+/* 🖱️ Clique (feedback tátil) */
+.acoes-linha button:active {
+    transform: scale(0.95);
+    box-shadow:
+        inset 0 2px 6px rgba(0, 0, 0, 0.5),
+        0 0 4px rgba(62, 115, 255, 0.25);
+}
+
+/* 🔹 Ícones ou emojis mais equilibrados */
+.acoes-linha button span,
+.acoes-linha button svg {
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+}
+
+.acoes-linha button:hover span,
+.acoes-linha button:hover svg {
+    transform: scale(1.1);
+}
+
+.ver-tudo,
+.ver-completo {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 0.4rem 0.7rem;
+    color: #b8c3dd;
+    font-size: 0.9rem;
+    cursor: pointer;
+
+    /* ✨ Aparência moderna e fluida */
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.03);
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        all 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.25s ease;
+}
+
+.vercert {
+    color: #f0f0f0;
+    font-size: 1.3rem;
+}
+
+.vercert:hover {
+    color: #0571d6 !important;
+}
+
+
+.ver-tudo:hover,
+.ver-completo:hover {
+    color: #fff;
+    border-color: #4ea3ff;
+    transform: translateY(-1px);
+    box-shadow:
+        0 0 10px rgba(62, 115, 255, 0.15),
+        inset 0 0 8px rgba(62, 115, 255, 0.08);
+}
+
+/* 🖱️ Efeito ao clicar */
+.ver-tudo:active,
+.ver-completo:active {
+    transform: scale(0.97);
+    box-shadow:
+        inset 0 2px 6px rgba(0, 0, 0, 0.4),
+        0 0 6px rgba(62, 115, 255, 0.25);
+}
+
+/* 🔹 Estado de foco acessível */
+.ver-tudo:focus-visible,
+.ver-completo:focus-visible {
+    outline: 2px solid rgba(62, 115, 255, 0.6);
+    outline-offset: 2px;
+}
+
+/* === LINHA DO TEMPO === */
+.timeline-section {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(145deg, #0e1b34, #16223c);
+    border-radius: 14px;
+
+    /* ✨ Profundidade e textura */
+    box-shadow:
+        0 6px 15px rgba(0, 0, 0, 0.45),
+        inset 0 0 14px rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    /* 💡 Iluminação ambiente */
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    /* 🎬 Transição suave */
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease,
+        border-color 0.4s ease,
+        filter 0.3s ease;
+}
+
+/* 🩵 Interação moderna */
+.timeline-section:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.55),
+        0 0 16px rgba(62, 115, 255, 0.15);
+    border-color: rgba(62, 115, 255, 0.15);
+    filter: brightness(1.05);
+}
+
+/* 🔹 Título da seção */
+.timeline-section h3 {
+    font-size: 1.7rem;
+    color: #4ea3ff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.4rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 6px rgba(62, 115, 255, 0.25);
+    letter-spacing: 0.4px;
+    transition: color 0.3s ease;
+}
+
+.timeline-section:hover h3 {
+    color: #68b1ff;
+}
+
+.timeline-item {
+    padding: 1rem;
+    border-left: 3px solid #3e73ff;
+    margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    position: relative;
+
+    /* ✨ Profundidade e suavidade */
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.35),
+        inset 0 0 10px rgba(255, 255, 255, 0.02);
+    transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+/* 💡 Marcador lateral */
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -9px;
+    top: 16px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #3e73ff;
+    box-shadow: 0 0 8px rgba(62, 115, 255, 0.6);
+    transition: all 0.3s ease;
+}
+
+/* 💫 Efeito visual no hover */
+.timeline-item:hover {
+    background: rgba(62, 115, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.4),
+        0 0 12px rgba(62, 115, 255, 0.15);
+    border-left-color: #4ea3ff;
+}
+
+/* 🔵 Marcador pulsante no hover */
+.timeline-item:hover::before {
+    transform: scale(1.3);
+    background: #4ea3ff;
+    box-shadow: 0 0 12px rgba(62, 115, 255, 0.8);
+}
+
+/* 🩵 Linha do tempo luminosa */
+.timeline-item::after {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg,
+            rgba(62, 115, 255, 0.4),
+            rgba(62, 115, 255, 0));
+    border-radius: 2px;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+/* 🔹 Tipografia e leitura */
+.timeline-item span {
+    color: #fff;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.3px;
+}
+
+/* 🔹 Tipografia e leitura */
+.timeline-item strong {
+    display: block;
+    color: #b6bcf1;
+    font-size: 1.9rem;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.3px;
+}
+
+.timeline-item small {
+    display: block;
+    color: #aab3c4;
+    font-size: 1.25rem;
+    margin-bottom: 0.4rem;
+}
+
+.timeline-item p {
+    color: #cfd6e6;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.timeline-item:hover p {
+    opacity: 1;
+}
+
+/* === MODAL === */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center,
+            rgba(0, 0, 0, 0.75) 0%,
+            rgba(0, 0, 0, 0.85) 60%,
+            rgba(0, 0, 0, 0.9) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    /* ✨ Profundidade e textura */
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+    box-shadow: inset 0 0 80px rgba(62, 115, 255, 0.05);
+
+    /* 💫 Transições e entrada fluida */
+    animation: fadeInModal 0.5s ease-out;
+    transition: backdrop-filter 0.4s ease, background 0.4s ease;
+}
+
+/* 🔹 Animação elegante de fade */
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px) saturate(100%);
+    }
+
+    to {
+        opacity: 1;
+        backdrop-filter: blur(8px) saturate(120%);
+    }
+}
+
+/* === SCROLLBAR PERSONALIZADA === */
+::-webkit-scrollbar {
+    width: 10px;
+    /* largura da barra */
+}
+
+/* 🔹 Trilha (fundo da barra) */
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.4);
+}
+
+/* 🔹 Polegar (parte que se move) */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #1e5686, #0571d6);
+    border-radius: 10px;
+    box-shadow:
+        inset 0 0 6px rgba(255, 255, 255, 0.1),
+        0 0 8px rgba(62, 115, 255, 0.3);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 🔹 Hover com brilho */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #0571d6, #1e5686);
+    box-shadow:
+        0 0 10px rgba(62, 115, 255, 0.5),
+        inset 0 0 8px rgba(255, 255, 255, 0.15);
+}
+
+/* 🔹 Canto da barra (quando visível) */
+::-webkit-scrollbar-corner {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* 🩵 Efeito dinâmico no hover (sutil) */
+.modal-overlay:hover {
+    background: radial-gradient(circle at center,
+            rgba(0, 0, 0, 0.78) 0%,
+            rgba(0, 0, 0, 0.88) 60%,
+            rgba(0, 0, 0, 0.92) 100%);
+    box-shadow: inset 0 0 100px rgba(62, 115, 255, 0.07);
+}
+
+.modal-conteudo {
+    background: linear-gradient(145deg, #0f172a, #1e293b);
+    color: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    max-width: 700px;
+    width: 90%;
+    height: 90%;
+    max-height: 120vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    position: relative;
+
+    /* ✨ Aparência de painel flutuante */
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.6),
+        0 0 25px rgba(62, 115, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+
+    /* 💫 Animação suave */
+    animation: modalZoom 0.45s ease-out;
+    transition: all 0.4s ease;
+}
+
+/* 🌟 Reflexo diagonal sutil */
+.modal-conteudo::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at top left,
+            rgba(62, 115, 255, 0.1),
+            transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.modal-conteudo:hover::before {
+    opacity: 1;
+}
+
+/* 💡 Barra de rolagem interna personalizada */
+.modal-conteudo::-webkit-scrollbar {
+    width: 10px;
+}
+
+.modal-conteudo::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+}
+
+.modal-conteudo::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #1e5686, #0571d6);
+    border-radius: 10px;
+    box-shadow:
+        inset 0 0 6px rgba(255, 255, 255, 0.08),
+        0 0 8px rgba(62, 115, 255, 0.3);
+    transition: background 0.3s ease;
+}
+
+.modal-conteudo::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #0571d6, #1e5686);
+    box-shadow: 0 0 12px rgba(62, 115, 255, 0.5);
+}
+
+/* 🔹 Botão fechar moderno */
+.modal-conteudo .fechar {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1.4rem;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0.25rem 0.55rem;
+    z-index: 10;
+
+    /* ✨ Profundidade e reflexo */
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.4),
+        inset 0 0 6px rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.3s ease,
+        color 0.3s ease,
+        background 0.3s ease;
+}
+
+/* 💡 Reflexo diagonal sutil */
+.modal-conteudo .fechar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0.25) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            transparent 100%);
+    transform: skewX(-25deg);
+    transition: all 0.5s ease;
+}
+
+/* ✨ Hover interativo */
+.modal-conteudo .fechar:hover::before {
+    left: 120%;
+}
+
+.modal-conteudo .fechar:hover {
+    background: rgba(62, 115, 255, 0.25);
+    color: #4ea3ff;
+    transform: scale(1.15);
+    box-shadow:
+        0 0 10px rgba(62, 115, 255, 0.4),
+        0 0 20px rgba(62, 115, 255, 0.15);
+}
+
+/* 🖱️ Efeito de clique (pressão) */
+.modal-conteudo .fechar:active {
+    transform: scale(0.9);
+    background: rgba(62, 115, 255, 0.3);
+    box-shadow:
+        inset 0 2px 8px rgba(0, 0, 0, 0.5),
+        0 0 6px rgba(62, 115, 255, 0.25);
+}
+
+/* 💫 Animação de foco/pulso sutil */
+@keyframes pulseFechar {
+
+    0%,
+    100% {
+        box-shadow:
+            0 3px 8px rgba(0, 0, 0, 0.4),
+            inset 0 0 8px rgba(62, 115, 255, 0.15);
+    }
+
+    50% {
+        box-shadow:
+            0 3px 12px rgba(62, 115, 255, 0.3),
+            inset 0 0 10px rgba(62, 115, 255, 0.2);
+    }
+}
+
+/* 🔹 Efeito pulsante ao passar o mouse */
+.modal-conteudo .fechar:hover {
+    animation: pulseFechar 1.8s infinite ease-in-out;
+}
+
+
+
+.modal-conteudo h3 {
+    color: #4ea3ff;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.modal-conteudo .fechar {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.modal-conteudo .fechar:hover {
+    transform: scale(1.2);
+    color: #4ea3ff;
+}
+
+/* === ANIMAÇÕES === */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* === VAZIO === */
+.vazio {
+    text-align: center;
+    color: #aab3c4;
+    font-style: italic;
+    padding: 1rem 0;
+
+    /* ✨ Toque profissional */
+    opacity: 0.85;
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+
+    /* 💫 Efeito de entrada suave */
+    animation: vazioFade 0.8s ease forwards;
+}
+
+/* 🩵 Hover sutil (dá vida à interface) */
+.vazio:hover {
+    opacity: 1;
+    transform: scale(1.02);
+    color: #c5ccda;
+    text-shadow: 0 0 8px rgba(62, 115, 255, 0.25);
+}
+
+/* 🎬 Animação de entrada */
+@keyframes vazioFade {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 0.85;
+        transform: translateY(0);
+    }
+}
+
+/* ✨ Animação de aparição suave dos formulários */
+.portfolio-form {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: subirSuave 0.6s ease forwards;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* 🌟 Efeito de destaque quando o formulário é mostrado */
+@keyframes subirSuave {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+        filter: blur(2px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* 💡 Quando o usuário clica em “editar”, realça o formulário */
+.portfolio-form:focus-within {
+    box-shadow: 0 0 15px rgba(78, 163, 255, 0.4);
+    border-color: rgba(78, 163, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* === 📱 RESPONSIVIDADE GERAL === */
+
+/* 🔹 Tablets (até 1024px) */
+@media (max-width: 1024px) {
+    .portfolio-container {
+        width: 95%;
+        padding: 1.5rem;
+        border-radius: 14px;
+    }
+
+    .portfolio-container h2 {
+        font-size: 2.4rem;
+    }
+
+    .portfolio-container p {
+        font-size: 1.3rem;
+        max-width: 90%;
+    }
+
+    .portfolio-botoes {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    .portfolio-form {
+        width: 80%;
+        padding: 1.2rem;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+
+    .portfolio-coluna h3 {
+        font-size: 1.6rem;
+    }
+
+    .item-box strong {
+        font-size: 1.4rem;
+    }
+
+    .item-box small,
+    .item-box p {
+        font-size: 1.2rem;
+    }
+
+    .timeline-item span {
+        font-size: 1.7rem;
+    }
+
+    .timeline-item strong {
+        font-size: 1.6rem;
+    }
+
+    .timeline-item p {
+        font-size: 1.2rem;
+    }
+
+    .modal-conteudo {
+        max-width: 90%;
+        padding: 1.5rem;
+        height: 85%;
+    }
+}
+
+/* 🔹 Celulares grandes (até 768px) */
+@media (max-width: 768px) {
+    .portfolio-container {
+        width: 95%;
+        padding: 1.2rem;
+        border-radius: 12px;
+    }
+
+    .portfolio-container h2 {
+        font-size: 2rem;
+    }
+
+    .portfolio-container p {
+        font-size: 1.15rem;
+    }
+
+    .portfolio-botoes button {
+        font-size: 1rem;
+        padding: 0.7rem 1rem;
+    }
+
+    .portfolio-form {
+        width: 80%;
+        padding: 1rem;
+        gap: 0.6rem;
+    }
+
+    .portfolio-form input,
+    .portfolio-form select,
+    .portfolio-form textarea {
+        font-size: 1.1rem;
+        padding: 0.7rem;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-coluna {
+        padding: 1rem;
+    }
+
+    .item-box {
+        padding: 0.8rem;
+    }
+
+    .item-box strong {
+        font-size: 1.25rem;
+    }
+
+    .item-box p {
+        font-size: 1.1rem;
+    }
+
+    .acoes-linha button {
+        font-size: 0.9rem;
+        padding: 0.35rem 0.5rem;
+    }
+
+    .timeline-section {
+        padding: 1rem;
+    }
+
+    .timeline-item {
+        padding: 0.8rem;
+    }
+
+    .timeline-item span {
+        font-size: 1.4rem;
+    }
+
+    .timeline-item strong {
+        font-size: 1.3rem;
+    }
+
+    .timeline-item p {
+        font-size: 1.1rem;
+    }
+
+    .modal-conteudo {
+        width: 95%;
+        height: 85%;
+        padding: 1rem;
+        border-radius: 12px;
+    }
+
+    .modal-conteudo .fechar {
+        top: 6px;
+        right: 10px;
+        font-size: 1.2rem;
+        padding: 0.2rem 0.4rem;
+    }
+}
+
+/* 🔹 iPhones e celulares pequenos (até 480px) */
+@media (max-width: 480px) {
+    .portfolio-container {
+        padding: 1rem;
+        width: 95%;
+        border-radius: 10px;
+    }
+
+    .portfolio-container h2 {
+        font-size: 1.6rem;
+    }
+
+    .portfolio-container p {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    .portfolio-botoes {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .portfolio-botoes button {
+        width: 100%;
+        max-width: 280px;
+        padding: 0.7rem 0.9rem;
+        font-size: 1rem;
+        border-radius: 8px;
+    }
+
+    .portfolio-form {
+        width: 84%;
+        padding: 0.8rem;
+        border-radius: 8px;
+    }
+
+    .portfolio-form button {
+        font-size: 1rem;
+        padding: 0.7rem 1rem;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .portfolio-coluna {
+        padding: 0.9rem;
+    }
+
+    .item-box {
+        padding: 0.7rem;
+    }
+
+    .item-box strong {
+        font-size: 1.15rem;
+    }
+
+    .item-box p {
+        font-size: 1rem;
+    }
+
+    .acoes-linha {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .acoes-linha button {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.5rem;
+    }
+
+    .timeline-section {
+        padding: 0.8rem;
+    }
+
+    .timeline-item {
+        padding: 0.7rem;
+    }
+
+    .timeline-item span {
+        font-size: 1.25rem;
+    }
+
+    .timeline-item strong {
+        font-size: 1.15rem;
+    }
+
+    .timeline-item p {
+        font-size: 1rem;
+    }
+
+    .modal-conteudo {
+        width: 95%;
+        height: 90%;
+        padding: 1rem;
+        border-radius: 10px;
+        font-size: 1rem;
+    }
+
+    .modal-conteudo h3 {
+        font-size: 1.3rem;
+    }
+
+    .modal-conteudo .fechar {
+        top: 8px;
+        right: 10px;
+        font-size: 1.2rem;
+    }
+
+    .ver-tudo,
+    .ver-completo {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.5rem;
+    }
+
+    .vazio {
+        font-size: 1rem;
+    }
+}
+
+/* 🔹 iPhones muito pequenos (até 360px) */
+@media (max-width: 360px) {
+    .portfolio-container {
+        padding: 0.8rem;
+    }
+
+    .portfolio-container h2 {
+        font-size: 1.4rem;
+    }
+
+    .portfolio-container p {
+        font-size: 0.95rem;
+    }
+
+    .portfolio-botoes button {
+        font-size: 0.9rem;
+        padding: 0.6rem 0.8rem;
+    }
+
+    .portfolio-form input,
+    .portfolio-form select,
+    .portfolio-form textarea {
+        font-size: 1rem;
+        padding: 0.6rem;
+    }
+
+    .item-box strong {
+        font-size: 1rem;
+    }
+
+    .item-box p {
+        font-size: 0.95rem;
+    }
+
+    .acoes-linha button {
+        font-size: 0.8rem;
+    }
+
+    .modal-conteudo {
+        padding: 0.8rem;
+    }
+}
+
+/* === CHECKBOX "EMPREGHO ATUAL" === */
+.check-atual {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 1.45rem;
+    color: #cfd8ef;
+    user-select: none;
+}
+
+/* Aparência do checkbox */
+.check-atual input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #3e73ff;
+    /* Azul IronGoals */
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.check-atual input[type="checkbox"]:hover {
+    transform: scale(1.15);
+}
+
+/* Label ao lado */
+.check-atual label {
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.check-atual label:hover {
+    color: #4ea3ff;
+}
+
+/* 🔹 Quebra automática de palavras longas e texto contínuo */
+.timeline-item p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    /* mantém quebras de linha, mas permite quebrar palavras longas */
+    line-height: 1.4;
+    max-width: 100%;
+}

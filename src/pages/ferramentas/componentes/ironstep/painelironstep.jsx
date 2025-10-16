@@ -125,8 +125,9 @@ export default function PainelEditarIronStep() {
         );
     }
     if (mostrarRankings) {
-        return <RankingsTeste onVoltar={() => setMostrarRankings(false)} />;
-    };
+        return <Rankings onVoltar={() => setMostrarRankings(false)} />;
+    }
+
     return (
         <div className="painel-editar-ironstep">
             <button

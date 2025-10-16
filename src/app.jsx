@@ -9,6 +9,7 @@ import Avaliacao from "./pages/areaafastada/avaliacao.jsx";
 import HistoricoCertificadosYouTube from "./components/historicocertificadosyoutube.jsx";
 import IronStep from "./pages/ironstep/ironstep.jsx";
 import IronStepVidas from "./pages/ironstep/paginas/ironstepvidas.jsx";
+import PortfolioPublico from "./components/portfoliopublico.jsx";
 
 import Login from './pages/login.jsx';
 import Cursos from "./pages/cursos.jsx";
@@ -184,6 +185,7 @@ function AppRoutes() {
           path="/historico-certificados/:codigo?"
           element={<HistoricoCertificadosYouTube />}
         />
+        <Route path="/portfolio-publico" element={<PortfolioPublico />} />
 
         <Route
           path="/ironstep"
@@ -204,6 +206,7 @@ function AppRoutes() {
             path="/criar-conta/:idHost/:nomeCompleto"
             element={<Cadastrarse />}
           />
+
           <Route path="/organizacao" element={<Organizacao />} />
           <Route path="/login" element={<Login />} />
         </Route>
