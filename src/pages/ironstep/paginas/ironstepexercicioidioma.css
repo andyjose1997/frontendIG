@@ -8,31 +8,22 @@
     background: linear-gradient(180deg, #020b3a 0%, #03124d 100%);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    /* muda aqui */
     z-index: 1000;
     margin-top: 10px !important;
 
-    /* 🔹 Modernizações */
     backdrop-filter: blur(6px);
-    /* efeito vidro fosco */
     -webkit-backdrop-filter: blur(6px);
 
     animation: fadeOverlay 0.5s ease-in-out;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-}
 
-/* 🔹 Animação de entrada suave */
-@keyframes fadeOverlay {
-    from {
-        opacity: 0;
-        transform: scale(1.02);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    overflow-y: auto;
+    /* 🔹 ADICIONE ESTA LINHA */
+    -webkit-overflow-scrolling: touch;
+    /* 🔹 ESSENCIAL PARA iPhone */
 }
 
 .fase-container {
@@ -42,21 +33,17 @@
     border-radius: 16px;
     padding: 2rem;
     color: #fff;
-    box-shadow:
-        0 0 25px rgba(0, 0, 0, 0.65),
-        /* sombra externa */
-        inset 0 0 12px rgba(255, 255, 255, 0.05);
-    /* brilho interno */
-    overflow-y: auto;
-    max-height: 100vh;
-    min-height: 120vh;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.65), inset 0 0 12px rgba(255, 255, 255, 0.05);
+    /* REMOVE ISSO: max-height: 100vh; */
+    min-height: auto;
+    /* 🔹 deixa o conteúdo crescer naturalmente */
     text-align: center;
     animation: fadeIn 0.5s ease-in-out;
     position: relative;
     margin-top: 20px !important;
-    /* 🔹 Transição ao passar o mouse */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 
 .fase-container:hover {
     transform: translateY(-4px);
