@@ -8,6 +8,7 @@ import RecuperarSenha from "./pages/recuperacao/recuperarsenha.jsx";
 import Avaliacao from "./pages/areaafastada/avaliacao.jsx";
 import HistoricoCertificadosYouTube from "./components/historicocertificadosyoutube.jsx";
 import IronStep from "./pages/ironstep/ironstep.jsx";
+import IronStepVidas from "./pages/ironstep/paginas/ironstepvidas.jsx";
 
 import Login from './pages/login.jsx';
 import Cursos from "./pages/cursos.jsx";
@@ -89,6 +90,42 @@ function Home() {
         <Link to="/cadastrarse" className="btnPrincipal">Comece Agora</Link>
       </section>
     </main>
+  );
+}
+function IronStepVidasWrapper() {
+  const [vidas, setVidas] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const carregarVidas = async () => {
+      try {
+        const res = await fetch(`${URL}/vidas`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const data = await res.json();
+        setVidas(data.vidas ?? 0);
+      } catch (err) {
+        console.error("Erro ao carregar vidas:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    carregarVidas();
+
+    const intervalo = setInterval(carregarVidas, 5000);
+    return () => clearInterval(intervalo);
+  }, []);
+
+  if (loading) return null;
+
+  return (
+    <div className="vidas-flutuantes-irene">
+      <IronStepVidas vidas={vidas} />
+    </div>
   );
 }
 
@@ -227,6 +264,12 @@ function AppRoutes() {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      {/* 🔹 Mostrar vidas flutuantes apenas na rota /ironstep */}
+      {/* 🔹 Mostrar vidas flutuantes apenas na rota /ironstep */}
+      {location.pathname === "/ironstep" && (
+        <IronStepVidasWrapper />
+      )}
+
 
       {/* 👇 Irene aparece em todas as rotas, menos no painel de controle */}
       {!location.pathname.startsWith("/ferramentas/painelcontrole") && (

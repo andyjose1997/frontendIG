@@ -57,11 +57,9 @@ export default function IronStep() {
                     {/* Cabeçalho */}
                     <IronStepHeader usuarios={usuarios} />
 
-                    {/* Vidas */}
-                    <IronStepVidas vidas={vidas} />
 
                     {/* Conteúdo */}
-                    <IronStepConteudo />
+                    <IronStepConteudo vidas={vidas} />
                 </div>
             )}
         </main>

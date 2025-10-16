@@ -6,8 +6,31 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+/* 🔹 Garante que as vidas flutuantes sempre fiquem visíveis em qualquer largura */
+.vidas-flutuantes-irene {
+  position: fixed !important;
+  right: 20px;
+  bottom: 110px;
+  z-index: 9999;
+}
 
+@media (max-width: 600px) {
+  .vidas-flutuantes-irene {
+    right: 10px;
+    bottom: 100px;
+    transform: scale(0.9);
+  }
 
+  /* Ajusta o wrapper interno */
+  .vidas-wrapper {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    align-items: center;
+    box-shadow: none;
+    background: transparent;
+  }
+}
 
 
 .Hero {

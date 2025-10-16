@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ironstepvidas.css";
 import { URL } from "../../../config"; // ajuste o caminho do seu config.js
 
 export default function IronStepVidas({ vidas = 0 }) {
     const [showModal, setShowModal] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 590);
+
+    // 👇 Atualiza automaticamente se a largura da tela mudar
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 500);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     // Garantir que vidas não seja negativo
     const vidasAtuais = Math.max(0, vidas);
@@ -47,8 +55,8 @@ export default function IronStepVidas({ vidas = 0 }) {
             {vidasAtuais >= 4 ? (
                 <div className="vidas-container" data-tooltip="Vidas infinitas">
                     <div className="vida-infinito">
-                        {window.innerWidth < 500 ? (
-                            <span>💎</span> // apenas 1 diamante em telas pequenas
+                        {isMobile ? (
+                            <span>💎</span> // Apenas 1 diamante no mobile
                         ) : (
                             <>
                                 <span>💎</span>
@@ -57,7 +65,6 @@ export default function IronStepVidas({ vidas = 0 }) {
                             </>
                         )}
                     </div>
-
                 </div>
             ) : (
                 <div className="vidas-container" data-tooltip="São as vidas">
@@ -74,19 +81,22 @@ export default function IronStepVidas({ vidas = 0 }) {
             {vidasAtuais < 4 && (
                 <>
                     {/* Versão normal (desktop) */}
-                    <button className="premium-btn premium-desktop" onClick={() => setShowModal(true)}>
+                    <button
+                        className="premium-btn premium-desktop"
+                        onClick={() => setShowModal(true)}
+                    >
                         💎 Seja Premium
                     </button>
 
                     {/* Versão só emoji (mobile) */}
-                    <button className="premium-btn premium-mobile" onClick={() => setShowModal(true)}>
+                    <button
+                        className="premium-btn premium-mobile"
+                        onClick={() => setShowModal(true)}
+                    >
                         💎
                     </button>
                 </>
             )}
-
-
-
 
             {/* 🔹 Modal de preços */}
             {showModal && (
@@ -99,15 +109,16 @@ export default function IronStepVidas({ vidas = 0 }) {
 
                         <div className="precos-container">
                             <div className="preco-card mensal">
-
-
                                 <h3>Plano Mensal</h3>
                                 <p className="preco">R$ 8,00</p>
                                 <ul>
                                     <li>✔ Vidas infinitas por 1 mês</li>
                                     <li>✔ Zero propagandas</li>
                                 </ul>
-                                <button onClick={() => iniciarPagamento("mensal")} className="btn-assinar">
+                                <button
+                                    onClick={() => iniciarPagamento("mensal")}
+                                    className="btn-assinar"
+                                >
                                     Assinar Mensal
                                 </button>
                             </div>
@@ -120,13 +131,19 @@ export default function IronStepVidas({ vidas = 0 }) {
                                     <li>✔ Vidas infinitas por 12 meses</li>
                                     <li>✔ Zero propagandas</li>
                                 </ul>
-                                <button onClick={() => iniciarPagamento("anual")} className="btn-assinar">
+                                <button
+                                    onClick={() => iniciarPagamento("anual")}
+                                    className="btn-assinar"
+                                >
                                     Assinar Anual
                                 </button>
                             </div>
                         </div>
 
-                        <button className="fechar-irontep-btn" onClick={() => setShowModal(false)}>
+                        <button
+                            className="fechar-irontep-btn"
+                            onClick={() => setShowModal(false)}
+                        >
                             Fechar
                         </button>
                     </div>

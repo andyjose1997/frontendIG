@@ -124,7 +124,7 @@ export default function ExercicioTipos({
 
                 </div>
             )}
-
+            <br /><br /><br /><br /><br /><br /><br />
         </>
     );
 }
