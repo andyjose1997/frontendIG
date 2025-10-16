@@ -1,33 +1,38 @@
 .fullscreennn {
-    position: fixed;
+    position: absolute;
+    /* 🟢 Troca o fixed pelo absolute */
     top: 0;
     left: 0;
     width: 100%;
-    height: 160% !important;
-    min-height: 120% !important;
+    min-height: 100vh;
+    /* altura natural da tela */
     background: linear-gradient(180deg, #020b3a 0%, #03124d 100%);
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    /* muda aqui */
     z-index: 1000;
-    margin-top: 10px !important;
+    padding-top: 10px;
+    overflow-y: auto;
+    /* 🔹 ativa rolagem */
+    -webkit-overflow-scrolling: touch;
+    /* 🔹 rolagem suave no iPhone */
 
+    /* efeitos visuais */
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-
     animation: fadeOverlay 0.5s ease-in-out;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-
-    overflow-y: auto;
-    /* 🔹 ADICIONE ESTA LINHA */
-    -webkit-overflow-scrolling: touch;
-    /* 🔹 ESSENCIAL PARA iPhone */
 }
 
 .fase-container {
     width: 90%;
+    max-height: none;
+    /* remove o limite */
+    min-height: auto;
+    /* deixa crescer */
+    overflow: visible;
+    /* deixa o conteúdo fluir */
     max-width: 1200px;
     background: linear-gradient(145deg, #0a1a5c, #0c226e);
     border-radius: 16px;
