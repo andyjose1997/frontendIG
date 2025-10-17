@@ -153,26 +153,87 @@ footer {
     background-color: #0066cc;
 }
 
-/* Responsividade */
-@media (max-width: 868px) {
+@media (max-width: 870px) {
     .aprendizagem-container {
-        grid-template-columns: 100%;
-        /* Sidebar e conteúdo ficam empilhados em telas menores */
-        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .sidebar {
-        width: 40%;
-        padding: 5% 20px;
+        width: 100%;
+        background: linear-gradient(135deg, #012b85, #080c0f);
+        border-radius: 0;
+        border-right: none;
+        box-shadow: none;
+        padding: 10px 0 20px 0;
+        position: relative;
     }
 
-    .content {
+    /* 🔹 Botão de voltar agora visível e no topo esquerdo */
+    .back-button {
+        display: block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+
+    .back-button button {
+        background-color: #004080;
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background 0.3s ease;
+    }
+
+    .back-button button:hover {
+        background-color: #0066cc;
+    }
+
+    .logo-container {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px;
+        margin-top: 40px;
+        /* espaço pro botão acima */
+    }
+
+    .logo-container h1 {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    /* 🔹 Botões lado a lado */
+    .button-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
         width: 100%;
-        padding: 20px 15px;
+        padding: 0 5%;
+        margin-top: 10px;
     }
 
     .button-container button {
-        font-size: 16px;
+        flex: 1 1 30%;
+        min-width: 120px;
+        height: 50px;
+        font-size: 14px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .content {
+        width: 95%;
+        margin: 15px auto;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 }
 

@@ -9,6 +9,7 @@ export default function Portfolio() {
     const [educacao, setEducacao] = useState([]);
     const [habilidades, setHabilidades] = useState([]);
     const [loading, setLoading] = useState(true);
+    const modalRef = useRef(null);
 
     const [formAberto, setFormAberto] = useState(null); // "exp", "edu", "hab"
     const [modal, setModal] = useState(null); // "exp", "edu", "hab", "cert"
@@ -26,6 +27,20 @@ export default function Portfolio() {
         carregarTudo();
     }, []);
 
+    // 🔹 Faz o modal rolar para o topo ao abrir
+    useEffect(() => {
+        if (modal && modalRef.current) {
+            setTimeout(() => {
+                modalRef.current.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
+
+                // Sobe um pouco mais pra centralizar melhor
+                window.scrollBy({ top: -500, behavior: "smooth" });
+            }, 150);
+        }
+    }, [modal]);
     const carregarTudo = async () => {
         try {
             const usuarioId = localStorage.getItem("usuario_id");
@@ -341,7 +356,7 @@ export default function Portfolio() {
                             {experiencias.length === 0 ? (
                                 <p>Nenhuma experiência adicionada.</p>
                             ) : (
-                                experiencias.slice(0, 5).map((exp, i) => (
+                                experiencias.slice(0, 3).map((exp, i) => (
                                     <div key={i} className="timeline-item">
                                         <strong>{exp.cargo}</strong> <span>{exp.empresa}</span>
                                         <small>
@@ -398,15 +413,18 @@ export default function Portfolio() {
                     </section>
 
                     {/* === MODAIS === */}
-                    <PortfolioLinhas
-                        modal={modal}
-                        experiencias={experiencias}
-                        educacao={educacao}
-                        habilidades={habilidades}
-                        certificados={certificados}
-                        editarItem={(tipo, item) => tipo ? editarItem(tipo, item) : setModal(null)}
-                        apagarItem={apagarItem}
-                    />
+                    <div ref={modalRef}>
+                        <PortfolioLinhas
+                            modal={modal}
+                            experiencias={experiencias}
+                            educacao={educacao}
+                            habilidades={habilidades}
+                            certificados={certificados}
+                            editarItem={(tipo, item) => tipo ? editarItem(tipo, item) : setModal(null)}
+                            apagarItem={apagarItem}
+                        />
+                    </div>
+
                 </>
             )}
         </div>
