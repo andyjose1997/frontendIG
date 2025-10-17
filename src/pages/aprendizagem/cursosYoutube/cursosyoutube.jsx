@@ -216,12 +216,15 @@ export const CursosYouTube = () => {
                                                     <div className="video-player">
                                                         <h4>{video.titulo}</h4>
                                                         <div className="video-responsivo">
-                                                            <YouTube
-                                                                videoId={extrairVideoId(video.codigo_iframe)}
-                                                                opts={opts}
-                                                                onEnd={() => setMostrarPerguntas(true)}
-                                                            />
+                                                            <iframe
+                                                                src={`https://www.youtube.com/embed/${extrairVideoId(video.codigo_iframe)}?autoplay=0&modestbranding=1&rel=0`}
+                                                                title="YouTube video player"
+                                                                frameBorder="0"
+                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                                                                allowFullScreen
+                                                            ></iframe>
                                                         </div>
+
 
 
                                                         {mostrarPerguntas && (
