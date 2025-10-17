@@ -221,7 +221,9 @@ export const CursosYouTube = () => {
                                                             onClick={() => setModoTeatro(true)}
                                                         >
                                                             <iframe
-                                                                src={`https://www.youtube.com/embed/${extrairVideoId(video.codigo_iframe)}?autoplay=0&modestbranding=1&rel=0&playsinline=1`}
+                                                                src={`https://www.youtube.com/embed/${extrairVideoId(
+                                                                    video.codigo_iframe
+                                                                )}?autoplay=0&modestbranding=1&rel=0&playsinline=1`}
                                                                 title="YouTube video player"
                                                                 frameBorder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
@@ -229,16 +231,27 @@ export const CursosYouTube = () => {
                                                                 webkitallowfullscreen="true"
                                                                 mozallowfullscreen="true"
                                                             ></iframe>
+
                                                             {modoTeatro && (
-                                                                <button
-                                                                    className="fechar-teatro"
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation();
-                                                                        setModoTeatro(false);
-                                                                    }}
-                                                                >
-                                                                    ✖
-                                                                </button>
+                                                                <>
+                                                                    <div
+                                                                        className="fundo-teatro"
+                                                                        onClick={(e) => {
+                                                                            e.stopPropagation();
+                                                                            setModoTeatro(false);
+                                                                        }}
+                                                                    ></div>
+
+                                                                    <button
+                                                                        className="fechar-teatro"
+                                                                        onClick={(e) => {
+                                                                            e.stopPropagation();
+                                                                            setModoTeatro(false);
+                                                                        }}
+                                                                    >
+                                                                        ✖
+                                                                    </button>
+                                                                </>
                                                             )}
                                                         </div>
 

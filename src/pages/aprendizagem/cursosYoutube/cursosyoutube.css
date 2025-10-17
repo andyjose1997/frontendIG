@@ -18,15 +18,19 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 🎥 ======== MODO TEATRO ======== */
+.cursos-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+/* ===== Modo teatro responsivo ===== */
 .video-responsivo {
     position: relative;
     padding-bottom: 56.25%;
     height: 0;
     background: #000;
-    border-radius: 12px;
     overflow: hidden;
-    transition: all 0.4s ease;
+    border-radius: 10px;
     cursor: pointer;
 }
 
@@ -39,36 +43,34 @@
     border: none;
 }
 
-/* Quando entra em modo teatro */
 .video-responsivo.modo-teatro {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: 56.25vw;
-    max-height: 100vh;
-    max-width: 100vw;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
+    position: fixed !important;
+    inset: 0;
+    margin: auto;
+    width: 100vw !important;
+    height: 100vh !important;
     background: #000;
+    z-index: 10001 !important;
     border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
 }
 
-.video-responsivo.modo-teatro iframe {
-    width: 100%;
-    height: 100%;
+body {
+    overflow: visible !important;
 }
 
-/* Fundo escuro */
-.video-responsivo.modo-teatro::before {
-    content: "";
+/* Fundo escuro atrás do vídeo */
+.fundo-teatro {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.9);
-    z-index: -1;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 10000;
 }
 
 /* Botão de fechar */
@@ -79,12 +81,12 @@
     background: rgba(255, 255, 255, 0.15);
     border: none;
     color: #fff;
-    font-size: 1.8rem;
+    font-size: 2rem;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     cursor: pointer;
-    z-index: 10000;
+    z-index: 10002;
     transition: all 0.3s ease;
 }
 
@@ -93,33 +95,12 @@
     transform: scale(1.1);
 }
 
-/* Corrige visualização em celulares */
+/* === Corrige proporção em celulares === */
 @media (max-width: 600px) {
-    .video-responsivo {
-        width: 100vw;
-        /* ocupa toda a largura da tela */
-        margin-left: 50%;
-        transform: translateX(-50%);
-        aspect-ratio: 16 / 9;
-    }
-
-    .video-responsivo iframe {
-        width: 100%;
-        height: 100%;
-    }
-
-    .cursos-container,
-    .video-player,
-    .lista-videos {
-        overflow: visible !important;
+    .video-responsivo.modo-teatro {
+        height: 56.25vh !important;
     }
 }
-
-.cursos-container:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
-}
-
 
 .lista-videos {
     max-height: 700px;
