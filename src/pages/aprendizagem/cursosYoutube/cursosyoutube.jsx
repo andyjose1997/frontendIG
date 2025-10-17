@@ -245,7 +245,8 @@ export const CursosYouTube = () => {
                                                             <iframe
                                                                 src={`https://www.youtube.com/embed/${extrairVideoId(
                                                                     video.codigo_iframe
-                                                                )}?autoplay=0&modestbranding=1&rel=0&playsinline=1`}
+                                                                )}?autoplay=0&modestbranding=1&rel=0&playsinline=1&fs=0`}
+
                                                                 title="YouTube video player"
                                                                 frameBorder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
