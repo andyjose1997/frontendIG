@@ -86,18 +86,16 @@ export default function Aprendizagem() {
                     {/* CURRICULO DESCONTINUADO POR ENQUANTO */}
                     <div className="button-container">
                         <button style={{ display: "none" }} onClick={() => setActiveSection("curriculo")}>
-                            📄 <pre>  </pre> Currículo Pessoal
+                            Currículo Pessoal
                         </button>
                         <button onClick={() => setActiveSection("cursos")}>
-                            <img src={irongoalsImage} alt="Irongoals" className="irongoals-icon" />
-                            <pre> </pre> Cursos IronGoals
+                            Cursos IronGoals
                         </button>
                         <button onClick={() => setActiveSection("cursosYouTube")}>
-                            <img src={youtubeImage} alt="YouTube" className="youtube-icon" />
                             Cursos YouTube
                         </button>
                         <button onClick={() => setActiveSection("portfolio")}>
-                            💼<pre>   </pre> Portfólio IronGoals
+                            Portfólio IronGoals
                         </button>
 
 
