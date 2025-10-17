@@ -28,18 +28,11 @@ export default function Portfolio() {
 
     const carregarTudo = async () => {
         try {
-            const token = localStorage.getItem("token");
-            const usuarioId = localStorage.getItem("usuario_id"); // ou de onde vem seu ID
+            const usuarioId = localStorage.getItem("usuario_id");
+            if (!usuarioId) throw new Error("Usuário não definido");
 
-            if (!usuarioId) {
-                throw new Error("Usuário não definido");
-            }
-
-            const res = await fetch(`${URL}/portfolio/publico/${usuarioId}`, {
-                headers: { "Authorization": `Bearer ${token}` }
-            });
-
-            if (!res.ok) throw new Error("Erro ao buscar dados");
+            const res = await fetch(`${URL}/portfolio/publico/${usuarioId}`);
+            if (!res.ok) throw new Error(`Erro ao buscar dados (${res.status})`);
 
             const data = await res.json();
 
@@ -52,6 +45,9 @@ export default function Portfolio() {
 
         } catch (error) {
             console.error("Erro ao carregar portfólio:", error);
+        } finally {
+            // 🔹 garante que o “Carregando...” desapareça
+            setLoading(false);
         }
     };
 
