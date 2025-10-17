@@ -10,7 +10,7 @@ import HistoricoCertificadosYouTube from "./components/historicocertificadosyout
 import IronStep from "./pages/ironstep/ironstep.jsx";
 import IronStepVidas from "./pages/ironstep/paginas/ironstepvidas.jsx";
 import PortfolioPublico from "./components/portfoliopublico.jsx";
-
+import LoginCadastroTopo from "./components/logincadastro.jsx";
 import Login from './pages/login.jsx';
 import Cursos from "./pages/cursos.jsx";
 import NotFound from "./pages/notfound.jsx";
@@ -177,6 +177,7 @@ function AppRoutes() {
   return (
     <>
       {isLoading && <Loader />}
+      <LoginCadastroTopo />
 
       <Routes>
         <Route path="/recuperar-senha" element={<RecuperarSenha />} />

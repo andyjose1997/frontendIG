@@ -1,0 +1,25 @@
+.login-cadastro-topo {
+    position: fixed;
+    top: 15px;
+    right: 25px;
+    display: flex;
+    gap: 14px;
+    z-index: 9999;
+}
+
+.login-cadastro-topo a {
+    color: #4ea3ff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 7px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+}
+
+.login-cadastro-topo a:hover {
+    background: rgba(62, 115, 255, 0.3);
+    transform: scale(1.05);
+}
