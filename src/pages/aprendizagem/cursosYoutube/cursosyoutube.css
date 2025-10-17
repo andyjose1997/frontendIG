@@ -18,15 +18,23 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* === 🔹 Player responsivo do YouTube === */
+/* === Compatibilidade total com fullscreen no celular === */
+.video-player,
+.video-responsivo,
+.cursos-container,
+.lista-videos {
+    overflow: visible !important;
+    /* 🔓 permite o iframe expandir fora dos limites */
+}
+
+/* Player responsivo */
 .video-responsivo {
     position: relative;
     padding-bottom: 56.25%;
     /* proporção 16:9 */
     height: 0;
-    overflow: hidden;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background: #000;
 }
 
 .video-responsivo iframe {
@@ -38,35 +46,17 @@
     border: none;
 }
 
-/* === 🔹 Ajuste automático para telas pequenas === */
+/* Evita cortes no modo retrato e paisagem */
 @media (max-width: 600px) {
     .video-responsivo {
-        padding-bottom: 62%;
-        /* leve ajuste */
+        padding-bottom: 58%;
     }
 
-    .cursos-container {
-        padding: 1.5rem 1rem;
-    }
-
-    .curso-detalhes h3 {
-        font-size: 1.4rem;
-        text-align: center;
-    }
-
-    .autor {
-        font-size: 1rem;
-        display: block;
-        text-align: center;
-    }
-
-    .curso-botao {
-        font-size: 1rem;
-        padding: 0.8rem;
-    }
-
-    .lista-videos {
-        max-height: unset;
+    .video-responsivo iframe {
+        width: 100vw;
+        height: 56vw;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
