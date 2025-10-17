@@ -264,10 +264,37 @@ export default function Portfolio() {
                             <input type="text" placeholder="Curso" required value={novaEdu.curso} onChange={(e) => setNovaEdu({ ...novaEdu, curso: e.target.value })} />
                             <div className="data-group">
                                 <label>Início:</label>
-                                <input type="date" value={novaEdu.data_inicio} onChange={(e) => setNovaEdu({ ...novaEdu, data_inicio: e.target.value })} />
+                                <input
+                                    type="date"
+                                    value={novaEdu.data_inicio}
+                                    onChange={(e) => setNovaEdu({ ...novaEdu, data_inicio: e.target.value })}
+                                />
+
                                 <label>Fim:</label>
-                                <input type="date" value={novaEdu.data_fim} onChange={(e) => setNovaEdu({ ...novaEdu, data_fim: e.target.value })} />
+                                <input
+                                    type="date"
+                                    value={novaEdu.data_fim === "Cursando" ? "" : novaEdu.data_fim}
+                                    onChange={(e) => setNovaEdu({ ...novaEdu, data_fim: e.target.value })}
+                                    readOnly={novaEdu.data_fim === "Cursando"}
+                                />
+
+                                <div className="checkbox-cursando">
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            checked={novaEdu.data_fim === "Cursando"}
+                                            onChange={(e) =>
+                                                setNovaEdu({
+                                                    ...novaEdu,
+                                                    data_fim: e.target.checked ? "Cursando" : "",
+                                                })
+                                            }
+                                        />
+                                        Cursando atualmente
+                                    </label>
+                                </div>
                             </div>
+
                             <textarea placeholder="Descrição ou foco do curso" value={novaEdu.descricao} onChange={(e) => setNovaEdu({ ...novaEdu, descricao: e.target.value })}></textarea>
                             <button type="submit">{novaEdu.id ? "💾 Atualizar Formação" : "💾 Adicionar Formação"}</button>
                         </form>
@@ -294,18 +321,41 @@ export default function Portfolio() {
                             {educacao.length === 0 ? (
                                 <p className="vazio">Nenhuma formação.</p>
                             ) : (
-                                educacao.slice(0, 3).map((ed, i) => (
+                                educacao.slice(0, 3).map((edu, i) => (
                                     <div key={i} className="item-box">
-                                        <strong>{ed.curso}</strong>
-                                        <small>{ed.instituicao}</small>
-                                        <p>{ed.descricao}</p>
+                                        <strong>{edu.curso}</strong>
+                                        <small>{edu.instituicao}</small>
+
+                                        <small>
+                                            {(() => {
+                                                const formatarData = (dataStr) => {
+                                                    if (!dataStr) return "";
+                                                    const data = new Date(dataStr);
+                                                    if (isNaN(data)) return dataStr; // caso seja "Cursando"
+                                                    return data.toLocaleDateString("pt-BR", {
+                                                        day: "numeric",
+                                                        month: "long",
+                                                        year: "numeric",
+                                                    });
+                                                };
+
+                                                if (edu.data_fim === "Cursando") {
+                                                    return ` Cursando desde ${formatarData(edu.data_inicio)}`;
+                                                } else {
+                                                    return `${formatarData(edu.data_inicio)} até ${formatarData(edu.data_fim)}`;
+                                                }
+                                            })()}
+                                        </small>
+
+                                        <p>{edu.descricao}</p>
                                         <div className="acoes-linha">
-                                            <button onClick={() => editarItem("edu", ed)}>✏️</button>
-                                            <button onClick={() => apagarItem("edu", ed.id)}>🗑️</button>
+                                            <button onClick={() => editarItem("edu", edu)}>✏️</button>
+                                            <button onClick={() => apagarItem("edu", edu.id)}>🗑️</button>
                                         </div>
                                     </div>
                                 ))
                             )}
+
                             <button className="ver-tudo" onClick={() => setModal("edu")}>Ver tudo</button>
                         </div>
 

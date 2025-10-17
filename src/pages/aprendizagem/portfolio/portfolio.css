@@ -1547,3 +1547,50 @@
     line-height: 1.4;
     max-width: 100%;
 }
+
+/* === CHECKBOX CURSANDO === */
+.checkbox-cursando {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    font-size: 0.95rem;
+    color: #d0d8ff;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.4rem 0.7rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    width: fit-content;
+    transition: all 0.3s ease;
+}
+
+.checkbox-cursando:hover {
+    background: rgba(78, 163, 255, 0.08);
+    border-color: rgba(78, 163, 255, 0.25);
+    color: #4ea3ff;
+    transform: scale(1.03);
+}
+
+/* 🔹 Estilo do input checkbox */
+.checkbox-cursando input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #4ea3ff;
+    /* cor do check azul */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    transform: translateY(1px);
+}
+
+/* 🔹 Estilo do label */
+.checkbox-cursando label {
+    cursor: pointer;
+    user-select: none;
+}
+
+/* 🔹 Quando marcado */
+.checkbox-cursando input[type="checkbox"]:checked+label {
+    color: #4ea3ff;
+    font-weight: 600;
+    text-shadow: 0 0 8px rgba(78, 163, 255, 0.5);
+}

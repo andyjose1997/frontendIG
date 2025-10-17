@@ -305,7 +305,63 @@ export default function PortfolioPublico() {
                                             return atual.data_inicio;
                                         })()}
 
+
                                     </span>
+                                    {/* 🔹 Formação atual (se estiver cursando) */}
+                                    {educacao.find((ed) => ed.data_fim === "Cursando") && (() => {
+                                        const atualEdu = educacao.find((ed) => ed.data_fim === "Cursando");
+                                        return (
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    textAlign: "center",
+                                                    background: "rgba(255, 255, 255, 0.03)",
+                                                    padding: "0.8rem 1rem",
+                                                    borderRadius: "12px",
+                                                    boxShadow: "0 0 10px rgba(78,163,255,0.15)",
+                                                    border: "1px solid rgba(78,163,255,0.2)",
+                                                    width: "97%",
+                                                    maxWidth: "85%",
+                                                    margin: "1rem auto",
+                                                    transition: "all 0.3s ease",
+                                                }}
+                                            >
+                                                <p
+                                                    style={{
+                                                        color: "#bcd9ff",
+                                                        fontSize: "1.35rem",
+                                                        fontWeight: "500",
+                                                        margin: 0,
+                                                        lineHeight: "1.5",
+                                                        textShadow: "0 0 6px rgba(78,163,255,0.2)",
+                                                        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                                                    }}
+                                                >
+                                                    <span style={{ fontSize: "1.6rem" }}></span>{" "}
+                                                    Atualmente cursando em{" "}
+                                                    <strong style={{ color: "#ffffff" }}>{atualEdu.curso}</strong>{" "}
+                                                    desde{" "}
+                                                    <span style={{ color: "#a1c4ff", fontWeight: "600" }}>
+                                                        {(() => {
+                                                            const data = new Date(atualEdu.data_inicio);
+                                                            if (!isNaN(data)) {
+                                                                data.setDate(data.getDate() + 1); // ➕ soma 1 dia
+                                                                return data.toLocaleDateString("pt-BR", {
+                                                                    day: "numeric",
+                                                                    month: "long",
+                                                                    year: "numeric",
+                                                                });
+                                                            }
+                                                            return atualEdu.data_inicio;
+                                                        })()}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        );
+                                    })()}
                                 </p>
                             </div>
                         );
@@ -322,7 +378,7 @@ export default function PortfolioPublico() {
                             maxWidth: "90%",
                         }}
                     >
-                        {usuario.comentario_perfil || "Qual é sua próxima meta?"}
+                        {usuario.comentario_perfil || ""}
                     </p>
 
                     {/* 🔹 Categoria */}
@@ -487,9 +543,39 @@ export default function PortfolioPublico() {
                                         <strong>{exp.cargo}</strong> <span>{exp.empresa}</span>
                                         <small>
                                             {exp.data_fim === "Emprego atual"
-                                                ? `Emprego atual desde ${formatarData(exp.data_inicio)}`
-                                                : `De ${formatarData(exp.data_inicio)} até ${formatarData(exp.data_fim) || "atual"}`}
+                                                ? `Emprego atual desde ${formatarData(
+                                                    (() => {
+                                                        const data = new Date(exp.data_inicio);
+                                                        if (!isNaN(data)) {
+                                                            data.setDate(data.getDate() + 1); // ➕ soma 1 dia
+                                                            return data.toISOString();
+                                                        }
+                                                        return exp.data_inicio;
+                                                    })()
+                                                )}`
+                                                : `De ${formatarData(
+                                                    (() => {
+                                                        const data = new Date(exp.data_inicio);
+                                                        if (!isNaN(data)) {
+                                                            data.setDate(data.getDate() + 1); // ➕ soma 1 dia
+                                                            return data.toISOString();
+                                                        }
+                                                        return exp.data_inicio;
+                                                    })()
+                                                )} até ${formatarData(
+                                                    (() => {
+                                                        const data = new Date(exp.data_fim);
+                                                        if (!isNaN(data)) {
+                                                            data.setDate(data.getDate() + 1); // ➕ soma 1 dia
+                                                            return data.toISOString();
+                                                        }
+                                                        return exp.data_fim;
+                                                    })()
+                                                ) || "atual"}`}
+
+
                                         </small>
+
                                         <p>{exp.descricao}</p>
                                     </div>
                                 ))

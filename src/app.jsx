@@ -177,11 +177,10 @@ function AppRoutes() {
   return (
     <>
       {isLoading && <Loader />}
-      <LoginCadastroTopo />
 
       <Routes>
         <Route path="/recuperar-senha" element={<RecuperarSenha />} />
-        <Route path="/Avaliacao" element={<Avaliacao />} /> {/* 🔹 nova rota */}
+        <Route path="/Avaliacao" element={<Avaliacao />} />
         <Route
           path="/historico-certificados/:codigo?"
           element={<HistoricoCertificadosYouTube />}
@@ -197,8 +196,7 @@ function AppRoutes() {
           }
         />
 
-
-        {/* Rotas que usam Layout */}
+        {/* Rotas com layout */}
         <Route element={<Layout />}>
           <Route path="/" element={<HomeRedirect />} />
           <Route path="/cursos" element={<Cursos />} />
@@ -207,16 +205,12 @@ function AppRoutes() {
             path="/criar-conta/:idHost/:nomeCompleto"
             element={<Cadastrarse />}
           />
-
           <Route path="/organizacao" element={<Organizacao />} />
           <Route path="/login" element={<Login />} />
         </Route>
 
-        {/* 🔹 Rotas independentes */}
-        <Route
-          path="/iron_quiz"
-          element={<IronQuiz />}   // 👈 agora é independente
-        />
+        {/* Outras rotas */}
+        <Route path="/iron_quiz" element={<IronQuiz />} />
         <Route
           path="/inicio"
           element={
@@ -268,21 +262,20 @@ function AppRoutes() {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {/* 🔹 Mostrar vidas flutuantes apenas na rota /ironstep */}
-      {/* 🔹 Mostrar vidas flutuantes apenas na rota /ironstep */}
-      {location.pathname === "/ironstep" && (
-        <IronStepVidasWrapper />
-      )}
 
+      {/* 🔹 Vidas flutuantes */}
+      {location.pathname === "/ironstep" && <IronStepVidasWrapper />}
 
-      {/* 👇 Irene aparece em todas as rotas, menos no painel de controle */}
+      {/* 🔹 Agora o login/cadastro vem ANTES da Irene */}
+      <LoginCadastroTopo />
+
+      {/* 🔹 Irene fica por último */}
       {!location.pathname.startsWith("/ferramentas/painelcontrole") && (
         <IreneChat />
       )}
     </>
-
-
   );
+
 }
 
 import { FerramentasProvider } from "./ferramentascontext.jsx";
