@@ -28,30 +28,33 @@ export default function Portfolio() {
 
     const carregarTudo = async () => {
         try {
-            localStorage.setItem("id_usuario", data.usuario.id);
-            if (!token) {
-                alert("Você precisa estar logado para ver seu portfólio.");
-                return;
+            const token = localStorage.getItem("token");
+            const usuarioId = localStorage.getItem("usuario_id"); // ou de onde vem seu ID
+
+            if (!usuarioId) {
+                throw new Error("Usuário não definido");
             }
 
-            const headers = { Authorization: `Bearer ${token}` };
-            const [resCert, resExp, resEdu, resHab] = await Promise.all([
-                fetch(`${URL}/portfolio/certificados`, { headers }),
-                fetch(`${URL}/portfolio/experiencias`, { headers }),
-                fetch(`${URL}/portfolio/educacao`, { headers }),
-                fetch(`${URL}/portfolio/habilidades`, { headers }),
-            ]);
+            const res = await fetch(`${URL}/portfolio/publico/${usuarioId}`, {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
 
-            setCertificados((await resCert.json()).certificados || []);
-            setExperiencias((await resExp.json()).experiencias || []);
-            setEducacao((await resEdu.json()).educacao || []);
-            setHabilidades((await resHab.json()).habilidades || []);
-        } catch (err) {
-            console.error("Erro ao carregar portfólio:", err);
-        } finally {
-            setLoading(false);
+            if (!res.ok) throw new Error("Erro ao buscar dados");
+
+            const data = await res.json();
+
+            console.log("📦 Dados carregados:", data);
+
+            setExperiencias(data.experiencias || []);
+            setEducacao(data.educacao || []);
+            setCertificados(data.certificados || []);
+            setHabilidades(data.habilidades || []);
+
+        } catch (error) {
+            console.error("Erro ao carregar portfólio:", error);
         }
     };
+
 
     useEffect(() => {
         const fechar = () => setModal(null);
