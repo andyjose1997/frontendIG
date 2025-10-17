@@ -221,14 +221,17 @@ export const CursosYouTube = () => {
                                                                 title="YouTube video player"
                                                                 frameBorder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-
+                                                                allowFullScreen
                                                                 webkitallowfullscreen="true"
                                                                 mozallowfullscreen="true"
-                                                                allowFullScreen
+                                                                style={{
+                                                                    width: "100%",
+                                                                    height: "100%",
+                                                                    display: "block",
+                                                                    border: "none",
+                                                                }}
                                                             ></iframe>
                                                         </div>
-
-
 
 
                                                         {mostrarPerguntas && (
