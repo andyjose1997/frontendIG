@@ -50,13 +50,25 @@
     width: 100vw !important;
     height: 100vh !important;
     background: #000;
-    z-index: 10001 !important;
+    z-index: 9999 !important;
+    /* 👈 força a camada mais alta */
     border-radius: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: default;
 }
+
+.fundo-teatro {
+    z-index: 9998 !important;
+}
+
+.cursos-container {
+    isolation: isolate;
+    position: relative;
+    z-index: 0;
+}
+
 
 body {
     overflow: visible !important;
