@@ -230,7 +230,7 @@ export default function PortfolioPublico() {
                         borderRadius: "14px",
                         marginBottom: "2.5rem",
                         boxShadow: "0 0 15px rgba(0,0,0,0.3)",
-                        width: "100%",
+                        width: "90%",
                         maxWidth: "1100px",
                         marginInline: "auto",
                     }}
