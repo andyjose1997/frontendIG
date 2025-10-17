@@ -251,8 +251,19 @@ export default function Cadastrarse() {
                             </button>
                             <button className="btn-verde" onClick={() => setMostrarModalHost(false)}>
                                 ✅ Esse mesmo
-                            </button><br />
-                        </div><br />
+                            </button>
+                        </div>
+
+                        {/* 🔹 Novo botão Ver Portfólio */}
+                        <a
+                            href={`https://www.irongoals.com/portfolio-publico?id=${hostData.id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <button className="btn-portfolio">🎓 Ver Portfólio</button>
+                        </a>
+                        <br />
+                        <br />
                         <button
                             className="btn-conhecer"
                             onClick={() => window.open("/", "_blank")}
@@ -262,6 +273,7 @@ export default function Cadastrarse() {
                     </div>
                 </div>
             )}
+
 
             {mostrarTermos && (
                 <TermosModal

@@ -20,6 +20,25 @@
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+/* 🔹 Botão Ver Portfólio (no modal do Host) */
+.btn-portfolio {
+    background: linear-gradient(90deg, #4a6cff, #9145ff);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-portfolio:hover {
+    background: linear-gradient(90deg, #667bff, #a86aff);
+    transform: scale(1.05);
+}
+
 .overlay-carregando {
     position: fixed;
     top: 0;

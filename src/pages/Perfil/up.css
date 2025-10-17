@@ -37,6 +37,18 @@
     }
 }
 
+/* 🔹 Nome clicável para abrir o portfólio */
+.nomeUsuarioLink {
+    cursor: pointer;
+    color: #f0f1f3;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.nomeUsuarioLink:hover {
+    color: #9145ff;
+    transform: scale(1.05);
+    text-decoration: underline;
+}
 
 .perfilBox {
     display: flex;

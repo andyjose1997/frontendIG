@@ -2,6 +2,7 @@ import "./portfoliopublico.css";
 import { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom"; // 
 import { URL } from "../config";
+import { QRCodeCanvas } from "qrcode.react";
 
 
 export default function PortfolioPublico() {
@@ -15,6 +16,7 @@ export default function PortfolioPublico() {
     const [erro, setErro] = useState("");
     const [modalAberto, setModalAberto] = useState(null); // "exp", "edu", "hab", "cert"
     const modalRef = useRef(null);
+    const [mostrarQR, setMostrarQR] = useState(false);
 
     const buscarPortfolio = async () => {
         if (!usuarioId) {
@@ -119,18 +121,29 @@ export default function PortfolioPublico() {
 
     return (
         <div className="portfolio-container">
-            <h2>🌐 Portfólio Público IronGoals</h2>
-            <p
-                style={{
-                    color: "#cdd7e6",
-                    textAlign: "center",
-                    marginBottom: "1.5rem",
-                    fontSize: "1.55rem",
-                    letterSpacing: "0.5px",
-                }}
-            >
-                Digite o ID de um usuário para visualizar seu portfólio público.
-            </p>
+            <h2 style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px" }}>
+                🌐 Portfólio Público IronGoals
+                <button
+                    onClick={() => setMostrarQR(true)}
+                    title="Ver QR Code deste portfólio"
+                    style={{
+                        background: "linear-gradient(90deg, #4ea3ff, #0072ff)",
+                        border: "none",
+                        color: "white",
+                        padding: "6px 14px",
+                        borderRadius: "8px",
+                        fontSize: "1rem",
+                        cursor: "pointer",
+                        transition: "all 0.3s ease",
+                        boxShadow: "0 0 10px rgba(78,163,255,0.4)"
+                    }}
+                    onMouseEnter={(e) => (e.target.style.transform = "scale(1.1)")}
+                    onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
+                >
+                    📱 QR Code
+                </button>
+            </h2>
+
 
             <div
                 className="busca-publica"
@@ -148,6 +161,7 @@ export default function PortfolioPublico() {
                     width: "fit-content",
                     marginInline: "auto",
                     transition: "all 0.3s ease",
+                    display: "none"
                 }}
             >
                 <input
@@ -254,7 +268,8 @@ export default function PortfolioPublico() {
                                     borderRadius: "12px",
                                     boxShadow: "0 0 10px rgba(78,163,255,0.15)",
                                     border: "1px solid rgba(78,163,255,0.2)",
-                                    width: "fit-content",
+                                    width: "97%",
+                                    maxWidth: "85%",
                                     margin: "1rem auto",
                                     transition: "all 0.3s ease",
                                 }}
@@ -558,6 +573,67 @@ export default function PortfolioPublico() {
                                 ))}
                             </>
                         )}
+                    </div>
+                </div>
+            )}
+            {mostrarQR && (
+                <div
+                    style={{
+                        position: "fixed",
+                        inset: 0,
+                        background: "rgba(0,0,0,0.75)",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "",
+                        marginTop: "30px",
+                        zIndex: 5000,
+                    }}
+                    onClick={() => setMostrarQR(false)}
+                >
+                    <div
+                        onClick={(e) => e.stopPropagation()}
+                        style={{
+                            background: "#fff",
+                            padding: "25px 30px",
+                            borderRadius: "18px",
+                            textAlign: "center",
+                            height: "700px",
+
+                            width: "80%",
+                            boxShadow: "0 8px 25px rgba(0,0,0,0.35)",
+                            position: "relative",
+                            animation: "fadeInUp 0.3s ease",
+                        }}
+                    >
+                        <button
+                            onClick={() => setMostrarQR(false)}
+                            style={{
+                                position: "absolute",
+                                top: "10px",
+                                right: "12px",
+                                background: "transparent",
+                                border: "none",
+                                fontSize: "20px",
+                                fontWeight: "bold",
+                                color: "#555",
+                                cursor: "pointer",
+                            }}
+                        >
+                            ✖
+                        </button>
+                        <h3 style={{ marginBottom: "1rem", color: "#222" }}>QR Code deste portfólio</h3>
+                        <QRCodeCanvas
+                            value={window.location.href}
+                            size={320}
+                            bgColor="#ffffff"
+                            fgColor="#000000"
+                            level="H"
+                            includeMargin={true}
+                        />
+
+                        <p style={{ marginTop: "1rem", fontSize: "1.9rem", color: "#333" }}>
+                            Escaneie para abrir este portfólio
+                        </p>
                     </div>
                 </div>
             )}

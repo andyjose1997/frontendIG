@@ -7,17 +7,20 @@
     align-items: center;
     justify-content: center;
     z-index: 3000;
+    overflow-y: auto;
+    /* ✅ permite rolar em telas menores */
+    padding: 20px;
+    /* evita que o modal encoste nas bordas */
 }
 
-
-/* Container do modalB */
+/* Container principal do modal */
 .modalB-qrcode {
     background: #fff;
     padding: 25px 20px 30px;
     border-radius: 18px;
     text-align: center;
-    max-width: 400px;
-    width: 90%;
+    width: 100%;
+    max-width: 420px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
     position: relative;
     animation: fadeInUp 0.3s ease;
@@ -42,22 +45,29 @@
     color: #000;
 }
 
-/* Card que será exportado (tamanho fixo para não deformar) */
+/* Cartão ajustável */
 .qrcode-card {
-    width: 350px;
-    height: 700px;
+    width: 100%;
+    max-width: 360px;
+    min-height: 500px;
     margin: 0 auto;
     padding: 20px;
     border-radius: 16px;
     background: linear-gradient(180deg, #296ef0, #93aaeb);
     text-align: center;
-    box-shadow: 0 40px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* ✅ distribui os elementos */
 }
 
 /* Foto de perfil */
 .foto-perfil {
-    width: 180px;
-    height: 180px;
+    width: 40%;
+    max-width: 150px;
+    aspect-ratio: 1/1;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 12px;
@@ -65,6 +75,41 @@
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
+/* Texto */
+.qrcode-card h2 {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: #222;
+    margin-bottom: 8px;
+}
+
+.comentario {
+    font-style: italic;
+    margin-bottom: 15px;
+    color: #fff;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+}
+
+/* QR code */
+.qrcode-card canvas {
+    width: 60%;
+    max-width: 200px;
+    height: auto;
+    margin: 15px auto;
+    display: block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+}
+
+/* Link */
+.link-indicacao {
+    margin-top: 20px;
+    font-weight: 600;
+    color: #ffeb3b;
+    word-break: break-word;
+    font-size: clamp(0.8rem, 1.8vw, 1rem);
+}
+
+/* Botão copiar */
 .btn-copiar {
     margin-top: 12px;
     padding: 10px 18px;
@@ -79,94 +124,111 @@
 
 .btn-copiar:hover {
     background: linear-gradient(135deg, #005bb5, #00264d);
+    transform: scale(1.05);
 }
 
-.alerta-temporario {
-    margin-top: 12px;
-    padding: 8px 12px;
-    border-radius: 6px;
-    background: #4caf50;
-    color: white;
-    font-weight: 600;
-    text-align: center;
-    animation: fadeOut 2s forwards;
-}
-
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-
-    80% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
+/* Responsividade */
+@media (max-height: 650px) {
+    .qrcode-card {
+        transform: scale(0.9);
     }
 }
 
-/* Nome */
-.qrcode-card h2 {
-    margin: 8px 0 4px;
-    font-weight: bold;
-    color: #222;
-}
-
-/* Meta (comentário do perfil) */
-.comentario {
-    font-style: italic;
-    margin-bottom: 15px;
-    color: #444;
-    font-size: 1.6rem;
-}
-
-/* QR Code centralizado */
-.qrcode-card canvas {
-    margin: 15px auto;
-    display: block;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 8px;
-}
-
-/* Link de indicação */
-.link-indicacao {
-    margin-top: 32px;
-    font-weight: 600;
-    color: #ecdd08;
-    word-break: break-word;
-    font-size: 1.5rem;
-}
-
-/* Botão para baixar imagem */
-.botao-baixar {
-    margin-top: 20px;
-    background: #0077ff;
-    color: white;
-    border: none;
-    padding: 12px 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 500;
-    transition: 0.25s;
-    box-shadow: 0 4px 12px rgba(0, 118, 255, 0.35);
-}
-
-.botao-baixar:hover {
-    background: #005fcc;
-    transform: translateY(-2px);
-}
-
-/* Animação de entrada */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
+@media (max-width: 500px) {
+    .qrcode-card {
+        width: 100%;
+        padding: 15px;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .foto-perfil {
+        widt .alerta-temporario {
+            margin-top: 12px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: #4caf50;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            animation: fadeOut 2s forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Nome */
+        .qrcode-card h2 {
+            margin: 8px 0 4px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        /* Meta (comentário do perfil) */
+        .comentario {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #444;
+            font-size: 1.6rem;
+        }
+
+        /* QR Code centralizado */
+        .qrcode-card canvas {
+            margin: 15px auto;
+            display: block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+            border-radius: 8px;
+        }
+
+        /* Link de indicação */
+        .link-indicacao {
+            margin-top: 32px;
+            font-weight: 600;
+            color: #ecdd08;
+            word-break: break-word;
+            font-size: 1.5rem;
+        }
+
+        /* Botão para baixar imagem */
+        .botao-baixar {
+            margin-top: 20px;
+            background: #0077ff;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            transition: 0.25s;
+            box-shadow: 0 4px 12px rgba(0, 118, 255, 0.35);
+        }
+
+        .botao-baixar:hover {
+            background: #005fcc;
+            transform: translateY(-2px);
+        }
+
+        /* Animação de entrada */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     }
 }

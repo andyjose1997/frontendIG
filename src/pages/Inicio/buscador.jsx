@@ -245,6 +245,17 @@ export default function Buscador() {
                         >
                             📱 Abrir WhatsApp
                         </a>
+                        <br />
+                        {/* 🔹 Novo botão para ver portfólio */}
+                        <a
+                            href={`https://www.irongoals.com/portfolio-publico?id=${detalhe.id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="detalhe-portfolio"
+                        >
+                            🎓 Ver Portfólio
+                        </a>
+
                         <p className="detalhe-meta">
                             <strong>Próxima Meta:</strong><br />
                             {detalhe.comentario_perfil && detalhe.comentario_perfil.trim() !== ""
@@ -254,6 +265,7 @@ export default function Buscador() {
                     </div>
                 </div>
             )}
+
         </>
     );
 }

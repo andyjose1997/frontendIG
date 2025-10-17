@@ -25,18 +25,20 @@ export default function HostModal({ idHost, onClose }) {
     const modalContent = (
         <div className="fundo-escurecido" onClick={onClose}>
             <div className="modal-host" onClick={e => e.stopPropagation()}>
-                <h2 style={{ fontSize: "50px" }}>Seu Host</h2>
+                <h2 style={{ fontSize: "50px", color: "white" }}>Seu Host</h2>
 
                 {/* Foto do Host */}
-                <img style={{
-                    width: "150px",
-                    borderRadius: "50%",
-                    border: "solid 2px blue"
-                }} src={dadosHost.foto || "/Logo/perfilPadrao/M.png"} />
-
+                <img
+                    style={{
+                        width: "150px",
+                        borderRadius: "50%",
+                        border: "solid 2px blue"
+                    }}
+                    src={dadosHost.foto || "/Logo/perfilPadrao/M.png"}
+                />
 
                 {/* Nome */}
-                <h2>{dadosHost.nome} {dadosHost.sobrenome}</h2>
+                <h2 style={{ color: "white" }} >{dadosHost.nome} {dadosHost.sobrenome}</h2>
 
                 {/* WhatsApp */}
                 <p>📱 {dadosHost.whatsapp || "Não informado"}</p>
@@ -49,6 +51,15 @@ export default function HostModal({ idHost, onClose }) {
                         <button className="botao-whatsapp">Conversar no WhatsApp</button>
                     </a>
                 )}
+                <br />
+                {/* 🔹 Novo botão Ver Portfólio */}
+                <a
+                    href={`https://www.irongoals.com/portfolio-publico?id=${dadosHost.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <button className="botao-portfolio">🎓 Ver Portfólio</button>
+                </a>
 
                 {/* Categoria */}
                 <p>Categoria: {dadosHost.categoria || "Não informado"}</p>

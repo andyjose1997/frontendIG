@@ -178,12 +178,21 @@ export default function Up() {
                     {/* INFORMAÇÕES */}
                     <div className="infoBox">
                         <h1>
-                            {user.nome} {user.sobrenome}
+                            <span
+                                className="nomeUsuarioLink"
+                                onClick={() =>
+                                    window.open(`https://www.irongoals.com/portfolio-publico?id=${user.id}`, "_blank")
+                                }
+                                title="Abrir portfólio"
+                            >
+                                {user.nome} {user.sobrenome}
+                            </span>
                             <span className="categoriaTexto">
                                 ({user.categoria && user.categoria.trim() !== ""
                                     ? user.categoria.charAt(0).toUpperCase() + user.categoria.slice(1).toLowerCase()
                                     : "Explorer"})
                             </span>
+
                             {/* 🔹 Botão ℹ do lado da categoria */}
                             <button
                                 className="botaoInfo"

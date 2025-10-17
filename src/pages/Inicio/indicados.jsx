@@ -221,6 +221,17 @@ export default function Indicados() {
                         >
                             📱 Abrir WhatsApp
                         </a>
+                        <br />
+                        {/* 🔹 Novo botão Ver Portfólio */}
+                        <a
+                            href={`https://www.irongoals.com/portfolio-publico?id=${detalhe.id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="botaoPortfolio"
+                        >
+                            🎓 Ver Portfólio
+                        </a>
+
                         <p className="comentarioPerfil">
                             <strong>Próxima Meta:</strong><br />
                             {detalhe.comentario_perfil && detalhe.comentario_perfil.trim() !== ""
@@ -230,6 +241,7 @@ export default function Indicados() {
                     </div>
                 </div>
             )}
+
         </div>
     );
 }

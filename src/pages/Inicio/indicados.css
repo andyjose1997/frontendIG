@@ -11,6 +11,44 @@
     max-height: 800px;
 }
 
+/* 🔹 Botão WhatsApp */
+.botaoZap {
+    display: inline-block;
+    margin-top: 10px;
+    background: linear-gradient(90deg, #25D366, #128C7E);
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.botaoZap:hover {
+    background: linear-gradient(90deg, #34E07D, #0e7c6b);
+    transform: scale(1.05);
+}
+
+/* 🔹 Novo botão Ver Portfólio */
+.botaoPortfolio {
+    display: inline-block;
+    margin-top: 10px;
+    background: linear-gradient(90deg, #4a6cff, #9145ff);
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.botaoPortfolio:hover {
+    background: linear-gradient(90deg, #667bff, #a86aff);
+    transform: scale(1.05);
+}
+
 .tituloIndicados:hover {
     color: #0c5099;
     cursor: pointer;
