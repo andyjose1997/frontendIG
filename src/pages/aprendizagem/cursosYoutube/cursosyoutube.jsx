@@ -215,11 +215,14 @@ export const CursosYouTube = () => {
                                                 {videoSelecionado?.id === video.id && (
                                                     <div className="video-player">
                                                         <h4>{video.titulo}</h4>
-                                                        <YouTube
-                                                            videoId={extrairVideoId(video.codigo_iframe)}
-                                                            opts={opts}
-                                                            onEnd={() => setMostrarPerguntas(true)}
-                                                        />
+                                                        <div className="video-responsivo">
+                                                            <YouTube
+                                                                videoId={extrairVideoId(video.codigo_iframe)}
+                                                                opts={opts}
+                                                                onEnd={() => setMostrarPerguntas(true)}
+                                                            />
+                                                        </div>
+
 
                                                         {mostrarPerguntas && (
                                                             <PerguntaCurso
