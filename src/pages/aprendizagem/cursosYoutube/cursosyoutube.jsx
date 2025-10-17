@@ -15,7 +15,8 @@ export const CursosYouTube = () => {
     const [progresso, setProgresso] = useState([]);
     const [hoverCurso, setHoverCurso] = useState(null);
     const [modoTeatro, setModoTeatro] = useState(false);
-
+    const [mostrarModalVideo, setMostrarModalVideo] = useState(false);
+    const [larguraTela, setLarguraTela] = useState(window.innerWidth);
     const [avisoOk, setAvisoOk] = useState(false);
 
     const usuarioId = localStorage.getItem("usuario_id");
@@ -32,6 +33,12 @@ export const CursosYouTube = () => {
         return null;
     };
 
+    // 🔹 Detectar tamanho da tela em tempo real
+    useEffect(() => {
+        const handleResize = () => setLarguraTela(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
     // Buscar cursos e progresso ao carregar
     useEffect(() => {
         if (!avisoOk) return;
@@ -215,64 +222,66 @@ export const CursosYouTube = () => {
 
                                                 {videoSelecionado?.id === video.id && (
                                                     <div className="video-player">
-                                                        <h4 style={{ color: "black" }}  >{video.titulo}</h4>
-                                                        <div
-                                                            className={`video-responsivo ${modoTeatro ? "modo-teatro" : ""}`}
-                                                            onClick={() => setModoTeatro(true)}
-                                                        >
-                                                            <iframe
-                                                                src={`https://www.youtube.com/embed/${extrairVideoId(
-                                                                    video.codigo_iframe
-                                                                )}?autoplay=0&modestbranding=1&rel=0&playsinline=1`}
-                                                                title="YouTube video player"
-                                                                frameBorder="0"
-                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                                                                allowFullScreen
-                                                                webkitallowfullscreen="true"
-                                                                mozallowfullscreen="true"
-                                                            ></iframe>
+                                                        <h4 style={{ color: "black" }}>{video.titulo}</h4>
 
-                                                            {modoTeatro && (
-                                                                <>
-                                                                    <div
-                                                                        className="fundo-teatro"
-                                                                        onClick={(e) => {
-                                                                            e.stopPropagation();
-                                                                            setModoTeatro(false);
-                                                                        }}
-                                                                    ></div>
+                                                        {/* 🔹 se for tela menor que 1000px → usa modal */}
+                                                        {larguraTela < 1000 ? (
+                                                            <>
+                                                                <div
+                                                                    className="thumb-video-mobile"
+                                                                    onClick={() => setMostrarModalVideo(true)}
+                                                                >
+                                                                    <iframe
+                                                                        src={`https://www.youtube.com/embed/${extrairVideoId(
+                                                                            video.codigo_iframe
+                                                                        )}?autoplay=0&modestbranding=1&rel=0`}
+                                                                        title="Miniatura"
+                                                                        frameBorder="0"
+                                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                                        allowFullScreen
+                                                                    ></iframe>
+                                                                    <div className="overlay-play">▶</div>
+                                                                </div>
 
-                                                                    <button
-                                                                        className="fechar-teatro"
-                                                                        onClick={(e) => {
-                                                                            e.stopPropagation();
-                                                                            setModoTeatro(false);
-                                                                        }}
-                                                                    >
-                                                                        ✖
-                                                                    </button>
-                                                                </>
-                                                            )}
-                                                        </div>
-
-
-                                                        {mostrarPerguntas && (
-                                                            <PerguntaCurso
-                                                                videoId={video.id}
-                                                                isUltimo={index === videos.length - 1}
-                                                                onConcluir={(id, fim) => {
-                                                                    handleConcluir(id);
-                                                                    if (fim) {
-                                                                        setVideoSelecionado(null);
-                                                                        setMostrarPerguntas(false);
-                                                                        setPerguntas([]);
-                                                                    } else {
-                                                                        handleSelecionarVideo(videos[index + 1]);
-                                                                    }
-                                                                }}
-                                                            />
+                                                                {mostrarModalVideo && (
+                                                                    <div className="modal-video">
+                                                                        <div className="fundo-modal" onClick={() => setMostrarModalVideo(false)}></div>
+                                                                        <div className="conteudo-modal">
+                                                                            <button
+                                                                                className="fechar-modal"
+                                                                                onClick={() => setMostrarModalVideo(false)}
+                                                                            >
+                                                                                ✖
+                                                                            </button>
+                                                                            <iframe
+                                                                                src={`https://www.youtube.com/embed/${extrairVideoId(
+                                                                                    video.codigo_iframe
+                                                                                )}?autoplay=1&modestbranding=1&rel=0`}
+                                                                                title="YouTube video player"
+                                                                                frameBorder="0"
+                                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                                                allowFullScreen
+                                                                            ></iframe>
+                                                                        </div>
+                                                                    </div>
+                                                                )}
+                                                            </>
+                                                        ) : (
+                                                            /* 🔹 modo normal (desktop) */
+                                                            <div className="video-responsivo">
+                                                                <iframe
+                                                                    src={`https://www.youtube.com/embed/${extrairVideoId(
+                                                                        video.codigo_iframe
+                                                                    )}?autoplay=0&modestbranding=1&rel=0&playsinline=1`}
+                                                                    title="YouTube video player"
+                                                                    frameBorder="0"
+                                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                                    allowFullScreen
+                                                                ></iframe>
+                                                            </div>
                                                         )}
                                                     </div>
+
                                                 )}
                                             </li>
                                         ))}

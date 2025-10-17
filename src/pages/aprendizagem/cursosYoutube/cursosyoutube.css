@@ -69,6 +69,105 @@
     z-index: 0;
 }
 
+/* ======= MODAL DE VÍDEO (para telas menores que 1000px) ======= */
+.modal-video {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fundo-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+    z-index: 9998;
+}
+
+.conteudo-modal {
+    position: relative;
+    width: 96vw;
+    max-width: 800px;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    z-index: 9999;
+    animation: fadeZoom 0.4s ease;
+}
+
+.conteudo-modal iframe {
+    width: 100%;
+    height: 56vw;
+    max-height: 450px;
+    display: block;
+    border: none;
+}
+
+/* Botão fechar */
+.fechar-modal {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    font-size: 1.6rem;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.3s ease;
+}
+
+.fechar-modal:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* Efeito ao abrir */
+@keyframes fadeZoom {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Miniatura clicável */
+.thumb-video-mobile {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.thumb-video-mobile iframe {
+    width: 100%;
+    height: 200px;
+    pointer-events: none;
+}
+
+.overlay-play {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: white;
+    background: rgba(0, 0, 0, 0.3);
+}
+
 
 body {
     overflow: visible !important;
