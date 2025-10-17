@@ -14,6 +14,7 @@ export const CursosYouTube = () => {
     const [mostrarPerguntas, setMostrarPerguntas] = useState(false);
     const [progresso, setProgresso] = useState([]);
     const [hoverCurso, setHoverCurso] = useState(null);
+    const [modoTeatro, setModoTeatro] = useState(false);
 
     const [avisoOk, setAvisoOk] = useState(false);
 
@@ -215,7 +216,10 @@ export const CursosYouTube = () => {
                                                 {videoSelecionado?.id === video.id && (
                                                     <div className="video-player">
                                                         <h4 style={{ color: "black" }}  >{video.titulo}</h4>
-                                                        <div className="video-responsivo">
+                                                        <div
+                                                            className={`video-responsivo ${modoTeatro ? "modo-teatro" : ""}`}
+                                                            onClick={() => setModoTeatro(true)}
+                                                        >
                                                             <iframe
                                                                 src={`https://www.youtube.com/embed/${extrairVideoId(video.codigo_iframe)}?autoplay=0&modestbranding=1&rel=0&playsinline=1`}
                                                                 title="YouTube video player"
@@ -224,13 +228,18 @@ export const CursosYouTube = () => {
                                                                 allowFullScreen
                                                                 webkitallowfullscreen="true"
                                                                 mozallowfullscreen="true"
-                                                                style={{
-                                                                    width: "100%",
-                                                                    height: "100%",
-                                                                    display: "block",
-                                                                    border: "none",
-                                                                }}
                                                             ></iframe>
+                                                            {modoTeatro && (
+                                                                <button
+                                                                    className="fechar-teatro"
+                                                                    onClick={(e) => {
+                                                                        e.stopPropagation();
+                                                                        setModoTeatro(false);
+                                                                    }}
+                                                                >
+                                                                    ✖
+                                                                </button>
+                                                            )}
                                                         </div>
 
 

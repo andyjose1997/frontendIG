@@ -18,13 +18,16 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* 🎥 ======== MODO TEATRO ======== */
 .video-responsivo {
     position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
+    padding-bottom: 56.25%;
+    height: 0;
     background: #000;
-    overflow: visible !important;
-    border-radius: 10px;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: pointer;
 }
 
 .video-responsivo iframe {
@@ -34,6 +37,60 @@
     width: 100%;
     height: 100%;
     border: none;
+}
+
+/* Quando entra em modo teatro */
+.video-responsivo.modo-teatro {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 56.25vw;
+    max-height: 100vh;
+    max-width: 100vw;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background: #000;
+    border-radius: 0;
+}
+
+.video-responsivo.modo-teatro iframe {
+    width: 100%;
+    height: 100%;
+}
+
+/* Fundo escuro */
+.video-responsivo.modo-teatro::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: -1;
+}
+
+/* Botão de fechar */
+.fechar-teatro {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #fff;
+    font-size: 1.8rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 10000;
+    transition: all 0.3s ease;
+}
+
+.fechar-teatro:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
 }
 
 /* Corrige visualização em celulares */
