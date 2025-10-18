@@ -1,5 +1,5 @@
 #blocoPerfil {
-    width: 94%;
+    width: 96.6%;
     background: linear-gradient(135deg, #101053, #0606b3);
     padding: 2rem 3rem;
     color: #ffffff;
@@ -17,7 +17,6 @@
 
     /* 🔹 Efeito sutil ao aparecer */
     animation: fadeInDown 3.6s ease;
-    display: flex;
     /* 🔹 Centralização do conteúdo */
     justify-content: center;
     align-items: center;
@@ -36,6 +35,15 @@
         transform: translateY(0);
     }
 }
+
+@media (max-width: 980px) {
+    #blocoPerfil {
+        width: 92.6%;
+
+    }
+
+}
+
 
 /* 🔹 Nome clicável para abrir o portfólio */
 .nomeUsuarioLink {
