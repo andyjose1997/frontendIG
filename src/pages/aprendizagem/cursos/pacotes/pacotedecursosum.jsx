@@ -28,10 +28,15 @@ export default function PacoteDeCursosUm() {
 
     // 🔹 Buscar cursos e certificados ao montar
     useEffect(() => {
-        fetch(`${URL}/cursos`)
+        fetch(`${URL}/cursos/`)
             .then(res => res.json())
-            .then(setCursos)
+            .then(data => {
+                setCursos(data.cursos || []); // ✅ extrai a lista corretamente
+                // opcional: salvar o próximo curso para exibir em banner
+                // setProximoCurso(data.proximo_curso || null);
+            })
             .catch(err => console.error("Erro ao carregar cursos:", err));
+
 
         fetch(`${URL}/certificados/usuario/${usuarioId}`)
             .then(res => res.json())
