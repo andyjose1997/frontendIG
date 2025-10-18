@@ -81,7 +81,7 @@ function Home() {
           📞 Falar no WhatsApp
         </a>
       </section>
-      <div style={{ display: "none" }} >      <FAQSection />
+      <div  >      <FAQSection />
       </div>
 
 

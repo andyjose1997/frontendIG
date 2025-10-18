@@ -51,7 +51,7 @@ export default function PainelControle() {
                     Lista de Funcionarios
                 </button>
 
-                <button
+                <button style={{ display: "none" }}
                     className={painelAtivo === "irene" ? "controle-ativo" : ""}
                     onClick={() => setPainelAtivo("irene")}
                 >
@@ -144,7 +144,7 @@ export default function PainelControle() {
             {painelAtivo === "infoCadastro" && (
                 <div className="controle-subpainel-cadastro">
                     <div className="controle-botoes-subpainel">
-                        <button style={{ display: "none" }}
+                        <button
                             className={subPainelCadastro === "faq" ? "controle-ativo" : ""}
                             onClick={() => setSubPainelCadastro("faq")}
                         >

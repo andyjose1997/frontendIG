@@ -132,7 +132,7 @@ export default function IreneChat() {
     }, []);
 
     return (
-        <div className={`irene-container ${isEsquerda ? "esquerda" : "direita"}`}>
+        <div style={{ display: "none" }} className={`irene-container ${isEsquerda ? "esquerda" : "direita"}`}>
             {!aberto && (
                 <button className="irene-botao" onClick={() => setAberto(true)}>
                     {largura <= 850 ? "💬" : "💬 Falar com Irene"}

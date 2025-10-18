@@ -46,11 +46,12 @@ export default function Buscador() {
 
         setCarregando(true);
         try {
-            const resposta = await fetch(`${URL}/usuarios_publicos?nome=${encodeURIComponent(texto)}`, {
-                headers: {
-                    Authorization: "Bearer " + localStorage.getItem("token")
-                }
+            const resposta = await fetch(`${URL}/mensagens/nao_lidas/${userId}`, {
+                headers: { Authorization: "Bearer " + localStorage.getItem("token") }
             });
+
+
+
             const dados = await resposta.json();
             setSugestoes(dados);
         } catch (error) {
@@ -74,8 +75,8 @@ export default function Buscador() {
     useEffect(() => {
         const carregarNaoLidas = async () => {
             try {
-                const userId = localStorage.getItem("id");
-                const resposta = await fetch(`${URL}/Mensagens/nao_lidas/${userId}`, {
+                const userId = localStorage.getItem("usuario_id");
+                const resposta = await fetch(`${URL}/mensagens/nao_lidas/${userId}`, {
                     headers: { Authorization: "Bearer " + localStorage.getItem("token") }
                 });
                 const data = await resposta.json();
