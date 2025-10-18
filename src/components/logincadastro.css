@@ -118,11 +118,14 @@
     }
 }
 
-/* === RESPONSIVIDADE === */
 @media (max-width: 600px) {
     .login-cadastro-topo {
-        top: 10px;
+        top: auto;
+        /* 🔹 remove o top */
+        bottom: 160px;
+        /* 🔹 mantém na parte de baixo */
         right: 10px;
+        /* 🔹 leve ajuste de posição */
         align-items: center;
     }
 
@@ -142,6 +145,7 @@
         text-align: center;
     }
 }
+
 
 /* === Efeito de rolagem === */
 .login-cadastro-topo {
