@@ -79,7 +79,7 @@ export default function FAQSection() {
                                 className={highlightId === item.id ? "faq-highlight" : ""}
                             >
                                 <strong>{item.pergunta}</strong>
-                                {item.link ? (
+                                {item.link && item.link !== "#" ? (
                                     <p>
                                         <a href={item.link} target="_blank" rel="noopener noreferrer">
                                             {item.resposta}
@@ -88,6 +88,7 @@ export default function FAQSection() {
                                 ) : (
                                     <p>{item.resposta}</p>
                                 )}
+
                             </li>
                         ))}
                     </ul>

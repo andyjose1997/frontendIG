@@ -60,10 +60,17 @@ export default function PerguntasUsuarios() {
     const fecharModal = () => setModalAberto(false);
 
     const salvarFaq = async () => {
-        if (!formData.pergunta || !formData.resposta || !formData.link) {
-            alert("Todos os campos são obrigatórios!");
+        if (!formData.pergunta || !formData.resposta) {
+            alert("Pergunta e resposta são obrigatórias!");
             return;
         }
+
+        // 🔹 Garante que o link sempre tenha um valor
+        const dados = {
+            ...formData,
+            link: formData.link && formData.link.trim() !== "" ? formData.link : "#",
+        };
+
 
         const metodo = modoEdicao ? "PUT" : "POST";
         const url = modoEdicao
@@ -73,7 +80,7 @@ export default function PerguntasUsuarios() {
         const res = await fetch(url, {
             method: metodo,
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(dados)
         });
 
         if (res.ok) {
@@ -180,11 +187,9 @@ export default function PerguntasUsuarios() {
                             required
                             onChange={(e) => setFormData({ ...formData, resposta: e.target.value })}
                         />
-                        <label>Link:</label>
-                        <input
+                        <input style={{ display: "none" }}
                             type="text"
                             value={formData.link}
-                            required
                             onChange={(e) => setFormData({ ...formData, link: e.target.value })}
                         />
 
