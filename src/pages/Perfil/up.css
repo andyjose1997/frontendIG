@@ -44,6 +44,20 @@
 
 }
 
+/* Mantém nome e categoria na mesma linha por padrão */
+.nomeUsuarioLink,
+.categoriaTexto {
+    display: inline;
+}
+
+/* 🔹 Se a tela for menor que 500px, quebra linha entre nome e categoria */
+@media (max-width: 500px) {
+    .nomeUsuarioLink {
+        display: block;
+        margin-bottom: 5px;
+        /* dá um pequeno espaço entre as linhas */
+    }
+}
 
 /* 🔹 Nome clicável para abrir o portfólio */
 .nomeUsuarioLink {

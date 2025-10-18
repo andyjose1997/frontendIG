@@ -1,0 +1,62 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* 🔹 Mantém o modal acima de tudo */
+}
+
+.modal-conteudo {
+    background: #1b1f2a;
+    padding: 25px;
+    border-radius: 10px;
+    color: white;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+    z-index: 10000;
+    /* 🔹 Garante que conteúdo interno fique clicável */
+    position: relative;
+}
+
+.lista-proximos li {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 10px;
+    list-style: none;
+    position: relative;
+    z-index: 10001;
+    /* 🔹 Garante que botões fiquem acima */
+}
+
+.lista-proximos .acoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.lista-proximos button {
+    cursor: pointer;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.lista-proximos button:first-child {
+    background: #ff8c00;
+}
+
+.lista-proximos button:last-child {
+    background: #007bff;
+}
+
+.lista-proximos button:hover {
+    filter: brightness(1.1);
+}

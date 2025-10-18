@@ -1,89 +1,118 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './cursos.css';
-
+import { URL } from "../config";
+import "./cursos.css";
 
 export default function Cursos() {
     const navigate = useNavigate();
-    return (
+    const [cursos, setCursos] = useState([]);
+    const [proximoCurso, setProximoCurso] = useState(null);
+    const [loading, setLoading] = useState(true);
 
+    // 🔹 Buscar cursos e próximo curso (mesma rota)
+    useEffect(() => {
+        fetch(`${URL}/cursos`)
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data.cursos)) {
+                    setCursos(data.cursos);
+                } else {
+                    console.warn("Formato inesperado:", data);
+                }
+
+                if (data.proximo_curso) {
+                    setProximoCurso(data.proximo_curso);
+                }
+
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error("Erro ao buscar cursos:", err);
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading) return <p>Carregando cursos...</p>;
+
+    return (
         <div>
             <section className="pacotes-info">
-                <h2>Informações sobre os Pacotes</h2>
+                <h2>Breve Informação</h2>
                 <p>
-                    Cada pacote contém 12 cursos cuidadosamente selecionados para seu desenvolvimento profissional e pessoal.
-                    O valor do primeiro pacote é fixo em <strong>R$ 60,00</strong>. A partir da compra do segundo pacote,
-                    cada novo pacote custará apenas <strong>R$ 30,00</strong>.
-                    No momento, ainda não temos outros pacotes disponíveis, mas nossa equipe está trabalhando para
-                    lançar novos conteúdos em breve!
+                    Este pacote reúne <strong>12 cursos cuidadosamente selecionados</strong> para o seu desenvolvimento
+                    profissional e pessoal. O valor do primeiro pacote é fixo em <strong>R$ 60,00</strong>.<br /><br />
+                    🎯 Nosso objetivo é expandir continuamente! Estamos preparando <strong>mais de 20 novos cursos</strong> nas áreas de
+                    <strong> Pacote Office, Programação e Idiomas</strong>, todos criados para ajudar você a evoluir em diferentes habilidades.
+                    <br /><br />
+                    🚀 Novos cursos serão adicionados constantemente à plataforma, e sempre anunciaremos aqui quais serão
+                    os próximos lançamentos para que você possa se planejar e acompanhar cada novidade!
                 </p>
+
             </section>
+
             <section className="pacote-geral">
-                <h2> <div className="Pacote">Pacote 1 </div> <br />📚 Idiomas e Programação</h2>
-                <p>Domine ferramentas práticas, idiomas essenciais e programação para alavancar sua carreira e produtividade.</p>
+                <h2>
+                    <div className="Pacote">Pacote 1</div>
+                    <br />📚 Idiomas e Programação
+                </h2>
+                <p>
+                    Domine ferramentas práticas, idiomas essenciais e programação para alavancar sua carreira e produtividade.
+                </p>
 
+                {/* 🔹 Lista de cursos do banco */}
                 <div className="lista-cursos">
-                    <div className="curso">
-                        <h3>Excel</h3>
-                        <p>Organizar, analisar e apresentar dados de forma eficiente.</p>
-                    </div>
-                    <div className="curso">
-                        <h3>Word</h3>
-                        <p>Criar documentos profissionais e formatar textos de forma avançada.</p>
-                    </div>
-                    <div className="curso">
-                        <h3>PowerPoint</h3>
-                        <p>Desenvolver apresentações impactantes e visualmente atrativas.</p>
-                    </div>
-                    <div className="curso">
-                        <h3>Google Sheets</h3>
-                        <p>Trabalhar com planilhas online colaborativas, fórmulas e gráficos.</p>
-                    </div>
-                    <div className="curso">
-                        <h3>Inglês</h3>
-                        <p>Melhorar a comunicação global e aumentar oportunidades profissionais.</p>
-                    </div>
-                    <div className="curso">
-                        <h3>Espanhol</h3>
-                        <p>Expandir a comunicação em países de língua espanhola para negócios e viagens.</p>
-                    </div>
-                    <div className="curso">
-                        <h3>HTML5</h3>
-                        <p>Estruturar páginas web do zero com códigos limpos e semânticos.</p>
-                    </div>
-                    <div className="curso">
-                        <h3>CSS3</h3>
-                        <p>Estilizar e criar layouts responsivos para sites modernos.</p>
-                    </div>
-                    <div className="curso">
-                        <h3>JavaScript (Basico intermediario)</h3>
-                        <p>Adicionar interatividade e dinamismo a páginas web.</p>
-                    </div>
-                    <div className="curso">
-                        <h3>React (Basico intermediario)</h3>
-                        <p>Criar aplicações web modernas com componentes reutilizáveis.</p>
-                    </div>
-                    <div className="curso">
-                        <h3>Python (Base para Back-end)</h3>
-                        <p>Automatizar tarefas, trabalhar com dados e aprender lógica de programação.</p>
-                    </div>
-                    <div className="curso">
-                        <h3>Git & GitHub</h3>
-                        <p>Controlar versões de projetos e colaborar de forma organizada.</p>
-                    </div>
+                    {cursos.map((curso, index) => (
+                        <div className="curso" key={index}>
+                            <h3>{curso.titulo}</h3>
+                            <p>{curso.descricao}</p>
+                        </div>
+                    ))}
                 </div>
-                <br /><br />
-                <div id="divBotao">
-                    <button
-                        onClick={() => navigate("/cadastrarse")}
-                        id="PacoteBotao"
-                    >
-                        Compre o Pacote agora
-                    </button>
+                <br />
+                {/* 🔹 Exibir o próximo curso */}
+                {proximoCurso && (
+                    <div className="proximo-curso">
+                        <h2>📅 Próximo curso</h2>
+                        <h3>{proximoCurso.curso}</h3>
+                        <p>
+                            <strong>Data:</strong>{" "}
+                            {new Date(proximoCurso.quando).toLocaleDateString("pt-BR")}
+                        </p>
+                        <p>{proximoCurso.descricao}</p>
+                    </div>
+                )}
 
+                <br />
+                <div className="comprar-pacote">
+                    <p className="texto-compra">
+                        💡 <strong>Para adquirir este pacote, é necessário ter uma conta IronGoals.</strong><br />
+                        Durante o cadastro, você precisará informar o <strong>ID do seu Host</strong>, ou seja,
+                        o representante que está vendendo o curso.<br /><br />
+                        ❓ <em>Não possui um Host ainda?</em><br />
+                        Fale diretamente com nossa equipe pelo WhatsApp:{" "}
+                        <a
+                            href="https://wa.me/5511921352636?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Preciso%20de%20um%20ID%20para%20fazer%20meu%20cadastro."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="link-whatsapp"
+                        >
+                            <strong>clique aqui</strong>
+                        </a>
+                        {" "}para receber seu ID e concluir seu cadastro.
+                    </p>
+
+                    <div className="botao-container">
+                        <button
+                            onClick={() => navigate("/cadastrarse")}
+                            className="botao-comprar"
+                        >
+                            🚀 Criar conta e comprar agora
+                        </button>
+                    </div>
                 </div>
+
+
             </section>
-
-
         </div>
-    )
+    );
 }

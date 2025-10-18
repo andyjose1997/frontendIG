@@ -1,9 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./modalsuporte.css";
+import { URL } from "../../config";
 
 export default function ModalSuporte({ onClose }) {
     const [mensagem, setMensagem] = useState("");
     const [nome, setNome] = useState("");
+
+    useEffect(() => {
+        const usuarioId = localStorage.getItem("usuario_id");
+        if (!usuarioId) return;
+
+        fetch(`${URL}/perfil/publico/${usuarioId}`)
+            .then(res => res.json())
+            .then(dados => {
+                if (dados && dados.nome) {
+                    const nomeCompleto = `${dados.nome} ${dados.sobrenome || ""}`.trim();
+                    setNome(nomeCompleto);
+                }
+            })
+            .catch(err => console.error("Erro ao buscar usuário:", err));
+    }, []);
+
 
     // Enviar por email
     const enviarEmail = (e) => {
@@ -17,7 +34,7 @@ export default function ModalSuporte({ onClose }) {
     // Enviar por WhatsApp
     const enviarWhatsApp = (e) => {
         e.preventDefault();
-        const numero = "5511921352636"; // DDI + DDD + número
+        const numero = "5511921352636";
         const texto = `Olá, meu nome é ${nome}. %0A%0A${mensagem}`;
         const whatsappLink = `https://wa.me/${numero}?text=${texto}`;
         window.open(whatsappLink, "_blank");
@@ -29,15 +46,17 @@ export default function ModalSuporte({ onClose }) {
                 <button className="fecharModal" onClick={onClose}>✖</button>
                 <h2>Suporte IronGoals</h2>
                 <h3>Preencha suas informações e envie sua mensagem para nosso suporte por e-mail ou WhatsApp.</h3>
+
                 <form onSubmit={enviarEmail}>
                     <input
                         type="text"
                         name="nome"
                         placeholder="Seu nome"
                         value={nome}
-                        onChange={(e) => setNome(e.target.value)}
+                        onChange={(e) => setNome(e.target.value)} // 🔹 ainda editável
                         required
                     />
+
                     <textarea
                         name="mensagem"
                         placeholder="Digite sua mensagem..."

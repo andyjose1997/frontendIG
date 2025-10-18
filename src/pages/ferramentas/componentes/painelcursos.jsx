@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { URL } from "../../../config";
 import "./painelcursos.css";
+import ModalProximoCurso from "./modalproximocurso";
 
 export default function PainelCursos() {
     const [cursos, setCursos] = useState([]);
     const [alerta, setAlerta] = useState(null);
+    const [mostrarModalProximo, setMostrarModalProximo] = useState(false);
 
     // Estados de modal
     const [cursoSelecionado, setCursoSelecionado] = useState(null);
@@ -218,6 +220,12 @@ export default function PainelCursos() {
 
     return (
         <div className="icpn-painel-cursos">
+            <div className="icpn-topo-acoes">
+                <button onClick={() => setMostrarModalProximo(true)} className="btn-proximo-curso">
+                    Anunciar Próximo Curso
+                </button>
+            </div>
+
             <h2>Painel de Cursos</h2>
 
             {/* Alerta customizado */}
@@ -362,6 +370,16 @@ export default function PainelCursos() {
                     <iframe src={iframeAberto} title="Video" width="100%" height="400" frameBorder="0" allowFullScreen></iframe>
                 </Modal>
             )}
+            {mostrarModalProximo && (
+                <ModalProximoCurso
+                    onClose={() => setMostrarModalProximo(false)}
+                    onSucesso={() => {
+                        setMostrarModalProximo(false);
+                        mostrarAlerta("✅ Próximo curso adicionado!");
+                    }}
+                />
+            )}
+
         </div>
     );
 }
