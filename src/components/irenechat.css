@@ -13,6 +13,18 @@
     left: 30px;
 }
 
+.irene-link {
+    color: #9bd1ff;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.irene-link:hover {
+    color: #b0e0ff;
+}
+
 /* ====== Botão inicial ====== */
 .irene-botao {
     padding: 1.2rem 2rem;

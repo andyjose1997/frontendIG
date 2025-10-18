@@ -8,7 +8,7 @@ export default function IreneChat() {
     const [mensagens, setMensagens] = useState([]);
     const [input, setInput] = useState("");
     const [carregando, setCarregando] = useState(false);
-    const [perguntas, setPerguntas] = useState([]); // sugestões vindas do backend
+    const [perguntas, setPerguntas] = useState([]);
     const location = useLocation();
     const isEsquerda =
         location.pathname.toLowerCase().includes("mensagens") ||
@@ -23,6 +23,17 @@ export default function IreneChat() {
             mensagensFimRef.current.scrollIntoView({ behavior: "smooth" });
         }
     }, [mensagens, carregando]);
+
+    // 🔹 Saudação automática
+    useEffect(() => {
+        if (aberto && mensagens.length === 0) {
+            setTimeout(() => {
+                setMensagens([
+                    { autor: "irene", texto: "👋 Olá! Eu sou a Irene, assistente virtual da IronGoals. Posso te ajudar com dúvidas sobre cursos, ranking, portfólio ou suporte." }
+                ]);
+            }, 300);
+        }
+    }, [aberto]);
 
     // 🔹 Carregar histórico ao abrir o chat
     useEffect(() => {
@@ -65,7 +76,7 @@ export default function IreneChat() {
         }
     };
 
-    // 🔹 Função para digitar letra por letra
+    // 🔹 Efeito de digitação da Irene
     const digitarResposta = (texto) => {
         let i = 0;
         setMensagens((prev) => [...prev, { autor: "irene", texto: "" }]);
@@ -82,36 +93,38 @@ export default function IreneChat() {
                 clearInterval(interval);
                 setCarregando(false);
             }
-        }, 40);
+        }, 35);
     };
 
     // 🔹 Enviar pergunta
     const enviarPergunta = async () => {
         if (!input.trim() || carregando) return;
 
-        const perguntaUsuario = input;
+        const perguntaUsuario = input.trim();
         setMensagens((prev) => [...prev, { autor: "user", texto: perguntaUsuario }]);
         setInput("");
         setCarregando(true);
 
         try {
-            const payload = { pergunta: perguntaUsuario };
-            if (usuarioId) payload.usuario_id = usuarioId;
-
-            const res = await fetch(`${URL}/irene/pergunta`, {
+            const res = await fetch(`https://irn.onrender.com/webhook/irene`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
+                body: JSON.stringify({
+                    pergunta: perguntaUsuario,
+                    usuario_id: usuarioId
+                }),
             });
+
 
             const data = await res.json();
             digitarResposta(data.resposta || "❌ Sem resposta.");
         } catch (error) {
-            digitarResposta("⚠️ Não consegui conectar com a Irene. Tente novamente.");
+            digitarResposta("⚠️ Não consegui conectar com a Irene. Tente novamente mais tarde.");
         }
     };
-    const [largura, setLargura] = useState(window.innerWidth);
 
+    // 🔹 Responsividade
+    const [largura, setLargura] = useState(window.innerWidth);
     useEffect(() => {
         const handleResize = () => setLargura(window.innerWidth);
         window.addEventListener("resize", handleResize);
@@ -122,10 +135,9 @@ export default function IreneChat() {
         <div className={`irene-container ${isEsquerda ? "esquerda" : "direita"}`}>
             {!aberto && (
                 <button className="irene-botao" onClick={() => setAberto(true)}>
-                    {largura <= 850 ? "💭" : "Assistente Virtual Irene"}
+                    {largura <= 850 ? "💬" : "💬 Falar com Irene"}
                 </button>
             )}
-
 
             {aberto && (
                 <div className="irene-chat">
@@ -139,14 +151,22 @@ export default function IreneChat() {
                     </div>
 
                     <div className="irene-mensagens">
-                        {mensagens.map((msg, i) => (
-                            <div
-                                key={i}
-                                className={`msg ${msg.autor === "user" ? "user" : "irene"}`}
-                            >
-                                {msg.texto}
-                            </div>
-                        ))}
+                        {mensagens.map((msg, i) => {
+                            // 🔹 Converte links em <a href="">
+                            const textoComLinks = msg.texto.replace(
+                                /(https?:\/\/[^\s]+)/g,
+                                '<a href="$1" target="_blank" rel="noopener noreferrer" class="irene-link">$1</a>'
+                            );
+
+                            return (
+                                <div
+                                    key={i}
+                                    className={`msg ${msg.autor === "user" ? "user" : "irene"}`}
+                                    dangerouslySetInnerHTML={{ __html: textoComLinks }}
+                                />
+                            );
+                        })}
+
 
                         {carregando && (
                             <div className="msg irene">✍️ Irene está digitando...</div>
@@ -155,7 +175,6 @@ export default function IreneChat() {
                         <div ref={mensagensFimRef} />
                     </div>
 
-                    {/* 🔹 Input + sugestões */}
                     <div className="irene-input">
                         <input
                             list="perguntas"
@@ -163,30 +182,27 @@ export default function IreneChat() {
                             value={input}
                             onChange={(e) => {
                                 setInput(e.target.value);
-                                buscarPerguntas(e.target.value); // 🔹 chama backend enquanto digita
+                                buscarPerguntas(e.target.value);
                             }}
-                            placeholder="Digite ou escolha uma pergunta..."
+                            placeholder="Digite sua pergunta..."
                             onKeyDown={(e) =>
                                 e.key === "Enter" && !carregando && enviarPergunta()
                             }
                             disabled={carregando}
                         />
 
-                        {/* 🔹 Datalist com sugestões do backend */}
                         <datalist id="perguntas">
-                            {[...new Set(perguntas)] // 🔹 remove duplicadas
-                                .slice(0, 5)          // 🔹 limita a 5 sugestões
+                            {[...new Set(perguntas)]
+                                .slice(0, 5)
                                 .map((p, i) => (
                                     <option key={i} value={p} />
                                 ))}
                         </datalist>
 
-
                         <button onClick={enviarPergunta} disabled={carregando}>
-                            {carregando ? "Aguarde..." : "Enviar"}
+                            {carregando ? "..." : "Enviar"}
                         </button>
                     </div>
-
                 </div>
             )}
         </div>
