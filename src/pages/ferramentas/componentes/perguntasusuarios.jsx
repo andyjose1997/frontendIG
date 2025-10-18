@@ -187,7 +187,7 @@ export default function PerguntasUsuarios() {
                             required
                             onChange={(e) => setFormData({ ...formData, resposta: e.target.value })}
                         />
-                        <input style={{ display: "none" }}
+                        <input
                             type="text"
                             value={formData.link}
                             onChange={(e) => setFormData({ ...formData, link: e.target.value })}
