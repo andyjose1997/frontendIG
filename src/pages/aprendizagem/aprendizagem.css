@@ -434,7 +434,7 @@ footer {
     }
 
     .sidebar {
-        width: 100%;
+        width: 97%;
         background: linear-gradient(135deg, #012b85, #080c0f);
         border-radius: 0;
         border-right: none;
@@ -488,7 +488,7 @@ footer {
         flex-wrap: wrap;
         justify-content: center;
         gap: 10px;
-        width: 100%;
+        width: 97%;
         padding: 0 5%;
         margin-top: 10px;
     }

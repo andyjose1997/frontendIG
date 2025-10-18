@@ -141,7 +141,7 @@
     }
 
     .botoes-topo a {
-        width: 100%;
+        width: 97%;
         text-align: center;
     }
 }
@@ -186,6 +186,6 @@
     }
 
     .botoes-topo a:hover::after {
-        width: 100%;
+        width: 97%;
     }
 }

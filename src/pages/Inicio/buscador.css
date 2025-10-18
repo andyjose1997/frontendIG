@@ -829,7 +829,7 @@
     /* Input ocupa toda a largura */
     .buscador-centro {
         max-width: 90%;
-        width: 100%;
+        width: 97%;
         margin: 0;
     }
 
@@ -843,7 +843,7 @@
     .buscador-direita {
         display: flex;
         justify-content: space-between;
-        width: 100%;
+        width: 97%;
         gap: 0.4rem;
         gap: 25px;
 
