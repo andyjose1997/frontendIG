@@ -39,7 +39,7 @@ export default function Cursos() {
             <section className="pacotes-info">
                 <h2>Breve Informação</h2>
                 <p>
-                    Este pacote reúne <strong>12 cursos cuidadosamente selecionados</strong> para o seu desenvolvimento
+                    Este pacote reúne <strong>cursos cuidadosamente selecionados</strong> para o seu desenvolvimento
                     profissional e pessoal. O valor do primeiro pacote é fixo em <strong>R$ 60,00</strong>.<br /><br />
                     🎯 Nosso objetivo é expandir continuamente! Estamos preparando <strong>mais de 20 novos cursos</strong> nas áreas de
                     <strong> Pacote Office, Programação e Idiomas</strong>, todos criados para ajudar você a evoluir em diferentes habilidades.
