@@ -366,7 +366,7 @@ export default function PortfolioPublico() {
                             </div>
                         );
                     })()}
-
+                    <p style={{ marginBottom: "-10px", marginTop: "-10px" }} >Próxima meta</p>
 
                     {/* 🔹 Comentário de perfil */}
                     <p

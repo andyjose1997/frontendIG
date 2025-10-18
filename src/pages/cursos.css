@@ -196,19 +196,14 @@
     color: #444;
     font-size: 1.3em;
     line-height: 1.6;
-
-    /* 🔹 Melhorias de leitura */
     font-family: "Segoe UI", Roboto, sans-serif;
     max-width: 750px;
     margin: 0 auto 1.2rem auto;
     text-align: justify;
 
-    /* 🔹 Estética */
-    letter-spacing: 0.3px;
-    word-spacing: 1px;
-
-    /* 🔹 Animação suave */
-    animation: fadeIn 1s ease both;
+    /* 🔹 Ajustes visuais */
+    letter-spacing: normal;
+    word-spacing: normal;
 }
 
 /* Pacote geral */
