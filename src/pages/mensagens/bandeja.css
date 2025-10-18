@@ -9,7 +9,7 @@
 
     min-height: 100vh;
     max-height: 750vh;
-
+    width: 87%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
