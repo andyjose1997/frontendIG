@@ -10,6 +10,7 @@
 
 #Up {
     grid-area: Up;
+    width: 94%;
 }
 
 #Botoes {
@@ -20,6 +21,7 @@
 #Bandeja {
     grid-area: Bandeja;
     margin-top: 9px;
+    width: 94%;
 }
 
 .botao-voltar {
