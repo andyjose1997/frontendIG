@@ -32,7 +32,7 @@ export default function TelaConfig() {
                         className="config-voltar-botao"
                         onClick={() => navigate("/perfil")}
                     >
-                        🔙 Voltar
+                        🔙
                     </button>
                 </div>
             ) : (

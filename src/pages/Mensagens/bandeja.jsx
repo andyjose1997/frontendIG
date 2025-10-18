@@ -215,7 +215,7 @@ export default function Bandeja() {
 
                 </>
             ) : (
-                <>
+                <><br />
                     <button onClick={() => setSelecionado(null)} className="voltar-botao">⬅ Voltar</button>
                     <h2 className='conversaCom' onClick={abrirModalUsuario} style={{ cursor: "pointer" }}>
                         💬 Conversa com {selecionado.nome}

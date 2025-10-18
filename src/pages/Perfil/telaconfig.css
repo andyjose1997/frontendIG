@@ -4,7 +4,7 @@
     grid-template-areas:
         "ConfigUp ConfigUp"
         "ConfigBotoes ConfigConteudo";
-    grid-template-columns: 18% 1fr;
+    grid-template-columns: 10% 85%;
     gap: 12px;
     box-sizing: border-box;
 }
@@ -33,7 +33,7 @@
 }
 
 .config-voltar-botao {
-    background: #3a86ff;
+    background: #021e4d;
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -41,6 +41,7 @@
     font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
+    border: #fff solid 0.1px;
     transition: background 0.25s ease, transform 0.2s ease;
     max-height: 90px;
 }

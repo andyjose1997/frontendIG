@@ -5,8 +5,8 @@
 
     margin: 2rem auto;
     width: 60%;
-    height: 90%;
-
+    height: fit-content;
+    max-height: 80%;
     padding: 1.5rem;
     border-radius: 18px;
 
@@ -277,19 +277,45 @@
     z-index: 999;
 }
 
-
 .modal-host {
     background: linear-gradient(to bottom, #004cff, #839eff);
     padding: 20px;
-
     border-radius: 10px;
     max-width: 400px;
     text-align: center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     width: 20%;
     font-size: 140%;
-    height: 65%;
+    height: fit-content;
+    max-height: 80vh;
+    /* 🔹 aumenta o limite proporcional à tela */
+    overflow-y: auto;
+    /* 🔹 ativa a rolagem se precisar */
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: #004cff #839eff;
+    /* Cores personalizadas */
 }
+
+/* 🔹 Scrollbar estilizada para Chrome e derivados */
+.modal-host::-webkit-scrollbar {
+    width: 10px;
+}
+
+.modal-host::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+.modal-host::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #004cff, #839eff);
+    border-radius: 10px;
+}
+
+.modal-host::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #0033cc, #5c7cff);
+}
+
 
 
 

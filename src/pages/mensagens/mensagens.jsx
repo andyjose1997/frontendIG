@@ -33,12 +33,12 @@ export default function LayoutMensagens() {
                         className="botao-voltar"
                         onClick={() => navigate("/perfil")}
                     >
-                        🔙 Voltar
+                        🔙
                     </button>
                 ) : (
                     <Botoes />
                 )}
-            </div>
+            </div><br />
 
             <div id="Bandeja">
                 <Bandeja />

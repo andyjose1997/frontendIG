@@ -106,7 +106,6 @@ export default function ChavePix({ onVoltar }) {
                 <h2>💳 Chave Pix</h2>
                 <p>Por favor coloque sua chave pix para receber as suas compensações conforme a sua CPP.
                     <br />
-                    O sistema vai recomendar o seu email, mas pode confirmar ou alterar
                 </p>
 
                 <input
@@ -128,34 +127,18 @@ export default function ChavePix({ onVoltar }) {
                     <button className="botao-config" onClick={salvarChavePix}>
                         Salvar Chave Pix
                     </button>
-                    <button className="botao-voltar" onClick={onVoltar}>
-                        ← Voltar
-                    </button>
+
                 </div>
             </section>
 
-            <div className="area-link">
-                <h2>🔗 Seu link exclusivo de indicação como Host</h2>
-                <h3 className="link-indicacao">{linkIndicacao}</h3>
 
-                {/* 🔹 Gerar QRCode (clicável) */}
-                <div
-                    className="qrcode-container"
-                    onClick={() => setMostrarQrModal(true)}
-                    style={{ cursor: "pointer" }}
-                >
-                    <QRCodeCanvas value={linkIndicacao} size={150} bgColor="#ffffff" fgColor="#000000" />
-                </div>
-                <br />
-                <div>
-                    <button className="botao-config" onClick={copiarLink}>
-                        Copiar Link
-                    </button>
-                    <button className="botao-config" onClick={() => setMostrarMensagens(true)}>
-                        Mensagens para Postar
-                    </button>
-                </div>
-            </div>
+
+            <button className="botao-config" onClick={() => setMostrarMensagens(true)}>
+                Mensagens para Postar
+            </button><br />
+            <button className="botao-voltar" onClick={onVoltar}>
+                ← Voltar
+            </button>
 
             {mostrarMensagens && (
                 <div className="modal-overlay">
