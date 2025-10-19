@@ -28,7 +28,7 @@ export default function LayoutMensagens() {
 
             <div id="Botoes">
                 {/* Se for /mensagens e tela < 1300 → mostra apenas botão voltar */}
-                {isMensagens && larguraTela < 1300 ? (
+                {isMensagens && larguraTela < 2000 ? (
                     <button
                         className="botao-voltar"
                         onClick={() => navigate("/perfil")}
