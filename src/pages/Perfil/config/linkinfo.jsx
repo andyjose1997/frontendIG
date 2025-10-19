@@ -98,7 +98,7 @@ export default function LinkInfo() {
 
     return (
         <div className="post-container">
-            <h2 className="post-titulo">Tipos de Postagem</h2>
+            <h2 className="post-tituloo">Tipos de Postagem</h2>
             <p className="avisopost" style={{ fontSize: "1.5rem", fontWeight: "bold" }} >Conheça os tipos de profissionais que mais aproveitam tudo que a IronGoals oferece.</p>            <div className="post-categorias">
                 {botoes.map((b) => (
                     <button

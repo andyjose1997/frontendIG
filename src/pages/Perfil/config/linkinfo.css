@@ -31,7 +31,7 @@
 /* ╔══════════════════════════════════════════╗
    ║                  TÍTULO                  ║
    ╚══════════════════════════════════════════╝ */
-.post-titulo {
+.post-tituloo {
     font-size: 2.5rem;
     font-weight: 700;
     color: #0f184b;
@@ -238,7 +238,7 @@
         padding: 25px 18px;
     }
 
-    .post-titulo {
+    .post-tituloo {
         font-size: 22px;
     }
 
