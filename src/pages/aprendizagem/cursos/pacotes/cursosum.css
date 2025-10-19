@@ -21,6 +21,94 @@
     overflow: hidden;
 }
 
+/* 🔹 Aviso sobre o próximo curso */
+.aviso-proximo-curso {
+    position: relative;
+    background: radial-gradient(circle at top left, #0d1b2a, #1b263b);
+    border: 2px solid rgba(0, 191, 255, 0.3);
+    border-radius: 16px;
+    padding: 28px 24px;
+    margin: 30px auto;
+    color: #f1f5f9;
+    text-align: center;
+    max-width: 90%;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    animation: fadeInAviso 0.9s ease forwards;
+}
+
+/* 🔹 Título do aviso */
+.aviso-proximo-curso h3 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    color: #00bfff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* 🔹 Nome do curso */
+.aviso-proximo-curso p strong {
+    font-size: 2.3rem;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
+}
+
+/* 🔹 Descrição */
+.aviso-proximo-curso p {
+    margin: 8px 0;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #dce3f2;
+}
+
+/* 🔹 Data destacada */
+.aviso-proximo-curso .data-proximo {
+    margin-top: 14px;
+    font-weight: 600;
+    color: #ffd700;
+    font-size: 1.25rem;
+}
+
+/* 🔹 Efeito decorativo no fundo */
+.aviso-proximo-curso::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, #00bfff, transparent 60%, #00bfff);
+    animation: girarLuz 10s linear infinite;
+    opacity: 0.07;
+    pointer-events: none;
+}
+
+/* 🔹 Animações */
+@keyframes fadeInAviso {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes girarLuz {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+
 /* Efeito de brilho sutil ao passar o mouse */
 .pacoteum-video-btn::after {
     content: "";

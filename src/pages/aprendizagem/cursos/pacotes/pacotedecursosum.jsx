@@ -12,31 +12,27 @@ export default function PacoteDeCursosUm() {
     const [videoAtivo, setVideoAtivo] = useState(null);
     const [progresso, setProgresso] = useState({});
     const [cursoConcluido, setCursoConcluido] = useState(false);
-    const [certificados, setCertificados] = useState({}); // 🔹 {curso_id: codigo}
+    const [certificados, setCertificados] = useState({});
     const [reloadKey, setReloadKey] = useState(0);
+    const [proximoCurso, setProximoCurso] = useState(null); // 🔹 NOVO
 
-    // 🔹 controla animação do texto
     const [animarTexto, setAnimarTexto] = useState(true);
-
     const usuarioId = localStorage.getItem("usuario_id");
 
-    // 🔹 Desliga animação depois de 4s
     useEffect(() => {
         const timer = setTimeout(() => setAnimarTexto(false), 1000);
         return () => clearTimeout(timer);
     }, []);
 
-    // 🔹 Buscar cursos e certificados ao montar
+    // 🔹 Buscar cursos, certificados e o próximo curso
     useEffect(() => {
         fetch(`${URL}/cursos/`)
             .then(res => res.json())
             .then(data => {
-                setCursos(data.cursos || []); // ✅ extrai a lista corretamente
-                // opcional: salvar o próximo curso para exibir em banner
-                // setProximoCurso(data.proximo_curso || null);
+                setCursos(data.cursos || []);
+                setProximoCurso(data.proximo_curso || null); // 🔹 novo
             })
             .catch(err => console.error("Erro ao carregar cursos:", err));
-
 
         fetch(`${URL}/certificados/usuario/${usuarioId}`)
             .then(res => res.json())
@@ -52,7 +48,7 @@ export default function PacoteDeCursosUm() {
             .catch(err => console.error("Erro ao carregar certificados:", err));
     }, [usuarioId]);
 
-    // 🔹 Carregar vídeos + progresso
+    // 🔹 Carregar vídeos e progresso
     const carregarVideos = (cursoId, cursoNome) => {
         setCursoAtivo(cursoId);
         setNomeCursoAtivo(cursoNome);
@@ -80,7 +76,6 @@ export default function PacoteDeCursosUm() {
             .catch(err => console.error("Erro ao carregar vídeos:", err));
     };
 
-    // 🔹 Voltar
     const voltarCursos = () => {
         setCursoAtivo(null);
         setNomeCursoAtivo("");
@@ -88,7 +83,6 @@ export default function PacoteDeCursosUm() {
         setCursoConcluido(false);
     };
 
-    // 🔹 Concluir vídeo
     const handleConcluirVideo = (video) => {
         const idx = videos.findIndex(v => v.id === video.id);
 
@@ -108,7 +102,6 @@ export default function PacoteDeCursosUm() {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log("🎓 Certificado emitido:", data);
                     if (data.codigo) {
                         setCertificados(prev => ({
                             ...prev,
@@ -125,8 +118,17 @@ export default function PacoteDeCursosUm() {
             <div className="pacoteum-container">
                 <h2 className="pacoteum-titulo">🎓 Pacote de Cursos Exclusivos</h2>
 
-                {/* 🔹 Texto explicativo com animação controlada */}
+                {/* 🔹 Aviso profissional sobre o próximo curso */}
+                {proximoCurso && (
+                    <div className="aviso-proximo-curso">
+                        <h3>🚀 Próximo Curso Chegando!</h3>
+                        <p><strong>{proximoCurso.curso}</strong></p>
+                        <p>{proximoCurso.descricao}</p>
+                        <p className="data-proximo">📅 Disponível a partir de <span> </span> <strong>{new Date(proximoCurso.quando).toLocaleDateString("pt-BR")}</strong></p>
+                    </div>
+                )}
 
+                {/* 🔹 Lista de cursos ou vídeos */}
                 {!cursoAtivo ? (
                     cursos.length > 0 ? (
                         <ul className="pacoteum-lista-cursos">
@@ -165,17 +167,16 @@ export default function PacoteDeCursosUm() {
                     <div className="pacoteum-area-curso">
                         <button
                             onClick={() => {
-                                voltarCursos(); // volta pra lista
+                                voltarCursos();
                                 setTimeout(() => {
-                                    setReloadKey(prev => prev + 1); // força recarregar componente
-                                    window.location.reload();       // 🔹 recarrega a página inteira
+                                    setReloadKey(prev => prev + 1);
+                                    window.location.reload();
                                 }, 300);
                             }}
                             className="pacoteum-voltar-btn"
                         >
                             ⬅ Voltar para Cursos
                         </button>
-
 
                         <h3 className="pacoteum-subtitulo">📺 Vídeos do Curso: {nomeCursoAtivo}</h3>
 
@@ -198,6 +199,7 @@ export default function PacoteDeCursosUm() {
                             </div>
                         )}
 
+                        {/* 🔹 Lista de vídeos */}
                         <ul className="pacoteum-lista-videos">
                             {videos.map((video) => (
                                 <li key={video.id} className="pacoteum-item-video">
