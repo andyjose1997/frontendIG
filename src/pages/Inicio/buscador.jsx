@@ -46,12 +46,8 @@ export default function Buscador() {
 
         setCarregando(true);
         try {
-            const resposta = await fetch(`${URL}/mensagens/nao_lidas/${userId}`, {
-                headers: { Authorization: "Bearer " + localStorage.getItem("token") }
-            });
-
-
-
+            const resposta = await fetch(`${URL}/usuarios_publicos?nome=${encodeURIComponent(texto)}`);
+            if (!resposta.ok) throw new Error("Erro ao buscar usuários");
             const dados = await resposta.json();
             setSugestoes(dados);
         } catch (error) {
@@ -61,6 +57,7 @@ export default function Buscador() {
             setCarregando(false);
         }
     }
+
 
     function selecionarUsuario(usuario) {
         setSugestoes([]);
