@@ -62,9 +62,20 @@ export default function ModalQrCode({ onClose }) {
                         <>
                             <QRCodeCanvas value={linkIndicacao} size={180} />
                             <p className="link-indicacao">{linkIndicacao}</p>
-                            <button className="btn-copiar" onClick={copiarLink}>
-                                📋 Copiar Link
-                            </button>
+                            <div style={{ display: "flex", justifyContent: "center", gap: "30px", marginTop: "15px" }}>
+                                <button className="btn-copiar" onClick={copiarLink}>
+                                    📋 Copiar Link
+                                </button>
+
+                                <button
+                                    className="btn-copiar"
+                                    onClick={() => window.open("/linkinfo", "_blank")}
+                                >
+                                    📊 Postagens prontas
+                                </button>
+
+                            </div>
+
                         </>
                     )}
                 </div>

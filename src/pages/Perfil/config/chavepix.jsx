@@ -133,7 +133,7 @@ export default function ChavePix({ onVoltar }) {
 
 
 
-            <button className="botao-config" onClick={() => setMostrarMensagens(true)}>
+            <button style={{ display: "none" }} className="botao-config" onClick={() => setMostrarMensagens(true)}>
                 Mensagens para Postar
             </button><br />
             <button className="botao-voltar" onClick={onVoltar}>

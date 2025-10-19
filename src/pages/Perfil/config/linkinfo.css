@@ -1,0 +1,263 @@
+/* ╔══════════════════════════════════════════╗
+   ║         ÁREA PRINCIPAL DO COMPONENTE     ║
+   ╚══════════════════════════════════════════╝ */
+.post-container {
+    max-width: 950px;
+    margin: 60px auto;
+    background: linear-gradient(180deg, #f9fbff 0%, #f2f6ff 100%);
+    border-radius: 22px;
+    padding: 45px 40px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    font-family: "Segoe UI", Roboto, sans-serif;
+    text-align: center;
+    color: #1b1f3b;
+    max-width: 1600px;
+    width: 80%;
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ╔══════════════════════════════════════════╗
+   ║                  TÍTULO                  ║
+   ╚══════════════════════════════════════════╝ */
+.post-titulo {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0f184b;
+    margin-bottom: 35px;
+    letter-spacing: 0.5px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-transform: uppercase;
+}
+
+/* ╔══════════════════════════════════════════╗
+   ║            BOTÕES DE CATEGORIA           ║
+   ╚══════════════════════════════════════════╝ */
+.post-categorias {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 35px;
+}
+
+.post-botao {
+    background: linear-gradient(135deg, #e8edff, #dbe4ff);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1b1f3b;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.post-botao:hover {
+    background: linear-gradient(135deg, #d8e2ff, #cddaff);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.post-botao.ativo {
+    background: linear-gradient(135deg, #2b7fff, #3a9dff);
+    color: white;
+    box-shadow: 0 4px 12px rgba(43, 127, 255, 0.35);
+    transform: scale(1.03);
+}
+
+/* ╔══════════════════════════════════════════╗
+   ║          ÁREA DO CONTEÚDO ABERTO         ║
+   ╚══════════════════════════════════════════╝ */
+.post-conteudo {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+    padding: 28px 25px;
+    text-align: left;
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ╔══════════════════════════════════════════╗
+   ║         TEXTO / TEXTAREA / CONTEÚDO      ║
+   ╚══════════════════════════════════════════╝ */
+.post-texto-pronto {
+    background: #fafbff;
+    border: 1px solid #e3e7f3;
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 1.5rem;
+    line-height: 1.75;
+    white-space: pre-wrap;
+    color: #2c2f48;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.03);
+    transition: background 0.3s ease;
+}
+
+.post-texto-pronto:hover {
+    background: #f5f8ff;
+}
+
+.post-textarea {
+    width: 100%;
+    min-height: 260px;
+    border: 1px solid #ccd5ee;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 1.4rem;
+    font-family: "Segoe UI", sans-serif;
+    line-height: 1.7;
+    color: #2b2d42;
+    background: #ffffff;
+    resize: vertical;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.post-textarea:focus {
+    border-color: #2b7fff;
+    box-shadow: 0 0 10px rgba(43, 127, 255, 0.3);
+}
+
+/* ╔══════════════════════════════════════════╗
+   ║           LINK DO USUÁRIO (DIV)          ║
+   ╚══════════════════════════════════════════╝ */
+.post-link-area {
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.post-link {
+    color: #2b7fff;
+    font-weight: 600;
+    font-size: 1.4rem;
+    text-decoration: none;
+    word-break: break-all;
+    transition: color 0.3s ease;
+}
+
+.post-link:hover {
+    color: #1a5fd1;
+    text-decoration: underline;
+}
+
+/* ╔══════════════════════════════════════════╗
+   ║         BOTÕES DE AÇÃO (EDITAR / COPIAR) ║
+   ╚══════════════════════════════════════════╝ */
+.post-acoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.avisopost {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.post-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 11px 22px;
+    font-size: 1.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ✏️ Botão Editar */
+.post-btn-editar {
+    background: linear-gradient(135deg, #ffe88b, #ffd166);
+    color: #333;
+}
+
+.post-btn-editar:hover {
+    background: linear-gradient(135deg, #ffd34d, #fcbf49);
+    transform: scale(1.05);
+}
+
+/* 📋 Botão Copiar */
+.post-btn-copiar {
+    background: linear-gradient(135deg, #2b7fff, #3a9dff);
+    color: white;
+}
+
+.post-btn-copiar:hover {
+    background: linear-gradient(135deg, #1a5fd1, #2b7fff);
+    transform: scale(1.05);
+}
+
+/* ╔══════════════════════════════════════════╗
+   ║                ALERTA                    ║
+   ╚══════════════════════════════════════════╝ */
+.post-alerta {
+    margin-top: 15px;
+    background: rgba(43, 127, 255, 0.1);
+    color: #1b4cff;
+    font-weight: 600;
+    text-align: center;
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: inline-block;
+    animation: fadeIn 0.4s ease;
+}
+
+/* ╔══════════════════════════════════════════╗
+   ║              RESPONSIVIDADE              ║
+   ╚══════════════════════════════════════════╝ */
+@media (max-width: 700px) {
+    .post-container {
+        padding: 25px 18px;
+    }
+
+    .post-titulo {
+        font-size: 22px;
+    }
+
+    .post-botao {
+        font-size: 14px;
+        padding: 10px 14px;
+    }
+
+    .post-textarea {
+        min-height: 200px;
+        font-size: 14.5px;
+    }
+
+    .post-btn {
+        font-size: 14px;
+        padding: 8px 18px;
+    }
+
+    .post-texto-pronto {
+        font-size: 14.5px;
+    }
+}

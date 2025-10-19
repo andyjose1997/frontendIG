@@ -32,6 +32,7 @@ import AdminRoute from "./adminroute.jsx";
 import IronQuiz from "./pages/ironQuiz/ironquiz.jsx";
 import { Link } from "react-router-dom";
 import { URL } from "./config.jsx";
+import LinkInfo from "./pages/Perfil/config/linkinfo.jsx";
 
 function HomeRedirect() {
   const { user } = useAuth(); // supondo que user != null significa logado
@@ -227,6 +228,15 @@ function AppRoutes() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/linkinfo"
+          element={
+            <PrivateRoute>
+              <LinkInfo />
+            </PrivateRoute>
+          }
+        />
+
         <Route
           path="/aprendizagem"
           element={
