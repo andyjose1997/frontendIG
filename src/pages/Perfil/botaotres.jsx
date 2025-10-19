@@ -200,7 +200,7 @@ export default function BotaoTres() {
                 >
                     Torneio Vendas
                 </button>
-                <button
+                <button style={{ display: "none" }}
                     className={mostrar === "quizzes" ? "ativo" : ""}
                     onClick={() => setMostrar("quizzes")}
                 >

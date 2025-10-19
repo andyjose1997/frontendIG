@@ -110,11 +110,11 @@ export default function Botoes() {
                 </div>
 
                 <div className="tooltip-wrapper">
-                    <button onClick={() => navigate('/manual')}>🧾 <span className="link-text">Manual</span></button>
+                    <button onClick={() => navigate('/manual')}>🧾 <span className="link-text">Termos</span></button>
                 </div>
 
                 <div className="tooltip-wrapper">
-                    <button onClick={() => navigate('/iron_quiz')}>
+                    <button style={{ display: "none" }} onClick={() => navigate('/iron_quiz')}>
                         🏆 <span className="link-text">IronQuiz</span>
                     </button>
                     <span className="tooltip-text">
