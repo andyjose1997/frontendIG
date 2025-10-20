@@ -150,7 +150,7 @@ export default function Cadastrarse() {
                 {hostData && !mostrarModalHost && (
                     <div className="host-box">
                         <p className="host-texto-intro">Seu Host será...</p>
-                        <img src={hostData.foto} alt="Foto do Host" className="host-foto" />
+                        <img src={hostData.foto} alt="Foto do Host" className="hhost-foto" />
                         <p className="host-nome">
                             <b>{hostData.nome} {hostData.sobrenome}!!</b>
                         </p>
@@ -179,16 +179,19 @@ export default function Cadastrarse() {
                 {hostData && !mostrarModalHost && !emailVerificado && (
                     <div className="login-google">
                         <h3 className="login-google-titulo">Entre com o Google</h3>
-                        <GoogleLogin
-                            onSuccess={(credentialResponse) => {
-                                const userInfo = jwtDecode(credentialResponse.credential);
-                                setEmail(userInfo.email);
-                                setNome(userInfo.given_name || "");
-                                setSobrenome(userInfo.family_name || "");
-                                setEmailVerificado(true);
-                            }}
-                            onError={() => console.log("Erro no login com Google")}
-                        />
+                        <div className="googlecadastro" >
+                            <GoogleLogin
+                                onSuccess={(credentialResponse) => {
+                                    const userInfo = jwtDecode(credentialResponse.credential);
+                                    setEmail(userInfo.email);
+                                    setNome(userInfo.given_name || "");
+                                    setSobrenome(userInfo.family_name || "");
+                                    setEmailVerificado(true);
+                                }}
+                                onError={() => console.log("Erro no login com Google")}
+                            />
+
+                        </div>
                     </div>
                 )}
 

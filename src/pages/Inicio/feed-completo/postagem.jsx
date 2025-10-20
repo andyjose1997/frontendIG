@@ -92,7 +92,7 @@ export default function Postagem({
                     </button>
                 </div>
             ) : (
-                <h4 className="post-titulo">{post.titulo}</h4>
+                <h4 className="postt-titulo">{post.titulo}</h4>
             )}
 
             <Reacoes

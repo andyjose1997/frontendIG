@@ -1,6 +1,6 @@
 /* Container principal */
 .PainelCadastro {
-    max-width: 480px;
+    max-width: 780px;
     margin: 4rem auto;
     padding: 2rem;
     background: #fff;
@@ -38,6 +38,22 @@
     background: linear-gradient(90deg, #667bff, #a86aff);
     transform: scale(1.05);
 }
+
+/* aumenta o tamanho do botão Google */
+.googlecadastro {
+    transform: scale(1.4);
+    /* aumenta o botão em 40% */
+    transform-origin: center;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.login-google>div iframe {
+    width: 330px !important;
+    height: 60px !important;
+}
+
 
 .overlay-carregando {
     position: fixed;
@@ -215,7 +231,7 @@
 }
 
 .host-nome {
-    font-size: 16px;
+    font-size: 1.6rem !important;
     font-weight: 700;
     color: #222;
     margin-top: 4px;
@@ -542,7 +558,7 @@
     color: #333;
 
     /* 🔹 responsividade e segurança */
-    max-width: 100%;
+    max-width: 90%;
     word-wrap: break-word;
     overflow-wrap: break-word;
 
@@ -603,9 +619,9 @@
 }
 
 /* Foto do Host */
-.host-foto {
-    width: 120px;
-    height: 120px;
+.hhost-foto {
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
 
     /* 🔹 garante proporção correta */

@@ -50,11 +50,12 @@
 }
 
 /* ====== CONTEÚDO ====== */
-.post-conteudo {
+.post-conteuudo {
     font-size: 2rem;
     line-height: 1.6;
     color: #d8e3f0;
     margin: 1rem 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     white-space: pre-line;
 }
 

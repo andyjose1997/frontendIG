@@ -85,7 +85,7 @@ export default function PostagemSistema({
             ) : (
                 <>
                     {console.log("DEBUG TITULO:", JSON.stringify(post.titulo))}
-                    <div className="post-conteudo">
+                    <div className="post-conteuudo">
                         {post.titulo.split("\n").map((linha, i) => (
                             <div key={i}>{linha}</div>
                         ))}
