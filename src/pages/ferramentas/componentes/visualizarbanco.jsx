@@ -17,6 +17,7 @@ export default function VisualizarBanco() {
     const [linhaEditando, setLinhaEditando] = useState(null);
     const [dadosEditados, setDadosEditados] = useState({});
     const [alerta, setAlerta] = useState({ mensagem: "", tipo: "" });
+    const [estatisticasAcessos, setEstatisticasAcessos] = useState({ hoje: 0, ontem: 0, semana: 0 });
 
     useEffect(() => {
         if (linhaEditando) {
@@ -39,6 +40,15 @@ export default function VisualizarBanco() {
                     carregarTabela("usuarios");
                 }
             });
+    }, []);
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        fetch(`${URL}/ferramentas/estatisticas_acessos`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then(res => res.json())
+            .then(data => setEstatisticasAcessos(data))
+            .catch(() => console.error("Erro ao carregar estatísticas de acessos"));
     }, []);
 
     const carregarTabela = (nome) => {
@@ -172,6 +182,14 @@ export default function VisualizarBanco() {
 
                     <div className="resumo-tabela">
                         <p style={{ fontSize: "30px" }}>Total de registros: <strong>{dadosFiltrados.length}</strong></p>
+                    </div>
+                    <div className="resumo-acessos">
+                        <p>📅 Cliques para cadastro:</p>
+                        <ul>
+                            <li>Hoje: <strong>{estatisticasAcessos.hoje}</strong></li>
+                            <li>Ontem: <strong>{estatisticasAcessos.ontem}</strong></li>
+                            <li>Essa semana: <strong>{estatisticasAcessos.semana}</strong></li>
+                        </ul>
                     </div>
 
 
