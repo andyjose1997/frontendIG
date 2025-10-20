@@ -1,3 +1,4 @@
+// 📂 src/componentes/configuracoes/DadosConta.jsx
 import { useEffect, useState } from 'react';
 import './dadosconta.css';
 import { URL } from '../../../config';
@@ -13,13 +14,9 @@ export default function DadosConta({ onVoltar }) {
     const [frase, setFrase] = useState("");
     const [notificacoesAtivas, setNotificacoesAtivas] = useState(false);
 
-    const [alerta, setAlerta] = useState(""); // 🔹 novo estado para o alerta
-
-    // 🔹 Função para deixar a primeira letra maiúscula
-    const capitalize = (str) => {
-        if (!str) return "";
-        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-    };
+    const [alerta, setAlerta] = useState("");
+    const [mostrarSenhaModal, setMostrarSenhaModal] = useState(false); // 🔹 novo estado
+    const [senhaDigitada, setSenhaDigitada] = useState(""); // 🔹 senha digitada pelo usuário
 
     useEffect(() => {
         buscarDadosConta();
@@ -49,11 +46,12 @@ export default function DadosConta({ onVoltar }) {
         }
     };
 
-    const salvarAlteracoes = async () => {
+    // 🔹 Função principal de salvar (somente chamada após senha validada)
+    const confirmarSalvar = async () => {
         const token = localStorage.getItem('token');
 
         try {
-            await fetch(`${URL}/perfil/atualizar_perfil`, {
+            const resposta = await fetch(`${URL}/perfil/atualizar_perfil`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -65,48 +63,30 @@ export default function DadosConta({ onVoltar }) {
                     email: email.trim(),
                     email_secundario: emailSecundario.trim(),
                     comentario_perfil: frase,
-                    notificacoes: notificacoesAtivas
+                    notificacoes: notificacoesAtivas,
+                    senha: senhaDigitada // 🔹 senha enviada
                 })
             });
 
-            // 🔹 Exibe alerta e volta depois de 2s
+            const data = await resposta.json();
+
+            if (data.erro) {
+                setAlerta("❌ Senha incorreta.");
+                setTimeout(() => setAlerta(""), 2000);
+                return;
+            }
+
             setAlerta("✅ Dados atualizados com sucesso!");
             setTimeout(() => {
                 setAlerta("");
-                onVoltar(); // 🔙 volta automaticamente
+                setMostrarSenhaModal(false);
+                onVoltar();
             }, 2000);
-
         } catch {
             setAlerta("❌ Erro ao salvar alterações.");
             setTimeout(() => setAlerta(""), 2000);
         }
     };
-
-    const atualizarNotificacoes = async (novoStatus) => {
-        setNotificacoesAtivas(novoStatus);
-
-        const token = localStorage.getItem('token');
-
-        await fetch(`${URL}/perfil/atualizar_perfil`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                nome,
-                sobrenome,
-                email,
-                email_secundario: emailSecundario,
-                comentario_perfil: frase,
-                notificacoes: novoStatus
-            })
-        });
-    };
-
-    if (!dados) {
-        return <p>Carregando dados...</p>;
-    }
 
     const renderCampo = (campo, valor, setValor) => {
         if (editandoCampo === campo) {
@@ -133,20 +113,11 @@ export default function DadosConta({ onVoltar }) {
         <section className="privacidade-config">
             <h2>👤 Dados da Conta</h2>
             <h4>clique em cada area para editar</h4>
-            <p><strong>Nome: </strong>
-                {renderCampo("nome", nome, (val) => setNome(capitalize(val)))}
-            </p>
 
-            <p><strong>Sobrenome: </strong>
-                {renderCampo("sobrenome", sobrenome, (val) => setSobrenome(capitalize(val)))}
-            </p>
-
-            <p style={{ display: "none" }} ><strong>Email:</strong> {renderCampo("email", email, setEmail)}</p>
-
-            <p><strong>Email Secundário (recuperação): </strong>
-                {renderCampo("email_secundario", emailSecundario, setEmailSecundario)}
-            </p>
-
+            <p><strong>Nome:</strong> {renderCampo("nome", nome, setNome)}</p>
+            <p><strong>Sobrenome:</strong> {renderCampo("sobrenome", sobrenome, setSobrenome)}</p>
+            <p style={{ display: "none" }}><strong>Email:</strong> {renderCampo("email", email, setEmail)}</p>
+            <p><strong>Email Secundário (recuperação):</strong> {renderCampo("email_secundario", emailSecundario, setEmailSecundario)}</p>
             <p><strong>Próxima Meta:</strong> {renderCampo("frase", frase, setFrase)}</p>
 
             <div style={{ marginTop: '20px' }}>
@@ -154,14 +125,14 @@ export default function DadosConta({ onVoltar }) {
                     <input
                         type="checkbox"
                         checked={notificacoesAtivas}
-                        onChange={e => atualizarNotificacoes(e.target.checked)}
+                        onChange={e => setNotificacoesAtivas(e.target.checked)}
                     />
                     Ativar Notificações
                 </label>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', gap: '10px' }}>
-                <button className="botao-config" onClick={salvarAlteracoes}>
+                <button className="botao-config" onClick={() => setMostrarSenhaModal(true)}>
                     Salvar Alterações
                 </button>
 
@@ -170,12 +141,26 @@ export default function DadosConta({ onVoltar }) {
                 </button>
             </div>
 
-            {/* 🔹 Toast personalizado */}
-            {alerta && (
-                <div className="toasta-alerta">
-                    {alerta}
+            {/* 🔹 Modal pedindo senha */}
+            {mostrarSenhaModal && (
+                <div className="modal-senha">
+                    <div className="modal-senha-content">
+                        <h3>🔒 Confirme sua Senha</h3>
+                        <input
+                            type="password"
+                            placeholder="Digite sua senha"
+                            value={senhaDigitada}
+                            onChange={e => setSenhaDigitada(e.target.value)}
+                        />
+                        <div className="modal-botoes">
+                            <button onClick={confirmarSalvar}>Confirmar</button>
+                            <button onClick={() => setMostrarSenhaModal(false)}>Cancelar</button>
+                        </div>
+                    </div>
                 </div>
             )}
+
+            {alerta && <div className="toasta-alerta">{alerta}</div>}
         </section>
     );
 }

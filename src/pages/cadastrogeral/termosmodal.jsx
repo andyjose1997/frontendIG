@@ -7,6 +7,7 @@ export default function TermosModal({ onClose, onAceitar, onFinalizar }) {
     const [termos, setTermos] = useState([]);
     const [carregando, setCarregando] = useState(true);
     const [erro, setErro] = useState("");
+    const [aceitouMaioridade, setAceitouMaioridade] = useState(false); // 🔹 novo estado
 
     useEffect(() => {
         const carregar = async () => {
@@ -42,9 +43,26 @@ export default function TermosModal({ onClose, onAceitar, onFinalizar }) {
                     </ol>
                 )}
 
+                {/* 🔹 Checkbox de maioridade */}
+                <div className="checkbox-maioridade">
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={aceitouMaioridade}
+                            onChange={(e) => setAceitouMaioridade(e.target.checked)}
+                        />{" "}
+                        Declaro ter mais de 18 anos e concordo com os Termos de Uso.
+                    </label>
+                </div>
+
                 <div className="acoes">
                     <button
                         className="btnTermos-verde"
+                        disabled={!aceitouMaioridade} // 🔹 desabilitado até marcar
+                        style={{
+                            opacity: aceitouMaioridade ? 1 : 0.6,
+                            cursor: aceitouMaioridade ? "pointer" : "not-allowed",
+                        }}
                         onClick={() => {
                             onAceitar();   // marca termos aceitos
                             onClose();     // fecha modal termos

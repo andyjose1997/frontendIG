@@ -26,7 +26,7 @@ export default function TelaConfig() {
                 <Acima />
             </div>
 
-            {isConfigPage && larguraTela <= 1300 ? (
+            {isConfigPage && larguraTela <= 2200 ? (
                 <div className="config-voltar-wrapper">
                     <button
                         className="config-voltar-botao"

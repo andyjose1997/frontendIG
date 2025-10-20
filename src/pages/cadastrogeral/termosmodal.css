@@ -11,6 +11,48 @@
     z-index: 1000;
 }
 
+/* 🔹 Área do checkbox de maioridade */
+.checkbox-maioridade {
+    margin: 25px 0 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1.5rem;
+    color: #030303;
+    line-height: 1.5;
+}
+
+.checkbox-maioridade label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* 🔹 Aparência do checkbox */
+.checkbox-maioridade input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #00b894;
+    /* cor verde moderna */
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid #bbb;
+    transition: all 0.2s ease;
+}
+
+.checkbox-maioridade input[type="checkbox"]:hover {
+    border-color: #00b894;
+}
+
+/* 🔹 Botão verde desabilitado */
+.btnTermos-verde:disabled {
+    background-color: #ccc !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+}
+
 .modal-termos {
     background: #024ef1;
     width: 65%;
