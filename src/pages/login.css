@@ -65,33 +65,34 @@
 }
 
 /* ===========================
-   LOGIN COM GOOGLE
+   BOTÃO GOOGLE AUMENTADO
 =========================== */
 .google-login-wrapper {
     display: flex;
     justify-content: center;
-    margin-top: 1.2rem;
-    padding: 0.3rem;
-    /* 🔹 dá respiro ao redor */
-    border-radius: 10px;
+    align-items: center;
+    margin-top: 1.8rem;
+    padding: 1.2rem;
+    border-radius: 12px;
     background: linear-gradient(145deg, #ffffff, #f1f5f9);
-    /* 🔹 efeito sutil */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
+/* Aumenta o botão Google */
 .google-login-wrapper iframe {
-    border-radius: 8px !important;
-    /* 🔹 bordas mais suaves */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    will-change: transform, box-shadow;
-    /* 🔹 performance suave */
+    transform: scale(1.5);
+    /* 🔹 aumenta 50% o tamanho */
+    transform-origin: center center;
+    width: 300px !important;
+    /* 🔹 força uma largura maior */
+    height: 60px !important;
+    /* 🔹 botão mais alto */
+    border-radius: 10px !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.google-login-wrapper iframe:hover {
-    transform: translateY(-2px) scale(1.03);
-    /* 🔹 micro movimento */
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
-}
+
 
 /* Seção do formulário */
 .form-section {
@@ -103,7 +104,7 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
     width: 90%;
     max-width: 420px;
-
+    min-height: 100vh;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     will-change: transform, box-shadow;
     /* 🔹 otimiza animação */

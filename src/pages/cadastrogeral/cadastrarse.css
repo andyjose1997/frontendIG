@@ -44,7 +44,7 @@
     transform: scale(1.4);
     /* aumenta o botão em 40% */
     transform-origin: center;
-    margin: 20px auto;
+    margin: auto auto;
     display: flex;
     justify-content: center;
 }
@@ -1112,10 +1112,7 @@
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.login-google>div:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
-}
+
 
 /* ===========================
    FAQ MODAL - Botão Azul
