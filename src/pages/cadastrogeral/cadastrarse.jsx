@@ -135,6 +135,23 @@ export default function Cadastrarse() {
             setMensagemFinal("⚠️ Erro de conexão com o servidor.");
         }
     };
+    useEffect(() => {
+        // 🔹 Registra o acesso
+        fetch(`${URL}/ferramentas/acessos/registrar`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id_host: "a00001",
+                nome_host: "andydeoliveira"
+            }),
+        });
+
+        // 🔹 Busca o total de acessos
+        fetch(`${URL}/ferramentas/acessos/contar/a00001`)
+            .then(res => res.json())
+            .then(data => setAcessos(data.total))
+            .catch(err => console.error("Erro ao buscar acessos:", err));
+    }, []);
 
     useEffect(() => {
         if (idHost) {
