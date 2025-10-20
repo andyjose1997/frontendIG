@@ -66,7 +66,7 @@ function Home() {
         <div className="Cards">
           <div className="Card">📚 Cursos Estruturados</div>
           <div className="Card">🏆 Ranking de Desempenho</div>
-          <div className="Card">💼 Gerador de Currículo</div>
+          <div className="Card">💼 Seu Portfolio pessoal</div>
         </div>
       </section>
 
