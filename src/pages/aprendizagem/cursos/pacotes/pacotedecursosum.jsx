@@ -124,7 +124,20 @@ export default function PacoteDeCursosUm() {
                         <h3>🚀 Próximo Curso Chegando!</h3>
                         <p><strong>{proximoCurso.curso}</strong></p>
                         <p>{proximoCurso.descricao}</p>
-                        <p className="data-proximo">📅 Disponível a partir de <span> </span> <strong>{new Date(proximoCurso.quando).toLocaleDateString("pt-BR")}</strong></p>
+                        <p className="data-proximo">
+                            📅 {(() => {
+                                const hoje = new Date();
+                                const dataCurso = new Date(proximoCurso.quando);
+                                const mesmoDia =
+                                    hoje.getFullYear() === dataCurso.getFullYear() &&
+                                    hoje.getMonth() === dataCurso.getMonth() &&
+                                    hoje.getDate() === dataCurso.getDate();
+
+                                return mesmoDia
+                                    ? "Disponível hoje apartir de 21 horas"
+                                    : <>Disponível a partir de <strong>{dataCurso.toLocaleDateString("pt-BR")}</strong></>;
+                            })()}
+                        </p>
                     </div>
                 )}
 
