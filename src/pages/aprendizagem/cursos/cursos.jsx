@@ -38,7 +38,7 @@ export const Cursos = () => {
 
     // 🔹 Buscar cursos (para explorers e members)
     useEffect(() => {
-        fetch(`${URL}/cursos`)
+        fetch(`${URL}/cursos/`)
             .then(res => res.json())
             .then(data => {
                 setCursos(data.cursos || []);
@@ -74,32 +74,43 @@ export const Cursos = () => {
                 </p>
                 <button
                     className="pagar-botao"
-                    onClick={async () => {
-                        try {
-                            const token = localStorage.getItem("token");
-                            const response = await fetch(`${URL}/pagamento/criar-preferencia`, {
-                                method: "POST",
-                                headers: {
-                                    "Authorization": `Bearer ${token}`,
-                                    "Content-Type": "application/json"
-                                }
-                            });
-
-                            const data = await response.json();
-
-                            if (data.init_point) {
-                                window.open(data.init_point, "_blank");
-                            } else {
-                                alert("Erro ao iniciar pagamento.");
-                            }
-                        } catch (error) {
-                            console.error("Erro:", error);
-                            alert("Erro ao conectar com pagamento.");
+                    onClick={() => {
+                        const token = localStorage.getItem("token");
+                        if (!token) {
+                            alert("Você precisa estar logado.");
+                            return;
                         }
+
+                        // Cria uma aba temporária (o iPhone permite)
+                        const novaAba = window.open("", "_blank");
+
+                        fetch(`${URL}/pagamento/criar-preferencia`, {
+                            method: "POST",
+                            headers: {
+                                "Authorization": `Bearer ${token}`,
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.init_point) {
+                                    // Atualiza a aba temporária com o checkout
+                                    novaAba.location.href = data.init_point;
+                                } else {
+                                    novaAba.close();
+                                    alert("Erro ao iniciar pagamento.");
+                                }
+                            })
+                            .catch(err => {
+                                console.error("Erro:", err);
+                                novaAba.close();
+                                alert("Erro ao conectar com pagamento.");
+                            });
                     }}
                 >
                     💳 Tornar-se Member (R$60)
                 </button>
+
             </div>
             <h2 className="cursosexp" >Cursos disponiveis</h2>
 
