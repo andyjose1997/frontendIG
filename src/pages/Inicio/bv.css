@@ -1,69 +1,243 @@
-/* Fundo escuro */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-/* Caixa central */
-.modal-content {
-    background: #111;
-    padding: 20px;
-    border-radius: 16px;
-    max-width: 80%;
-    max-height: 70%;
-    width: 100%;
-    height: 800px;
+/* =============================== */
+/* 🌟 SEÇÃO PRINCIPAL - CONTAINER */
+/* =============================== */
+.boas-vindas-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-    animation: zoomIn 0.3s ease;
+    justify-content: center;
+    min-height: 75vh;
+    width: 90%;
+    max-width: 750px;
+    margin: 50px auto;
+    padding: 45px 40px;
+    border-radius: 25px;
+    text-align: center;
+    color: #f9f9f9;
+    background: radial-gradient(circle at top left, #1f2a44, #0b132b 60%);
+    box-shadow:
+        0 0 15px rgba(0, 198, 255, 0.3),
+        inset 0 0 15px rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    animation: aparecer 0.9s ease-in-out;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Animação de entrada */
-@keyframes zoomIn {
+/* 🔹 Efeito dinâmico de brilho girando no fundo */
+.boas-vindas-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(from 180deg at 50% 50%,
+            rgba(0, 198, 255, 0.15),
+            rgba(0, 255, 170, 0.05),
+            transparent 60%);
+    animation: rotacaoBrilho 15s linear infinite;
+    z-index: 0;
+    border-radius: 25px;
+}
+
+/* 🔹 Mantém o conteúdo acima do brilho */
+.boas-vindas-container>* {
+    position: relative;
+    z-index: 2;
+}
+
+/* =============================== */
+/* 💬 MENSAGEM PRINCIPAL */
+/* =============================== */
+.mensagem {
+    font-size: 1.5rem;
+    line-height: 1.7;
+    font-weight: 500;
+    color: #f0f8ff;
+    letter-spacing: 0.5px;
+    margin-bottom: 35px;
+    min-height: 110px;
+    animation: fadeIn 0.8s ease-in-out;
+    background: linear-gradient(90deg, #00c6ff, #00ffcc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* =============================== */
+/* ⚡ BOTÕES */
+/* =============================== */
+.boas-vindas-container button {
+    padding: 12px 36px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    box-shadow:
+        0 0 12px rgba(0, 198, 255, 0.3),
+        inset 0 0 4px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.boas-vindas-container button:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow:
+        0 0 20px rgba(0, 198, 255, 0.6),
+        inset 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+.btn-entendi {
+    background: linear-gradient(135deg, #00ff88, #28a745);
+    box-shadow:
+        0 0 12px rgba(0, 255, 136, 0.4),
+        inset 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+.btn-entendi:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow:
+        0 0 22px rgba(0, 255, 136, 0.6),
+        inset 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* =============================== */
+/* 🔗 LINKS (Lives e Facebook) */
+/* =============================== */
+.link-live {
+    display: inline-block;
+    margin-top: 10px;
+    color: #00d4ff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.link-live::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0%;
+    height: 2px;
+    background: #00d4ff;
+    transition: width 0.3s ease;
+}
+
+.link-live:hover::after {
+    width: 100%;
+}
+
+.link-live:hover {
+    color: #00fff7;
+    transform: scale(1.05);
+}
+
+/* =============================== */
+/* 🧭 HOST SECTION */
+/* =============================== */
+.host-info {
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+    color: #eafaff;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.host-foto {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 12px;
+    border: 3px solid #00e0ff;
+    box-shadow:
+        0 0 20px rgba(0, 198, 255, 0.6),
+        inset 0 0 6px rgba(255, 255, 255, 0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.host-foto:hover {
+    transform: scale(1.05);
+    box-shadow:
+        0 0 30px rgba(0, 255, 204, 0.8),
+        inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* =============================== */
+/* ⏳ ESTILO DE CARREGAMENTO */
+/* =============================== */
+.carregando {
+    font-style: italic;
+    opacity: 0.8;
+    color: #ccc;
+    font-size: 1.1rem;
+}
+
+/* =============================== */
+/* 📱 RESPONSIVIDADE */
+/* =============================== */
+@media (max-width: 700px) {
+    .boas-vindas-container {
+        width: 95%;
+        padding: 30px 20px;
+        border-radius: 20px;
+    }
+
+    .mensagem {
+        font-size: 1.1rem;
+        margin-bottom: 25px;
+    }
+
+    .boas-vindas-container button {
+        width: 100%;
+        font-size: 1rem;
+        margin-top: 10px;
+    }
+
+    .host-foto {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* =============================== */
+/* ✨ ANIMAÇÕES */
+/* =============================== */
+@keyframes aparecer {
     from {
-        transform: scale(0.9);
         opacity: 0;
+        transform: translateY(40px);
     }
 
     to {
-        transform: scale(1);
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* Vídeo ocupa quase a tela */
-.modal-content iframe {
-    width: 100%;
-    height: 100vh;
-    border-radius: 12px;
-    margin-bottom: 20px;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-/* Botão bonito */
-.fechar-btn {
-    padding: 12px 30px;
-    background: linear-gradient(135deg, #0571d6, #034f9e);
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
+@keyframes rotacaoBrilho {
+    from {
+        transform: rotate(0deg);
+    }
 
-.fechar-btn:hover {
-    background: linear-gradient(135deg, #034f9e, #022d6e);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    to {
+        transform: rotate(360deg);
+    }
 }
