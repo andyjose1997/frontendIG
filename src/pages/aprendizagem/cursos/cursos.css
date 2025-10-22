@@ -212,6 +212,41 @@
     font-size: 1.5rem;
 }
 
+.aviso-mobile {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 10px 0 16px 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.aviso-mobile a {
+    color: #0056b3;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.aviso-mobile a:hover {
+    text-decoration: underline;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Próximo curso */
 .proximo-curso {
     background: linear-gradient(135deg, #004d40, #00796b);

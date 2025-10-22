@@ -178,6 +178,34 @@ export const Cursos = () => {
                     <br />
                     Torne-se <strong>Member</strong> agora e tenha acesso completo!
                 </p>
+                {/* 📱 Aviso para todos os celulares (iPhone e Android) */}
+                {(() => {
+                    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                    const isMobile = /android|iphone|ipad|ipod/i.test(userAgent);
+
+                    if (isMobile) {
+                        return (
+                            <p className="aviso-mobile">
+                                ⚠️ <strong>Aviso:</strong> em dispositivos móveis, é necessário ter o aplicativo
+                                <strong> Mercado Pago </strong> instalado para concluir o pagamento com sucesso.
+                                <br />
+                                <a
+                                    href={
+                                        /iphone|ipad|ipod/i.test(userAgent)
+                                            ? "https://apps.apple.com/app/mercado-pago/id925436649"
+                                            : "https://play.google.com/store/apps/details?id=com.mercadopago.wallet"
+                                    }
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    👉 Baixar o app
+                                </a>
+                            </p>
+                        );
+                    }
+                    return null;
+                })()}
+
                 <button className="pagar-botao" onClick={handlePagamentoPacote}>
                     💳 Tornar-se Member (R$60)
                 </button>
