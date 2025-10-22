@@ -11,7 +11,7 @@ export default function Cursos() {
 
     // 🔹 Buscar cursos e próximo curso (mesma rota)
     useEffect(() => {
-        fetch(`${URL}/cursos`)
+        fetch(`${URL}/cursos/`)
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data.cursos)) {
