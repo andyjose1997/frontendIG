@@ -257,6 +257,8 @@ export default function Cadastrarse() {
             {mostrarModalHost && hostData && (
                 <div className="modalCadastro-overlay">
                     <div className="modalCadastro-host">
+                        <h2>Seja muito bem-vindo(a)!</h2>
+                        <p>Esta é a plataforma onde aprender e lucrar caminham juntos.</p>
                         <h2 className="modal-titulo">Este é o usuário que te recomendou?</h2>
                         <img src={hostData.foto} alt="Foto do Host" className="host-foto" />
                         <h3 className="modal-host-nome">

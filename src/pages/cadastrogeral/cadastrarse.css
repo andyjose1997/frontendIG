@@ -380,25 +380,55 @@
     animation: fadeIn 0.4s ease forwards;
 }
 
-/* ===== Caixa principal do modal ===== */
 .modalCadastro-host {
-    background: #fff;
-    border-radius: 16px;
-    padding: 2rem;
-    width: 90%;
-    max-width: 420px;
-    text-align: center;
-
-    /* 🔹 profundidade */
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
-
-    /* 🔹 animação de entrada */
-    animation: scaleIn 0.35s ease-out;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-
-    -webkit-font-smoothing: antialiased;
-    backface-visibility: hidden;
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 16px !important;
+    padding: 2rem !important;
+    width: 90% !important;
+    max-width: 620px !important;
+    text-align: center !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+    backdrop-filter: blur(10px) !important;
 }
+
+/* 🔹 Fundo animado dentro do modal */
+.modalCadastro-host::before {
+    content: "" !important;
+    position: absolute !important;
+    top: -50% !important;
+    left: -50% !important;
+    width: 200% !important;
+    height: 200% !important;
+    z-index: 0 !important;
+    background: linear-gradient(120deg, #007bff, #00bcd4, #2196f3, #1e88e5) !important;
+    background-size: 300% 300% !important;
+    animation: moveGradient 8s linear infinite !important;
+    opacity: 0.15 !important;
+}
+
+/* 🔹 Animação do gradiente interno */
+@keyframes moveGradient {
+    0% {
+        background-position: 0% 50% !important;
+    }
+
+    50% {
+        background-position: 100% 50% !important;
+    }
+
+    100% {
+        background-position: 0% 50% !important;
+    }
+}
+
+/* 🔹 Garantir que o conteúdo fique acima do fundo animado */
+.modalCadastro-host>* {
+    position: relative !important;
+    z-index: 2 !important;
+}
+
 
 .modalCadastro-host:hover {
     transform: translateY(-2px);
@@ -691,32 +721,6 @@
 .btnn-info:active {
     transform: scale(0.97);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Caixa central do modal de cadastro */
-.modalCadastro-host {
-    background: #fff;
-    border-radius: 16px;
-    padding: 2rem;
-    width: 90%;
-    max-width: 420px;
-    text-align: center;
-
-    /* 🔹 profundidade */
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-
-    /* 🔹 animação suave */
-    animation: scaleIn 0.35s ease-out;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-
-    /* 🔹 acabamento */
-    -webkit-font-smoothing: antialiased;
-    backface-visibility: hidden;
-}
-
-.modalCadastro-host:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
 }
 
 .modalCadastro-host img {
