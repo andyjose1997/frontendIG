@@ -20,6 +20,7 @@ export default function ExercicioIdiomas({ exercicioId, onClose }) {
     const [erros, setErros] = useState(0);
     const [showPremium, setShowPremium] = useState(false);
     const [reiniciar, setReiniciar] = useState(false);
+    const [vidaAtualizando, setVidaAtualizando] = useState(false);
 
     // Timer de entrada
     const [countdown, setCountdown] = useState(3);
@@ -175,11 +176,12 @@ export default function ExercicioIdiomas({ exercicioId, onClose }) {
         }
     };
 
-
-    // 🔹 Descontar vida no erro
     const descontarVida = () => {
         if (!usuarioId) return;
         const token = localStorage.getItem("token");
+
+        setVidaAtualizando(true); // ⏳ Bloqueia o botão durante o desconto
+
         fetch(`${URL}/ironstep/vidas/descontar/${usuarioId}`, {
             method: "POST",
             headers: { Authorization: `Bearer ${token}` }
@@ -189,10 +191,12 @@ export default function ExercicioIdiomas({ exercicioId, onClose }) {
                 setVidas(data.vidas);
                 if (data.vidas === 0) setBloqueado(true);
             })
-            .catch(err => console.error("Erro ao descontar vida:", err));
+            .catch(err => console.error("Erro ao descontar vida:", err))
+            .finally(() => {
+                setVidaAtualizando(false); // ✅ Libera o botão após resposta do backend
+            });
     };
 
-    // 🔹 Validação da resposta
     // 🔹 Validação da resposta
     const validarResposta = () => {
         let correto = false;
@@ -293,9 +297,23 @@ export default function ExercicioIdiomas({ exercicioId, onClose }) {
                         {feedback ? (
                             <div className={`feedback ${feedback.tipo}`}>
                                 <p>{feedback.msg}</p>
-                                <button className="next-bttn" onClick={proximaFase}>Próxima</button>
+
+                                <button
+                                    className={`next-bttn ${(feedback.tipo === "erro" && vidaAtualizando) ? "disabled" : ""
+                                        }`}
+                                    onClick={
+                                        (feedback.tipo === "erro" && vidaAtualizando)
+                                            ? undefined
+                                            : proximaFase
+                                    }
+                                    disabled={feedback.tipo === "erro" && vidaAtualizando}
+                                >
+                                    {vidaAtualizando ? "Atualizando vidas..." : "Próxima"}
+                                </button>
                             </div>
                         ) : (
+
+
                             <ExercicioTipos
                                 fase={fase}
                                 opcoesAtuais={opcoesAtuais}

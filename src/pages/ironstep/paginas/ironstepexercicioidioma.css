@@ -111,6 +111,11 @@
     }
 }
 
+.next-bttn.disabled {
+    background-color: #aaa !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+}
 
 /* ===== Botão Premium Chamativo ===== */
 .premiumm-btttn {

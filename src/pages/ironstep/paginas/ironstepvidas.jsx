@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "./ironstepvidas.css";
-import { URL } from "../../../config"; // ajuste o caminho do seu config.js
+import { URL } from "../../../config";
 
 export default function IronStepVidas({ vidas = 0 }) {
     const [showModal, setShowModal] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 590);
 
-    // 👇 Atualiza automaticamente se a largura da tela mudar
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth < 500);
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    // Garantir que vidas não seja negativo
     const vidasAtuais = Math.max(0, vidas);
 
-    // 🔹 Função genérica de pagamento
     const iniciarPagamento = async (plano) => {
         try {
             const token = localStorage.getItem("token");
@@ -39,7 +36,7 @@ export default function IronStepVidas({ vidas = 0 }) {
 
             const data = await res.json();
             if (data.init_point) {
-                window.open(data.init_point, "_blank"); // abre checkout em nova aba
+                window.open(data.init_point, "_blank");
             } else {
                 alert("Não foi possível iniciar o pagamento.");
             }
@@ -51,19 +48,10 @@ export default function IronStepVidas({ vidas = 0 }) {
 
     return (
         <div className="vidas-wrapper">
-            {/* 🔹 Mostrar as vidas */}
             {vidasAtuais >= 4 ? (
                 <div className="vidas-container" data-tooltip="Vidas infinitas">
                     <div className="vida-infinito">
-                        {isMobile ? (
-                            <span>💎</span> // Apenas 1 diamante no mobile
-                        ) : (
-                            <>
-                                <span>💎</span>
-                                <span>💎</span>
-                                <span>💎</span>
-                            </>
-                        )}
+                        {isMobile ? <span>💎</span> : <><span>💎</span><span>💎</span><span>💎</span></>}
                     </div>
                 </div>
             ) : (
@@ -77,10 +65,8 @@ export default function IronStepVidas({ vidas = 0 }) {
                 </div>
             )}
 
-            {/* 🔹 Botão para abrir modal */}
             {vidasAtuais < 4 && (
                 <>
-                    {/* Versão normal (desktop) */}
                     <button
                         className="premium-btn premium-desktop"
                         onClick={() => setShowModal(true)}
@@ -88,7 +74,6 @@ export default function IronStepVidas({ vidas = 0 }) {
                         💎 Seja Premium
                     </button>
 
-                    {/* Versão só emoji (mobile) */}
                     <button
                         className="premium-btn premium-mobile"
                         onClick={() => setShowModal(true)}
@@ -98,7 +83,6 @@ export default function IronStepVidas({ vidas = 0 }) {
                 </>
             )}
 
-            {/* 🔹 Modal de preços */}
             {showModal && (
                 <div className="modal-ironstep-overlay">
                     <div className="modal-content premium-modal">
@@ -139,6 +123,35 @@ export default function IronStepVidas({ vidas = 0 }) {
                                 </button>
                             </div>
                         </div>
+
+                        {/* ⚠️ Aviso Mercado Pago */}
+                        {(() => {
+                            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                            const isMobile = /android|iphone|ipad|ipod/i.test(userAgent);
+                            if (isMobile) {
+                                return (
+                                    <p className="aviso-mobile" style={{ marginTop: "1rem", fontSize: "0.9rem", color: "#444" }}>
+                                        ⚠️ <strong>Aviso:</strong> é necessário ter o aplicativo <strong>Mercado Pago</strong> instalado para concluir o pagamento.
+                                        <br />
+                                        O app pode pedir login antes de mostrar a tela de pagamento — isso é normal.
+                                        <br />
+                                        <a
+                                            href={
+                                                /iphone|ipad|ipod/i.test(userAgent)
+                                                    ? "https://apps.apple.com/app/mercado-pago/id925436649"
+                                                    : "https://play.google.com/store/apps/details?id=com.mercadopago.wallet"
+                                            }
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            style={{ color: "#007bff", textDecoration: "underline" }}
+                                        >
+                                            👉 Baixar o app Mercado Pago
+                                        </a>
+                                    </p>
+                                );
+                            }
+                            return null;
+                        })()}
 
                         <button
                             className="fechar-irontep-btn"
