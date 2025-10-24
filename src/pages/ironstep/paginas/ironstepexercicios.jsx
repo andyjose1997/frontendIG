@@ -114,6 +114,17 @@ export default function IronStepExercicios({ cursoId, onBack }) {
             );
         }
     }
+    useEffect(() => {
+        const header = document.querySelector(".ironstep-header");
+        if (header) {
+            header.style.display = "none"; // 🔹 esconde o header ao entrar
+        }
+        return () => {
+            if (header) {
+                header.style.display = ""; // 🔹 volta ao normal ao sair
+            }
+        };
+    }, []);
 
     return (
         <>
@@ -154,7 +165,7 @@ export default function IronStepExercicios({ cursoId, onBack }) {
                                             </div>
                                             <div className="exercicio-infoo">
                                                 <p><strong>Descrição:</strong> {ex.descricao}</p>
-                                                <p><strong>Tipo:</strong> {ex.tipo_exercicio || ex.tipo_exercisio}</p>
+                                                <p style={{ display: "none" }} ><strong>Tipo:</strong> {ex.tipo_exercicio || ex.tipo_exercisio}</p>
                                                 <p><strong>Pontos: {ex.pontos}, </strong>seja rápido! Cada 30 segundos custam 1 ponto</p>
                                             </div>
 

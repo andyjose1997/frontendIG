@@ -47,12 +47,10 @@ export const Cursos = () => {
             const iosStore = "https://apps.apple.com/app/mercado-pago/id925436649";
 
             // Scheme custom do Mercado Pago (tentativa de abrir app)
-            // OBS: esquemas custom podem variar — esta é a tentativa genérica.
-            const appScheme = "mercadopago://";
+            const appScheme = "mercadopago://checkout";
 
             // Tentativa 1: tentar abrir o app diretamente na nova aba (iOS permite porque a aba foi criada no clique)
-            // Usamos uma URL que contém o init_point encodado para aumentar chance de redirecionamento correto pelo app
-            const appUrlWithInit = `${appScheme}?url=${encodeURIComponent(checkoutWeb)}`;
+            const appUrlWithInit = `${appScheme}?init_point=${encodeURIComponent(checkoutWeb)}`;
 
             // Tenta abrir o app (navegador tentará abrir o app se instalado)
             try {
@@ -174,11 +172,10 @@ export const Cursos = () => {
             {/* 💳 Área de pagamento primeiro */}
             <div className="explorer-aviso">
                 <p>
-                    🔒 Esses cursos estão disponíveis para membros IronGoals.
+                    🔒 Esses cursos estão disponíveis para Usuarios categoria Member IronGoals.
                     <br />
                     Torne-se <strong>Member</strong> agora e tenha acesso completo!
                 </p>
-                {/* 📱 Aviso para todos os celulares (iPhone e Android) */}
                 {(() => {
                     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
                     const isMobile = /android|iphone|ipad|ipod/i.test(userAgent);

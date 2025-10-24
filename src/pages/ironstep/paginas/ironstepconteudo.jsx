@@ -117,7 +117,9 @@ export default function IronStepConteudo() {
 
     return (
         <section className="section-container-ironstep">
-            <h3>Qual trilha você quer seguir hoje?</h3>
+            <h3 style={{ display: selectedCurso ? "none" : "block" }}>
+                Qual trilha você quer seguir hoje?
+            </h3>
 
             {loading ? (
                 <p>Carregando classes...</p>
