@@ -6,7 +6,7 @@ import JogarQuiz from "./jogarquiz";
 import './ironquiz.css'
 
 export default function IronQuiz() {
-    const [modo, setModo] = useState(null);
+    const [modo, setModo] = useState("jogar"); // 👈 Já começa em "jogar"
     const [funcao, setFuncao] = useState("");
 
     useEffect(() => {
@@ -22,15 +22,8 @@ export default function IronQuiz() {
                 console.log("🔎 Resposta do backend:", data);
                 const f = data.funcao || "";
                 setFuncao(f);
-
-                // 🔹 Se a função NÃO estiver na lista, já abre em "jogar"
-                if (!["admin", "auditor", "coordenador"].includes(f)) {
-                    setModo("jogar");
-                }
             } catch (err) {
                 console.error("Erro ao carregar função:", err);
-                // fallback: se der erro, também abre em "jogar"
-                setModo("jogar");
             }
         };
         carregarFuncao();
@@ -70,5 +63,4 @@ export default function IronQuiz() {
             </div>
         </main>
     );
-
 }
