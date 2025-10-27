@@ -119,7 +119,7 @@ export default function Login({ redirectTo }) {
                         onClick={() => loginComGoogle()}
                     >
                         <div className="google-icon-wrap">
-                            <img src="/public/logo/image.png" alt="Google" className="google-icon" />
+                            <img src="/logo/image.png" alt="Google" className="google-icon" />
                         </div>
                         <span className="google-text">Continuar com Google</span>
                     </button>

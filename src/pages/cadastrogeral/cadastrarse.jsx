@@ -215,7 +215,6 @@ export default function Cadastrarse() {
                                 onClick={() => loginComGoogle()}
                             >
                                 <img
-                                    src="/public/logo/image.png"
                                     alt="Google"
                                     className="icon-google"
                                 />
