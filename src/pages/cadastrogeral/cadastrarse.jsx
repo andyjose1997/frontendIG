@@ -214,12 +214,31 @@ export default function Cadastrarse() {
                                 className="btn-google-personalizado"
                                 onClick={() => loginComGoogle()}
                             >
-                                <img
-                                    alt="Google"
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 48 48"
                                     className="icon-google"
-                                />
+                                >
+                                    <path
+                                        fill="#EA4335"
+                                        d="M24 9.5c3.94 0 6.58 1.7 8.09 3.13l5.91-5.9C34.08 3.14 29.41 1 24 1 14.82 1 7.06 6.58 3.9 14.1l6.88 5.35C12.26 14.21 17.68 9.5 24 9.5z"
+                                    />
+                                    <path
+                                        fill="#34A853"
+                                        d="M46.5 24.5c0-1.61-.15-3.14-.43-4.62H24v9.08h12.65c-.55 2.96-2.22 5.46-4.72 7.15l7.24 5.63C43.86 37.56 46.5 31.48 46.5 24.5z"
+                                    />
+                                    <path
+                                        fill="#4A90E2"
+                                        d="M9.9 28.25a14.47 14.47 0 010-8.5l-6.88-5.35A23.86 23.86 0 000 24c0 3.9.94 7.59 2.62 10.87l7.28-5.62z"
+                                    />
+                                    <path
+                                        fill="#FBBC05"
+                                        d="M24 47c6.41 0 11.79-2.12 15.72-5.78l-7.24-5.63c-2.01 1.36-4.58 2.16-8.48 2.16-6.32 0-11.74-4.71-13.22-11.05l-7.28 5.62C7.06 41.42 14.82 47 24 47z"
+                                    />
+                                </svg>
                                 Entrar com Google
                             </button>
+
                         </div>
                     </div>
                 )}
