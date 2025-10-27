@@ -1,4 +1,6 @@
+// 📂 src/pages/Inicio/bv.jsx
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./bv.css";
 import { URL } from "../../config";
 
@@ -6,6 +8,7 @@ export default function BoasVindasInterativo() {
     const [passo, setPasso] = useState(0);
     const [host, setHost] = useState(null);
     const [carregando, setCarregando] = useState(true);
+    const navigate = useNavigate();
 
     // 🔹 Buscar dados do usuário e do host
     useEffect(() => {
@@ -51,23 +54,30 @@ export default function BoasVindasInterativo() {
         setTimeout(() => {
             setPasso((prev) => prev + 1);
             setCarregando(false);
-        }, 300); // pequena transição suave
+        }, 300);
     };
 
-    // 🔹 Quando clicar em "Entendi"
-    const handleEntendi = () => {
+    // 🔹 Finaliza (Entendi OU Pular)
+    const finalizarBoasVindas = async () => {
         const token = localStorage.getItem("token");
-        setCarregando(true);
-        fetch(`${URL}/usuarios/assistiu`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-        })
-            .then(() => window.location.reload())
-            .catch((err) => console.error("Erro ao atualizar assistiu:", err))
-            .finally(() => setCarregando(false));
+        if (!token) return;
+
+        try {
+            setCarregando(true);
+            await fetch(`${URL}/usuarios/assistiu`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            // ✅ Redireciona direto para o início
+            navigate("/inicio");
+        } catch (err) {
+            console.error("Erro ao atualizar assistiu:", err);
+        } finally {
+            setCarregando(false);
+        }
     };
 
     return (
@@ -76,12 +86,11 @@ export default function BoasVindasInterativo() {
                 <div className="mensagem carregando">⏳ Carregando...</div>
             ) : (
                 <>
-                    {/* 🔹 Passos de 0 a 5 = mensagens iniciais */}
+                    {/* 🔹 Passos 0–5 */}
                     {passo < 6 && (
                         <>
                             <div className="mensagem">{mensagens[passo]}</div>
 
-                            {/* 🔹 Link para live (passo 3) */}
                             {passo === 3 && (
                                 <a
                                     href="https://www.facebook.com/profile.php?id=61580492555279"
@@ -93,7 +102,6 @@ export default function BoasVindasInterativo() {
                                 </a>
                             )}
 
-                            {/* 🔹 Link para seguir a página (passo 4) */}
                             {passo === 4 && (
                                 <a
                                     href="https://www.facebook.com/profile.php?id=61580492555279"
@@ -105,14 +113,22 @@ export default function BoasVindasInterativo() {
                                 </a>
                             )}
 
-                            <br />
-                            <button
-                                onClick={proximoPasso}
-                                className="btn-proximo"
-                                disabled={carregando}
-                            >
-                                Próximo
-                            </button>
+                            <div className="botoes-container">
+                                <button
+                                    onClick={proximoPasso}
+                                    className="btn-proximo"
+                                    disabled={carregando}
+                                >
+                                    Próximo
+                                </button>
+                                <button
+                                    onClick={finalizarBoasVindas}
+                                    className="btn-pular"
+                                    disabled={carregando}
+                                >
+                                    Pular
+                                </button>
+                            </div>
                         </>
                     )}
 
@@ -126,7 +142,6 @@ export default function BoasVindasInterativo() {
                                         alt="Foto do Host"
                                         className="host-foto"
                                     />
-
                                     {host.id?.toString() === "a00001" ? (
                                         <p>
                                             Seu host é{" "}
@@ -158,50 +173,54 @@ export default function BoasVindasInterativo() {
                                 </div>
                             )}
 
-                            <button
-                                onClick={proximoPasso}
-                                className="btn-proximo"
-                                disabled={carregando}
-                            >
-                                Próximo
-                            </button>
+                            <div className="botoes-container">
+                                <button
+                                    onClick={proximoPasso}
+                                    className="btn-proximo"
+                                    disabled={carregando}
+                                >
+                                    Próximo
+                                </button>
+                                <button
+                                    onClick={finalizarBoasVindas}
+                                    className="btn-pular"
+                                    disabled={carregando}
+                                >
+                                    Pular
+                                </button>
+                            </div>
                         </>
                     )}
 
-                    {/* 🔹 Mensagem sobre contato com o host (passo 7) */}
-                    {passo === 7 && (
+                    {/* 🔹 Passos 7 e 8 */}
+                    {(passo === 7 || passo === 8) && (
                         <>
-                            <div className="mensagem">{mensagens[6]}</div>
-                            <button
-                                onClick={proximoPasso}
-                                className="btn-proximo"
-                                disabled={carregando}
-                            >
-                                Próximo
-                            </button>
+                            <div className="mensagem">{mensagens[passo - 1]}</div>
+                            <div className="botoes-container">
+                                <button
+                                    onClick={proximoPasso}
+                                    className="btn-proximo"
+                                    disabled={carregando}
+                                >
+                                    Próximo
+                                </button>
+                                <button
+                                    onClick={finalizarBoasVindas}
+                                    className="btn-pular"
+                                    disabled={carregando}
+                                >
+                                    Pular
+                                </button>
+                            </div>
                         </>
                     )}
 
-                    {/* 🔹 Mensagem sobre vendas e link de indicação (passo 8) */}
-                    {passo === 8 && (
-                        <>
-                            <div className="mensagem">{mensagens[7]}</div>
-                            <button
-                                onClick={proximoPasso}
-                                className="btn-proximo"
-                                disabled={carregando}
-                            >
-                                Próximo
-                            </button>
-                        </>
-                    )}
-
-                    {/* 🔹 Mensagem final sobre CPP (passo 9) */}
+                    {/* 🔹 Último passo */}
                     {passo === 9 && (
                         <>
                             <div className="mensagem">{mensagens[8]}</div>
                             <button
-                                onClick={handleEntendi}
+                                onClick={finalizarBoasVindas}
                                 className="btn-entendi"
                                 disabled={carregando}
                             >

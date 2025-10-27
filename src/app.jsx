@@ -33,6 +33,7 @@ import IronQuiz from "./pages/ironQuiz/ironquiz.jsx";
 import { Link } from "react-router-dom";
 import { URL } from "./config.jsx";
 import LinkInfo from "./pages/Perfil/config/linkinfo.jsx";
+import BoasVindasInterativo from "./pages/Inicio/bv.jsx";
 
 function HomeRedirect() {
   const { user } = useAuth(); // supondo que user != null significa logado
@@ -233,6 +234,14 @@ function AppRoutes() {
           element={
             <PrivateRoute>
               <LinkInfo />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/boas-vindas"
+          element={
+            <PrivateRoute>
+              <BoasVindasInterativo />
             </PrivateRoute>
           }
         />

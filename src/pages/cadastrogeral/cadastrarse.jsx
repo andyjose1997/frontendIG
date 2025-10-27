@@ -1,11 +1,10 @@
-// 📂 src/componentes/Cadastrarse.jsx
 import { useState, useEffect } from "react";
 import "./cadastrarse.css";
 import TermosModal from "./termosmodal";
-import AlertaTermos from "./alertatermos";
 import { useParams } from "react-router-dom";
 import { URL } from "../../config";
-import { jwtDecode } from "jwt-decode";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 export default function Cadastrarse() {
     const { idHost, nomeHost } = useParams();
@@ -15,55 +14,29 @@ export default function Cadastrarse() {
     const [emailVerificado, setEmailVerificado] = useState(false);
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
-    const [senha, setSenha] = useState("");
-    const [confirmarSenha, setConfirmarSenha] = useState("");
-    const [aceitouTermos, setAceitouTermos] = useState(false);
-
-    const [mensagemFinal, setMensagemFinal] = useState("");
     const [mostrarTermos, setMostrarTermos] = useState(false);
-    const [mostrarAlerta, setMostrarAlerta] = useState(false);
     const [carregandoCadastro, setCarregandoCadastro] = useState(false);
+    const [mensagemFinal, setMensagemFinal] = useState("");
+    const [carregandoHost, setCarregandoHost] = useState(true);
 
-    // 🔹 Funções auxiliares
+    // 🔹 Função auxiliar de capitalização
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    function validarSenha(senha) {
-        const regex =
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.,;])[A-Za-z\d@$!%*?&.,;]{8,}$/;
-        return regex.test(senha);
-    }
-
-    // 🔹 Etapa: Próxima Etapa (verificação de senha)
-    const handleProximaEtapa = (e) => {
+    // 🔹 Cadastro + login automático + redirecionamento
+    const handleCadastroFinal = async (e) => {
         e.preventDefault();
-
-        if (!validarSenha(senha)) {
-            setMensagemFinal(
-                "⚠️ A senha deve ter pelo menos 8 caracteres, incluindo 1 maiúscula, 1 minúscula, 1 número e 1 símbolo."
-            );
-            return;
-        }
-
-        if (senha !== confirmarSenha) {
-            setMensagemFinal("⚠️ As senhas não coincidem.");
-            return;
-        }
-
+        setCarregandoCadastro(true);
         setMensagemFinal("");
-        setMostrarTermos(true);
-    };
 
-    // 🔹 Etapa: Cadastro final
-    const handleCadastroFinal = async () => {
         try {
             const formData = new FormData();
             formData.append("nome", capitalizeFirstLetter(nome.trim()));
             formData.append("sobrenome", capitalizeFirstLetter(sobrenome.trim()));
             formData.append("id_host", idHost.trim().toLowerCase());
             formData.append("email", email);
-            formData.append("senha", senha);
+            formData.append("senha", "null");
             formData.append("termos_aceitos", 1);
 
             const res = await fetch(`${URL}/cadastrar`, {
@@ -72,9 +45,12 @@ export default function Cadastrarse() {
             });
 
             if (res.ok) {
+                console.log("✅ Cadastro concluído com sucesso!");
+
+                // 🔹 Faz login automático
                 const loginForm = new FormData();
                 loginForm.append("login", email);
-                loginForm.append("senha", senha);
+                loginForm.append("senha", "null");
 
                 const loginRes = await fetch(`${URL}/login`, {
                     method: "POST",
@@ -86,46 +62,52 @@ export default function Cadastrarse() {
                     localStorage.setItem("token", dados.token);
                     localStorage.setItem("usuario", JSON.stringify(dados.usuario));
                     localStorage.setItem("usuario_id", dados.usuario.id);
-                    window.location.href = "/inicio";
+
+                    // ✅ Redireciona para Boas-Vindas
+                    window.location.href = "/boas-vindas";
+                } else {
+                    setMensagemFinal("⚠️ Erro ao fazer login automático.");
                 }
             } else {
                 const erro = await res.json();
-                if (erro?.erro?.includes("já cadastrado")) {
-                    setMensagemFinal(
-                        "⚠️ Este email já está cadastrado. Faça login ou use outro email."
-                    );
-                } else {
-                    setMensagemFinal(erro?.erro || "Erro no cadastro.");
-                }
+                setMensagemFinal(erro?.erro || "Erro no cadastro.");
             }
         } catch {
             setMensagemFinal("⚠️ Erro de conexão com o servidor.");
+        } finally {
+            setCarregandoCadastro(false);
         }
     };
 
-    // 🔹 Login automático com Google One Tap
-    useEffect(() => {
-        /* global google */
-        const initGoogle = () => {
-            if (window.google?.accounts) {
-                window.google.accounts.id.initialize({
-                    client_id: "337060969671-5d1v2uv4ebkchts1eodkdka4caclginf.apps.googleusercontent.com",
-                    callback: (response) => {
-                        const userInfo = jwtDecode(response.credential);
-                        setEmail(userInfo.email);
-                        setNome(userInfo.given_name || "");
-                        setSobrenome(userInfo.family_name || "");
-                        setEmailVerificado(true);
-                    },
-                    auto_select: false, // mostra a lista de contas
-                });
-                window.google.accounts.id.prompt(); // mostra a seleção no topo
-            }
-        };
-        initGoogle();
-    }, []);
+    // 🔹 Login via Google com botão personalizado
+    const loginComGoogle = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+            try {
+                const userInfoRes = await axios.get(
+                    "https://www.googleapis.com/oauth2/v3/userinfo",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${tokenResponse.access_token}`,
+                        },
+                    }
+                );
 
-    // 🔹 Carregar dados do host automaticamente
+                const userInfo = userInfoRes.data;
+                console.log("🔹 Google user info:", userInfo);
+
+                setEmail(userInfo.email);
+                setNome(userInfo.given_name || "");
+                setSobrenome(userInfo.family_name || "");
+                setEmailVerificado(true);
+            } catch (error) {
+                console.error("Erro ao buscar dados do Google:", error);
+                setMensagemFinal("⚠️ Não foi possível verificar sua conta Google.");
+            }
+        },
+        onError: () => setMensagemFinal("⚠️ Erro no login com Google."),
+    });
+
+    // 🔹 Buscar informações do Host
     useEffect(() => {
         if (!idHost) return;
         const buscarHost = async () => {
@@ -140,11 +122,13 @@ export default function Cadastrarse() {
                 }
             } catch {
                 setMensagemFinal("⚠️ Erro ao carregar informações do host.");
+            } finally {
+                setCarregandoHost(false);
             }
         };
         buscarHost();
 
-        // 🔹 Registrar acesso para estatísticas
+        // 🔹 Registrar acesso
         fetch(`${URL}/ferramentas/acessos/registrar`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -154,22 +138,51 @@ export default function Cadastrarse() {
             }),
         });
     }, [idHost, nomeHost]);
+    const frases = [
+        "Você está prestes a dar o primeiro passo rumo às suas maiores metas.",
+        "Grandes conquistas começam com pequenas decisões.",
+        "Acredite no processo, não apenas no resultado.",
+        "O futuro pertence a quem se dedica hoje.",
+        "Cada meta alcançada é uma vitória sobre quem você era ontem.",
+        "A constância transforma o impossível em inevitável.",
+        "Você não precisa ser o melhor, só precisa começar.",
+        "O esforço de hoje é o sucesso de amanhã.",
+        "Não espere motivação, crie disciplina.",
+        "Você é capaz de muito mais do que imagina."
+    ];
+
+    const [fraseAtual, setFraseAtual] = useState(0);
+
+    useEffect(() => {
+        const intervalo = setInterval(() => {
+            setFraseAtual((prev) => (prev + 1) % frases.length);
+        }, 10000);
+        return () => clearInterval(intervalo);
+    }, []);
+
+    // 🔹 Exibe tela de carregamento até o host carregar
+    if (carregandoHost) {
+        return (
+            <div className="overlay-carregando">
+                <div className="spinner-box">
+                    <p>⏳ Carregando...</p>
+                </div>
+            </div>
+        );
+    }
+
 
     return (
         <>
             <div className="PainelCadastro">
-                {/* 🔹 Exibição do Host automático */}
+                {/* 🔹 Exibição do Host */}
                 {hostData && (
                     <div className="host-box">
-                        <h2 className="titulo-boasvindas">
-                            Você está prestes a dar o primeiro passo rumo às suas maiores metas.
+                        <h2 key={fraseAtual} className="titulo-boasvindas">
+                            {frases[fraseAtual]}
                         </h2>
 
-                        <img
-                            src={hostData.foto}
-                            alt="Foto do Host"
-                            className="hhost-foto"
-                        />
+                        <img src={hostData.foto} alt="Foto do Host" className="hhost-foto" />
 
                         <p className="host-texto-intro">
                             O responsável pelo seu progresso é{" "}
@@ -182,7 +195,6 @@ export default function Cadastrarse() {
                             <p className="host-cargo">Cargo: {hostData.cargo_exibido}</p>
                         )}
 
-                        {/* 🔹 Botão de Ver Portfólio */}
                         <a
                             href={`https://www.irongoals.com/portfolio-publico?id=${hostData.id}`}
                             target="_blank"
@@ -193,20 +205,29 @@ export default function Cadastrarse() {
                     </div>
                 )}
 
+                {/* 🔹 Login com Google (botão personalizado) */}
                 {!emailVerificado && (
                     <div className="login-google">
-                        <h3 className="login-google-titulo">
-                            Selecione seu e-mail para continuar
-                        </h3>
-                        <p className="login-google-subtexto">
-                            Use uma conta Google conectada ao seu navegador
-                        </p>
+                        <h3 className="login-google-titulo">Entre com o Google</h3>
+                        <div className="googlecadastro">
+                            <button
+                                className="btn-google-personalizado"
+                                onClick={() => loginComGoogle()}
+                            >
+                                <img
+                                    src="/public/logo/image.png"
+                                    alt="Google"
+                                    className="icon-google"
+                                />
+                                Entrar com Google
+                            </button>
+                        </div>
                     </div>
                 )}
 
-                {/* 🔹 Etapa de formulário (dados pessoais e senha) */}
+                {/* 🔹 Formulário de confirmação */}
                 {emailVerificado && (
-                    <form className="FormularioLogin">
+                    <form className="FormularioLogin" onSubmit={handleCadastroFinal}>
                         <h3 className="form-titulo">Dados Pessoais</h3>
                         <p className="form-email-info">
                             <b>Email usado:</b> {email}
@@ -234,33 +255,17 @@ export default function Cadastrarse() {
                             />
                         </div>
 
-                        <h3 className="form-titulo">Segurança</h3>
-                        <div className="form-group">
-                            <label className="form-label">Senha</label>
-                            <input
-                                type="password"
-                                value={senha}
-                                onChange={(e) => setSenha(e.target.value)}
-                                className="inputPadrao"
-                                required
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label className="form-label">Confirmar Senha</label>
-                            <input
-                                type="password"
-                                value={confirmarSenha}
-                                onChange={(e) => setConfirmarSenha(e.target.value)}
-                                className="inputPadrao"
-                                required
-                            />
+                        <div
+                            className="termos-info-piscando"
+                            onClick={() => setMostrarTermos(true)}
+                        >
+                            ⚖️ Ao se cadastrar, você confirma que é maior de 18 anos e
+                            concorda com os{" "}
+                            <span className="link-termos">Termos de Uso</span>.
                         </div>
 
-                        <button
-                            onClick={handleProximaEtapa}
-                            className="btn-verde btn-proxima-etapa"
-                        >
-                            Próxima Etapa
+                        <button type="submit" className="btn-verde btn-proxima-etapa">
+                            Finalizar Cadastro
                         </button>
                     </form>
                 )}
@@ -268,42 +273,15 @@ export default function Cadastrarse() {
                 {mensagemFinal && <div className="alerta-erro">{mensagemFinal}</div>}
             </div>
 
-            {/* ==== Modais ==== */}
+            {/* 🔹 Modal de Termos */}
             {mostrarTermos && (
                 <TermosModal
                     onClose={() => setMostrarTermos(false)}
-                    onAceitar={async () => {
-                        try {
-                            const res = await fetch(`${URL}/cadastrar/verificar-email/${email}`);
-                            const dados = await res.json();
-
-                            if (dados.existe) {
-                                setMostrarAlerta(true);
-                                setMensagemFinal("⚠️ Este email já está cadastrado.");
-                                return;
-                            }
-
-                            setAceitouTermos(true);
-                            setMostrarTermos(false);
-                            setCarregandoCadastro(true);
-                            await handleCadastroFinal();
-                            setCarregandoCadastro(false);
-                        } catch {
-                            setMostrarAlerta(true);
-                            setMensagemFinal("⚠️ Erro ao verificar email no servidor.");
-                            setCarregandoCadastro(false);
-                        }
-                    }}
+                    onAceitar={() => setMostrarTermos(false)}
                 />
             )}
 
-            {mostrarAlerta && (
-                <AlertaTermos
-                    mensagem={mensagemFinal}
-                    onClose={() => setMostrarAlerta(false)}
-                />
-            )}
-
+            {/* 🔹 Tela de carregamento do cadastro final */}
             {carregandoCadastro && (
                 <div className="overlay-carregando">
                     <div className="spinner-box">

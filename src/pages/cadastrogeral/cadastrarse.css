@@ -750,26 +750,251 @@
 }
 
 /* ===========================
-   FORMULÁRIOS
+   FORMULÁRIO DE CADASTRO
 =========================== */
-/* Títulos dentro do formulário */
-.FormularioLogin h3 {
-    margin-top: 20px;
-    margin-bottom: 12px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #0077ff;
+.FormularioLogin {
+    background: linear-gradient(145deg, #0056b3, #0077ff);
+    border-radius: 16px;
+    padding: 2.2rem 2.6rem;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+    margin-top: 2rem;
+    max-width: 90%;
+    width: 700px;
+    /* 🔹 centralização e suavidade */
+    animation: fadeIn 0.6s ease, slideUp 0.5s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    color: #fff;
 
-    /* 🔹 destaque visual */
-    border-bottom: 2px solid rgba(0, 119, 255, 0.15);
+    /* 🔹 acabamento */
+    -webkit-font-smoothing: antialiased;
+    backface-visibility: hidden;
+}
+
+.FormularioLogin:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25);
+}
+
+.btn-google-personalizado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #ffffff;
+    color: #444;
+    font-weight: 600;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px 18px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+}
+
+.btn-google-personalizado:hover {
+    background: #f7f7f7;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.icon-google {
+    width: 22px;
+    height: 22px;
+}
+
+.titulo-boasvindas {
+    font-size: 1.9rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    color: #010842;
+    animation: fadeZoom 1s ease-in-out;
+    transition: all 1s ease;
+    text-shadow: 0 0 18px rgba(0, 0, 0, 0.35);
+}
+
+/* 🔹 Animação suave de entrada com energia */
+@keyframes fadeZoom {
+    0% {
+        opacity: 0;
+        transform: scale(0.92);
+        filter: blur(3px);
+    }
+
+    40% {
+        opacity: 1;
+        transform: scale(1.04);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 🔹 Fundo e suavização (opcional) */
+.host-box {
+    text-align: center;
+    color: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transition: transform 0.5s ease;
+}
+
+.host-box:hover {
+    transform: scale(1.02);
+}
+
+/* 🔹 Título das seções do formulário */
+.FormularioLogin h3 {
+    color: #010831 !important;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.6px;
+    margin-bottom: 1.5rem;
+
+    /* linha suave inferior */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.25);
     padding-bottom: 6px;
 
-    /* 🔹 acabamento tipográfico */
-    font-family: "Segoe UI", Roboto, sans-serif;
-    letter-spacing: 0.4px;
-
-    /* 🔹 animação de entrada */
+    /* animação de entrada */
     animation: fadeIn 0.4s ease;
+}
+
+/* 🔹 Texto informativo do e-mail */
+.form-email-info {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #e3f2ff;
+    margin-bottom: 1.8rem;
+    letter-spacing: 0.3px;
+}
+
+/* 🔹 Labels */
+.FormularioLogin .form-label {
+    color: #e9f3ff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 6px;
+    text-align: left;
+}
+
+/* 🔹 Inputs */
+.FormularioLogin .inputPadrao {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    outline: none;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(4px);
+}
+
+.FormularioLogin .inputPadrao::placeholder {
+    color: #d9e6ff;
+    opacity: 0.85;
+}
+
+.FormularioLogin .inputPadrao:focus {
+    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* 🔹 Botão de próxima etapa */
+.FormularioLogin .btn-proxima-etapa {
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 14px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    background: linear-gradient(135deg, #28a745, #1e8a3a);
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.FormularioLogin .btn-proxima-etapa:hover {
+    background: linear-gradient(135deg, #34ce57, #1b7f33);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+}
+
+.FormularioLogin .btn-proxima-etapa:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 🔹 Animações adicionais */
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 🔹 Mensagem de Termos Piscando */
+.termos-info-piscando {
+    color: #fff;
+    font-size: 1.3rem;
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    animation: pulsar 1.8s infinite ease-in-out;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.termos-info-piscando:hover {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+}
+
+.link-termos {
+    text-decoration: underline;
+    color: #7ee0ff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+@keyframes pulsar {
+    0% {
+        opacity: 0.85;
+        text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+    }
+
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 14px rgba(255, 255, 255, 0.9);
+    }
+
+    100% {
+        opacity: 0.85;
+        text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+    }
 }
 
 

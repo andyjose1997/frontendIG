@@ -1,102 +1,95 @@
 // 📂 src/componentes/Login.jsx
-import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../authcontext';
 import './login.css';
 import { URL } from '../config';
-import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 export default function Login({ redirectTo }) {
-    const [loginField, setLoginField] = useState('');
-    const [senha, setSenha] = useState('');
-    const [showSenha, setShowSenha] = useState(false);
     const [mensagem, setMensagem] = useState('');
     const [tipoMensagem, setTipoMensagem] = useState('');
-
     const { login } = useAuth();
     const navigate = useNavigate();
-    const location = useLocation();
+    // 🔹 Frases inspiradoras
+    const frases = [
+        "Você está prestes a transformar sua jornada em algo extraordinário.",
+        "Cada meta alcançada começa com um simples passo de fé.",
+        "A constância vence o talento quando o talento não se esforça.",
+        "O sucesso é construído um dia de cada vez.",
+        "Acredite no processo, mesmo quando os resultados ainda não apareceram.",
+        "Grandes conquistas nascem de pequenas decisões diárias.",
+        "Você é o protagonista da sua história. Comece hoje!",
+        "O futuro pertence a quem age, não apenas a quem sonha.",
+        "Persistir é a prova mais pura de fé em si mesmo.",
+        "Seja constante — o tempo recompensa quem não desiste."
+    ];
 
-    // --- Login com ID / Email / WhatsApp ---
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const [fraseAtual, setFraseAtual] = useState(0);
 
-        try {
-            const formData = new FormData();
-            formData.append("login", loginField); // 🔹 pode ser id, email ou whatsapp
-            formData.append("senha", senha);
+    useEffect(() => {
+        const intervalo = setInterval(() => {
+            setFraseAtual((prev) => (prev + 1) % frases.length);
+        }, 10000); // muda a cada 10 segundos
 
-            const res = await fetch(`${URL}/login`, {
-                method: "POST",
-                body: formData
-            });
+        return () => clearInterval(intervalo);
+    }, []);
 
-            const data = await res.json();
+    // 🔹 Login via Google com botão personalizado
+    const loginComGoogle = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+            try {
+                const userInfoRes = await axios.get(
+                    "https://www.googleapis.com/oauth2/v3/userinfo",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${tokenResponse.access_token}`,
+                        },
+                    }
+                );
 
-            if (!res.ok) {
-                setMensagem(data?.erro || "Erro ao fazer login.");
+                const userInfo = userInfoRes.data;
+                console.log("🔹 Google user info:", userInfo);
+
+                // Envia para backend
+                const formData = new FormData();
+                formData.append("email", userInfo.email);
+                formData.append("nome", userInfo.given_name || "");
+
+                const res = await fetch(`${URL}/login-google`, {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    setMensagem(data?.erro || "Erro no login com Google.");
+                    setTipoMensagem("erro");
+                    return;
+                }
+
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("usuario", JSON.stringify(data.usuario));
+                localStorage.setItem("usuario_id", data.usuario.id);
+
+                login(data.usuario, data.token);
+                navigate(redirectTo || "/inicio");
+            } catch (error) {
+                console.error("Erro ao buscar dados do Google:", error);
+                setMensagem("⚠️ Não foi possível verificar sua conta Google.");
                 setTipoMensagem("erro");
-                return;
             }
-            // Salva token e usuário
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("usuario", JSON.stringify(data.usuario));
-            localStorage.setItem("usuario_id", data.usuario.id);
-
-            login(data.usuario, data.token);
-
-            // 🔹 Se veio com redirectTo (ex: modal Avalie-nos), usa ele. Caso contrário vai para /inicio
-            navigate(redirectTo || "/inicio");
-        } catch (error) {
-            setMensagem("Erro de conexão com o servidor.");
-            setTipoMensagem("erro");
-        }
-    };
-
-    // --- Login com Google ---
-    const handleGoogleLogin = async (credentialResponse) => {
-        try {
-            const userInfo = jwtDecode(credentialResponse.credential);
-
-            const formData = new FormData();
-            formData.append("email", userInfo.email);
-            formData.append("nome", userInfo.given_name || "");
-
-            const res = await fetch(`${URL}/login-google`, {
-                method: "POST",
-                body: formData
-            });
-
-            const data = await res.json();
-
-            if (!res.ok) {
-                setMensagem(data?.erro || "Erro no login com Google.");
-                setTipoMensagem("erro");
-                return;
-            }
-
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("usuario", JSON.stringify(data.usuario));
-            localStorage.setItem("usuario_id", data.usuario.id);
-
-            login(data.usuario, data.token);
-
-            // 🔹 Redirecionamento dinâmico
-            navigate(redirectTo || "/inicio");
-
-        } catch (err) {
-            console.error("Erro no login com Google:", err);
-            setMensagem("Erro ao autenticar com Google.");
-            setTipoMensagem("erro");
-        }
-    };
+        },
+        onError: () => setMensagem("⚠️ Erro no login com Google."),
+    });
 
     return (
         <div className="login-container">
             <div className="info-section">
                 <h2>Bem-vindo(a)!</h2>
-                <p style={{ fontSize: "1.4rem" }} >Ao fazer login, você pode:</p>
+                <p style={{ fontSize: "1.4rem" }}>Ao fazer login, você pode:</p>
                 <ul>
                     <li>📚 Acessar cursos organizados e sempre disponíveis</li>
                     <li>🎓 Conquistar certificados reconhecidos na plataforma</li>
@@ -113,43 +106,23 @@ export default function Login({ redirectTo }) {
                         {mensagem}
                     </div>
                 )}
+                {/* 🔹 Frases inspiradoras dinâmicas */}
+                <h2 key={fraseAtual} className="frase-inspiradora">
+                    {frases[fraseAtual]}
+                </h2>
 
-                {/* Login tradicional */}
-                <form onSubmit={handleSubmit} className="FormularioLogin">
-                    <label style={{ fontSize: "1.4rem" }} >ID, Email ou WhatsApp:</label><br />
-                    <input style={{ fontSize: "1.4rem" }}
-                        type="text"
-                        value={loginField}
-                        onChange={(e) => setLoginField(e.target.value)}
-                        placeholder="Digite seu ID, email ou WhatsApp"
-                    /><br /><br />
-
-                    <label style={{ fontSize: "1.4rem" }} >Senha:</label><br />
-                    <div className="senha-wrapper">
-                        <input style={{ fontSize: "1.4rem" }}
-                            type={showSenha ? "text" : "password"}
-                            value={senha}
-                            onChange={(e) => setSenha(e.target.value)}
-                            placeholder="Digite sua senha"
-                        />
-                    </div>
-
-                    <br />
-                    <a style={{ fontSize: "1.4rem" }} id="EsqueciMinhaSenha" href="/recuperar-senha">Esqueci minha senha</a>
-
-                    <button id="botaoInicio" type="submit">
-                        Entrar
-                    </button><br />
-                </form>
-
-                <div className="separador">ou</div>
-
-                {/* Login com Google */}
-                <div className="google-login-wrapper">
-                    <GoogleLogin
-                        onSuccess={handleGoogleLogin}
-                        onError={() => setMensagem("Erro no login com Google")}
-                    />
+                {/* 🔹 Botão personalizado do Google */}
+                <div className="google-login-area">
+                    <h3 className="login-google-titulo">Entre com o Google</h3>
+                    <button
+                        className="btn-google-iron"
+                        onClick={() => loginComGoogle()}
+                    >
+                        <div className="google-icon-wrap">
+                            <img src="/public/logo/image.png" alt="Google" className="google-icon" />
+                        </div>
+                        <span className="google-text">Continuar com Google</span>
+                    </button>
                 </div>
             </div>
         </div>
