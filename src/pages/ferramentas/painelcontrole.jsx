@@ -16,6 +16,7 @@ import ManualPainel from './componentes/manualpainel';
 import PainelYouTube from './componentes/painelyoutube/painelyoutube';
 import PainelCursos from './componentes/painelcursos';
 import PainelIronStep from './componentes/ironstep/painelironstep';
+import PrivilegioPainel from './componentes/privilegiopainel';
 
 
 export default function PainelControle() {
@@ -32,6 +33,7 @@ export default function PainelControle() {
             navigate("/");
         }
     }, [navigate]);
+
     return (
         <div id='controle-painel'>
             <h1>Painel de Controle</h1>
@@ -75,14 +77,12 @@ export default function PainelControle() {
                     Permitir Fundadores
                 </button>
 
-
                 <button style={{ display: "block" }}
                     className={painelAtivo === "indicadores" ? "controle-ativo" : ""}
                     onClick={() => setPainelAtivo("indicadores")}
                 >
                     Indicadores
                 </button>
-
 
                 <button
                     className={painelAtivo === "propaganda" ? "controle-ativo" : ""}
@@ -97,24 +97,28 @@ export default function PainelControle() {
                 >
                     Rankings gerais & CPP
                 </button>
+
                 <button
                     className={painelAtivo === "manual" ? "controle-ativo" : ""}
                     onClick={() => setPainelAtivo("manual")}
                 >
                     Manual
                 </button>
+
                 <button
                     className={painelAtivo === "youtube" ? "controle-ativo" : ""}
                     onClick={() => setPainelAtivo("youtube")}
                 >
                     YouTube
                 </button>
+
                 <button
                     className={painelAtivo === "cursos" ? "controle-ativo" : ""}
                     onClick={() => setPainelAtivo("cursos")}
                 >
                     Cursos
                 </button>
+
                 <button
                     className={painelAtivo === "ironstep" ? "controle-ativo" : ""}
                     onClick={() => setPainelAtivo("ironstep")}
@@ -122,9 +126,13 @@ export default function PainelControle() {
                     IronStep
                 </button>
 
-
-
-
+                {/* 🔹 Novo botão Privilégio */}
+                <button
+                    className={painelAtivo === "privilegio" ? "controle-ativo" : ""}
+                    onClick={() => setPainelAtivo("privilegio")}
+                >
+                    Privilégio
+                </button>
             </div>
 
             {painelAtivo === "visualizarBanco" && <VisualizarBanco />}
@@ -139,6 +147,7 @@ export default function PainelControle() {
             {painelAtivo === "cursos" && <PainelCursos />}
             {painelAtivo === "indicadores" && <Indicadores />}
             {painelAtivo === "ironstep" && <PainelIronStep />}
+            {painelAtivo === "privilegio" && <PrivilegioPainel />}
 
             {/* 🔹 Novo fluxo Info de Cadastro */}
             {painelAtivo === "infoCadastro" && (
