@@ -3,17 +3,38 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" href="public/Logo/I_round.png">
+
+  <!-- Ícone -->
+  <link rel="icon" href="/public/Logo/I_round.png">
+
+  <!-- Viewport responsivo -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Fonte principal -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <title>IronGoals</title>
+
+  <!-- Manifest e tema -->
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#001d3d" />
 
+  <!-- Título -->
+  <title>IronGoals</title>
+
+  <!-- 🔹 Script do Google One Tap (deve estar DENTRO do head) -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- 🔹 Meta de identificação do seu Client ID (opcional, mas recomendado pelo Google) -->
+  <meta name="google-signin-client_id"
+    content="337060969671-5d1v2uv4ebkchts1eodkdka4caclginf.apps.googleusercontent.com" />
+
+  <!-- 🔹 Para habilitar o One Tap em iframes (caso use modais ou embeds) -->
+  <meta name="google-signin-scope" content="profile email" />
 </head>
 
 <body>
   <div id="root"></div>
+
+  <!-- App principal -->
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

@@ -87,7 +87,7 @@ export default function JogarQuiz() {
     // 🔹 Registrar resposta
     const registrarResposta = async (id_pergunta, pontos) => {
         try {
-            await fetch(`${URL}/quiz/responder/`, {
+            await fetch(`${URL}/quiz/responder`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

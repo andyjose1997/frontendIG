@@ -1,6 +1,8 @@
 /* Container principal */
 .PainelCadastro {
-    max-width: 780px;
+    width: 1280px;
+    max-width: 85%;
+
     margin: 4rem auto;
     padding: 2rem;
     background: #fff;
@@ -223,11 +225,15 @@
 
 /* Host */
 .host-texto-intro {
-    font-size: 2rem;
-    color: #444;
+    font-size: 1.4rem !important;
+    color: #0a0a0a !important;
     margin-bottom: 6px;
     font-weight: 500;
-    width: 200px;
+    width: 95%;
+}
+
+.host-texto-intro b {
+    font-size: 2rem !important;
 }
 
 .host-nome {
@@ -235,6 +241,7 @@
     font-weight: 700;
     color: #222;
     margin-top: 4px;
+    width: 80%;
 }
 
 .host-label {
