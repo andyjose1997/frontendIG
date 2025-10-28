@@ -1,0 +1,58 @@
+/* =============================== */
+/* 🤝 ParceriaAnnet - Seção de Parcerias */
+/* Todas as classes começam com "parceriaannet-" */
+/* =============================== */
+
+.parceriaannet-container {
+    text-align: center;
+    padding: 80px 20px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(5px);
+    font-family: "Poppins", sans-serif;
+}
+
+.parceriaannet-container h2 {
+    font-size: 1.8rem;
+    color: #ff8ac7;
+    margin-bottom: 10px;
+}
+
+.parceriaannet-container p {
+    color: #eee;
+    font-size: 1rem;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
+.parceriaannet-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+}
+
+.parceriaannet-logos img {
+    height: 60px;
+    filter: brightness(0.9);
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.parceriaannet-logos img:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    .parceriaannet-logos {
+        gap: 30px;
+    }
+
+    .parceriaannet-logos img {
+        height: 45px;
+    }
+}

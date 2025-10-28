@@ -34,7 +34,7 @@ import { Link } from "react-router-dom";
 import { URL } from "./config.jsx";
 import LinkInfo from "./pages/Perfil/config/linkinfo.jsx";
 import BoasVindasInterativo from "./pages/Inicio/bv.jsx";
-
+import AnnetStudios from "./pages/annetstudios/annetpainel.jsx";
 function HomeRedirect() {
   const { user } = useAuth(); // supondo que user != null significa logado
 
@@ -280,6 +280,8 @@ function AppRoutes() {
           }
         />
         <Route path="*" element={<NotFound />} />
+        <Route path="/studio-annet" element={<AnnetStudios />} />
+
       </Routes>
 
       {/* 🔹 Vidas flutuantes */}

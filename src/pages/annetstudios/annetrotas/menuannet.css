@@ -1,0 +1,252 @@
+.menuannet-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #b3125c, #e91e63);
+    /* ✨ Rosa elegante com transição suave */
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0 0 16px 16px;
+    /* leve arredondamento inferior */
+    position: relative;
+    z-index: 10;
+    font-family: "Poppins", "Segoe UI", "Inter", sans-serif;
+    letter-spacing: 0.4px;
+    backdrop-filter: blur(6px);
+    /* efeito vidro sutil (para quem tem suporte) */
+    transition: all 0.3s ease-in-out;
+}
+
+/* 🔹 Pequeno brilho ao passar o mouse em desktops */
+.menuannet-container:hover {
+    box-shadow: 0 6px 18px rgba(233, 30, 99, 0.35);
+}
+
+/* 🔹 Logo e título */
+.menuannet-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-left: 4px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menuannet-logo:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+}
+
+/* 🔹 Imagem da logo */
+.menuannet-logo-img {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: all 0.4s ease;
+    background: radial-gradient(circle at center, #fff 0%, #fce4ec 60%, transparent 100%);
+}
+
+.menuannet-logo-img:hover {
+    transform: scale(1.05);
+    border-color: #fff;
+    box-shadow: 0 6px 14px rgba(255, 105, 180, 0.4);
+}
+
+/* 🔹 Título da marca */
+.menuannet-titulo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    font-family: "Montserrat", "Poppins", "Inter", sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    transition: color 0.3s ease;
+}
+
+.menuannet-titulo:hover {
+    color: #ffe4f1;
+    /* leve destaque no hover */
+}
+
+/* 🔹 Links desktop com espaçamento maior */
+.menuannet-links {
+    display: flex;
+    gap: 90px;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+}
+
+/* 🔹 Estilo base dos links */
+.menuannet-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.45rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transition: all 0.3s ease;
+    font-family: "Poppins", "Inter", "Segoe UI", sans-serif;
+    letter-spacing: 0.6px;
+    padding: 6px 10px;
+    border-radius: 12px;
+}
+
+/* 🔹 Efeito hover moderno */
+.menuannet-links a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, #fff, #ffd1e8);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.menuannet-links a:hover::after {
+    width: 80%;
+}
+
+.menuannet-links a:hover {
+    color: #ffe6f2;
+    transform: translateY(-2px);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* 🔹 Efeito de foco ativo (para o link da seção atual, se quiser aplicar depois) */
+.menuannet-links a.ativo {
+    color: #ffe6f2;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(255, 200, 230, 0.5);
+}
+
+.menuannet-emoji {
+    font-size: 1.6rem;
+    display: block;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.3));
+    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+    opacity: 0.9;
+}
+
+/* ✨ Efeito suave ao passar o mouse */
+.menuannet-links a:hover .menuannet-emoji {
+    transform: scale(1.2) rotate(-3deg);
+    filter: drop-shadow(0 0 8px rgba(255, 200, 230, 0.7));
+    opacity: 1;
+}
+
+/* 🔹 Botão menu (mobile) */
+.menuannet-btn {
+    display: none;
+    font-size: 30px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 6px 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+/* ✨ Efeito ao passar o mouse (ou tocar) */
+.menuannet-btn:hover,
+.menuannet-btn:active {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+    box-shadow: 0 4px 14px rgba(255, 182, 193, 0.35);
+}
+
+/* 🔹 Mostrar o botão somente em telas pequenas */
+@media (max-width: 700px) {
+    .menuannet-btn {
+        display: block;
+        position: absolute;
+        right: 16px;
+        top: 10px;
+    }
+}
+
+
+@media (max-width: 320px) {
+    .menuannet-links a {
+        font-size: 0.7rem !important;
+    }
+
+    .menuannet-titulo {
+        font-size: 0.7rem !important;
+    }
+
+}
+
+/* ======================== */
+/* 📱 Responsivo abaixo de 700px */
+/* ======================== */
+@media (max-width: 800px) {
+    .menuannet-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: calc(100% - 20px);
+        /* ← deixa 10px livres nas laterais */
+        margin: 0 10px;
+        background: #c2185b;
+        border-top: 3px solid #ff77a9;
+        justify-content: center;
+        padding: 8px 0;
+        flex-direction: row;
+        border-radius: 12px 12px 0 0;
+        /* opcional, dá um toque mais bonito */
+    }
+
+    .menuannet-logo {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+    }
+
+    .menuannet-logo-img {
+        width: 45px;
+        height: 45px;
+        margin-left: 20px;
+    }
+
+    .menuannet-titulo {
+        font-size: 0.9rem;
+        margin-left: 20px;
+        margin-top: 4px;
+        text-align: center;
+        font-family: "Montserrat", "Poppins", "Segoe UI", sans-serif;
+        font-weight: 600;
+    }
+
+    .menuannet-links {
+        display: flex;
+        justify-content: space-around;
+        flex-grow: 1;
+        gap: 0;
+        /* mobile não precisa de grande espaço */
+    }
+
+    .menuannet-links a {
+        font-size: 1.1rem;
+        font-family: "Poppins", "Segoe UI", sans-serif;
+    }
+
+    .menuannet-btn {
+        display: none;
+    }
+}
