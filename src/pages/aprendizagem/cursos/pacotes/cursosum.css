@@ -505,6 +505,7 @@
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     /* 🔹 mesmo */
     color: #2c3e50;
+    height: fit-content !important;
     /* tom de cinza mais elegante */
     line-height: 1.6;
     /* 🔹 melhora a leitura */
@@ -721,9 +722,8 @@
 /* 📦 Section Principal  */
 /* ===================== */
 .pacoteum-section {
-    height: 150vh;
+    height: fit-content !important;
     /* ocupa a altura da tela */
-    max-height: 130vh;
     /* não ultrapassa */
     overflow-y: auto;
     /* ativa a rolagem vertical */

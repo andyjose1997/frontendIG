@@ -9,6 +9,133 @@
     gap: 1rem;
 }
 
+/* 🔹 Barra inferior fixa */
+.barra-inferior {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(15, 15, 15, 0.9);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 1000;
+}
+
+/* 🔹 Botões da barra */
+.barra-inferior button {
+    background: none;
+    border: none;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.barra-inferior button:hover {
+    transform: translateY(-2px);
+    color: #00c4ff;
+}
+
+.barra-inferior .emoji {
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+/* 🔹 Garante espaço no conteúdo acima da barra */
+#Perfil {
+    padding-bottom: 60px;
+}
+
+/* 🔹 Área dos cursos no perfil */
+.perfil-cursos-area {
+    margin-top: 20px;
+    margin-bottom: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* 🔹 Animação suave */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🔹 Container interno dos cursos */
+.perfil-cursos-area>div {
+    width: 92%;
+    max-width: 1000px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 200, 255, 0.1);
+    backdrop-filter: blur(8px);
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.perfil-cursos-area>div:hover {
+    box-shadow: 0 0 25px rgba(0, 200, 255, 0.25);
+}
+
+/* 🔹 Barra inferior fixa */
+.barra-inferior {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(15, 15, 15, 0.9);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0, 200, 255, 0.1);
+}
+
+/* 🔹 Botões da barra */
+.barra-inferior button {
+    background: none;
+    border: none;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.barra-inferior button:hover {
+    transform: translateY(-2px);
+    color: #00c4ff;
+}
+
+.barra-inferior .emoji {
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
 body {
     margin: 0;
     padding: 0;

@@ -59,6 +59,13 @@ function Inicio() {
     if (mostrarVideo) {
         return <ModalVideo onClose={handleCloseVideo} />;
     }
+    useEffect(() => {
+        const jaRolou = localStorage.getItem("inicio_rolou");
+        if (!jaRolou) {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            localStorage.setItem("inicio_rolou", "true");
+        }
+    }, []);
 
     // 🔹 Caso contrário, mostra o site normal
     return (

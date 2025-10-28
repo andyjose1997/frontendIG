@@ -3,6 +3,7 @@
     border-radius: 12px;
     padding: 30px;
     margin: 30px auto;
+    height: fit-content;
     max-width: 900px;
     text-align: center;
 

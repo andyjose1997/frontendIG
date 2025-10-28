@@ -139,7 +139,7 @@ export default function Login({ redirectTo }) {
                                 />
                             </svg>
                         </div>
-                        <span className="google-text">Continuar com Google</span>
+                        <span className="google-text">Fazer login com Google</span>
                     </button>
 
                 </div>

@@ -1,10 +1,11 @@
-import './perfil.css'
+import './perfil.css';
 import Up from './up';
 import BotaoUm from './botaoum';
 import BotaoDois from './botaodois';
 import BotaoTres from './botaotres';
 import Botoes from './botoes';
 import { useEffect, useState } from "react";
+import { Cursos } from '../aprendizagem/cursos/cursos';
 
 export default function Perfil() {
     const [modoMobileBotoes, setModoMobileBotoes] = useState(false);
@@ -13,13 +14,33 @@ export default function Perfil() {
     const [modoMobileBotaoTres, setModoMobileBotaoTres] = useState(false);
     const [larguraTela, setLarguraTela] = useState(window.innerWidth);
 
+    // 🔹 Estado de carregamento
+    const [carregando, setCarregando] = useState(true);
+
     useEffect(() => {
         function atualizarLargura() {
             setLarguraTela(window.innerWidth);
         }
         window.addEventListener("resize", atualizarLargura);
-        return () => window.removeEventListener("resize", atualizarLargura);
+
+        // 🔹 Remove o carregamento após renderização inicial
+        const timer = setTimeout(() => setCarregando(false), 800);
+
+        return () => {
+            window.removeEventListener("resize", atualizarLargura);
+            clearTimeout(timer);
+        };
     }, []);
+
+    // 🔹 Enquanto carrega
+    if (carregando) {
+        return (
+            <div className="overlay-carregando">
+                <div className="spinner"></div>
+                <p>Carregando...</p>
+            </div>
+        );
+    }
 
     return (
         <main id='Perfil'>
@@ -27,71 +48,68 @@ export default function Perfil() {
                 <Up />
             </div>
 
+            {/* 🔹 Cursos só aparecem se a tela for menor que 1300px */}
+            {larguraTela <= 1300 && (
+                <div className="perfil-cursos-area">
+                    <Cursos />
+                </div>
+            )}
+
             {larguraTela <= 1300 ? (
                 <>
-                    {/* Botão Menu */}
-                    {!modoMobileBotoes && (
-                        <button className="abrir-botoes" onClick={() => setModoMobileBotoes(true)}>
+                    {/* 🔹 Barra fixa inferior com os 4 botões */}
+                    <div className="barra-inferior">
+                        <button onClick={() => setModoMobileBotoes(true)}>
+                            <span className="emoji">📋</span>
                             Menu
                         </button>
-                    )}
+                        <button onClick={() => setModoMobileBotaoUm(true)}>
+                            <span className="emoji">ℹ️</span>
+                            Info
+                        </button>
+                        <button onClick={() => setModoMobileBotaoDois(true)}>
+                            <span className="emoji">💪</span>
+                            IronStep
+                        </button>
+                        <button onClick={() => setModoMobileBotaoTres(true)}>
+                            <span className="emoji">🏆</span>
+                            Ranking
+                        </button>
+                    </div>
+
+                    {/* 🔹 Modais (mesmo funcionamento anterior) */}
                     {modoMobileBotoes && (
                         <div className="perfil-modal-overlay">
                             <div className="perfil-modal-conteudo">
-                                <button className="voltar" onClick={() => setModoMobileBotoes(false)}>
-                                    🔙
-                                </button>
+                                <button className="voltar" onClick={() => setModoMobileBotoes(false)}>🔙</button>
                                 <Botoes />
                             </div>
                         </div>
                     )}
 
-                    {/* Botão Informações */}
-                    {!modoMobileBotaoUm && (
-                        <button className="abrir-botaoUm" onClick={() => setModoMobileBotaoUm(true)}>
-                            Informações
-                        </button>
-                    )}
                     {modoMobileBotaoUm && (
                         <div className="perfil-modal-overlay">
                             <div className="perfil-modal-conteudo">
-                                <button className="voltar" onClick={() => setModoMobileBotaoUm(false)}>
-                                    🔙
-                                </button>
+                                <button className="voltar" onClick={() => setModoMobileBotaoUm(false)}>🔙</button>
                                 <BotaoUm />
                             </div>
                         </div>
                     )}
 
-                    {/* Botão Dois */}
-                    {!modoMobileBotaoDois && (
-                        <button className="abrir-botaoDois" onClick={() => setModoMobileBotaoDois(true)}>
-                            IronStep                        </button>
-                    )}
                     {modoMobileBotaoDois && (
                         <div className="perfil-modal-overlay">
                             <div className="perfil-modal-conteudo">
-                                <button className="voltar" onClick={() => setModoMobileBotaoDois(false)}>
-                                    🔙
-                                </button>
+                                <button className="voltar" onClick={() => setModoMobileBotaoDois(false)}>🔙</button>
                                 <BotaoDois />
                             </div>
                         </div>
                     )}
 
-                    {/* Botão Três */}
-                    {!modoMobileBotaoTres && (
-                        <button className="abrir-botaoTres" onClick={() => setModoMobileBotaoTres(true)}>
-                            Ranking                        </button>
-                    )}
                     {modoMobileBotaoTres && (
                         <div className="perfil-modal-overlay">
                             <div className="perfil-modal-conteudo">
-                                <button className="voltar" onClick={() => setModoMobileBotaoTres(false)}>
-                                    🔙
-                                </button>
+                                <button className="voltar" onClick={() => setModoMobileBotaoTres(false)}>🔙</button>
                                 <BotaoTres />
-
                             </div>
                         </div>
                     )}

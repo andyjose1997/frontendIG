@@ -236,7 +236,7 @@ export default function Cadastrarse() {
                                         d="M24 47c6.41 0 11.79-2.12 15.72-5.78l-7.24-5.63c-2.01 1.36-4.58 2.16-8.48 2.16-6.32 0-11.74-4.71-13.22-11.05l-7.28 5.62C7.06 41.42 14.82 47 24 47z"
                                     />
                                 </svg>
-                                Entrar com Google
+                                Cadastrar-se com Google
                             </button>
 
                         </div>
