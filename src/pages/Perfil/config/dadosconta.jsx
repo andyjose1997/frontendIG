@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 import './dadosconta.css';
 import { URL } from '../../../config';
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 export default function DadosConta({ onVoltar }) {
     const [dados, setDados] = useState(null);
@@ -15,8 +17,6 @@ export default function DadosConta({ onVoltar }) {
     const [notificacoesAtivas, setNotificacoesAtivas] = useState(false);
 
     const [alerta, setAlerta] = useState("");
-    const [mostrarSenhaModal, setMostrarSenhaModal] = useState(false); // 🔹 novo estado
-    const [senhaDigitada, setSenhaDigitada] = useState(""); // 🔹 senha digitada pelo usuário
 
     useEffect(() => {
         buscarDadosConta();
@@ -45,8 +45,6 @@ export default function DadosConta({ onVoltar }) {
             setTimeout(() => setAlerta(""), 2000);
         }
     };
-
-    // 🔹 Função principal de salvar (somente chamada após senha validada)
     const confirmarSalvar = async () => {
         const token = localStorage.getItem('token');
 
@@ -64,14 +62,14 @@ export default function DadosConta({ onVoltar }) {
                     email_secundario: emailSecundario.trim(),
                     comentario_perfil: frase,
                     notificacoes: notificacoesAtivas,
-                    senha: senhaDigitada // 🔹 senha enviada
+                    senha: "google_autenticado"
                 })
             });
 
             const data = await resposta.json();
 
             if (data.erro) {
-                setAlerta("❌ Senha incorreta.");
+                setAlerta("❌ Erro ao atualizar dados.");
                 setTimeout(() => setAlerta(""), 2000);
                 return;
             }
@@ -79,14 +77,14 @@ export default function DadosConta({ onVoltar }) {
             setAlerta("✅ Dados atualizados com sucesso!");
             setTimeout(() => {
                 setAlerta("");
-                setMostrarSenhaModal(false);
-                onVoltar();
-            }, 2000);
+                window.location.href = "/perfil"; // 🔹 redireciona direto para o perfil
+            }, 1500);
         } catch {
             setAlerta("❌ Erro ao salvar alterações.");
             setTimeout(() => setAlerta(""), 2000);
         }
     };
+
 
     const renderCampo = (campo, valor, setValor) => {
         if (editandoCampo === campo) {
@@ -109,6 +107,40 @@ export default function DadosConta({ onVoltar }) {
         }
     };
 
+    // 🔹 Login com Google para confirmar identidade
+    const loginComGoogle = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+            try {
+                const userInfo = await axios.get(
+                    "https://www.googleapis.com/oauth2/v3/userinfo",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${tokenResponse.access_token}`,
+                        },
+                    }
+                );
+
+                const emailGoogle = userInfo.data.email;
+                console.log("Email do Google:", emailGoogle);
+
+                if (emailGoogle.trim().toLowerCase() === email.trim().toLowerCase()) {
+                    confirmarSalvar(); // ✅ mesmo email, pode salvar
+                } else {
+                    setAlerta("❌ O e-mail selecionado não corresponde ao da conta.");
+                    setTimeout(() => setAlerta(""), 2500);
+                }
+            } catch (err) {
+                console.error("Erro ao validar login Google:", err);
+                setAlerta("❌ Erro ao autenticar com o Google.");
+                setTimeout(() => setAlerta(""), 2500);
+            }
+        },
+        onError: () => {
+            setAlerta("❌ Erro ao conectar com o Google.");
+            setTimeout(() => setAlerta(""), 2500);
+        },
+    });
+
     return (
         <section className="privacidade-config">
             <h2>👤 Dados da Conta</h2>
@@ -117,10 +149,10 @@ export default function DadosConta({ onVoltar }) {
             <p><strong>Nome:</strong> {renderCampo("nome", nome, setNome)}</p>
             <p><strong>Sobrenome:</strong> {renderCampo("sobrenome", sobrenome, setSobrenome)}</p>
             <p style={{ display: "none" }}><strong>Email:</strong> {renderCampo("email", email, setEmail)}</p>
-            <p><strong>Email Secundário (recuperação):</strong> {renderCampo("email_secundario", emailSecundario, setEmailSecundario)}</p>
+            <p style={{ display: "none" }}><strong>Email Secundário (recuperação):</strong> {renderCampo("email_secundario", emailSecundario, setEmailSecundario)}</p>
             <p><strong>Próxima Meta:</strong> {renderCampo("frase", frase, setFrase)}</p>
 
-            <div style={{ marginTop: '20px' }}>
+            <div style={{ marginTop: '20px', display: "none" }}>
                 <label>
                     <input
                         type="checkbox"
@@ -132,33 +164,15 @@ export default function DadosConta({ onVoltar }) {
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', gap: '10px' }}>
-                <button className="botao-config" onClick={() => setMostrarSenhaModal(true)}>
+                <button
+                    className="botao-config"
+                    onClick={() => loginComGoogle()}
+                >
                     Salvar Alterações
                 </button>
 
-                <button className="botao-voltar" onClick={onVoltar}>
-                    ← Voltar
-                </button>
-            </div>
 
-            {/* 🔹 Modal pedindo senha */}
-            {mostrarSenhaModal && (
-                <div className="modal-senha">
-                    <div className="modal-senha-content">
-                        <h3>🔒 Confirme sua Senha</h3>
-                        <input
-                            type="password"
-                            placeholder="Digite sua senha"
-                            value={senhaDigitada}
-                            onChange={e => setSenhaDigitada(e.target.value)}
-                        />
-                        <div className="modal-botoes">
-                            <button onClick={confirmarSalvar}>Confirmar</button>
-                            <button onClick={() => setMostrarSenhaModal(false)}>Cancelar</button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            </div>
 
             {alerta && <div className="toasta-alerta">{alerta}</div>}
         </section>

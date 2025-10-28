@@ -9,7 +9,7 @@ import { URL } from '../../config';
 
 export default function Config() {
     const [mostrarPrivacidade, setMostrarPrivacidade] = useState(false);
-    const [mostrarDadosConta, setMostrarDadosConta] = useState(false);
+    const [mostrarDadosConta, setMostrarDadosConta] = useState(true);
     const [mostrarChavePix, setMostrarChavePix] = useState(false);
     const [mostrarMudarSenha, setMostrarMudarSenha] = useState(false);
     const [mostrarPerguntasSeguranca, setMostrarPerguntasSeguranca] = useState(false);
@@ -57,7 +57,7 @@ export default function Config() {
                     Dados da Conta
                 </button>
 
-                <button className="botao-config" onClick={() => setMostrarMudarSenha(true)}>
+                <button style={{ display: "none" }} className="botao-config" onClick={() => setMostrarMudarSenha(true)}>
                     Mudar Senha
                 </button>
 
