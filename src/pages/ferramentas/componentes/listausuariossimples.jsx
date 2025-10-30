@@ -120,6 +120,7 @@ export default function ListaUsuariosSimples() {
                                 onChange={(e) => setDadosEditados(prev => ({ ...prev, funcao: e.target.value }))}
                             >
                                 <option value="admin">admin</option>
+                                <option value="partner">partner</option>
                                 <option value="auditor">auditor</option>
                                 <option value="coordenador">coordenador</option>
                             </select>
