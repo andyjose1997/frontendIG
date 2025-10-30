@@ -181,7 +181,7 @@
     position: relative;
 }
 
-@media (max-width: 383px) {
+@media (max-width: 693px) {
     .parceriaannet-logo-img {
         width: 40px !important;
         height: 40px;
