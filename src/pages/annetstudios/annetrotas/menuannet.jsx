@@ -1,10 +1,21 @@
 // 📂 src/pages/annetstudios/menu.jsx
-// Todas as classes começam com "menuannet-"
 import "./menuannet.css";
 import { useState } from "react";
 
+// 🧱 Import dos modais individuais
+import ModalServicos from "./modais/modalservicos";
+import ModalSobre from "./modais/modalsobre";
+import ModalAvaliacoes from "./modais/modalavaliacoes";
+import ModalPerfil from "./modais/modalperfil";
+
 export default function MenuAnnet() {
     const [menuAberto, setMenuAberto] = useState(false);
+
+    // 🔹 Estados dos modais
+    const [modalServicos, setModalServicos] = useState(false);
+    const [modalSobre, setModalSobre] = useState(false);
+    const [modalAvaliacoes, setModalAvaliacoes] = useState(false);
+    const [modalPerfil, setModalPerfil] = useState(false);
 
     const alternarMenu = () => {
         setMenuAberto(!menuAberto);
@@ -15,32 +26,51 @@ export default function MenuAnnet() {
             <div className="menuannet-logo">
                 <img
                     src="https://sbeotetrpndvnvjgddyv.supabase.co/storage/v1/object/public/annet/ChatGPT%20Image%2028%20de%20out%20(1).%20de%202025,%2015_28_46"
-                    alt="Annet Studios"
+                    alt="Annett Studios"
                     className="menuannet-logo-img"
                 />
-                <h1 className="menuannet-titulo">Annet Studios</h1>
+                <h1 className="menuannet-titulo">Annett Studios</h1>
             </div>
 
             <nav className={`menuannet-links ${menuAberto ? "aberto" : ""}`}>
-                <a href="#servicos">
+                <button
+                    className="menuannet-link"
+                    onClick={() => setModalServicos(true)}
+                >
                     <span className="menuannet-emoji">💼</span>
                     Serviços
-                </a>
-                <a href="#sobre">
+                </button>
+
+                <button
+                    className="menuannet-link"
+                    onClick={() => setModalSobre(true)}
+                >
                     <span className="menuannet-emoji">💖</span>
                     Sobre
-                </a>
-                <a href="#avaliacoes">
+                </button>
+
+                <button
+                    className="menuannet-link"
+                    onClick={() => setModalAvaliacoes(true)}
+                >
                     <span className="menuannet-emoji">⭐</span>
                     Avaliações
-                </a>
-                <a href="#perfil">
+                </button>
+
+                <button
+                    className="menuannet-link"
+                    onClick={() => setModalPerfil(true)}
+                >
                     <span className="menuannet-emoji">👤</span>
                     Perfil
-                </a>
+                </button>
             </nav>
 
-
+            {/* 🔹 Renderização condicional dos modais */}
+            {modalServicos && <ModalServicos onFechar={() => setModalServicos(false)} />}
+            {modalSobre && <ModalSobre onFechar={() => setModalSobre(false)} />}
+            {modalAvaliacoes && <ModalAvaliacoes onFechar={() => setModalAvaliacoes(false)} />}
+            {modalPerfil && <ModalPerfil onFechar={() => setModalPerfil(false)} />}
         </header>
     );
 }

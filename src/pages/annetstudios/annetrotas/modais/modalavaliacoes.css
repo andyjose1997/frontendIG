@@ -1,0 +1,676 @@
+.modalavaliacoes-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(20, 20, 40, 0.85) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(12px) saturate(130%);
+    z-index: 9999;
+    animation: fadeIn 0.5s ease forwards;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    box-shadow: inset 0 0 80px rgba(255, 255, 255, 0.05);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 🎀 Caixa principal - moderna e elegante */
+.modalavaliacoes-conteudo {
+    background: rgba(237, 206, 241, 0.85);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    color: #1f1f1f;
+    width: 92%;
+    max-width: 1080px;
+    max-height: 120vh;
+    overflow-y: auto;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.25),
+        inset 0 0 20px rgba(255, 255, 255, 0.15);
+    padding: 36px 36px 80px;
+    position: relative;
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: 130%;
+    /* ⬆️ Aumento de 30% no tamanho das fontes */
+    animation: slideUp 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
+    scrollbar-width: thin;
+    transition: all 0.4s ease;
+}
+
+/* 🪄 Animação mais fluida */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 🔝 Cabeçalho fixo - moderno e brilhante */
+.avaliacoes-header-fixo {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    border-bottom: 2px solid rgba(255, 182, 219, 0.6);
+    padding: 18px 0;
+    z-index: 15;
+    text-align: center;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border-radius: 18px 18px 0 0;
+}
+
+/* 💫 Título refinado */
+.avaliacoes-header-fixo h2 {
+    font-size: 1.95rem;
+    /* ⬆️ aumento ~30% */
+    margin: 0;
+    color: #d81b60;
+    letter-spacing: 0.8px;
+    font-weight: 800;
+    text-shadow: 0 0 8px rgba(216, 27, 96, 0.3);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.avaliacoes-header-fixo h2:hover {
+    color: #ad1457;
+    text-shadow: 0 0 12px rgba(216, 27, 96, 0.4);
+}
+
+/* 🌟 Texto da média de avaliações - moderno e elegante */
+.avaliacoes-media {
+    font-weight: 600;
+    color: #5a2a41;
+    font-size: 1.25rem;
+    /* ⬆️ aumento de ~30% */
+    margin-top: 6px;
+    letter-spacing: 0.4px;
+    text-shadow: 0 0 6px rgba(192, 24, 91, 0.15);
+    transition: all 0.3s ease;
+}
+
+.avaliacoes-media strong {
+    font-weight: 800;
+    color: #ad1457;
+    text-shadow: 0 0 8px rgba(216, 27, 96, 0.25);
+}
+
+/* ⭐ Lista de avaliações - layout espaçado e elegante */
+.avaliacoes-lista {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 0 4px;
+    font-size: 130%;
+    /* ⬆️ aumento de 30% */
+}
+
+/* 💬 Cartão individual da avaliação - moderno e com brilho suave */
+.avaliacao-item {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    border: 1px solid rgba(243, 204, 224, 0.7);
+    border-radius: 18px;
+    padding: 20px 22px;
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.12);
+    transition: all 0.35s ease;
+    transform: translateY(0);
+}
+
+/* 🪶 Efeito hover com leve elevação */
+.avaliacao-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.15),
+        inset 0 0 25px rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 182, 219, 0.9);
+}
+
+/* 💎 Cabeçalho da avaliação - moderno e organizado */
+.avaliacao-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(230, 200, 215, 0.5);
+    font-size: 130%;
+    /* ⬆️ aumento 30% */
+}
+
+/* 🩰 Nome do usuário */
+.avaliacao-nome strong {
+    font-weight: 700;
+    color: #d81b60;
+    /* tom principal do tema */
+    letter-spacing: 0.4px;
+    text-shadow: 0 0 6px rgba(216, 27, 96, 0.2);
+    transition: all 0.3s ease;
+}
+
+.avaliacao-nome strong:hover {
+    color: #ad1457;
+    text-shadow: 0 0 10px rgba(216, 27, 96, 0.4);
+}
+
+/* ⭐ Estrelas da avaliação - dourado elegante e animado */
+.avaliacao-estrelas {
+    color: #ffca28;
+    font-size: 1.45rem;
+    /* ⬆️ aumento ~30% */
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(255, 202, 40, 0.4);
+    animation: brilhoEstrelas 2.5s ease-in-out infinite alternate;
+    user-select: none;
+}
+
+/* ✨ leve pulsação dourada */
+@keyframes brilhoEstrelas {
+    from {
+        text-shadow: 0 0 4px rgba(255, 202, 40, 0.2);
+        transform: scale(1);
+    }
+
+    to {
+        text-shadow: 0 0 12px rgba(255, 215, 64, 0.7);
+        transform: scale(1.05);
+    }
+}
+
+/* 🕓 Data da avaliação - discreta e refinada */
+.avaliacao-data {
+    color: #6e6e6e;
+    font-size: 1.1rem;
+    /* ⬆️ aumento ~30% */
+    font-weight: 500;
+    opacity: 0.8;
+    letter-spacing: 0.3px;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
+    transition: opacity 0.3s ease;
+}
+
+.avaliacao-data:hover {
+    opacity: 1;
+}
+
+/* 💬 Mensagem da avaliação - moderna, suave e legível */
+.avaliacao-mensagem {
+    margin-top: 10px;
+    font-size: 1.25rem;
+    /* ⬆️ aumento ~30% */
+    color: #2a2a2a;
+    line-height: 1.7;
+    letter-spacing: 0.3px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    padding: 12px 16px;
+    box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    white-space: pre-line;
+    /* 🔹 mantém quebras de linha do texto */
+    backdrop-filter: blur(4px);
+}
+
+/* 🌸 efeito hover leve para destacar comentários */
+.avaliacao-mensagem:hover {
+    background: rgba(255, 245, 250, 0.9);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08),
+        inset 0 0 14px rgba(255, 255, 255, 0.4);
+    transform: scale(1.01);
+}
+
+/* ✏️ / 🗑️ Botões de ação - estilo moderno e vibrante */
+.avaliacao-acoes {
+    margin-top: 14px;
+    display: flex;
+    gap: 14px;
+    justify-content: space-between;
+    font-size: 130%;
+    /* ⬆️ aumento global nas fontes */
+}
+
+/* ✏️🗑️ Botões Annet — estilo moderno unificado */
+.annetbtn-editar,
+.annetbtn-apagar {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 30px !important;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    transition: all 0.3s ease;
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.15),
+        inset 0 0 10px rgba(255, 255, 255, 0.15);
+}
+
+/* 🌈 Estilos específicos */
+.annetbtn-editar {
+    background: linear-gradient(135deg, #42a5f5, #1976d2);
+}
+
+.annetbtn-apagar {
+    background: linear-gradient(135deg, #ef5350, #c62828);
+}
+
+/* ✨ Efeito hover compartilhado */
+.annetbtn-editar:hover,
+.annetbtn-apagar:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.25),
+        inset 0 0 12px rgba(255, 255, 255, 0.25);
+}
+
+/* 💙 Hover editar */
+.annetbtn-editar:hover {
+    background: linear-gradient(135deg, #64b5f6, #1565c0);
+    box-shadow:
+        0 8px 24px rgba(25, 118, 210, 0.35),
+        inset 0 0 12px rgba(255, 255, 255, 0.25);
+}
+
+/* ❤️ Hover apagar */
+.annetbtn-apagar:hover {
+    background: linear-gradient(135deg, #e57373, #b71c1c);
+    box-shadow:
+        0 8px 24px rgba(198, 40, 40, 0.35),
+        inset 0 0 12px rgba(255, 255, 255, 0.25);
+}
+
+/* 💬 Área de envio - realçada e luminosa */
+.avaliacoes-enviar {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(194, 24, 91, 0.3);
+    border-radius: 20px;
+    padding: 24px 22px;
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.12),
+        inset 0 0 25px rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    font-size: 130%;
+    transition: all 0.3s ease;
+}
+
+.avaliacoes-enviar:hover {
+    transform: scale(1.02);
+    box-shadow:
+        0 12px 36px rgba(0, 0, 0, 0.15),
+        inset 0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+/* ⭐ Estrelas interativas - versão mais visível e viva */
+.avaliacoes-estrelas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+}
+
+.estrela {
+    font-size: 2.6rem;
+    /* ⬆️ ainda mais destaque */
+    color: #f5d142;
+    cursor: pointer;
+    filter: drop-shadow(0 0 6px rgba(255, 223, 0, 0.6));
+    transition: all 0.25s ease;
+    text-shadow:
+        0 0 10px rgba(255, 230, 128, 0.8),
+        0 0 20px rgba(255, 223, 0, 0.6);
+}
+
+.estrela:hover {
+    transform: scale(1.25) rotate(-3deg);
+    color: #ffd600;
+    filter: drop-shadow(0 0 10px rgba(255, 240, 150, 0.9));
+    text-shadow:
+        0 0 15px rgba(255, 255, 180, 0.9),
+        0 0 30px rgba(255, 220, 100, 0.8);
+}
+
+.estrela.ativa {
+    color: #ffc107;
+    text-shadow:
+        0 0 18px rgba(255, 220, 90, 0.9),
+        0 0 35px rgba(255, 200, 60, 0.8);
+    transform: scale(1.18);
+    filter: drop-shadow(0 0 12px rgba(255, 220, 80, 1));
+}
+
+/* 🌟 Contêiner geral das estrelas com título */
+.avaliacoes-estrelas-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+/* ✨ Texto que indica que pode avaliar */
+.avaliacoes-instrucao {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #c2185b;
+    letter-spacing: 0.5px;
+    background: linear-gradient(90deg, #c2185b, #e91e63);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(233, 30, 99, 0.2);
+    animation: aparecerInstrucao 1.2s ease;
+}
+
+/* 🪄 Animação sutil de entrada */
+@keyframes aparecerInstrucao {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.estrela {
+    font-size: 1.9rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: transform 0.15s ease, color 0.25s ease;
+}
+
+.estrela:hover {
+    transform: scale(1.15);
+    color: #ffb400;
+}
+
+.estrela.ativa {
+    color: #ffb400;
+    text-shadow: 0 0 6px rgba(255, 204, 0, 0.6);
+}
+
+/* 📝 Campo de texto moderno e visível */
+.avaliacoes-enviar textarea {
+    width: 100%;
+    min-height: 120px;
+    /* ⬆️ um pouco maior */
+    padding: 14px 18px;
+    font-size: 1.3rem;
+    /* ⬆️ aumento ~30% */
+    border-radius: 14px;
+    border: 1.5px solid rgba(210, 210, 210, 0.6);
+    resize: vertical;
+    background: rgba(255, 255, 255, 0.75);
+    color: #1f1f1f;
+    font-family: "Poppins", "Inter", sans-serif;
+    box-shadow:
+        inset 0 0 12px rgba(255, 255, 255, 0.3),
+        0 4px 14px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(8px) saturate(140%);
+    -webkit-backdrop-filter: blur(8px) saturate(140%);
+    outline: none;
+    transition: all 0.35s ease;
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+}
+
+/* ✨ Efeito de foco com brilho e cor */
+.avaliacoes-enviar textarea:focus {
+    border-color: #e91e63;
+    box-shadow:
+        0 0 10px rgba(233, 30, 99, 0.4),
+        inset 0 0 15px rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.9);
+    transform: scale(1.01);
+}
+
+/* 💡 Placeholder mais visível */
+.avaliacoes-enviar textarea::placeholder {
+    color: rgba(100, 100, 100, 0.7);
+    font-style: italic;
+    letter-spacing: 0.4px;
+}
+
+/* 🔘 Botão principal de envio (estilo moderno glass) */
+.annetenviar {
+    background: linear-gradient(135deg, #c2185b, #e91e63);
+    border: none;
+    color: #fff;
+    width: fit-content;
+    padding: 13px 10px;
+    border-radius: 14px;
+    font-weight: 800;
+    font-size: 1.3rem;
+    /* +30% */
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    box-shadow:
+        0 8px 20px rgba(233, 30, 99, 0.35),
+        inset 0 0 12px rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px) saturate(160%);
+    -webkit-backdrop-filter: blur(6px) saturate(160%);
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ✨ Efeito de luz em movimento ao passar o mouse */
+.annetenviar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0.3) 0%,
+            rgba(255, 255, 255, 0.6) 50%,
+            rgba(255, 255, 255, 0.3) 100%);
+    transition: all 0.5s ease;
+}
+
+.annetenviar:hover::before {
+    left: 100%;
+}
+
+/* 💫 Hover com brilho e leve elevação */
+.annetenviar:hover {
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+    box-shadow:
+        0 10px 28px rgba(233, 30, 99, 0.5),
+        inset 0 0 14px rgba(255, 255, 255, 0.4);
+    transform: scale(1.05) translateY(-2px);
+}
+
+/* 🩵 Efeito de clique */
+.annetenviar:active {
+    transform: scale(0.97);
+    box-shadow:
+        0 4px 14px rgba(233, 30, 99, 0.4),
+        inset 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* 🔒 Estado desabilitado */
+.annetenviar:disabled {
+    background: linear-gradient(135deg, #bbb, #999);
+    color: #f4f4f4;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+    transform: none;
+}
+
+/* 🌈 Pulso suave quando ativo e pronto para enviar */
+@keyframes pulseAtivo {
+    0% {
+        box-shadow: 0 0 12px rgba(233, 30, 99, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(233, 30, 99, 0.8);
+    }
+
+    100% {
+        box-shadow: 0 0 12px rgba(233, 30, 99, 0.5);
+    }
+}
+
+/* 🔹 Ativar o pulso quando habilitado */
+.annetenviar:not(:disabled) {
+    animation: pulseAtivo 2.8s infinite ease-in-out;
+}
+
+/* 🔹 Botão "Ver mais" */
+.annetbtn-vermais {
+    background: linear-gradient(135deg, #b3125c, #e91e63);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 9px 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 10px auto;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.annetbtn-vermais:hover {
+    background: linear-gradient(135deg, #e91e63, #b3125c);
+    transform: scale(1.05);
+}
+
+/* 🔒 Aviso (para login obrigatório) */
+.avaliacoes-aviso {
+    text-align: center;
+    font-size: 1.25rem;
+    /* ⬆️ +30% */
+    color: #777;
+    font-weight: 500;
+    padding: 16px 10px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    margin-top: 12px;
+    backdrop-filter: blur(6px) saturate(140%);
+    -webkit-backdrop-filter: blur(6px) saturate(140%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.avaliacoes-aviso:hover {
+    color: #c2185b;
+    transform: scale(1.03);
+}
+
+
+/* ❌ Botão Fechar (estilo moderno) */
+.modalavaliacoes-fechar {
+    position: sticky;
+    bottom: 0;
+    width: fit-content;
+    display: flex;
+    margin-top: 40px !important;
+    margin: auto auto;
+    background: linear-gradient(135deg, #c2185b, #e91e63);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 10px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    /* ⬆️ +30% */
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    margin-top: 22px;
+    transition: all 0.35s ease;
+    box-shadow:
+        0 6px 18px rgba(233, 30, 99, 0.3),
+        inset 0 0 10px rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px) saturate(150%);
+    -webkit-backdrop-filter: blur(5px) saturate(150%);
+}
+
+/* ✨ Hover com leve brilho e movimento */
+.modalavaliacoes-fechar:hover {
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+    transform: scale(1.04);
+    box-shadow:
+        0 10px 25px rgba(233, 30, 99, 0.45),
+        inset 0 0 12px rgba(255, 255, 255, 0.3);
+}
+
+/* 💥 Efeito de clique */
+.modalavaliacoes-fechar:active {
+    transform: scale(0.97);
+    box-shadow:
+        0 4px 12px rgba(233, 30, 99, 0.3),
+        inset 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+
+/* ✨ Scrollbar personalizada */
+.modalavaliacoes-conteudo::-webkit-scrollbar {
+    width: 10px;
+}
+
+.modalavaliacoes-conteudo::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #e91e63, #c2185b);
+    border-radius: 8px;
+    box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.3);
+    transition: background 0.3s ease;
+}
+
+.modalavaliacoes-conteudo::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #ff5a8c, #c2185b);
+}
+
+/* 🔹 Fundo da barra (track) */
+.modalavaliacoes-conteudo::-webkit-scrollbar-track {
+    background: rgba(240, 240, 240, 0.4);
+    border-radius: 8px;
+    backdrop-filter: blur(3px);
+}

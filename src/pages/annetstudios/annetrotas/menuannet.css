@@ -12,6 +12,7 @@
     /* leve arredondamento inferior */
     position: relative;
     z-index: 10;
+    margin: auto auto;
     font-family: "Poppins", "Segoe UI", "Inter", sans-serif;
     letter-spacing: 0.4px;
     backdrop-filter: blur(6px);
@@ -192,7 +193,7 @@
 }
 
 /* ======================== */
-/* 📱 Responsivo abaixo de 700px */
+/* 📱 Responsivo abaixo de 800px */
 /* ======================== */
 @media (max-width: 800px) {
     .menuannet-container {
@@ -200,7 +201,6 @@
         bottom: 0;
         left: 0;
         width: calc(100% - 20px);
-        /* ← deixa 10px livres nas laterais */
         margin: 0 10px;
         background: #c2185b;
         border-top: 3px solid #ff77a9;
@@ -208,7 +208,8 @@
         padding: 8px 0;
         flex-direction: row;
         border-radius: 12px 12px 0 0;
-        /* opcional, dá um toque mais bonito */
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 999;
     }
 
     .menuannet-logo {
@@ -238,15 +239,64 @@
         justify-content: space-around;
         flex-grow: 1;
         gap: 0;
-        /* mobile não precisa de grande espaço */
     }
 
-    .menuannet-links a {
+    /* ✅ Agora estiliza os botões de verdade */
+    .menuannet-link {
         font-size: 1.1rem;
         font-family: "Poppins", "Segoe UI", sans-serif;
+        background: none;
+        border: none;
+        color: #fff;
+        text-align: center;
+        padding: 5px 10px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .menuannet-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .menuannet-emoji {
+        font-size: 1.4rem;
+        margin-bottom: 3px;
     }
 
     .menuannet-btn {
         display: none;
     }
+}
+
+/* ======================== */
+/* 📱 Muito pequenas (320px) */
+/* ======================== */
+@media (max-width: 320px) {
+    .menuannet-link {
+        font-size: 0.75rem !important;
+    }
+
+    .menuannet-emoji {
+        font-size: 1.1rem !important;
+    }
+
+    .menuannet-titulo {
+        font-size: 0.75rem !important;
+    }
+}
+
+
+.menuannet-link {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }

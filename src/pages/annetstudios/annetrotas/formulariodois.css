@@ -2,7 +2,8 @@
 /* 🌸 ESTILO GERAL DO FORMULÁRIO */
 /* ============================ */
 .formannet-container {
-    max-width: 600px;
+    width: 600px;
+    max-width: 95% !important;
     margin: 60px auto;
     background: rgba(255, 255, 255, 0.88);
     border-radius: 20px;
@@ -291,6 +292,61 @@
     }
 }
 
+/* ============================= */
+/* ✨ Botão - Novo Agendamento (Versão Refinada) */
+/* ============================= */
+.formannet-aprovado .formannet-btn {
+    background: linear-gradient(145deg, #2a2a2f, #1a1a1d);
+    border: 1.5px solid rgba(255, 215, 0, 0.4);
+    color: #ffd700;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 12px 32px;
+    border-radius: 40px;
+    cursor: pointer;
+    letter-spacing: 0.4px;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.1),
+        0 0 12px rgba(255, 215, 0, 0.2);
+}
+
+/* 🔹 Efeito de reflexo dourado que percorre o botão */
+.formannet-aprovado .formannet-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            transparent,
+            rgba(255, 255, 255, 0.25),
+            transparent);
+    transform: skewX(-20deg);
+    transition: 0.7s;
+}
+
+.formannet-aprovado .formannet-btn:hover::before {
+    left: 125%;
+}
+
+/* 🔹 Hover mais luxuoso */
+.formannet-aprovado .formannet-btn:hover {
+    border-color: rgba(255, 215, 0, 0.8);
+    color: #fff;
+    background: linear-gradient(145deg, #3b3b40, #222225);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.45);
+    transform: translateY(-2px);
+}
+
+/* 🔹 Efeito de clique */
+.formannet-aprovado .formannet-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
 .formannet-btn {
     flex: 1;
     background: linear-gradient(135deg, #ff77a9, #d63384);
@@ -453,4 +509,348 @@
     color: #7a2e5d;
     font-style: italic;
     font-size: 0.9rem;
+}
+
+/* ============================= */
+/* 💅 Aguardando Confirmação de Pagamento */
+/* ============================= */
+
+.formannet-aguardando {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+    text-align: center;
+    color: #fff;
+    background: radial-gradient(circle at center, #0d0d0f, #151621, #0b0c13);
+    font-family: "Poppins", "Segoe UI", sans-serif;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* 🔹 Anel de carregamento elegante */
+.formannet-loader {
+    width: 90px;
+    height: 90px;
+    border: 6px solid rgba(255, 255, 255, 0.08);
+    border-top: 6px solid #ff4081;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 40px 0 25px 0;
+    box-shadow: 0 0 18px rgba(255, 64, 129, 0.5);
+}
+
+/* 🔹 Efeito de brilho girando atrás do loader */
+.formannet-aguardando::before {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(255, 64, 129, 0.25), transparent 70%);
+    filter: blur(60px);
+    border-radius: 50%;
+    animation: glow 4s ease-in-out infinite alternate;
+}
+
+/* 🔹 Texto */
+.formannet-aguardando h2 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ff4081, #ff80ab);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.5px;
+    animation: pulseText 1.6s infinite;
+}
+
+.formannet-aguardando p {
+    font-size: 1rem;
+    color: #d6d6d6;
+    max-width: 400px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* 🔹 Animações */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulseText {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes glow {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🌈 Detalhe sutil de fundo animado */
+.formannet-aguardando::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 180deg at 50% 50%,
+            rgba(255, 64, 129, 0.1),
+            rgba(0, 0, 0, 0),
+            rgba(255, 64, 129, 0.1));
+    animation: rotateBg 8s linear infinite;
+    z-index: 0;
+}
+
+@keyframes rotateBg {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 🔹 Garante que o conteúdo fique acima das animações */
+.formannet-aguardando>* {
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================= */
+/* ✅ Pagamento Aprovado - Estilo Moderno Premium */
+/* ============================= */
+
+.formannet-aprovado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+    text-align: center;
+    font-family: "Poppins", "Segoe UI", sans-serif;
+    background: radial-gradient(circle at center, #0e0e11, #141417, #0a0a0c) !important;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* 🔹 Ícone e título */
+.formannet-aprovado h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ffe259, #ffa751);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    animation: glowText 1.5s ease-in-out infinite alternate;
+}
+
+/* 🔹 Texto descritivo */
+.formannet-aprovado p {
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 35px;
+    opacity: 0.95;
+}
+
+/* 🔹 Botão “Novo Agendamento” */
+.formannet-aprovado .formannet-btn {
+    background: linear-gradient(135deg, #34014d, #5c025c);
+    color: #111;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 12px 28px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(83, 2, 107, 0.4);
+    transition: all 0.25s ease;
+}
+
+.formannet-aprovado .formannet-btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 20px rgba(131, 4, 114, 0.6);
+}
+
+/* 🔹 Fundo animado com brilho dourado */
+.formannet-aprovado::before {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(255, 223, 80, 0.25), transparent 70%);
+    filter: blur(60px);
+    border-radius: 50%;
+    animation: goldPulse 4s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+/* 🔹 Confete dourado leve (efeito de partículas) */
+.formannet-aprovado::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-conic-gradient(from 0deg,
+            rgba(211, 1, 253, 0.1) 0deg 10deg,
+            transparent 10deg 20deg);
+    animation: rotateConfetti 15s linear infinite;
+    z-index: 0;
+}
+
+/* 🔹 Garante que o conteúdo fique sobre os efeitos */
+.formannet-aprovado>* {
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================= */
+/* ✨ Animações */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowText {
+    0% {
+        text-shadow: 0 0 10px rgba(255, 223, 100, 0.4);
+    }
+
+    100% {
+        text-shadow: 0 0 30px rgba(255, 223, 100, 0.9);
+    }
+}
+
+@keyframes goldPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+}
+
+@keyframes rotateConfetti {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================= */
+/* ✨ Botão Moderno - Pagamento Aprovado */
+/* ============================= */
+.formannet-aprovado-btn {
+    background: linear-gradient(135deg, #640468, #a620a7);
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px 34px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    letter-spacing: 0.4px;
+    box-shadow: 0 6px 20px rgba(166, 32, 167, 0.3);
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ✨ Efeito de brilho suave ao passar o mouse */
+.formannet-aprovado-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            transparent,
+            rgba(255, 255, 255, 0.25),
+            transparent);
+    transform: skewX(-20deg);
+    transition: 0.7s;
+}
+
+.formannet-aprovado-btn:hover::before {
+    left: 125%;
+}
+
+/* 💜 Hover refinado */
+.formannet-aprovado-btn:hover {
+    background: linear-gradient(135deg, #7b0990, #b92acb);
+    box-shadow: 0 0 20px rgba(185, 42, 203, 0.6);
+    transform: translateY(-2px);
+}
+
+/* 🔹 Efeito de clique */
+.formannet-aprovado-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 0 10px rgba(185, 42, 203, 0.3);
+}
+
+/* 🌈 Pulso luminoso leve (animação contínua) */
+@keyframes pulseButton {
+    0% {
+        box-shadow: 0 0 12px rgba(166, 32, 167, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(166, 32, 167, 0.7);
+    }
+
+    100% {
+        box-shadow: 0 0 12px rgba(166, 32, 167, 0.4);
+    }
+}
+
+.formannet-aprovado-btn {
+    animation: pulseButton 2.5s infinite ease-in-out;
 }

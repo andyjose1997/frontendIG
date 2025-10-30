@@ -1,5 +1,5 @@
 // 📂 src/pages/annetstudios/annetrotas/formulariodois.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./formulariodois.css";
 
 export default function FormularioDois({ onVoltar }) {
@@ -7,6 +7,7 @@ export default function FormularioDois({ onVoltar }) {
     const [dataHora, setDataHora] = useState("");
     const [indiceImagem, setIndiceImagem] = useState({});
     const [imagemGrande, setImagemGrande] = useState(null);
+    const [statusPagamento, setStatusPagamento] = useState("inicio");
 
     const supabaseUrl = "https://sbeotetrpndvnvjgddyv.supabase.co/storage/v1/object/public/annet/";
 
@@ -41,6 +42,18 @@ export default function FormularioDois({ onVoltar }) {
         });
     };
 
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const status = params.get("status");
+
+        if (status === "approved") {
+            setStatusPagamento("aprovado");
+        } else if (status === "failure") {
+            setStatusPagamento("inicio");
+            alert("O pagamento não foi concluído. Tente novamente.");
+        }
+    }, []);
+
     const handleConfirmar = async (e) => {
         e.preventDefault();
 
@@ -49,171 +62,207 @@ export default function FormularioDois({ onVoltar }) {
             return;
         }
 
-        // 🔹 Calcula o total baseado nos serviços
+        // 🔹 Muda a tela para “aguardando”
+        setStatusPagamento("aguardando");
+
+        // 🔹 Calcula o total
         const total = servicos
-            .filter(s => servicosSelecionados.includes(s.nome))
+            .filter((s) => servicosSelecionados.includes(s.nome))
             .reduce((sum, s) => sum + s.preco, 0);
 
         try {
-            // 🔹 Cria uma preferência de pagamento no backend (sem login)
             const resposta = await fetch("https://backendig-2.onrender.com/pagamento/criar-preferencia-annet", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     valor_total: total,
                     descricao: `Agendamento de ${servicosSelecionados.join(", ")}`,
-                    dataHora: dataHora
-                })
+                    dataHora: dataHora,
+                }),
             });
 
             const data = await resposta.json();
             if (data.init_point) {
-                // 🔹 Redireciona ao checkout MercadoPago
-                window.location.href = data.init_point;
+                // 🔹 Abre o checkout do MercadoPago em nova aba
+                window.open(data.init_point, "_blank", "noopener,noreferrer");
             } else {
                 alert("Erro ao criar pagamento. Tente novamente.");
+                setStatusPagamento("inicio");
             }
         } catch (err) {
             console.error("Erro ao criar pagamento:", err);
             alert("Ocorreu um erro ao iniciar o pagamento.");
+            setStatusPagamento("inicio");
         }
     };
 
-
     return (
         <main className="formannet-container">
-            <h1 className="formannet-titulo">Escolha seus serviços</h1>
-            <p className="formannet-subtitulo">
-                Selecione um ou mais serviços que deseja agendar e o horário disponível.
-            </p>
+            {statusPagamento === "inicio" && (
+                <>
+                    <p className="formannet-etapa">Etapa 2/3</p><br />
 
-            <div className="formannet-servicos-lista">
-                {servicos.map((servico) => {
-                    const imagens = gerarImagens(servico.prefixo);
-                    const inicio = indiceImagem[servico.prefixo] || 0;
-                    const visiveis = imagens.slice(inicio, inicio + 3);
+                    <h1 className="formannet-titulo">Escolha seus serviços</h1>
+                    <p className="formannet-subtitulo">
+                        Selecione um ou mais serviços que deseja agendar e o horário disponível.
+                    </p>
 
-                    return (
-                        <div key={servico.nome} className="formannet-servico-bloco">
-                            <label
-                                className={`formannet-servico ${servicosSelecionados.includes(servico.nome)
-                                    ? "selecionado"
-                                    : ""
-                                    }`}
-                            >
-                                <input
-                                    type="checkbox"
-                                    checked={servicosSelecionados.includes(servico.nome)}
-                                    onChange={() => handleSelecionarServico(servico.nome)}
-                                />
-                                <span>{servico.nome}</span>
-                                <strong>R$ {servico.preco}</strong>
-                            </label>
+                    <div className="formannet-servicos-lista">
+                        {servicos.map((servico) => {
+                            const imagens = gerarImagens(servico.prefixo);
+                            const inicio = indiceImagem[servico.prefixo] || 0;
+                            const visiveis = imagens.slice(inicio, inicio + 3);
 
-                            {servicosSelecionados.includes(servico.nome) && (
-                                <div className="formannet-carrossel">
-                                    <button
-                                        type="button"
-                                        className="formannet-carrossel-btn esquerda"
-                                        onClick={() => mudarSlide(servico.prefixo, "anterior")}
+                            return (
+                                <div key={servico.nome} className="formannet-servico-bloco">
+                                    <label
+                                        className={`formannet-servico ${servicosSelecionados.includes(servico.nome)
+                                            ? "selecionado"
+                                            : ""
+                                            }`}
                                     >
-                                        ⬅️
-                                    </button>
+                                        <input
+                                            type="checkbox"
+                                            checked={servicosSelecionados.includes(servico.nome)}
+                                            onChange={() => handleSelecionarServico(servico.nome)}
+                                        />
+                                        <span>{servico.nome}</span>
+                                        <strong>R$ {servico.preco}</strong>
+                                    </label>
 
-                                    <div className="formannet-imagens">
-                                        {visiveis.map((img, i) => (
-                                            <img
-                                                key={i}
-                                                src={img}
-                                                alt={servico.nome}
-                                                className="formannet-imagem"
-                                                onClick={() => setImagemGrande(img)}
-                                                onError={(e) => (e.target.style.display = "none")}
-                                            />
-                                        ))}
-                                    </div>
+                                    {servicosSelecionados.includes(servico.nome) && (
+                                        <div className="formannet-carrossel">
+                                            <button
+                                                type="button"
+                                                className="formannet-carrossel-btn esquerda"
+                                                onClick={() => mudarSlide(servico.prefixo, "anterior")}
+                                            >
+                                                ⬅️
+                                            </button>
 
-                                    <button
-                                        type="button"
-                                        className="formannet-carrossel-btn direita"
-                                        onClick={() => mudarSlide(servico.prefixo, "proximo")}
-                                    >
-                                        ➡️
-                                    </button>
+                                            <div className="formannet-imagens">
+                                                {visiveis.map((img, i) => (
+                                                    <img
+                                                        key={i}
+                                                        src={img}
+                                                        alt={servico.nome}
+                                                        className="formannet-imagem"
+                                                        onClick={() => setImagemGrande(img)}
+                                                        onError={(e) => (e.target.style.display = "none")}
+                                                    />
+                                                ))}
+                                            </div>
+
+                                            <button
+                                                type="button"
+                                                className="formannet-carrossel-btn direita"
+                                                onClick={() => mudarSlide(servico.prefixo, "proximo")}
+                                            >
+                                                ➡️
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
-                            )}
-                        </div>
-                    );
-                })}
-            </div>
-
-            <div className="formannet-horario">
-                <h3>Selecione a data e o horário desejado:</h3>
-
-                <div className="formannet-data">
-                    <input
-                        type="date"
-                        value={dataHora.split("T")[0] || ""}
-                        onChange={(e) =>
-                            setDataHora(e.target.value ? `${e.target.value}T` : "")
-                        }
-                        required
-                    />
-                </div>
-
-                {dataHora && (
-                    <div className="formannet-horas">
-                        {[
-                            "09:00",
-                            "10:00",
-                            "11:00",
-                            "13:00",
-                            "14:00",
-                            "15:00",
-                            "16:00",
-                            "17:00",
-                        ].map((hora) => (
-                            <button
-                                key={hora}
-                                type="button"
-                                className={`formannet-hora-btn ${dataHora.endsWith(hora) ? "ativo" : ""
-                                    }`}
-                                onClick={() =>
-                                    setDataHora((prev) => prev.split("T")[0] + "T" + hora)
-                                }
-                            >
-                                {hora}
-                            </button>
-                        ))}
+                            );
+                        })}
                     </div>
-                )}
-            </div>
 
-            <div className="formannet-botoes">
-                <button onClick={onVoltar} className="formannet-btn-voltar">
-                    ← Voltar
-                </button>
-                <button
-                    onClick={handleConfirmar}
-                    disabled={servicosSelecionados.length === 0 || !dataHora}
-                    className="formannet-btn"
-                >
-                    Confirmar Agendamento
-                </button>
-            </div>
+                    <div className="formannet-horario">
+                        <h3>Selecione a data e o horário desejado:</h3>
 
-            {/* 🆕 Modal da imagem ampliada */}
-            {imagemGrande && (
-                <div
-                    className="formannet-modal-fundo"
-                    onClick={() => setImagemGrande(null)}
-                >
-                    <img
-                        src={imagemGrande}
-                        alt="Imagem ampliada"
-                        className="formannet-modal-imagem"
-                        onClick={(e) => e.stopPropagation()}
-                    />
+                        <div className="formannet-data">
+                            <input
+                                type="date"
+                                value={dataHora.split("T")[0] || ""}
+                                onChange={(e) =>
+                                    setDataHora(e.target.value ? `${e.target.value}T` : "")
+                                }
+                                required
+                            />
+                        </div>
+
+                        {dataHora && (
+                            <div className="formannet-horas">
+                                {[
+                                    "09:00",
+                                    "10:00",
+                                    "11:00",
+                                    "13:00",
+                                    "14:00",
+                                    "15:00",
+                                    "16:00",
+                                    "17:00",
+                                ].map((hora) => (
+                                    <button
+                                        key={hora}
+                                        type="button"
+                                        className={`formannet-hora-btn ${dataHora.endsWith(hora) ? "ativo" : ""
+                                            }`}
+                                        onClick={() =>
+                                            setDataHora((prev) => prev.split("T")[0] + "T" + hora)
+                                        }
+                                    >
+                                        {hora}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="formannet-botoes">
+                        <button onClick={onVoltar} className="formannet-btn-voltar">
+                            ← Voltar
+                        </button>
+                        <button
+                            onClick={handleConfirmar}
+                            disabled={servicosSelecionados.length === 0 || !dataHora}
+                            className="formannet-btn"
+                        >
+                            proximo passo
+                        </button>
+                    </div>
+
+                    {imagemGrande && (
+                        <div
+                            className="formannet-modal-fundo"
+                            onClick={() => setImagemGrande(null)}
+                        >
+                            <img
+                                src={imagemGrande}
+                                alt="Imagem ampliada"
+                                className="formannet-modal-imagem"
+                                onClick={(e) => e.stopPropagation()}
+                            />
+                        </div>
+                    )}
+                </>
+            )}
+
+            {statusPagamento === "aguardando" && (
+                <div className="formannet-aguardando">
+                    <h2>💅 Aguardando confirmação do pagamento...</h2>
+                    <p>O checkout foi aberto em nova aba. Assim que o pagamento for aprovado, volte aqui para confirmar.</p>
+                    <div className="formannet-loader"></div>
+
+                    {/* 🔹 Botão de teste (simula pagamento aprovado) */}
+                    <button
+                        className="formannet-btn-teste"
+                        onClick={() => setStatusPagamento("aprovado")}
+                    >
+                        Simular Pagamento Aprovado 💳
+                    </button>
+                </div>
+            )}
+
+
+            {statusPagamento === "aprovado" && (
+                <div className="formannet-aprovado">
+
+                    <h2>✅ Pagamento aprovado!</h2>
+                    <p>Seu agendamento foi confirmado com sucesso!</p>
+                    <button onClick={() => setStatusPagamento("inicio")} className="formannet-aprovado-btn">
+                        Novo Agendamento
+                    </button>
                 </div>
             )}
         </main>

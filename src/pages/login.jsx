@@ -70,12 +70,26 @@ export default function Login({ redirectTo }) {
                     return;
                 }
 
+                // ✅ Salva o token e dados básicos
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("usuario", JSON.stringify(data.usuario));
                 localStorage.setItem("usuario_id", data.usuario.id);
 
                 login(data.usuario, data.token);
-                navigate(redirectTo || "/inicio");
+
+                // 🔍 Verifica se o usuário já viu as Boas-Vindas
+                const respUser = await fetch(`${URL}/usuarios/me`, {
+                    headers: { Authorization: `Bearer ${data.token}` },
+                });
+                const userData = await respUser.json();
+
+                console.log("🧭 Dados do usuário:", userData);
+
+                if (userData.assistiu === 0 || userData.assistiu === false) {
+                    navigate("/boas-vindas");
+                } else {
+                    navigate("/inicio");
+                }
             } catch (error) {
                 console.error("Erro ao buscar dados do Google:", error);
                 setMensagem("⚠️ Não foi possível verificar sua conta Google.");
@@ -84,6 +98,7 @@ export default function Login({ redirectTo }) {
         },
         onError: () => setMensagem("⚠️ Erro no login com Google."),
     });
+
 
     return (
         <div className="login-container">

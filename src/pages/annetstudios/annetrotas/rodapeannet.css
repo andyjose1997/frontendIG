@@ -1,60 +1,128 @@
-/* =============================== */
-/* 🎨 Rodannet - Rodapé Annet Studios */
-/* =============================== */
+/* 🌸 Estilo profissional e moderno para o rodapé da Annett Studios */
 
 .rodannet-container {
-    background: rgba(0, 0, 0, 0.75);
-    color: #fff;
-    padding: 40px 20px 15px;
+    background: linear-gradient(135deg, #f6d4e6, #f2b3c9, #e4a7c5);
+    color: #3a2d35;
     text-align: center;
+    padding: 3rem 1.5rem;
+    margin: auto auto;
     font-family: "Poppins", sans-serif;
-    margin-top: auto;
-    width: 98%;
     position: relative;
-    /* 🔹 garante que NÃO fique fixo */
+    overflow: hidden;
+    max-width: 96%;
+    box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.3);
 }
 
-.rodannet-conteudo {
+.rodannet-container::before {
+    content: "";
+    position: absolute;
+    top: -20%;
+    left: -20%;
+    width: 140%;
+    height: 140%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    animation: rodannetGlow 6s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+@keyframes rodannetGlow {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+.rodannet-centro {
+    position: relative;
+    z-index: 1;
+}
+
+.rodannet-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    transition: transform 0.4s ease;
+}
+
+.rodannet-logo:hover {
+    transform: scale(1.07);
+}
+
+.rodannet-nome {
+    margin-top: 1.2rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #40293b;
+    letter-spacing: 1px;
+}
+
+.rodannet-direitos {
+    margin-top: 0.4rem;
+    font-size: 0.95rem;
+    color: #5a3a4c;
+}
+
+.rodannet-infos {
+    margin-top: 2rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 50px;
-    margin-bottom: 20px;
+    gap: 1.5rem;
+    z-index: 1;
+    position: relative;
 }
 
-.rodannet-coluna {
-    max-width: 260px;
-}
-
-.rodannet-coluna h3,
-.rodannet-coluna h4 {
-    color: #ff8ac7;
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-.rodannet-coluna p {
-    margin: 5px 0;
-    font-size: 0.95rem;
-    color: #eee;
-}
-
-.rodannet-redes a {
-    display: block;
-    color: #fff;
+.rodannet-item a {
     text-decoration: none;
-    margin: 4px 0;
+    color: #40293b;
+    font-weight: 500;
     transition: color 0.3s ease;
 }
 
-.rodannet-redes a:hover {
-    color: #ff8ac7;
+.rodannet-item a:hover {
+    color: #d63384;
+    text-shadow: 0 0 8px rgba(214, 51, 132, 0.4);
 }
 
-.rodannet-copy {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    margin-top: 15px;
-    padding-top: 10px;
-    font-size: 0.85rem;
-    opacity: 0.8;
+
+
+/* 📱 Responsivo */
+@media (max-width: 600px) {
+    .rodannet-logo {
+        width: 90px;
+        height: 90px;
+    }
+
+    .rodannet-nome {
+        font-size: 1.3rem;
+    }
+
+    .rodannet-infos {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+}
+
+/* 📂 src/pages/annetstudios/rodapeannet.css */
+
+/* Por padrão, escondido */
+.rodannet-breaks {
+    display: none;
+}
+
+/* 🔹 Mostra apenas em telas menores que 800px */
+@media (max-width: 800px) {
+    .rodannet-breaks {
+        display: block;
+        height: 100px;
+        /* 5 quebras ~ 5x20px */
+    }
 }

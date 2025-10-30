@@ -21,15 +21,16 @@ export default function TorneioQuizzes() {
                 // 🔹 Tipos ainda não clicados
                 const resTipos = await fetch(`${URL}/quiz/tipos/${idUsuario}`);
                 const dataTipos = await resTipos.json();
-                const unicos = [];
+                // 🔹 Garantir que só apareça um botão por tipo, mesmo com variações sutis
                 const vistos = new Set();
-                for (const item of dataTipos) {
-                    if (!vistos.has(item.tipo)) {
-                        vistos.add(item.tipo);
-                        unicos.push(item);
-                    }
-                }
+                const unicos = dataTipos.filter((item) => {
+                    const tipoNormalizado = (item.tipo || item.tipo_quiz).trim().toLowerCase();
+                    if (vistos.has(tipoNormalizado)) return false;
+                    vistos.add(tipoNormalizado);
+                    return true;
+                });
                 setTipos(unicos);
+
 
                 // 🔹 Tipos já clicados → rankings
                 const resClicados = await fetch(`${URL}/quiz/clicados/${idUsuario}`);

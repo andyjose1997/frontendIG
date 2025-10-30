@@ -1,0 +1,37 @@
+.annetstudios-layout {
+    padding-top: 4px;
+}
+
+/* 🔹 Área principal usando Grid */
+.annetstudios-principal {
+    display: grid;
+    grid-template-columns: 70% 50%;
+    /* Parceria menor, formulário maior */
+    gap: 40px;
+    justify-content: center;
+    align-items: start;
+    padding: 20px;
+    max-width: fit-content;
+    margin: 0 auto;
+}
+
+/* 🔹 Parceria (coluna esquerda) */
+.annetstudios-principal> :first-child {
+    background: transparent;
+    width: 100%;
+}
+
+/* 🔹 Formulário (coluna central) */
+.annetstudios-principal> :last-child {
+    width: 100%;
+}
+
+/* 🔹 Layout responsivo */
+@media (max-width: 1000px) {
+    .annetstudios-principal {
+        grid-template-columns: 1fr;
+        /* uma coluna só */
+        gap: 20px;
+        padding: 10px;
+    }
+}

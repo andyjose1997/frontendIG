@@ -1,36 +1,45 @@
-// Todas as classes começam com "rodannet-"
-
+// 📂 src/pages/annetstudios/Rodannet.jsx
 import "./rodapeannet.css";
 
 export default function Rodannet() {
     return (
         <footer className="rodannet-container">
-            <div className="rodannet-conteudo">
-                <div className="rodannet-coluna">
-                    <h3>Annet Studios</h3>
-                    <p>Beleza, cuidado e confiança em cada detalhe.</p>
+            <div className="rodannet-centro">
+                <img
+                    src="https://sbeotetrpndvnvjgddyv.supabase.co/storage/v1/object/public/annet/ChatGPT%20Image%2028%20de%20out%20(1).%20de%202025,%2015_28_46"
+                    alt="Logo Annett Studios"
+                    className="rodannet-logo"
+                />
+                <h3 className="rodannet-nome">Annett Studios</h3>
+                <p className="rodannet-direitos">
+                    © {new Date().getFullYear()} Annett Studios — Todos os direitos reservados.
+                </p>
+            </div>
+
+            <div className="rodannet-infos">
+                <div className="rodannet-item">
+                    <a
+                        href="https://www.instagram.com/studio_annett?igsh=Ym16dWZrNHZwaHk3"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        🌸 Instagram
+                    </a>
                 </div>
 
-                <div className="rodannet-coluna">
-                    <h4>Contato</h4>
-                    <p>📍 Rua das Rosas, 215 - São Paulo, SP</p>
-                    <p>📞 (11) 91234-5678</p>
-                    <p>📧 contato@annetstudios.com</p>
+                <div className="rodannet-item">
+                    <a href="https://wa.me/5511915305613" target="_blank" rel="noreferrer">
+                        💬 WhatsApp: +55 11 91530-5613
+                    </a>
                 </div>
 
-                <div className="rodannet-coluna">
-                    <h4>Redes Sociais</h4>
-                    <div className="rodannet-redes">
-                        <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">🌸 Instagram</a>
-                        <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">💖 Facebook</a>
-                        <a href="https://wa.me/5511912345678" target="_blank" rel="noreferrer">💬 WhatsApp</a>
-                    </div>
+                <div className="rodannet-item">
+                    <a href="mailto:torresannett17@gmail.com">📧 torresannett17@gmail.com</a>
                 </div>
             </div>
 
-            <div className="rodannet-copy">
-                © {new Date().getFullYear()} Annet Studios — Todos os direitos reservados.
-            </div>
+            {/* 🔹 Só aparecerá no mobile */}
+            <div className="rodannet-breaks"></div>
         </footer>
     );
 }

@@ -41,6 +41,7 @@ export default function BoasVindasInterativo() {
         "💼 Aqui, além de aprender, você pode gerar renda extra enquanto estuda.",
         "📘 Você poderá fazer exercícios práticos e evoluir de forma divertida.",
         "🎥 Todas as terças, quintas e sábados às 20h temos uma live especial no Facebook explicando tudo sobre a plataforma e tirando suas dúvidas.",
+        "💬 Se não está em nosso grupo de WhatsApp, entre para receber as novidades da IronGoals 👉 ",
         "📲 Recomendamos que siga nossa página para se manter atualizado nas novidades.",
         "🧭 E o melhor: você tem um host que será o seu orientador. Ele recebe uma porcentagem das suas vendas e compras, como reconhecimento por te guiar no seu caminho rumo à autossuficiência.",
         "📍 Você pode encontrar o contato com seu host em Perfil → Informações → Host.",
@@ -52,10 +53,11 @@ export default function BoasVindasInterativo() {
     const proximoPasso = () => {
         setCarregando(true);
         setTimeout(() => {
-            setPasso((prev) => prev + 1);
+            setPasso((prev) => (prev < mensagens.length - 1 ? prev + 1 : prev));
             setCarregando(false);
         }, 300);
     };
+
 
     // 🔹 Finaliza (Entendi OU Pular)
     const finalizarBoasVindas = async () => {
@@ -103,6 +105,17 @@ export default function BoasVindasInterativo() {
                             )}
 
                             {passo === 4 && (
+                                <a
+                                    href="https://chat.whatsapp.com/DodPExHME585JBCzuLbTDP?mode=wwt"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="link-live"
+                                >
+                                    💬 Entrar no grupo do WhatsApp
+                                </a>
+                            )}
+
+                            {passo === 5 && (
                                 <a
                                     href="https://www.facebook.com/profile.php?id=61580492555279"
                                     target="_blank"
@@ -195,7 +208,7 @@ export default function BoasVindasInterativo() {
                     {/* 🔹 Passos 7 e 8 */}
                     {(passo === 7 || passo === 8) && (
                         <>
-                            <div className="mensagem">{mensagens[passo - 1]}</div>
+                            <div className="mensagem">{mensagens[passo]}</div>
                             <div className="botoes-container">
                                 <button
                                     onClick={proximoPasso}
@@ -218,7 +231,7 @@ export default function BoasVindasInterativo() {
                     {/* 🔹 Último passo */}
                     {passo === 9 && (
                         <>
-                            <div className="mensagem">{mensagens[8]}</div>
+                            <div className="mensagem">{mensagens[9]}</div>
                             <button
                                 onClick={finalizarBoasVindas}
                                 className="btn-entendi"

@@ -1,58 +1,265 @@
-/* =============================== */
-/* 🤝 ParceriaAnnet - Seção de Parcerias */
-/* Todas as classes começam com "parceriaannet-" */
-/* =============================== */
-
 .parceriaannet-container {
     text-align: center;
-    padding: 80px 20px;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(5px);
-    font-family: "Poppins", sans-serif;
+    padding: 4rem 1rem;
+    background: linear-gradient(145deg, #fff0f8, #f7e6ff);
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(255, 0, 100, 0.2);
+    margin: 3rem auto;
+    max-width: 90%;
+    width: fit-content;
+    padding: 30px 40px;
 }
 
 .parceriaannet-container h2 {
     font-size: 1.8rem;
-    color: #ff8ac7;
-    margin-bottom: 10px;
+    color: #b3125c;
+    margin-bottom: 0.8rem;
 }
 
 .parceriaannet-container p {
-    color: #eee;
-    font-size: 1rem;
-    margin-bottom: 40px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.5;
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
 }
 
 .parceriaannet-logos {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 50px;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
 }
 
 .parceriaannet-logos img {
-    height: 60px;
-    filter: brightness(0.9);
-    transition: transform 0.3s ease, filter 0.3s ease;
+    width: 130px;
+    height: auto;
+    transition: transform 0.3s ease;
 }
 
 .parceriaannet-logos img:hover {
-    transform: scale(1.1);
-    filter: brightness(1.1);
+    transform: scale(1.08);
 }
 
-/* Responsivo */
-@media (max-width: 600px) {
-    .parceriaannet-logos {
-        gap: 30px;
+.parceriaannet-btn {
+    background: linear-gradient(135deg, #b3125c, #e91e63);
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.parceriaannet-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #e91e63, #b3125c);
+}
+
+/* 🔹 Modal */
+.parceriaannet-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 15, 30, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeIn 0.4s ease;
+}
+
+.parceriaannet-modal {
+    background: #fff;
+    border-radius: 14px;
+    padding: 2.5rem;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* 🔹 Versão azul do título IronGoals */
+.parceriaannet-container h2,
+.parceriaannet-container .titulo-iron {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+}
+
+.parceriaannet-container h2 {
+    color: #b3125c;
+    /* já existente - rosa */
+}
+
+.parceriaannet-container .titulo-iron {
+    color: #004a99;
+    /* azul profundo */
+    text-shadow: 0 0 10px rgba(0, 102, 204, 0.3);
+}
+
+.frase-inspiradora {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 1.6rem;
+}
+
+.btn-google-iron {
+    background: #fff;
+    color: #444;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-google-iron:hover {
+    background: #f8f8f8;
+    transform: scale(1.02);
+}
+
+.google-icon {
+    width: 22px;
+    height: 22px;
+}
+
+.texto-menor {
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    color: #555;
+}
+
+.btn-cadastrar {
+    background: linear-gradient(135deg, #0069d9, #004a99);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 22px;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-cadastrar:hover {
+    background: linear-gradient(135deg, #004a99, #0069d9);
+    transform: translateY(-1px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
     }
 
-    .parceriaannet-logos img {
-        height: 45px;
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
+}
+
+.parceriaannet-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+@media (max-width: 383px) {
+    .parceriaannet-logo-img {
+        width: 40px !important;
+        height: 40px;
+    }
+}
+
+.parceriaannet-logo-img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.parceriaannet-logo-img:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 25px rgba(255, 0, 150, 0.3);
+}
+
+/* 🔹 Linha de conexão entre logos */
+.parceriaannet-linha {
+    width: 160px;
+    height: 4px;
+    background: linear-gradient(90deg, #b3125c, #e91e63, #b3125c);
+    border-radius: 4px;
+    animation: brilhoLinha 3s linear infinite;
+}
+
+@keyframes brilhoLinha {
+    0% {
+        opacity: 0.5;
+        transform: scaleX(0.95);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scaleX(1.05);
+    }
+
+    100% {
+        opacity: 0.5;
+        transform: scaleX(0.95);
+    }
+}
+
+.btn-conhecer {
+    background: linear-gradient(135deg, #0099cc, #0066cc);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 22px;
+    margin-top: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-conhecer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: skewX(-20deg);
+    transition: 0.7s;
+}
+
+.btn-conhecer:hover::after {
+    left: 160%;
+}
+
+.btn-conhecer:hover {
+    transform: translateY(-2px);
 }

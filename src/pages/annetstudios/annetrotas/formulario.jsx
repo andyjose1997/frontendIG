@@ -28,7 +28,8 @@ export default function Formannet() {
 
     return (
         <main className="formannet-container">
-            <h1 className="formannet-titulo">Agendamento — Annet Studios</h1>
+            <p className="formannet-etapa">Etapa 1/3</p><br />
+            <h1 className="formannet-titulo">Agendamento — Annett Studios</h1>
             <p className="formannet-subtitulo">
                 Preencha o formulário abaixo para agendar seu serviço.
                 Todas as informações são confidenciais e usadas apenas para garantir sua segurança.
