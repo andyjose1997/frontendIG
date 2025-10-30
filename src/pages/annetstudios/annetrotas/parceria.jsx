@@ -116,7 +116,7 @@ export default function ParceriaAnnet() {
             <div className="parceriaannet-logos">
                 <img
                     className="parceriaannet-logo-img"
-                    src="https://sbeotetrpndvnvjgddyv.supabase.co/storage/v1/object/public/annet/ChatGPT%20Image%2028%20de%20out%20(1).%20de%202025,%2015_28_46"
+                    src="https://sbeotetrpndvnvjgddyv.supabase.co/storage/v1/object/public/annet/logo.png"
                     alt="Annett Studios"
                 />
                 <div className="parceriaannet-linha"></div>

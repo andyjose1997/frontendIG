@@ -1,0 +1,104 @@
+.painelpartner-loading {
+    text-align: center;
+    color: #ccc;
+    font-size: 1.2rem;
+    margin-top: 100px;
+}
+
+.painelpartner-erro {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #ff5555;
+    background: #111;
+    font-weight: 600;
+}
+
+/* 🔹 Estrutura principal */
+.painelpartner-pagina {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0a1a, #151530);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+}
+
+/* 🔹 Tema especial Annet Studios */
+.annet-tema {
+    background: linear-gradient(135deg, #ffd9f3, #fff5fb);
+    color: #3b0045;
+}
+
+.annet-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 20px rgba(255, 170, 220, 0.6);
+}
+
+/* 🔹 Conteúdo principal */
+.painelpartner-conteudo {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 2rem 3rem;
+    max-width: 700px;
+    width: 90%;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+}
+
+/* 🔹 Título */
+.painelpartner-conteudo h2 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+/* 🔹 Botões de teste */
+.painelpartner-botoes-teste {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.painelpartner-botao {
+    background: #00b4d8;
+    color: #fff;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.painelpartner-botao:hover {
+    background: #0096c7;
+    transform: scale(1.05);
+}
+
+/* 🔹 Botões tema Annet */
+.annet-tema .painelpartner-botao {
+    background: linear-gradient(90deg, #ff89ce, #ffb6e6);
+    color: #3b003d;
+}
+
+.annet-tema .painelpartner-botao:hover {
+    background: linear-gradient(90deg, #ff6fc7, #ffa5de);
+}
+
+/* 🔹 Responsivo */
+@media (max-width: 700px) {
+    .painelpartner-conteudo {
+        padding: 1.5rem;
+    }
+
+    .painelpartner-botao {
+        width: 100%;
+    }
+}

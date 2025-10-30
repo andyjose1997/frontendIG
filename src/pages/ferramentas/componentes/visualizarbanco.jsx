@@ -438,6 +438,8 @@ export default function VisualizarBanco() {
                                                     <option value="admin">admin</option>
                                                     <option value="auditor">auditor</option>
                                                     <option value="coordenador">coordenador</option>
+                                                    <option value="partner">partner</option>
+
                                                 </select>
                                             ) : campo === "categoria" ? (
                                                 <select
@@ -455,6 +457,7 @@ export default function VisualizarBanco() {
                                                     <option value="member">member</option>
                                                     <option value="explorer">explorer</option>
                                                     <option value="founder">founder</option>
+
 
                                                 </select>
                                             ) : campo === "id" ? (

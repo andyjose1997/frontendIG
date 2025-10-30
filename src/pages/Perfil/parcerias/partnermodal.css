@@ -1,0 +1,196 @@
+/* 🔹 Fundo escurecido do modal */
+.partner-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(20, 20, 40, 0.9) 0%, rgba(0, 0, 0, 0.95) 100%);
+    backdrop-filter: blur(10px) saturate(140%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeInOverlay 0.4s ease forwards;
+}
+
+/* 🔹 Caixa principal do modal */
+.partner-conteudo {
+    background: linear-gradient(145deg, #0a0a1a, #14142b);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 880px !important;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    animation: slideUp 0.4s ease;
+    position: relative;
+}
+
+/* 🌸 Tema especial para Annet Studios */
+.annet-tema {
+    background: rgba(255, 255, 255, 0.9);
+    color: #190025;
+    max-width: 90%;
+    width: 980px;
+    border: none;
+    box-shadow: 0 0 20px rgba(255, 160, 200, 0.6);
+}
+
+.annet-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 15px rgba(255, 170, 220, 0.5);
+    margin-bottom: 1rem;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.annet-titulo {
+    font-family: "Poppins", sans-serif;
+    color: #000000;
+    font-weight: 600;
+    font-size: 2.2rem;
+    text-shadow: 0 0 10px rgba(255, 180, 240, 0.6);
+}
+
+.annet-descricao {
+    font-size: 1.3rem;
+    color: #000000;
+}
+
+.annet-botao {
+    background: linear-gradient(90deg, #ff8ccf, #ffb6e6);
+    color: #fff;
+    font-weight: bold;
+    border: none;
+
+}
+
+.annet-botao:hover {
+    background: linear-gradient(90deg, #ff6fc7, #ff9ee0);
+    transform: translateY(-2px);
+}
+
+/* 🔹 Resto igual */
+.partner-form input {
+    width: 80%;
+    max-width: 300px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-size: 1.4rem;
+    outline: none;
+    text-align: center;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.partner-form input:focus {
+    border-color: #00c2ff;
+    box-shadow: 0 0 8px rgba(0, 194, 255, 0.4);
+}
+
+.partner-form input.erro {
+    border-color: #ff4d4d;
+    box-shadow: 0 0 8px rgba(255, 77, 77, 0.4);
+}
+
+.partner-botao-voltar {
+    background: #343a40;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 22px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.partner-botao-voltar:hover {
+    background: #495057;
+}
+
+/* 📱 Responsivo para telas até 700px */
+@media (max-width: 700px) {
+
+    /* 🔹 Centraliza e ajusta o container */
+    .partner-conteudo {
+        width: 95% !important;
+        max-width: 95% !important;
+        padding: 1.5rem;
+        border-radius: 14px;
+    }
+
+    /* 🔹 Versão Annet adaptada */
+    .annet-tema {
+        width: 95%;
+        max-width: 95%;
+        padding: 1.5rem;
+        border-radius: 16px;
+        box-shadow: 0 0 15px rgba(255, 180, 230, 0.6);
+    }
+
+    /* 🔹 Logo menor e central */
+    .annet-logo {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 0.8rem;
+    }
+
+    /* 🔹 Título e texto menores */
+    .partner-titulo,
+    .annet-titulo {
+        font-size: 1.6rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .partner-descricao,
+    .annet-descricao {
+        font-size: 1.1rem;
+        line-height: 1.4;
+        margin-bottom: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    /* 🔹 Input adaptado */
+    .partner-form input {
+        width: 90%;
+        max-width: 90%;
+        font-size: 1.1rem;
+        padding: 8px 12px;
+    }
+
+    /* 🔹 Botões reorganizados */
+    .partner-botoes {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-top: 1.5rem;
+    }
+
+    .partner-botao-entrar,
+    .partner-botao-voltar,
+    .annet-botao {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    /* 🔹 Corrige sombra e animação em telas pequenas */
+    .partner-conteudo,
+    .annet-tema {
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+        animation: slideUp 0.3s ease;
+    }
+
+    /* 🔹 Texto de erro visível */
+    .erro-texto {
+        font-size: 0.85rem;
+        margin-top: 0.4rem;
+    }
+}

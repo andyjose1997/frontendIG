@@ -113,6 +113,9 @@ export default function ModalAvaliacoes({ onFechar }) {
             alert(data.detail || "Erro ao apagar.");
         }
     };
+    const avaliacaoUsuario = avaliacoes.find(
+        (av) => av.id_usuario === usuarioLogado
+    );
 
     const iniciarEdicao = (av) => {
         setMensagem(av.mensagem);
@@ -218,21 +221,30 @@ export default function ModalAvaliacoes({ onFechar }) {
                             {usuarioLogado ? (
                                 <>
                                     <div className="avaliacoes-estrelas-container">
-                                        <p className="avaliacoes-instrucao">
-                                            ⭐ Avalie sua experiência
-                                        </p>
-                                        <div className="avaliacoes-estrelas">
-                                            {[1, 2, 3, 4, 5].map((n) => (
-                                                <span
-                                                    key={n}
-                                                    className={`estrela ${n <= estrelas ? "ativa" : ""}`}
-                                                    onClick={() => usuarioLogado && setEstrelas(n)}
-                                                >
-                                                    ★
-                                                </span>
-                                            ))}
-                                        </div>
+                                        {avaliacaoUsuario ? (
+                                            <p className="avaliacoes-instrucao jaavaliou">
+                                                Avalie-nos
+                                            </p>
+                                        ) : (
+                                            <>
+                                                <p className="avaliacoes-instrucao">
+                                                    ⭐ Avalie sua experiência
+                                                </p>
+                                                <div className="avaliacoes-estrelas">
+                                                    {[1, 2, 3, 4, 5].map((n) => (
+                                                        <span
+                                                            key={n}
+                                                            className={`estrela ${n <= estrelas ? "ativa" : ""}`}
+                                                            onClick={() => usuarioLogado && setEstrelas(n)}
+                                                        >
+                                                            ★
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
+
 
                                     <textarea
                                         ref={textareaRef}

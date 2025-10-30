@@ -123,6 +123,13 @@
     .rodannet-breaks {
         display: block;
         height: 100px;
+
         /* 5 quebras ~ 5x20px */
+    }
+
+    .rodannet-container {
+        max-width: 86%;
+        border-radius: 20px;
+
     }
 }

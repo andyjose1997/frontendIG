@@ -8,6 +8,7 @@ import AlertaWhatsApp from "./alertawhatsapp";
 import ChavePix from './config/chavepix';
 import SaldoCPPModal from './saldocppmodal';
 import CertificadosModal from './certificadosmodal';
+import PartnerModal from './parcerias/partnermodal';
 
 export default function BotaoUm() {
     const [mostrarNivel, setMostrarNivel] = useState(false);
@@ -25,6 +26,7 @@ export default function BotaoUm() {
     const [temCertificado, setTemCertificado] = useState(false);
     const [mostrarCertificados, setMostrarCertificados] = useState(false);
     const [certificados, setCertificados] = useState([]);
+    const [mostrarPartnerModal, setMostrarPartnerModal] = useState(false);
 
     const linkAprendizagem = window.location.origin.includes("localhost")
         ? "http://localhost:5173/aprendizagem"
@@ -325,14 +327,24 @@ export default function BotaoUm() {
             <button onClick={() => setMostrarPacotes(true)} className="botao-acao">📦 Pacotes</button>
             <button onClick={() => setMostrarModal(true)} className="botao-acao">🧭 Host</button>
             {["admin", "coordinador", "auditor"].includes(funcao.toLowerCase()) && (
-                <button onClick={() => setMostrarFerramentas(true)} className="botao-acao">🛠 Painel de controle</button>
+                <button onClick={() => setMostrarFerramentas(true)} className="botao-acao">
+                    🛠 Painel de controle
+                </button>
             )}
-            {mostrarCertificados && (
-                <CertificadosModal
-                    certificados={certificados}
-                    onClose={() => setMostrarCertificados(false)}
-                />
+            {/* ✅ Novo botão Partner */}
+            {["partner", "admin", "coordinador", "auditor"].includes(funcao.toLowerCase()) && (
+                <button onClick={() => setMostrarPartnerModal(true)} className="botao-acao">
+                    🤝 Área Partner
+                </button>
             )}
+            {mostrarPartnerModal && (
+                <div className="partner-modal-overlay" onClick={() => setMostrarPartnerModal(false)}>
+                    <div className="partner-modal" onClick={(e) => e.stopPropagation()}>
+                        <PartnerModal onClose={() => setMostrarPartnerModal(false)} />
+                    </div>
+                </div>
+            )}
+
 
             {mostrarFerramentas && (
                 <div className="painel-modal-overlay">

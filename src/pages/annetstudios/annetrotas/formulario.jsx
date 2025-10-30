@@ -9,18 +9,20 @@ export default function Formannet() {
     const [etapa, setEtapa] = useState("formulario");
 
     useEffect(() => {
-        document.body.style.backgroundImage =
-            "url('https://sbeotetrpndvnvjgddyv.supabase.co/storage/v1/object/public/annet/ChatGPT%20Image%2028%20de%20out.%20de%202025,%2015_26_11.png')";
+        document.body.style.background =
+            "linear-gradient(135deg, #e3c1b3, #d3a998, #c7988a)";
         document.body.style.backgroundSize = "cover";
         document.body.style.backgroundPosition = "center";
         document.body.style.backgroundAttachment = "fixed";
         document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.boxShadow = "inset 0 0 80px rgba(255, 255, 255, 0.05)";
 
         return () => {
-            document.body.style.backgroundImage = "";
-            document.body.style.backgroundColor = "";
+            document.body.style.background = "";
+            document.body.style.boxShadow = "";
         };
     }, []);
+
 
     if (etapa === "servicos") {
         return <FormularioDois onVoltar={() => setEtapa("formulario")} />;

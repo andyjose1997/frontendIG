@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 14px 32px;
-    background: linear-gradient(135deg, #b3125c, #e91e63);
+    background: linear-gradient(135deg, #b7950b, #f7dc6f, #d4ac0d);
     /* ✨ Rosa elegante com transição suave */
     color: #fff;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
@@ -61,7 +61,6 @@
 .menuannet-titulo {
     font-size: 1.6rem;
     font-weight: 700;
-    color: #ffffff;
     font-family: "Montserrat", "Poppins", "Inter", sans-serif;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -78,6 +77,8 @@
 .menuannet-links {
     display: flex;
     gap: 90px;
+    font-weight: bold;
+    color: #91016d;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease-in-out;
@@ -85,7 +86,7 @@
 
 /* 🔹 Estilo base dos links */
 .menuannet-links a {
-    color: #ffffff;
+    color: #070000 !important;
     text-decoration: none;
     font-weight: 500;
     font-size: 1.45rem;
@@ -202,7 +203,6 @@
         left: 0;
         width: calc(100% - 20px);
         margin: 0 10px;
-        background: #c2185b;
         border-top: 3px solid #ff77a9;
         justify-content: center;
         padding: 8px 0;
