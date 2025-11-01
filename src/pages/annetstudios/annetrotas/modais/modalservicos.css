@@ -1,17 +1,174 @@
+/* ==============================
+   MODAL BASE
+============================== */
 .modalannet-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    /* ocupa toda a largura da viewport */
     height: 100%;
-    /* ocupa toda a altura da viewport */
-    background: rgba(0, 0, 0, 0.65);
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    /* aumenta um pouco o z-index */
-    backdrop-filter: blur(4px);
-    animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.modalannet-conteudo {
+    background: linear-gradient(135deg, #ffffff, #f8f4e6, #e8d49a);
+    border-radius: 18px;
+    width: 90%;
+    max-width: 900px;
+    padding: 40px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+    font-family: "Poppins", sans-serif;
+    color: #333;
+    position: relative;
+    animation: slideUp 0.5s ease-out;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+.modalannet-conteudo h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: #222;
+    font-weight: 600;
+}
+
+/* ==============================
+   LISTA DE SERVIÇOS
+============================== */
+.modalannet-lista-servicos {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.modalannet-servico {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    padding: 20px 25px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(240, 220, 150, 0.3);
+}
+
+.modalannet-servico:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.modalannet-servico h3 {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+    color: #333;
+    font-weight: 600;
+}
+
+.modalannet-preco {
+    font-size: 1.1rem;
+    color: #856404;
+    font-weight: 500;
+}
+
+.modalannet-tempo {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+/* ==============================
+   FOTOS
+============================== */
+.modalannet-fotos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.modalannet-foto {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.modalannet-foto:hover {
+    transform: scale(1.05);
+}
+
+/* ==============================
+   BOTÃO FECHAR
+============================== */
+.modalannet-fechar {
+    background: linear-gradient(135deg, #d4af37, #f2e5a0);
+    color: #1a1a1a;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 25px;
+    margin-top: 25px;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 0.3s ease;
+}
+
+.modalannet-fechar:hover {
+    background: linear-gradient(135deg, #c8a127, #f7e589);
+    transform: scale(1.05);
+}
+
+/* ==============================
+   ANIMAÇÕES
+============================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ==============================
+   RESPONSIVO
+============================== */
+@media (max-width: 600px) {
+    .modalannet-conteudo {
+        padding: 25px 20px;
+    }
+
+    .modalannet-foto {
+        height: 110px;
+    }
+
+    .modalannet-servico h3 {
+        font-size: 1.2rem;
+    }
+
+    .modalannet-preco {
+        font-size: 1rem;
+    }
 }

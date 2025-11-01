@@ -1,104 +1,106 @@
-.painelpartner-loading {
-    text-align: center;
-    color: #ccc;
-    font-size: 1.2rem;
-    margin-top: 100px;
-}
-
-.painelpartner-erro {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: #ff5555;
-    background: #111;
-    font-weight: 600;
-}
-
-/* 🔹 Estrutura principal */
+/* === CONTAINER PRINCIPAL === */
 .painelpartner-pagina {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #0a0a1a, #151530);
+    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    text-align: center;
+    background: linear-gradient(135deg, #fff, #fdf6fa, #f1d5ef);
+    font-family: "Poppins", sans-serif;
+    color: #3a2a3d;
+    animation: fadeIn 0.8s ease-in-out;
 }
 
-/* 🔹 Tema especial Annet Studios */
-.annet-tema {
-    background: linear-gradient(135deg, #ffd9f3, #fff5fb);
-    color: #3b0045;
-}
-
-.annet-logo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin-bottom: 1rem;
-    box-shadow: 0 0 20px rgba(255, 170, 220, 0.6);
-}
-
-/* 🔹 Conteúdo principal */
-.painelpartner-conteudo {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    padding: 2rem 3rem;
-    max-width: 700px;
-    width: 90%;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-}
-
-/* 🔹 Título */
-.painelpartner-conteudo h2 {
-    margin-bottom: 2rem;
-    font-size: 2rem;
-}
-
-/* 🔹 Botões de teste */
-.painelpartner-botoes-teste {
+/* === MENU SUPERIOR === */
+.painelpartner-menu {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(200, 120, 200, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-.painelpartner-botao {
-    background: #00b4d8;
-    color: #fff;
-    padding: 0.8rem 2rem;
+/* === BOTÕES DO MENU === */
+.painelpartner-botao-menu {
+    background: linear-gradient(145deg, #e6b8ff, #c58cff);
     border: none;
-    border-radius: 8px;
-    cursor: pointer;
+    color: #fff;
     font-weight: 600;
-    transition: 0.3s;
+    padding: 10px 22px;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(156, 84, 190, 0.3);
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
 }
 
-.painelpartner-botao:hover {
-    background: #0096c7;
+.painelpartner-botao-menu:hover {
+    background: linear-gradient(145deg, #c58cff, #e6b8ff);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(156, 84, 190, 0.4);
+}
+
+.painelpartner-botao-menu.ativo {
+    background: linear-gradient(145deg, #b95ea6, #a24c90);
+    box-shadow: 0 6px 18px rgba(169, 63, 150, 0.4);
     transform: scale(1.05);
 }
 
-/* 🔹 Botões tema Annet */
-.annet-tema .painelpartner-botao {
-    background: linear-gradient(90deg, #ff89ce, #ffb6e6);
-    color: #3b003d;
+/* === ÁREA DE CONTEÚDO === */
+.painelpartner-conteudo {
+    flex: 1;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    animation: slideUp 0.6s ease;
 }
 
-.annet-tema .painelpartner-botao:hover {
-    background: linear-gradient(90deg, #ff6fc7, #ffa5de);
-}
-
-/* 🔹 Responsivo */
-@media (max-width: 700px) {
-    .painelpartner-conteudo {
-        padding: 1.5rem;
+/* === ANIMAÇÕES === */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
     }
 
-    .painelpartner-botao {
-        width: 100%;
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+    .painelpartner-menu {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .painelpartner-botao-menu {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    .painelpartner-conteudo {
+        padding: 25px 15px;
     }
 }

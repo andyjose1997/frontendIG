@@ -1,0 +1,239 @@
+/* === CONTAINER PRINCIPAL === */
+.agendamentosannet-container {
+    padding: 30px;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    max-width: 1900px;
+    margin: 0 auto;
+}
+
+/* === TÍTULO === */
+.agendamentosannet-titulo {
+    font-size: 26px;
+    margin-bottom: 25px;
+    color: #b37ada;
+}
+
+/* === ABAS (BOTÕES DE VISUALIZAÇÃO) === */
+.agendamentosannet-abas {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.aba-botao {
+    background: linear-gradient(135deg, #f6e7ff, #e5c7ff);
+    color: #4b2872;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.aba-botao:hover {
+    background: linear-gradient(135deg, #e5c7ff, #d4aaff);
+    transform: translateY(-2px);
+}
+
+.aba-botao.ativo {
+    background: linear-gradient(135deg, #b37ada, #8e5bc1);
+    color: #fff;
+    transform: scale(1.05);
+}
+
+/* === TABELA === */
+.agendamentosannet-tabela {
+    width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* === CABEÇALHO === */
+.agendamentosannet-tabela th {
+    background: linear-gradient(135deg, #e9d8fd, #f3e8ff);
+    color: #5c3c89;
+    padding: 10px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* === CÉLULAS === */
+.agendamentosannet-tabela td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+    text-align: center;
+}
+
+/* === LINHAS === */
+.linha-par {
+    background-color: #ffffff;
+}
+
+.linha-impar {
+    background-color: #ffffff;
+}
+
+.linha-menor-idade {
+    background-color: #e8d9ff !important;
+    color: #3e256e !important;
+    font-weight: 500;
+}
+
+/* === BARRA DE ROLAGEM PERSONALIZADA === */
+.agendamentosannet-tabela::-webkit-scrollbar {
+    height: 8px;
+}
+
+.agendamentosannet-tabela::-webkit-scrollbar-track {
+    background: #f4e9ff;
+    border-radius: 10px;
+}
+
+.agendamentosannet-tabela::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #b37ada, #8e5bc1);
+    border-radius: 10px;
+}
+
+.agendamentosannet-tabela::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #8e5bc1, #b37ada);
+}
+
+/* === BOTÃO "CARREGAR MAIS" === */
+.agendamentosannet-botao-container {
+    margin-top: 20px;
+}
+
+.agendamentosannet-botao-mais {
+    background: linear-gradient(135deg, #b37ada, #8e5bc1);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+.agendamentosannet-botao-mais:hover {
+    background: linear-gradient(135deg, #8e5bc1, #b37ada);
+    transform: scale(1.05);
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 900px) {
+    .agendamentosannet-container {
+        padding: 20px;
+    }
+
+    .agendamentosannet-titulo {
+        font-size: 22px;
+    }
+
+    .agendamentosannet-abas {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .aba-botao {
+        width: 100%;
+        max-width: 280px;
+        font-size: 14px;
+    }
+
+    .agendamentosannet-tabela {
+        max-width: 95%;
+        font-size: 14px;
+    }
+
+    .agendamentosannet-tabela th,
+    .agendamentosannet-tabela td {
+        padding: 8px;
+        white-space: nowrap;
+    }
+
+    .agendamentosannet-botao-mais {
+        width: 100%;
+        max-width: 250px;
+        font-size: 14px;
+    }
+}
+
+/* === AJUSTES ESPECÍFICOS PARA CELULARES === */
+@media (max-width: 600px) {
+
+    /* 🔹 Garante espaçamento e centralização */
+    .agendamentosannet-container {
+        padding: 10px;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* 🔹 Melhora espaçamento entre as abas */
+    .agendamentosannet-abas {
+        margin-bottom: 20px;
+        gap: 6px;
+    }
+
+    .aba-botao {
+        width: 100%;
+        max-width: 100%;
+        font-size: 14px;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    /* 🔹 Envolve a tabela num contêiner rolável */
+    .agendamentosannet-tabela {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        border-radius: 10px;
+        margin: 0 auto;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        background: #fff;
+    }
+
+    /* 🔹 Melhora leitura dentro da tabela */
+    .agendamentosannet-tabela th,
+    .agendamentosannet-tabela td {
+        font-size: 13px;
+        padding: 8px 10px;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    /* 🔹 Faz a tabela ocupar toda a largura da rolagem */
+    .agendamentosannet-tabela table {
+        width: 100%;
+    }
+
+    /* 🔹 Espaço entre a tabela e os botões */
+    .agendamentosannet-botao-container {
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+
+    /* 🔹 Ajusta o botão “Carregar mais” */
+    .agendamentosannet-botao-mais {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+}

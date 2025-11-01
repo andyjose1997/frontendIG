@@ -1,0 +1,80 @@
+.botao-toggle-dia {
+    display: flex;
+    gap: 10px;
+}
+
+.botao-navegar.ativo {
+    background: linear-gradient(135deg, #a87ae6, #8e5bc1);
+    color: #fff;
+    box-shadow: 0 0 8px rgba(142, 91, 193, 0.6);
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+    .semana-container {
+        padding: 15px;
+    }
+
+    .semana-titulo {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .semana-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .botao-toggle-dia {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .botao-navegar {
+        width: 100%;
+        max-width: 200px;
+        font-size: 15px;
+    }
+
+    .semana-coluna {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .semana-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .info-conteudo {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .semana-titulo {
+        font-size: 16px;
+    }
+
+    .horario-box {
+        font-size: 13px;
+        padding: 8px 6px;
+    }
+
+    .semana-dia {
+        font-size: 14px;
+    }
+
+    .semana-data {
+        font-size: 12px;
+    }
+
+    .botao-navegar {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}

@@ -1,0 +1,368 @@
+.semana-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 25px;
+    font-family: "Poppins", sans-serif;
+}
+
+.semana-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.botao-navegar {
+    background: linear-gradient(135deg, #f3e8ff, #d8b9ff);
+    color: #4b2872;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.botao-navegar:hover {
+    background: linear-gradient(135deg, #d8b9ff, #b37ada);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.semana-titulo {
+    font-size: 20px;
+    color: #5b338a;
+    font-weight: 600;
+    text-align: center;
+}
+
+.semana-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.semana-coluna {
+    flex: 1;
+    min-width: 160px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.semana-dia {
+    font-size: 15px;
+    font-weight: 600;
+    color: #4b2872;
+    margin-bottom: 8px;
+    border-bottom: 2px solid #e8d9ff;
+    padding-bottom: 5px;
+}
+
+.semana-data {
+    font-size: 13px;
+    color: #999;
+}
+
+.horario-box {
+    border-radius: 10px;
+    padding: 10px 8px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.horario-box.livre {
+    background: #f9f9f9;
+    color: #666;
+}
+
+.horario-box.ocupado {
+    background: linear-gradient(135deg, #c7a6ff, #a87ae6);
+    color: #fff;
+    font-weight: 600;
+}
+
+.horario-box.ocupado:hover {
+    background: linear-gradient(135deg, #a87ae6, #8e5bc1);
+    transform: scale(1.03);
+}
+
+.hora {
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.nome {
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+/* 🔹 Modal */
+.info-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.info-conteudo {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    width: 400px;
+    max-width: 90%;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: fadeIn 0.4s ease;
+}
+
+.info-conteudo h3 {
+    color: #4b2872;
+    margin-bottom: 15px;
+}
+
+.info-conteudo p {
+    margin: 6px 0;
+    color: #333;
+}
+
+.fechar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.fechar:hover {
+    color: #000;
+    transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 🔹 Dourado para menores de idade */
+.horario-box.menor-idade {
+    background: linear-gradient(135deg, #fceabb, #f8d47b);
+    color: #4a3b00;
+    border: 1px solid #e3c565;
+    box-shadow: 0 0 8px rgba(247, 215, 96, 0.5);
+    font-weight: 600;
+}
+
+.horario-box.menor-idade:hover {
+    background: linear-gradient(135deg, #f9e499, #f2cb4d);
+    transform: scale(1.03);
+    transition: all 0.2s ease;
+}
+
+/* 🔹 Legenda superior */
+.legenda-cores {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.legenda-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #444;
+}
+
+/* 🔹 Menor de idade = dourado */
+.horario-box.menor-idade {
+    background: linear-gradient(135deg, #fceabb, #f8d47b);
+    color: #4a3b00;
+    border: 2px solid #e3c565;
+    box-shadow: 0 0 6px rgba(247, 215, 96, 0.5);
+    font-weight: 600;
+}
+
+/* 🔹 Não pago = borda vermelha */
+.horario-box.nao-pago {
+    border: 3px solid #e03c3c !important;
+    box-shadow: 0 0 10px rgba(224, 60, 60, 0.4);
+}
+
+/* 🔹 Legenda cores */
+.legenda-item.roxo::before {
+    content: " ";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    background: linear-gradient(135deg, #b892ff, #8e5bc1);
+}
+
+.legenda-item.dourado::before {
+    content: " ";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    background: linear-gradient(135deg, #fceabb, #f8d47b);
+}
+
+.legenda-item.vermelho::before {
+    content: " ";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    background: #e03c3c;
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 900px) {
+    .semana-container {
+        max-width: 700px;
+        padding: 20px;
+    }
+
+    .semana-grid {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .semana-coluna {
+        min-width: 200px;
+        flex: 1 1 45%;
+    }
+
+    .semana-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .semana-titulo {
+        font-size: 18px;
+    }
+
+    .botao-navegar {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 600px) {
+    .semana-container {
+        padding: 15px;
+        max-width: 100%;
+    }
+
+    .semana-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .semana-coluna {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .semana-dia {
+        font-size: 14px;
+    }
+
+    .semana-data {
+        font-size: 12px;
+    }
+
+    .horario-box {
+        font-size: 13px;
+        padding: 8px 6px;
+    }
+
+    .info-conteudo {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+/* === RESPONSIVIDADE: controles e datas abaixo da grade === */
+@media (max-width: 900px) {
+    .semana-container {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    /* reorganiza os elementos do cabeçalho */
+    .semana-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .semana-titulo {
+        font-size: 17px;
+    }
+
+    .semana-grid {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .semana-coluna {
+        min-width: 220px;
+        flex: 1 1 45%;
+    }
+
+    /* 🔹 adiciona a seção inferior com os botões */
+    .semana-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 25px;
+        text-align: center;
+    }
+
+    .semana-footer .botao-navegar {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .semana-footer .intervalo-semana {
+        font-size: 14px;
+        color: #5b338a;
+        font-weight: 500;
+    }
+}

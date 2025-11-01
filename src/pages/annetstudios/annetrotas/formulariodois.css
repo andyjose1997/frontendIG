@@ -40,6 +40,15 @@
     margin-bottom: 30px;
 }
 
+.formannet-btn.desativado {
+    background-color: #ccc !important;
+    color: #777 !important;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
 /* ============================ */
 /* 🕒 SELETOR DE DATA E HORÁRIO */
 /* ============================ */
@@ -51,6 +60,121 @@
     border-radius: 15px;
     box-shadow: 0 6px 18px rgba(214, 51, 132, 0.15);
     animation: fadeIn 0.6s ease-in-out;
+}
+
+/* 🔹 Container principal */
+.formannet-confirmar-pagamento {
+    background: linear-gradient(135deg, #fffaf3, #f8f4e6, #e8d49a);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 18px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+    padding: 40px 50px;
+    max-width: 600px;
+    margin: 60px auto;
+    text-align: center;
+    color: #2e2e2e;
+    font-family: "Poppins", sans-serif;
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* 🔹 Título */
+.formannet-confirmar-pagamento h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #b89b33;
+    margin-bottom: 10px;
+}
+
+/* 🔹 Texto explicativo */
+.formannet-confirmar-pagamento p {
+    font-size: 1.05rem;
+    color: #444;
+    margin-bottom: 25px;
+}
+
+/* 🔹 Área dos botões */
+.formannet-botoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* 🔹 Botões principais */
+.formannet-btn {
+    background: linear-gradient(135deg, #d4af37, #c6a03c);
+    border: none;
+    color: #fff;
+    padding: 14px 26px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 160px;
+}
+
+.formannet-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+}
+
+/* 🔹 Botão de voltar */
+.formannet-btn-voltar {
+    background-color: transparent;
+    color: #444;
+    border: 2px solid #b89b33;
+    border-radius: 12px;
+    padding: 12px 22px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.formannet-btn-voltar:hover {
+    background-color: #b89b33;
+    color: #fff;
+}
+
+/* 🔹 Animação de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🔹 Responsividade */
+@media (max-width: 600px) {
+    .formannet-confirmar-pagamento {
+        padding: 25px 20px;
+        margin: 40px 15px;
+    }
+
+    .formannet-confirmar-pagamento h2 {
+        font-size: 1.3rem;
+    }
+
+    .formannet-confirmar-pagamento p {
+        font-size: 0.95rem;
+    }
+
+    .formannet-botoes {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .formannet-btn,
+    .formannet-btn-voltar {
+        width: 100%;
+        font-size: 0.95rem;
+    }
 }
 
 .formannet-horario h3 {

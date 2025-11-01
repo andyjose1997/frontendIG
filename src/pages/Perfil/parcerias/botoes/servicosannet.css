@@ -1,0 +1,223 @@
+.servicosannet-container {
+    padding: 40px 30px;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+}
+
+.servicosannet-titulo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #b95ea6;
+    margin-bottom: 25px;
+}
+
+/* === FORMULÁRIO === */
+.servicosannet-formulario {
+    background: linear-gradient(145deg, #fff, #faf4ff);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 6px 25px rgba(187, 137, 219, 0.25);
+    margin: 0 auto 35px auto;
+    max-width: 650px;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.form-linha {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.form-grupo {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    flex: 1;
+    min-width: 150px;
+}
+
+.form-grupo label {
+    font-weight: 600;
+    color: #6a3f78;
+    margin-bottom: 5px;
+}
+
+.form-grupo input {
+    padding: 10px 14px;
+    border: 1px solid #d6b2e3;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.form-grupo input:focus {
+    border-color: #b95ea6;
+    box-shadow: 0 0 8px rgba(185, 94, 166, 0.3);
+}
+
+/* === BOTÃO SALVAR === */
+.servicosannet-botao-salvar {
+    margin-top: 25px;
+    background: linear-gradient(145deg, #b95ea6, #a24c90);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(169, 63, 150, 0.3);
+}
+
+.servicosannet-botao-salvar:hover {
+    background: linear-gradient(145deg, #a24c90, #b95ea6);
+    transform: translateY(-2px);
+}
+
+/* === MENSAGENS === */
+.servicosannet-mensagem {
+    margin-top: 15px;
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+
+.servicosannet-mensagem.sucesso {
+    color: #3cb371;
+}
+
+.servicosannet-mensagem.erro {
+    color: #e64b4b;
+}
+
+/* === ANIMAÇÃO === */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.servicosannet-tabela-container {
+    margin-top: 40px;
+    overflow-x: auto;
+}
+
+.servicosannet-subtitulo {
+    font-size: 1.4rem;
+    color: #9b4b8e;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.servicosannet-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(185, 94, 166, 0.15);
+}
+
+.servicosannet-tabela th,
+.servicosannet-tabela td {
+    padding: 12px 16px;
+    text-align: center;
+    border-bottom: 1px solid #f0dcef;
+}
+
+.servicosannet-tabela th {
+    background: #f7e8f5;
+    color: #7a3f6c;
+    font-weight: 600;
+}
+
+.servicosannet-tabela tr:hover {
+    background: #fdf7fd;
+}
+
+/* Botões de ação */
+.servicosannet-botao-acao {
+    border: none;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 8px;
+    margin: 0 5px;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+}
+
+.servicosannet-botao-acao.editar {
+    background: #b95ea6;
+    color: white;
+}
+
+.servicosannet-botao-acao.editar:hover {
+    background: #a44c90;
+}
+
+.servicosannet-botao-acao.apagar {
+    background: #ff7b7b;
+    color: white;
+}
+
+.servicosannet-botao-acao.apagar:hover {
+    background: #e66565;
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+    .servicosannet-titulo {
+        font-size: 1.7rem;
+    }
+
+    .form-linha {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .servicosannet-formulario {
+        padding: 20px;
+    }
+
+    .servicosannet-botao-salvar {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .servicosannet-tabela th,
+    .servicosannet-tabela td {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .servicosannet-container {
+        padding: 25px 15px;
+    }
+
+    .servicosannet-titulo {
+        font-size: 1.5rem;
+    }
+
+    .form-grupo label {
+        font-size: 0.9rem;
+    }
+
+    .form-grupo input {
+        font-size: 0.9rem;
+        padding: 8px 10px;
+    }
+
+    .servicosannet-botao-salvar {
+        font-size: 0.95rem;
+        padding: 10px 18px;
+    }
+}

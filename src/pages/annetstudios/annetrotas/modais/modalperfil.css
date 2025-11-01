@@ -1,22 +1,208 @@
-/* =============================== */
-/* 🎨 Fundo do Modal */
-/* =============================== */
+/* 🔹 Fundo escurecido com blur */
 .annetperfil-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(15, 15, 25, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+    background: rgba(10, 10, 10, 0.6);
     backdrop-filter: blur(6px);
-    animation: annetperfil-fadeIn 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    animation: fadeIn 0.3s ease;
 }
 
-@keyframes annetperfil-fadeIn {
+/* 🔹 Corpo principal do modal */
+.annetperfil-conteudo {
+    background: linear-gradient(135deg, #ffffff, #f8f4e6, #e8d49a);
+    border-radius: 18px;
+    padding: 25px 20px;
+    width: 92%;
+    max-width: 600px;
+    max-height: 800px;
+    overflow-y: auto;
+    color: #222;
+    box-shadow: 0 8px 35px rgba(0, 0, 0, 0.25);
+    font-family: "Poppins", sans-serif;
+    position: relative;
+    animation: slideIn 0.4s ease;
+    scrollbar-gutter: stable;
+}
+
+/* 🔹 Rolagem interna elegante */
+.annetperfil-conteudo::-webkit-scrollbar {
+    width: 8px;
+}
+
+.annetperfil-conteudo::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #e3c978, #c6b054);
+    border-radius: 6px;
+}
+
+.annetperfil-conteudo::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 🔹 Título e ícone */
+.annetperfil-titulo {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1f1f1f;
+    margin-bottom: 10px;
+}
+
+.annetperfil-icone {
+    font-size: 1.3rem;
+    margin-right: 6px;
+}
+
+.annetperfil-linha {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #d5b765, transparent);
+    margin-bottom: 15px;
+}
+
+/* 🔹 Área da foto e boas-vindas */
+.annetperfil-area-foto-nome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.annetperfil-foto {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #c7a74d;
+    box-shadow: 0 0 12px rgba(199, 167, 77, 0.4);
+    margin-bottom: 10px;
+    transition: transform 0.3s;
+}
+
+.annetperfil-foto:hover {
+    transform: scale(1.05);
+}
+
+.annetperfil-nome {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2a2a2a;
+    margin: 5px 0;
+}
+
+.annetperfil-boas-vindas {
+    font-size: 0.9rem;
+    color: #444;
+    margin-bottom: 12px;
+}
+
+/* 🔹 Botão "Ir ao perfil" */
+.annetperfil-irperfil {
+    background: linear-gradient(135deg, #f47bb1, #ff9ac4);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(244, 123, 177, 0.4);
+}
+
+.annetperfil-irperfil:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #ff9ac4, #f47bb1);
+}
+
+/* 🔹 Histórico */
+.annetperfil-historico {
+    margin-top: 18px;
+}
+
+.annetperfil-historico h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #3a2e00;
+    font-weight: 600;
+}
+
+/* 🔹 Cada item da lista */
+.annetperfil-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 10px;
+    padding: 8px 10px;
+    margin: 5px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.annetperfil-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* 🔹 Botão cancelar */
+.annetperfil-cancelar {
+    background: #ff6b6b;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.annetperfil-cancelar:hover {
+    background: #ff3b3b;
+    transform: scale(1.05);
+}
+
+/* 🔹 Botão fechar */
+.annetperfil-fechar {
+    margin-top: 12px;
+    background: #222;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.annetperfil-fechar:hover {
+    background: #000;
+    transform: scale(1.02);
+}
+
+/* 🔹 Mensagem de erro e carregando */
+.annetperfil-erro {
+    color: #ff3b3b;
+    text-align: center;
+    font-weight: 600;
+}
+
+.annetperfil-carregando {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* 🔹 Animações */
+@keyframes fadeIn {
     from {
         opacity: 0;
     }
@@ -26,25 +212,9 @@
     }
 }
 
-/* =============================== */
-/* 📦 Conteúdo do Modal */
-/* =============================== */
-.annetperfil-conteudo {
-    background: linear-gradient(145deg, #ffffff, #f2f3f7);
-    border-radius: 20px;
-    box-shadow: 0 8px 35px rgba(0, 0, 0, 0.25);
-    padding: 40px;
-    width: 760px;
-    max-width: 70%;
-    text-align: center;
-    font-family: "Poppins", "Segoe UI", Tahoma, sans-serif;
-    position: relative;
-    animation: annetperfil-subir 0.4s ease;
-}
-
-@keyframes annetperfil-subir {
+@keyframes slideIn {
     from {
-        transform: translateY(25px);
+        transform: translateY(30px);
         opacity: 0;
     }
 
@@ -54,101 +224,21 @@
     }
 }
 
-/* =============================== */
-/* 🧑‍💼 Cabeçalho */
-/* =============================== */
-.annetperfil-titulo {
-    color: #222;
-    font-weight: 700;
-    font-size: 1.6rem;
-    margin-bottom: 0.6rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
+/* 🔹 Responsividade */
+@media (max-width: 500px) {
+    .annetperfil-conteudo {
+        width: 90%;
+        padding: 18px;
+        max-height: 85%;
+    }
 
-.annetperfil-icone {
-    font-size: 1.7rem;
-}
+    .annetperfil-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-/* Linha decorativa */
-.annetperfil-linha {
-    border: none;
-    border-top: 1.5px solid #ddd;
-    margin: 12px 0 25px;
-}
-
-/* =============================== */
-/* 🖼️ Foto e Nome */
-/* =============================== */
-.annetperfil-area-foto-nome {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.annetperfil-foto {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #3f51b5;
-    box-shadow: 0 0 12px rgba(63, 81, 181, 0.3);
-    margin-bottom: 15px;
-    transition: 0.3s ease;
-}
-
-.annetperfil-foto:hover {
-    transform: scale(1.05);
-}
-
-.annetperfil-nome {
-    color: #111;
-    font-weight: 600;
-    font-size: 1.3rem;
-    margin-bottom: 6px;
-}
-
-.annetperfil-boas-vindas {
-    color: #555;
-    font-size: 0.95rem;
-}
-
-/* =============================== */
-/* ❌ Botão Fechar */
-/* =============================== */
-.annetperfil-fechar {
-    background: linear-gradient(135deg, #3f51b5, #1a237e);
-    color: #fff;
-    font-weight: 600;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 28px;
-    margin-top: 28px;
-    cursor: pointer;
-    transition: 0.25s ease;
-    box-shadow: 0 4px 12px rgba(63, 81, 181, 0.4);
-}
-
-.annetperfil-fechar:hover {
-    background: linear-gradient(135deg, #5c6bc0, #283593);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(63, 81, 181, 0.55);
-}
-
-/* =============================== */
-/* ⚠️ Mensagens de Erro e Carregamento */
-/* =============================== */
-.annetperfil-erro {
-    color: #c62828;
-    font-weight: 600;
-    font-size: 1.2rem;
-}
-
-.annetperfil-carregando {
-    color: #333;
-    font-size: 1rem;
-    line-height: 1.4;
+    .annetperfil-cancelar {
+        margin-top: 6px;
+        align-self: flex-end;
+    }
 }

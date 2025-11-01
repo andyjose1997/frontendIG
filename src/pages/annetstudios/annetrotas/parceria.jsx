@@ -128,7 +128,7 @@ export default function ParceriaAnnet() {
             </div>
 
             {!usuarioLogado && (
-                <button className="parceriaannet-btn" onClick={() => setMostrarLogin(true)}>
+                <button style={{ display: "none" }} className="parceriaannet-btn" onClick={() => setMostrarLogin(true)}>
                     🔑 Abrir conta
                 </button>
             )}

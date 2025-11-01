@@ -1,0 +1,207 @@
+/* 🌸 Container principal */
+.funcionarios-container {
+    width: 95%;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px 25px;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    font-family: "Poppins", sans-serif;
+    color: #1a1a1a;
+    animation: fadeIn 0.6s ease;
+    transition: all 0.3s ease;
+}
+
+/* ✨ Animação suave de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🏷️ Título */
+.funcionarios-titulo {
+    text-align: center;
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+}
+
+/* 🟢 Mensagem de feedback */
+.funcionarios-mensagem {
+    text-align: center;
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* 🔹 Área de adicionar funcionário */
+.funcionarios-adicionar {
+    background: linear-gradient(135deg, #ffffff, #f8f4e6, #e8d49a);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.funcionarios-adicionar h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+/* 📝 Input de ID */
+.funcionarios-input {
+    width: 220px;
+    padding: 10px 12px;
+    border: 1.5px solid #aaa;
+    border-radius: 10px;
+    outline: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.funcionarios-input:focus {
+    border-color: #c49a00;
+    box-shadow: 0 0 8px rgba(196, 154, 0, 0.3);
+}
+
+/* 👀 Pré-visualização do usuário encontrado */
+.funcionarios-preview {
+    margin-top: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    padding: 12px 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    display: inline-block;
+    animation: fadeIn 0.4s ease;
+}
+
+.funcionarios-preview p {
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* 🟢 Botões */
+.funcionarios-botao {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin: 4px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+/* ✅ Adicionar */
+.funcionarios-botao.adicionar {
+    background: linear-gradient(135deg, #3ecf8e, #33b77a);
+    color: white;
+}
+
+.funcionarios-botao.adicionar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(51, 183, 122, 0.3);
+}
+
+/* ❌ Remover */
+.funcionarios-botao.apagar {
+    background: linear-gradient(135deg, #ff6b6b, #e84141);
+    color: white;
+}
+
+.funcionarios-botao.apagar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(232, 65, 65, 0.3);
+}
+
+/* 🧾 Tabela */
+.funcionarios-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    margin-top: 10px;
+}
+
+.funcionarios-tabela th {
+    background: #1a1a1a;
+    color: white;
+    text-align: left;
+    padding: 12px 15px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+}
+
+.funcionarios-tabela td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.funcionarios-tabela tr:nth-child(even) {
+    background: #fafafa;
+}
+
+.funcionarios-tabela tr:hover {
+    background: #f4f4f4;
+}
+
+/* ⏳ Carregando e mensagens */
+.funcionarios-loading,
+.funcionarios-vazio {
+    text-align: center;
+    color: #444;
+    margin-top: 30px;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* 📱 Responsividade */
+@media (max-width: 700px) {
+    .funcionarios-container {
+        padding: 20px 15px;
+    }
+
+    .funcionarios-tabela th,
+    .funcionarios-tabela td {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+
+    .funcionarios-input {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .funcionarios-botao {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+
+    .funcionarios-preview {
+        width: 100%;
+    }
+}

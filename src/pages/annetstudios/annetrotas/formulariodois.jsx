@@ -1,77 +1,194 @@
 // 📂 src/pages/annetstudios/annetrotas/formulariodois.jsx
 import { useState, useEffect } from "react";
 import "./formulariodois.css";
+import { URL } from "../../../config";
 
-export default function FormularioDois({ onVoltar }) {
+export default function FormularioDois({
+    onVoltar,
+    maiorIdade,
+    temPermissao,
+    nomeResponsavel,
+    condicao,
+    whatsapp,
+    nomeCompleto, // ✅ adiciona aqui
+}) {
+    const [servicos, setServicos] = useState([]);
+    const [fotos, setFotos] = useState([]);
+    const [agendamentos, setAgendamentos] = useState([]);
     const [servicosSelecionados, setServicosSelecionados] = useState([]);
     const [dataHora, setDataHora] = useState("");
     const [indiceImagem, setIndiceImagem] = useState({});
     const [imagemGrande, setImagemGrande] = useState(null);
     const [statusPagamento, setStatusPagamento] = useState("inicio");
+    const [etapaPagamento, setEtapaPagamento] = useState(false);
 
-    const supabaseUrl = "https://sbeotetrpndvnvjgddyv.supabase.co/storage/v1/object/public/annet/";
+    const horariosFixos = ["08:30", "10:30", "13:30", "15:30", "17:30"];
 
-    const servicos = [
-        { nome: "Unhas semi permanentes (Mãos)", preco: 50, prefixo: "um_" },
-        { nome: "Unhas semi permanentes (Pés)", preco: 50, prefixo: "dois_" },
-        { nome: "Alongamento Soft Gel (unhas realistas)", preco: 100, prefixo: "tres_" },
-        { nome: "Alongamento de Acrílico", preco: 120, prefixo: "quatro_" },
-        { nome: "Banho de Acrílico na unha natural", preco: 80, prefixo: "cinco_" },
-        { nome: "Apenas limpeza", preco: 25, prefixo: "seis_" },
-    ];
+    // 🔹 Buscar serviços, fotos e agendamentos reais
+    useEffect(() => {
+        const carregar = async () => {
+            try {
+                const [resServicos, resFotos, resAg] = await Promise.all([
+                    fetch(`${URL}/annett/servicos/listar`),
+                    fetch(`${URL}/annett/servicos/fotos/listar`),
+                    fetch(`${URL}/annett/agendamentos/listar`),
+                ]);
 
-    const gerarImagens = (prefixo) =>
-        Array.from({ length: 9 }).map((_, i) => `${supabaseUrl}${prefixo}${i + 1}.png`);
+                const dataServicos = await resServicos.json();
+                const dataFotos = await resFotos.json();
+                const dataAg = await resAg.json();
 
-    const handleSelecionarServico = (nome) => {
-        setServicosSelecionados((prev) =>
-            prev.includes(nome)
-                ? prev.filter((s) => s !== nome)
-                : [...prev, nome]
+                setServicos(dataServicos);
+                setFotos(dataFotos);
+                setAgendamentos(dataAg);
+            } catch (err) {
+                console.error("❌ Erro ao carregar dados:", err);
+            }
+        };
+        carregar();
+    }, []);
+
+    // 🔹 Bloquear datas passadas
+    const hojeBrasil = new Date().toLocaleDateString("pt-BR", {
+        timeZone: "America/Sao_Paulo",
+    });
+    const [dia, mes, ano] = hojeBrasil.split("/");
+    const dataMinima = `${ano}-${mes.padStart(2, "0")}-${dia.padStart(2, "0")}`;
+
+    // 🔹 Verifica se o horário está ocupado
+    const horarioOcupado = (data, hora) => {
+        return agendamentos.some(
+            (a) => a.data === data && a.horario_escolhido === hora
         );
     };
 
-    const mudarSlide = (prefixo, direcao) => {
+    // 🔹 Verifica se o dia está cheio
+    const dataCheia = (data) => {
+        return horariosFixos.every((hora) => horarioOcupado(data, hora));
+    };
+
+    // 🔹 Muda slide de imagens
+    const mudarSlide = (id, direcao) => {
         setIndiceImagem((prev) => {
-            const atual = prev[prefixo] || 0;
+            const atual = prev[id] || 0;
             const novo =
-                direcao === "proximo"
-                    ? (atual + 3) % 9
-                    : (atual - 3 + 9) % 9;
-            return { ...prev, [prefixo]: novo };
+                direcao === "proximo" ? (atual + 3) % 9 : (atual - 3 + 9) % 9;
+            return { ...prev, [id]: novo };
+        });
+    };
+    // 🔹 Permitir apenas um serviço selecionado por vez
+    const handleSelecionarServico = (nome) => {
+        setServicosSelecionados((prev) => {
+            if (prev.includes(nome)) {
+                // Se clicar de novo no mesmo serviço, desmarca
+                return [];
+            } else {
+                // Caso contrário, substitui o anterior
+                return [nome];
+            }
         });
     };
 
-    useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        const status = params.get("status");
 
-        if (status === "approved") {
-            setStatusPagamento("aprovado");
-        } else if (status === "failure") {
-            setStatusPagamento("inicio");
-            alert("O pagamento não foi concluído. Tente novamente.");
-        }
-    }, []);
-
-    const handleConfirmar = async (e) => {
+    // 🔹 Confirmar seleção e ir para escolha de pagamento
+    const handleConfirmar = (e) => {
         e.preventDefault();
-
         if (servicosSelecionados.length === 0 || !dataHora) {
             alert("Por favor, selecione os serviços e o horário.");
             return;
         }
+        setEtapaPagamento(true);
+    };
 
-        // 🔹 Muda a tela para “aguardando”
-        setStatusPagamento("aguardando");
+    // 🔹 Função para salvar agendamento (pago = 0 ou 1)
+    const salvarAgendamento = async (pago = 0) => {
+        try {
+            const usuarioLocal = localStorage.getItem("usuario");
+            const usuario = usuarioLocal ? JSON.parse(usuarioLocal) : {};
+            const usuario_id =
+                usuario.id ||
+                usuario.usuario_id ||
+                usuario.user_id ||
+                localStorage.getItem("usuario_id") ||
+                null;
 
-        // 🔹 Calcula o total
+            if (!usuario_id) {
+                alert("Não foi possível identificar o usuário logado.");
+                return;
+            }
+
+            const dataSelecionada = dataHora.split("T")[0];
+            const horarioSelecionado = dataHora.split("T")[1];
+
+            // 🧠 Detecta automaticamente o nome completo, independente do formato salvo
+            let nomeUsuario =
+                usuario.nome_completo ||
+                usuario.full_name ||
+                usuario.display_name ||
+                (usuario.nome && usuario.sobrenome
+                    ? `${usuario.nome} ${usuario.sobrenome}`
+                    : usuario.nome || "Usuário");
+
+            // 🔹 Se ainda assim vier só uma palavra, tenta buscar sobrenome adicional
+            if (nomeUsuario.split(" ").length === 1 && usuario.sobrenome) {
+                nomeUsuario = `${nomeUsuario} ${usuario.sobrenome}`;
+            }
+
+
+
+            const dados = {
+                usuario_id,
+                data: dataSelecionada,
+                horario_escolhido: horarioSelecionado,
+                servico: servicosSelecionados.join(", "),
+                maior_idade: maiorIdade,
+                permissao: temPermissao,
+                nome_responsavel: nomeResponsavel || null,
+                nome_completo: nomeCompleto || nomeUsuario,
+                condicao: condicao || null,
+                whatsapp: whatsapp || usuario.whatsapp || null,
+                pago,
+            };
+
+            console.log("%c📤 Enviando agendamento:", "color:#d4af37; font-weight:bold;");
+            console.table(dados);
+
+            const resposta = await fetch(`${URL}/annett/agendamentos/criar`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(dados),
+            });
+
+            const resultado = await resposta.json();
+
+            if (resposta.ok) {
+                console.log("%c✅ Agendamento salvo com sucesso!", "color:#32CD32; font-weight:bold;");
+                console.table(resultado);
+                setStatusPagamento(pago === 1 ? "aguardando" : "aprovado");
+                setEtapaPagamento(false);
+            } else {
+                console.error("❌ Erro ao salvar agendamento:", resultado);
+                alert(resultado.detail || "Erro ao salvar agendamento.");
+            }
+        } catch (err) {
+            console.error("❌ Erro ao salvar agendamento:", err);
+            alert("Ocorreu um erro ao salvar o agendamento.");
+        }
+    };
+
+    // 🔹 Pagar agora (integra MercadoPago)
+    const handlePagamentoAgora = async () => {
         const total = servicos
-            .filter((s) => servicosSelecionados.includes(s.nome))
-            .reduce((sum, s) => sum + s.preco, 0);
+            .filter((s) => servicosSelecionados.includes(s.servico))
+            .reduce((sum, s) => sum + parseFloat(s.valor), 0);
 
         try {
-            const resposta = await fetch("https://backendig-2.onrender.com/pagamento/criar-preferencia-annet", {
+            console.log(
+                "%c💳 Criando preferência de pagamento...",
+                "color:#0099ff; font-weight:bold;"
+            );
+
+            const resposta = await fetch(`${URL}/pagamento/criar-preferencia-annet`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -82,60 +199,65 @@ export default function FormularioDois({ onVoltar }) {
             });
 
             const data = await resposta.json();
+
             if (data.init_point) {
-                // 🔹 Abre o checkout do MercadoPago em nova aba
+                await salvarAgendamento(1);
                 window.open(data.init_point, "_blank", "noopener,noreferrer");
             } else {
                 alert("Erro ao criar pagamento. Tente novamente.");
-                setStatusPagamento("inicio");
             }
         } catch (err) {
-            console.error("Erro ao criar pagamento:", err);
+            console.error("❌ Erro ao criar pagamento:", err);
             alert("Ocorreu um erro ao iniciar o pagamento.");
-            setStatusPagamento("inicio");
         }
     };
 
     return (
         <main className="formannet-container">
-            {statusPagamento === "inicio" && (
+            {statusPagamento === "inicio" && !etapaPagamento && (
                 <>
                     <p className="formannet-etapa">Etapa 2/3</p><br />
-
                     <h1 className="formannet-titulo">Escolha seus serviços</h1>
                     <p className="formannet-subtitulo">
-                        Selecione um ou mais serviços que deseja agendar e o horário disponível.
+                        Selecione um serviço que deseja agendar e o horário disponível.
                     </p>
 
                     <div className="formannet-servicos-lista">
                         {servicos.map((servico) => {
-                            const imagens = gerarImagens(servico.prefixo);
-                            const inicio = indiceImagem[servico.prefixo] || 0;
+                            const imagens = fotos
+                                .filter((f) => f.id_servico === servico.id)
+                                .map((f) => f.foto);
+                            const inicio = indiceImagem[servico.id] || 0;
                             const visiveis = imagens.slice(inicio, inicio + 3);
 
                             return (
-                                <div key={servico.nome} className="formannet-servico-bloco">
+                                <div key={servico.id} className="formannet-servico-bloco">
                                     <label
-                                        className={`formannet-servico ${servicosSelecionados.includes(servico.nome)
+                                        className={`formannet-servico ${servicosSelecionados.includes(servico.servico)
                                             ? "selecionado"
                                             : ""
                                             }`}
                                     >
                                         <input
                                             type="checkbox"
-                                            checked={servicosSelecionados.includes(servico.nome)}
-                                            onChange={() => handleSelecionarServico(servico.nome)}
+                                            checked={servicosSelecionados.includes(servico.servico)}
+                                            onChange={() => handleSelecionarServico(servico.servico)}
                                         />
-                                        <span>{servico.nome}</span>
-                                        <strong>R$ {servico.preco}</strong>
+                                        <span>{servico.servico}</span>
+                                        <strong>
+                                            {Number(servico.valor).toLocaleString("pt-BR", {
+                                                style: "currency",
+                                                currency: "BRL",
+                                            })}
+                                        </strong>
                                     </label>
 
-                                    {servicosSelecionados.includes(servico.nome) && (
+                                    {servicosSelecionados.includes(servico.servico) && imagens.length > 0 && (
                                         <div className="formannet-carrossel">
                                             <button
                                                 type="button"
                                                 className="formannet-carrossel-btn esquerda"
-                                                onClick={() => mudarSlide(servico.prefixo, "anterior")}
+                                                onClick={() => mudarSlide(servico.id, "anterior")}
                                             >
                                                 ⬅️
                                             </button>
@@ -145,10 +267,9 @@ export default function FormularioDois({ onVoltar }) {
                                                     <img
                                                         key={i}
                                                         src={img}
-                                                        alt={servico.nome}
+                                                        alt={servico.servico}
                                                         className="formannet-imagem"
                                                         onClick={() => setImagemGrande(img)}
-                                                        onError={(e) => (e.target.style.display = "none")}
                                                     />
                                                 ))}
                                             </div>
@@ -156,7 +277,7 @@ export default function FormularioDois({ onVoltar }) {
                                             <button
                                                 type="button"
                                                 className="formannet-carrossel-btn direita"
-                                                onClick={() => mudarSlide(servico.prefixo, "proximo")}
+                                                onClick={() => mudarSlide(servico.id, "proximo")}
                                             >
                                                 ➡️
                                             </button>
@@ -173,60 +294,64 @@ export default function FormularioDois({ onVoltar }) {
                         <div className="formannet-data">
                             <input
                                 type="date"
+                                min={dataMinima}
                                 value={dataHora.split("T")[0] || ""}
-                                onChange={(e) =>
-                                    setDataHora(e.target.value ? `${e.target.value}T` : "")
-                                }
+                                onChange={(e) => {
+                                    const data = e.target.value;
+                                    if (dataCheia(data)) {
+                                        alert("Todos os horários deste dia estão ocupados.");
+                                        return;
+                                    }
+                                    setDataHora(`${data}T`);
+                                }}
                                 required
                             />
                         </div>
 
                         {dataHora && (
                             <div className="formannet-horas">
-                                {[
-                                    "09:00",
-                                    "10:00",
-                                    "11:00",
-                                    "13:00",
-                                    "14:00",
-                                    "15:00",
-                                    "16:00",
-                                    "17:00",
-                                ].map((hora) => (
-                                    <button
-                                        key={hora}
-                                        type="button"
-                                        className={`formannet-hora-btn ${dataHora.endsWith(hora) ? "ativo" : ""
-                                            }`}
-                                        onClick={() =>
-                                            setDataHora((prev) => prev.split("T")[0] + "T" + hora)
-                                        }
-                                    >
-                                        {hora}
-                                    </button>
-                                ))}
+                                {horariosFixos.map((hora) => {
+                                    const dataSelecionada = dataHora.split("T")[0];
+                                    const ocupado = horarioOcupado(dataSelecionada, hora);
+                                    if (ocupado) return null;
+                                    return (
+                                        <button
+                                            key={hora}
+                                            type="button"
+                                            className={`formannet-hora-btn ${dataHora.endsWith(hora) ? "ativo" : ""}`}
+                                            onClick={() => setDataHora(`${dataSelecionada}T${hora}`)}
+                                        >
+                                            {hora}
+                                        </button>
+                                    );
+                                })}
                             </div>
                         )}
                     </div>
 
                     <div className="formannet-botoes">
-                        <button onClick={onVoltar} className="formannet-btn-voltar">
-                            ← Voltar
-                        </button>
+                        <button onClick={onVoltar} className="formannet-btn-voltar">← Voltar</button>
                         <button
                             onClick={handleConfirmar}
-                            disabled={servicosSelecionados.length === 0 || !dataHora}
-                            className="formannet-btn"
+                            disabled={
+                                servicosSelecionados.length === 0 ||
+                                !dataHora.includes("T") ||
+                                dataHora.split("T")[1] === "" // garante que tenha horário
+                            }
+                            className={`formannet-btn ${servicosSelecionados.length === 0 ||
+                                !dataHora.includes("T") ||
+                                dataHora.split("T")[1] === ""
+                                ? "desativado"
+                                : ""
+                                }`}
                         >
-                            proximo passo
+                            Próximo Passo
                         </button>
+
                     </div>
 
                     {imagemGrande && (
-                        <div
-                            className="formannet-modal-fundo"
-                            onClick={() => setImagemGrande(null)}
-                        >
+                        <div className="formannet-modal-fundo" onClick={() => setImagemGrande(null)}>
                             <img
                                 src={imagemGrande}
                                 alt="Imagem ampliada"
@@ -238,28 +363,54 @@ export default function FormularioDois({ onVoltar }) {
                 </>
             )}
 
+            {/* 🔹 Etapa de confirmação de pagamento */}
+            {etapaPagamento && (
+                <div className="formannet-confirmar-pagamento">
+                    <h2>💳 Deseja pagar agora ou depois do serviço?</h2>
+                    <p>Escolha a opção que preferir:</p>
+
+                    <div className="formannet-botoes">
+                        <button
+                            className="formannet-btn"
+                            style={{ backgroundColor: "#d4af37" }}
+                            onClick={() => {
+                                setEtapaPagamento(false);
+                                handlePagamentoAgora();
+                            }}
+                        >
+                            💰 Pagar Agora
+                        </button>
+
+                        <button
+                            className="formannet-btn"
+                            style={{ backgroundColor: "#a58e6a" }}
+                            onClick={() => salvarAgendamento(0)}
+                        >
+                            ⏳ Pagar Depois do serviço
+                        </button>
+                        <br /><br />
+                        <button
+                            className="formannet-btn-voltar"
+                            onClick={() => setEtapaPagamento(false)}
+                        >
+                            ← Voltar
+                        </button>
+                    </div>
+                </div>
+            )}
+
             {statusPagamento === "aguardando" && (
                 <div className="formannet-aguardando">
                     <h2>💅 Aguardando confirmação do pagamento...</h2>
                     <p>O checkout foi aberto em nova aba. Assim que o pagamento for aprovado, volte aqui para confirmar.</p>
                     <div className="formannet-loader"></div>
-
-                    {/* 🔹 Botão de teste (simula pagamento aprovado) */}
-                    <button
-                        className="formannet-btn-teste"
-                        onClick={() => setStatusPagamento("aprovado")}
-                    >
-                        Simular Pagamento Aprovado 💳
-                    </button>
                 </div>
             )}
 
-
             {statusPagamento === "aprovado" && (
                 <div className="formannet-aprovado">
-
-                    <h2>✅ Pagamento aprovado!</h2>
-                    <p>Seu agendamento foi confirmado com sucesso!</p>
+                    <h2>✅ Agendamento registrado!</h2>
+                    <p>Seu agendamento foi salvo com sucesso!, em Perfil pode ver o historico</p>
                     <button onClick={() => setStatusPagamento("inicio")} className="formannet-aprovado-btn">
                         Novo Agendamento
                     </button>

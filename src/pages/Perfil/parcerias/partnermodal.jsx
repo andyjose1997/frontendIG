@@ -144,15 +144,10 @@ export default function PartnerModal({ onClose }) {
         return (
             <div
                 className="partner-conteudo annet-tema"
-                style={{
-                    backgroundImage:
-                        "url('https://sbeotetrpndvnvjgddyv.supabase.co/storage/v1/object/public/annet/ChatGPT%20Image%2028%20de%20out.%20de%202025,%2015_26_11.png')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                }}
+
             >
                 <img
-                    src="https://sbeotetrpndvnvjgddyv.supabase.co/storage/v1/object/public/annet/ChatGPT%20Image%2028%20de%20out%20(1).%20de%202025,%2015_28_46"
+                    src="https://sbeotetrpndvnvjgddyv.supabase.co/storage/v1/object/public/annet/logo.png"
                     alt="Logo Annet Studios"
                     className="annet-logo"
                 />
