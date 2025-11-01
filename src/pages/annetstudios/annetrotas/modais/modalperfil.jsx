@@ -138,20 +138,20 @@ export default function ModalPerfil({ onFechar }) {
                                     {agendamentos.map((a, i) => (
                                         <li key={i} className="annetperfil-item">
                                             <div>
-                                                <strong>{a.servico}</strong> —{" "}
-                                                {getTextoData(a.data)} às{" "}
-                                                {a.horario_escolhido}
+                                                <strong>{a.servico}</strong> — {getTextoData(a.data)} às {a.horario_escolhido}
+                                                {a.pago === 0 && (
+                                                    <span className="annetperfil-naopago"> NÃO PAGO </span>
+                                                )}
                                             </div>
                                             <button
                                                 className="annetperfil-cancelar"
-                                                onClick={() =>
-                                                    cancelarAgendamento(a)
-                                                }
+                                                onClick={() => cancelarAgendamento(a)}
                                             >
                                                 Solicitar cancelamento
                                             </button>
                                         </li>
                                     ))}
+
                                 </ul>
                             ) : (
                                 <p>Nenhum agendamento encontrado.</p>
