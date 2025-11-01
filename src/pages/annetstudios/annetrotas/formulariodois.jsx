@@ -1,5 +1,5 @@
 // 📂 src/pages/annetstudios/annetrotas/formulariodois.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react"; // ✅ adiciona useRef
 import "./formulariodois.css";
 import { URL } from "../../../config";
 
@@ -21,6 +21,7 @@ export default function FormularioDois({
     const [imagemGrande, setImagemGrande] = useState(null);
     const [statusPagamento, setStatusPagamento] = useState("inicio");
     const [etapaPagamento, setEtapaPagamento] = useState(false);
+    const pagamentoRef = useRef(null); // ✅ referência da área de pagamento
 
     const horariosFixos = ["08:30", "10:30", "13:30", "15:30", "17:30"];
 
@@ -47,6 +48,14 @@ export default function FormularioDois({
         };
         carregar();
     }, []);
+    useEffect(() => {
+        if (etapaPagamento && pagamentoRef.current) {
+            requestAnimationFrame(() => {
+                pagamentoRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+        }
+    }, [etapaPagamento]);
+
 
     // 🔹 Bloquear datas passadas
     const hojeBrasil = new Date().toLocaleDateString("pt-BR", {
@@ -88,9 +97,6 @@ export default function FormularioDois({
             }
         });
     };
-
-
-    // 🔹 Confirmar seleção e ir para escolha de pagamento
     const handleConfirmar = (e) => {
         e.preventDefault();
         if (servicosSelecionados.length === 0 || !dataHora) {
@@ -98,7 +104,14 @@ export default function FormularioDois({
             return;
         }
         setEtapaPagamento(true);
+        setTimeout(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        }, 200);
     };
+
 
     // 🔹 Função para salvar agendamento (pago = 0 ou 1)
     const salvarAgendamento = async (pago = 0) => {
@@ -365,7 +378,7 @@ export default function FormularioDois({
 
             {/* 🔹 Etapa de confirmação de pagamento */}
             {etapaPagamento && (
-                <div className="formannet-confirmar-pagamento">
+                <div ref={pagamentoRef} className="formannet-confirmar-pagamento">
                     <h2>💳 Deseja pagar agora ou depois do serviço?</h2>
                     <p>Escolha a opção que preferir:</p>
 
