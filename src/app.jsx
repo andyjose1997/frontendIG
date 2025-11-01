@@ -283,7 +283,7 @@ function AppRoutes() {
           }
         />
         <Route path="*" element={<NotFound />} />
-        <Route path="/studio-annet" element={<AnnetStudios />} />
+        <Route path="/studio-annett" element={<AnnetStudios />} />
         <Route
           path="/painel-partner"
           element={
