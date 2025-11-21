@@ -142,13 +142,13 @@ function AppRoutes() {
   useEffect(() => {
     const url = new URL(window.location.href);
 
-    if (
-      url.pathname === "/portfolio-publico" &&
-      url.searchParams.get("id") === "a00001"
-    ) {
+    const id = url.searchParams.get("id");
+
+    if (url.pathname === "/portfolio-publico" && id === "a00001") {
       window.location.href = "https://ironexecutions.com.br";
     }
-  }, []);
+  }, [location]);
+
 
   useEffect(() => {
     setIsLoading(true);
