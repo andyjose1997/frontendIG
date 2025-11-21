@@ -140,14 +140,14 @@ function AppRoutes() {
   const [isLoading, setIsLoading] = useState(false);
   const [backendOnline, setBackendOnline] = useState(true);
   useEffect(() => {
-    const url = new URL(window.location.href);
+    const current = window.location.pathname;
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
 
-    const id = url.searchParams.get("id");
-
-    if (url.pathname === "/portfolio-publico" && id === "a00001") {
-      window.location.href = "https://ironexecutions.com.br";
+    if (current === "/portfolio-publico" && id === "a00001") {
+      window.location.replace("https://ironexecutions.com.br");
     }
-  }, [location]);
+  }, []);
 
 
   useEffect(() => {
