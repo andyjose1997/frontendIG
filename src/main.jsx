@@ -4,11 +4,12 @@ import App from "./app.jsx";
 import "./index.css";
 import { GoogleOAuthProvider } from "@react-oauth/google"; // 👈 importa o provider
 
-// 🔹 Registrar o Service Worker (para habilitar o PWA)
-if ("serviceWorker" in navigator) {
+// DESATIVADO NO LOCALHOST
+if (window.location.hostname !== "localhost" && "serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
       .register("/service-worker.js")
+
       .then(() => console.log("✅ Service Worker registrado com sucesso"))
       .catch((err) => console.error("❌ Erro ao registrar Service Worker:", err));
   });
